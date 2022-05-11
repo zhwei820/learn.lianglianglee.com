@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>16  如何从架构师角度回答系统容错、降级等高可用问题？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/00 开篇词  中高级研发面试，逃不开架构设计这一环.md">00 开篇词  中高级研发面试，逃不开架构设计这一环.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/01  研发工程师想提升面试竞争力，该具备这三个技术认知.md">01  研发工程师想提升面试竞争力，该具备这三个技术认知.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/02  研发工程师如何用架构师视角回答架构设计方案？.md">02  研发工程师如何用架构师视角回答架构设计方案？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/03  面试官如何考察与 CAP 有关的分布式理论？.md">03  面试官如何考察与 CAP 有关的分布式理论？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/04  亿级商品存储下，如何深度回答分布式系统的原理性问题？.md">04  亿级商品存储下，如何深度回答分布式系统的原理性问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/05  海量并发场景下，如何回答分布式事务一致性问题？.md">05  海量并发场景下，如何回答分布式事务一致性问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/06  分布式系统中，如何回答锁的实现原理？.md">06  分布式系统中，如何回答锁的实现原理？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/07  RPC：如何在面试中展现出“造轮子”的能力？.md">07  RPC：如何在面试中展现出“造轮子”的能力？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/08  MQ：如何回答消息队列的丢失、重复与积压问题.md">08  MQ：如何回答消息队列的丢失、重复与积压问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/08 案例串联  如何让系统抗住双十一的预约抢购活动？.md">08 案例串联  如何让系统抗住双十一的预约抢购活动？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/09  如何回答 MySQL 的索引原理与优化问题？.md">09  如何回答 MySQL 的索引原理与优化问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/10  如何回答 MySQL 的事务隔离级别和锁的机制？.md">10  如何回答 MySQL 的事务隔离级别和锁的机制？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/11  读多写少：MySQL 如何优化数据查询方案？.md">11  读多写少：MySQL 如何优化数据查询方案？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/12  写多读少：MySQL 如何优化数据存储方案？.md">12  写多读少：MySQL 如何优化数据存储方案？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/13  缓存原理：应对面试你要掌握 Redis 哪些原理？.md">13  缓存原理：应对面试你要掌握 Redis 哪些原理？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/14  缓存策略：面试中如何回答缓存穿透、雪崩等问题？.md">14  缓存策略：面试中如何回答缓存穿透、雪崩等问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/15  如何向面试官证明你做的系统是高可用的？.md">15  如何向面试官证明你做的系统是高可用的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/架构设计面试精讲/16  如何从架构师角度回答系统容错、降级等高可用问题？.md">16  如何从架构师角度回答系统容错、降级等高可用问题？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/17  如何向面试官证明你做的系统是高性能的？.md">17  如何向面试官证明你做的系统是高性能的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/18  如何从架构师角度回答怎么应对千万级流量的问题？.md">18  如何从架构师角度回答怎么应对千万级流量的问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/19 彩蛋  互联网架构设计面试，你需要掌握的知识体系.md">19 彩蛋  互联网架构设计面试，你需要掌握的知识体系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/架构设计面试精讲/结束语  程序员的道、术、势.md">结束语  程序员的道、术、势.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>16  如何从架构师角度回答系统容错、降级等高可用问题？</h1>
+
+<p>上一讲，我带你学习了“评估系统高可用的指标”以及“如何监控系统高可用”今天这一讲，我们继续学习保证系统高可用的有效手段，比如系统容错、降级等，以及在面试时的重要考察点。</p>
+
+<p>系统容错、降级等手段你肯定不陌生，很多文章都反复重申过，所以我的重点不再是普及相关理论知识，而是带你深入面试中对架构高可用问题的考察，带你避免面试中的易错点。</p>
+
+<h3>案例背景</h3>
+
+<p>先来看这样一道面试题：</p>
+
+<p><img src="assets/Cgp9HWAzkoCANywAAAAX6qOl804638.png" alt="1.png" /></p>
+
+<p>商品的一次查询</p>
+
+<blockquote>
+
+<p>某电商平台中有商品系统、促销系统、积分系统。商品的一次查询操作是由网关系统先调用商品系统查询商品列表，然后根据返回的商品列表信息，再查询促销和积分系统，匹配商品信息的促销活动和积分奖励，最终返回给客户端展示给用户。</p>
+
+<p>大部分互联网公司，会有专门的研发团队分别负责这三个系统（比如 A 团队负责商品系统、 B 团队负责促销系统）。这会带来一个问题：出现流量高峰期时，虽然作为服务请求入口的商品系统很容易扩容，但对于商品系统依赖的其他服务，就不会有实时性的响应。</p>
+
+<p>那么促销或积分系统就可能因为无法承担大流量，请求处理缓慢，从而让执行商品查询操作的服务线程阻塞，不能释放，直到所有线程资源被占满，无法处理后续的请求。</p>
+
+</blockquote>
+
+<p>对于这种问题，你该如何处理呢？</p>
+
+<h3>案例分析</h3>
+
+<p>这道面试题就涉及了高可用架构的设计，我们再来分析一下商品的调用链条。在电商平台的商品系统中，一次系统查询的流程经历了三次调用，从网关系统开始，然后依次调用商品系统、促销系统、积分系统的三个服务，如果此时积分系统的响应时间变长，那么整条请求的响应时间也会因此变长，整体服务甚至会发生宕机。<strong>这就是服务雪崩现象：即局部故障最终导致了全局故障。</strong></p>
+
+<p>在分布式环境下，系统某一个服务或者组件响应缓慢，从而拖垮整个系统的情况随处可见。那你要怎么避免呢？这就涉及我们在 15 讲中的内容了。在 15 讲中我提到了，对于系统可用性，你要通过三个方面来解决：分别是“评估”“检测”和“保证”，具体如下。</p>
+
+<ol>
+
+<li>用科学的方法评估<strong>系统的可用性指标；</strong></li>
+
+<li>通过实时监控预警<strong>检测系统的可用性</strong>；</li>
+
+<li>通过系统架构设计<strong>保证系统的可用性。</strong></li>
+
+</ol>
+
+<p>解决的思路是：在分布式系统中，当检测到某一个系统或服务响应时长出现异常时，要想办法停止调用该服务，让服务的调用快速返回失败，从而释放此次请求持有的资源。<strong>这就是架构设计中经常提到的降级和熔断机制。</strong></p>
+
+<p>对应到面试中，面试官一般会通过如下两个问题考察候选者：</p>
+
+<ul>
+
+<li>熔断和降级是怎么做的（考察你对原理性知识的掌握）？</li>
+
+<li>你在项目中如何实现熔断降级（考察你的实战能力）？</li>
+
+</ul>
+
+<p>你先要了解熔断和降级的原理，再结合实践设计实现它们。</p>
+
+<h3>案例解答</h3>
+
+<h4>熔断设计的原理</h4>
+
+<p>形象一点儿说：熔断机制参考了电路中保险丝的保护原理，当电路出现短路、过载时，保险丝就会自动熔断，保证整体电路的安全。</p>
+
+<p>而在微服务架构中，服务的熔断机制是指：在服务 A 调用服务 B 时，如果 B 返回错误或超时的次数超过一定阈值，服务 A 的后续请求将不再调用服务 B。<strong>这种设计方式就是断路器模式。</strong></p>
+
+<p>在这种模式下，服务调用方为每一个调用的服务维护一个有限状态机，在这个状态机中存在<strong>关闭</strong>、<strong>半打开</strong>和<strong>打开三种状态。</strong></p>
+
+<ul>
+
+<li>关闭：正常调用远程服务。</li>
+
+<li>半打开：尝试调用远程服务。</li>
+
+<li>打开：直接返回错误，不调用远程服务。</li>
+
+</ul>
+
+<p>这三种状态之间切换的过程如下。</p>
+
+<ul>
+
+<li><strong>“关闭”转换“打开”</strong>：当服务调用失败的次数累积到一定的阈值时，服务熔断状态，将从关闭态切换到打开态。</li>
+
+<li><strong>“打开”转换“半打开”</strong>：当熔断处于打开状态时，我们会启动一个超时计时器，当计时器超时后，状态切换到半打开态。</li>
+
+<li><strong>“半打开”转换“关闭”</strong>：在熔断处于半打开状态时，请求可以达到后端服务，如果累计一定的成功次数后，状态切换到关闭态。</li>
+
+</ul>
+
+<p><img src="assets/CioPOWAzkrSAfZ7ZAAAzMHsPttE231.png" alt="image" /></p>
+
+<p>熔断状态变更示意图</p>
+
+<p>在工作中，研发工程师经常会通过 Netflix 的开源项目 Hystrix 来实现熔断的功能，并不会探究其中的原理，我在 07 讲中就说过：</p>
+
+<blockquote>
+
+<p>虽然在实际工作中不推荐重复“造轮子”，但在面试中要证明自己具备“造轮子”的能力，因为要评价一个程序员是否对技术栈有全面的认识，考察其“造轮子”的能力是一个不错的切入点。</p>
+
+</blockquote>
+
+<p>所以很多时候，面试官也会考察你在不通过开源组件的前提下，怎么实现断路器的功能。</p>
+
+<h3>如何设计实现一个断路器</h3>
+
+<p><img src="assets/Cgp9HWAzkqOAfaG_AABo0kM-2s4680.png" alt="image" /></p>
+
+<p>断路器的流程图</p>
+
+<ul>
+
+<li><strong>“关闭”转“打开”：</strong> 当请求到来，首先判断是否在熔断中，如果没有熔断，则正常调用系统服务，此时统计系统的调用状态，如果失败次数超过阈值，则断路器“打开”。</li>
+
+</ul>
+
+<pre><code>// 如果是关闭状态
+
+
+
+if(breaker.isClose()) {
+
+
+
+    // 失败次数超过阈值
+
+
+
+    if(failCount.incrementAndGet() &gt;= FAILS_THRESHOLD) {
+
+
+
+        // 设置为打开状态
+
+
+
+        breaker.setOpen();
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<ul>
+
+<li><strong>“打开”转“半打开”：</strong> 如果已经熔断，就初始化一个定时器，定期检测服务状态的可用性，如果服务达到了熔断的倒计时，则设置当前熔断器为“半打开”状态。</li>
+
+</ul>
+
+<pre><code>// 初始化定时器定期检测服务是否可用
+
+
+
+new Timer(&quot;Service-Recover&quot;, true).scheduleAtFixedRate(new TimerTask() {
+
+
+
+    @Override
+
+
+
+    public void run() {
+
+
+
+        if (breaker.isOpen()) {
+
+
+
+            // 设置为半打开态
+
+
+
+            breaker.setHalfOpen(); 
+
+
+
+        }
+
+
+
+    }
+
+
+
+}, 0, recoverInterval);
+
+</code></pre>
+
+<ul>
+
+<li><strong>“半打开”转“关闭”：</strong> 如果服务状态是半打开，则判断成功次数是否超过阈值，超过则设置断路器的状态为“关闭”。</li>
+
+</ul>
+
+<pre><code>// 如果断路器是半打开状态
+
+
+
+if(breaker.isHalfOpen()) {
+
+
+
+    // 判断成功次数是否超过阈值
+
+
+
+    if(successCount.incrementAndGet() &gt;= SUCCESS_THRESHOLD) {
+
+
+
+        // 设置断路器为关闭状态
+
+
+
+        breaker.setClose(); 
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>这样，当某一个服务节点出现问题，服务调用者的熔断器就会实时监测到，并且不再请求有问题的服务节点，避免单个节点的故障导致整体系统的雪崩。</p>
+
+<p>说完了熔断设计的原理和实现，我们再来看看降级设计的原理。</p>
+
+<h4>降级设计的原理</h4>
+
+<p>降级设计本质上是站在系统整体可用性的角度上考虑问题：当资源和访问量出现矛盾时，在有限的资源下，放弃部分非核心功能或者服务，保证整体的可用性。这是一种有损的系统容错方式。</p>
+
+<p>这样看来，熔断也是降级的一种手段（除此之外还有限流、兜底服务等）。</p>
+
+<p>降级的实现手段是：在请求流量突增的情况下，放弃一些非核心流程或非关键业务，释放系统资源，让核心业务正常运行。比如 618 零点大促，电商平台一般会暂时关闭评论、退款功能。</p>
+
+<p>那么问题来了，当你被问到“怎么做降级设计？”时，要怎么回答呢？</p>
+
+<h4>如何设计一个降级机制</h4>
+
+<p>从架构设计的角度出发，<strong>降级设计就是在做取舍，你要从服务降级</strong>和<strong>功能降级</strong>两方面来考虑。</p>
+
+<p>在实现上，服务降级可以分为读操作降级和写操作降级。</p>
+
+<ul>
+
+<li><strong>读操作降级：</strong> 做数据兜底服务，比如将兜底数据提前存储在缓存中，当系统触发降级时，读操作直接降级到缓存，从缓存中读取兜底数据，如果此时缓存中也不存在查询数据，则返回默认值，不在请求数据库。</li>
+
+<li><strong>写操作降级：</strong> 同样的，将之前直接同步调用写数据库的操作，降级为先写缓存，然后再异步写入数据库。</li>
+
+</ul>
+
+<p>我们提炼一下这两种情况的设计原则。</p>
+
+<ul>
+
+<li>读操作降级的设计原则，就是取舍非核心服务。</li>
+
+<li>写操作降级的设计原则，就是取舍系统一致性：实现方式是把强一致性转换成最终一致性。比如，两个系统服务通过 RPC 来交互，在触发降级时，将同步 RPC 服务调用降级到异步 MQ 消息队列中，然后再由消费服务异步处理。</li>
+
+</ul>
+
+<p><strong>而功能降级</strong>就是在做产品功能上的取舍，既然在做服务降级时，已经取舍掉了非核心服务，那么同样的产品功能层面也要相应的进行简化。在实现方式上，可以通过降级开关控制功能的可用或不可用。</p>
+
+<p>另外，在设计降级时，离不开降级开关的配置，一般是通过参数化配置的方式存储在配置中心（如 Zookeeper），在高并发场景下，手动或自动开启开关，实现系统降级。</p>
+
+<h3>总结</h3>
+
+<p>这一讲我带你了解了雪崩产生的原因，服务熔断的实现方式以及服务降级的策略，今天你需要了解的重点是：</p>
+
+<ul>
+
+<li>服务熔断其实是一个有限状态机，实现的关键是三种状态之间的转换过程。</li>
+
+<li>降级就是在做取舍（取舍服务、取舍功能），本质上是为了解决资源不足和访问量过大的问题。实现上可以降低系统一致性、裁剪非核心服务，以及简化产品功能。</li>
+
+</ul>
+
+<p>总之，服务的熔断和降级是互联网保证系统稳定性和可用性的重要手段，在你的架构设计中，如果涉及系统与第三方服务调用的情况下，都需要考虑增加服务熔断和降级方案。当然，高可用的设计方案不仅仅只有熔断和降级，还有如服务冗余、负载均衡、故障隔离、服务限流等设计方式。</p>
+
+<p>总而言之，既然系统出故障是不可避免的，那做架构设计时就要把故障当作不可或缺的一环来处理，因此在分布式系统设计的和开发的过程中，要通过各种架构手段来提高系统可用性。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/架构设计面试精讲/15  如何向面试官证明你做的系统是高可用的？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/架构设计面试精讲/17  如何向面试官证明你做的系统是高性能的？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709979256fdb3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

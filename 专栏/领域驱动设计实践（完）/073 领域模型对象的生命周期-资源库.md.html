@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>073 领域模型对象的生命周期-资源库.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/001 「战略篇」访谈  DDD 和微服务是什么关系？.md">001 「战略篇」访谈  DDD 和微服务是什么关系？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典.md">002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/003 领域驱动设计概览.md">003 领域驱动设计概览.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/004 深入分析软件的复杂度.md">004 深入分析软件的复杂度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/005 控制软件复杂度的原则.md">005 控制软件复杂度的原则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/006 领域驱动设计对软件复杂度的应对（上）.md">006 领域驱动设计对软件复杂度的应对（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/007 领域驱动设计对软件复杂度的应对（下）.md">007 领域驱动设计对软件复杂度的应对（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/008 软件开发团队的沟通与协作.md">008 软件开发团队的沟通与协作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/009 运用领域场景分析提炼领域知识（上）.md">009 运用领域场景分析提炼领域知识（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/010 运用领域场景分析提炼领域知识（下）.md">010 运用领域场景分析提炼领域知识（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/011 建立统一语言.md">011 建立统一语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/012 理解限界上下文.md">012 理解限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/013 限界上下文的控制力（上）.md">013 限界上下文的控制力（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/014 限界上下文的控制力（下）.md">014 限界上下文的控制力（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/015 识别限界上下文（上）.md">015 识别限界上下文（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/016 识别限界上下文（下）.md">016 识别限界上下文（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/017 理解上下文映射.md">017 理解上下文映射.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/018 上下文映射的团队协作模式.md">018 上下文映射的团队协作模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/019 上下文映射的通信集成模式.md">019 上下文映射的通信集成模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/020 辨别限界上下文的协作关系（上）.md">020 辨别限界上下文的协作关系（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/021 辨别限界上下文的协作关系（下）.md">021 辨别限界上下文的协作关系（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/022 认识分层架构.md">022 认识分层架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/023 分层架构的演化.md">023 分层架构的演化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/024 领域驱动架构的演进.md">024 领域驱动架构的演进.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/025 案例  层次的职责与协作关系（图文篇）.md">025 案例  层次的职责与协作关系（图文篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/026 限界上下文与架构.md">026 限界上下文与架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/027 限界上下文对架构的影响.md">027 限界上下文对架构的影响.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/028 领域驱动设计的代码模型.md">028 领域驱动设计的代码模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/029 代码模型的架构决策.md">029 代码模型的架构决策.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/030 实践  先启阶段的需求分析.md">030 实践  先启阶段的需求分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/031 实践  先启阶段的领域场景分析（上）.md">031 实践  先启阶段的领域场景分析（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/032 实践  先启阶段的领域场景分析（下）.md">032 实践  先启阶段的领域场景分析（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/033 实践  识别限界上下文.md">033 实践  识别限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/034 实践  确定限界上下文的协作关系.md">034 实践  确定限界上下文的协作关系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/035 实践  EAS 的整体架构.md">035 实践  EAS 的整体架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？.md">036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/037 「战术篇」开篇词：领域驱动设计的不确定性.md">037 「战术篇」开篇词：领域驱动设计的不确定性.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/038 什么是模型.md">038 什么是模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/039 数据分析模型.md">039 数据分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/040 数据设计模型.md">040 数据设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/041 数据模型与对象模型.md">041 数据模型与对象模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/042 数据实现模型.md">042 数据实现模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/043 案例  培训管理系统.md">043 案例  培训管理系统.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/044 服务资源模型.md">044 服务资源模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/045 服务行为模型.md">045 服务行为模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/046 服务设计模型.md">046 服务设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/047 领域模型驱动设计.md">047 领域模型驱动设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/048 领域实现模型.md">048 领域实现模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/049 理解领域模型.md">049 理解领域模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/050 领域模型与结构范式.md">050 领域模型与结构范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/051 领域模型与对象范式（上）.md">051 领域模型与对象范式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/052 领域模型与对象范式（中）.md">052 领域模型与对象范式（中）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/053 领域模型与对象范式（下）.md">053 领域模型与对象范式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/054 领域模型与函数范式.md">054 领域模型与函数范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/055 领域驱动分层架构与对象模型.md">055 领域驱动分层架构与对象模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/056 统一语言与领域分析模型.md">056 统一语言与领域分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/057 精炼领域分析模型.md">057 精炼领域分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/058 彩色 UML 与彩色建模.md">058 彩色 UML 与彩色建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/059 四色建模法.md">059 四色建模法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/060 案例  订单核心流程的四色建模.md">060 案例  订单核心流程的四色建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/061 事件风暴与业务全景探索.md">061 事件风暴与业务全景探索.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/062 事件风暴与领域分析建模.md">062 事件风暴与领域分析建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/063 案例  订单核心流程的事件风暴.md">063 案例  订单核心流程的事件风暴.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/064 表达领域设计模型.md">064 表达领域设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/065 实体.md">065 实体.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/066 值对象.md">066 值对象.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/067 对象图与聚合.md">067 对象图与聚合.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/068 聚合设计原则.md">068 聚合设计原则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/069 聚合之间的关系.md">069 聚合之间的关系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/070 聚合的设计过程.md">070 聚合的设计过程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/071 案例  培训领域模型的聚合设计.md">071 案例  培训领域模型的聚合设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/072 领域模型对象的生命周期-工厂.md">072 领域模型对象的生命周期-工厂.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/领域驱动设计实践（完）/073 领域模型对象的生命周期-资源库.md">073 领域模型对象的生命周期-资源库.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/074 领域服务.md">074 领域服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/075 案例  领域设计模型的价值.md">075 案例  领域设计模型的价值.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/076 应用服务.md">076 应用服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/077 场景的设计驱动力.md">077 场景的设计驱动力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/078 案例  薪资管理系统的场景驱动设计.md">078 案例  薪资管理系统的场景驱动设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/079 场景驱动设计与 DCI 模式.md">079 场景驱动设计与 DCI 模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/080 领域事件.md">080 领域事件.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/081 发布者—订阅者模式.md">081 发布者—订阅者模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/082 事件溯源模式.md">082 事件溯源模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/083 测试优先的领域实现建模.md">083 测试优先的领域实现建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/084 深入理解简单设计.md">084 深入理解简单设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/085 案例  薪资管理系统的测试驱动开发（上）.md">085 案例  薪资管理系统的测试驱动开发（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/086 案例  薪资管理系统的测试驱动开发（下）.md">086 案例  薪资管理系统的测试驱动开发（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/087 对象关系映射（上）.md">087 对象关系映射（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/088 对象关系映射（下）.md">088 对象关系映射（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/089 领域模型与数据模型.md">089 领域模型与数据模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/090 领域驱动设计对持久化的影响.md">090 领域驱动设计对持久化的影响.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/091 领域驱动设计体系.md">091 领域驱动设计体系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/092 子领域与限界上下文.md">092 子领域与限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/093 限界上下文的边界与协作.md">093 限界上下文的边界与协作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/094 限界上下文之间的分布式通信.md">094 限界上下文之间的分布式通信.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/095 命令查询职责分离.md">095 命令查询职责分离.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/096 分布式柔性事务.md">096 分布式柔性事务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/097 设计概念的统一语言.md">097 设计概念的统一语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/098 模型对象.md">098 模型对象.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/099 领域驱动设计参考过程模型.md">099 领域驱动设计参考过程模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/100 领域驱动设计的精髓.md">100 领域驱动设计的精髓.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/101 实践  员工上下文的领域建模.md">101 实践  员工上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/102 实践  考勤上下文的领域建模.md">102 实践  考勤上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/103 实践  项目上下文的领域建模.md">103 实践  项目上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/104 实践  培训上下文的业务需求.md">104 实践  培训上下文的业务需求.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/105 实践  培训上下文的领域分析建模.md">105 实践  培训上下文的领域分析建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/106 实践  培训上下文的领域设计建模.md">106 实践  培训上下文的领域设计建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/107 实践  培训上下文的领域实现建模.md">107 实践  培训上下文的领域实现建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/108 实践  EAS 系统的代码模型.md">108 实践  EAS 系统的代码模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/109 后记：如何学习领域驱动设计.md">109 后记：如何学习领域驱动设计.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>073 领域模型对象的生命周期-资源库</h1>
+
+<p>资源库（Repository）是对数据访问的一种业务抽象，使其具有业务意义。利用资源库抽象，就可以解耦领域层与外部资源，使领域层变得更为纯粹，能够脱离外部资源而单独存在。在设计资源库时，我们想到的不应该是数据库，而是作为“资源”的聚合对象在一个抽象的仓库中是如何管理的。于是，资源库可以代表任何可以获取资源的地方，而不仅限于数据库：</p>
+
+<p><img src="assets/69c96d30-dd3e-11e9-bd36-7f7c003fb3d0" alt="img" /></p>
+
+<p>在《领域驱动设计实践-战略篇》课程中，我介绍了版本升级系统的先启过程。在这个系统中，后台需要与前台的基站（NodeB）以及基站的 BBU 板和 RRU 板进行通信，以获得这些终端设备的软件信息，如 Version、Configure、Software、Package、File 等。我在设计过程中引入了领域驱动设计，将获取的这些软件信息建模为领域模型对象，并根据其概念完整性等设计原则定义了聚合。要获得聚合，并非通过访问数据库，而是借由 TELNET 通信协议与前台设备通信，获得的信息以文件形式传输到后端，再由 FileReader 读取其内容后实例化对应的实体或值对象。当我们将这些软件信息建立的领域模型视为资源时，通信采用的 TELNET 协议，以及读取文件后的对象实例化都可以通过抽象的资源库隐藏起来，领域层就无需操心底层的繁琐细节了：</p>
+
+<p><img src="assets/716758e0-dd3e-11e9-91f1-1f062dd96300" alt="75901236.png" /></p>
+
+<h3>资源库的设计原则</h3>
+
+<p>之所以引入资源库，主要目的还是为了管理聚合的生命周期。工厂负责聚合实例的生，垃圾回收负责聚合实例的死，资源库就负责聚合记录的查询与状态变更，即记录的“增删改查”操作。不同于活动记录（Active Record）模式，资源库分离了聚合的领域行为和持久化行为。为了更好地管理聚合，领域驱动设计对资源库的设计做了一定程度的限制与规范。</p>
+
+<h4>一个聚合对应一个资源库</h4>
+
+<p>假定存储资源的仓库为数据库。在此前提下，粗略一看，资源库模式与传统的数据访问对象（DAO）模式并无太大差别。</p>
+
+<p>DAO 实现了使用数据源所需的访问机制，封装了管理数据库连接以及存取数据的逻辑。不论使用哪种数据源，DAO 为调用者提供了统一的 API，调用者只需使用 DAO 暴露的接口，无需考虑内部的实现细节，这就隔离了业务逻辑与数据访问逻辑，满足“关注点分离”的架构原则。尤其当我们为 DAO 定义了专门的抽象接口时，就可以利用依赖注入来改变依赖方向，满足“整洁架构”的设计思想。</p>
+
+<p>既然如此，为何 Eric Evans 还要引入<strong>资源库</strong>的概念呢？Eric Evans 说：“我们可以通过对象之间的关联来找到对象。但当它处于生命周期的中间时，必须要有一个起点，以便从这个起点遍历到一个实体或者对象。”</p>
+
+<p>怎么来理解生命周期的“中间”和“起点”？这就需要注意对象与数据记录之间的区别与联系。单从对象的角度看，生命周期代表了一个实例从创建到最后被回收，体现了生命的诞生到死亡；而数据记录呢？生命周期的起点是指插入一条新纪录，直到该记录被删除为生命的终点。</p>
+
+<p>Eric Evans 提及的生命周期其实是<strong>领域模型对象的生命周期</strong>，需要将对象与数据记录二者结合起来，换言之就是要将内存（堆与栈）管理的对象与数据库（持久化）管理的数据记录结合起来，共同表达了聚合领域模型的整体生命周期：</p>
+
+<p><img src="assets/c2116580-dd46-11e9-bd36-7f7c003fb3d0" alt="59448394.png" /></p>
+
+<p>通过上图，可以清晰地看出 Eric 所谓的“起点”，就是通过资源库查询或重建后得到聚合对象的那个点，因为只有在这个时候，我们才能获得聚合对象，然后以此为起点去遍历聚合的根实体及内部的实体和值对象。这个“起点”实际处于领域模型对象生命周期的“中间”。这也正好解释了资源库的职能，就是执行对聚合的“增删改查”。</p>
+
+<p>虽然增删改查同样是 DAO 的职责，但资源库的不同之处在于：</p>
+
+<ul>
+
+<li>资源库操作的是属于领域层中的具有边界的聚合；DAO 操作的是数据传输对象，即持久化对象，该对象与 DAO 一起都位于数据访问层；倘若使用 DAO 操作领域对象，最大的区别在于聚合的引入。</li>
+
+<li>资源库强调了聚合生命周期的管理，其目的在于获取聚合对象的引用，在形成聚合的对象图后，便于调用者对其进行操作。</li>
+
+</ul>
+
+<p>显然，是聚合的引入改变了资源库的格局。DAO 模式没有聚合配套，就意味着针对领域层的任何模型对象，调用者都可以通过对应的 DAO 随意发起对数据库的操作，实体和值对象就会被散乱放置到领域层的各个地方，无拘无束。缺乏边界控制力的设计就等于自由没有了规范，长此以往，会导致大多数处理数据库访问的技术复杂性“侵入”到领域层，复杂度呈指数级增加，之前通过领域分析建模与领域设计建模获得的模型，也会变得无关紧要。</p>
+
+<p>因此，<strong>保证一个聚合对应一个资源库非常重要</strong>。聚合只有一个入口，那就是聚合根；对聚合生命周期的管理，也只有一个入口，那就是聚合对应的资源库。要访问聚合内的其他实体和值对象，也只能通过聚合对应的资源库进行，这就保护了聚合的封装性。一言以蔽之：通过资源库获取聚合的引用，通过对象图的单一遍历方向获得聚合内部对象。例如，要为订单添加订单项，这样的做法就是错误的：</p>
+
+<pre><code class="language-java">OrderItemRepository oderItemRepo;
+
+
+
+orderItemRepo.add(orderId, orderItem);
+
+
+
+</code></pre>
+
+<p>OrderItem 不是聚合，不能为其定义资源库。OrderItem 是 Order 聚合的内部实体，因此添加订单项的操作本质上是更新订单的操作：</p>
+
+<pre><code class="language-java">OrderRepository orderRepo;
+
+
+
+Order order = orderRepo.orderOfId(orderId);
+
+order.addItem(orderItem);
+
+
+
+orderRepo.update(order);
+
+
+
+</code></pre>
+
+<p>添加订单项功能由 Order 聚合根实体实现，addItem() 方法的实现可以保证订单领域概念的完整性，实现不变量。例如，该方法可以根据 OrderItem 中的 ProductId 来判断究竟是添加订单项，还是合并订单项，然后修改订单项中所购商品的数量。</p>
+
+<h4>资源库的领域特征</h4>
+
+<p>资源库的命名说明它作为资源的仓库，是用以存取聚合资源的容器。容器自身没有领域含义，但对容器内对象的访问操作，实则可以视为是领域逻辑的一部分，这也是为何在分层架构中将抽象的资源库放在领域层的原因所在。</p>
+
+<p>《领域驱动设计》中明确说明：“它（指资源库）的行为类似于集合（Collection），只是具有更复杂的查询功能。在添加和删除相应类型的对象时，资源库的后台机制负责将对象添加到数据库中，或从数据库中删除对象。这个定义将一组紧密相关的职责集中在一起，这些职责提供了对聚合根的整个生命周期的全程访问。”</p>
+
+<p>既然资源库可认为是“聚合集合”的隐喻，在设计资源库的接口 API 时，就可参考此特征定义接口方法的名称。例如，定义通用的 Repository：</p>
+
+<pre><code class="language-java">public interface Repository&lt;T extends AggregateRoot&gt; {
+
+    // 查询
+
+    Optional&lt;T&gt; findById(Identity id);
+
+    List&lt;T&gt; findAll();
+
+    List&lt;T&gt; findAllMatching(Criteria criteria);
+
+    boolean contains(T t);
+
+
+
+    // 新增
+
+    void add(T t);
+
+    void addAll(Collection&lt;? extends T&gt; entities);
+
+
+
+    // 更新
+
+    void replace(T t);
+
+    void replaceAll(Collection&lt;? extends T&gt; entities);
+
+
+
+    // 删除
+
+    void remove(T t);
+
+    void removeAll();
+
+    void removeAll(Collection&lt;? extends T&gt; entities);
+
+    void removeAllMatching(Criteria criteria); 
+
+}
+
+
+
+</code></pre>
+
+<p>如何使用这样的 Repository 通用接口呢？既然该接口使用了泛型的类型参数，且接口定义的方法涵盖了与聚合生命周期有关的所有增删改查操作，我们就可以享受重用的福利，无需再为各个聚合定义单独的资源库了。例如，Order 聚合的资源就可以用 Repository<Order> 来管理其生命周期。至于 Repository<T> 接口的实现，则根据 ORM 框架的不同，可以提供不同的实现：</p>
+
+<p><img src="assets/67192b30-dd47-11e9-a45e-f337da342125" alt="72794507.png" /></p>
+
+<p>这样的设计看似很美好，实际并不可行。首先，Repository 通用接口定义了全生命周期的资源库方法，但并非所有聚合都需要这些方法，实现机制又无法控制这些方法。例如，Order 聚合不需要真正的删除方法，又或者对外虽然公开为 delete()，内部却按照需求仅仅是修改订单的状态为 DELETED，该如何让 Repository<Order> 满足这一需求呢？</p>
+
+<p>其次，聚合资源库对外暴露了根据条件进行查询或删除的方法，其目的是为了满足各种不同的查询/删除需求。但对条件的组装又会加重调用者的负担，例如查询指定顾客所有正在处理中的订单：</p>
+
+<pre><code class="language-java">Criteria customerIdCriteria = new EquationCriteria(&quot;customerId&quot;, customerId);
+
+Criteria inProgressCriteria = new EquationCriteria(&quot;orderStatus&quot;, OrderStatus.InProgress);
+
+orderRepository.findAllMatching(customerIdCriteria.and(inProgressCriteria));
+
+
+
+</code></pre>
+
+<p>正确的做法是在重用、封装与代码可读性求得一个平衡。Repository 作为一个通用接口，仍有存在必要。但该接口并非直接面向领域服务，故而在设计时，无需考虑所谓“集合”的隐喻。这样就可以将新增操作与更新操作合二为一，用 save() 方法来代表，名称上也尽可以遵循数据库操作的通用叫法，如删除仍然命名为 delete：</p>
+
+<pre><code class="language-java">public interface Repository&lt;E extends AggregateRoot, ID extends Identity&gt; {
+
+    Optional&lt;E&gt; findById(ID id);
+
+    List&lt;E&gt; findAll();
+
+    List&lt;E&gt; findAllMatching(Criteria criteria);
+
+
+
+    boolean existsById(ID id);
+
+
+
+    void save(E entity);
+
+    void saveAll(Collection&lt;? extends E&gt; entities);
+
+
+
+    void delete(E entity);
+
+    void deleteAll();
+
+    void deleteAll(Collection&lt;? extends E&gt; entities);
+
+    void deleteAllMatching(Criteria criteria); 
+
+}
+
+
+
+</code></pre>
+
+<p>我将这样的通用接口看作是连接领域与基础设施的网关，真正体现领域特征的还是为每个聚合显式定义的资源库，并将它视为聚合类的集合，并根据具体的业务场景定义只属于该聚合的生命周期方法。至于重用，则可<strong>采用委派而非继承的方式</strong>，在聚合资源库的实现类内部维持对通用接口 Repository<T> 的引用。以订单的资源库为例：</p>
+
+<pre><code class="language-java">// 领域层
+
+public interface OrderRepository {
+
+    // 查询方法的命名更加倾向于自然语言，而未必体现 find 的技术含义
+
+    Optional&lt;Order&gt; orderOfId(OrderId orderId);
+
+    // 以下两个方法在内部实现时，需要组装为通用接口的 criteria
+
+    Collection&lt;Order&gt; allOrdersOfCustomer(CustomerId customerId);
+
+    Collection&lt;Order&gt; allInProgressOrdersOfCustomer(CustomerId customerId);
+
+
+
+    void add(Order order);
+
+    void addAll(Iterable&lt;Order&gt; orders);
+
+
+
+    // 在底层实现中，新增和更新都可以视为是保存，因此也可以考虑将 add 与 update 合二为一
+
+    void update(Order order);
+
+    void updateAll(Iterable&lt;Order&gt; orders);
+
+}
+
+
+
+// 基础设施层
+
+public class PersistenceOrderRepository implements OrderRepository {
+
+    // 采用委派
+
+    private Repository&lt;Order, OrderId&gt; repository;
+
+
+
+    // 注入真正的资源库实现
+
+    public PersistenceOrderRepository(Repository&lt;Order, OrderId&gt; repository) {
+
+        this.repository = repository;
+
+    }
+
+
+
+    public Optional&lt;Order&gt; orderOfId(OrderId orderId) {
+
+        return repository.findById(orderId);
+
+    }
+
+    public Collection&lt;Order&gt; allOrdersOfCustomer(CustomerId customerId) {
+
+        Criteria customerIdCriteria = new EquationCriteria(&quot;customerId&quot;, customerId);
+
+        return repository.findAllMatching(customerIdCriteria);
+
+    }
+
+    public Collection&lt;Order&gt; allInProgressOrdersOfCustomer(CustomerId customerId) {
+
+        Criteria customerIdCriteria = new EquationCriteria(&quot;customerId&quot;, customerId);
+
+        Criteria inProgressCriteria = new EquationCriteria(&quot;orderStatus&quot;,OrderStatus.InProgress);
+
+        return repository.findAllMatching(customerIdCriteria.and(inProgressCriteria));
+
+    }
+
+
+
+    public void add(Order order) {
+
+        repository.save(order);
+
+    }
+
+    public void addAll(Collection&lt;Order&gt; orders) {
+
+        repository.saveAll(orders);
+
+    }
+
+
+
+    public void update(Order order) {
+
+        repository.save(order);
+
+    }
+
+    public void updateAll(Collection&lt;Order&gt; orders) {
+
+        repository.saveAll(orders);
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>设计类图如下所示：</p>
+
+<p><img src="assets/9d2a4380-dd47-11e9-a584-59c5758c1abc" alt="72042857.png" /></p>
+
+<p>领域服务调用 OrderRepository 管理 Order 聚合，但在执行时，调用的其实是通过依赖注入的实现类 PersistenceOrderRepository。为了避免重复实现，在 PersistenceOrderRepository 类的内部，操作数据库的工作又委派给了通用接口 Repository<T>，进而委派给具体实现了 Repository<T> 接口的类，如前所述的 MybatisRepository<T> 等。</p>
+
+<p><strong>委派方式显然要优于继承</strong>。如此一来，聚合的资源库接口可不受通用接口的限制，明确定义满足真实业务场景的调用需求。例如，业务需求不允许删除订单，OrderRepository 接口就无需提供 remove() 等移除方法，定义的诸如 allOrdersOfCustomer() 与 allInProgressOrdersOfCustomer() 等特定的查询方法，更能表达领域逻辑。</p>
+
+<p>不过针对资源库的条件查询方法的接口设计，社区存在争议，大致分为如下两派：</p>
+
+<ul>
+
+<li>一派支持设计简单通用的资源库查询接口，让资源库回归本质，老老实实做好查询的工作。条件查询接口应保持其通用性，将查询条件的组装工作交由调用者，否则就需要穷举所有可能的查询条件。一旦业务增加了新的查询条件，就需要修改资源库接口。如订单聚合的接口定义，在定义了 allInProgressOrdersOfCustomer(customerId) 方法之后，是否意味着还需要定义 allCancelledOrdersOfCustomer(customerId) 之类的各种方法呢？</li>
+
+<li>另一派坚持将查询接口<strong>明确化</strong>，根据资源库的个体需求定义查询方法，方法命名也应体现领域逻辑。封装了查询条件的查询接口不会将 Criteria 泄露出去，归根结底，Criteria 的定义本身并不属于领域层。这样的查询方法既有其业务含义，又能通过封装减轻调用者的负担。</li>
+
+</ul>
+
+<p>两派观点各有其道理。一派以通用性换取接口的可扩展，却牺牲了接口方法的可读性；另一派以封装性获得接口的简单可读，却因为过于具体导致接口膨胀与不稳定。从资源库的领域特征来看，我倾向于后者，但为了兼顾可扩展性与可读性，倒不如为资源库定义常见查询方法的同时，保留对查询条件的支持。此外，查询接口的具体化与抽象化也可折中，例如查询“处理中”与“已取消”的订单，差异在于订单的状态，因而可以将订单状态提取为查询方法的参数：</p>
+
+<pre><code class="language-java">Collection&lt;Order&gt; allOrdersOf(CustomerId customerId, OrderStatus orderStatus);
+
+
+
+</code></pre>
+
+<p>我们还应从资源库的调用角度分析。资源库的调用者包括领域服务和应用服务（后面讲解应用服务时，我提出应用服务应只与领域服务协作）。倘若资源库提供了通用的查询接口，而调用者又是应用服务（若应用服务不能与资源库协作，就不存在此种情况），就会将组装查询条件的代码混入到应用层。这违背了保持应用层“轻薄”的原则。要么限制资源库的通用查询接口，要么限制应用层直接依赖资源库，如何取舍，还得结合具体业务场景做出最适合当前情况的判断。设计时，需要坚守一些基本原则，如保证各层的职责单一、遵循 DRY 原则、高内聚低耦合等，除此之外，可以灵活处理。</p>
+
+<p>实际上，资源库的条件查询接口设计还有第三条路可走，那就是 Eric Evans 提出的引入规格模式（Specification Pattern）封装查询条件。我在讲解分析模式的时候介绍过规格模式，它与查询条件是两种不同的设计模式。查询条件是一种表达式，采用了解释器模式（Interpreter Pattern）的设计思想，为逻辑表达式建立统一的抽象，如前所示的 Criteria 接口，然后将各种原子条件表达式定义为表达式子类，如前所示的 AndCriteria 类。这些子类实现解释方法，将值解释为条件表达式。规格模式是策略模式（Strategy Pattern）的体现，为所有规格定义一个共同的接口，如 Specification 接口的 isSatisfied() 方法。规格的子类会实现该方法，结合规则返回 Boolean 值。</p>
+
+<p>相较于查询条件表达式，规格模式的封装性更好，可以实现按照业务规则定义不同的规格子类，通过规格接口，也能做到对领域规则的扩展。与之相反，查询条件的设计方式着重寻找原子表达式，然后将组装的职责交由调用者，因此它能够更加灵活地应对各种业务规则，唯一欠缺的是封装性。收之东隅失之桑榆，在做设计决策时，概莫如此。</p>
+
+<h3>持久化框架对资源库实现的影响</h3>
+
+<p>遵循整洁架构思想与领域驱动设计分层架构的设计要求，我们应保证领域层的纯粹性，即不依赖任何外部资源和框架。我建议将聚合的资源库定义为接口，目的正在与此。即使是接口，若不做好合适的设计，也可能会悄无声息地引入依赖。</p>
+
+<p>从软件工程学的角度看，我们不可能不使用框架，重用是必须的。许多持久化框架都会提供通用的类或接口，你只需要继承它就可以享受框架带来的强大威力，但同时也意味着你将受制于它。Neal Ford 将这种模式称之为<strong>耦合的毒贩模式</strong>：“如果你服从这些诱导，你就只能永远受制于框架。”假设有一个 JpaFramework 提供了持久化的通用接口 Repository，为了重用框架，自定义的订单聚合资源库继承了该接口：</p>
+
+<p><img src="assets/42baa4b0-dd49-11e9-8134-9900814ad853" alt="img" /></p>
+
+<p>虽然 OrderRepository 通过继承框架的 Repository 得到了持久化便利，但领域模型也无法轻易甩开 JpaFramework。继承关系就好像胶水，把二者紧紧粘在了一起，这就使得领域模型失去了纯粹性。正确的做法是转移对框架的依赖，交给资源库的实现类。实现类属于基础设施层，本就负责与外部资源和框架的适配工作，将它与框架耦合，并不会干扰到领域层：</p>
+
+<p><img src="assets/512b3cd0-dd49-11e9-8134-9900814ad853" alt="39903508.png" /></p>
+
+<p>上图中的 PersistenceOrderRepository 是一个类，它通过组合方式重用了 JpaFramework 的 Repository 接口。其实不仅限于组合方式，即使让资源库的实现类去继承框架的类型或实现框架的接口都无关紧要，因为通过依赖注入，领域层的领域模型根本就不知晓 PersistenceOrderRepository 类的存在，更不用提框架了。</p>
+
+<p>似乎看中了资源库接口的抽象性与隔离性，许多持久化框架也在向这个方向迈进，力图在保证抽象性的同时，做到最大程度的封装以减轻开发人员的工作量。针对具有元数据的语言如 Java，多数框架采用动态代理的方式完成具体实现代码的混入。以 Spring Data JPA 为例，它定义了如下的标记接口 Repository：</p>
+
+<pre><code class="language-java">package org.springframework.data.repository;
+
+
+
+import org.springframework.stereotype.Indexed;
+
+
+
+@Indexed
+
+public interface Repository&lt;T, ID&gt; {
+
+}
+
+
+
+</code></pre>
+
+<p>虽然该接口并未定义任何方法，但却是 Spring Data JPA 底层动态代理确定某个类是否为资源库的根本特征。除此之外，Spring Data API 还定义了诸如 CrudRepositoy 与 PagingAndSortingRepository 等接口，以便于用户可以根据具体情况选择作为资源库的父接口。虽然这些接口皆未提供任何实现，但归根结底它们都定义在 Spring Data JPA 这个框架中。若聚合的资源库接口直接继承它们，就会变成前面提及的“耦合的毒贩模式”，违背了整洁架构的思想；若让处于基础设施的资源库子类去实现这些接口，又可能违背框架的意图，因为框架为了简便起见，已经自动把 ORM 的工作封装到底层中，并不需要用户再来提供实现。</p>
+
+<p>这就是现实的进退两难。</p>
+
+<p>若要彻底保持领域模型的纯净，可定义两个层次的接口：其一为面向聚合定义的抽象接口，它在领域层中扮演抽象资源库的角色；其二为满足框架要求定义的接口，它一则继承了领域模型的资源库接口，一则又继承自框架的抽象接口。例如：</p>
+
+<pre><code class="language-java">package com.practiceddd.ecommerce.domain.order;
+
+
+
+public interface OrderRepository {
+
+    Optional&lt;Order&gt; findById(OrderId orderId);
+
+    Collection&lt;Order&gt; findByCustomerId(CustomerId customerId);
+
+    Collection&lt;Order&gt; findByCustomerIdAndOrderStatus(CustomerId customerId, OrderStatus orderStatus);
+
+    Stream&lt;Order&gt; streamAllOrders();
+
+}
+
+
+
+package com.praticeddd.ecommerce.client.persistence;
+
+
+
+import org.springframework.data.repository.Repository;
+
+import com.practiceddd.ecommerce.domain.order.OrderRepository;
+
+
+
+public interface JpaOrderRepository extends OrderRepository, Repostory&lt;Order, OrderId&gt; {}
+
+
+
+</code></pre>
+
+<p>此方式虽可隔离领域层对框架的依赖，但在 OrderRepository 接口方法的定义上，仍然可见框架约束的痕迹。因为 Spring Data JPA 提供了两种定义查询的方法：</p>
+
+<ul>
+
+<li>通过 @Query 在方法上定义查询</li>
+
+<li>根据命名惯例指定资源库方法。</li>
+
+</ul>
+
+<p>由于资源库的方法定义在领域层中，不能使用框架提供的 @Query 标记，因此命名惯例的方式就成了不二之选。框架规定，查询接口方法必须是 <code>find...By...</code>、<code>read...By...</code>、<code>query...By...</code> 等形式。这种命名惯例的约束虽然无形，却容易让不明框架者不知所谓。若开发者因为其名过于宽泛而尝试重命名，就会导致功能不可用。</p>
+
+<p>若要突破框架带来的限制，更好的方式还是在资源库的实现类中使用组合的形式。Spring Data JPA 框架支持 Java 的 JPA（Java Persistence API）规范，故而可以利用 JPA 规范提供的 EntityManager 类执行查询，如：</p>
+
+<pre><code class="language-java">package com.practiceddd.ecommerce.domain.order;
+
+
+
+public interface OrderRepository {
+
+    Optional&lt;Order&gt; orderOfId(OrderId orderId);
+
+    Collection&lt;Order&gt; allOrdersOfCustomer(CustomerId customerId);
+
+    Collection&lt;Order&gt; allInProgressOrdersOfCustomer(CustomerId customerId);
+
+}
+
+
+
+package com.praticeddd.ecommerce.client.persistence;
+
+
+
+import com.practiceddd.ecommerce.domain.order.OrderRepository;
+
+import javax.persistence.EntityManager;
+
+import javax.persistence.PersistenceContext;
+
+
+
+public class JpaOrderRepository implements OrderRepository {
+
+    @PersistenceContext
+
+    private EntityManager entityManager;
+
+
+
+    public Optional&lt;Order&gt; orderOfId(OrderId orderId) {
+
+        Order order = entityManager.get(Order.class, orderId);
+
+        if (order == null) {
+
+            return Optional.empty();
+
+        }
+
+        return Optional.of(order);
+
+     } 
+
+
+
+    ...
+
+}
+
+
+
+</code></pre>
+
+<p>组合的设计方式完全保证了领域层的纯粹性，也遵循了资源库的设计原则。然而有得也有失，在带来灵活性的同时，也失去了框架与生俱来的能力，实现者要编写更多代码方可满足要求。当然，能做到领域逻辑与技术实现的完全隔离，这一努力仍然值得。它使得我们在设计领域层的资源库对象时，可以暂时抛开对技术实现的顾虑，仅从领域逻辑角度定义满足统一语言的资源库接口。这才是所谓<strong>领域驱动设计</strong>的真谛。</p>
+
+<p>若你并没有领域驱动设计那种纯然的洁癖感，也不妨降低要求，毕竟未来更换持久化框架的可能性很小（我确曾经历过更换持久化框架的项目）。既然许多持久化框架已经提供了不错的抽象，也能做到与数据库之间的完全隔离，在项目中就可以抛开不切实际的抽象，直接在领域层使用框架提供的资源库。例如，定义的 OrderRepository 接口直接继承框架提供的 Repository 或 CrudRepository 等接口。如果是 MyBatis，也可直接将抽象的 Mapper 接口当做聚合的资源库。设计由心，还是得结合具体场景做出准确判断。多数时候，简单才是最合适的方案，过于强调维持领域的纯净性，可能陷入过度设计的泥沼而不自知。</p>
+
+<p>说来矛盾，虽然我赞成为了简单性可以损失领域的一部分纯净，但充分理解资源库的领域特征仍有重要意义，并需要在设计中尽力维持这一特征。毕竟，在实现层面，选择的框架不同，实现方式亦有所不同。若能从根本的设计原则出发，必能就现实情况选择最为适宜的方案。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/领域驱动设计实践（完）/072 领域模型对象的生命周期-工厂.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/领域驱动设计实践（完）/074 领域服务.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997ea2dcb33cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

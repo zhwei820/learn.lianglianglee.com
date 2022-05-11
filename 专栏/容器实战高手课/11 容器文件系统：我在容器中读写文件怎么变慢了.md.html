@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>11 容器文件系统：我在容器中读写文件怎么变慢了.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>11 容器文件系统：我在容器中读写文件怎么变慢了</h1>
+
+<p>你好，我是程远。从这一讲开始，我们进入容器存储这个模块。</p>
+
+<p>这一模块我们所讲的内容，都和容器里的文件读写密切相关。因为所有的容器的运行都需要一个容器文件系统，那么我们就从容器文件系统先开始讲起。</p>
+
+<p>那我们还是和以前一样，先来看看我之前碰到了什么问题。</p>
+
+<p>这个问题具体是我们在宿主机上，把 Linux 从 ubuntu18.04 升级到 ubuntu20.04 之后发现的。</p>
+
+<p>在我们做了宿主机的升级后，启动了一个容器，在容器里用 fio 这个磁盘性能测试工具，想看一下容器里文件的读写性能。结果我们很惊讶地发现，在 ubuntu 20.04 宿主机上的容器中文件读写的性能只有 ubuntu18.04 宿主机上的 1/8 左右了，那这是怎么回事呢？</p>
+
+<h2>问题再现</h2>
+
+<p>这里我提醒一下你，因为涉及到两个 Linux 的虚拟机，问题再现这里我为你列出了关键的结果输出截图，不方便操作的同学可以重点看其中的思路。</p>
+
+<p>我们可以先启动一个 ubuntu18.04 的虚拟机，它的 Linux 内核版本是 4.15 的，然后在虚拟机上用命令 docker run -it ubuntu:18.04 bash 启动一个容器，接着在容器里运行 fio 这条命令，看一下在容器中读取文件的性能。</p>
+
+<pre><code># fio -direct=1 -iodepth=64 -rw=read -ioengine=libaio -bs=4k -size=10G -numjobs=1  -name=./fio.test
+
+</code></pre>
+
+<p>这里我给你解释一下 fio 命令中的几个主要参数：</p>
+
+<p>第一个参数是&quot;-direct=1&quot;，代表采用非 buffered I/O 文件读写的方式，避免文件读写过程中内存缓冲对性能的影响。</p>
+
+<p>接着我们来看这&quot;-iodepth=64&quot;和&quot;-ioengine=libaio&quot;这两个参数，这里指文件读写采用异步 I/O（Async I/O）的方式，也就是进程可以发起多个 I/O 请求，并且不用阻塞地等待 I/O 的完成。稍后等 I/O 完成之后，进程会收到通知。</p>
+
+<p>这种异步 I/O 很重要，因为它可以极大地提高文件读写的性能。在这里我们设置了同时发出 64 个 I/O 请求。</p>
+
+<p>然后是&quot;-rw=read，-bs=4k，-size=10G&quot;，这几个参数指这个测试是个读文件测试，每次读 4KB 大小数块，总共读 10GB 的数据。</p>
+
+<p>最后一个参数是&quot;-numjobs=1&quot;，指只有一个进程 / 线程在运行。</p>
+
+<p>所以，这条 fio 命令表示我们通过异步方式读取了 10GB 的磁盘文件，用来计算文件的读取性能。</p>
+
+<p>那我们看到在 ubuntu 18.04，内核 4.15 上的容器 I/O 性能是 584MB/s 的带宽，IOPS（I/O per second）是 150K 左右。</p>
+
+<p><img src="assets/5df788a1c7fb9f5677557d6cb15c995e.png" alt="img" /></p>
+
+<p>同样我们再启动一个 ubuntu 20.04，内核 5.4 的虚拟机，然后在它的上面也启动一个容器。</p>
+
+<p>我们运行 docker run -it ubuntu:20.04 bash ，接着在容器中使用同样的 fio 命令，可以看到它的 I/O 性能是 70MB 带宽，IOPS 是 18K 左右。实践证明，这的确比老版本的 ubuntu 18.04 差了很多。</p>
+
+<p><img src="assets/90aff20c885286d4b6b5aed7b017a9f1.png" alt="img" /></p>
+
+<h2>知识详解</h2>
+
+<h3>如何理解容器文件系统？</h3>
+
+<p>刚才我们对比了升级前后的容器读写性能差异，那想要分析刚刚说的这个性能的差异，我们需要先理解容器的文件系统。</p>
+
+<p>我们在容器里，运行  df 命令，你可以看到在容器中根目录 (/) 的文件系统类型是&quot;overlay&quot;，它不是我们在普通 Linux 节点上看到的 Ext4 或者 XFS 之类常见的文件系统。</p>
+
+<p>那么看到这里你肯定想问，Overlay 是一个什么样的文件系统呢，容器为什么要用这种文件系统？别急，我会一步一步带你分析。</p>
+
+<p><img src="assets/2fed851ba2df3232efbdca1d1cce19b0.png" alt="img" /></p>
+
+<p>在说容器文件系统前，我们先来想象一下如果没有文件系统管理的话会怎样。假设有这么一个场景，在一个宿主机上需要运行 100 个容器。</p>
+
+<p>在我们这个课程的第一讲里，我们就说过每个容器都需要一个镜像，这个镜像就把容器中程序需要运行的二进制文件，库文件，配置文件，其他的依赖文件等全部都打包成一个镜像文件。</p>
+
+<p>如果没有特别的容器文件系统，只是普通的 Ext4 或者 XFS 文件系统，那么每次启动一个容器，就需要把一个镜像文件下载并且存储在宿主机上。</p>
+
+<p>我举个例子帮你理解，比如说，假设一个镜像文件的大小是 500MB，那么 100 个容器的话，就需要下载 500MB*100= 50GB 的文件，并且占用 50GB 的磁盘空间。</p>
+
+<p>如果你再分析一下这 50GB 里的内容，你会发现，在绝大部分的操作系统里，库文件都是差不多的。而且，在容器运行的时候，这类文件也不会被改动，基本上都是只读的。</p>
+
+<p>特别是这样的情况：假如这 100 个容器镜像都是基于&quot;ubuntu:18.04&quot;的，每个容器镜像只是额外复制了 50MB 左右自己的应用程序到&quot;ubuntu: 18.04&quot;里，那么就是说在总共 50GB 的数据里，有 90% 的数据是冗余的。</p>
+
+<p>讲到这里，你不难推测出理想的情况应该是什么样的？</p>
+
+<p>没错，当然是在一个宿主机上只要下载并且存储存一份&quot;ubuntu:18.04&quot;，所有基于&quot;ubuntu:18.04&quot;镜像的容器都可以共享这一份通用的部分。这样设置的话，不同容器启动的时候，只需要下载自己独特的程序部分就可以。就像下面这张图展示的这样。</p>
+
+<p><img src="assets/c0119d9d2af9cf7386db13467027003f.jpg" alt="img" /></p>
+
+<p>正是为了有效地减少磁盘上冗余的镜像数据，同时减少冗余的镜像数据在网络上的传输，选择一种针对于容器的文件系统是很有必要的，而这类的文件系统被称为 UnionFS。</p>
+
+<p>UnionFS 这类文件系统实现的主要功能是把多个目录（处于不同的分区）一起挂载（mount）在一个目录下。这种多目录挂载的方式，正好可以解决我们刚才说的容器镜像的问题。</p>
+
+<p>比如，我们可以把 ubuntu18.04 这个基础镜像的文件放在一个目录 ubuntu18.04/ 下，容器自己额外的程序文件 app_1_bin 放在 app_1/ 目录下。</p>
+
+<p>然后，我们把这两个目录挂载到 container_1/ 这个目录下，作为容器 1 看到的文件系统；对于容器 2，就可以把 ubuntu18.04/ 和 app_2/ 两个目录一起挂载到 container_2 的目录下。</p>
+
+<p>这样在节点上我们只要保留一份 ubuntu18.04 的文件就可以了。</p>
+
+<p><img src="assets/449669a1aaa8c631d7768369b275ed27.jpg" alt="img" /></p>
+
+<h3>OverlayFS</h3>
+
+<p>UnionFS 类似的有很多种实现，包括在 Docker 里最早使用的 AUFS，还有目前我们使用的 OverlayFS。前面我们在运行df的时候，看到的文件系统类型&quot;overlay&quot;指的就是 OverlayFS。</p>
+
+<p>在 Linux 内核 3.18 版本中，OverlayFS 代码正式合入 Linux 内核的主分支。在这之后，OverlayFS 也就逐渐成为各个主流 Linux 发行版本里缺省使用的容器文件系统了。</p>
+
+<p>网上 Julia Evans 有个blog，里面有个的 OverlayFS 使用的例子，很简单，我们也拿这个例子来理解一下 OverlayFS 的一些基本概念。</p>
+
+<p>你可以先执行一下这一组命令。</p>
+
+<pre><code># !/bin/bash
+
+
+
+umount ./merged
+
+rm upper lower merged work -r
+
+
+
+mkdir upper lower merged work
+
+echo &quot;I'm from lower!&quot; &gt; lower/in_lower.txt
+
+echo &quot;I'm from upper!&quot; &gt; upper/in_upper.txt
+
+# `in_both` is in both directories
+
+echo &quot;I'm from lower!&quot; &gt; lower/in_both.txt
+
+echo &quot;I'm from upper!&quot; &gt; upper/in_both.txt
+
+
+
+sudo mount -t overlay overlay \
+
+ -o lowerdir=./lower,upperdir=./upper,workdir=./work \
+
+ ./merged
+
+</code></pre>
+
+<p>我们可以看到，OverlayFS 的一个 mount 命令牵涉到四类目录，分别是 lower，upper，merged 和 work，那它们是什么关系呢？</p>
+
+<p>我们看下面这张图，这和前面 UnionFS 的工作示意图很像，也不奇怪，OverlayFS 就是 UnionFS 的一种实现。接下来，我们从下往上依次看看每一层的功能。</p>
+
+<p>首先，最下面的&quot;lower/&quot;，也就是被 mount 两层目录中底下的这层（lowerdir）。</p>
+
+<p>在 OverlayFS 中，最底下这一层里的文件是不会被修改的，你可以认为它是只读的。我还想提醒你一点，在这个例子里我们只有一个 lower/ 目录，不过 OverlayFS 是支持多个 lowerdir 的。</p>
+
+<p>然后我们看&quot;uppder/&quot;，它是被 mount 两层目录中上面的这层 （upperdir）。在 OverlayFS 中，如果有文件的创建，修改，删除操作，那么都会在这一层反映出来，它是可读写的。</p>
+
+<p>接着是最上面的&quot;merged&quot;  ，它是挂载点（mount point）目录，也是用户看到的目录，用户的实际文件操作在这里进行。</p>
+
+<p>其实还有一个&quot;work/&quot;，这个目录没有在这个图里，它只是一个存放临时文件的目录，OverlayFS 中如果有文件修改，就会在中间过程中临时存放文件到这里。</p>
+
+<p><img src="assets/ca894a91e0171a027ba0ded6cdf2a95d.jpg" alt="img" /></p>
+
+<p>从这个例子我们可以看到，OverlayFS 会 mount 两层目录，分别是 lower 层和 upper 层，这两层目录中的文件都会映射到挂载点上。</p>
+
+<p>从挂载点的视角看，upper 层的文件会覆盖 lower 层的文件，比如&quot;in_both.txt&quot;这个文件，在 lower 层和 upper 层都有，但是挂载点 merged/ 里看到的只是 upper 层里的 in_both.txt.</p>
+
+<p>如果我们在 merged/ 目录里做文件操作，具体包括这三种。</p>
+
+<p>第一种，新建文件，这个文件会出现在 upper/ 目录中。</p>
+
+<p>第二种是删除文件，如果我们删除&quot;in_upper.txt&quot;，那么这个文件会在 upper/ 目录中消失。如果删除&quot;in_lower.txt&quot;, 在 lower/ 目录里的&quot;in_lower.txt&quot;文件不会有变化，只是在 upper/ 目录中增加了一个特殊文件来告诉 OverlayFS，&quot;in_lower.txt'这个文件不能出现在 merged/ 里了，这就表示它已经被删除了。</p>
+
+<p><img src="assets/f3813b984193e3aebebe1b5104f75e2a.png" alt="img" /></p>
+
+<p>还有一种操作是修改文件，类似如果修改&quot;in_lower.txt&quot;，那么就会在 upper/ 目录中新建一个&quot;in_lower.txt&quot;文件，包含更新的内容，而在 lower/ 中的原来的实际文件&quot;in_lower.txt&quot;不会改变。</p>
+
+<p>通过这个例子，我们知道了 OverlayFS 是怎么工作了。那么我们可以再想一想，怎么把它运用到容器的镜像文件上？</p>
+
+<p>其实也不难，从系统的 mounts 信息中，我们可以看到 Docker 是怎么用 OverlayFS 来挂载镜像文件的。容器镜像文件可以分成多个层（layer），每层可以对应 OverlayFS 里 lowerdir 的一个目录，lowerdir 支持多个目录，也就可以支持多层的镜像文件。</p>
+
+<p>在容器启动后，对镜像文件中修改就会被保存在 upperdir 里了。</p>
+
+<p><img src="assets/55a7059809afdd3d51e5a6b3f5c83626.png" alt="img" /></p>
+
+<h2>解决问题</h2>
+
+<p>在理解了容器使用的 OverlayFS 文件系统后，我们再回到开始的问题，为什么在宿主机升级之后，在容器里读写文件的性能降低了？现在我们至少应该知道，在容器中读写文件性能降低了，那么应该是 OverlayFS 的性能在新的 ubuntu20.04 中降低了。</p>
+
+<p>要找到问题的根因，我们还需要进一步的 debug。对于性能问题，我们需要使用 Linux 下的 perf 工具来查看一下，具体怎么使用 perf 来解决问题，我们会在后面讲解。</p>
+
+<p>这里你只要看一下结果就可以了，自下而上是函数的一个调用顺序。通过 perf 工具，我们可以比较在容器中运行 fio 的时候，ubuntu 18.04 和 ubuntu 20.04 在内核函数调用上的不同。</p>
+
+<p>ubuntu 18.04 (Linux内核4.15)环境下使用perf输出的函数调用结果</p>
+
+<p>ubuntu 20.04 (Linux内核 5.4)环境下使用perf输出的函数调用结果</p>
+
+<p>我们从系统调用框架之后的函数 aio_read() 开始比较：Linux 内核 4.15 里 aio_read() 之后调用的是 xfs_file_read_iter()，而在 Linux 内核 5.4 里，aio_read() 之后调用的是 ovl_read_iter() 这个函数，之后再调用 xfs_file_read_iter()。</p>
+
+<p>这样我们就可以去查看一下，在内核 4.15 之后新加入的这个函数 ovl_read_iter() 的代码。</p>
+
+<p>查看代码后我们就能明白，Linux 为了完善 OverlayFS，增加了 OverlayFS 自己的 read/write 函数接口，从而不再直接调用 OverlayFS 后端文件系统（比如 XFS，Ext4）的读写接口。但是它只实现了同步 I/O（sync I/O），并没有实现异步 I/O。</p>
+
+<p>而在 fio 做文件系统性能测试的时候使用的是异步 I/O，这样才可以得到文件系统的性能最大值。所以，在内核 5.4 上就无法对 OverlayFS 测出最高的性能指标了。</p>
+
+<p>在 Linux 内核 5.6 版本中，这个问题已经通过下面的这个补丁给解决了，有兴趣的同学可以看一下。</p>
+
+<pre><code>commit 2406a307ac7ddfd7effeeaff6947149ec6a95b4e
+
+Author: Jiufei Xue &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cdced2c1c2ce89dfd2c2e7cbcec9d2df89c6cbcec5c6c5c689c4c8ca">[email&#160;protected]</a>&gt;
+
+Date:   Wed Nov 20 17:45:26 2019 +0800
+
+
+
+    ovl: implement async IO routines
+
+
+
+    A performance regression was observed since linux v4.19 with aio test using
+
+    fio with iodepth 128 on overlayfs.  The queue depth of the device was
+
+    always 1 which is unexpected.
+
+
+
+    After investigation, it was found that commit 16914e6fc7e1 (&quot;ovl: add
+
+    ovl_read_iter()&quot;) and commit 2a92e07edc5e (&quot;ovl: add ovl_write_iter()&quot;)
+
+    resulted in vfs_iter_{read,write} being called on underlying filesystem,
+
+    which always results in syncronous IO.
+
+
+
+    Implement async IO for stacked reading and writing.  This resolves the
+
+    performance regresion.
+
+
+
+    This is implemented by allocating a new kiocb for submitting the AIO
+
+    request on the underlying filesystem.  When the request is completed, the
+
+    new kiocb is freed and the completion callback is called on the original
+
+    iocb.
+
+
+
+    Signed-off-by: Jiufei Xue &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f3f0ecfffcf0b7e1ecfcd9f5f0f7ece1b7f8f5f0fbf8fbf8b7faf6f4">[email&#160;protected]</a>&gt;
+
+    Signed-off-by: Miklos Szeredi &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a4bab3acbbacada089bbacada1a8bde7aaa6a4">[email&#160;protected]</a>&gt;
+
+
+
+</code></pre>
+
+<h2>重点总结</h2>
+
+<p>这一讲，我们最主要的内容是理解容器文件系统。为什么要有容器自己的文件系统？很重要的一点是减少相同镜像文件在同一个节点上的数据冗余，可以节省磁盘空间，也可以减少镜像文件下载占用的网络资源。</p>
+
+<p>作为容器文件系统，UnionFS 通过多个目录挂载的方式工作。OverlayFS 就是 UnionFS 的一种实现，是目前主流 Linux 发行版本中缺省使用的容器文件系统。</p>
+
+<p>OverlayFS 也是把多个目录合并挂载，被挂载的目录分为两大类：lowerdir 和 upperdir。</p>
+
+<p>lowerdir 允许有多个目录，在被挂载后，这些目录里的文件都是不会被修改或者删除的，也就是只读的；upperdir 只有一个，不过这个目录是可读写的，挂载点目录中的所有文件修改都会在 upperdir 中反映出来。</p>
+
+<p>容器的镜像文件中各层正好作为 OverlayFS 的 lowerdir 的目录，然后加上一个空的 upperdir 一起挂载好后，就组成了容器的文件系统。</p>
+
+<p>OverlayFS 在 Linux 内核中还在不断的完善，比如我们在这一讲看到的在 kenel 5.4 中对异步 I/O 操作的缺失，这也是我们在使用容器文件系统的时候需要注意的。</p>
+
+<h2>思考题</h2>
+
+<p>在这一讲 OverlayFS 的例子的基础上，建立 2 个 lowerdir 的目录，并且在目录中建立相同文件名的文件，然后一起做一个 overlay mount，看看会发生什么？</p>
+
+<p>欢迎在留言区和我分享你的思考和疑问。如果这篇文章让你有所收获，也欢迎分享给你的同事、朋友，一起学习探讨。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977978ddc3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

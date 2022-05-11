@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md">00 开篇词  为什么大厂面试必考操作系统？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md">00 课前必读  构建知识体系，可以这样做！.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md">02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md">03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md">05 (1) 加餐  练习题详解（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md">06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md">07  进程、重定向和管道指令：xargs 指令的作用是？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md">12 (1)加餐  练习题详解（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md">14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md">16 (1)加餐  练习题详解（三）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md">17  进程和线程：进程的开销比线程大在了哪里？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md">20  线程的调度：线程调度都有哪些方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md">22  进程间通信： 进程间通信都有哪些方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md">23 (1)加餐  练习题详解（四）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md">24  虚拟内存 ：一个程序最多能使用多少内存？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md">25  内存管理单元： 什么情况下使用大内存分页？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md">26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md">27  内存回收上篇：如何解决内存的循环引用问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md">28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md">28 (1)加餐  练习题详解（五）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md">29  Linux 下的各个目录有什么作用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md">32  HDFS 介绍：分布式文件系统是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md">32 (1)加餐  练习题详解（六）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md">33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md">34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md">35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md">36  公私钥体系和网络安全：什么是中间人攻击？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md">36 (1)加餐  练习题详解（七）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md">37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md">39  Linux 架构优秀在哪里.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md">40  商业操作系统：电商操作系统是不是一个噱头？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md">40 (1)加餐  练习题详解（八）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md">41 结束语  论程序员的发展——信仰、选择和博弈.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？</h1>
+
+<p>锁是一个面试的热门话题，有乐观锁、悲观锁、重入锁、公平锁、分布式锁。有很多和锁相关的数据结构，比如说阻塞队列。还有一些关联的一些工具，比如说 Semaphore、Monitor 等。这些知识点可以关联很多的面试题目，比如：</p>
+
+<ul>
+
+<li>锁是如何实现的？</li>
+
+<li>如何控制同一时间只有 2 个线程运行？</li>
+
+<li>如何实现分布式锁？</li>
+
+</ul>
+
+<p>面试官通过这类题目考查你的这部分知识，就知道你对并发的理解是停留在表面，还是可以深入原理，去设计高并发的数据结构。这一讲我将帮你把锁类问题一网打尽。</p>
+
+<h3>原子操作</h3>
+
+<p>要想弄清楚锁，就要弄清楚锁的实现，实现锁需要底层提供的原子操作，因此我们先来学习下原子操作。</p>
+
+<p>原子操作就是<strong>操作不可分</strong>。在多线程环境，一个原子操作的执行过程无法被中断。那么你可以思考下，具体原子操作的一个示例。</p>
+
+<p>比如<code>i++</code>就不是一个原子操作，因为它是 3 个原子操作组合而成的：</p>
+
+<ol>
+
+<li>读取 i 的值；</li>
+
+<li>计算 i+1；</li>
+
+<li>写入新的值。</li>
+
+</ol>
+
+<p>像这样的操作，在多线程 + 多核环境会造成<strong>竞争条件</strong>。</p>
+
+<h3>竞争条件</h3>
+
+<p>竞争条件就是说多个线程对一个资源（内存地址）的读写存在竞争，在这种条件下，最后这个资源的值不可预测，而是取决于竞争时具体的执行顺序。</p>
+
+<p>举个例子，比如两个线程并发执行<code>i++</code>。那么可以有下面这个操作顺序，假设执行前<code>i=0</code>：</p>
+
+<p><img src="assets/CgqCHl-lBrSAKBmrAADNiS8bkAY490.png" alt="Lark20201106-161714.png" /></p>
+
+<p>虽然上面的程序执行了两次<code>i++</code>，但最终i的值为 1。</p>
+
+<p><code>i++</code>这段程序访问了共享资源，也就是变量<code>i</code>，这种访问共享资源的程序片段我们称为<strong>临界区</strong>。在临界区，程序片段会访问共享资源，造成竞争条件，也就是共享资源的值最终取决于程序执行的时序，因此这个值不是确定的。</p>
+
+<p>竞争条件是一件非常糟糕的事情，你可以把上面的程序想象成两个自动提款机。如果用户同时操作两个自动提款机，用户的余额就可能会被算错。</p>
+
+<h3>解决竞争条件</h3>
+
+<p>解决竞争条件有很多方案，一种方案就是不要让程序同时进入临界区，这个方案叫作<strong>互斥</strong>。还有一些方案旨在避免竞争条件，比如 ThreadLocal、 cas 指令以及 “<strong>19 讲</strong>”中我们要学习的乐观锁。</p>
+
+<h4>避免临界区</h4>
+
+<p>不让程序同时进入临界区这个方案比较简单，核心就是我们给每个线程一个变量<code>i</code>，比如利用 ThreadLocal，这样线程之间就不存在竞争关系了。这样做优点很明显，缺点就是并不是所有的情况都允许你这样做。有一些资源是需要共享的，比如一个聊天室，如果每次用户请求都有一个单独的线程在处理，不可能为每个请求（线程）都维护一份聊天记录。</p>
+
+<h4>cas 指令</h4>
+
+<p>另一个方案是利用 CPU 的指令，让<code>i++</code>成为一个原子操作。 很多 CPU 都提供 Compare And Swap 指令。这个指令的作用是更新一个内存地址的值，比如把<code>i</code>更新为<code>i+1</code>，但是这个指令明确要求使用者必须确定知道内存地址中的值是多少。比如一个线程想把<code>i</code>从<code>100</code>更新到<code>101</code>，线程必须明确地知道现在<code>i</code>是 100，否则就会更新失败。</p>
+
+<p>cas 可以用下面这个函数表示：</p>
+
+<pre><code>cas(&amp;oldValue, expectedValue, targetValue)
+
+</code></pre>
+
+<p>这里我用的是伪代码，用<code>&amp;</code>符号代表这里取内存地址。注意 cas 是 CPU 提供的原子操作。因此上面的比较和设置值的过程，是原子的，也就是不可分。</p>
+
+<p>比如想用 cas 更新<code>i</code>的值，而且知道<code>i</code>是 100，想更新成<code>101</code>。那么就可以这样做：</p>
+
+<pre><code>cas(&amp;i, 100, 101)
+
+</code></pre>
+
+<p>如果在这个过程中，有其他线程把<code>i</code>更新为<code>101</code>，这次调用会返回 false，否则返回 true。</p>
+
+<p>所以<code>i++</code>程序可以等价的修改为：</p>
+
+<pre><code>// i++等价程序
+
+
+
+cas(&amp;i, i, i+1)
+
+</code></pre>
+
+<p>上面的程序执行时，其实是 3 条指令：</p>
+
+<pre><code>读取i 
+
+
+
+计算i+1
+
+
+
+cas操作：比较期望值i和i的真实值的值是否相等，如果是，更新目标值
+
+</code></pre>
+
+<p>假设<code>i=0</code>，考虑两个线程分别执行一次这个程序，尝试构造竞争条件：</p>
+
+<p><img src="assets/Ciqc1F-lBr2ATIabAADce4zrAOw887.png" alt="Lark20201106-161708.png" /></p>
+
+<p>你可以看到通过这种方式，cas 解决了一部分问题，找到了竞争条件，并返回了 false。但是还是无法计算出正确的结果。因为最后一次 cas 失败了。</p>
+
+<p>如果要完全解决可以考虑这样去实现：</p>
+
+<pre><code>while(!cas(&amp;i, i, i+1)){
+
+
+
+  // 什么都不做
+
+
+
+}
+
+</code></pre>
+
+<p>如果 cas 返回 false，那么会尝试再读一次 i 的值，直到 cas 成功。</p>
+
+<h4>tas 指令</h4>
+
+<p>还有一个方案是 tas 指令，有的 CPU 没有提供 cas（大部分服务器是提供的），提供一种 Test-And-Set 指令（tas）。tas 指令的目标是设置一个内存地址的值为 1，它的工作原理和 cas 相似。首先比较内存地址的数据和 1 的值，如果内存地址是 0，那么把这个地址置 1。如果是 1，那么失败。</p>
+
+<p>所以你可以把 tas 看作一个特殊版的<code>cas</code>，可以这样来理解：</p>
+
+<pre><code>tas(&amp;lock) {
+
+
+
+  return cas(&amp;lock, 0, 1)
+
+
+
+}
+
+</code></pre>
+
+<h4>锁</h4>
+
+<p>锁（lock），目标是实现抢占（preempt）。就是只让给定数量的线程进入临界区。锁可以用<code>tas</code>或者<code>cas</code>来实现。</p>
+
+<p>举个例子：如果希望同时只能有一个线程执行<code>i++</code>，伪代码可以这么写：</p>
+
+<pre><code>enter();
+
+
+
+i++;
+
+
+
+leave();
+
+</code></pre>
+
+<p>可以考虑用<code>cas</code>实现<code>enter</code>和<code>leave</code>函数，代码如下：</p>
+
+<pre><code>int lock = 0;
+
+
+
+enter(){
+
+
+
+  while( !cas(&amp;lock, 0, 1) ) {
+
+
+
+    // 什么也不做
+
+
+
+  }
+
+
+
+}
+
+
+
+leave(){
+
+
+
+  lock = 0;
+
+
+
+}
+
+</code></pre>
+
+<p>多个线程竞争一个整数的 lock 变量，0 代表目前没有线程进入临界区，1 代表目前有线程进入临界区。利用<code>cas</code>原子指令我们可以对临界区进行管理。如果一个线程利用 cas 将 lock 设置为 1，那么另一个线程就会一直执行<code>cas</code>操作，直到锁被释放。</p>
+
+<h3>语言级锁的实现</h3>
+
+<p>上面解决竞争条件的时候，我们用到了锁。 相比 cas，锁是一种简单直观的模型。总体来说，cas 更底层，用 cas 解决问题优化空间更大。但是用锁解决问题，代码更容易写——进入临界区之前 lock，出去就 unlock。 从上面这段代码可以看出，为了定义锁，我们需要用到一个整型。如果实现得好，可以考虑这个整数由语言级定义。</p>
+
+<p>比如考虑让用户传递一个变量过去：</p>
+
+<pre><code>int lock = 0;
+
+
+
+enter(&amp;lock);
+
+
+
+//临界区代码
+
+
+
+leave(&amp;lock);
+
+</code></pre>
+
+<h4>自旋锁</h4>
+
+<p>上面我们已经用过自旋锁了，这是之前的代码：</p>
+
+<pre><code>enter(){
+
+
+
+  while( !cas(&amp;lock, 0, 1) ) {
+
+
+
+    // 什么也不做
+
+
+
+  }
+
+
+
+}
+
+</code></pre>
+
+<p>这段代码不断在 CPU 中执行指令，直到锁被其他线程释放。这种情况线程不会主动释放资源，我们称为<strong>自旋锁</strong>。自旋锁的优点就是不会主动发生 Context Switch，也就是线程切换，因为线程切换比较消耗时间。<strong>自旋锁</strong>缺点也非常明显，比较消耗 CPU 资源。如果自旋锁一直拿不到锁，会一直执行。</p>
+
+<h4>wait 操作</h4>
+
+<p>你可以考虑实现一个 wait 操作，主动触发 Context Switch。这样就解决了 CPU 消耗的问题。但是触发 Context Switch 也是比较消耗成本的事情，那么有没有更好的方法呢？</p>
+
+<pre><code>enter(){
+
+
+
+  while( !cas(&amp;lock, 0, 1) ) {
+
+
+
+    // sleep(1000ms);
+
+
+
+    wait();
+
+
+
+  }
+
+
+
+}
+
+</code></pre>
+
+<p>你可以看下上面的代码，这里有一个更好的方法：就是 cas 失败后，马上调用<code>sleep</code>方法让线程休眠一段时间。但是这样，可能会出现锁已经好了，但是还需要多休眠一小段时间的情况，影响计算效率。</p>
+
+<p>另一个方案，就是用<code>wait</code>方法，等待一个信号——直到另一个线程调用<code>notify</code>方法，通知这个线程结束休眠。但是这种情况——wait 和 notify 的模型要如何实现呢？</p>
+
+<h4>生产者消费者模型</h4>
+
+<p>一个合理的实现就是生产者消费者模型。 wait 是一个生产者，将当前线程挂到一个等待队列上，并休眠。notify 是一个消费者，从等待队列中取出一个线程，并重新排队。</p>
+
+<p>如果使用这个模型，那么我们之前简单用<code>enter</code>和<code>leave</code>来封装加锁和解锁的模式，就需要变化。我们需要把<code>enter``leave``wait``notify</code>的逻辑都封装起来，不让用户感知到它们的存在。</p>
+
+<p>比如 Java 语言，Java 为每个对象增加了一个 Object Header 区域，里面一个锁的位（bit），锁并不需要一个 32 位整数，一个 bit 足够。下面的代码用户使用 synchronized 关键字让临界区访问互斥。</p>
+
+<pre><code>synchronized(obj){// enter
+
+
+
+  // 临界区代码
+
+
+
+} // leave
+
+</code></pre>
+
+<p>synchronized 关键字的内部实现，用到了封装好的底层代码——Monitor 对象。每个 Java 对象都关联了一个 Monitor 对象。Monitor 封装了对锁的操作，比如 enter、leave 的调用，这样简化了 Java 程序员的心智负担，你只需要调用 synchronized 关键字。</p>
+
+<p>另外，Monitor 实现了生产者、消费者模型。</p>
+
+<ul>
+
+<li>如果一个线程拿到锁，那么这个线程继续执行；</li>
+
+<li>如果一个线程竞争锁失败，Montior 就调用 wait 方法触发生产者的逻辑，把线程加入等待集合；</li>
+
+<li>如果一个线程执行完成，Monitor 就调用一次 notify 方法恢复一个等待的线程。</li>
+
+</ul>
+
+<p>这样，Monitor 除了提供了互斥，还提供了线程间的通信，避免了使用自旋锁，还简化了程序设计。</p>
+
+<h4>信号量</h4>
+
+<p>接下来介绍一个叫作信号量的方法，你可以把它看作是互斥的一个广义版。我们考虑一种更加广义的锁，这里请你思考如何同时允许 N 个线程进入临界区呢？</p>
+
+<p>我们先考虑实现一个基础的版本，用一个整数变量<code>lock</code>来记录进入临界区线程的数量。</p>
+
+<pre><code>int lock = 0;
+
+
+
+enter(){
+
+
+
+  while(lock++ &gt; 2) { }
+
+
+
+}
+
+
+
+leave(){
+
+
+
+  lock--;
+
+
+
+}
+
+</code></pre>
+
+<p>上面的代码具有一定的欺骗性，没有考虑到<strong>竞争条件</strong>，执行的时候会出问题，可能会有超过2个线程同时进入临界区。</p>
+
+<p>下面优化一下，作为一个考虑了竞争条件的版本：</p>
+
+<pre><code>up(&amp;lock){
+
+
+
+  while(!cas(&amp;lock, lock, lock+1)) { }
+
+
+
+}
+
+
+
+down(&amp;lock){
+
+
+
+  while(!cas(&amp;lock, lock, lock - 1) || lock == 0){}
+
+
+
+}
+
+</code></pre>
+
+<p>为了简化模型，我们重新设计了两个原子操作<code>up</code>和<code>down</code>。<code>up</code>将<code>lock</code>增 1，<code>down</code>将<code>lock</code>减 1。当 lock 为 0 时，如果还在<code>down</code>那么会自旋。考虑用多个线程同时执行下面这段程序：</p>
+
+<pre><code>int lock = 2;
+
+
+
+down(&amp;lock);
+
+
+
+// 临界区
+
+
+
+up(&amp;lock);
+
+</code></pre>
+
+<p>如果只有一个线程在临界区，那么<code>lock</code>等于 1，第 2 个线程还可以进入。 如果两个线程在临界区，第 3 个线程尝试<code>down</code>的时候，会陷入自旋锁。当然我们也可以用其他方式来替代自旋锁，比如让线程休眠。</p>
+
+<p>当<code>lock</code>初始值为 1 的时候，这个模型就是实现<strong>互斥（mutex）</strong>。如果 lock 大于 1，那么就是同时允许多个线程进入临界区。这种方法，我们称为<strong>信号量（semaphore）</strong>。</p>
+
+<h4>信号量实现生产者消费者模型</h4>
+
+<p>信号量可以用来实现生产者消费者模型。下面我们通过一段代码实现生产者消费者：</p>
+
+<pre><code>int empty = N; // 当前空位置数量
+
+
+
+int mutex = 1; // 锁
+
+
+
+int full = 0; // 当前的等待的线程数
+
+
+
+wait(){
+
+
+
+  down(&amp;empty);
+
+
+
+  down(&amp;mutex);
+
+
+
+  insert(); 
+
+
+
+  up(&amp;mutex);
+
+
+
+  up(&amp;full);
+
+
+
+}
+
+
+
+notify(){
+
+
+
+  down(&amp;full);
+
+
+
+  down(&amp;mutex);
+
+
+
+  remove(); 
+
+
+
+  up(&amp;mutex);
+
+
+
+  up(&amp;empty)
+
+
+
+}
+
+
+
+insert(){
+
+
+
+  wait_queue.add(currentThread);
+
+
+
+  yield();
+
+
+
+}
+
+
+
+remove(){
+
+
+
+  thread = wait_queue.dequeue();
+
+
+
+  thread.resume();
+
+
+
+}
+
+</code></pre>
+
+<p>代码中 wait 是生产者，notify 是消费者。 每次<code>wait</code>操作减少一个空位置数量，empty-1；增加一个等待的线程，full+1。每次<code>notify</code>操作增加一个空位置，empty+1，减少一个等待线程，full-1。</p>
+
+<p><code>insert</code>和<code>remove</code>方法是互斥的操作，需要用另一个 mutex 锁来保证。<code>insert</code>方法将当前线程加入等待队列，并且调用 yield 方法，交出当前线程的控制权，当前线程休眠。<code>remove</code>方法从等待队列中取出一个线程，并且调用<code>resume</code>进行恢复。以上， 就构成了一个简单的生产者消费者模型。</p>
+
+<h3>死锁问题</h3>
+
+<p>另外就是在并行的时候，如果两个线程互相等待对方获得的锁，就会发生死锁。你可以把死锁理解成一个环状的依赖关系。比如：</p>
+
+<pre><code>int lock1 = 0;
+
+
+
+int lock2 = 0;
+
+
+
+// 线程1
+
+
+
+enter(&amp;lock1);
+
+
+
+enter(&amp;lock2);
+
+
+
+leave(&amp;lock1);
+
+
+
+leave(&amp;lock2);
+
+
+
+// 线程2
+
+
+
+enter(&amp;lock2);
+
+
+
+enter(&amp;lock1);
+
+
+
+leave(&amp;lock1);
+
+
+
+leave(&amp;lock2)
+
+</code></pre>
+
+<p>上面的程序，如果是按照下面这个顺序执行，就会死锁：</p>
+
+<pre><code>线程1： enter(&amp;lock1);
+
+
+
+线程2： enter(&amp;lock2);
+
+
+
+线程1： enter(&amp;lock2)
+
+
+
+线程2:  enter(&amp;lock1)
+
+
+
+// 死锁发生，线程1、2陷入等待
+
+</code></pre>
+
+<p>上面程序线程 1 获得了<code>lock1</code>，线程 2 获得了<code>lock2</code>。接下来线程 1 尝试获得<code>lock2</code>，线程 2 尝试获得<code>lock1</code>，于是两个线程都陷入了等待。这个等待永远都不会结束，我们称之为<strong>死锁</strong>。</p>
+
+<p>关于死锁如何解决，我们会在“<strong>21 | 哲学家就餐问题：什么情况下会触发饥饿和死锁</strong>？”讨论。这里我先讲一种最简单的解决方案，你可以尝试让两个线程对锁的操作顺序相同，这样就可以避免死锁问题。</p>
+
+<h3>分布式环境的锁</h3>
+
+<p>最后，我们留一点时间给分布式锁。我们之前讨论了非常多的实现，是基于多个线程访问临界区。现在要考虑一个更庞大的模型，我们有 100 个容器，每一个里面有一个为用户<strong>减少积分</strong>的服务。</p>
+
+<p>简化下模型，假设积分存在 Redis 中。当然数据库中也有，但是我们只考虑 Redis。使用 Redis，我们目标是给数据库减负。</p>
+
+<p>假设这个接口可以看作 3 个原子操作：</p>
+
+<ol>
+
+<li>从 Redis 读出当前库存；</li>
+
+<li>计算库存 -1；</li>
+
+<li>更新 Redis 库存。</li>
+
+</ol>
+
+<p>和<code>i++</code>类似，很明显，当用户并发的访问这个接口，是会发生竞争条件的。 因为程序已经不是在同一台机器上执行了，解决方案就是<strong>分布式锁</strong>。实现锁，我们需要原子操作。</p>
+
+<p>在单机多线程并发的场景下，原子操作由 CPU 指令提供，比如 cas 和 tas 指令。那么在分布式环境下，原子操作由谁提供呢？</p>
+
+<p>有很多工具都可以提供分布式的原子操作，比如 Redis 的 setnx 指令，Zookeeper 的节点操作等等。作为操作系统课程，这部分我不再做进一步的讲解。这里是从多线程的处理方式，引出分布式的处理方式，通过两个类比，帮助你提高。如果你感兴趣，可以自己查阅更多的分布式锁的资料。</p>
+
+<h3>总结</h3>
+
+<p><strong>那么通过这节课的学习，你现在可以尝试来回答本讲关联的面试题目：如何控制同一时间只有 2 个线程运行？</strong></p>
+
+<p>老规矩，请你先在脑海里构思下给面试官的表述，并把你的思考写在留言区，然后再来看我接下来的分析。</p>
+
+<p><strong>【解析】</strong> 同时控制两个线程进入临界区，一种方式可以考虑用信号量（semaphore）。</p>
+
+<p>另一种方式是考虑生产者、消费者模型。想要进入临界区的线程先在一个等待队列中等待，然后由消费者每次消费两个。这种实现方式，类似于实现一个线程池，所以也可以考虑实现一个 ThreadPool 类，然后再实现一个调度器类，最后实现一个每次选择两个线程执行的调度算法。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997d75b8573cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>28 实战：分布式锁详解与代码.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/01 Redis 是如何执行的.md">01 Redis 是如何执行的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/02 Redis 快速搭建与使用.md">02 Redis 快速搭建与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/03 Redis 持久化——RDB.md">03 Redis 持久化——RDB.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/04 Redis 持久化——AOF.md">04 Redis 持久化——AOF.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/05 Redis 持久化——混合持久化.md">05 Redis 持久化——混合持久化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/06 字符串使用与内部实现原理.md">06 字符串使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">07 附录：更多字符串操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/08 字典使用与内部实现原理.md">08 字典使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">09 附录：更多字典操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/10 列表使用与内部实现原理.md">10 列表使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">11 附录：更多列表操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/12 集合使用与内部实现原理.md">12 集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">13 附录：更多集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/14 有序集合使用与内部实现原理.md">14 有序集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/15 附录：更多有序集合操作命令.md">15 附录：更多有序集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/16 Redis 事务深入解析.md">16 Redis 事务深入解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/17 Redis 键值过期操作.md">17 Redis 键值过期操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/18 Redis 过期策略与源码分析.md">18 Redis 过期策略与源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/19 Redis 管道技术——Pipeline.md">19 Redis 管道技术——Pipeline.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/20 查询附近的人——GEO.md">20 查询附近的人——GEO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/21 游标迭代器（过滤器）——Scan.md">21 游标迭代器（过滤器）——Scan.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/22 优秀的基数统计算法——HyperLogLog.md">22 优秀的基数统计算法——HyperLogLog.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/23 内存淘汰机制与算法.md">23 内存淘汰机制与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">24 消息队列——发布订阅模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/25 消息队列的其他实现方式.md">25 消息队列的其他实现方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">26 消息队列终极解决方案——Stream（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">27 消息队列终极解决方案——Stream（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">28 实战：分布式锁详解与代码.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">29 实战：布隆过滤器安装与使用及原理分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">30 完整案例：实现延迟队列的两种方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/31 实战：定时任务案例.md">31 实战：定时任务案例.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/32 实战：RediSearch 高性能的全文搜索引擎.md">32 实战：RediSearch 高性能的全文搜索引擎.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/33 实战：Redis 性能测试.md">33 实战：Redis 性能测试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/34 实战：Redis 慢查询.md">34 实战：Redis 慢查询.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/35 实战：Redis 性能优化方案.md">35 实战：Redis 性能优化方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/36 实战：Redis 主从同步.md">36 实战：Redis 主从同步.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/37 实战：Redis哨兵模式（上）.md">37 实战：Redis哨兵模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/38 实战：Redis 哨兵模式（下）.md">38 实战：Redis 哨兵模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/39 实战：Redis 集群模式（上）.md">39 实战：Redis 集群模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/40 实战：Redis 集群模式（下）.md">40 实战：Redis 集群模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/41 案例：Redis 问题汇总和相关解决方案.md">41 案例：Redis 问题汇总和相关解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/42 技能学习指南.md">42 技能学习指南.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/43 加餐：Redis 的可视化管理工具.md">43 加餐：Redis 的可视化管理工具.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>28 实战：分布式锁详解与代码</h1>
+
+<h3>什么是锁？</h3>
+
+<p>锁是一种常用的并发控制机制，用于保证一项资源在任何时候只能被一个线程使用，如果其他线程也要使用同样的资源，必须排队等待上一个线程使用完。</p>
+
+<p>锁的示意图，如下所示：</p>
+
+<p><img src="assets/f869b800-74fc-11ea-8550-75744eb9dddc" alt="锁示意图.png" /></p>
+
+<h3>什么是分布式锁？</h3>
+
+<p>上面说的锁指的是程序级别的锁，例如 Java 语言中的 synchronized 和 ReentrantLock 在单应用中使用不会有任何问题，但如果放到分布式环境下就不适用了，这个时候我们就要使用分布式锁。</p>
+
+<p>分布式锁比较好理解就是用于分布式环境下并发控制的一种机制，用于控制某个资源在同一时刻只能被一个应用所使用。</p>
+
+<p>分布式锁示意图，如下所示：</p>
+
+<p><img src="assets/0baf7ee0-74fd-11ea-9dae-5d0db1c26be7" alt="image.png" /></p>
+
+<h3>怎么实现分布式锁？</h3>
+
+<p>分布式锁比较常见的实现方式有三种：</p>
+
+<ol>
+
+<li>Memcached 实现的分布式锁：使用 add 命令，添加成功的情况下，表示创建分布式锁成功。</li>
+
+<li>ZooKeeper 实现的分布式锁：使用 ZooKeeper 顺序临时节点来实现分布式锁。</li>
+
+<li>Redis 实现的分布式锁。</li>
+
+</ol>
+
+<p>本文要重点来说的是第三种，也就是 Redis 分布式锁的实现方式。</p>
+
+<p>Redis 分布式锁的实现思路是使用 setnx（set if not exists），如果创建成功则表明此锁创建成功，否则代表这个锁已经被占用创建失败。</p>
+
+<h4><strong>分布式锁实现</strong></h4>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; setnx lock true
+
+(integer) 1 #创建锁成功
+
+#逻辑业务处理...
+
+127.0.0.1:6379&gt; del lock
+
+(integer) 1 #释放锁
+
+
+
+</code></pre>
+
+<p>从以上代码可以看出，释放锁使用 <code>del lock</code> 即可，如果在锁未被删除之前，其他程序再来执行 setnx 是不会创建成功的，结果如下：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; setnx lock true
+
+(integer) 0
+
+
+
+</code></pre>
+
+<p>执行结果为 0 表示失败。</p>
+
+<h4><strong>setnx 的问题</strong></h4>
+
+<p>setnx 虽然可以成功地创建分布式锁，但存在一个问题，如果此程序在创建了锁之后，程序异常退出了，那么这个锁将永远不会被释放，就造成了<strong>死锁的问题</strong>。</p>
+
+<p>这个时候有人想到，我们可以使用 <code>expire key seconds</code> 设置超时时间，即使出现程序中途崩溃的情况，超过超时时间之后，这个锁也会解除，不会出现死锁的情况了，实现命令如下：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; setnx lock true
+
+(integer) 1
+
+127.0.0.1:6379&gt; expire lock 30
+
+(integer) 1
+
+#逻辑业务处理...
+
+127.0.0.1:6379&gt; del lock
+
+(integer) 1 #释放锁
+
+
+
+</code></pre>
+
+<p>但这样依然会有问题，因为命令 setnx 和 expire 处理是一前一后非原子性的，因此如果在它们执行之间，出现断电和 Redis 异常退出的情况，因为超时时间未设置，依然会造成死锁。</p>
+
+<h4><strong>带参数的 Set</strong></h4>
+
+<p>因为 setnx 和 expire 存在原子性的问题，所以之后出现了很多类库用于解决此问题的，这样就增加了使用的成本，意味着你不但要添加 Redis 本身的客户端，并且为了解决 setnx 分布式锁的问题，还需要额外第三方类库。</p>
+
+<p>然而，这个问题到 Redis 2.6.12 时得到了解决，因为这个版本可以使用 set 并设置超时和非空判定等参数了。</p>
+
+<p><img src="assets/1d962af0-74fd-11ea-a691-fda85882301c" alt="image.png" /></p>
+
+<p>这样我们就可以使用 set 命令来设置分布式锁，并设置超时时间了，而且 set 命令可以保证原子性，实现命令如下所示：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; set lock true ex 30 nx
+
+OK #创建锁成功
+
+127.0.0.1:6379&gt; set lock true ex 30 nx
+
+(nil) #在锁被占用的时候，企图获取锁失败
+
+
+
+</code></pre>
+
+<p>其中， <code>ex n</code> 为设置超时时间，nx 为元素非空判断，用来判断是否能正常使用锁的。</p>
+
+<h3>分布式锁的执行超时问题</h3>
+
+<p>使用 set 命令之后好像所有问题都解决了，然后真相是“没那么简单”。使用 set 命令只解决创建锁的问题，那执行中的极端问题，和释放锁极端问题，我们依旧要考虑。</p>
+
+<p>例如，我们设置锁的最大超时时间是 30s，但业务处理使用了 35s，这就会导致原有的业务还未执行完成，锁就被释放了，新的程序和旧程序一起操作就会带来线程安全的问题。</p>
+
+<p>此执行流程如下图所示：</p>
+
+<p><img src="assets/2cfbaa60-74fd-11ea-9628-dd9a4bfcf1d2" alt="分布式锁-执行超时同时拥有锁.png" /></p>
+
+<p>执行超时的问题处理带来线程安全问题之外，还引发了另一个问题：<strong>锁被误删</strong>。</p>
+
+<p>假设锁的最大超时时间是 30s，应用 1 执行了 35s，然而应用 2 在 30s，锁被自动释放之后，用重新获取并设置了锁，然后在 35s 时，应用 1 执行完之后，就会把应用 2 创建的锁给删除掉，如下图所示：</p>
+
+<p><img src="assets/3a50e770-74fd-11ea-965e-2b5335ba3591" alt="分布式锁-锁被误删.png" /></p>
+
+<p>锁被误删的解决方案是在使用 set 命令创建锁时，给 value 值设置一个归属人标识，例如给应用关联一个 UUID，每次在删除之前先要判断 UUID 是不是属于当前的线程，如果属于在删除，这样就避免了锁被误删的问题。</p>
+
+<p>注意：如果是在代码中执行删除，不能使用先判断再删除的方法，伪代码如下：</p>
+
+<pre><code class="language-java">if(xxx.equals(xxx)){ // 判断是否是自己的锁
+
+    del(luck); // 删除锁
+
+}
+
+
+
+</code></pre>
+
+<p>因为判断代码和删除代码不具备原子性，因此也不能这样使用，这个时候可以使用 Lua 脚本来执行判断和删除的操作，因为多条 Lua 命令可以保证原子性，Java 实现代码如下：</p>
+
+<pre><code class="language-java">/**
+
+ * 释放分布式锁
+
+ * @param jedis Redis 客户端
+
+ * @param lockKey 锁的 key
+
+ * @param flagId 锁归属标识
+
+ * @return 是否释放成功
+
+ */
+
+public static boolean unLock(Jedis jedis, String lockKey, String flagId) {
+
+    String script = &quot;if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end&quot;;
+
+    Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(flagId));
+
+    if (&quot;1L&quot;.equals(result)) { // 判断执行结果
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+
+
+</code></pre>
+
+<p>其中，Collections.singletonList() 方法的作用是将 String 转成 List，因为 jedis.eval() 最后两个参数的类型必须是 List。</p>
+
+<p>说完了锁误删的解决方案，咱们回过头来看如何解决执行超时的问题，执行超时的问题可以从以下两方面来解决：</p>
+
+<ol>
+
+<li>把执行比较耗时的任务不要放到加锁的方法内，锁内的方法尽量控制执行时长；</li>
+
+<li>把最大超时时间可以适当的设置长一点，正常情况下锁用完之后会被手动的删除掉，因此适当的把最大超时时间设置的长一点，也是可行的。</li>
+
+</ol>
+
+<h3>代码实战</h3>
+
+<p>下面我们使用 Java 代码来实现分布式锁，代码如下：</p>
+
+<pre><code class="language-java">import org.apache.commons.lang3.StringUtils;
+
+import redis.clients.jedis.Jedis;
+
+import redis.clients.jedis.params.SetParams;
+
+import utils.JedisUtils;
+
+
+
+import java.util.Collections;
+
+public class LockExample {
+
+    static final String _LOCKKEY = &quot;REDISLOCK&quot;; // 锁 key
+
+    static final String _FLAGID = &quot;UUID:6379&quot;;  // 标识（UUID）
+
+    static final Integer _TimeOut = 90;     // 最大超时时间
+
+
+
+    public static void main(String[] args) {
+
+        Jedis jedis = JedisUtils.getJedis();
+
+        // 加锁
+
+        boolean lockResult = lock(jedis, _LOCKKEY, _FLAGID, _TimeOut);
+
+        // 逻辑业务处理
+
+        if (lockResult) {
+
+            System.out.println(&quot;加锁成功&quot;);
+
+        } else {
+
+            System.out.println(&quot;加锁失败&quot;);
+
+        }
+
+        // 手动释放锁
+
+        if (unLock(jedis, _LOCKKEY, _FLAGID)) {
+
+            System.out.println(&quot;锁释放成功&quot;);
+
+        } else {
+
+            System.out.println(&quot;锁释放成功&quot;);
+
+        }
+
+    }
+
+    /**
+
+     * @param jedis       Redis 客户端
+
+     * @param key         锁名称
+
+     * @param flagId      锁标识（锁值），用于标识锁的归属
+
+     * @param secondsTime 最大超时时间
+
+     * @return
+
+     */
+
+    public static boolean lock(Jedis jedis, String key, String flagId, Integer secondsTime) {
+
+        SetParams params = new SetParams();
+
+        params.ex(secondsTime);
+
+        params.nx();
+
+        String res = jedis.set(key, flagId, params);
+
+        if (StringUtils.isNotBlank(res) &amp;&amp; res.equals(&quot;OK&quot;))
+
+            return true;
+
+        return false;
+
+    }
+
+    /**
+
+     * 释放分布式锁
+
+     * @param jedis   Redis 客户端
+
+     * @param lockKey 锁的 key
+
+     * @param flagId  锁归属标识
+
+     * @return 是否释放成功
+
+     */
+
+    public static boolean unLock(Jedis jedis, String lockKey, String flagId) {
+
+        String script = &quot;if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end&quot;;
+
+        Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(flagId));
+
+        if (&quot;1L&quot;.equals(result)) { // 判断执行结果
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>以上代码执行结果如下所示：</p>
+
+<pre><code>加锁成功
+
+锁释放成功
+
+
+
+</code></pre>
+
+<h3>小结</h3>
+
+<p>本文介绍了锁和分布式锁的概念，锁其实就是用来保证同一时刻只有一个程序可以去操作某一个资源，以此来保证并发时程序能正常执行的。使用 Redis 来实现分布式锁不能使用 setnx 命令，因为它可能会带来死锁的问题，因此我们可以使用 Redis 2.6.12 带来的多参数的 set 命令来申请锁，但在使用的时候也要注意锁内的业务流程执行的时间，不能大于锁设置的最大超时时间，不然会带来线程安全问题和锁误删的问题。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973ecefef3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

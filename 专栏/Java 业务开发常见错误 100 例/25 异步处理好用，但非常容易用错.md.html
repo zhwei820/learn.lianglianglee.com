@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>25 异步处理好用，但非常容易用错.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md">00 开篇词 业务代码真的会有这么多坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md">01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md">02 代码加锁：不要让“锁”事成为烦心事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md">03 线程池：业务代码最常用也最容易犯错的组件.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md">04 连接池：别让连接池帮了倒忙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md">05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md">06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md">07 数据库索引：索引并不是万能药.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md">08 判等问题：程序里如何确定你就是你？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md">09 数值计算：注意精度、舍入和溢出问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md">10 集合类：坑满地的List列表操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md">11 空值处理：分不清楚的null和恼人的空指针.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md">12 异常处理：别让自己在出问题的时候变为瞎子.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md">13 日志：日志记录真没你想象的那么简单.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md">14 文件IO：实现高效正确的文件读写并非易事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md">15 序列化：一来一回你还是原来的你吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md">16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md">17 别以为“自动挡”就不可能出现OOM.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md">18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md">19 Spring框架：IoC和AOP是扩展的核心.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md">20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md">21 代码重复：搞定代码重复的三个绝招.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md">22 接口设计：系统间对话的语言，一定要统一.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md">23 缓存设计：缓存可以锦上添花也可以落井下石.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md">24 业务代码写完，就意味着生产就绪了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md">25 异步处理好用，但非常容易用错.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md">27 数据源头：任何客户端的东西都不可信任.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md">29 数据和代码：数据就是数据，代码就是代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md">30 如何正确保存和传输敏感数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md">33 加餐3：定位应用问题，排错套路很重要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md">34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md">35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md">37 加餐7：程序员成长28计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md">答疑篇：代码篇思考题集锦（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md">答疑篇：代码篇思考题集锦（三）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md">答疑篇：代码篇思考题集锦（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md">答疑篇：加餐篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md">答疑篇：安全篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md">答疑篇：设计篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md">结束语 写代码时，如何才能尽量避免踩坑？.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>25 异步处理好用，但非常容易用错</h1>
+
+<p>你好，我是朱晔。今天，我来和你聊聊好用但容易出错的异步处理。</p>
+
+<p>异步处理是互联网应用不可或缺的一种架构模式，大多数业务项目都是由同步处理、异步处理和定时任务处理三种模式相辅相成实现的。</p>
+
+<p>区别于同步处理，异步处理无需同步等待流程处理完毕，因此适用场景主要包括：</p>
+
+<p>服务于主流程的分支流程。比如，在注册流程中，把数据写入数据库的操作是主流程，但注册后给用户发优惠券或欢迎短信的操作是分支流程，时效性不那么强，可以进行异步处理。</p>
+
+<p>用户不需要实时看到结果的流程。比如，下单后的配货、送货流程完全可以进行异步处理，每个阶段处理完成后，再给用户发推送或短信让用户知晓即可。</p>
+
+<p>同时，异步处理因为可以有 MQ 中间件的介入用于任务的缓冲的分发，所以相比于同步处理，在应对流量洪峰、实现模块解耦和消息广播方面有功能优势。</p>
+
+<p>不过，异步处理虽然好用，但在实现的时候却有三个最容易犯的错，分别是异步处理流程的可靠性问题、消息发送模式的区分问题，以及大量死信消息堵塞队列的问题。今天，我就用三个代码案例结合目前常用的 MQ 系统 RabbitMQ，来和你具体聊聊。</p>
+
+<p>今天这一讲的演示，我都会使用 Spring AMQP 来操作 RabbitMQ，所以你需要先引入 amqp 依赖：</p>
+
+<pre><code>&lt;dependency&gt;
+
+
+
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+
+
+
+    &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+
+
+
+&lt;/dependency&gt;
+
+
+
+</code></pre>
+
+<h2>异步处理需要消息补偿闭环</h2>
+
+<p>使用类似 RabbitMQ、RocketMQ 等 MQ 系统来做消息队列实现异步处理，虽然说消息可以落地到磁盘保存，即使 MQ 出现问题消息数据也不会丢失，但是异步流程在消息发送、传输、处理等环节，都可能发生消息丢失。此外，任何 MQ 中间件都无法确保 100% 可用，需要考虑不可用时异步流程如何继续进行。</p>
+
+<p>因此，对于异步处理流程，必须考虑补偿或者说建立主备双活流程。</p>
+
+<p>我们来看一个用户注册后异步发送欢迎消息的场景。用户注册落数据库的流程为同步流程，会员服务收到消息后发送欢迎消息的流程为异步流程。</p>
+
+<p><img src="assets/629d9f0557cd7f06ac9ee2e871524893.png" alt="img" /></p>
+
+<p>我们来分析一下：</p>
+
+<p>蓝色的线，使用 MQ 进行的异步处理，我们称作主线，可能存在消息丢失的情况（虚线代表异步调用）；</p>
+
+<p>绿色的线，使用补偿 Job 定期进行消息补偿，我们称作备线，用来补偿主线丢失的消息；</p>
+
+<p>考虑到极端的 MQ 中间件失效的情况，我们要求备线的处理吞吐能力达到主线的能力水平。</p>
+
+<p>我们来看一下相关的实现代码。</p>
+
+<p>首先，定义 UserController 用于注册 + 发送异步消息。对于注册方法，我们一次性注册 10 个用户，用户注册消息不能发送出去的概率为 50%。</p>
+
+<pre><code>@RestController
+
+
+
+@Slf4j
+
+
+
+@RequestMapping(&quot;user&quot;)
+
+
+
+public class UserController {
+
+
+
+    @Autowired
+
+
+
+    private UserService userService;
+
+
+
+    @Autowired
+
+
+
+    private RabbitTemplate rabbitTemplate;
+
+
+
+    @GetMapping(&quot;register&quot;)
+
+
+
+    public void register() {
+
+
+
+        //模拟10个用户注册
+
+
+
+        IntStream.rangeClosed(1, 10).forEach(i -&gt; {
+
+
+
+            //落库
+
+
+
+            User user = userService.register();
+
+
+
+            //模拟50%的消息可能发送失败
+
+
+
+            if (ThreadLocalRandom.current().nextInt(10) % 2 == 0) {
+
+
+
+                //通过RabbitMQ发送消息
+
+
+
+               rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, user);
+
+
+
+                log.info(&quot;sent mq user {}&quot;, user.getId());
+
+
+
+            }
+
+
+
+        });
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>然后，定义 MemberService 类用于模拟会员服务。会员服务监听用户注册成功的消息，并发送欢迎短信。我们使用 ConcurrentHashMap 来存放那些发过短信的用户 ID 实现幂等，避免相同的用户进行补偿时重复发送短信：</p>
+
+<pre><code>@Component
+
+
+
+@Slf4j
+
+
+
+public class MemberService {
+
+
+
+    //发送欢迎消息的状态
+
+
+
+    private Map&lt;Long, Boolean&gt; welcomeStatus = new ConcurrentHashMap&lt;&gt;();
+
+
+
+    //监听用户注册成功的消息，发送欢迎消息
+
+
+
+    @RabbitListener(queues = RabbitConfiguration.QUEUE)
+
+
+
+    public void listen(User user) {
+
+
+
+        log.info(&quot;receive mq user {}&quot;, user.getId());
+
+
+
+        welcome(user);
+
+
+
+    }
+
+
+
+    //发送欢迎消息
+
+
+
+    public void welcome(User user) {
+
+
+
+        //去重操作
+
+
+
+        if (welcomeStatus.putIfAbsent(user.getId(), true) == null) {
+
+
+
+            try {
+
+
+
+                TimeUnit.SECONDS.sleep(2);
+
+
+
+            } catch (InterruptedException e) {
+
+
+
+            }
+
+
+
+            log.info(&quot;memberService: welcome new user {}&quot;, user.getId());
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>对于 MQ 消费程序，处理逻辑务必考虑去重（支持幂等），原因有几个：</p>
+
+<p>MQ 消息可能会因为中间件本身配置错误、稳定性等原因出现重复。</p>
+
+<p>自动补偿重复，比如本例，同一条消息可能既走 MQ 也走补偿，肯定会出现重复，而且考虑到高内聚，补偿 Job 本身不会做去重处理。</p>
+
+<p>人工补偿重复。出现消息堆积时，异步处理流程必然会延迟。如果我们提供了通过后台进行补偿的功能，那么在处理遇到延迟的时候，很可能会先进行人工补偿，过了一段时间后处理程序又收到消息了，重复处理。我之前就遇到过一次由 MQ 故障引发的事故，MQ 中堆积了几十万条发放资金的消息，导致业务无法及时处理，运营以为程序出错了就先通过后台进行了人工处理，结果 MQ 系统恢复后消息又被重复处理了一次，造成大量资金重复发放。</p>
+
+<p>接下来，定义补偿 Job 也就是备线操作。</p>
+
+<p>我们在 CompensationJob 中定义一个 @Scheduled 定时任务，5 秒做一次补偿操作，因为 Job 并不知道哪些用户注册的消息可能丢失，所以是全量补偿，补偿逻辑是：每 5 秒补偿一次，按顺序一次补偿 5 个用户，下一次补偿操作从上一次补偿的最后一个用户 ID 开始；对于补偿任务我们提交到线程池进行“异步”处理，提高处理能力。</p>
+
+<pre><code>@Component
+
+
+
+@Slf4j
+
+
+
+public class CompensationJob {
+
+
+
+    //补偿Job异步处理线程池
+
+
+
+    private static ThreadPoolExecutor compensationThreadPool = new ThreadPoolExecutor(
+
+
+
+            10, 10,
+
+
+
+            1, TimeUnit.HOURS,
+
+
+
+            new ArrayBlockingQueue&lt;&gt;(1000),
+
+
+
+            new ThreadFactoryBuilder().setNameFormat(&quot;compensation-threadpool-%d&quot;).get());
+
+
+
+    @Autowired
+
+
+
+    private UserService userService;
+
+
+
+    @Autowired
+
+
+
+    private MemberService memberService;
+
+
+
+    //目前补偿到哪个用户ID
+
+
+
+    private long offset = 0;
+
+
+
+    //10秒后开始补偿，5秒补偿一次
+
+
+
+    @Scheduled(initialDelay = 10_000, fixedRate = 5_000)
+
+
+
+    public void compensationJob() {
+
+
+
+        log.info(&quot;开始从用户ID {} 补偿&quot;, offset);
+
+
+
+        //获取从offset开始的用户
+
+
+
+        userService.getUsersAfterIdWithLimit(offset, 5).forEach(user -&gt; {
+
+
+
+            compensationThreadPool.execute(() -&gt; memberService.welcome(user));
+
+
+
+            offset = user.getId();
+
+
+
+        });
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>为了实现高内聚，主线和备线处理消息，最好使用同一个方法。比如，本例中 MemberService 监听到 MQ 消息和 CompensationJob 补偿，调用的都是 welcome 方法。</p>
+
+<p>此外值得一说的是，Demo 中的补偿逻辑比较简单，生产级的代码应该在以下几个方面进行加强：</p>
+
+<p>考虑配置补偿的频次、每次处理数量，以及补偿线程池大小等参数为合适的值，以满足补偿的吞吐量。</p>
+
+<p>考虑备线补偿数据进行适当延迟。比如，对注册时间在 30 秒之前的用户再进行补偿，以方便和主线 MQ 实时流程错开，避免冲突。</p>
+
+<p>诸如当前补偿到哪个用户的 offset 数据，需要落地数据库。</p>
+
+<p>补偿 Job 本身需要高可用，可以使用类似 XXLJob 或 ElasticJob 等任务系统。</p>
+
+<p>运行程序，执行注册方法注册 10 个用户，输出如下：</p>
+
+<pre><code>[17:01:16.570] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.a.compensation.UserController:28  ] - sent mq user 1
+
+
+
+[17:01:16.571] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.a.compensation.UserController:28  ] - sent mq user 5
+
+
+
+[17:01:16.572] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.a.compensation.UserController:28  ] - sent mq user 7
+
+
+
+[17:01:16.573] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.a.compensation.UserController:28  ] - sent mq user 8
+
+
+
+[17:01:16.594] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:18  ] - receive mq user 1
+
+
+
+[17:01:18.597] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 1
+
+
+
+[17:01:18.601] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:18  ] - receive mq user 5
+
+
+
+[17:01:20.603] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 5
+
+
+
+[17:01:20.604] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:18  ] - receive mq user 7
+
+
+
+[17:01:22.605] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 7
+
+
+
+[17:01:22.606] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:18  ] - receive mq user 8
+
+
+
+[17:01:24.611] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 8
+
+
+
+[17:01:25.498] [scheduling-1] [INFO ] [o.g.t.c.a.compensation.CompensationJob:29  ] - 开始从用户ID 0 补偿
+
+
+
+[17:01:27.510] [compensation-threadpool-1] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 2
+
+
+
+[17:01:27.510] [compensation-threadpool-3] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 4
+
+
+
+[17:01:27.511] [compensation-threadpool-2] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 3
+
+
+
+[17:01:30.496] [scheduling-1] [INFO ] [o.g.t.c.a.compensation.CompensationJob:29  ] - 开始从用户ID 5 补偿
+
+
+
+[17:01:32.500] [compensation-threadpool-6] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 6
+
+
+
+[17:01:32.500] [compensation-threadpool-9] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 9
+
+
+
+[17:01:35.496] [scheduling-1] [INFO ] [o.g.t.c.a.compensation.CompensationJob:29  ] - 开始从用户ID 9 补偿
+
+
+
+[17:01:37.501] [compensation-threadpool-0] [INFO ] [o.g.t.c.a.compensation.MemberService:28  ] - memberService: welcome new user 10
+
+
+
+[17:01:40.495] [scheduling-1] [INFO ] [o.g.t.c.a.compensation.CompensationJob:29  ] - 开始从用户ID 10 补偿
+
+
+
+</code></pre>
+
+<p>可以看到：</p>
+
+<p>总共 10 个用户，MQ 发送成功的用户有四个，分别是用户 1、5、7、8。</p>
+
+<p>补偿任务第一次运行，补偿了用户 2、3、4，第二次运行补偿了用户 6、9，第三次运行补充了用户 10。</p>
+
+<p>最后提一下，针对消息的补偿闭环处理的最高标准是，能够达到补偿全量数据的吞吐量。也就是说，如果补偿备线足够完善，即使直接把 MQ 停机，虽然会略微影响处理的及时性，但至少确保流程都能正常执行。</p>
+
+<h2>注意消息模式是广播还是工作队列</h2>
+
+<p>在今天这一讲的一开始，我们提到异步处理的一个重要优势，是实现消息广播。</p>
+
+<p>消息广播，和我们平时说的“广播”意思差不多，就是希望同一条消息，不同消费者都能分别消费；而队列模式，就是不同消费者共享消费同一个队列的数据，相同消息只能被某一个消费者消费一次。</p>
+
+<p>比如，同一个用户的注册消息，会员服务需要监听以发送欢迎短信，营销服务同样需要监听以发送新用户小礼物。但是，会员服务、营销服务都可能有多个实例，我们期望的是同一个用户的消息，可以同时广播给不同的服务（广播模式），但对于同一个服务的不同实例（比如会员服务 1 和会员服务 2），不管哪个实例来处理，处理一次即可（工作队列模式）：</p>
+
+<p><img src="assets/79994116247045ff90652254770a6d14.png" alt="img" /></p>
+
+<p>在实现代码的时候，我们务必确认 MQ 系统的机制，确保消息的路由按照我们的期望。</p>
+
+<p>对于类似 RocketMQ 这样的 MQ 来说，实现类似功能比较简单直白：如果消费者属于一个组，那么消息只会由同一个组的一个消费者来消费；如果消费者属于不同组，那么每个组都能消费一遍消息。</p>
+
+<p>而对于 RabbitMQ 来说，消息路由的模式采用的是队列 + 交换器，队列是消息的载体，交换器决定了消息路由到队列的方式，配置比较复杂，容易出错。所以，接下来我重点和你讲讲 RabbitMQ 的相关代码实现。</p>
+
+<p>我们还是以上面的架构图为例，来演示使用 RabbitMQ 实现广播模式和工作队列模式的坑。</p>
+
+<p>第一步，实现会员服务监听用户服务发出的新用户注册消息的那部分逻辑。</p>
+
+<p>如果我们启动两个会员服务，那么同一个用户的注册消息应该只能被其中一个实例消费。</p>
+
+<p>我们分别实现 RabbitMQ 队列、交换器、绑定三件套。其中，队列用的是匿名队列，交换器用的是直接交换器 DirectExchange，交换器绑定到匿名队列的路由 Key 是空字符串。在收到消息之后，我们会打印所在实例使用的端口：</p>
+
+<pre><code>//为了代码简洁直观，我们把消息发布者、消费者、以及MQ的配置代码都放在了一起
+
+
+
+@Slf4j
+
+
+
+@Configuration
+
+
+
+@RestController
+
+
+
+@RequestMapping(&quot;workqueuewrong&quot;)
+
+
+
+public class WorkQueueWrong {
+
+
+
+    private static final String EXCHANGE = &quot;newuserExchange&quot;;
+
+
+
+    @Autowired
+
+
+
+    private RabbitTemplate rabbitTemplate;
+
+
+
+    @GetMapping
+
+
+
+    public void sendMessage() {
+
+
+
+        rabbitTemplate.convertAndSend(EXCHANGE, &quot;&quot;, UUID.randomUUID().toString());
+
+
+
+    }
+
+
+
+    //使用匿名队列作为消息队列
+
+
+
+    @Bean
+
+
+
+    public Queue queue() {
+
+
+
+        return new AnonymousQueue();
+
+
+
+    }
+
+
+
+  
+
+
+
+    //声明DirectExchange交换器，绑定队列到交换器
+
+
+
+    @Bean
+
+
+
+    public Declarables declarables() {
+
+
+
+        DirectExchange exchange = new DirectExchange(EXCHANGE);
+
+
+
+        return new Declarables(queue(), exchange,
+
+
+
+                BindingBuilder.bind(queue()).to(exchange).with(&quot;&quot;));
+
+
+
+    }
+
+
+
+    //监听队列，队列名称直接通过SpEL表达式引用Bean
+
+
+
+    @RabbitListener(queues = &quot;#{queue.name}&quot;)
+
+
+
+    public void memberService(String userName) {
+
+
+
+        log.info(&quot;memberService: welcome message sent to new user {} from {}&quot;, userName, System.getProperty(&quot;server.port&quot;));
+
+
+
+    }
+
+
+
+}   
+
+
+
+</code></pre>
+
+<p>使用 12345 和 45678 两个端口启动两个程序实例后，调用 sendMessage 接口发送一条消息，输出的日志，显示同一个会员服务两个实例都收到了消息：</p>
+
+<p><img src="assets/bd649f78f2f3a7c732b8883fd4d5255f.png" alt="img" /></p>
+
+<p><img src="assets/96278ba64ac411d5910d7ce8073c7304.png" alt="img" /></p>
+
+<p>出现这个问题的原因是，我们没有理清楚 RabbitMQ 直接交换器和队列的绑定关系。</p>
+
+<p>如下图所示，RabbitMQ 的直接交换器根据 routingKey 对消息进行路由。由于我们的程序每次启动都会创建匿名（随机命名）的队列，所以相当于每一个会员服务实例都对应独立的队列，以空 routingKey 绑定到直接交换器。用户服务发出消息的时候也设置了 routingKey 为空，所以直接交换器收到消息之后，发现有两条队列匹配，于是都转发了消息：</p>
+
+<p><img src="assets/c685c1a07347b040ee5ba1b48ce00af8.png" alt="img" /></p>
+
+<p>要修复这个问题其实很简单，对于会员服务不要使用匿名队列，而是使用同一个队列即可。把上面代码中的匿名队列替换为一个普通队列：</p>
+
+<pre><code>private static final String QUEUE = &quot;newuserQueue&quot;;
+
+
+
+@Bean
+
+
+
+public Queue queue() {
+
+
+
+    return new Queue(QUEUE);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>测试发现，对于同一条消息来说，两个实例中只有一个实例可以收到，不同的消息按照轮询分发给不同的实例。现在，交换器和队列的关系是这样的：</p>
+
+<p><img src="assets/65205002a2cdde62d55330263afd317b.png" alt="img" /></p>
+
+<p>第二步，进一步完整实现用户服务需要广播消息给会员服务和营销服务的逻辑。</p>
+
+<p>我们希望会员服务和营销服务都可以收到广播消息，但会员服务或营销服务中的每个实例只需要收到一次消息。</p>
+
+<p>代码如下，我们声明了一个队列和一个广播交换器 FanoutExchange，然后模拟两个用户服务和两个营销服务：</p>
+
+<pre><code>@Slf4j
+
+
+
+@Configuration
+
+
+
+@RestController
+
+
+
+@RequestMapping(&quot;fanoutwrong&quot;)
+
+
+
+public class FanoutQueueWrong {
+
+
+
+    private static final String QUEUE = &quot;newuser&quot;;
+
+
+
+    private static final String EXCHANGE = &quot;newuser&quot;;
+
+
+
+    @Autowired
+
+
+
+    private RabbitTemplate rabbitTemplate;
+
+
+
+    @GetMapping
+
+
+
+    public void sendMessage() {
+
+
+
+        rabbitTemplate.convertAndSend(EXCHANGE, &quot;&quot;, UUID.randomUUID().toString());
+
+
+
+    }
+
+
+
+    //声明FanoutExchange，然后绑定到队列，FanoutExchange绑定队列的时候不需要routingKey
+
+
+
+    @Bean
+
+
+
+    public Declarables declarables() {
+
+
+
+        Queue queue = new Queue(QUEUE);
+
+
+
+        FanoutExchange exchange = new FanoutExchange(EXCHANGE);
+
+
+
+        return new Declarables(queue, exchange,
+
+
+
+                BindingBuilder.bind(queue).to(exchange));
+
+
+
+    }
+
+
+
+    //会员服务实例1
+
+
+
+    @RabbitListener(queues = QUEUE)
+
+
+
+    public void memberService1(String userName) {
+
+
+
+        log.info(&quot;memberService1: welcome message sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    //会员服务实例2
+
+
+
+    @RabbitListener(queues = QUEUE)
+
+
+
+    public void memberService2(String userName) {
+
+
+
+        log.info(&quot;memberService2: welcome message sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    //营销服务实例1
+
+
+
+    @RabbitListener(queues = QUEUE)
+
+
+
+    public void promotionService1(String userName) {
+
+
+
+        log.info(&quot;promotionService1: gift sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    //营销服务实例2
+
+
+
+    @RabbitListener(queues = QUEUE)
+
+
+
+    public void promotionService2(String userName) {
+
+
+
+        log.info(&quot;promotionService2: gift sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>我们请求四次 sendMessage 接口，注册四个用户。通过日志可以发现，一条用户注册的消息，要么被会员服务收到，要么被营销服务收到，显然这不是广播。那，我们使用的 FanoutExchange，看名字就应该是实现广播的交换器，为什么根本没有起作用呢？</p>
+
+<p><img src="assets/34e2ea5e0f38ac029ff3d909d8b9606d.png" alt="img" /></p>
+
+<p>其实，广播交换器非常简单，它会忽略 routingKey，广播消息到所有绑定的队列。在这个案例中，两个会员服务和两个营销服务都绑定了同一个队列，所以这四个服务只能收到一次消息：</p>
+
+<p><img src="assets/20adae38645d1cc169756fb4888211cb.png" alt="img" /></p>
+
+<p>修改方式很简单，我们把队列进行拆分，会员和营销两组服务分别使用一条独立队列绑定到广播交换器即可：</p>
+
+<pre><code>@Slf4j
+
+
+
+@Configuration
+
+
+
+@RestController
+
+
+
+@RequestMapping(&quot;fanoutright&quot;)
+
+
+
+public class FanoutQueueRight {
+
+
+
+    private static final String MEMBER_QUEUE = &quot;newusermember&quot;;
+
+
+
+    private static final String PROMOTION_QUEUE = &quot;newuserpromotion&quot;;
+
+
+
+    private static final String EXCHANGE = &quot;newuser&quot;;
+
+
+
+    @Autowired
+
+
+
+    private RabbitTemplate rabbitTemplate;
+
+
+
+    @GetMapping
+
+
+
+    public void sendMessage() {
+
+
+
+        rabbitTemplate.convertAndSend(EXCHANGE, &quot;&quot;, UUID.randomUUID().toString());
+
+
+
+    }
+
+
+
+    @Bean
+
+
+
+    public Declarables declarables() {
+
+
+
+        //会员服务队列
+
+
+
+        Queue memberQueue = new Queue(MEMBER_QUEUE);
+
+
+
+        //营销服务队列
+
+
+
+        Queue promotionQueue = new Queue(PROMOTION_QUEUE);
+
+
+
+        //广播交换器
+
+
+
+        FanoutExchange exchange = new FanoutExchange(EXCHANGE);
+
+
+
+        //两个队列绑定到同一个交换器
+
+
+
+        return new Declarables(memberQueue, promotionQueue, exchange,
+
+
+
+                BindingBuilder.bind(memberQueue).to(exchange),
+
+
+
+                BindingBuilder.bind(promotionQueue).to(exchange));
+
+
+
+    }
+
+
+
+    @RabbitListener(queues = MEMBER_QUEUE)
+
+
+
+    public void memberService1(String userName) {
+
+
+
+        log.info(&quot;memberService1: welcome message sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    @RabbitListener(queues = MEMBER_QUEUE)
+
+
+
+    public void memberService2(String userName) {
+
+
+
+        log.info(&quot;memberService2: welcome message sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    @RabbitListener(queues = PROMOTION_QUEUE)
+
+
+
+    public void promotionService1(String userName) {
+
+
+
+        log.info(&quot;promotionService1: gift sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+    @RabbitListener(queues = PROMOTION_QUEUE)
+
+
+
+    public void promotionService2(String userName) {
+
+
+
+        log.info(&quot;promotionService2: gift sent to new user {}&quot;, userName);
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>现在，交换器和队列的结构是这样的：</p>
+
+<p><img src="assets/9a3b06605913aa17025854dfbe6a5778.png" alt="img" /></p>
+
+<p>从日志输出可以验证，对于每一条 MQ 消息，会员服务和营销服务分别都会收到一次，一条消息广播到两个服务的同时，在每一个服务的两个实例中通过轮询接收：</p>
+
+<p><img src="assets/2975386cec273f3ca54b42872d9f4b63.png" alt="img" /></p>
+
+<p>所以说，理解了 RabbitMQ 直接交换器、广播交换器的工作方式之后，我们对消息的路由方式了解得很清晰了，实现代码就不会出错。</p>
+
+<p>对于异步流程来说，消息路由模式一旦配置出错，轻则可能导致消息的重复处理，重则可能导致重要的服务无法接收到消息，最终造成业务逻辑错误。</p>
+
+<p>每个 MQ 中间件对消息的路由处理的配置各不相同，我们一定要先了解原理再着手编码。</p>
+
+<h2>别让死信堵塞了消息队列</h2>
+
+<p>我们在介绍线程池的时候提到，如果线程池的任务队列没有上限，那么最终可能会导致 OOM。使用消息队列处理异步流程的时候，我们也同样要注意消息队列的任务堆积问题。对于突发流量引起的消息队列堆积，问题并不大，适当调整消费者的消费能力应该就可以解决。但在很多时候，消息队列的堆积堵塞，是因为有大量始终无法处理的消息。</p>
+
+<p>比如，用户服务在用户注册后发出一条消息，会员服务监听到消息后给用户派发优惠券，但因为用户并没有保存成功，会员服务处理消息始终失败，消息重新进入队列，然后还是处理失败。这种在 MQ 中像幽灵一样回荡的同一条消息，就是死信。</p>
+
+<p>随着 MQ 被越来越多的死信填满，消费者需要花费大量时间反复处理死信，导致正常消息的消费受阻，最终 MQ 可能因为数据量过大而崩溃。</p>
+
+<p>我们来测试一下这个场景。首先，定义一个队列、一个直接交换器，然后把队列绑定到交换器：</p>
+
+<pre><code>@Bean
+
+
+
+public Declarables declarables() {
+
+
+
+    //队列
+
+
+
+    Queue queue = new Queue(Consts.QUEUE);
+
+
+
+    //交换器
+
+
+
+    DirectExchange directExchange = new DirectExchange(Consts.EXCHANGE);
+
+
+
+    //快速声明一组对象，包含队列、交换器，以及队列到交换器的绑定
+
+
+
+    return new Declarables(queue, directExchange,
+
+
+
+            BindingBuilder.bind(queue).to(directExchange).with(Consts.ROUTING_KEY));
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>然后，实现一个 sendMessage 方法来发送消息到 MQ，访问一次提交一条消息，使用自增标识作为消息内容：</p>
+
+<pre><code>
+
+//自增消息标识
+
+
+
+AtomicLong atomicLong = new AtomicLong();
+
+
+
+@Autowired
+
+
+
+private RabbitTemplate rabbitTemplate;
+
+
+
+@GetMapping(&quot;sendMessage&quot;)
+
+
+
+public void sendMessage() {
+
+
+
+    String msg = &quot;msg&quot; + atomicLong.incrementAndGet();
+
+
+
+    log.info(&quot;send message {}&quot;, msg);
+
+
+
+    //发送消息
+
+
+
+    rabbitTemplate.convertAndSend(Consts.EXCHANGE, msg);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>收到消息后，直接抛出空指针异常，模拟处理出错的情况：</p>
+
+<pre><code>@RabbitListener(queues = Consts.QUEUE)
+
+
+
+public void handler(String data) {
+
+
+
+    log.info(&quot;got message {}&quot;, data);
+
+
+
+    throw new NullPointerException(&quot;error&quot;);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>调用 sendMessage 接口发送两条消息，然后来到 RabbitMQ 管理台，可以看到这两条消息始终在队列中，不断被重新投递，导致重新投递 QPS 达到了 1063。</p>
+
+<p><img src="assets/1130fc65dee6acba4df08227baf4d554.jpg" alt="img" /></p>
+
+<p>同时，在日志中可以看到大量异常信息：</p>
+
+<pre><code>
+
+[20:02:31.533] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [WARN ] [o.s.a.r.l.ConditionalRejectingErrorHandler:129 ] - Execution of Rabbit message listener failed.
+
+
+
+org.springframework.amqp.rabbit.support.ListenerExecutionFailedException: Listener method 'public void org.geekbang.time.commonmistakes.asyncprocess.deadletter.MQListener.handler(java.lang.String)' threw exception
+
+
+
+  at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:219)
+
+
+
+  at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:143)
+
+
+
+  at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:132)
+
+
+
+  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1569)
+
+
+
+  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1488)
+
+
+
+  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1476)
+
+
+
+  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1467)
+
+
+
+  at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1411)
+
+
+
+  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:958)
+
+
+
+  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:908)
+
+
+
+  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.access$1600(SimpleMessageListenerContainer.java:81)
+
+
+
+  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1279)
+
+
+
+  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1185)
+
+
+
+  at java.lang.Thread.run(Thread.java:748)
+
+
+
+Caused by: java.lang.NullPointerException: error
+
+
+
+  at org.geekbang.time.commonmistakes.asyncprocess.deadletter.MQListener.handler(MQListener.java:14)
+
+
+
+  at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+
+
+
+  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+
+
+
+  at java.lang.reflect.Method.invoke(Method.java:498)
+
+
+
+  at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:171)
+
+
+
+  at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:120)
+
+
+
+  at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:50)
+
+
+
+  at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:211)
+
+
+
+  ... 13 common frames omitted
+
+
+
+</code></pre>
+
+<p>解决死信无限重复进入队列最简单的方式是，在程序处理出错的时候，直接抛出 AmqpRejectAndDontRequeueException 异常，避免消息重新进入队列：</p>
+
+<pre><code>throw new AmqpRejectAndDontRequeueException(&quot;error&quot;);
+
+
+
+</code></pre>
+
+<p>但，我们更希望的逻辑是，对于同一条消息，能够先进行几次重试，解决因为网络问题导致的偶发消息处理失败，如果还是不行的话，再把消息投递到专门的一个死信队列。对于来自死信队列的数据，我们可能只是记录日志发送报警，即使出现异常也不会再重复投递。整个逻辑如下图所示：</p>
+
+<p><img src="assets/40f0cf14933178fd07690372199e8428.png" alt="img" /></p>
+
+<p>针对这个问题，Spring AMQP 提供了非常方便的解决方案：</p>
+
+<p>首先，定义死信交换器和死信队列。其实，这些都是普通的交换器和队列，只不过被我们专门用于处理死信消息。</p>
+
+<p>然后，通过 RetryInterceptorBuilder 构建一个 RetryOperationsInterceptor，用于处理失败时候的重试。这里的策略是，最多尝试 5 次（重试 4 次）；并且采取指数退避重试，首次重试延迟 1 秒，第二次 2 秒，以此类推，最大延迟是 10 秒；如果第 4 次重试还是失败，则使用 RepublishMessageRecoverer 把消息重新投入一个“死信交换器”中。</p>
+
+<p>最后，定义死信队列的处理程序。这个案例中，我们只是简单记录日志。</p>
+
+<p>对应的实现代码如下：</p>
+
+<pre><code>//定义死信交换器和队列，并且进行绑定
+
+
+
+@Bean
+
+
+
+public Declarables declarablesForDead() {
+
+
+
+    Queue queue = new Queue(Consts.DEAD_QUEUE);
+
+
+
+    DirectExchange directExchange = new DirectExchange(Consts.DEAD_EXCHANGE);
+
+
+
+    return new Declarables(queue, directExchange,
+
+
+
+            BindingBuilder.bind(queue).to(directExchange).with(Consts.DEAD_ROUTING_KEY));
+
+
+
+}
+
+
+
+//定义重试操作拦截器
+
+
+
+@Bean
+
+
+
+public RetryOperationsInterceptor interceptor() {
+
+
+
+    return RetryInterceptorBuilder.stateless()
+
+
+
+            .maxAttempts(5) //最多尝试（不是重试）5次
+
+
+
+            .backOffOptions(1000, 2.0, 10000) //指数退避重试
+
+
+
+            .recoverer(new RepublishMessageRecoverer(rabbitTemplate, Consts.DEAD_EXCHANGE, Consts.DEAD_ROUTING_KEY)) //重新投递重试达到上限的消息
+
+
+
+            .build();
+
+
+
+}
+
+
+
+//通过定义SimpleRabbitListenerContainerFactory，设置其adviceChain属性为之前定义的RetryOperationsInterceptor来启用重试拦截器
+
+
+
+@Bean
+
+
+
+public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+
+
+
+    SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+
+
+
+    factory.setConnectionFactory(connectionFactory);
+
+
+
+    factory.setAdviceChain(interceptor());
+
+
+
+    return factory;
+
+
+
+}
+
+
+
+//死信队列处理程序
+
+
+
+@RabbitListener(queues = Consts.DEAD_QUEUE)
+
+
+
+public void deadHandler(String data) {
+
+
+
+    log.error(&quot;got dead message {}&quot;, data);
+
+
+
+}
+
+</code></pre>
+
+<p>执行程序，发送两条消息，日志如下：</p>
+
+<pre><code>[11:22:02.193] [http-nio-45688-exec-1] [INFO ] [o.g.t.c.a.d.DeadLetterController:24  ] - send message msg1
+
+
+
+[11:22:02.219] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg1
+
+
+
+[11:22:02.614] [http-nio-45688-exec-2] [INFO ] [o.g.t.c.a.d.DeadLetterController:24  ] - send message msg2
+
+
+
+[11:22:03.220] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg1
+
+
+
+[11:22:05.221] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg1
+
+
+
+[11:22:09.223] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg1
+
+
+
+[11:22:17.224] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg1
+
+
+
+[11:22:17.226] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [WARN ] [o.s.a.r.retry.RepublishMessageRecoverer:172 ] - Republishing failed message to exchange 'deadtest' with routing key deadtest
+
+
+
+[11:22:17.227] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg2
+
+
+
+[11:22:17.229] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] [ERROR] [o.g.t.c.a.deadletter.MQListener:20  ] - got dead message msg1
+
+
+
+[11:22:18.232] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg2
+
+
+
+[11:22:20.237] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg2
+
+
+
+[11:22:24.241] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg2
+
+
+
+[11:22:32.245] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [INFO ] [o.g.t.c.a.deadletter.MQListener:13  ] - got message msg2
+
+
+
+[11:22:32.246] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] [WARN ] [o.s.a.r.retry.RepublishMessageRecoverer:172 ] - Republishing failed message to exchange 'deadtest' with routing key deadtest
+
+
+
+[11:22:32.250] [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] [ERROR] [o.g.t.c.a.deadletter.MQListener:20  ] - got dead message msg2
+
+
+
+</code></pre>
+
+<p>可以看到：</p>
+
+<p>msg1 的 4 次重试间隔分别是 1 秒、2 秒、4 秒、8 秒，再加上首次的失败，所以最大尝试次数是 5。</p>
+
+<p>4 次重试后，RepublishMessageRecoverer 把消息发往了死信交换器。</p>
+
+<p>死信处理程序输出了 got dead message 日志。</p>
+
+<p>这里需要尤其注意的一点是，虽然我们几乎同时发送了两条消息，但是 msg2 是在 msg1 的四次重试全部结束后才开始处理。原因是，默认情况下 SimpleMessageListenerContainer 只有一个消费线程。可以通过增加消费线程来避免性能问题，如下我们直接设置 concurrentConsumers 参数为 10，来增加到 10 个工作线程：</p>
+
+<pre><code>@Bean
+
+
+
+public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+
+
+
+    SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+
+
+
+    factory.setConnectionFactory(connectionFactory);
+
+
+
+    factory.setAdviceChain(interceptor());
+
+
+
+    factory.setConcurrentConsumers(10);
+
+
+
+    return factory;
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>当然，我们也可以设置 maxConcurrentConsumers 参数，来让 SimpleMessageListenerContainer 自己动态地调整消费者线程数。不过，我们需要特别注意它的动态开启新线程的策略。你可以通过官方文档，来了解这个策略。</p>
+
+<h2>重点回顾</h2>
+
+<p>在使用异步处理这种架构模式的时候，我们一般都会使用 MQ 中间件配合实现异步流程，需要重点考虑四个方面的问题。</p>
+
+<p>第一，要考虑异步流程丢消息或处理中断的情况，异步流程需要有备线进行补偿。比如，我们今天介绍的全量补偿方式，即便异步流程彻底失效，通过补偿也能让业务继续进行。</p>
+
+<p>第二，异步处理的时候需要考虑消息重复的可能性，处理逻辑需要实现幂等，防止重复处理。</p>
+
+<p>第三，微服务场景下不同服务多个实例监听消息的情况，一般不同服务需要同时收到相同的消息，而相同服务的多个实例只需要轮询接收消息。我们需要确认 MQ 的消息路由配置是否满足需求，以避免消息重复或漏发问题。</p>
+
+<p>第四，要注意始终无法处理的死信消息，可能会引发堵塞 MQ 的问题。一般在遇到消息处理失败的时候，我们可以设置一定的重试策略。如果重试还是不行，那可以把这个消息扔到专有的死信队列特别处理，不要让死信影响到正常消息的处理。</p>
+
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+
+<h2>思考与讨论</h2>
+
+<p>在用户注册后发送消息到 MQ，然后会员服务监听消息进行异步处理的场景下，有些时候我们会发现，虽然用户服务先保存数据再发送 MQ，但会员服务收到消息后去查询数据库，却发现数据库中还没有新用户的信息。你觉得，这可能是什么问题呢，又该如何解决呢？</p>
+
+<p>除了使用 Spring AMQP 实现死信消息的重投递外，RabbitMQ 2.8.0 后支持的死信交换器 DLX 也可以实现类似功能。你能尝试用 DLX 实现吗，并比较下这两种处理机制？</p>
+
+<p>关于使用 MQ 进行异步处理流程，你还遇到过其他问题吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把今天的内容分享给你的朋友或同事，一起交流。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099704e3d403d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>05  监控指标：如何通过分析数据快速定位系统隐患？（上）.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/00 分布式链路追踪实战.md">00 分布式链路追踪实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/01  数据观测：数据追踪的基石从哪里来？.md">01  数据观测：数据追踪的基石从哪里来？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/02  系统日志：何以成为保障稳定性的关键？.md">02  系统日志：何以成为保障稳定性的关键？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/03  日志编写：怎样才能编写“可观测”的系统日志？.md">03  日志编写：怎样才能编写“可观测”的系统日志？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/04  统计指标：“五个九”对系统稳定的真正意义.md">04  统计指标：“五个九”对系统稳定的真正意义.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/分布式链路追踪实战-完/05  监控指标：如何通过分析数据快速定位系统隐患？（上）.md">05  监控指标：如何通过分析数据快速定位系统隐患？（上）.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/06  监控指标：如何通过分析数据快速定位系统隐患？（下）.md">06  监控指标：如何通过分析数据快速定位系统隐患？（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/07  指标编写：如何编写出更加了解系统的指标？.md">07  指标编写：如何编写出更加了解系统的指标？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/08  链路监控：为什么对于系统而言必不可少？.md">08  链路监控：为什么对于系统而言必不可少？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/09  性能剖析：如何补足分布式追踪短板？.md">09  性能剖析：如何补足分布式追踪短板？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/10  链路分析：除了观测链路，还能做什么？.md">10  链路分析：除了观测链路，还能做什么？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/11  黑白盒监控：系统功能与结构稳定的根基.md">11  黑白盒监控：系统功能与结构稳定的根基.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/12  系统告警：快速感知业务隐藏问题.md">12  系统告警：快速感知业务隐藏问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/13  告警质量：如何更好地创建告警规则和质量？.md">13  告警质量：如何更好地创建告警规则和质量？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/14  告警处理：怎样才能更好地解决问题？.md">14  告警处理：怎样才能更好地解决问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/15  日志收集：ELK 如何更高效地收集日志？.md">15  日志收集：ELK 如何更高效地收集日志？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/16  指标体系：Prometheus 如何更完美地显示指标体系？.md">16  指标体系：Prometheus 如何更完美地显示指标体系？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/17  链路追踪：Zipkin 如何进行分布式追踪？.md">17  链路追踪：Zipkin 如何进行分布式追踪？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/18  观测分析：SkyWalking 如何把观测和分析结合起来？.md">18  观测分析：SkyWalking 如何把观测和分析结合起来？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/19  云端观测：ARMS 如何进行云观测？.md">19  云端观测：ARMS 如何进行云观测？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/20  运维集成：内部的 OSS 系统如何与观测相结合？.md">20  运维集成：内部的 OSS 系统如何与观测相结合？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式链路追踪实战-完/21 结束语  未来的监控是什么样子？.md">21 结束语  未来的监控是什么样子？.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>05  监控指标：如何通过分析数据快速定位系统隐患？（上）</h1>
+
+<p>我在上一节课带你了解了统计指标的基本概念。本课时我会向你介绍每个平台都有哪些监控指标，让你更轻松地通过统计数据来了解系统隐患。</p>
+
+<p>介于篇幅较长，我将它们分为上、下两篇（05、06 课时）。对应我们在 01 课时介绍数据来源时的顺序，从用户侧到服务器，<strong>监控指标</strong>依次有端上访问、应用程序、组件和机器信息。在上篇，我会从端上访问和应用程序 2 个方面来说明。</p>
+
+<h3>端上访问</h3>
+
+<p>端上访问一般可以细分为 2 个，App 和网页。两个虽然都属于端上，但是侧重点不一样，二者之间的区别主要可以是以下 4 点：</p>
+
+<ol>
+
+<li><strong>访问方式</strong>：这个很好理解，App 需要在应用市场下载使用，下载会花费一定的时间，而网页只需要输入一个地址或直接利用搜索引擎。</li>
+
+<li><strong>兼容性</strong>：从使用者的角度来讲，兼容性十分关键。App 一般具有很好的兼容性，但由于 Android 厂家相对较多，所以每个厂家可能会有一些细微的差别，但是整体的兼容性不会有太大问题；网页需要考虑各种不同的浏览器厂商，有些差别还是比较大的，比如最常见的 IE8 相对而言就比较难做兼容。</li>
+
+<li><strong>内容变更</strong>：显示的内容需要变更时，App 往往需要很长的周期，因为需要进行发版、应用审核、上架，最后才到用户更新，所以有时为了方便，在 App 内嵌入 H5 也是很常见的；网页则是实时的，只需要开发人员将更改后的内容上线，用户访问时就会是最新的。</li>
+
+<li><strong>使用体验</strong>：从用户使用体验角度来讲，App 往往体验更好，因为它是手机上的应用，所以包括在使用、消息推送等方面都有更好的支持；网页相对来说会差一些，更多的是展示信息的功能，因为它属于在浏览器应用中的内容，所以其权限相对较少。</li>
+
+</ol>
+
+<h4>App</h4>
+
+<p>介绍了二者的区别后，我先来讲一讲如今更为用户青睐的 App，看看 App 中有哪些比较常见的指标：</p>
+
+<ol>
+
+<li><strong>崩溃率</strong>：崩溃指的是应用在运行过程中出现强制关闭的现象。崩溃会打断了用户操作的体验，造成业务中断。崩溃率过高还会导致用户的留存率下降，品牌口碑变差，等等。</li>
+
+<li><strong>卡顿率</strong>：App 中的卡顿率指的是 UI 刷新时出现卡顿的情况。如果卡顿率过高，会让用户感觉 App 运行很慢，降低用户的使用体验。</li>
+
+<li><strong>卸载率</strong>：卸载说明用户很难适应你的产品，卸载率可以算是最能检测用户在使用一个产品时是否满意的一个指标了。卸载率的升高可能是各个方面导致的，比如推送过多打扰到用户，有严重的 bug 影响到使用体验，等等。</li>
+
+</ol>
+
+<h4>网页</h4>
+
+<p>介绍完 App 后，我再带你了解一下网页，网页会更加关注显示体验，所以其中一般会有这样一些指标：</p>
+
+<ol>
+
+<li><strong>白屏时间</strong>：指的是用户访问页面时，从用户输入地址栏之后到首次出现内容的时间，也叫作首次渲染时间。白屏时间的长短会影响用户的使用体验，白屏时间长会导致用户认为网站比较慢。如果出现较长时间的空白，有可能是服务器响应慢或是网络波动等原因造成的。</li>
+
+<li><strong>首屏时间</strong>：指的是用户输入地址栏之后到首个屏幕渲染完成，即完全显示了页面内容的时间。首屏时间会受资源下载速度影响，首屏渲染的速度越快，用户的使用体验也会更好。</li>
+
+</ol>
+
+<h4>通用指标</h4>
+
+<p>端上的资源请求，一般都会经历以下几个步骤：DNS 寻找，建立与服务器的链接，发送请求，请求响应。这几个步骤是可以被监控起来，现在很多主流的拨测软件也会提供这样的统计功能，拨测软件其实就是利用各个不同地方的机器发起请求，来测试网络情况。</p>
+
+<p><img src="assets/Ciqc1F81E42AK_yyAABp5FkSw7A395.png" alt="11.png" /></p>
+
+<p>App 和网页，在发送请求和获取数据内容的过程中，除了以上提到的指标，还有以下几个指标需要注意：</p>
+
+<ol>
+
+<li><strong>DNS 响应时间</strong>：通常用来记录访问地址向 DNS 服务器发起请求，到 DNS 返回服务器 IP 地址信息的时间。</li>
+
+<li><strong>建立连接时间</strong>：客户端通过 TCP 与服务器建立的时间。</li>
+
+<li><strong>SSL 握手时间</strong>：SSL 握手指的是与 HTTPS 服务器端进行建立链接的整个过程，其耗时就是 SSL 握手时间。</li>
+
+<li><strong>首字节时间</strong>：从客户端发送请求，到接收服务器首个字节的时间。因此，它包含了服务器的响应耗时信息。</li>
+
+<li><strong>下载内容时间</strong>：接收到内容后，内容被完整下载完成的时间。</li>
+
+</ol>
+
+<p>通用指标并不限于 App 或是网页。通过这些指标，你可以更加了解客户端从请求发起到接收完整内容的耗时情况。通用指标前 3 项（DNS 响应时间、建立连接时间、SSL 握手时间）是基础功能，在优化时更偏向运维层面；首字节时间和下载内容时间，则更多的是后端开发人员来优化。</p>
+
+<h3>应用程序</h3>
+
+<p>介绍完端上访问后，我们再来看看应用程序。对于应用程序，需要监控的指标就更多了，我会分请求、数据处理、组件协作资源、业务指标、VM 监控这 5 个部分来介绍。</p>
+
+<p><strong>业务指标</strong>更多是倾向于开发人员在编写代码时需要自定义控制的指标内容，这一课时我会略过这一内容的介绍，在“07 | 指标编写：如何编写出更加了解系统的指标？”这一课时我会有详细的讲解。</p>
+
+<h4>请求</h4>
+
+<p><strong>请求</strong>指的是端上通过 HTTP 等方式发起的请求，与请求相关的指标有以下几个需要关注：</p>
+
+<ol>
+
+<li><strong>QPS</strong>：我在“04 | 统计指标：‘五个九’对系统稳定的意义？”这个课时中介绍过，QPS 代表了请求数量，它是我们能最快了解这个系统使用情况的一个指标。</li>
+
+<li><strong>状态码</strong>：针对 HTTP(S) 的请求，一般会细化响应状态码的数量指标。
+
+<ol>
+
+<li>2xx：响应被正常处理。一般系统中会使用 JSON 来返回数据，而 JSON 可能会有不同的业务状态码，监控时可以依据具体的情况定制。</li>
+
+<li>3xx：请求被重定向。如果出现了大量的重定向，一般就表明该网页存在一定的问题，而且也存在降低用户使用体验的风险。</li>
+
+<li>4xx：无法访问，比如我们常见的 403 无权限、404 未找到。4xx 说明业务边界存在问题，可能会导致身份信息出现问题或者页面访问异常。</li>
+
+<li>5xx：这个在后端比较常见，如果服务器内部出现了错误，通常也会伴随着访问出现错误。</li>
+
+</ol>
+
+</li>
+
+<li><strong>请求时间</strong>：从服务器发起请求，到服务器返回数据内容的总计时间，一般也叫响应耗时。响应耗时可以帮助我们了解具体某个接口或者页面的执行情况。在“04 课时”中我介绍了直方图和分位值图，通过这 2 种或者是其他的形式展示响应耗时，也更能直观了解耗时的整体分布情况。</li>
+
+<li><strong>SLA</strong>：同 QPS 一样，我也在“04 课时”中介绍过。在这里我简单说明一下，在 HTTP 请求层面，SLA 一般可以通过总共的请求数与 5xx 请求数之间的运算获得。</li>
+
+<li><strong>独立用户数</strong>：指的是总共有多少个用户访问。用户数越多，说明产品使用的人数越多，用户基数越大。通过查看独立用户数也可以发现一些问题，比如爬虫在爬取你的数据，就可能会导致 QPS 偏高，而用户数很少的情况。</li>
+
+</ol>
+
+<h4>数据处理</h4>
+
+<p>数据处理和一些第三方框架的交互居多，在请求数据处理时，会涉及很多的内容，其中有以下几个比较关键的指标类型：</p>
+
+<ol>
+
+<li><strong>RPC</strong>：你的应用程序一定会有微服务的概念，而且系统之间肯定也会存在 RPC 调用。那么，在调用时就肯定会涉及消费者和提供者。你就可以分别记录消费者和提供者的调用次数、成功率、耗时等信息。
+
+为什么要分别记录？以成功率来说，消费者一般会有超时设置。假设超时设置是 2 秒，提供者第 3 秒才返回数据，它认为自己成功了，但消费者可能早将其认定为超时。所以我们在统计数据时，消费者的成功率是更能提现执行情况的，提供者的数据则更多的是参考。</li>
+
+<li><strong>熔断限流降级</strong>：熔断、限流、降级在高流量的时代也是一个必不可少的内容，比如阿里的 Sentinel，Netflix 的 Hystrix。我们一般都是基于 RPC 或者其他资源的使用情况，来设置相应的阈值进行限流或者熔断的。熔断/限流/降级的次数、阈值，其实也是一个很好的观测指标，我们可以通过这些指标，更清楚地了解阈值是否正确、触发后的处理是否正确，等等。</li>
+
+<li><strong>数据源</strong>：你的系统肯定会涉及各种各样的第三方数据源，比如最经常使用的 MySQL、ElasticSearch、MongoDB。在这里，我们会更加关注与这些系统交互时的执行耗时、调用频次。如果你在和数据库操作时，出现耗时较高的情况，就代表业务逻辑也出现了问题。</li>
+
+<li><strong>自定义业务指标</strong>：以上所介绍的这些固有指标早已不能满足我们对指标的要求，因此我们经常会自定义业务指标，以便能更细化地了解系统。在“07课时”中我会对这部分内容进行讲解。</li>
+
+</ol>
+
+<h4>组件协作资源</h4>
+
+<p>我们的应用程序会和各种的第三方框架进行资源利用，对于它们的资源利用的效率，很大程度上决定了应用的执行效率。我将资源分为 5 大类，分别是 RPC、数据库、队列、缓存和请求，再一一介绍每种资源中常见的指标。</p>
+
+<ol>
+
+<li><strong>RPC</strong>：和数据处理中提到的 RPC 类似，组件协作资源中的 RPC 一样会涉及资源利用。以国内使用最多的 Dubbo 为例，Dubbo 的每一次发送请求和接收请求，都是利用线程池完成的。在使用 Dubbo 的时候，你可以通过监控线程池的资源信息掌握系统运行的状态，这其中的指标有总计的<strong>线程数</strong>、<strong>活跃线程数</strong>等。</li>
+
+</ol>
+
+<p>我在工作中就遇到过这样的情况：因为一个 Dubbo 接口耗时较长，线程池也没有做到很好的隔离，导致当前服务的资源完全处于等待状态，没有线程可以去处理其他的业务请求，造成了线上的故障。</p>
+
+<ol>
+
+<li><strong>数据库</strong>：业务系统与数据库之间的交互一般会有专门的 TCP 链接资源保持并处理，每个数据库都有各自的数据协议。因此，我们通常将链接池化，以提高资源使用效率，不浪费资源。并监控<strong>活跃数</strong>、<strong>闲置数</strong>和<strong>总共的资源数</strong>。当资源缺少时，我们需要注意，是否是配置不足导致的资源减少。</li>
+
+<li><strong>队列</strong>：对于<strong>异步</strong>和<strong>大量需要处理的任务</strong>，我们通常会使用队列，以起到<strong>削峰</strong>的作用。所以我们也会监控任务的<strong>发送量</strong>、<strong>处理量</strong>、<strong>Lag 值</strong>、<strong>处理耗时</strong>，确保不会出现大面积的延迟进而影响业务处理的情况。</li>
+
+<li><strong>缓存</strong>：缓存框架也经常会在系统中使用，正确使用它可以减少部分数据库查询的压力，从而提升我们接口的响应性能，比如拉勾教育中就会经常用 Redis 作为部分数据的查询缓存。在缓存中，我们通常会更加关注命中率、内存使用率、数据量等指标。尤其是命中率，命中率越高表明接口性能越高，而接口性能可以缩短响应耗时。</li>
+
+<li><strong>请求</strong>：系统经常会依赖于其他需要进行 HTTP 请求等方式的第三方服务，像微信的创建订单，就需要通过 HTTP 的请求，创建订单后再返回数据。在这里同样要监控其请求数、耗时情况等指标。虽然这是个常见的现象，但在与第三方服务通信的时候，我们一定要做好熔断降级策略，最好不要因为第三方服务的不稳定导致自己业务的主流程受到阻碍。</li>
+
+</ol>
+
+<h4>VM 监控</h4>
+
+<p>我们的 Java 程序一般运行在 JVM 上，JVM 我想你一定不陌生。在 JVM 上也有很多的指标，其中有几个是需要我们关注的：</p>
+
+<ol>
+
+<li><strong>GC</strong>：GC 我想应该是不用特别说明的，我们通常会收集 GC 的次数、每次 GC 时收集了多大的内存空间数据。</li>
+
+<li><strong>内存</strong>：内存可以分为年轻代、老年代、堆外、Meta 区这 4 个部分。如果老年代长期占有率较高，则有可能存在内存泄漏的问题。我们可以分别观测上面 4 个部分的当前值和最大值，来了解内存的使用量。</li>
+
+<li><strong>CPU 占用率</strong>：这里指的是进程启动时 CPU 占用率，通过这个值我们可以看出这个应用是否会频繁地使用 CPU。出现问题时，如果 CPU 占用率居高不下，可能它并不是问题的根源，而仅仅是任务处理不过来。</li>
+
+<li><strong>类加载</strong>：程序启动后，一定会进行一定类的加载和卸载。监控当前总共的类加载和类卸载的数量，也是很好地观察问题的方式。如果持续出现大量的类被加载的情况，有可能是使用动态代码生成框架时出现了问题。大量的类被加载会不停地占用 Meta 区，最终导致堆溢出。</li>
+
+<li><strong>线程</strong>：线程数据也是必不可少的观察指标之一。程序代码都是运行在线程上的，如果当前活跃的线程数过多，会使 CPU 资源过高，最终因为资源占用问题，导致任务执行缓慢。我们一般会监控线程中的活跃线程数、总计线程数、等待线程数等指标。</li>
+
+</ol>
+
+<h3>结语</h3>
+
+<p>相信你通过我对端上访问和应用程序中常见指标的讲解，对这 2 个部分有了一个深入的认识。你觉得还有哪些在应用程序中常见的指标呢？欢迎在留言区分享你的想法。</p>
+
+<p>下一课时我会讲解本课时没有提到的监控内容，组件和机器信息。希望通过下一课时的讲解，能让你对监控指标有一个完整且系统的了解，使你能通过指标来分析系统可能存在的问题。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/分布式链路追踪实战-完/04  统计指标：“五个九”对系统稳定的真正意义.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/分布式链路追踪实战-完/06  监控指标：如何通过分析数据快速定位系统隐患？（下）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099771c6d3c3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

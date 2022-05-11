@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>14 消息消费积压问题排查实战.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/01 搭建学习环境准备篇.md">01 搭建学习环境准备篇.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/02 RocketMQ 核心概念扫盲篇.md">02 RocketMQ 核心概念扫盲篇.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/03 消息发送 API 详解与版本变迁说明.md">03 消息发送 API 详解与版本变迁说明.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/04 结合实际应用场景谈消息发送.md">04 结合实际应用场景谈消息发送.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/05 消息发送核心参数与工作原理详解.md">05 消息发送核心参数与工作原理详解.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/06 消息发送常见错误与解决方案.md">06 消息发送常见错误与解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/07 事务消息使用及方案选型思考.md">07 事务消息使用及方案选型思考.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/08 消息消费 API 与版本变迁说明.md">08 消息消费 API 与版本变迁说明.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/09 DefaultMQPushConsumer 核心参数与工作原理.md">09 DefaultMQPushConsumer 核心参数与工作原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/10 DefaultMQPushConsumer 使用示例与注意事项.md">10 DefaultMQPushConsumer 使用示例与注意事项.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/11 DefaultLitePullConsumer 核心参数与实战.md">11 DefaultLitePullConsumer 核心参数与实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/12 结合实际场景再聊 DefaultLitePullConsumer 的使用.md">12 结合实际场景再聊 DefaultLitePullConsumer 的使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/13 结合实际场景顺序消费、消息过滤实战.md">13 结合实际场景顺序消费、消息过滤实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/RocketMQ 实战与进阶（完）/14 消息消费积压问题排查实战.md">14 消息消费积压问题排查实战.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/15 RocketMQ 常用命令实战.md">15 RocketMQ 常用命令实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/16 RocketMQ 集群性能摸高.md">16 RocketMQ 集群性能摸高.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/17 RocketMQ 集群性能调优.md">17 RocketMQ 集群性能调优.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/18 RocketMQ 集群平滑运维.md">18 RocketMQ 集群平滑运维.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/19 RocketMQ 集群监控（一）.md">19 RocketMQ 集群监控（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/20 RocketMQ 集群监控（二）.md">20 RocketMQ 集群监控（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/21 RocketMQ 集群告警.md">21 RocketMQ 集群告警.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/22 RocketMQ 集群踩坑记.md">22 RocketMQ 集群踩坑记.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/23 消息轨迹、ACL 与多副本搭建.md">23 消息轨迹、ACL 与多副本搭建.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/24 RocketMQ-Console 常用页面指标获取逻辑.md">24 RocketMQ-Console 常用页面指标获取逻辑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/25 RocketMQ Nameserver 背后的设计理念.md">25 RocketMQ Nameserver 背后的设计理念.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/26 Java 并发编程实战.md">26 Java 并发编程实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/27 从 RocketMQ 学基于文件的编程模式（一）.md">27 从 RocketMQ 学基于文件的编程模式（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/28 从 RocketMQ 学基于文件的编程模式（二）.md">28 从 RocketMQ 学基于文件的编程模式（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/29 从 RocketMQ 学 Netty 网络编程技巧.md">29 从 RocketMQ 学 Netty 网络编程技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/30 RocketMQ 学习方法之我见.md">30 RocketMQ 学习方法之我见.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>14 消息消费积压问题排查实战</h1>
+
+<h3>问题描述</h3>
+
+<p>在 RocketMQ 消息消费方面一个最常见的问题是消息积压，其现象如下图所示：</p>
+
+<p><img src="assets/20200823230858465.png" alt="1" /></p>
+
+<p>所谓的消息积压：就是 Broker 端当前队列有效数据最大的偏移量（brokerOffset）与消息消费端的当前处理进度（consumerOffset）之间的差值，即表示当前需要消费但没有消费的消息。</p>
+
+<h3>问题分析与解决方案</h3>
+
+<p>项目组遇到消息积压问题通常第一时间都会怀疑是 RocketMQ Broker 的问题，会第一时间联系到消息中间件的负责，消息中间件负责人当然会首先排查 Broker 端的异常，但根据笔者的境遇，此种情况通常是消费端的问题，反而是消息发送遇到的问题更有可能是 Broker 端的问题，当然笔者也有方法进行举证，服务端的诊断方法稍后会给出，这里基本可以采用类比法，因为一个 Topic 通常会被多个消费端订阅，我们只要看看其他消费组是否也积压，例如如下图所示：</p>
+
+<p><img src="assets/20200823230907422.png" alt="2" /></p>
+
+<p>从上图看出，两个不同的消费组订阅了同一个 Topic，一个出现消息积压，一个却消费正常，从这里就可以将分析的重点定位到具体项目组。那如何具体分析这个问题呢？</p>
+
+<p>要能更好的掌握问题分析的切入点，在这里我想再重复介绍一下 RocketMQ 消息拉取模型与消息消费进度提交机制。消息的拉取模型如下图所示：</p>
+
+<p><img src="assets/20200823230917368.png" alt="3" /></p>
+
+<p>在 RocketMQ 中每一客户端会单独创建一个线程 PullMessageService 会循环从 Broker 拉取一批消息，然后提交到消费端的线程池中进行消费，线程池中的线程消费完一条消息后会上服务端上报当前消费端的消费进度，而且在提交消费进度时是提交当前处理队列中消息消费偏移量最小的消息作为消费组的进度，即如果消息偏移量为 100 的消息，如果由于某种原因迟迟没有消费成功，那该消费组的进度则无法向前推进，久而久之，Broker 端的消息偏移量就会远远大于消费组当前消费的进度，从而造成消息积压现象。</p>
+
+<p>故遇到这种情况，通常应该去查看消费端线程池中线程的状态，故可以通过如下命令获取应用程序的线程栈。</p>
+
+<p><img src="assets/20200823230926360.png" alt="4" /></p>
+
+<p>即可通过 <code>jps -m</code> 或者 <code>ps -ef | grep java</code> 命令获取当前正在运行的 Java 程序，通过启动主类即可获得应用的进程 id，然后可以通过 <code>jstack pid &gt; j.log</code> 命令获取线程的堆栈，在这里我建议大家连续运行 5 次该命令，分别获取 5 个线程堆栈文件，主要用于对比线程的状态是否在向前推进。</p>
+
+<p>通过 jstack 获取堆栈信息后，可以重点搜索 ConsumeMessageThread_ 开头的线程状态，例如下图所示：</p>
+
+<p><img src="assets/2020082323094335.png" alt="5" /></p>
+
+<p>状态为 RUNABLE 的消费端线程正在等待网络读取，我们再去其他文件看该线程的状态，如果其状态一直是 RUNNABLE，表示线程一直在等待网络读取，及线程一直“阻塞”在网络读取上，一旦阻塞，那该线程正在处理的消息就一直处于消费中，消息消费进度就会卡在这里，不会继续向前推进，久而久之，就会出现消息积压情况。</p>
+
+<p>从调用线程栈就可以找到阻塞的具体方法，从这里看出是在调用一个 HTTP 请求，跟踪到代码，截图如下：</p>
+
+<p><img src="assets/20200823230951248.png" alt="6" /></p>
+
+<p>定位到代码后再定位问题就比较简单的，通常的网络调用需要设置超时时间，这里由于没有设置超时时间，导致一直在等待对端的返回，从而消息消费进度无法向前推进，解决方案：设置超时时间。</p>
+
+<p>通常会造成线程阻塞的场景如下：</p>
+
+<ul>
+
+<li>HTTP 请求未设置超时时间</li>
+
+<li>数据库查询慢查询导致查询时间过长，一条消息消费延时过高</li>
+
+</ul>
+
+<h3>线程栈分析经验</h3>
+
+<p>网上说分析线程栈，一般盯着 WAIT、Block、TIMEOUT_WAIT 等状态，其实不然，处于 RUNNABLE 状态的线程也不能忽略，因为 MySQL 的读写、HTTP 请求等网络读写，即在等待对端网络的返回数据时线程的状态是 RUNNABLE，并不是所谓的 BLOCK 状态。</p>
+
+<p>如果处于下图所示的线程栈中的线程数量越多，说明消息消费端的处理能力很好，反而是拉取消息的速度跟不上消息消费的速度。</p>
+
+<p><img src="assets/20200823230959857.png" alt="7" /></p>
+
+<h3>RocketMQ 消费端限流机制</h3>
+
+<p>RocketMQ 消息消费端会从 3 个维度进行限流：</p>
+
+<ol>
+
+<li>消息消费端队列中积压的消息超过 1000 条</li>
+
+<li>消息处理队列中尽管积压没有超过 1000 条，但最大偏移量与最小偏移量的差值超过 2000</li>
+
+<li>消息处理队列中积压的消息总大小超过 100M</li>
+
+</ol>
+
+<p>为了方便理解上述三条规则的设计理念，我们首先来看一下消费端的数据结构，如下图所示：</p>
+
+<p><img src="assets/20200823231007700.png" alt="8" /></p>
+
+<p>PullMessageService 线程会按照队列向 Broker 拉取一批消息，然后会存入到 ProcessQueue 队列中，即所谓的处理队列，然后再提交到消费端线程池中进行消息消费，消息消费完成后会将对应的消息从 ProcessQueue 中移除，然后向 Broker 端提交消费进度，提交的消费偏移量为 ProceeQueue 中的最小偏移量。</p>
+
+<p><strong>规则一：消息消费端队列中积压的消息超过 1000 条值的就是 ProcessQueue 中存在的消息条数超过指定值</strong>，默认为 1000 条，就触发限流，限流的具体做法就是暂停向 Broker 拉取该队列中的消息，但并不会阻止其他队列的消息拉取。例如如果 q0 中积压的消息超过 1000 条，但 q1 中积压的消息不足 1000，那 q1 队列中的消息会继续消费。其目的就是担心积压的消息太多，如果再继续拉取，会造成内存溢出。</p>
+
+<p><strong>规则二：消息在 ProcessQueue 中实际上维护的是一个 TreeMap</strong>，key 为消息的偏移量、vlaue 为消息对象，由于 TreeMap 本身是排序的，故很容易得出最大偏移量与最小偏移量的差值，即有可能存在处理队列中其实就只有 3 条消息，但偏移量确超过了 2000，例如如下图所示：</p>
+
+<p><img src="assets/20200823231015957.png" alt="9" /></p>
+
+<p>出现这种情况也是非常有可能的，其主要原因就是消费偏移量为 100 的这个线程由于某种情况卡主了（“阻塞”了），其他消息却能正常消费，这种情况虽然不会造成内存溢出，但大概率会造成大量消息重复消费，究其原因与消息消费进度的提交机制有关，在 RocketMQ 中，例如消息偏移量为 2001 的消息消费成功后，向服务端汇报消费进度时并不是报告 2001，而是取处理队列中最小偏移量 100，这样虽然消息一直在处理，但消息消费进度始终无法向前推进，试想一下如果此时最大的消息偏移量为 1000，项目组发现出现了消息积压，然后重启消费端，那消息就会从 100 开始重新消费，会造成大量消息重复消费，RocketMQ 为了避免出现大量消息重复消费，故对此种情况会对其进行限制，超过 2000 就不再拉取消息了。</p>
+
+<p><strong>规则三：消息处理队列中积压的消息总大小超过 100M。</strong></p>
+
+<p>这个就更加直接了，不仅从消息数量考虑，再结合从消息体大小考虑，处理队列中消息总大小超过 100M 进行限流，这个显而易见就是为了避免内存溢出。</p>
+
+<p>在了解了 RocketMQ 消息限流规则后，会在 rocketmq_client.log 中输出相关的限流日志，具体搜索“so do flow control”，详细如下图所示：</p>
+
+<p><img src="assets/20200823231023286.png" alt="10" /></p>
+
+<h3>RocketMQ 服务端性能自查技巧</h3>
+
+<p>那如何证明 RocketMQ 集群本身没有问题呢？其实也很简单，我们通常一个常用的技巧是查看 RocketMQ 消息写入的性能，执行如下命令：</p>
+
+<pre><code>cd ~/logs/rocketmqlogs/
+
+grep 'PAGECACHERT' store.log  | more
+
+
+
+</code></pre>
+
+<p>其输出的结果如下图所示：</p>
+
+<p><img src="assets/20200823231034976.png" alt="11" /></p>
+
+<p>在 RocketMQ Broker 中会每隔 1 分钟打印出上一分钟消息写入的耗时分布，例如 [&lt;=0ms] 表示在这一秒钟写入消息在 Broker 端的延时小鱼 0ms 的消息条数，其他的依次类推，通常在 100~200ms 在上万次消息发送中也不会出现 1 次。从这里基本能看出 Broker 端写入的压力。</p>
+
+<h3>小结</h3>
+
+<p>本节首先从消息积压的现象说起，然后分析问题、解决问题，最后再加以一些原理上的补充，尽量避免知其然而不知其所以然。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/RocketMQ 实战与进阶（完）/13 结合实际场景顺序消费、消息过滤实战.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/RocketMQ 实战与进阶（完）/15 RocketMQ 常用命令实战.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709974301cb23d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

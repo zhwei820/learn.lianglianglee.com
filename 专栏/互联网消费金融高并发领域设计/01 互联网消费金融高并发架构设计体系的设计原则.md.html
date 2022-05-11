@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>01 互联网消费金融高并发架构设计体系的设计原则.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/互联网消费金融高并发领域设计/01 互联网消费金融高并发架构设计体系的设计原则.md">01 互联网消费金融高并发架构设计体系的设计原则.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/02 打造互联网消金高并发架构八大中间件运用.md">02 打造互联网消金高并发架构八大中间件运用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/03 互联网金融高并发架构微服务治理方案实践.md">03 互联网金融高并发架构微服务治理方案实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/04 构建高并发互联网消费金融体系的领域规划设计.md">04 构建高并发互联网消费金融体系的领域规划设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/05 互联网消费金融高并发场景下监控体系建设.md">05 互联网消费金融高并发场景下监控体系建设.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>01 互联网消费金融高并发架构设计体系的设计原则</h1>
+
+<h1>互联网消费金融架构的特性</h1>
+
+<p>近年来互联网金融蓬勃发展，在借贷、保险、股权等领域涌现出一大批互联网与金融场景相结合的创新产品。同时作为互联网金融的子领域消费金融领域，在国家消费升级战略下，各大平台推出了如花呗、借呗，微粒贷等众多服务。</p>
+
+<blockquote>
+
+<p>根据第三方机构预统计，自2016年-2019年，我国零售信贷规模维持20%以上的高复合增长率，2017年中国零售信贷规模达到27万亿，到2019年，总规模超过37万亿。</p>
+
+</blockquote>
+
+<p><img src="assets/fa0cf2820fa6571be26f8482585dff9e.png" alt="img" /></p>
+
+<p>互联网金融的架构有别于传统金融系统，互联网金融产品依托于互联网的众多技术特性，主要包括三大主要方面：</p>
+
+<p>1）互联网高并发软件平台化特性
+
+2）基于大数据的场景的智能化风控体系
+
+3）基于高弹性的云计算基础设施建设</p>
+
+<blockquote>
+
+<p>在互联网浪潮的背景下，传统银行、金融行业也有着转型的诉求，并在股权、借贷、保险等方面都需要创新。有些是业务从线下转线上，有些是金融零售化转型。随着互联网金融业务的爆发增长，建设一个高并发、高可用、高弹性的互金平台是每个金融从业的IT技术人员面临的挑战。</p>
+
+</blockquote>
+
+<h2>互联网消费金融高并发架构面临的挑战</h2>
+
+<p>在传统金融的领域里，架构的特点往往是保守的，除了技术相对陈旧以外，更多是要求系统更高的稳定性，低风险，低维护等。
+
+<img src="assets/9026e9e5559df0186b1368af5a5dd9b4.png" alt="img" /></p>
+
+<p>银行、金融机构在面对互联网化的高速业务发展，往往会陷入技术与基础建设的泥潭，一方面在软件平台建设时银行、金融传统系统的高可用、低风险、低风险特性与互联网产品的高并发、高性能、高扩展/高弹性存在一定的冲突，另一方面在基础设施建设方面，相比互联网的云计算平台，存在天然的先天不足。</p>
+
+<p>所以，我们的架构设计，需要结合两者的特性，综合考虑，既要兼顾传统金融行业的特性，又要承载互联网高并发高弹性等特性，这样使我们面临到巨大的挑战：</p>
+
+<p>1）对于架构师来说，前期的技术架构设计和领域规划，需要同时具备对传统金融领域知识和互联网高并发架构的双重能力；</p>
+
+<p>2）对于研发、测试、运维人员来说，系统的复杂度成倍的增长，微服务拆分后，系统研发、测试、运维难度大大增加；</p>
+
+<p>3）当出现线上问题时，排查问题和分析错误，也变得复杂，需要依赖庞大的监控体系和log分析工具。</p>
+
+<blockquote>
+
+<p>如何在构建一个高并发互联网架构的基础上，同时兼顾金融行业的特性，让金融IT技术从业者面临着巨大的挑战。而且金融行业的高安全、银保监会监管合规方面的要求，也让高并发的互联网架构在实施起来步履蹒跚。</p>
+
+</blockquote>
+
+<h2>高并发场景下的安全设计</h2>
+
+<p><strong>互联网金融的安全要求</strong></p>
+
+<p>金融行业的安全性要求，是架构设计时不可忽视的问题。总的来说，包括以下四个方面：
+
+1）数据安全：</p>
+
+<ul>
+
+<li>数据不丢失</li>
+
+<li>数据加密</li>
+
+<li>数据准确性</li>
+
+</ul>
+
+<p>2）物理安全：</p>
+
+<ul>
+
+<li>物理机的隔离规划</li>
+
+<li>重要的交易服务与普通服务的网络隔离</li>
+
+</ul>
+
+<p>3）网络安全</p>
+
+<ul>
+
+<li>网络加密</li>
+
+<li>防火墙的建设等</li>
+
+</ul>
+
+<p>4）业务安全</p>
+
+<ul>
+
+<li>反欺诈</li>
+
+<li>防恶意操作</li>
+
+<li>交易过程防篡改</li>
+
+</ul>
+
+<p><strong>互联网金融高并发场景下的条件竞争安全设计</strong></p>
+
+<p>在互联网金融的高并发场景下，涉及到资金方面安全的问题尤为重要。服务端在做并发编程时，往往需要考虑到竞争条件的情况。在多个并发线程同时访问同一资源时，由于对请求的处理不是原子性的，无法预测调度的顺序，就可能由于时间序列上的冲突而造成对共享资源的操作混乱。</p>
+
+<p><strong>条件竞争安全漏洞危害</strong></p>
+
+<p>通过高并发操作触及程序处理临界区，绕过程序线性执行顺序，使原有的逻辑限制失效。经典场景有：</p>
+
+<ol>
+
+<li>超额取款，提现</li>
+
+<li>重复兑换积分</li>
+
+<li>多次领取优惠券</li>
+
+<li>使用相同优惠券、积分多次下单等</li>
+
+<li></li>
+
+</ol>
+
+<p><img src="assets/e9b960529b4cdf99d66f9743887db1e2.png" alt="img" /></p>
+
+<p><img src="assets/2ff088db90b76e50c080190602c7a28d.png" alt="img" /></p>
+
+<p><strong>条件竞争安全漏洞解决方案</strong></p>
+
+<ol>
+
+<li>在程序处理时使用时序队列</li>
+
+<li>在更新数据库数据时使用数据库锁（乐观锁）</li>
+
+<li>针对数据库使用分布式锁</li>
+
+</ol>
+
+<h2>互联网金融的合规性的设计原则</h2>
+
+<p><strong>合规、监管要求</strong>
+
+在对互联网金融项目建设时，根据金融行业特性，必须在建设范围进行法律、法规的研讨和设计，确定要关注及合规部门银保监会的监控要求限制。</p>
+
+<p>对于新的业务流程或不确定的业务规则，必须通过银行合规、法律部门等会签通过，确保系统遵循合规条件。法律法规的参考相关地址：</p>
+
+<p>1）. 中国政府政策网页http://www.gov.cn/zhengce/zhengcewenjianku/index.htm
+
+2）. 中华人民共和国公安部政策https://www.mps.gov.cn/n6557558/index.html
+
+3）. 中华人民共和国国家知识产权局法规http://www.sipo.gov.cn/zcfg/index.htm
+
+4）. 中国银行保险监督管理委员会http://www.cbirc.gov.cn/cn/view/pages/index/index.html</p>
+
+<h1>高并发消费金融架构重点指标的核心设计理念</h1>
+
+<p>在构建一个高并发金融架构时，我们往往会考虑很多因素，从系统平台建设的角度来讲，会优先关注以下重点指标的建设：</p>
+
+<p>1）高可用
+
+2）高并发
+
+3）高性能
+
+4）高弹性</p>
+
+<h2>互联网金融高可用设计原则</h2>
+
+<p>对于互联网金融架构系统来说，涉及到以资金交易为核心的业务领域，最重要的指标是高可用。</p>
+
+<p>高可用HA（High Availability）是分布式架构设计中必须考虑的因素之一，它通常的是指，通过设计减少系统不能提供服务的时间。</p>
+
+<p><strong>高可用的指标</strong>
+
+我们通常会形容高可用如：</p>
+
+<ul>
+
+<li>不能“挂”</li>
+
+<li>可用性99.99%四个九</li>
+
+<li>一年故障时长0.876小时</li>
+
+<li>平均响应时间&lt;10ms，95线&lt;50ms</li>
+
+<li>全年数据故障不超过5次</li>
+
+<li>全年系统100%可用</li>
+
+</ul>
+
+<p><strong>如何保证高可用</strong></p>
+
+<p>保障系统的高可用，有两大架构设计的原则：</p>
+
+<ul>
+
+<li>多副本设计：</li>
+
+</ul>
+
+<p>避免单点问题，对各个系统特别是涉及到交易、账务的核心系统进行多副本设计，对数据库进行多库备份和读写分离。如果有了多副本，在某个单点出问题时，副本可以发挥作用。架构设计以“集群化”的方式，保障架构的高可用。</p>
+
+<ul>
+
+<li>自动故障转移：</li>
+
+</ul>
+
+<p>在有了多副本的建设的前提下，前面已经说到，互联网金融的架构体系相比传统系统复杂度高，所以在系统出问题时，我们必须引入故障自动转移机制，避免手工和人工的干预，能够高效率的自动化的切换至副本服务或数据库。</p>
+
+<p><img src="assets/4037f52d45cf59f86ee792676a35c81a.png" alt="img" /></p>
+
+<p><strong>高可用服务网关建设</strong>
+
+互联网金融的网关的建设，有以下好处：</p>
+
+<ol>
+
+<li>对金融安全性方面把关，涉及到数据的加解密工作和身份认证鉴权工作；</li>
+
+<li>对流量进行管控和切换，保障核心系统始终处于可用状态，对异常节点进行剔除；</li>
+
+<li>限流降级异常流量拦截，保护核心系统。</li>
+
+</ol>
+
+<p><img src="assets/943f7d6d8efae6079ee967402b82c064.png" alt="img" /></p>
+
+<p><strong>高可用数据库设计</strong>
+
+在金融行业，数据的重要性不言而喻，为保障数据库的高可用，我们一般有：</p>
+
+<ol>
+
+<li>读写分离设计；</li>
+
+<li>主备库设计；</li>
+
+<li>使用分布式数据库服务等。</li>
+
+</ol>
+
+<p><img src="assets/5ff9ed0b8f9a3301cb449194a43101a5.png" alt="img" /></p>
+
+<blockquote>
+
+<p>提到数据库的多副本设计，如读写分离和主备库设计，这就涉及到数据同步的问题了。同步的方式有很多，现在很多云服务厂商也提供了很多配套工具，进过封装之后的服务，可以傻瓜式的上手。
+
+对于自建的服务来说，我们常常会考虑通过MQ（如RocketMQ）进行异步同步，或者解析MYSQL的binlog等方式进行数据同步。</p>
+
+</blockquote>
+
+<h2>互联网金融高并发设计</h2>
+
+<p>互联网金融的场景下，在高可用的基础上，对于高并发的要求是必不可少的。为满足日益剧增的用户增长和交易量，往往需要在架构设计时，考虑高并发的特性。</p>
+
+<p><strong>高并发的指标</strong></p>
+
+<p>我们通常会通过很多方式来衡量说明一个高并发系统的架构设计，如：</p>
+
+<ol>
+
+<li>通过设计来保证系统能够同时处理很多的事情，比如亿级并发支付交易，百万级并发保单下单等</li>
+
+<li>低响应时间：系统对请求作出的响应时间维持在一个较低的水平，通常不超过3秒。例如系统处理一个HTTP请求需要200ms，这个200ms就是系统响应时间。</li>
+
+<li>高吞吐量：单位时间内处理的请求量。</li>
+
+<li>QPS：每秒响应请求数。在互联网领域，这个指标和吞吐量区分的没那么明显。</li>
+
+<li>TPS：每秒处理的事务数。</li>
+
+<li>并发用户数：同时承载正常使用系统功能的用户数量。例如一个即时通讯系统，同时在线量一定程度上代表了系统的并发用户数。</li>
+
+</ol>
+
+<p><strong>如何提升系统的并发能力</strong></p>
+
+<p><strong>1） 提升系统的单机处理能力</strong></p>
+
+<p>垂直扩展的方式有两种：</p>
+
+<p>增强单机硬件性能，例如：增加CPU的核数，由8核扩展到16核；升级更好的网卡，由千兆网卡升级到万兆网卡；升级更好的硬盘，如SSD；扩展硬盘的容量，如由500G升级到10T；扩展系统内存，如由16G升级到64G等。</p>
+
+<p>提升单机的架构性能，例如：引入缓存机制Redis来减少IO次数；引入消息队列机制，来削峰填谷，用异步处理来增加单服务的吞吐量；用轻量级架构来减少服务的处理时间等。</p>
+
+<p><img src="assets/34fa3388a3f865bd63e396851e54bf3d.png" alt="img" /></p>
+
+<p><strong>2）提升系统的横向扩展能力</strong></p>
+
+<p>系统单机的处理能力总是有极限的，我们可以通过增加服务器数量的方式，来线性扩充系统的性能。</p>
+
+<p><img src="assets/f8133ff2fef9ea0a085c16e4de0cdc5e.png" alt="img" /></p>
+
+<h2>互联网金融高性能设计</h2>
+
+<p>在互联网金融分布式架构中，高性能是一项涉及众多方面因素的系统工程，并不是单一高新技术和设备的简单应用或堆叠，应该进行合理的规划与优化设计，以适合用户在性能、成本等方面对系统建设的综合需求。</p>
+
+<p><strong>高性能的指标</strong></p>
+
+<p>高性能的指标通常有：</p>
+
+<p>1）通过合理的架构设计，实现互联网金融系统高吞吐、低延时（相对时间）。
+
+2）可用性指标计算：平均相应时间、95线的响应时间、99线的响应时间。</p>
+
+<p><strong>如何提升系统的性能</strong>
+
+互联网金融系统，涉及到各方面的性能问题，如：系统软件平台服务的性能，网络和硬件的性能，数据库及存储的性能等。</p>
+
+<p><strong>1）微服务化设计</strong></p>
+
+<p>将对庞大金融服务进行领域规划，将臃肿的系统进行拆分解耦，将每一个模块进行解耦，把每个服务都尽可能做成无状态化，每个独立模块均可以作为一个微服务，这样每个微服务的关联性都比较小，每一个微服务都可能做到最大化的性能。</p>
+
+<blockquote>
+
+<p>备注：微服务技术和消费金融领域的规划，我们会在后面的章节再独立介绍。</p>
+
+</blockquote>
+
+<p><img src="assets/986825d4dd7c21ea9e92f5ab29b3b8bf.png" alt="img" /></p>
+
+<p><strong>2）CDN加速技术</strong></p>
+
+<p>互联网消费金融的产品，涉及到众多前端，使用CDN缓存技术，能大大提升用户的产品体验。</p>
+
+<p>CND加速将网站的内容缓存在网络边缘（离用户接入网络最近的地方），然后在用户访问网站内容的时候，通过调度系统将用户的请求路由或者引导到离用户接入网络最近或者访问效果最佳的缓存服务器上，由该缓存服务器为用户提供内容服务；相对于直接访问源站，这种方式缩短了用户和内容之间的网络距离，从而达到加速的效果。</p>
+
+<p><strong>3）网络与硬件性能</strong></p>
+
+<p>带宽性能：足够的带宽应该满足在网站峰值的情况还能足够快速的使用，所以网络带宽应该大于峰值流量=峰值QPS * 平均请求大小。只有在保证带宽的情况才能实现高性能服务。</p>
+
+<p>服务器性能：服务器性能主要从CPU、内存和磁盘三个方面来考虑，CPU核心数量尽量多点，内存大小最好大一点，利用到磁盘存储的话SSD会优于机械磁盘。</p>
+
+<p>硬件负载均衡设备对于有条件的团队可以采购硬件负载均衡设备，加强后台服务负载均衡的能力，比如F5。</p>
+
+<p><strong>4）分布式缓存</strong></p>
+
+<p>在互联网金融的高并发场景，引入缓存能够大大提升系统性能，减少数据库IO请求，从而降低核心数据库的并发压力。</p>
+
+<blockquote>
+
+<p>一般来说，在系统横向扩展能力足够强的情况下，高并发的压力会打到数据库，所以分布式缓存的建设对于互联网消费金融产品架构设计来说非常重要。</p>
+
+</blockquote>
+
+<p>缓存的本质是通过Key-Value形式的Hash表提升读写速度，一般情况是O（1）的读写速度。读量比较高，变化量不大的数据比较适合使用缓存。目前比较常用的分布式缓存技术有Redis，Memcache等。缓存这块的中间件建设，后面的章节会在细化讲解。</p>
+
+<p><strong>5）操作异步化设计</strong></p>
+
+<p>目前在大型的互联网消费金融系统架构设计中，普遍会考虑用消息队列来讲调用异步化，不仅可以提升系统的性能，还可以提升系统的扩展性。</p>
+
+<p>对于大量的数据库写请求，数据库的压力很大，同时也会造成数据库的响应不及时。可以引入使用消息队列机制，数据库的写请求可以直接写入到消息队列，然后通过多线程或者多进程从消息队列读取数据慢慢写入到数据库。消息队列服务器的处理速度会远远快于数据库，所以用户在写入操作时会感觉到很快写入速度。</p>
+
+<p><strong>6）代码的优化</strong></p>
+
+<p>对于IO操作的请求可以采用基于状态机的异步化编程。如：</p>
+
+<blockquote>
+
+<p>多线程模型
+
+多进程模型
+
+多协作模型
+
+事件驱动模型</p>
+
+</blockquote>
+
+<p>处理算法的模型优化（时间复杂度和空间复杂度），对于数据结构的设计可以采用高效的数据结构，比如典型的key-value缓存系统就是基于hash的基本原理来实现的，hash表的查询效率是O（1），效率极快。</p>
+
+<p><strong>7）高性能的本地存储设计</strong></p>
+
+<p>提供更高的存储硬件，更高的吞吐量和IPOS，读写性能。合理的数据连接池和缓存。</p>
+
+<p><strong>8）数据分片设计</strong></p>
+
+<p>在互联网消费金融领域，涉及到很多账务数据的处理，引入分片技术能大大提升数据处理的性能。</p>
+
+<blockquote>
+
+<p>比如：借贷业务涉及到的借据数据、财务数据的夜间批量处理时，利用分片技术进行处理，提供了更高的扩展性，提升了整体的性能。</p>
+
+</blockquote>
+
+<p><img src="assets/6afd8649570a56c2c6b333e0e824d82f.png" alt="img" /></p>
+
+<h2>互联网消费金融高弹性架构设计</h2>
+
+<p><strong>高弹性架构设计原则</strong>
+
+互联网消费金融行业的架构设计中，高弹性涉及到众多技术面。主要有：</p>
+
+<blockquote>
+
+<p>分布式高弹性架构
+
+中间件平台高弹性支撑体系设计
+
+分布式高弹性数据库建设
+
+云计算基础设施架构</p>
+
+</blockquote>
+
+<p><strong>高弹性架构实践</strong></p>
+
+<p><strong>1）单元化的拆分，让应用系统具备独立弹性能力</strong></p>
+
+<p>互联网消费金融架构设计时，考虑到的拆分涉及到两方面：</p>
+
+<p>一是系统拆分，根据业务领域设计，把系统拆分解耦，让系统的颗粒度细化，模块化，微服务化。</p>
+
+<p>二是数据拆分，对数据分而治之，减少单点数据故障的同时，又可以让每个数据模块具备高弹性能力。</p>
+
+<p><img src="assets/c83d5d9b087093c0d6c0b630ea197e5a.png" alt="img" /></p>
+
+<p><strong>2）同城双活、异地多活建设，提高系统伸缩弹性</strong></p>
+
+<p>在互联网金融行业，数据和服务的重要程度都非常高，通常会通过建设同城双活、异地多活的架构，来提升系统的容错和伸缩能力。</p>
+
+<p><img src="assets/8f043fc57f1a783ee4727a45bb660ae8.png" alt="img" /></p>
+
+<h2>互联网消费金融高可测设计</h2>
+
+<p><strong>1）自动化测试</strong></p>
+
+<p>前面的章节介绍到了互联网消费金融的软件架构的拆分与微服务建设，服务在我们的领域规划下变得有调理，服务越来越多，越来越细化，给测试也带来了巨大的挑战。进行高可测的架构设计时，我们对自动化测试的依赖越来越强，因为自动化测试能我们带来很大便利：</p>
+
+<p>1）运用自动化环境，实现一次性部署测试环境，一键测试；
+
+2）方便对程序的回归测试；
+
+3）可以运行更多更繁琐的测试；
+
+4）可以执行一些手工测试困难的测试；
+
+5）测试具有一致性和可重复性；
+
+6）增加软件信任度；
+
+7）释放测试资源，提升测试人员能力等。</p>
+
+<blockquote>
+
+<p>常用的自动化建设，一般分为前端页面的自动化测试，和接口的自动化测试。比较流行的工具有：appium，selenium，httprunner，loadrunner等。有能力的企业会自主研发自动化框架，加入更多定制化的功能，以满足实际的业务需要。</p>
+
+</blockquote>
+
+<p><strong>2）性能测试问题和解决方案</strong></p>
+
+<p>互联网消费金融业务复杂度高，面对性能测试往往会遇到诸多问题。</p>
+
+<p>性能测试的场景多，业务复杂，比如支付功能可能涉及到从发起支服务的业务服务，到支付网关，在到银行内部系统等五六个服务。</p>
+
+<p>解决方案：对关键业务路径进行性能回归，对单个服务接口进行压测和预估。</p>
+
+<p>测试环境服务器和线上服务器的配置往往不一样，而且测试环境是单点的，而线上服务是集群的。</p>
+
+<p>解决方案：
+
+a. 机房单台服务器配置尽量与线上保持一致，集群问题通过等比缩放预估；
+
+b. 技术力量比较强的公司如阿里，直接在线上环境进行压测。</p>
+
+<p>测试数据准确性和一致性问题
+
+解决方案：对生产数据进行全量脱敏导下来，用于性能测试</p>
+
+<p>接口的性能测试调用链太长，对外部系统依赖
+
+解决方案：接口的调用链尽量优化简短，部分接口和外部依赖进行mock后再测试。</p>
+
+<p>性能测试方案制定，怎样定位性能瓶颈？
+
+解决方案：需要对被压测的接口分析调用链，根据线上监控，进行分析可能存在的性能瓶颈。</p>
+
+<blockquote>
+
+<p><strong>QPS应该跑多少？</strong>
+
+根据接入的接口监控，比如cat监控，可以根据监控数据QPS/集群数，再乘以80%（因为测试服务器和线上服务器的性能可能有一些差距）。</p>
+
+<p><strong>相应时间以多少为准？</strong>
+
+接口理论上相应时间是100-800ms，最大不超过1s。这是基本要求，一些特殊重场景，需特殊处理。</p>
+
+<p><strong>压测结果应怎样预估？</strong>
+
+根据测试环境压测结果（cpu&lt;=50%）简单预估，测试QPS<em>线上集群</em>1.2 约等于线上QPS</p>
+
+</blockquote>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        
+
+                        <div style="float: right">
+
+                            <a href="/专栏/互联网消费金融高并发领域设计/02 打造互联网消金高并发架构八大中间件运用.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997610ccd43cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

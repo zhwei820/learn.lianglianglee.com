@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>012  程序中的错误处理：异步编程和最佳实践.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/000 开篇词  洞悉技术的本质，享受科技的乐趣.md">000 开篇词  洞悉技术的本质，享受科技的乐趣.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/001  程序员如何用技术变现（上）.md">001  程序员如何用技术变现（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/002  程序员如何用技术变现（下）.md">002  程序员如何用技术变现（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/003  Equifax信息泄露始末.md">003  Equifax信息泄露始末.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/004  从Equifax信息泄露看数据安全.md">004  从Equifax信息泄露看数据安全.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/005  何为技术领导力.md">005  何为技术领导力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/006  如何拥有技术领导力.md">006  如何拥有技术领导力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/007  推荐阅读：每个程序员都该知道的事.md">007  推荐阅读：每个程序员都该知道的事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/008  Go语言，Docker和新技术.md">008  Go语言，Docker和新技术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/009  答疑解惑：渴望、热情和选择.md">009  答疑解惑：渴望、热情和选择.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/010  如何成为一个大家愿意追随的Leader？.md">010  如何成为一个大家愿意追随的Leader？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/011  程序中的错误处理：错误返回码和异常捕捉.md">011  程序中的错误处理：错误返回码和异常捕捉.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/左耳听风/012  程序中的错误处理：异步编程和最佳实践.md">012  程序中的错误处理：异步编程和最佳实践.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/013  魔数 0x5f3759df.md">013  魔数 0x5f3759df.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/014  推荐阅读：机器学习101.md">014  推荐阅读：机器学习101.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/015  时间管理：同扭曲时间的事儿抗争.md">015  时间管理：同扭曲时间的事儿抗争.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/016  时间管理：投资赚取时间.md">016  时间管理：投资赚取时间.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/017  故障处理最佳实践：应对故障.md">017  故障处理最佳实践：应对故障.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/018  故障处理最佳实践：故障改进.md">018  故障处理最佳实践：故障改进.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/019  答疑解惑：我们应该能够识别的表象和本质.md">019  答疑解惑：我们应该能够识别的表象和本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/020  分布式系统架构的冰与火.md">020  分布式系统架构的冰与火.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/021  从亚马逊的实践，谈分布式系统的难点.md">021  从亚马逊的实践，谈分布式系统的难点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/022  分布式系统的技术栈.md">022  分布式系统的技术栈.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/023  分布式系统关键技术：全栈监控.md">023  分布式系统关键技术：全栈监控.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/024  分布式系统关键技术：服务调度.md">024  分布式系统关键技术：服务调度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/025  分布式系统关键技术：流量与数据调度.md">025  分布式系统关键技术：流量与数据调度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/026  洞悉PaaS平台的本质.md">026  洞悉PaaS平台的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/027  推荐阅读：分布式系统架构经典资料.md">027  推荐阅读：分布式系统架构经典资料.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/028  编程范式游记（1）- 起源.md">028  编程范式游记（1）- 起源.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/029  编程范式游记（2）- 泛型编程.md">029  编程范式游记（2）- 泛型编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/030  编程范式游记（3） - 类型系统和泛型的本质.md">030  编程范式游记（3） - 类型系统和泛型的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/031  Git协同工作流，你该怎样选.md">031  Git协同工作流，你该怎样选.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/032  推荐阅读：分布式数据调度相关论文.md">032  推荐阅读：分布式数据调度相关论文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/033  编程范式游记（4）- 函数式编程.md">033  编程范式游记（4）- 函数式编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/034  编程范式游记（5）- 修饰器模式.md">034  编程范式游记（5）- 修饰器模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/035  编程范式游记（6）- 面向对象编程.md">035  编程范式游记（6）- 面向对象编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/036  编程范式游记（7）- 基于原型的编程范式.md">036  编程范式游记（7）- 基于原型的编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/037  编程范式游记（8）- Go 语言的委托模式.md">037  编程范式游记（8）- Go 语言的委托模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/038  编程范式游记（9）- 编程的本质.md">038  编程范式游记（9）- 编程的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/039  编程范式游记（10）- 逻辑编程范式.md">039  编程范式游记（10）- 逻辑编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/040  编程范式游记（11）- 程序世界里的编程范式.md">040  编程范式游记（11）- 程序世界里的编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/041  弹力设计篇之“认识故障和弹力设计”.md">041  弹力设计篇之“认识故障和弹力设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/042  弹力设计篇之“隔离设计”.md">042  弹力设计篇之“隔离设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/043  弹力设计篇之“异步通讯设计”.md">043  弹力设计篇之“异步通讯设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/044  弹力设计篇之“幂等性设计”.md">044  弹力设计篇之“幂等性设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/045  弹力设计篇之“服务的状态”.md">045  弹力设计篇之“服务的状态”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/046  弹力设计篇之“补偿事务”.md">046  弹力设计篇之“补偿事务”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/047  弹力设计篇之“重试设计”.md">047  弹力设计篇之“重试设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/048  弹力设计篇之“熔断设计”.md">048  弹力设计篇之“熔断设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/049  弹力设计篇之“限流设计”.md">049  弹力设计篇之“限流设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/050  弹力设计篇之“降级设计”.md">050  弹力设计篇之“降级设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/051  弹力设计篇之“弹力设计总结”.md">051  弹力设计篇之“弹力设计总结”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/052  区块链技术 - 区块链的革命性及技术概要.md">052  区块链技术 - 区块链的革命性及技术概要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/053  区块链技术 - 区块链技术细节 - 哈希算法.md">053  区块链技术 - 区块链技术细节 - 哈希算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/054  区块链技术 - 区块链技术细节 - 加密和挖矿.md">054  区块链技术 - 区块链技术细节 - 加密和挖矿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/055  区块链技术 - 去中心化的共识机制.md">055  区块链技术 - 去中心化的共识机制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/056  区块链技术 - 智能合约.md">056  区块链技术 - 智能合约.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/057  区块链技术 - 传统金融和虚拟货币.md">057  区块链技术 - 传统金融和虚拟货币.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/058  管理设计篇之分布式锁.md">058  管理设计篇之分布式锁.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/059  管理设计篇之配置中心.md">059  管理设计篇之配置中心.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/060  管理设计篇之边车模式.md">060  管理设计篇之边车模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/061  管理设计篇之服务网格.md">061  管理设计篇之服务网格.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/062  管理设计篇之网关模式.md">062  管理设计篇之网关模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/063  管理设计篇之部署升级策略.md">063  管理设计篇之部署升级策略.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/064  性能设计篇之缓存.md">064  性能设计篇之缓存.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/065  性能设计篇之异步处理.md">065  性能设计篇之异步处理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/066  性能设计篇之数据库扩展.md">066  性能设计篇之数据库扩展.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/067  性能设计篇之秒杀.md">067  性能设计篇之秒杀.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/068  性能设计篇之边缘计算.md">068  性能设计篇之边缘计算.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/069  程序员练级攻略（2018）：开篇词.md">069  程序员练级攻略（2018）：开篇词.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/070  程序员练级攻略（2018）：零基础启蒙.md">070  程序员练级攻略（2018）：零基础启蒙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/071  程序员练级攻略（2018）：正式入门.md">071  程序员练级攻略（2018）：正式入门.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/072  程序员练级攻略（2018）：程序员修养.md">072  程序员练级攻略（2018）：程序员修养.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/073  程序员练级攻略（2018）：编程语言.md">073  程序员练级攻略（2018）：编程语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/074  程序员练级攻略：理论学科.md">074  程序员练级攻略：理论学科.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/075  程序员练级攻略（2018）：系统知识.md">075  程序员练级攻略（2018）：系统知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/076  程序员练级攻略（2018）：软件设计.md">076  程序员练级攻略（2018）：软件设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/077  程序员练级攻略（2018）：Linux系统、内存和网络.md">077  程序员练级攻略（2018）：Linux系统、内存和网络.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/078  程序员练级攻略（2018）：异步IO模型和Lock-Free编程.md">078  程序员练级攻略（2018）：异步IO模型和Lock-Free编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/079  程序员练级攻略（2018）：Java底层知识.md">079  程序员练级攻略（2018）：Java底层知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/080  程序员练级攻略（2018）：数据库.md">080  程序员练级攻略（2018）：数据库.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/081  程序员练级攻略（2018）：分布式架构入门.md">081  程序员练级攻略（2018）：分布式架构入门.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/082  程序员练级攻略（2018）：分布式架构经典图书和论文.md">082  程序员练级攻略（2018）：分布式架构经典图书和论文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/083  程序员练级攻略（2018）：分布式架构工程设计.md">083  程序员练级攻略（2018）：分布式架构工程设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/084  程序员练级攻略（2018）：微服务.md">084  程序员练级攻略（2018）：微服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/085  程序员练级攻略（2018）：容器化和自动化运维.md">085  程序员练级攻略（2018）：容器化和自动化运维.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/086  程序员练级攻略（2018）：机器学习和人工智能.md">086  程序员练级攻略（2018）：机器学习和人工智能.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/087  程序员练级攻略（2018）：前端基础和底层原理.md">087  程序员练级攻略（2018）：前端基础和底层原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/088  程序员练级攻略（2018）：前端性能优化和框架.md">088  程序员练级攻略（2018）：前端性能优化和框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/089  程序员练级攻略（2018）：UIUX设计.md">089  程序员练级攻略（2018）：UIUX设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/090  程序员练级攻略（2018）：技术资源集散地.md">090  程序员练级攻略（2018）：技术资源集散地.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/091  程序员面试攻略：面试前的准备.md">091  程序员面试攻略：面试前的准备.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/092  程序员面试攻略：面试中的技巧.md">092  程序员面试攻略：面试中的技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/093  程序员面试攻略：面试风格.md">093  程序员面试攻略：面试风格.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/094  程序员面试攻略：实力才是王中王.md">094  程序员面试攻略：实力才是王中王.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/095  高效学习：端正学习态度.md">095  高效学习：端正学习态度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/096  高效学习：源头、原理和知识地图.md">096  高效学习：源头、原理和知识地图.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/097  高效学习：深度，归纳和坚持实践.md">097  高效学习：深度，归纳和坚持实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/098  高效学习：如何学习和阅读代码.md">098  高效学习：如何学习和阅读代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/099  高效学习：面对枯燥和量大的知识.md">099  高效学习：面对枯燥和量大的知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/100  高效沟通：Talk和Code同等重要.md">100  高效沟通：Talk和Code同等重要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/101  高效沟通：沟通阻碍和应对方法.md">101  高效沟通：沟通阻碍和应对方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/102  高效沟通：沟通方式及技巧.md">102  高效沟通：沟通方式及技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/103  高效沟通：沟通技术.md">103  高效沟通：沟通技术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/104  高效沟通：好老板要善于提问.md">104  高效沟通：好老板要善于提问.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/105  高效沟通：好好说话的艺术.md">105  高效沟通：好好说话的艺术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/106 加餐  谈谈我的“三观”.md">106 加餐  谈谈我的“三观”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/107 结束语  业精于勤，行成于思.md">107 结束语  业精于勤，行成于思.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>012  程序中的错误处理：异步编程和最佳实践</h1>
+
+<p>上一篇文章中，我们讨论了错误返回码和异常捕捉，以及在不同情况下该如何选择和使用。本文中会接着讲两个有趣话题：异步编程世界里的错误处理方法，以及我在实战中总结出来的错误处理最佳实践。</p>
+
+<h1>异步编程世界里的错误处理</h1>
+
+<p>在异步编程的世界里，因为被调用的函数是被放到了另外一个线程里运行，这将导致：</p>
+
+<ul>
+
+<li>
+
+<p><strong>无法使用返回码</strong>。因为函数在被异步运行中，所谓的返回只是把处理权交给下一条指令，而不是把函数运行完的结果返回。<strong>所以，函数返回的语义完全变了，返回码也没有用了</strong>。</p>
+
+</li>
+
+<li>
+
+<p><strong>无法使用抛异常的方式</strong>。因为除了上述的函数立马返回的原因之外，抛出的异常也在另外一个线程中，不同线程中的栈是完全不一样的，所以主线程的 <code>catch</code> 完全看不到另外一个线程中的异常。</p>
+
+</li>
+
+</ul>
+
+<p>对此，在异步编程的世界里，我们也会有好几种处理错误的方法，最常用的就是 <code>callback</code> 方式。在做异步请求的时候，注册几个 <code>OnSuccess()</code>、 <code>OnFailure()</code> 这样的函数，让在另一个线程中运行的异步代码来回调过来。</p>
+
+<h2>JavaScript 异步编程的错误处理</h2>
+
+<p>比如，下面这个 JavaScript 示例：</p>
+
+<pre><code class="language-JavaScript">function successCallback(result) {
+
+  console.log(&quot;It succeeded with &quot; + result);
+
+}
+
+ 
+
+function failureCallback(error) {
+
+  console.log(&quot;It failed with &quot; + error);
+
+}
+
+ 
+
+doSomething(successCallback, failureCallback);
+
+</code></pre>
+
+<p>通过注册错误处理的回调函数，让异步执行的函数在出错的时候，调用被注册进来的错误处理函数，这样的方式比较好地解决了程序的错误处理。<strong>而出错的语义从返回码、异常捕捉到了直接耦合错误出处函数的样子</strong>，挺好的。</p>
+
+<p>但是， 如果我们需要把几个异步函数顺序执行的话（异步程序中，程序执行的顺序是不可预测的、也是不确定的，而有时候，函数被调用的上下文是有相互依赖的，所以，我们希望它们能按一定的顺序处理），就会出现了所谓的 Callback Hell 的问题。如下所示：</p>
+
+<pre><code class="language-javascript">doSomething(function(result) {
+
+  doSomethingElse(result, function(newResult) {
+
+    doThirdThing(newResult, function(finalResult) {
+
+      console.log('Got the final result: ' + finalResult);
+
+    }, failureCallback);
+
+  }, failureCallback);
+
+}, failureCallback);
+
+</code></pre>
+
+<p>而这样层层嵌套中需要注册的错误处理函数也有可能是完全不一样的，而且会导致代码非常混乱，难以阅读和维护。</p>
+
+<p>所以，一般来说，在异步编程的实践里，我们会用 Promise 模式来处理。如下所示（箭头表达式）：</p>
+
+<pre><code class="language-JavaScript">doSomething()
+
+.then(result =&gt; doSomethingElse(result))
+
+.then(newResult =&gt; doThirdThing(newResult))
+
+.then(finalResult =&gt; {
+
+  console.log(`Got the final result: ${finalResult}`);
+
+}).catch(failureCallback);
+
+</code></pre>
+
+<p>上面代码中的 <code>then()</code> 和 <code>catch()</code> 方法就是 Promise 对象的方法，<code>then()</code>方法可以把各个异步的函数给串联起来，而<code>catch()</code> 方法则是出错的处理。</p>
+
+<p>看到上面的那个级联式的调用方式，这就要我们的 <code>doSomething()</code> 函数返回 Promise 对象，下面是这个函数的相关代码示例：</p>
+
+<p>比如：</p>
+
+<pre><code class="language-JavaScript">function doSomething() {
+
+	let promise = new Promise();
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'http://coolshell.cn/....', true);
+
+ 
+
+	xhr.onload = function (e) {
+
+        if (this.status === 200) {
+
+            results = JSON.parse(this.responseText);
+
+            promise.resolve(results); // 成功时，调用 resolve() 方法
+
+        }
+
+    };
+
+ 
+
+    xhr.onerror = function (e) {
+
+        promise.reject(e); // 失败时，调用 reject() 方法
+
+    };
+
+ 
+
+    xhr.send();
+
+    return promise;
+
+}
+
+</code></pre>
+
+<p>从上面的代码示例中，我们可以看到，如果成功了，要调用
+
+<code>Promise.resolve()</code> 方法，这样 Promise 对象会继续调用下一个 <code>then()</code>。如果出错了就调用 <code>Promise.reject()</code> 方法，这样就会忽略后面的 <code>then()</code> 直到 <code>catch()</code> 方法。</p>
+
+<p>我们可以看到 <code>Promise.reject()</code> 就像是抛异常一样。这个编程模式让我们的代码组织方便了很多。</p>
+
+<p>另外，多说一句，Promise 还可以同时等待两个不同的异步方法。比如下面的代码所展示的方式：</p>
+
+<pre><code class="language-JavaScript">promise1 = doSomething();
+
+promise2 = doSomethingElse();
+
+Promise.when(promise1, promise2).then( function (result1, result2) {
+
+	... // 处理 result1 和 result2 的代码
+
+}, handleError);
+
+</code></pre>
+
+<p>在 ECMAScript 2017 的标准中，我们可以使用<code>async</code>/<code>await</code>这两个关键字来取代 Promise 对象，这样可以让我们的代码更易读。</p>
+
+<p>比如下面的代码示例：</p>
+
+<pre><code class="language-JavaScript">async function foo() {
+
+  try {
+
+    let result = await doSomething();
+
+    let newResult = await doSomethingElse(result);
+
+    let finalResult = await doThirdThing(newResult);
+
+    console.log(`Got the final result: ${finalResult}`);
+
+  } catch(error) {
+
+    failureCallback(error);
+
+  }
+
+}
+
+</code></pre>
+
+<p>如果在函数定义之前使用了 <code>async</code> 关键字，就可以在函数内使用 <code>await</code>。 当在 <code>await</code> 某个 <code>Promise</code> 时，函数暂停执行，直至该 <code>Promise</code> 产生结果，并且暂停并不会阻塞主线程。 如果 <code>Promise</code> resolve，则会返回值。 如果 <code>Promise</code> reject，则会抛出拒绝的值。而我们的异步代码完全可以放在一个 <code>try - catch</code> 语句块内，在有语言支持了以后，我们又可以使用 <code>try - catch</code> 语句块了。</p>
+
+<p>下面我们来看一下，一个 pipeline 的代码。所谓 pipeline 就是把一串函数给编排起来，从而形成更为强大的功能。这个玩法是函数式编程中经常用到的方法。</p>
+
+<p>比如，下面这个 pipeline 的代码（注意，其上使用了 <code>reduce()</code> 函数）：</p>
+
+<pre><code class="language-JavaScript">[func1, func2].reduce((p, f) =&gt; p.then(f), Promise.resolve());
+
+
+
+</code></pre>
+
+<p>其等同于：</p>
+
+<pre><code class="language-JavaScript">Promise.resolve().then(func1).then(func2);
+
+
+
+</code></pre>
+
+<p>我们可以抽象成</p>
+
+<pre><code class="language-JavaScript">let applyAsync = (acc,val) =&gt; acc.then(val);
+
+let composeAsync = (...funcs) =&gt; x =&gt; funcs.reduce(applyAsync, Promise.resolve(x));
+
+</code></pre>
+
+<p>于是，可以这样使用：</p>
+
+<pre><code class="language-JavaScript">let transformData = composeAsync(func1, asyncFunc1, asyncFunc2, func2);
+
+transformData(data);
+
+</code></pre>
+
+<p>但是，在 ECMAScript 2017 的 <code>async</code>/<code>await</code> 语法糖下，这事儿就变得简单了。</p>
+
+<pre><code class="language-JavaScript">for (let f of [func1, func2]) {
+
+  await f();
+
+}
+
+</code></pre>
+
+<h2>Java 异步编程的 Promise 模式</h2>
+
+<p>在 Java 中，在 JDK 1.8 里也引入了类 JavaScript 的玩法 —— <code>CompletableFuture</code>。这个类提供了大量的异步编程中 Promise 的各种方式。下面例举几个。</p>
+
+<p>链式处理：</p>
+
+<pre><code class="language-Java">CompletableFuture.supplyAsync(this::findReceiver)
+
+                 .thenApply(this::sendMsg)
+
+                 .thenAccept(this::notify);
+
+</code></pre>
+
+<p>上面的这个链式处理和 JavaScript 中的<code>then()</code>方法很像，其中的
+
+<code>supplyAsync()</code> 表示执行一个异步方法，而 <code>thenApply()</code> 表示执行成功后再串联另外一个异步方法，最后是 <code>thenAccept()</code> 来处理最终结果。</p>
+
+<p>下面这个例子是，合并两个异步函数的结果成一个的示例：</p>
+
+<pre><code class="language-Java">String result = CompletableFuture.supplyAsync(() -&gt; {
+
+         return &quot;hello&quot;;
+
+     }).thenCombine(CompletableFuture.supplyAsync(() -&gt; {
+
+         return &quot;world&quot;;
+
+     }), (s1, s2) -&gt; s1 + &quot; &quot; + s2).join());
+
+System.out.println(result);
+
+ 
+
+</code></pre>
+
+<p>接下来，我们再来看一下，Java 这个类相关的异常处理：</p>
+
+<pre><code class="language-Java">CompletableFuture.supplyAsync(Integer::parseInt) // 输入: &quot;ILLEGAL&quot;
+
+			     .thenApply(r -&gt; r * 2 * Math.PI)
+
+			     .thenApply(s -&gt; &quot;apply&gt;&gt; &quot; + s)
+
+			     .exceptionally(ex -&gt; &quot;Error: &quot; + ex.getMessage());
+
+</code></pre>
+
+<p>我们要注意到上面代码里的 <code>exceptionally()</code> 方法，这个和 JavaScript Promise 中的 <code>catch()</code> 方法相似。</p>
+
+<p>运行上面的代码，会出现如下输出：</p>
+
+<pre><code class="language-Java">Error: java.lang.NumberFormatException: For input string: &quot;ILLEGAL&quot;
+
+
+
+</code></pre>
+
+<p>也可以这样：</p>
+
+<pre><code class="language-Java">CompletableFuture.supplyAsync(Integer::parseInt) // 输入: &quot;ILLEGAL&quot;
+
+				 .thenApply(r -&gt; r * 2 * Math.PI)
+
+				 .thenApply(s -&gt; &quot;apply&gt;&gt; &quot; + s)
+
+				 .handle((result, ex) -&gt; {
+
+				 	if (result != null) {
+
+				 		return result;
+
+				 	} else {
+
+				 		return &quot;Error handling: &quot; + ex.getMessage();
+
+				 	}
+
+				 });
+
+</code></pre>
+
+<p>上面代码中，你可以看到，其使用了 <code>handle()</code> 方法来处理最终的结果，其中包含了异步函数中的错误处理。</p>
+
+<h2>Go 语言的 Promise</h2>
+
+<p>在 Go 语言中，如果你想实现一个简单的 Promise 模式，也是可以的。下面的代码纯属示例，只为说明问题。如果你想要更好的代码，可以上 GitHub 上搜一下 Go 语言 Promise 的相关代码库。</p>
+
+<p>首先，先声明一个结构体。其中有三个成员：第一个 <code>wg</code> 用于多线程同步；第二个 <code>res</code> 用于存放执行结果；第三个 <code>err</code> 用于存放相关的错误。</p>
+
+<pre><code class="language-Go">type Promise struct {
+
+	wg  sync.WaitGroup
+
+	res string
+
+	err error
+
+}
+
+</code></pre>
+
+<p>然后，定义一个初始函数，来初始化 Promise 对象。其中可以看到，需要把一个函数 <code>f</code> 传进来，然后调用 <code>wg.Add(1)</code> 对 waitGroup 做加一操作，新开一个 Goroutine 通过异步去执行用户传入的函数 <code>f()</code> ，然后记录这个函数的成功或错误，并把 waitGroup 做减一操作。</p>
+
+<pre><code class="language-Go">func NewPromise(f func() (string, error)) *Promise {
+
+	p := &amp;Promise{}
+
+	p.wg.Add(1)
+
+	go func() {
+
+		p.res, p.err = f()
+
+		p.wg.Done()
+
+	}()
+
+	return p
+
+}
+
+</code></pre>
+
+<p>然后，我们需要定义 Promise 的 Then 方法。其中需要传入一个函数，以及一个错误处理的函数。并且调用 <code>wg.Wait()</code> 方法来阻塞（因为之前被<code>wg.Add(1)</code>)，一旦上一个方法被调用了 <code>wg.Done()</code>，这个 Then 方法就会被唤醒。</p>
+
+<p>唤醒的第一件事是，检查一下之前的方法有没有错误。如果有，那么就调用错误处理函数。如果之前成功了，就把之前的结果以参数的方式传入到下一个函数中。</p>
+
+<pre><code class="language-Go">func (p *Promise) Then(r func(string), e func(error)) (*Promise){
+
+	go func() {
+
+		p.wg.Wait()
+
+		if p.err != nil {
+
+			e(p.err)
+
+			return 
+
+		}
+
+		r(p.res)
+
+	}()
+
+	return p
+
+}
+
+</code></pre>
+
+<p>下面，我们定义一个用于测试的异步方法。这个方面很简单，就是在数数，然后，有一半的机率会出错。</p>
+
+<pre><code class="language-Go">func exampleTicker() (string, error) {
+
+	for i := 0; i &lt; 3; i++ {
+
+		fmt.Println(i)
+
+		&lt;-time.Tick(time.Second * 1)
+
+	}
+
+	
+
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	r:=rand.Intn(100)%2
+
+	fmt.Println(r)
+
+	if  r != 0 {
+
+		return &quot;hello, world&quot;, nil
+
+	} else {
+
+		return &quot;&quot;, fmt.Errorf(&quot;error&quot;)
+
+	}
+
+}
+
+ 
+
+</code></pre>
+
+<p>下面，我们来看看我们实现的 Go 语言 Promise 是怎么使用的。代码还是比较直观的，我就不做更多的解释了。</p>
+
+<pre><code class="language-Go">func main() {
+
+	doneChan := make(chan int)
+
+	
+
+	var p = NewPromise(exampleTicker)
+
+	p.Then(func(result string) { fmt.Println(result); doneChan &lt;- 1 }, 
+
+			func(err error) { fmt.Println(err); doneChan &lt;-1 })
+
+			
+
+	&lt;-doneChan
+
+}
+
+</code></pre>
+
+<p>当然，如果你需要更好的 Go 语言 Promise，可以到 GitHub 上找，上面好些代码都是实现得很不错的。上面的这个示例，实现得比较简陋，仅仅是为了说明问题。</p>
+
+<h1>错误处理的最佳实践</h1>
+
+<p>下面是我个人总结的几个错误处理的最佳实践。如果你知道更好的，请一定告诉我。</p>
+
+<ul>
+
+<li><strong>统一分类的错误字典</strong>。无论你是使用错误码还是异常捕捉，都需要认真并统一地做好错误的分类。最好是在一个地方定义相关的错误。比如，HTTP 的 4XX 表示客户端有问题，5XX 则表示服务端有问题。也就是说，你要建立一个错误字典。</li>
+
+<li><strong>同类错误的定义最好是可以扩展的</strong>。这一点非常重要，而对于这一点，通过面向对象的继承或是像 Go 语言那样的接口多态可以很好地做到。这样可以方便地重用已有的代码。</li>
+
+<li><strong>定义错误的严重程度</strong>。比如，Fatal 表示重大错误，Error 表示资源或需求得不到满足，Warning 表示并不一定是个错误但还是需要引起注意，Info 表示不是错误只是一个信息，Debug 表示这是给内部开发人员用于调试程序的。</li>
+
+<li><strong>错误日志的输出最好使用错误码，而不是错误信息</strong>。打印错误日志的时候，除了要用统一的格式，最好不要用错误信息，而使用相应的错误码，错误码不一定是数字，也可以是一个能从错误字典里找到的一个唯一的可以让人读懂的关键字。这样，会非常有利于日志分析软件进行自动化监控，而不是要从错误信息中做语义分析。比如：HTTP 的日志中就会有 HTTP 的返回码，如：<code>404</code>。但我更推荐使用像<code>PageNotFound</code>这样的标识，这样人和机器都很容易处理。</li>
+
+<li><strong>忽略错误最好有日志</strong>。不然会给维护带来很大的麻烦。</li>
+
+<li><strong>对于同一个地方不停的报错，最好不要都打到日志里</strong>。不然这样会导致其它日志被淹没了，也会导致日志文件太大，最好的实践是，打出一个错误以及出现的次数。</li>
+
+<li><strong>不要用错误处理逻辑来处理业务逻辑</strong>。也就是说，不要使用异常捕捉这样的方式来处理业务逻辑，而是应该用条件判断。如果一个逻辑控制可以用 if - else 清楚地表达，非常不建议使用异常方式处理。异常捕捉是用来处理不期望发生的事的，而错误码则用来处理可能会发生的事。</li>
+
+<li><strong>对于同类的错误处理，用一样的模式</strong>。比如，对于<code>null</code>对象的错误，要么都用返回 null，加上条件检查的模式，要么都用抛 NullPointerException 的方式处理。不要混用，这样有助于代码规范。</li>
+
+<li><strong>尽可能在错误发生的地方处理错误</strong>。因为这样会让调用者变得更简单。</li>
+
+<li><strong>向上尽可能地返回原始的错误</strong>。如果一定要把错误返回到更高层去处理，那么，应该返回原始的错误，而不是重新发明一个错误。</li>
+
+<li><strong>处理错误时，总是要清理已分配的资源</strong>。这点非常关键，使用 RAII 技术，或是 try-catch-finally，或是 Go 的 defer 都可以容易地做到。</li>
+
+<li><strong>不推荐在循环体里处理错误</strong>。这里说的更多的情况是对于 try-catch 这种情况，对于绝大多数的情况你不需要这样做。最好把整个循环体外放在 try 语句块内，而在外面做 catch。</li>
+
+<li><strong>不要把大量的代码都放在一个 try 语句块内</strong>。一个 try 语句块内的语句应该是完成一个简单单一的事情。</li>
+
+<li><strong>为你的错误定义提供清楚的文档以及每种错误的代码示例</strong>。如果你是做 RESTful API 方面的，使用 Swagger 会帮你很容易搞定这个事。</li>
+
+<li><strong>对于异步的方式，推荐使用 Promise 模式处理错误</strong>。对于这一点，JavaScript 中有很好的实践。</li>
+
+<li><strong>对于分布式的系统，推荐使用 APM 相关的软件</strong>。尤其是使用 Zipkin 这样的服务调用跟踪的分析来关联错误。</li>
+
+</ul>
+
+<p>好了。关于程序中的错误处理，我主要总结了这些。如果你有更好的想法和经验，欢迎来跟我交流。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/左耳听风/011  程序中的错误处理：错误返回码和异常捕捉.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/左耳听风/013  魔数 0x5f3759df.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977df781f3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

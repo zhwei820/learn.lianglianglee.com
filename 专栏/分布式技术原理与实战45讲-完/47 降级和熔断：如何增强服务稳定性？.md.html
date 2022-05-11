@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>47 降级和熔断：如何增强服务稳定性？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/00 开篇词：搭建分布式知识体系，挑战高薪 Offer.md">00 开篇词：搭建分布式知识体系，挑战高薪 Offer.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/01 如何证明分布式系统的 CAP 理论？.md">01 如何证明分布式系统的 CAP 理论？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/02 不同数据一致性模型有哪些应用？.md">02 不同数据一致性模型有哪些应用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/03 如何透彻理解 Paxos 算法？.md">03 如何透彻理解 Paxos 算法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/04 ZooKeeper 如何保证数据一致性？.md">04 ZooKeeper 如何保证数据一致性？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/05 共识问题：区块链如何确认记账权？.md">05 共识问题：区块链如何确认记账权？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/06 如何准备一线互联网公司面试？.md">06 如何准备一线互联网公司面试？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/07 分布式事务有哪些解决方案？.md">07 分布式事务有哪些解决方案？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/08 对比两阶段提交，三阶段协议有哪些改进？.md">08 对比两阶段提交，三阶段协议有哪些改进？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/09 MySQL 数据库如何实现 XA 规范？.md">09 MySQL 数据库如何实现 XA 规范？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/10 如何在业务中体现 TCC 事务模型？.md">10 如何在业务中体现 TCC 事务模型？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/11 分布式锁有哪些应用场景和实现？.md">11 分布式锁有哪些应用场景和实现？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/12 如何使用 Redis 快速实现分布式锁？.md">12 如何使用 Redis 快速实现分布式锁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/13 分布式事务考点梳理 + 高频面试题.md">13 分布式事务考点梳理 + 高频面试题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/14 如何理解 RPC 远程服务调用？.md">14 如何理解 RPC 远程服务调用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/15 为什么微服务需要 API 网关？.md">15 为什么微服务需要 API 网关？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/16 如何实现服务注册与发现？.md">16 如何实现服务注册与发现？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/17 如何实现分布式调用跟踪？.md">17 如何实现分布式调用跟踪？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/18 分布式下如何实现配置管理？.md">18 分布式下如何实现配置管理？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/19 容器化升级对服务有哪些影响？.md">19 容器化升级对服务有哪些影响？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/20 ServiceMesh：服务网格有哪些应用？.md">20 ServiceMesh：服务网格有哪些应用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/21 Dubbo vs Spring Cloud：两大技术栈如何选型？.md">21 Dubbo vs Spring Cloud：两大技术栈如何选型？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/22 分布式服务考点梳理 + 高频面试题.md">22 分布式服务考点梳理 + 高频面试题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/23 读写分离如何在业务中落地？.md">23 读写分离如何在业务中落地？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/24 为什么需要分库分表，如何实现？.md">24 为什么需要分库分表，如何实现？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/25 存储拆分后，如何解决唯一主键问题？.md">25 存储拆分后，如何解决唯一主键问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/26 分库分表以后，如何实现扩容？.md">26 分库分表以后，如何实现扩容？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/27 NoSQL 数据库有哪些典型应用？.md">27 NoSQL 数据库有哪些典型应用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/28 ElasticSearch 是如何建立索引的？.md">28 ElasticSearch 是如何建立索引的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/29 分布式存储考点梳理 + 高频面试题.md">29 分布式存储考点梳理 + 高频面试题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/30 消息队列有哪些应用场景？.md">30 消息队列有哪些应用场景？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/31 集群消费和广播消费有什么区别？.md">31 集群消费和广播消费有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/32 业务上需要顺序消费，怎么保证时序性？.md">32 业务上需要顺序消费，怎么保证时序性？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/33 消息幂等：如何保证消息不被重复消费？.md">33 消息幂等：如何保证消息不被重复消费？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/34 高可用：如何实现消息队列的 HA？.md">34 高可用：如何实现消息队列的 HA？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/35 消息队列选型：Kafka 如何实现高性能？.md">35 消息队列选型：Kafka 如何实现高性能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/36 消息队列选型：RocketMQ 适用哪些场景？.md">36 消息队列选型：RocketMQ 适用哪些场景？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/37 消息队列考点梳理 + 高频面试题.md">37 消息队列考点梳理 + 高频面试题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/38 不止业务缓存，分布式系统中还有哪些缓存？.md">38 不止业务缓存，分布式系统中还有哪些缓存？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/39 如何避免缓存穿透、缓存击穿、缓存雪崩？.md">39 如何避免缓存穿透、缓存击穿、缓存雪崩？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/40 经典问题：先更新数据库，还是先更新缓存？.md">40 经典问题：先更新数据库，还是先更新缓存？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/41 失效策略：缓存过期都有哪些策略？.md">41 失效策略：缓存过期都有哪些策略？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/42 负载均衡：一致性哈希解决了哪些问题？.md">42 负载均衡：一致性哈希解决了哪些问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/43 缓存高可用：缓存如何保证高可用？.md">43 缓存高可用：缓存如何保证高可用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/44 分布式缓存考点梳理 + 高频面试题.md">44 分布式缓存考点梳理 + 高频面试题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/45 从双十一看高可用的保障方式.md">45 从双十一看高可用的保障方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/46 高并发场景下如何实现系统限流？.md">46 高并发场景下如何实现系统限流？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/分布式技术原理与实战45讲-完/47 降级和熔断：如何增强服务稳定性？.md">47 降级和熔断：如何增强服务稳定性？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/48 如何选择适合业务的负载均衡策略？.md">48 如何选择适合业务的负载均衡策略？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/49 线上服务有哪些稳定性指标？.md">49 线上服务有哪些稳定性指标？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/50 分布式下有哪些好用的监控组件？.md">50 分布式下有哪些好用的监控组件？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/51 分布式下如何实现统一日志系统？.md">51 分布式下如何实现统一日志系统？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/分布式技术原理与实战45讲-完/52 分布式路漫漫，厚积薄发才是王道.md">52 分布式路漫漫，厚积薄发才是王道.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>47 降级和熔断：如何增强服务稳定性？</h1>
+
+<p>上一课时我们分析了限流的常用策略，下面来看一下，高可用的另外两大撒手锏：降级和熔断，关于这两种技术手段如何实施，又有哪些区别呢？</p>
+
+<h3>高可用之降级</h3>
+
+<p>我们在第 39 课时提过服务降级是电商大促等高并发场景的常见稳定性手段，那你有没有想过，为什么在大促时要开启降级，平时不去应用呢？</p>
+
+<p>在大促场景下，请求量剧增，可我们的系统资源是有限的，服务器资源是企业的固定成本，这个成本不可能无限扩张，所以说，<strong>降级是解决系统资源不足和海量业务请求之间的矛盾</strong>。</p>
+
+<p>降级的具体实现手段是，在暴增的流量请求下，对一些非核心流程业务、非关键业务，进行有策略的放弃，以此来释放系统资源，保证核心业务的正常运行。我们在第 34 课时中提过二八策略，换一个角度，服务降级就是尽量避免这种系统资源分配的不平衡，打破二八策略，让更多的机器资源，承载主要的业务请求。</p>
+
+<p>就如同我们之前的例子中，电商大促时限制退款，但平时并不会限制，所以服务降级不是一个常态策略，而是应对非正常情况下的应急策略。服务降级的结果，通常是对一些业务请求，返回一个统一的结果，你可以理解为是一种 FailOver 快速失败的策略。</p>
+
+<p>举个例子，我们都有在 12306 网站购票的经历，在早期春运抢票时，会有大量的购票者进入请求，如果火车票服务不能支撑，你想一想，是直接失败好呢，还是返回一个空的信息好呢？一般都会返回一个空的信息，这其实是一种限流后的策略，我们从一个广义的角度去理解，限流也是一种服务降级手段，是针对部分请求的降级。</p>
+
+<p>一般来说，降级针对的目标，一般是业务闭环中的一些次要功能，比如大促时的评论、退款功能，从一致性的角度，因为强一致性的保证需要很多系统资源，降级可能会降低某些业务场景的一致性。</p>
+
+<p>具体在进行服务降级操作时，要注意哪些点呢？首先需要注意梳理核心流程，知道哪些业务是可以被牺牲的，比如双十一大家都忙着抢购，这时候一些订单评论之类的边缘功能，就很少有人去使用。另外，要明确开启时间，在系统水位到达一定程度时开启。还记得我们在第 16 课时提到的分布式配置中心吗？降级一般是通过配置的形式，做成一个开关，在高并发的场景中打开开关，开启降级。</p>
+
+<h3>高可用之熔断</h3>
+
+<p>不知道你有没有股票投资的经验，在很多证券市场上，在大盘发生非常大幅度的波动时，为了保护投资者的利益，维护正常的市场秩序，会采取自动停盘机制，也就是我们常说的<strong>股市熔断</strong>。</p>
+
+<p>在高可用设计中，也有熔断的技术手段，熔断模式保护的是业务系统不被外部大流量或者下游系统的异常而拖垮。</p>
+
+<p>通过添加合理的熔断策略，可以防止系统不断地去请求可能超时和失败的下游业务，跳过下游服务的异常场景，防止被拖垮，也就是防止出现服务雪崩的情况。</p>
+
+<p>熔断策略其实是一种熔断器模式，你可以想象一下家里应用的电路过载保护器，不过熔断器的设计要更复杂，一个设计完善的熔断策略，可以在下游服务异常时关闭调用，在下游服务恢复正常时，逐渐恢复流量。</p>
+
+<p>下面我举一个例子，假设你开发了一个电商的订单服务，你的服务要依赖下游很多其他模块的服务，比如评论服务。现在有一个订单查询的场景，QPS 非常高，但是恰好评论服务因为某些原因部分机器宕机，出现大量调用失败的情况。如果没有熔断机制，订单系统可能会在失败后多次重试，最终导致大量请求阻塞，产生级联的失败，并且影响订单系统的上游服务，出现类似服务雪崩的问题，导致整个系统的响应变慢，可用性降低。</p>
+
+<p>如果开启了熔断，订单服务可以在下游调用出现部分异常时，调节流量请求，比如在出现 10% 的失败后，减少 50% 的流量请求，如果继续出现 50% 的异常，则减少 80% 的流量请求；相应的，在检测的下游服务正常后，首先恢复 30% 的流量，然后是 50% 的流量，接下来是全部流量。</p>
+
+<p>对于熔断策略的具体实现，我建议你查看 Alibaba Sentinel 或者 Netflix Hystrix 的设计，熔断器的实现其实是数据结构中有限状态机（Finite-state Machines，FSM）的一种应用，关于 FSM 的具体分析和应用，不是本课时的目标，因为 FSM 不光在算法领域有应用，在复杂系统设计时，为了更好的标识状态流转，用有限状态机来描述会特别清晰。</p>
+
+<p>熔断器的恢复时间，也就是平均故障恢复时间，称为 MTTR，在稳定性设计中是一个常见的指标，在 Hystrix 的断路器设计中，有以下几个状态。</p>
+
+<ul>
+
+<li>Closed：熔断器关闭状态，比如系统检测到下游失败到了 50% 的阈值，会开启熔断。</li>
+
+<li>Open：熔断器打开状态，此时对下游的调用在内部直接返回错误，不发出请求，但是在一定的时间周期以后，会进入下一个半熔断状态。</li>
+
+<li>Half-Open：半熔断状态，允许少量的服务请求，如果调用都成功（或一定比例）则认为恢复了，关闭熔断器，否则认为还没好，又回到熔断器打开状态。</li>
+
+</ul>
+
+<p>在系统具体实现中，降级和熔断推荐使用成熟的中间件，包括 Sentinel 和 Hystrix，以及 resilience4j，关于这几种组件的应用细节，这里暂不做展开分析，我一直觉得，授人以鱼不如授人以渔，在解决了原理层面以后，如何实现就变得简单很多。</p>
+
+<p>我在工作中应用 Sentinel 比较多，你可以在<a href="https://github.com/alibaba/Sentinel/wiki/介绍">Sentinel 官网</a>看到详细的介绍，下面是对这几种组件的对比，来自阿里巴巴 Sentinel 开发团队的分享，作为补充资料：</p>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th></th>
+
+<th>Sentinel</th>
+
+<th>Hystrix</th>
+
+<th>resilience4j</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>隔离策略</td>
+
+<td>信号量隔离（并发线程数限流）</td>
+
+<td>线程池隔离/信号量隔离</td>
+
+<td>信号量隔离</td>
+
+</tr>
+
+<tr>
+
+<td>熔断降级策略</td>
+
+<td>基于响应时间、异常比率、异常数</td>
+
+<td>基于异常比率</td>
+
+<td>基于异常比率、响应时间</td>
+
+</tr>
+
+<tr>
+
+<td>实时统计实现</td>
+
+<td>滑动窗口（LeapArray）</td>
+
+<td>滑动窗口（基于 RxJava）</td>
+
+<td>Ring Bit Buffer</td>
+
+</tr>
+
+<tr>
+
+<td>动态规则配置</td>
+
+<td>支持多种数据源</td>
+
+<td>支持多种数据源</td>
+
+<td>有限支持</td>
+
+</tr>
+
+<tr>
+
+<td>扩展性</td>
+
+<td>多个扩展点</td>
+
+<td>插件的形式</td>
+
+<td>接口的形式</td>
+
+</tr>
+
+<tr>
+
+<td>基于注解的支持</td>
+
+<td>支持</td>
+
+<td>支持</td>
+
+<td>支持</td>
+
+</tr>
+
+<tr>
+
+<td>限流</td>
+
+<td>基于 QPS，支持基于调用关系的限流</td>
+
+<td>有限的支持</td>
+
+<td>Rate Limiter</td>
+
+</tr>
+
+<tr>
+
+<td>流量整形</td>
+
+<td>支持预热模式、匀速器模式、预热排队模式</td>
+
+<td>不支持</td>
+
+<td>简单的 Rate Limiter 模式</td>
+
+</tr>
+
+<tr>
+
+<td>系统自适应保护</td>
+
+<td>支持</td>
+
+<td>不支持</td>
+
+<td>不支持</td>
+
+</tr>
+
+<tr>
+
+<td>控制台</td>
+
+<td>提供开箱即用的控制台，可配置规则、查看秒级监控、机器发现等</td>
+
+<td>简单的监控查看</td>
+
+<td>不提供控制台，可对接其他监控系统</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<h3>总结</h3>
+
+<p>以上就是这一课时的内容，和大家总结了降级和熔断的概念，应用场景和实现手段，通过一些应用实例进行了对比。</p>
+
+<p>不知道你有没有发现，在系统设计中，特别是高可用模块，和生活里的一些博弈策略息息相关，不是一个纯技术领域的工作。比如在中国象棋策略中，有个成语叫作丢车保帅，和服务降级有异曲同工之妙，敌人已经攻打过来了，这时候是保护元帅不被将军，还是丢弃一些军备，下次还能卷土重来呢？而服务降级就是放弃一些非关键功能，保证整体系统的运行。</p>
+
+<p>这一课时中，我也列举了股票熔断、漏电保护器等生活实例，希望大家可以扩展思考一下，高可用设计中的博弈在生活中有哪些体现，也欢迎留言分享你的观点。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/分布式技术原理与实战45讲-完/46 高并发场景下如何实现系统限流？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/分布式技术原理与实战45讲-完/48 如何选择适合业务的负载均衡策略？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099770138fc3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

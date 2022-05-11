@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>08  代理模式与常见实现.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/01  Dubbo 源码环境搭建：千里之行，始于足下.md">01  Dubbo 源码环境搭建：千里之行，始于足下.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/03  Dubbo SPI 精析，接口实现两极反转（上）.md">03  Dubbo SPI 精析，接口实现两极反转（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/04  Dubbo SPI 精析，接口实现两极反转（下）.md">04  Dubbo SPI 精析，接口实现两极反转（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/05  海量定时任务，一个时间轮搞定.md">05  海量定时任务，一个时间轮搞定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Dubbo源码解读与实战-完/08  代理模式与常见实现.md">08  代理模式与常见实现.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/09  Netty 入门，用它做网络编程都说好（上）.md">09  Netty 入门，用它做网络编程都说好（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/10  Netty 入门，用它做网络编程都说好（下）.md">10  Netty 入门，用它做网络编程都说好（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/11  简易版 RPC 框架实现（上）.md">11  简易版 RPC 框架实现（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/12  简易版 RPC 框架实现（下）.md">12  简易版 RPC 框架实现（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md">13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/14  重试机制是网络操作的基本保证.md">14  重试机制是网络操作的基本保证.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md">15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/23  核心接口介绍，RPC 层骨架梳理.md">23  核心接口介绍，RPC 层骨架梳理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md">28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md">30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/31  加餐：深潜 Directory 实现，探秘服务目录玄机.md">31  加餐：深潜 Directory 实现，探秘服务目录玄机.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/32  路由机制：请求到底怎么走，它说了算（上）.md">32  路由机制：请求到底怎么走，它说了算（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/33  路由机制：请求到底怎么走，它说了算（下）.md">33  路由机制：请求到底怎么走，它说了算（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/34  加餐：初探 Dubbo 动态配置的那些事儿.md">34  加餐：初探 Dubbo 动态配置的那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/37  集群容错：一个好汉三个帮（上）.md">37  集群容错：一个好汉三个帮（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/38  集群容错：一个好汉三个帮（下）.md">38  集群容错：一个好汉三个帮（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md">39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/40  加餐：模拟远程调用，Mock 机制帮你搞定.md">40  加餐：模拟远程调用，Mock 机制帮你搞定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/41  加餐：一键通关服务发布全流程.md">41  加餐：一键通关服务发布全流程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/42  加餐：服务引用流程全解析.md">42  加餐：服务引用流程全解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/43  服务自省设计方案：新版本新方案.md">43  服务自省设计方案：新版本新方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/45  加餐：深入服务自省方案中的服务发布订阅（上）.md">45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/46  加餐：深入服务自省方案中的服务发布订阅（下）.md">46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/49 结束语  认真学习，缩小差距.md">49 结束语  认真学习，缩小差距.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>08  代理模式与常见实现</h1>
+
+<p>动态代理机制在 Java 中有着广泛的应用，例如，Spring AOP、MyBatis、Hibernate 等常用的开源框架，都使用到了动态代理机制。当然，Dubbo 中也使用到了动态代理，在后面开发简易版 RPC 框架的时候，我们还会参考 Dubbo 使用动态代理机制来屏蔽底层的网络传输以及服务发现的相关实现。</p>
+
+<p>本课时我们主要从基础知识开始讲起，首先介绍代理模式的基本概念，之后重点介绍 JDK 动态代理的使用以及底层实现原理，同时还会说明 JDK 动态代理的一些局限性，最后再介绍基于字节码生成的动态代理。</p>
+
+<h3>代理模式</h3>
+
+<p>代理模式是 23 种面向对象的设计模式中的一种，它的类图如下所示：</p>
+
+<p><img src="assets/CgqCHl8_hxqAY6vaAAGcUb0A8A4971.png" alt="image" /></p>
+
+<p>图中的 Subject 是程序中的<strong>业务逻辑接口</strong>，RealSubject 是实现了 Subject 接口的<strong>真正业务类</strong>，Proxy 是实现了 Subject 接口的<strong>代理类</strong>，封装了一个 RealSubject 引用。<strong>在程序中不会直接调用 RealSubject 对象的方法，而是使用 Proxy 对象实现相关功能。</strong></p>
+
+<p>Proxy.operation() 方法的实现会调用其中封装的 RealSubject 对象的 operation() 方法，执行真正的业务逻辑。代理的作用不仅仅是正常地完成业务逻辑，还会在业务逻辑前后添加一些代理逻辑，也就是说，Proxy.operation() 方法会在 RealSubject.operation() 方法调用前后进行一些预处理以及一些后置处理。这就是我们常说的“<strong>代理模式</strong>”。</p>
+
+<p><strong>使用代理模式可以控制程序对 RealSubject 对象的访问</strong>，如果发现异常的访问，可以直接限流或是返回，也可以在执行业务处理的前后进行相关的预处理和后置处理，帮助上层调用方屏蔽底层的细节。例如，在 RPC 框架中，代理可以完成序列化、网络 I/O 操作、负载均衡、故障恢复以及服务发现等一系列操作，而上层调用方只感知到了一次本地调用。</p>
+
+<p><strong>代理模式还可以用于实现延迟加载的功能</strong>。我们知道查询数据库是一个耗时的操作，而有些时候查询到的数据也并没有真正被程序使用。延迟加载功能就可以有效地避免这种浪费，系统访问数据库时，首先可以得到一个代理对象，此时并没有执行任何数据库查询操作，代理对象中自然也没有真正的数据；当系统真正需要使用数据时，再调用代理对象完成数据库查询并返回数据。常见 ORM 框架（例如，MyBatis、 Hibernate）中的延迟加载的原理大致也是如此。</p>
+
+<p>另外，代理对象可以协调真正RealSubject 对象与调用者之间的关系，在一定程度上实现了解耦的效果。</p>
+
+<h3>JDK 动态代理</h3>
+
+<p>上面介绍的这种代理模式实现，也被称为“静态代理模式”，这是因为在编译阶段就要为每个RealSubject 类创建一个 Proxy 类，当需要代理的类很多时，就会出现大量的 Proxy 类。</p>
+
+<p>这种场景下，我们可以使用 JDK 动态代理解决这个问题。<strong>JDK 动态代理的核心是InvocationHandler 接口</strong>。这里提供一个 InvocationHandler 的Demo 实现，代码如下：</p>
+
+<pre><code>public class DemoInvokerHandler implements InvocationHandler {
+
+
+
+    private Object target; // 真正的业务对象，也就是RealSubject对象
+
+
+
+    public DemoInvokerHandler(Object target) { // 构造方法
+
+
+
+        this.target = target;
+
+
+
+    }
+
+
+
+    public Object invoke(Object proxy, Method method, Object[] args)
+
+
+
+             throws Throwable {
+
+
+
+        // ...在执行业务方法之前的预处理...
+
+
+
+        Object result = method.invoke(target, args);
+
+
+
+        // ...在执行业务方法之后的后置处理...
+
+
+
+        return result;
+
+
+
+    }
+
+
+
+    public Object getProxy() {
+
+
+
+        // 创建代理对象
+
+
+
+        return Proxy.newProxyInstance(Thread.currentThread()
+
+
+
+            .getContextClassLoader(),
+
+
+
+                target.getClass().getInterfaces(), this);
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>接下来，我们可以创建一个 main() 方法来模拟上层调用者，创建并使用动态代理：</p>
+
+<pre><code>public class Main {
+
+
+
+    public static void main(String[] args) {
+
+
+
+        Subject subject = new RealSubject();
+
+
+
+        DemoInvokerHandler invokerHandler = 
+
+
+
+            new DemoInvokerHandler(subject);
+
+
+
+        // 获取代理对象
+
+
+
+        Subject proxy = (Subject) invokerHandler.getProxy();
+
+
+
+        // 调用代理对象的方法，它会调用DemoInvokerHandler.invoke()方法
+
+
+
+        proxy.operation();
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>对于需要相同代理逻辑的业务类，只需要提供一个 InvocationHandler 接口实现类即可。在 Java 运行的过程中，JDK会为每个 RealSubject 类动态生成相应的代理类并加载到 JVM 中，然后创建对应的代理实例对象，返回给上层调用者。</p>
+
+<p>了解了 JDK 动态代理的基本使用之后，下面我们就来分析 JDK动态代理创建代理类的底层实现原理。不同JDK版本的 Proxy 类实现可能有细微差别，但核心思路不变，这里使用 1.8.0 版本的 JDK。</p>
+
+<p>JDK 动态代理相关实现的入口是 Proxy.newProxyInstance() 这个静态方法，它的三个参数分别是加载动态生成的代理类的类加载器、业务类实现的接口和上面介绍的InvocationHandler对象。Proxy.newProxyInstance()方法的具体实现如下：</p>
+
+<pre><code>public static Object newProxyInstance(ClassLoader loader,
+
+
+
+     Class[] interfaces, InvocationHandler h) 
+
+
+
+         throws IllegalArgumentException {
+
+
+
+    final Class&lt;?&gt;[] intfs = interfaces.clone();
+
+
+
+    // ...省略权限检查等代码
+
+
+
+    Class&lt;?&gt; cl = getProxyClass0(loader, intfs);  // 获取代理类
+
+
+
+    // ...省略try/catch代码块和相关异常处理
+
+
+
+    // 获取代理类的构造方法
+
+
+
+    final Constructor&lt;?&gt; cons = cl.getConstructor(constructorParams);
+
+
+
+    final InvocationHandler ih = h;
+
+
+
+    return cons.newInstance(new Object[]{h});  // 创建代理对象
+
+
+
+}
+
+</code></pre>
+
+<p>通过 newProxyInstance()方法的实现可以看到，JDK 动态代理是在 getProxyClass0() 方法中完成代理类的生成和加载。getProxyClass0() 方法的具体实现如下：</p>
+
+<pre><code>private static Class getProxyClass0 (ClassLoader loader, 
+
+
+
+        Class... interfaces) {
+
+
+
+    // 边界检查，限制接口数量（略）
+
+
+
+    // 如果指定的类加载器中已经创建了实现指定接口的代理类，则查找缓存；
+
+
+
+    // 否则通过ProxyClassFactory创建实现指定接口的代理类
+
+
+
+    return proxyClassCache.get(loader, interfaces);
+
+
+
+}
+
+</code></pre>
+
+<p>proxyClassCache 是定义在 Proxy 类中的静态字段，主要用于缓存已经创建过的代理类，定义如下：</p>
+
+<pre><code>private static final WeakCache[], Class&gt; proxyClassCache
+
+
+
+     = new WeakCache&lt;&gt;(new KeyFactory(), 
+
+
+
+           new ProxyClassFactory());
+
+</code></pre>
+
+<p>WeakCache.get() 方法会首先尝试从缓存中查找代理类，如果查找不到，则会创建 Factory 对象并调用其 get() 方法获取代理类。Factory 是 WeakCache 中的内部类，Factory.get() 方法会调用 ProxyClassFactory.apply() 方法创建并加载代理类。</p>
+
+<p>ProxyClassFactory.apply() 方法首先会检测代理类需要实现的接口集合，然后确定代理类的名称，之后创建代理类并将其写入文件中，最后加载代理类，返回对应的 Class 对象用于后续的实例化代理类对象。该方法的具体实现如下：</p>
+
+<pre><code>public Class apply(ClassLoader loader, Class[] interfaces) {
+
+
+
+    // ... 对interfaces集合进行一系列检测（略）
+
+
+
+    // ... 选择定义代理类的包名（略）
+
+
+
+    // 代理类的名称是通过包名、代理类名称前缀以及编号这三项组成的
+
+
+
+    long num = nextUniqueNumber.getAndIncrement();
+
+
+
+    String proxyName = proxyPkg + proxyClassNamePrefix + num;
+
+
+
+    // 生成代理类，并写入文件
+
+
+
+    byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
+
+
+
+            proxyName, interfaces, accessFlags);
+
+
+
+    
+
+
+
+    // 加载代理类，并返回Class对象
+
+
+
+    return defineClass0(loader, proxyName, proxyClassFile, 0, 
+
+
+
+      proxyClassFile.length);
+
+
+
+}
+
+</code></pre>
+
+<p>ProxyGenerator.generateProxyClass() 方法会按照指定的名称和接口集合生成代理类的字节码，并根据条件决定是否保存到磁盘上。该方法的具体代码如下：</p>
+
+<pre><code>public static byte[] generateProxyClass(final String name,
+
+
+
+       Class[] interfaces) {
+
+
+
+    ProxyGenerator gen = new ProxyGenerator(name, interfaces);
+
+
+
+    // 动态生成代理类的字节码，具体生成过程不再详细介绍，感兴趣的读者可以继续分析
+
+
+
+    final byte[] classFile = gen.generateClassFile();
+
+
+
+    // 如果saveGeneratedFiles值为true，会将生成的代理类的字节码保存到文件中
+
+
+
+    if (saveGeneratedFiles) { 
+
+
+
+        java.security.AccessController.doPrivileged(
+
+
+
+            new java.security.PrivilegedAction() {
+
+
+
+                public Void run() {
+
+
+
+                    // 省略try/catch代码块
+
+
+
+                    FileOutputStream file = new FileOutputStream(
+
+
+
+                        dotToSlash(name) + &quot;.class&quot;);
+
+
+
+                    file.write(classFile);
+
+
+
+                    file.close();
+
+
+
+                    return null;
+
+
+
+                }
+
+
+
+            }
+
+
+
+        );
+
+
+
+    }
+
+
+
+    return classFile; // 返回上面生成的代理类的字节码
+
+
+
+}
+
+</code></pre>
+
+<p>最后，为了清晰地看到JDK动态生成的代理类的真正定义，我们需要将上述生成的代理类的字节码进行反编译。上述示例为RealSubject生成的代理类，反编译后得到的代码如下：</p>
+
+<pre><code>public final class $Proxy37 
+
+
+
+      extends Proxy implements Subject {  // 实现了Subject接口
+
+
+
+    // 这里省略了从Object类继承下来的相关方法和属性
+
+
+
+    private static Method m3;
+
+
+
+    static {
+
+
+
+        // 省略了try/catch代码块
+
+
+
+        // 记录了operation()方法对应的Method对象
+
+
+
+        m3 = Class.forName(&quot;com.xxx.Subject&quot;)
+
+
+
+          .getMethod(&quot;operation&quot;, new Class[0]);
+
+
+
+    }
+
+
+
+    // 构造方法的参数就是我们在示例中使用的DemoInvokerHandler对象
+
+
+
+    public $Proxy11(InvocationHandler var1) throws {
+
+
+
+        super(var1); 
+
+
+
+    }
+
+
+
+    public final void operation() throws {
+
+
+
+        // 省略了try/catch代码块
+
+
+
+        // 调用DemoInvokerHandler对象的invoke()方法
+
+
+
+        // 最终调用RealSubject对象的对应方法
+
+
+
+        super.h.invoke(this, m3, (Object[]) null);
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>至此JDK 动态代理的基本使用以及核心原理就介绍完了。简单总结一下，JDK 动态代理的实现原理是动态创建代理类并通过指定类加载器进行加载，在创建代理对象时将InvocationHandler对象作为构造参数传入。当调用代理对象时，会调用 InvocationHandler.invoke() 方法，从而执行代理逻辑，并最终调用真正业务对象的相应方法。</p>
+
+<h3>CGLib</h3>
+
+<p>JDK 动态代理是 Java 原生支持的，不需要任何外部依赖，但是正如上面分析的那样，它只能基于接口进行代理，对于没有继承任何接口的类，JDK 动态代理就没有用武之地了。</p>
+
+<p>如果想对没有实现任何接口的类进行代理，可以考虑使用 CGLib。</p>
+
+<p><strong>CGLib（Code Generation Library）是一个基于 ASM 的字节码生成库</strong>，它允许我们在运行时对字节码进行修改和动态生成。CGLib 采用字节码技术实现动态代理功能，其底层原理是通过字节码技术为目标类生成一个子类，并在该子类中采用方法拦截的方式拦截所有父类方法的调用，从而实现代理的功能。</p>
+
+<p>因为 CGLib 使用生成子类的方式实现动态代理，所以无法代理 final 关键字修饰的方法（因为final 方法是不能够被重写的）。这样的话，<strong>CGLib 与 JDK 动态代理之间可以相互补充：在目标类实现接口时，使用 JDK 动态代理创建代理对象；当目标类没有实现接口时，使用 CGLib 实现动态代理的功能</strong>。在 Spring、MyBatis 等多种开源框架中，都可以看到JDK动态代理与 CGLib 结合使用的场景。</p>
+
+<p>CGLib 的实现有两个重要的成员组成。</p>
+
+<ul>
+
+<li><strong>Enhancer</strong>：指定要代理的目标对象以及实际处理代理逻辑的对象，最终通过调用 create() 方法得到代理对象，对这个对象所有的非 final 方法的调用都会转发给 MethodInterceptor 进行处理。</li>
+
+<li><strong>MethodInterceptor</strong>：动态代理对象的方法调用都会转发到intercept方法进行增强。</li>
+
+</ul>
+
+<p>这两个组件的使用与 JDK 动态代理中的 Proxy 和 InvocationHandler 相似。</p>
+
+<p>下面我们通过一个示例简单介绍 CGLib 的使用。在使用 CGLib 创建动态代理类时，首先需要定义一个 Callback 接口的实现， CGLib 中也提供了多个Callback接口的子接口，如下图所示：</p>
+
+<p><img src="assets/CgqCHl8_h1uAcXB-AAKCT9cNDBw713.png" alt="image" /></p>
+
+<p>这里以 MethodInterceptor 接口为例进行介绍，首先我们引入 CGLib 的 maven 依赖：</p>
+
+<pre><code>&lt;dependency&gt;
+
+
+
+    &lt;groupId&gt;cglib&lt;/groupId&gt;
+
+
+
+    &lt;artifactId&gt;cglib&lt;/artifactId&gt;
+
+
+
+    &lt;version&gt;3.3.0&lt;/version&gt;
+
+
+
+&lt;/dependency&gt;
+
+</code></pre>
+
+<p>下面是 CglibProxy 类的具体代码，它实现了 MethodInterceptor 接口：</p>
+
+<pre><code>public class CglibProxy implements MethodInterceptor {
+
+
+
+    // 初始化Enhancer对象
+
+
+
+    private Enhancer enhancer = new Enhancer(); 
+
+
+
+    
+
+
+
+    public Object getProxy(Class clazz) {
+
+
+
+        enhancer.setSuperclass(clazz); // 指定生成的代理类的父类
+
+
+
+        enhancer.setCallback(this); // 设置Callback对象
+
+
+
+        return enhancer.create(); // 通过ASM字节码技术动态创建子类实例
+
+
+
+    }
+
+
+
+    
+
+
+
+    // 实现MethodInterceptor接口的intercept()方法
+
+
+
+    public Object intercept(Object obj, Method method, Object[] args,
+
+
+
+                   MethodProxy proxy) throws Throwable {
+
+
+
+        System.out.println(&quot;前置处理&quot;);
+
+
+
+        Object result = proxy.invokeSuper(obj, args); // 调用父类中的方法
+
+
+
+        System.out.println(&quot;后置处理&quot;);
+
+
+
+        return result;
+
+
+
+    }
+
+
+
+}  
+
+</code></pre>
+
+<p>下面我们再编写一个要代理的目标类以及 main 方法进行测试，具体如下：</p>
+
+<pre><code>public class CGLibTest { // 目标类
+
+
+
+    public String method(String str) {   // 目标方法
+
+
+
+        System.out.println(str);
+
+
+
+        return &quot;CGLibTest.method():&quot; + str;
+
+
+
+    }
+
+
+
+    
+
+
+
+    public static void main(String[] args) {
+
+
+
+        CglibProxy proxy = new CglibProxy();
+
+
+
+        // 生成CBLibTest的代理对象
+
+
+
+        CGLibTest proxyImp = (CGLibTest) 
+
+
+
+            proxy.getProxy(CGLibTest.class);
+
+
+
+        // 调用代理对象的method()方法
+
+
+
+        String result = proxyImp.method(&quot;test&quot;);
+
+
+
+        System.out.println(result);
+
+
+
+        // ----------------
+
+
+
+        // 输出如下：
+
+
+
+        // 前置代理
+
+
+
+        // test
+
+
+
+        // 后置代理
+
+
+
+        // CGLibTest.method():test
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>到此，CGLib 基础使用的内容就介绍完了，在后面介绍 Dubbo 源码时我们还会继续介绍涉及的 CGLib 内容。</p>
+
+<h1>Javassist</h1>
+
+<p><strong>Javassist 是一个开源的生成 Java 字节码的类库</strong>，其主要优点在于简单、快速，直接使用Javassist 提供的 Java API 就能动态修改类的结构，或是动态生成类。</p>
+
+<p>Javassist 的使用比较简单，首先来看如何使用 Javassist 提供的 Java API 动态创建类。示例代码如下：</p>
+
+<pre><code>public class JavassistMain {
+
+
+
+    public static void main(String[] args) throws Exception {
+
+
+
+        ClassPool cp = ClassPool.getDefault(); // 创建ClassPool
+
+
+
+        // 要生成的类名称为com.test.JavassistDemo
+
+
+
+        CtClass clazz = cp.makeClass(&quot;com.test.JavassistDemo&quot;);
+
+
+
+    
+
+
+
+        StringBuffer body = null;
+
+
+
+        // 创建字段，指定了字段类型、字段名称、字段所属的类
+
+
+
+        CtField field = new CtField(cp.get(&quot;java.lang.String&quot;), 
+
+
+
+            &quot;prop&quot;, clazz);
+
+
+
+        // 指定该字段使用private修饰
+
+
+
+        field.setModifiers(Modifier.PRIVATE);
+
+
+
+    
+
+
+
+        // 设置prop字段的getter/setter方法
+
+
+
+        clazz.addMethod(CtNewMethod.setter(&quot;getProp&quot;, field));
+
+
+
+        clazz.addMethod(CtNewMethod.getter(&quot;setProp&quot;, field));
+
+
+
+        // 设置prop字段的初始化值，并将prop字段添加到clazz中
+
+
+
+        clazz.addField(field, CtField.Initializer.constant(&quot;MyName&quot;));
+
+
+
+    
+
+
+
+        // 创建构造方法，指定了构造方法的参数类型和构造方法所属的类
+
+
+
+        CtConstructor ctConstructor = new CtConstructor(
+
+
+
+            new CtClass[]{}, clazz);
+
+
+
+        // 设置方法体
+
+
+
+        body = new StringBuffer();
+
+
+
+        body.append(&quot;{\n prop=\&quot;MyName\&quot;;\n}&quot;);
+
+
+
+        ctConstructor.setBody(body.toString());
+
+
+
+        clazz.addConstructor(ctConstructor); // 将构造方法添加到clazz中
+
+
+
+    
+
+
+
+        // 创建execute()方法，指定了方法返回值、方法名称、方法参数列表以及
+
+
+
+        // 方法所属的类
+
+
+
+        CtMethod ctMethod = new CtMethod(CtClass.voidType, &quot;execute&quot;,
+
+
+
+                new CtClass[]{}, clazz);
+
+
+
+        // 指定该方法使用public修饰
+
+
+
+        ctMethod.setModifiers(Modifier.PUBLIC);
+
+
+
+        // 设置方法体
+
+
+
+        body = new StringBuffer();
+
+
+
+        body.append(&quot;{\n System.out.println(\&quot;execute():\&quot; &quot; +
+
+
+
+                &quot;+ this.prop);&quot;);
+
+
+
+        body.append(&quot;\n}&quot;);
+
+
+
+        ctMethod.setBody(body.toString());
+
+
+
+        clazz.addMethod(ctMethod); // 将execute()方法添加到clazz中
+
+
+
+        // 将上面定义的JavassistDemo类保存到指定的目录
+
+
+
+        clazz.writeFile(&quot;/Users/xxx/&quot;); 
+
+
+
+        // 加载clazz类，并创建对象
+
+
+
+        Class&lt;?&gt; c = clazz.toClass();
+
+
+
+        Object o = c.newInstance();
+
+
+
+        // 调用execute()方法
+
+
+
+        Method method = o.getClass().getMethod(&quot;execute&quot;, 
+
+
+
+          new Class[]{});
+
+
+
+        method.invoke(o, new Object[]{});
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>执行上述代码之后，在指定的目录下可以找到生成的 JavassistDemo.class 文件，将其反编译，得到 JavassistDemo 的代码如下：</p>
+
+<pre><code>public class JavassistDemo {
+
+
+
+    private String prop = &quot;MyName&quot;;
+
+
+
+    public JavassistDemo() {
+
+
+
+        prop = &quot;MyName&quot;;
+
+
+
+    }
+
+
+
+    public void setProp(String paramString) {
+
+
+
+        this.prop = paramString;
+
+
+
+    }
+
+
+
+    public String getProp() {
+
+
+
+        return this.prop;
+
+
+
+    }
+
+
+
+    public void execute() {
+
+
+
+        System.out.println(&quot;execute():&quot; + this.prop);
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>Javassist 也可以实现动态代理功能，底层的原理也是通过创建目标类的子类的方式实现的。这里使用 Javassist 为上面生成的 JavassitDemo 创建一个代理对象，具体实现如下：</p>
+
+<pre><code>public class JavassitMain2 {
+
+
+
+    public static void main(String[] args) throws Exception {
+
+
+
+        ProxyFactory factory = new ProxyFactory();
+
+
+
+        // 指定父类，ProxyFactory会动态生成继承该父类的子类
+
+
+
+        factory.setSuperclass(JavassistDemo.class);
+
+
+
+        // 设置过滤器，判断哪些方法调用需要被拦截
+
+
+
+        factory.setFilter(new MethodFilter() {
+
+
+
+            public boolean isHandled(Method m) {
+
+
+
+                if (m.getName().equals(&quot;execute&quot;)) {
+
+
+
+                    return true;
+
+
+
+                }
+
+
+
+                return false;
+
+
+
+            }
+
+
+
+        });
+
+
+
+        // 设置拦截处理
+
+
+
+        factory.setHandler(new MethodHandler() {
+
+
+
+            @Override
+
+
+
+            public Object invoke(Object self, Method thisMethod, 
+
+
+
+                Method proceed, Object[] args) throws Throwable {
+
+
+
+                System.out.println(&quot;前置处理&quot;);
+
+
+
+                Object result = proceed.invoke(self, args);
+
+
+
+                System.out.println(&quot;执行结果:&quot; + result);
+
+
+
+                System.out.println(&quot;后置处理&quot;);
+
+
+
+                return result;
+
+
+
+            }
+
+
+
+        });
+
+
+
+        // 创建JavassistDemo的代理类，并创建代理对象
+
+
+
+        Class&lt;?&gt; c = factory.createClass();
+
+
+
+        JavassistDemo JavassistDemo = (JavassistDemo) c.newInstance();
+
+
+
+        JavassistDemo.execute(); // 执行execute()方法，会被拦截
+
+
+
+        System.out.println(JavassistDemo.getProp());
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>Javassist 的基础知识就介绍到这里。Javassist可以直接使用 Java 语言的字符串生成类，还是比较好用的。<strong>Javassist 的性能也比较好，是 Dubbo 默认的代理生成方式</strong>。</p>
+
+<h3>总结</h3>
+
+<p>本课时我们首先介绍了代理模式的核心概念和用途，让你对代理模式有初步的了解；然后介绍了 JDK 动态代理使用，并深入到 JDK 源码中分析了 JDK 动态代理的实现原理，以及 JDK 动态代理的局限；最后我们介绍了 CGLib和Javassist这两款代码生成工具的基本使用，简述了两者生成代理的原理。</p>
+
+<p>那你还知道哪些实现动态代理的方式呢？欢迎你在评论区留言讨论。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Dubbo源码解读与实战-完/07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Dubbo源码解读与实战-完/09  Netty 入门，用它做网络编程都说好（上）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996f213e653d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

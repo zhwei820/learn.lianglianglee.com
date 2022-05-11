@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>12  指针详解：在什么情况下应该使用指针？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md">00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/01  基础入门：编写你的第一个 Go 语言程序.md">01  基础入门：编写你的第一个 Go 语言程序.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/02  数据类型：你必须掌握的数据类型有哪些？.md">02  数据类型：你必须掌握的数据类型有哪些？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/03  控制结构：if、for、switch 逻辑语句的那些事儿.md">03  控制结构：if、for、switch 逻辑语句的那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/04  集合类型：如何正确使用 array、slice 和 map？.md">04  集合类型：如何正确使用 array、slice 和 map？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md">05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/06  struct 和 interface：结构体与接口都实现了哪些功能？.md">06  struct 和 interface：结构体与接口都实现了哪些功能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/07  错误处理：如何通过 error、deferred、panic 等处理错误？.md">07  错误处理：如何通过 error、deferred、panic 等处理错误？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/08  并发基础：Goroutines 和 Channels 的声明与使用.md">08  并发基础：Goroutines 和 Channels 的声明与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/09  同步原语：sync 包让你对并发控制得心应手.md">09  同步原语：sync 包让你对并发控制得心应手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/10  Context：你必须掌握的多线程并发控制神器.md">10  Context：你必须掌握的多线程并发控制神器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/11  并发模式：Go 语言中即学即用的高效并发模式.md">11  并发模式：Go 语言中即学即用的高效并发模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/22 讲通关 Go 语言-完/12  指针详解：在什么情况下应该使用指针？.md">12  指针详解：在什么情况下应该使用指针？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/13  参数传递：值、引用及指针之间的区别？.md">13  参数传递：值、引用及指针之间的区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/14  内存分配：new 还是 make？什么情况下该用谁？.md">14  内存分配：new 还是 make？什么情况下该用谁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/15  运行时反射：字符串和结构体之间如何转换？.md">15  运行时反射：字符串和结构体之间如何转换？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/16  非类型安全：让你既爱又恨的 unsafe.md">16  非类型安全：让你既爱又恨的 unsafe.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/17  SliceHeader：slice 如何高效处理数据？.md">17  SliceHeader：slice 如何高效处理数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/18  质量保证：Go 语言如何通过测试保证质量？.md">18  质量保证：Go 语言如何通过测试保证质量？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/19  性能优化：Go 语言如何进行代码检查和优化？.md">19  性能优化：Go 语言如何进行代码检查和优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/20  协作开发：模块化管理为什么能够提升研发效能？.md">20  协作开发：模块化管理为什么能够提升研发效能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/21  网络编程：Go 语言如何玩转 RESTful API 服务？.md">21  网络编程：Go 语言如何玩转 RESTful API 服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/23 结束语  你的 Go 语言成长之路.md">23 结束语  你的 Go 语言成长之路.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>12  指针详解：在什么情况下应该使用指针？</h1>
+
+<p>这节课起我将带你学习本专栏的第三模块：深入理解 Go 语言。这部分主要会为你讲解 Go 语言的高级特性，以及 Go 语言一些特性功能的底层原理。通过这部分的学习，你不光可以更好地使用 Go 语言，还会更深入地理解 Go 语言，比如理解你所使用的 slice 底层是如何实现的等。</p>
+
+<h3>什么是指针</h3>
+
+<p>我们都知道程序运行时的数据是存放在内存中的，而内存会被抽象为一系列具有连续编号的存储空间，那么每一个存储在内存中的数据都会有一个编号，这个编号就是内存地址。有了这个内存地址就可以找到这个内存中存储的数据，而内存地址可以被赋值给一个指针。</p>
+
+<blockquote>
+
+<p>小提示：内存地址通常为 16 进制的数字表示，比如 0x45b876。</p>
+
+</blockquote>
+
+<p>可以总结为：在编程语言中，指针是一种数据类型，用来存储一个内存地址，该地址<strong>指向</strong>存储在该内存中的对象。这个对象可以是字符串、整数、函数或者你自定义的结构体。</p>
+
+<blockquote>
+
+<p>小技巧：你也可以简单地把指针理解为内存地址。</p>
+
+</blockquote>
+
+<p>举个通俗的例子，每本书中都有目录，目录上会有相应章节的页码，你可以把页码理解为一系列的内存地址，通过页码你可以快速地定位到具体的章节（也就是说，通过内存地址可以快速地找到存储的数据）。</p>
+
+<h3>指针的声明和定义</h3>
+
+<p>在 Go 语言中，获取一个变量的指针非常容易，使用取地址符 &amp; 就可以，比如下面的例子：</p>
+
+<p><em><strong>ch12/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   name:=&quot;飞雪无情&quot;
+
+
+
+   nameP:=&amp;name//取地址
+
+
+
+   fmt.Println(&quot;name变量的值为:&quot;,name)
+
+
+
+   fmt.Println(&quot;name变量的内存地址为:&quot;,nameP)
+
+
+
+}
+
+</code></pre>
+
+<p>我在示例中定义了一个 string 类型的变量 name，它的值为&quot;飞雪无情&quot;，然后通过取地址符 &amp; 获取变量 name 的内存地址，并赋值给指针变量 nameP，该指针变量的类型为 *string。运行以上示例你可以看到如下打印结果：</p>
+
+<pre><code>name变量的值为: 飞雪无情
+
+
+
+name变量的内存地址为: 0xc000010200
+
+</code></pre>
+
+<p>这一串 0xc000010200 就是内存地址，这个内存地址可以赋值给指针变量 nameP。</p>
+
+<blockquote>
+
+<p>指针类型非常廉价，只占用 4 个或者 8 个字节的内存大小。</p>
+
+</blockquote>
+
+<p>以上示例中 nameP 指针的类型是 *string，用于指向 string 类型的数据。在 Go 语言中使用类型名称前加 * 的方式，即可表示一个对应的指针类型。比如 int 类型的指针类型是 *int，float64 类型的指针类型是 *float64，自定义结构体 A 的指针类型是 *A。总之，指针类型就是在对应的类型前加 * 号。</p>
+
+<p>下面我通过一个图让你更好地理解普通类型变量、指针类型变量、内存地址、内存等之间的关系。</p>
+
+<p><img src="assets/Ciqc1F_OA06AI435AADN1ZPvtvs400.png" alt="Drawing 1.png" /></p>
+
+<p>（指针变量、内存地址指向示意图）</p>
+
+<p>上图就是我刚举的例子所对应的示意图，从图中可以看到普通变量 name 的值“飞雪无情”被放到内存地址为 0xc000010200 的内存块中。指针类型变量也是变量，它也需要一块内存用来存储值，这块内存对应的地址就是 0xc00000e028，存储的值是 0xc000010200。相信你已经看到关键点了，指针变量 nameP 的值正好是普通变量 name 的内存地址，所以就建立指向关系。</p>
+
+<blockquote>
+
+<p>小提示：指针变量的值就是它所指向数据的内存地址，普通变量的值就是我们具体存放的数据。</p>
+
+</blockquote>
+
+<p>不同的指针类型是无法相互赋值的，比如你不能对一个 string 类型的变量取地址然后赋值给 *int指针类型，编译器会提示你 Cannot use '&amp;name' (type *string) as type *int in assignment。</p>
+
+<p>此外，除了可以通过简短声明的方式声明一个指针类型的变量外，也可以使用 var 关键字声明，如下面示例中的 var intP *int 就声明了一个 *int 类型的变量 intP。</p>
+
+<pre><code>var intP *int
+
+
+
+intP = &amp;name //指针类型不同，无法赋值
+
+</code></pre>
+
+<p>可以看到指针变量也和普通的变量一样，既可以通过 var 关键字定义，也可以通过简短声明定义。</p>
+
+<blockquote>
+
+<p>小提示：通过 var 声明的指针变量是不能直接赋值和取值的，因为这时候它仅仅是个变量，还没有对应的内存地址，它的值是 nil。</p>
+
+</blockquote>
+
+<p>和普通类型不一样的是，指针类型还可以通过内置的 new 函数来声明，如下所示：</p>
+
+<pre><code>intP1:=new(int)
+
+</code></pre>
+
+<p>内置的 new 函数有一个参数，可以传递类型给它。它会返回对应的指针类型，比如上述示例中会返回一个 *int 类型的 intP1。</p>
+
+<h3>指针的操作</h3>
+
+<p>在 Go 语言中指针的操作无非是两种：一种是获取指针指向的值，一种是修改指针指向的值。</p>
+
+<p>首先介绍如何获取，我用下面的代码进行演示：</p>
+
+<pre><code>nameV:=*nameP
+
+
+
+fmt.Println(&quot;nameP指针指向的值为:&quot;,nameV)
+
+</code></pre>
+
+<p>可以看到，要获取指针指向的值，只需要在指针变量前加 * 号即可，获得的变量 nameV 的值就是“飞雪无情”，方法比较简单。</p>
+
+<p>修改指针指向的值也非常简单，比如下面的例子：</p>
+
+<pre><code>*nameP = &quot;公众号:飞雪无情&quot; //修改指针指向的值
+
+
+
+fmt.Println(&quot;nameP指针指向的值为:&quot;,*nameP)
+
+
+
+fmt.Println(&quot;name变量的值为:&quot;,name)
+
+</code></pre>
+
+<p>对 *nameP 赋值等于修改了指针 nameP 指向的值。运行程序你将看到如下打印输出：</p>
+
+<pre><code>nameP指针指向的值为: 公众号:飞雪无情
+
+
+
+name变量的值为: 公众号:飞雪无情
+
+</code></pre>
+
+<p>通过打印结果可以看到，不光 nameP 指针指向的值被改变了，变量 name 的值也被改变了，这就是指针的作用。因为变量 name 存储数据的内存就是指针 nameP 指向的内存，这块内存被 nameP 修改后，变量 name 的值也被修改了。</p>
+
+<p>我们已经知道，通过 var 关键字直接定义的指针变量是不能进行赋值操作的，因为它的值为 nil，也就是还没有指向的内存地址。比如下面的示例：</p>
+
+<pre><code>var intP *int
+
+
+
+*intP =10
+
+</code></pre>
+
+<p>运行的时候会提示 invalid memory address or nil pointer dereference。这时候该怎么办呢？其实只需要通过 new 函数给它分配一块内存就可以了，如下所示：</p>
+
+<pre><code>var intP *int = new(int)
+
+
+
+//更推荐简短声明法，这里是为了演示
+
+
+
+//intP:=new(int)
+
+</code></pre>
+
+<h3>指针参数</h3>
+
+<p>假如有一个函数 modifyAge，想要用来修改年龄，如下面的代码所示。但运行它，你会看到 age 的值并没有被修改，还是 18，并没有变成 20。</p>
+
+<pre><code>age:=18
+
+
+
+modifyAge(age)
+
+
+
+fmt.Println(&quot;age的值为:&quot;,age)
+
+
+
+func modifyAge(age int)  {
+
+
+
+   age = 20
+
+
+
+}
+
+</code></pre>
+
+<p>导致这种结果的原因是 modifyAge 中的 age 只是实参 age 的一份拷贝，所以修改它不会改变实参 age 的值。</p>
+
+<p>如果要达到修改年龄的目的，就需要使用指针，现在对刚刚的示例进行改造，如下所示：</p>
+
+<pre><code>age:=18
+
+
+
+modifyAge(&amp;age)
+
+
+
+fmt.Println(&quot;age的值为:&quot;,age)
+
+
+
+func modifyAge(age *int)  {
+
+
+
+   *age = 20
+
+
+
+}
+
+</code></pre>
+
+<p>也就是说，当你需要在函数中通过形参改变实参的值时，需要使用指针类型的参数。</p>
+
+<h3>指针接收者</h3>
+
+<p>指针的接收者在[“第 6 讲| struct 和 interface：结构体与接口都实现了哪些功能？”]中有详细介绍，你可以再复习一下。对于是否使用指针类型作为接收者，有以下几点参考：</p>
+
+<ol>
+
+<li>如果接收者类型是 map、slice、channel 这类引用类型，不使用指针；</li>
+
+<li>如果需要修改接收者，那么需要使用指针；</li>
+
+<li>如果接收者是比较大的类型，可以考虑使用指针，因为内存拷贝廉价，所以效率高。</li>
+
+</ol>
+
+<p>所以对于是否使用指针类型作为接收者，还需要你根据实际情况考虑。</p>
+
+<h3>什么情况下使用指针</h3>
+
+<p>从以上指针的详细分析中，我们可以总结出指针的两大好处：</p>
+
+<ol>
+
+<li>可以修改指向数据的值；</li>
+
+<li>在变量赋值，参数传值的时候可以节省内存。</li>
+
+</ol>
+
+<p><img src="assets/CgqCHl_OA2eANW2SAAU88P9foow113.png" alt="Drawing 2.png" /></p>
+
+<p>不过 Go 语言作为一种高级语言，在指针的使用上还是比较克制的。它在设计的时候就对指针进行了诸多限制，比如指针不能进行运行，也不能获取常量的指针。所以在思考是否使用时，我们也要保持克制的心态。</p>
+
+<p>我根据实战经验总结了以下几点使用指针的建议，供你参考：</p>
+
+<ol>
+
+<li>不要对 map、slice、channel 这类引用类型使用指针；</li>
+
+<li>如果需要修改方法接收者内部的数据或者状态时，需要使用指针；</li>
+
+<li>如果需要修改参数的值或者内部数据时，也需要使用指针类型的参数；</li>
+
+<li>如果是比较大的结构体，每次参数传递或者调用方法都要内存拷贝，内存占用多，这时候可以考虑使用指针；</li>
+
+<li>像 int、bool 这样的小数据类型没必要使用指针；</li>
+
+<li>如果需要并发安全，则尽可能地不要使用指针，使用指针一定要保证并发安全；</li>
+
+<li>指针最好不要嵌套，也就是不要使用一个指向指针的指针，虽然 Go 语言允许这么做，但是这会使你的代码变得异常复杂。</li>
+
+</ol>
+
+<h3>总结</h3>
+
+<p>为了使编程变得更简单，指针在高级的语言中被逐渐淡化，但是它也的确有自己的优势：修改数据的值和节省内存。所以在 Go 语言的开发中我们要尽可能地使用值类型，而不是指针类型，因为值类型可以使你的开发变得更简单，并且也是并发安全的。如果你想使用指针类型，就要参考我上面讲到的使用指针的条件，看是否满足，要在满足和必须的情况下才使用指针。</p>
+
+<p>这节课到这里就要结束了，在这节课的最后同样给你留个思考题：指向接口的指针是否实现了该接口？为什么？思考后可以自己写代码验证下。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/11  并发模式：Go 语言中即学即用的高效并发模式.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/13  参数传递：值、引用及指针之间的区别？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996dc209773d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

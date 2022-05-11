@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>30  Java虚拟机的监控及诊断工具（命令行篇）.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/00 开篇词  为什么我们要学习Java虚拟机？.md">00 开篇词  为什么我们要学习Java虚拟机？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/01  Java代码是怎么运行的？.md">01  Java代码是怎么运行的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/02  Java的基本类型.md">02  Java的基本类型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/03  Java虚拟机是如何加载Java类的.md">03  Java虚拟机是如何加载Java类的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/04  JVM是如何执行方法调用的？（上）.md">04  JVM是如何执行方法调用的？（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/05  JVM是如何执行方法调用的？（下）.md">05  JVM是如何执行方法调用的？（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/06  JVM是如何处理异常的？.md">06  JVM是如何处理异常的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/07  JVM是如何实现反射的？.md">07  JVM是如何实现反射的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/08  JVM是怎么实现invokedynamic的？（上）.md">08  JVM是怎么实现invokedynamic的？（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/09  JVM是怎么实现invokedynamic的？（下）.md">09  JVM是怎么实现invokedynamic的？（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/10  Java对象的内存布局.md">10  Java对象的内存布局.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/11  垃圾回收（上）.md">11  垃圾回收（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/12  垃圾回收（下）.md">12  垃圾回收（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/13  Java内存模型.md">13  Java内存模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/14  Java虚拟机是怎么实现synchronized的？.md">14  Java虚拟机是怎么实现synchronized的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/15  Java语法糖与Java编译器.md">15  Java语法糖与Java编译器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/16  即时编译（上）.md">16  即时编译（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/17  即时编译（下）.md">17  即时编译（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/18  即时编译器的中间表达形式.md">18  即时编译器的中间表达形式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/19  Java字节码（基础篇）.md">19  Java字节码（基础篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/20  方法内联（上）.md">20  方法内联（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/21  方法内联（下）.md">21  方法内联（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/22  HotSpot虚拟机的intrinsic.md">22  HotSpot虚拟机的intrinsic.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/23  逃逸分析.md">23  逃逸分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/24  字段访问相关优化.md">24  字段访问相关优化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/25  循环优化.md">25  循环优化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/26  向量化.md">26  向量化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/27  注解处理器.md">27  注解处理器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/28  基准测试框架JMH（上）.md">28  基准测试框架JMH（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/29  基准测试框架JMH（下）.md">29  基准测试框架JMH（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/深入拆解Java虚拟机/30  Java虚拟机的监控及诊断工具（命令行篇）.md">30  Java虚拟机的监控及诊断工具（命令行篇）.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/31  Java虚拟机的监控及诊断工具（GUI篇）.md">31  Java虚拟机的监控及诊断工具（GUI篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/32  JNI的运行机制.md">32  JNI的运行机制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/33  Java Agent与字节码注入.md">33  Java Agent与字节码注入.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/34  Graal：用Java编译Java.md">34  Graal：用Java编译Java.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/35  Truffle：语言实现框架.md">35  Truffle：语言实现框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/36  SubstrateVM：AOT编译框架.md">36  SubstrateVM：AOT编译框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/尾声丨道阻且长，努力加餐.html.md">尾声丨道阻且长，努力加餐.html.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/深入拆解Java虚拟机/工具篇  常用工具介绍.md">工具篇  常用工具介绍.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>30  Java虚拟机的监控及诊断工具（命令行篇）</h1>
+
+<p>今天，我们来一起了解一下 JDK 中用于监控及诊断工具。本篇中我将使用刚刚发布的 Java 11 版本的工具进行示范。</p>
+
+<h2>jps</h2>
+
+<p>你可能用过<code>ps</code>命令，打印所有正在运行的进程的相关信息。JDK 中的<code>jps</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jps.html">帮助文档</a>）沿用了同样的概念：它将打印所有正在运行的 Java 进程的相关信息。</p>
+
+<p>在默认情况下，<code>jps</code>的输出信息包括 Java 进程的进程 ID 以及主类名。我们还可以通过追加参数，来打印额外的信息。例如，<code>-l</code>将打印模块名以及包名；<code>-v</code>将打印传递给 Java 虚拟机的参数（如<code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code>）；<code>-m</code>将打印传递给主类的参数。</p>
+
+<p>具体的示例如下所示：</p>
+
+<pre><code>$ jps -mlv
+
+18331 org.example.Foo Hello World
+
+18332 jdk.jcmd/sun.tools.jps.Jps -mlv -Dapplication.home=/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home -Xms8m -Djdk.module.main=jdk.jcmd
+
+</code></pre>
+
+<p>需要注意的是，如果某 Java 进程关闭了默认开启的<code>UsePerfData</code>参数（即使用参数<code>-XX:-UsePerfData</code>），那么<code>jps</code>命令（以及下面介绍的<code>jstat</code>）将无法探知该 Java 进程。</p>
+
+<p>当获得 Java 进程的进程 ID 之后，我们便可以调用接下来介绍的各项监控及诊断工具了。</p>
+
+<h2>jstat</h2>
+
+<p><code>jstat</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jstat.html">帮助文档</a>）可用来打印目标 Java 进程的性能数据。它包括多条子命令，如下所示：</p>
+
+<pre><code>$ jstat -options
+
+-class
+
+-compiler
+
+-gc
+
+-gccapacity
+
+-gccause
+
+-gcmetacapacity
+
+-gcnew
+
+-gcnewcapacity
+
+-gcold
+
+-gcoldcapacity
+
+-gcutil
+
+-printcompilation
+
+</code></pre>
+
+<p>在这些子命令中，<code>-class</code>将打印类加载相关的数据，<code>-compiler</code>和<code>-printcompilation</code>将打印即时编译相关的数据。剩下的都是以<code>-gc</code>为前缀的子命令，它们将打印垃圾回收相关的数据。</p>
+
+<p>默认情况下，<code>jstat</code>只会打印一次性能数据。我们可以将它配置为每隔一段时间打印一次，直至目标 Java 进程终止，或者达到我们所配置的最大打印次数。具体示例如下所示：</p>
+
+<pre><code># Usage: jstat -outputOptions [-t] [-hlines] VMID [interval [count]]
+
+$ jstat -gc 22126 1s 4
+
+S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT   
+
+17472,0 17472,0  0,0    0,0   139904,0 47146,4   349568,0   21321,0   30020,0 28001,8 4864,0 4673,4     22    0,080   3      0,270   0      0,000    0,350
+
+17472,0 17472,0 420,6   0,0   139904,0 11178,4   349568,0   21321,0   30020,0 28090,1 4864,0 4674,2     28    0,084   3      0,270   0      0,000    0,354
+
+17472,0 17472,0  0,0   403,9  139904,0 139538,4  349568,0   21323,4   30020,0 28137,2 4864,0 4674,2     34    0,088   4      0,359   0      0,000    0,446
+
+17472,0 17472,0  0,0    0,0   139904,0   0,0     349568,0   21326,1   30020,0 28093,6 4864,0 4673,4     38    0,091   5      0,445   0      0,000    0,536
+
+</code></pre>
+
+<blockquote>
+
+<p>当监控本地环境的 Java 进程时，VMID 可以简单理解为 PID。如果需要监控远程环境的 Java 进程，你可以参考 jstat 的帮助文档。</p>
+
+</blockquote>
+
+<p>在上面这个示例中，22126 进程是一个使用了 CMS 垃圾回收器的 Java 进程。我们利用<code>jstat</code>的<code>-gc</code>子命令，来打印该进程垃圾回收相关的数据。命令最后的<code>1s 4</code>表示每隔 1 秒打印一次，共打印 4 次。</p>
+
+<p>在<code>-gc</code>子命令的输出中，前四列分别为两个 Survivor 区的容量（Capacity）和已使用量（Utility）。我们可以看到，这两个 Survivor 区的容量相等，而且始终有一个 Survivor 区的内存使用量为 0。</p>
+
+<p>当使用默认的 G1 GC 时，输出结果则有另一些特征：</p>
+
+<pre><code>$ jstat -gc 22208 1s
+
+S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT   
+
+0,0   16384,0  0,0   16384,0 210944,0 192512,0  133120,0    5332,5   28848,0 26886,4 4864,0 4620,5     19    0,067   1      0,016   2      0,002    0,084
+
+0,0   16384,0  0,0   16384,0 210944,0 83968,0   133120,0    5749,9   29104,0 27132,8 4864,0 4621,0     21    0,078   1      0,016   2      0,002    0,095
+
+0,0    0,0    0,0    0,0   71680,0  18432,0   45056,0    20285,1   29872,0 27952,4 4864,0 4671,6     23    0,089   2      0,063   2      0,002    0,153
+
+0,0   2048,0  0,0   2048,0 69632,0  28672,0   45056,0    18608,1   30128,0 28030,4 4864,0 4672,4     32    0,093   2      0,063   2      0,002    0,158
+
+...
+
+</code></pre>
+
+<p>在上面这个示例中，<code>jstat</code>每隔 1s 便会打印垃圾回收的信息，并且不断重复下去。</p>
+
+<p>你可能已经留意到，<code>S0C</code>和<code>S0U</code>始终为 0，而且另一个 Survivor 区的容量（S1C）可能会下降至 0。</p>
+
+<p>这是因为，当使用 G1 GC 时，Java 虚拟机不再设置 Eden 区、Survivor 区，老年代区的内存边界，而是将堆划分为若干个等长内存区域。</p>
+
+<p>每个内存区域都可以作为 Eden 区、Survivor 区以及老年代区中的任一种，并且可以在不同区域类型之间来回切换。（<a href="https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html">参考链接</a>）</p>
+
+<p>换句话说，逻辑上我们只有一个 Survivor 区。当需要迁移 Survivor 区中的数据时（即 Copying GC），我们只需另外申请一个或多个内存区域，作为新的 Survivor 区。</p>
+
+<p>因此，Java 虚拟机决定在使用 G1 GC 时，将所有 Survivor 内存区域的总容量以及已使用量存放至 S1C 和 S1U 中，而 S0C 和 S0U 则被设置为 0。</p>
+
+<p>当发生垃圾回收时，Java 虚拟机可能出现 Survivor 内存区域内的对象<strong>全</strong>被回收或晋升的现象。</p>
+
+<p>在这种情况下，Java 虚拟机会将这块内存区域回收，并标记为可分配的状态。这样子做的结果是，堆中可能完全没有 Survivor 内存区域，因而相应的 S1C 和 S1U 将会是 0。</p>
+
+<p><code>jstat</code>还有一个非常有用的参数<code>-t</code>，它将在每行数据之前打印目标 Java 进程的启动时间。例如，在下面这个示例中，第一列代表该 Java 进程已经启动了 10.7 秒。</p>
+
+<pre><code>$ jstat -gc -t 22407
+
+Timestamp        S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT   
+
+           10,7  0,0    0,0    0,0    0,0   55296,0  45056,0   34816,0    20267,8   30128,0 27975,3 4864,0 4671,6     33    0,086   3      0,111   2      0,001    0,198
+
+</code></pre>
+
+<p>我们可以比较 Java 进程的启动时间以及总 GC 时间（GCT 列），或者两次测量的间隔时间以及总 GC 时间的增量，来得出 GC 时间占运行时间的比例。</p>
+
+<p>如果该比例超过 20%，则说明目前堆的压力较大；如果该比例超过 90%，则说明堆里几乎没有可用空间，随时都可能抛出 OOM 异常。</p>
+
+<p><code>jstat</code>还可以用来判断是否出现内存泄漏。在长时间运行的 Java 程序中，我们可以运行<code>jstat</code>命令连续获取多行性能数据，并取这几行数据中 OU 列（即已占用的老年代内存）的最小值。</p>
+
+<p>然后，我们每隔一段较长的时间重复一次上述操作，来获得多组 OU 最小值。如果这些值呈上涨趋势，则说明该 Java 程序的老年代内存已使用量在不断上涨，这意味着无法回收的对象在不断增加，因此很有可能存在内存泄漏。</p>
+
+<blockquote>
+
+<p>上面没有涉及的列（或者其他子命令的输出），你可以查阅帮助文档了解具体含义。至于文档中漏掉的 CGC 和 CGCT，它们分别代表并发 GC Stop-The-World 的次数和时间。</p>
+
+</blockquote>
+
+<h2>jmap</h2>
+
+<p>在这种情况下，我们便可以请<code>jmap</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jmap.html">帮助文档</a>）出马，分析 Java 虚拟机堆中的对象。</p>
+
+<p><code>jmap</code>同样包括多条子命令。</p>
+
+<ol>
+
+<li><code>-clstats</code>，该子命令将打印被加载类的信息。</li>
+
+<li><code>-finalizerinfo</code>，该子命令将打印所有待 finalize 的对象。</li>
+
+<li><code>-histo</code>，该子命令将统计各个类的实例数目以及占用内存，并按照内存使用量从多至少的顺序排列。此外，<code>-histo:live</code>只统计堆中的存活对象。</li>
+
+<li><code>-dump</code>，该子命令将导出 Java 虚拟机堆的快照。同样，<code>-dump:live</code>只保存堆中的存活对象。</li>
+
+</ol>
+
+<p>我们通常会利用<code>jmap -dump:live,format=b,file=filename.bin</code>命令，将堆中所有存活对象导出至一个文件之中。</p>
+
+<p>这里<code>format=b</code>将使<code>jmap</code>导出与<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr008.html">hprof</a>（在 Java 9 中已被移除）、<code>-XX:+HeapDumpAfterFullGC</code>、<code>-XX:+HeapDumpOnOutOfMemoryError</code>格式一致的文件。这种格式的文件可以被其他 GUI 工具查看，具体我会在下一篇中进行演示。</p>
+
+<p>下面我贴了一段<code>-histo</code>子命令的输出：</p>
+
+<pre><code>$ jmap -histo 22574
+
+ num     #instances         #bytes  class name (module)
+
+-------------------------------------------------------
+
+   1:        500004       20000160  org.python.core.PyComplex
+
+   2:        570866       18267712  org.python.core.PyFloat
+
+   3:        360295       18027024  [B (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe5eef9eea1edeefceacfbebe">[email&#160;protected]</a>)
+
+   4:        339394       11429680  [Lorg.python.core.PyObject;
+
+   5:        308637       11194264  [Ljava.lang.Object; (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a3a8bfa8e7aba8baac89f8f8">[email&#160;protected]</a>)
+
+   6:        301378        9291664  [I (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="244e4552450a46455741641515">[email&#160;protected]</a>)
+
+   7:        225103        9004120  java.math.BigInteger (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4beb5a2b5fab6b5a7b194e5e5">[email&#160;protected]</a>)
+
+   8:        507362        8117792  org.python.core.PySequence$1
+
+   9:        285009        6840216  org.python.core.PyLong
+
+  10:        282908        6789792  java.lang.String (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="33595245521d51524056730202">[email&#160;protected]</a>)
+
+  ...
+
+2281:             1             16  traceback$py
+
+2282:             1             16  unicodedata$py
+
+Total       5151277      167944400
+
+</code></pre>
+
+<p>由于<code>jmap</code>将访问堆中的所有对象，为了保证在此过程中不被应用线程干扰，<code>jmap</code>需要借助安全点机制，让所有线程停留在不改变堆中数据的状态。</p>
+
+<p>也就是说，由<code>jmap</code>导出的堆快照必定是安全点位置的。这可能导致基于该堆快照的分析结果存在偏差。举个例子，假设在编译生成的机器码中，某些对象的生命周期在两个安全点之间，那么<code>:live</code>选项将无法探知到这些对象。</p>
+
+<p>另外，如果某个线程长时间无法跑到安全点，<code>jmap</code>将一直等下去。上一小节的<code>jstat</code>则不同。这是因为垃圾回收器会主动将<code>jstat</code>所需要的摘要数据保存至固定位置之中，而<code>jstat</code>只需直接读取即可。</p>
+
+<p>关于这种长时间等待的情况，你可以通过下面这段程序来复现：</p>
+
+<pre><code>// 暂停时间较长，约为二三十秒，可酌情调整。
+
+// CTRL+C 的 SIGINT 信号无法停止，需要 SIGKILL。
+
+static double sum = 0;
+
+ 
+
+public static void main(String[] args) {
+
+  for (int i = 0; i &lt; 0x77777777; i++) { // counted loop
+
+    sum += Math.log(i); // Math.log is an intrinsic
+
+  }
+
+}
+
+</code></pre>
+
+<p><code>jmap</code>（以及接下来的<code>jinfo</code>、<code>jstack</code>和<code>jcmd</code>）依赖于 Java 虚拟机的<a href="https://docs.oracle.com/en/java/javase/11/docs/api/jdk.attach/com/sun/tools/attach/package-summary.html">Attach API</a>，因此只能监控本地 Java 进程。</p>
+
+<p>一旦开启 Java 虚拟机参数<code>DisableAttachMechanism</code>（即使用参数<code>-XX:+DisableAttachMechanism</code>），基于 Attach API 的命令将无法执行。反过来说，如果你不想被其他进程监控，那么你需要开启该参数。</p>
+
+<h2>jinfo</h2>
+
+<p><code>jinfo</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jinfo.html">帮助文档</a>）可用来查看目标 Java 进程的参数，如传递给 Java 虚拟机的<code>-X</code>（即输出中的 jvm_args）、<code>-XX</code>参数（即输出中的 VM Flags），以及可在 Java 层面通过<code>System.getProperty</code>获取的<code>-D</code>参数（即输出中的 System Properties）。</p>
+
+<p>具体的示例如下所示：</p>
+
+<pre><code>$ jinfo 31185
+
+Java System Properties:
+
+ 
+
+gopherProxySet=false
+
+awt.toolkit=sun.lwawt.macosx.LWCToolkit
+
+java.specification.version=11
+
+sun.cpu.isalist=
+
+sun.jnu.encoding=UTF-8
+
+...
+
+ 
+
+VM Flags:
+
+-XX:CICompilerCount=4 -XX:ConcGCThreads=3 -XX:G1ConcRefinementThreads=10 -XX:G1HeapRegionSize=2097152 -XX:GCDrainStackTargetSize=64 -XX:InitialHeapSize=536870912 -XX:MarkStackSize=4194304 -XX:MaxHeapSize=8589934592 -XX:MaxNewSize=5152702464 -XX:MinHeapDeltaBytes=2097152 -XX:NonNMethodCodeHeapSize=5835340 -XX:NonProfiledCodeHeapSize=122911450 -XX:ProfiledCodeHeapSize=122911450 -XX:ReservedCodeCacheSize=251658240 -XX:+SegmentedCodeCache -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseG1GC
+
+ 
+
+VM Arguments:
+
+jvm_args: -Xlog:gc -Xmx1024m
+
+java_command: org.example.Foo
+
+java_class_path (initial): .
+
+Launcher Type: SUN_STANDARD
+
+</code></pre>
+
+<p><code>jinfo</code>还可以用来修改目标 Java 进程的“manageable”虚拟机参数。</p>
+
+<p>举个例子，我们可以使用<code>jinfo -flag +HeapDumpAfterFullGC &lt;PID&gt;</code>命令，开启<code>&lt;PID&gt;</code>所指定的 Java 进程的<code>HeapDumpAfterFullGC</code>参数。</p>
+
+<p>你可以通过下述命令查看其他 &quot;manageable&quot; 虚拟机参数：</p>
+
+<pre><code>$ java -XX:+PrintFlagsFinal -version | grep manageable   
+
+     intx CMSAbortablePrecleanWaitMillis           = 100                                    {manageable} {default}
+
+     intx CMSTriggerInterval                       = -1                                     {manageable} {default}
+
+     intx CMSWaitDuration                          = 2000                                   {manageable} {default}
+
+     bool HeapDumpAfterFullGC                      = false                                  {manageable} {default}
+
+     bool HeapDumpBeforeFullGC                     = false                                  {manageable} {default}
+
+     bool HeapDumpOnOutOfMemoryError               = false                                  {manageable} {default}
+
+    ccstr HeapDumpPath                             =                                        {manageable} {default}
+
+    uintx MaxHeapFreeRatio                         = 70                                     {manageable} {default}
+
+    uintx MinHeapFreeRatio                         = 40                                     {manageable} {default}
+
+     bool PrintClassHistogram                      = false                                  {manageable} {default}
+
+     bool PrintConcurrentLocks                     = false                                  {manageable} {default}
+
+java version &quot;11&quot; 2018-09-25
+
+Java(TM) SE Runtime Environment 18.9 (build 11+28)
+
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11+28, mixed mode)
+
+</code></pre>
+
+<h2>jstack</h2>
+
+<p><code>jstack</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jstack.html">帮助文档</a>）可以用来打印目标 Java 进程中各个线程的栈轨迹，以及这些线程所持有的锁。</p>
+
+<p><code>jstack</code>的其中一个应用场景便是死锁检测。这里我用<code>jstack</code>获取一个已经死锁了的 Java 程序的栈信息。具体输出如下所示：</p>
+
+<pre><code>$ jstack 31634
+
+...
+
+ 
+
+&quot;Thread-0&quot; #12 prio=5 os_prio=31 cpu=1.32ms elapsed=34.24s tid=0x00007fb08601c800 nid=0x5d03 waiting for monitor entry  [0x000070000bc7e000]
+
+   java.lang.Thread.State: BLOCKED (on object monitor)
+
+ at DeadLock.foo(DeadLock.java:18)
+
+ - waiting to lock &lt;0x000000061ff904c0&gt; (a java.lang.Object)
+
+ - locked &lt;0x000000061ff904b0&gt; (a java.lang.Object)
+
+ at DeadLock$$Lambda$1/0x0000000800060840.run(Unknown Source)
+
+ at java.lang.Thread.run(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e3e8ffe8a7ebe8faecc9b8b8">[email&#160;protected]</a>/Thread.java:834)
+
+ 
+
+&quot;Thread-1&quot; #13 prio=5 os_prio=31 cpu=1.43ms elapsed=34.24s tid=0x00007fb08601f800 nid=0x5f03 waiting for monitor entry  [0x000070000bd81000]
+
+   java.lang.Thread.State: BLOCKED (on object monitor)
+
+ at DeadLock.bar(DeadLock.java:33)
+
+ - waiting to lock &lt;0x000000061ff904b0&gt; (a java.lang.Object)
+
+ - locked &lt;0x000000061ff904c0&gt; (a java.lang.Object)
+
+ at DeadLock$$Lambda$2/0x0000000800063040.run(Unknown Source)
+
+ at java.lang.Thread.run(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed878c9b8cc38f8c9e88addcdc">[email&#160;protected]</a>/Thread.java:834)
+
+ 
+
+...
+
+ 
+
+JNI global refs: 6, weak refs: 0
+
+ 
+
+ 
+
+Found one Java-level deadlock:
+
+=============================
+
+&quot;Thread-0&quot;:
+
+  waiting to lock monitor 0x00007fb083015900 (object 0x000000061ff904c0, a java.lang.Object),
+
+  which is held by &quot;Thread-1&quot;
+
+&quot;Thread-1&quot;:
+
+  waiting to lock monitor 0x00007fb083015800 (object 0x000000061ff904b0, a java.lang.Object),
+
+  which is held by &quot;Thread-0&quot;
+
+ 
+
+Java stack information for the threads listed above:
+
+===================================================
+
+&quot;Thread-0&quot;:
+
+ at DeadLock.foo(DeadLock.java:18)
+
+ - waiting to lock &lt;0x000000061ff904c0&gt; (a java.lang.Object)
+
+ - locked &lt;0x000000061ff904b0&gt; (a java.lang.Object)
+
+ at DeadLock$$Lambda$1/0x0000000800060840.run(Unknown Source)
+
+ at java.lang.Thread.run(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="016b6077602f63607264413030">[email&#160;protected]</a>/Thread.java:834)
+
+&quot;Thread-1&quot;:
+
+ at DeadLock.bar(DeadLock.java:33)
+
+ - waiting to lock &lt;0x000000061ff904b0&gt; (a java.lang.Object)
+
+ - locked &lt;0x000000061ff904c0&gt; (a java.lang.Object)
+
+ at DeadLock$$Lambda$2/0x0000000800063040.run(Unknown Source)
+
+ at java.lang.Thread.run(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923283f28672b283a2c097878">[email&#160;protected]</a>/Thread.java:834)
+
+ 
+
+Found 1 deadlock.
+
+</code></pre>
+
+<p>我们可以看到，<code>jstack</code>不仅会打印线程的栈轨迹、线程状态（BLOCKED）、持有的锁（locked …）以及正在请求的锁（waiting to lock …），而且还会分析出具体的死锁。</p>
+
+<h2>jcmd</h2>
+
+<p>你还可以直接使用<code>jcmd</code>命令（<a href="https://docs.oracle.com/en/java/javase/11/tools/jcmd.html">帮助文档</a>），来替代前面除了<code>jstat</code>之外的所有命令。具体的替换规则你可以参考下表。</p>
+
+<p>至于<code>jstat</code>的功能，虽然<code>jcmd</code>复制了<code>jstat</code>的部分代码，并支持通过<code>PerfCounter.print</code>子命令来打印所有的 Performance Counter，但是它没有保留<code>jstat</code>的输出格式，也没有重复打印的功能。因此，感兴趣的同学可以自行整理。</p>
+
+<p>另外，我们将在下一篇中介绍<code>jcmd</code>中 Java Flight Recorder 相关的子命令。</p>
+
+<h2>总结与实践</h2>
+
+<p>今天我介绍了 JDK 中用于监控及诊断的命令行工具。我们再来回顾一下。</p>
+
+<ol>
+
+<li><code>jps</code>将打印所有正在运行的 Java 进程。</li>
+
+<li><code>jstat</code>允许用户查看目标 Java 进程的类加载、即时编译以及垃圾回收相关的信息。它常用于检测垃圾回收问题以及内存泄漏问题。</li>
+
+<li><code>jmap</code>允许用户统计目标 Java 进程的堆中存放的 Java 对象，并将它们导出成二进制文件。</li>
+
+<li><code>jinfo</code>将打印目标 Java 进程的配置参数，并能够改动其中 manageabe 的参数。</li>
+
+<li><code>jstack</code>将打印目标 Java 进程中各个线程的栈轨迹、线程状态、锁状况等信息。它还将自动检测死锁。</li>
+
+<li><code>jcmd</code>则是一把瑞士军刀，可以用来实现前面除了<code>jstat</code>之外所有命令的功能。</li>
+
+</ol>
+
+<hr />
+
+<p>今天的实践环节，你可以探索<code>jcmd</code>中的下述功能，看看有没有适合你项目的监控项：</p>
+
+<pre><code>Compiler.CodeHeap_Analytics
+
+Compiler.codecache
+
+Compiler.codelist
+
+Compiler.directives_add
+
+Compiler.directives_clear
+
+Compiler.directives_print
+
+Compiler.directives_remove
+
+Compiler.queue
+
+GC.class_histogram
+
+GC.class_stats
+
+GC.finalizer_info
+
+GC.heap_dump
+
+GC.heap_info
+
+GC.run
+
+GC.run_finalization
+
+VM.class_hierarchy
+
+VM.classloader_stats
+
+VM.classloaders
+
+VM.command_line
+
+VM.dynlibs
+
+VM.flags
+
+VM.info
+
+VM.log
+
+VM.metaspace
+
+VM.native_memory
+
+VM.print_touched_methods
+
+VM.set_flag
+
+VM.stringtable
+
+VM.symboltable
+
+VM.system_properties
+
+VM.systemdictionary
+
+VM.unlock_commercial_features
+
+VM.uptime
+
+VM.version
+
+</code></pre>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/深入拆解Java虚拟机/29  基准测试框架JMH（下）.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/深入拆解Java虚拟机/31  Java虚拟机的监控及诊断工具（GUI篇）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997a1c3a5c3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

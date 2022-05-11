@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>09 应用存储和持久化数据卷：核心知识.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/01 第一堂“云原生”课.md">01 第一堂“云原生”课.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/02 容器基本概念.md">02 容器基本概念.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/03 Kubernetes 核心概念.md">03 Kubernetes 核心概念.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/04 理解 Pod 和容器设计模式.md">04 理解 Pod 和容器设计模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/05 应用编排与管理：核心原理.md">05 应用编排与管理：核心原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/06 应用编排与管理.md">06 应用编排与管理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/07 应用编排与管理：Job &amp; DaemonSet.md">07 应用编排与管理：Job &amp; DaemonSet.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/08 应用配置管理.md">08 应用配置管理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/CNCF X 阿里巴巴云原生技术公开课/09 应用存储和持久化数据卷：核心知识.md">09 应用存储和持久化数据卷：核心知识.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/10 应用存储和持久化数据卷：存储快照与拓扑调度(至天).md">10 应用存储和持久化数据卷：存储快照与拓扑调度(至天).md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/11 可观测性：你的应用健康吗？（莫源）.md">11 可观测性：你的应用健康吗？（莫源）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/12 可观测性-监控与日志（莫源）.md">12 可观测性-监控与日志（莫源）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/13 Kubernetes 网络概念及策略控制（叶磊）.md">13 Kubernetes 网络概念及策略控制（叶磊）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/14 Kubernetes Service（溪恒）.md">14 Kubernetes Service（溪恒）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/15 从 0 开始创作云原生应用（殷达）.md">15 从 0 开始创作云原生应用（殷达）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/16 深入解析 Linux 容器（华敏）.md">16 深入解析 Linux 容器（华敏）.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>09 应用存储和持久化数据卷：核心知识</h1>
+
+<h2>Volumes 介绍</h2>
+
+<h3>Pod Volumes</h3>
+
+<p>首先来看一下 Pod Volumes 的使用场景：</p>
+
+<ul>
+
+<li>场景一：如果 pod 中的某一个容器在运行时异常退出，被 kubelet 重新拉起之后，如何保证之前容器产生的重要数据没有丢失？</li>
+
+<li>场景二：如果同一个 pod 中的多个容器想要共享数据，应该如何去做？</li>
+
+</ul>
+
+<p>以上两个场景，其实都可以借助 Volumes 来很好地解决，接下来首先看一下 Pod Volumes 的常见类型：</p>
+
+<ol>
+
+<li>本地存储，常用的有 emptydir/hostpath；</li>
+
+<li>网络存储：网络存储当前的实现方式有两种，一种是 in-tree，它的实现的代码是放在 K8s 代码仓库中的，随着k8s对存储类型支持的增多，这种方式会给k8s本身的维护和发展带来很大的负担；而第二种实现方式是 out-of-tree，它的实现其实是给 K8s 本身解耦的，通过抽象接口将不同存储的driver实现从k8s代码仓库中剥离，因此out-of-tree 是后面社区主推的一种实现网络存储插件的方式；</li>
+
+<li>Projected Volumes：它其实是将一些配置信息，如 secret/configmap 用卷的形式挂载在容器中，让容器中的程序可以通过POSIX接口来访问配置数据；</li>
+
+<li>PV 与 PVC 就是今天要重点介绍的内容。</li>
+
+</ol>
+
+<h3>Persistent Volumes</h3>
+
+<p><img src="assets/FmJuAEtK_8fagBqyLSp53h2zgIg3" alt="avatar" /></p>
+
+<p>接下来看一下 PV（Persistent Volumes）。既然已经有了 Pod Volumes，为什么又要引入 PV 呢？我们知道 pod 中声明的 volume 生命周期与 pod 是相同的，以下有几种常见的场景：</p>
+
+<ul>
+
+<li>场景一：pod 重建销毁，如用 Deployment 管理的 pod，在做镜像升级的过程中，会产生新的 pod并且删除旧的 pod ，那新旧 pod 之间如何复用数据？</li>
+
+<li>场景二：宿主机宕机的时候，要把上面的 pod 迁移，这个时候 StatefulSet 管理的 pod，其实已经实现了带卷迁移的语义。这时通过 Pod Volumes 显然是做不到的；</li>
+
+<li>场景三：多个 pod 之间，如果想要共享数据，应该如何去声明呢？我们知道，同一个 pod 中多个容器想共享数据，可以借助 Pod Volumes 来解决；当多个 pod 想共享数据时，Pod Volumes 就很难去表达这种语义；</li>
+
+<li>场景四：如果要想对数据卷做一些功能扩展性，如：snapshot、resize 这些功能，又应该如何去做呢？</li>
+
+</ul>
+
+<p>以上场景中，通过 Pod Volumes 很难准确地表达它的复用/共享语义，对它的扩展也比较困难。因此 K8s 中又引入了 **Persistent Volumes **概念，它可以将存储和计算分离，通过不同的组件来管理存储资源和计算资源，然后解耦 pod 和 Volume 之间生命周期的关联。这样，当把 pod 删除之后，它使用的PV仍然存在，还可以被新建的 pod 复用。</p>
+
+<h3>PVC 设计意图</h3>
+
+<p><img src="assets/FvnzsKTaEYFgKeolFgUOmDcJqHed" alt="avatar" /></p>
+
+<p>了解 PV 后，应该如何使用它呢？</p>
+
+<p>用户在使用 PV 时其实是通过 PVC，为什么有了 PV 又设计了 PVC 呢？主要原因是为了简化K8s用户对存储的使用方式，做到职责分离。通常用户在使用存储的时候，只用声明所需的存储大小以及访问模式。</p>
+
+<p>访问模式是什么？其实就是：我要使用的存储是可以被多个node共享还是只能单node独占访问(注意是node level而不是pod level)？只读还是读写访问？用户只用关心这些东西，与存储相关的实现细节是不需要关心的。</p>
+
+<p>通过 PVC 和 PV 的概念，将用户需求和实现细节解耦开，用户只用通过 PVC 声明自己的存储需求。PV是有集群管理员和存储相关团队来统一运维和管控，这样的话，就简化了用户使用存储的方式。可以看到，PV 和 PVC 的设计其实有点像面向对象的接口与实现的关系。用户在使用功能时，只需关心用户接口，不需关心它内部复杂的实现细节。</p>
+
+<p>既然 PV 是由集群管理员统一管控的，接下来就看一下 PV 这个对象是怎么产生的。</p>
+
+<h3>Static Volume Provisioning</h3>
+
+<p>第一种产生方式：静态产生方式 - 静态 Provisioning。</p>
+
+<p><img src="assets/FoFecEsyKiE9My9MHytiChC-hU4Y" alt="avatar" /></p>
+
+<p>静态 Provisioning：由集群管理员事先去规划这个集群中的用户会怎样使用存储，它会先预分配一些存储，也就是预先创建一些 PV；然后用户在提交自己的存储需求（也就是 PVC）的时候，K8s 内部相关组件会帮助它把 PVC 和 PV 做绑定；之后用户再通过 pod 去使用存储的时候，就可以通过 PVC 找到相应的 PV，它就可以使用了。</p>
+
+<p>静态产生方式有什么不足呢？可以看到，首先需要集群管理员预分配，预分配其实是很难预测用户真实需求的。举一个最简单的例子：如果用户需要的是 20G，然而集群管理员在分配的时候可能有 80G 、100G 的，但没有 20G 的，这样就很难满足用户的真实需求，也会造成资源浪费。有没有更好的方式呢？</p>
+
+<h3>Dynamic Volume Provisioning</h3>
+
+<p>第二种访问方式：动态 Dynamic Provisioning。</p>
+
+<p><img src="assets/FtjZGrp4T4up6CRjAeHJAtWjybUa" alt="avatar" /></p>
+
+<p>动态供给是什么意思呢？就是说现在集群管理员不预分配 PV，他写了一个模板文件，这个模板文件是用来表示创建某一类型存储（块存储，文件存储等）所需的一些参数，这些参数是用户不关心的，给存储本身实现有关的参数。用户只需要提交自身的存储需求，也就是PVC文件，并在 PVC 中指定使用的存储模板（StorageClass）。</p>
+
+<p>K8s 集群中的管控组件，会结合 PVC 和 StorageClass 的信息动态，生成用户所需要的存储（PV），将 PVC 和 PV 进行绑定后，pod 就可以使用 PV 了。通过 StorageClass 配置生成存储所需要的存储模板，再结合用户的需求动态创建 PV 对象，做到按需分配，在没有增加用户使用难度的同时也解放了集群管理员的运维工作。</p>
+
+<h2>用例解读</h2>
+
+<p>接下来看一下 Pod Volumes、PV、PVC 及 StorageClass 具体是如何使用的。</p>
+
+<h3>Pod Volumes 的使用</h3>
+
+<p><img src="assets/FhstZbg24CMthwpyzKZLk28XMbDH" alt="avatar" /></p>
+
+<p>首先来看一下 Pod Volumes 的使用。如上图左侧所示，我们可以在 pod yaml 文件中的 Volumes 字段中，声明我们卷的名字以及卷的类型。声明的两个卷，一个是用的是 emptyDir，另外一个用的是 hostPath，这两种都是本地卷。在容器中应该怎么去使用这个卷呢？它其实可以通过 volumeMounts 这个字段，volumeMounts 字段里面指定的 name 其实就是它使用的哪个卷，mountPath 就是容器中的挂载路径。</p>
+
+<p>这里还有个 subPath，subPath 是什么？</p>
+
+<p>先看一下，这两个容器都指定使用了同一个卷，就是这个 cache-volume。那么，在多个容器共享同一个卷的时候，为了隔离数据，我们可以通过 subPath 来完成这个操作。它会在卷里面建立两个子目录，然后容器 1 往 cache 下面写的数据其实都写在子目录 cache1 了，容器 2 往 cache 写的目录，其数据最终会落在这个卷里子目录下面的 cache2 下。</p>
+
+<p>还有一个 readOnly 字段，readOnly 的意思其实就是只读挂载，这个挂载你往挂载点下面实际上是没有办法去写数据的。</p>
+
+<p>另外emptyDir、hostPath 都是本地存储，它们之间有什么细微的差别呢？emptyDir 其实是在 pod 创建的过程中会临时创建的一个目录，这个目录随着 pod 删除也会被删除，里面的数据会被清空掉；hostPath 顾名思义，其实就是宿主机上的一个路径，在 pod 删除之后，这个目录还是存在的，它的数据也不会被丢失。这就是它们两者之间一个细微的差别。</p>
+
+<h3>静态 PV 使用</h3>
+
+<p><img src="assets/FrZFcplmkDDCGzqKSiuZtS74yHPW" alt="avatar" /></p>
+
+<p>接下来再看一下，PV 和 PVC 是怎么使用的。</p>
+
+<p>先看一个静态 PV 创建方式。静态 PV 的话，首先是由管理员来创建的，管理员我们这里以 NAS，就是阿里云文件存储为例。我需要先在阿里云的文件存储控制台上去创建 NAS 存储，然后把 NAS 存储的相关信息要填到 PV 对象中，这个 PV 对象预创建出来后，用户可以通过 PVC 来声明自己的存储需求，然后再去创建 pod。创建 pod 还是通过我们刚才讲解的字段把存储挂载到某一个容器中的某一个挂载点下面。</p>
+
+<p>那么接下来看一下 yaml 怎么写。集群管理员首先是在云存储厂商那边先去把存储创建出来，然后把相应的信息填写到 PV 对象中。</p>
+
+<p><img src="assets/Fl5h3c_gIfVNlpfn09bxn5UL7R23" alt="avatar" /></p>
+
+<p>刚刚创建的阿里云 NAS 文件存储对应的PV，有个比较重要的字段：capacity，即创建的这个存储的大小，accessModes，创建出来的这个存储它的访问方式，我们后面会讲解总共有几种访问方式。</p>
+
+<p>然后有个 ReclaimPolicy，ReclaimPolicy 的意思就是：这块存储在被使用后，等它的使用方 pod 以及 PVC 被删除之后，这个 PV 是应该被删掉还是被保留呢？其实就是PV的回收策略。</p>
+
+<p>接下来看看用户怎么去使用该PV对象。用户在使用存储的时候，需要先创建一个 PVC 对象。PVC 对象里面，只需要指定存储需求，不用关心存储本身的具体实现细节。存储需求包括哪些呢？首先是需要的大小，也就是 resources.requests.storage；然后是它的访问方式，即需要这个存储的访问方式，这里声明为ReadWriteMany，也即支持多node读写访问，这也是文件存储的典型特性。</p>
+
+<p><img src="assets/FthKM6QA0grpUbN_3Sjxchr8PPIG" alt="avatar" /></p>
+
+<p>上图中左侧，可以看到这个声明：它的 size 和它的access mode，跟我们刚才静态创建这块 PV 其实是匹配的。这样的话，当用户在提交 PVC 的时候，K8s 集群相关的组件就会把 PV 的 PVC bound 到一起。之后，用户在提交 pod yaml 的时候，可以在卷里面写上 PVC声明，在 PVC声明里面可以通过 claimName 来声明要用哪个 PVC。这时，挂载方式其实跟前面讲的一样，当提交完 yaml 的时候，它可以通过 PVC 找到 bound 着的那个 PV，然后就可以用那块存储了。这是静态 Provisioning到被pod使用的一个过程。</p>
+
+<h3>动态 PV 使用</h3>
+
+<p>然后再看一下动态 Provisioning。动态 Provisioning 上面提到过，系统管理员不再预分配 PV，而只是创建一个模板文件。</p>
+
+<p><img src="assets/FsMpZ01GlLkyvLGLME5tJEOrfOun" alt="avatar" /></p>
+
+<p>这个模板文件叫 StorageClass，在StorageClass里面，我们需要填的重要信息：第一个是 provisioner，provisioner 是什么？它其实就是说我当时创建 PV 和对应的存储的时候，应该用哪个存储插件来去创建。</p>
+
+<p>这些参数是通过k8s创建存储的时候，需要指定的一些细节参数。对于这些参数，用户是不需要关心的，像这里 regionld、zoneld、fsType 和它的类型。ReclaimPolicy跟我们刚才讲解的 PV 里的意思是一样的，就是说动态创建出来的这块 PV,当使用方使用结束、Pod 及 PVC 被删除后，这块 PV 应该怎么处理，我们这个地方写的是 delete，意思就是说当使用方 pod 和 PVC 被删除之后，这个 PV 也会被删除掉。</p>
+
+<p>接下来看一下，集群管理员提交完 StorageClass，也就是提交创建 PV 的模板之后，用户怎么用，首先还是需要写一个 PVC 的文件。</p>
+
+<p><img src="assets/Fimve05og289st9eo03GaBix2048" alt="avatar" /></p>
+
+<p>PVC 的文件里存储的大小、访问模式是不变的。现在需要新加一个字段，叫 StorageClassName，它的意思是指定动态创建PV的模板文件的名字，这里StorageClassName填的就是上面声明的csi-disk。</p>
+
+<p>在提交完 PVC之后，K8s 集群中的相关组件就会根据 PVC 以及对应的 StorageClass 动态生成这块 PV 给这个 PVC 做一个绑定，之后用户在提交自己的 yaml 时，用法和接下来的流程和前面的静态使用方式是一样的，通过 PVC 找到我们动态创建的 PV，然后把它挂载到相应的容器中就可以使用了。</p>
+
+<h3>PV Spec 重要字段解析</h3>
+
+<p>接下来，我们讲解一下 PV 的一些重要字段：</p>
+
+<p><img src="assets/Fg7NdhdioxWhbqr8pi51pgMUWqXM" alt="avatar" /></p>
+
+<ul>
+
+<li><strong>Capacity</strong>：这个很好理解，就是存储对象的大小；</li>
+
+<li>**AccessModes：**也是用户需要关心的，就是说我使用这个 PV 的方式。它有三种使用方式。</li>
+
+<li>一种是单 node 读写访问；</li>
+
+<li>第二种是多个 node 只读访问，是常见的一种数据的共享方式；</li>
+
+<li>第三种是多个 node 上读写访问。</li>
+
+</ul>
+
+<p>用户在提交 PVC 的时候，最重要的两个字段 —— Capacity 和 AccessModes。在提交 PVC后，k8s集群中的相关组件是如何去找到合适的PV呢？首先它是通过为PV建立的AccessModes索引找到所有能够满足用户的 PVC 里面的 AccessModes 要求的PV list，然后根据PVC的 Capacity，StorageClassName, Label Selector 进一步筛选PV，如果满足条件的PV有多个，选择PV的size最小的，accessmodes列表最短的PV，也即最小适合原则。</p>
+
+<ul>
+
+<li><strong>ReclaimPolicy</strong>：这个就是刚才提到的，我的用户方 PV 的 PVC 在删除之后，我的 PV 应该做如何处理？常见的有三种方式。</li>
+
+<li>第一种方式我们就不说了，现在 K8s 中已经不推荐使用了；</li>
+
+<li>第二种方式 delete，也就是说 PVC 被删除之后，PV 也会被删除；</li>
+
+<li>第三种方式 Retain，就是保留，保留之后，后面这个 PV 需要管理员来手动处理。</li>
+
+<li><strong>StorageClassName</strong>：StorageClassName 这个我们刚才说了，我们动态 Provisioning 时必须指定的一个字段，就是说我们要指定到底用哪一个模板文件来生成 PV ；</li>
+
+<li><strong>NodeAffinity</strong>：就是说我创建出来的 PV，它能被哪些 node 去挂载使用，其实是有限制的。然后通过 NodeAffinity 来声明对node的限制，这样其实对 使用该PV的pod调度也有限制，就是说 pod 必须要调度到这些能访问 PV 的 node 上，才能使用这块 PV，这个字段在我们下一讲讲解存储拓扑调度时在细说。</li>
+
+</ul>
+
+<h3>PV 状态流转</h3>
+
+<p><img src="assets/FgMdJEPXW7ocrXw8wJKtGvK0Fysb" alt="avatar" /></p>
+
+<p>接下来我们看一下 PV 的状态流转。首先在创建 PV 对象后，它会处在短暂的pending 状态；等真正的 PV 创建好之后，它就处在 available 状态。</p>
+
+<p>available 状态意思就是可以使用的状态，用户在提交 PVC 之后，被 K8s 相关组件做完 bound（即：找到相应的 PV），这个时候 PV 和 PVC 就结合到一起了，此时两者都处在 bound 状态。当用户在使用完 PVC，将其删除后，这个 PV 就处在 released 状态，之后它应该被删除还是被保留呢？这个就会依赖我们刚才说的 ReclaimPolicy。</p>
+
+<p>这里有一个点需要特别说明一下：当 PV 已经处在 released 状态下，它是没有办法直接回到 available 状态，也就是说接下来无法被一个新的 PVC 去做绑定。如果我们想把已经 released 的 PV 复用，我们这个时候通常应该怎么去做呢？
+
+第一种方式：我们可以新建一个 PV 对象，然后把之前的 released 的 PV 的相关字段的信息填到新的 PV 对象里面，这样的话，这个 PV 就可以结合新的 PVC 了；第二种是我们在删除 pod 之后，不要去删除 PVC 对象，这样给 PV 绑定的 PVC 还是存在的，下次 pod 使用的时候，就可以直接通过 PVC 去复用。K8s中的StatefulSet管理的Pod带存储的迁移就是通过这种方式。</p>
+
+<h2>操作演示</h2>
+
+<p>接下来，我会在实际的环境中给大家演示一下，静态 Provisioning 以及动态 Provisioning 具体操作方式。</p>
+
+<h3>静态 Provisioning 例子</h3>
+
+<p>静态 Provisioning 主要用的是阿里云的 NAS 文件存储；动态 Provisioning 主要用了阿里云的云盘。它们需要相应存储插件，插件我已经提前部署在我的 K8s 集群中了(csi-nasplugin<em>是为了在 k8s 中使用阿里云 NAS 所需的插件，csi-disk</em>是为了在 k8s 中使用阿里云云盘所需要的插件)。</p>
+
+<p><img src="assets/FpJhAEAs04or-prbVkNoqkZUZIEK" alt="avatar" /></p>
+
+<p>我们接下来先看一下静态 Provisioning 的 PV 的 yaml 文件。</p>
+
+<p><img src="assets/Fi9o0KtIDLFFmmurEkXDGWHQuIFQ" alt="avatar" /></p>
+
+<p>volumeAttributes是我在阿里云nas控制台预先创建的 NAS 文件系统的相关信息，我们主要需要关心的有 capacity 为5Gi; accessModes 为多node读写访问; reclaimPolicy：Retain，也就是当我使用方的 PVC 被删除之后，我这个 PV 是要保留下来的；以及在使用这个卷的过程中使用的driver。</p>
+
+<p>然后我们把对应的 PV 创建出来：</p>
+
+<p><img src="assets/Fo6LxYpVZcpurwOrxWHR2HircjRF" alt="avatar" /></p>
+
+<p>我们看一下上图 PV 的状态，已经处在 Available，也就是说它已经可以被使用了。</p>
+
+<p>再创建出来 nas-pvc：</p>
+
+<p><img src="assets/FulXLoM1BylIB2KKiuuX4_tGpmzP" alt="avatar" /></p>
+
+<p>我们看这个时候 PVC 已经新创建出来了，而且也已经和我们上面创建的PV绑定到一起了。我们看一下 PVC 的 yaml 里面写的什么。</p>
+
+<p><img src="assets/Fgaj1H2CcWxzLc3mwI4GDjv7O0Ro" alt="avatar" /></p>
+
+<p>其实很简单 ，就是我需要的大小以及我需要的 accessModes。提交完之后，它就与我们集群中已经存在的 PV 做匹配，匹配成功之后，它就会做 bound。</p>
+
+<p>接下来我们去创建使用 nas-fs 的 pod：</p>
+
+<p><img src="assets/Fm36cv--ETArYNuLUspEOSI86mO8" alt="avatar" /></p>
+
+<p>上图看到，这两个 Pod 都已经处在 running 状态了。</p>
+
+<p>我们先看一下这个 pod yaml：</p>
+
+<p><img src="assets/FvBoeg3pm8fva4Ix8EmSIzxQs2LR" alt="avatar" /></p>
+
+<p>pod yaml 里面声明了刚才我们创建出来的PVC对象，然后把它挂载到nas-container容器中的 /data 下面。我们这个 pod 是通过前面课程中讲解 deployment 创建两个副本，通过反亲和性，将两个副本调度在不同的 node 上面。</p>
+
+<p><img src="assets/FgnxVbrCTKqn5dAPz0br2jyZoUqL" alt="avatar" /></p>
+
+<p>上图我们可以看一下，两个Pod所在的宿主机是不一样的。</p>
+
+<p>如下图所示：我们登陆到第一个上面，findmnt 看一下它的挂载信息，这个其实就挂载在我声明的 nas-fs 上，那我们再在下面 touch 个 test.test.test 文件，我们也会登陆到另外一个容器看一下，它有没有被共享。</p>
+
+<p><img src="assets/FlCrgKZ-MAmT3oZJg7hlgqgQCQIT" alt="avatar" /></p>
+
+<p>我们退出再登陆另外一个 pod（刚才登陆的是第一个，现在登陆第二个）。</p>
+
+<p>如下图所示：我们也 findmnt 一下，可以看到，这两个 pod 的远程挂载路径一样，也就是说我们用的是同一个 NAS PV，我们再看一下刚才创建出来的那个是否存在。</p>
+
+<p><img src="assets/FvFvcwfeRquZImc3d8cGoOACwbj8" alt="avatar" /></p>
+
+<p>可以看到，这个也是存在的，就说明这两个运行在不同node上的 pod 共享了同一个 nas 存储。</p>
+
+<p>接下来我们看一下把两个 pod 删掉之后的情况。先删Pod，接着再删一下对应的 PVC(K8s内部对pvc对象由保护机制，在删除pvc对象时如果发现有pod在使用pvc，pvc是删除不掉的)，这个可能要稍等一下。</p>
+
+<p><img src="assets/FvE83zl6fe452Ise-GffNKldJ1Cq" alt="avatar" /></p>
+
+<p>看一下下图对应的 PVC 是不是已经被删掉了。</p>
+
+<p><img src="assets/FjAol2eKYuoVn-a4Yd0J42kBi_Zo" alt="avatar" /></p>
+
+<p>上图显示，它已经被删掉了。再看一下，刚才的 nas PV 还是在的，它的状态是处在 Released 状态，也就是说刚才使用它的 PVC 已经被删掉了，然后它被 released 了。又因为我们 RECLAIN POLICY 是 Retain，所以它这个 PV 是被保留下来的。</p>
+
+<h3>动态 Provisioning 例子</h3>
+
+<p>接下来我们来看第二个例子，动态 Provisioning 的例子。我们先把保留下来的 PV 手动删掉，可以看到集群中没有 PV了。接下来演示一下动态 Provisioning。</p>
+
+<p>首先，先去创建一个生成 PV 的模板文件，也就是 storageclass。看一下 storageclass 里面的内容，其实很简单。</p>
+
+<p><img src="assets/FqUmuY0twPO9rCISNk1gC2JcVk_V" alt="avatar" /></p>
+
+<p>如上图所示，我事先指定的是我要创建存储的卷插件(阿里云云盘插件，由阿里云团队开发)，这个我们已经提前部署好了；我们可以看到，parameters部分是创建存储所需要的一些参数，但是用户不需要关心这些信息；然后是 reclaimPolicy，也就是说通过这个 storageclass 创建出来的 PV 在给绑定到一起的 PVC 删除之后，它是要保留还是要删除。</p>
+
+<p><img src="assets/Fg_mTM6GX9f_4M1xt42iwYlttuRL" alt="avatar" /></p>
+
+<p>如上图所示：现在这个集群中是没有 PV 的，我们动态提交一个 PVC 文件，先看一下它的 PVC 文件。它的 accessModes-ReadWriteOnce(因为阿里云云盘其实只能是单node读写的，所以我们声明这样的方式），它的存储大小需求是 30G，它的 storageClassName 是 csi-disk，就是我们刚才创建的 storageclass，也就是说它指定要通过这个模板去生成 PV。</p>
+
+<p><img src="assets/FsqNYtTTGnUyLV2u4hG39vkUcJb9" alt="avatar" /></p>
+
+<p>这个 PVC 此时正处在 pending 状态，这就说明它对应的 PV 还在创建过程中。</p>
+
+<p><img src="assets/FlUl2GEfG_o04F150cunvqKb1p4n" alt="avatar" /></p>
+
+<p>稍过一会，我们看到已经有一个新的 PV 生成，这个 PV 其实就是根据我们提交的 PVC 以及 PVC 里面指定的storageclass 动态生成的。之后k8s会将生成的 PV 以及我们提交的 PVC，就是这个 disk PVC 做绑定，之后我们就可以通过创建 pod 来使用了。</p>
+
+<p>再看一下 pod yaml：</p>
+
+<p><img src="assets/Fr1xeD1emQDSPXFL9AtuzwE1jxxH" alt="avatar" /></p>
+
+<p>pod yaml 很简单，也是通过 PVC 声明，表明使用这个 PVC。然后是挂载点，下面我们可以创建看一下。</p>
+
+<p><img src="assets/FjNOzsDuK9EcSKXYc3zyMfFg4KDm" alt="avatar" /></p>
+
+<p>如下图所示：我们可以大概看一下 Events，首先被调度器调度，调度完之后，接下来会有个 attachdetach controller，它会去做 disk的attach操作，就是把我们对应的 PV 挂载到调度器调度的 node 上，然后Pod对应的容器才能启动，启动容器才能使用对应的盘。</p>
+
+<p><img src="assets/FjuLUczGXW9kx-JlbPNRery3OVHj" alt="avatar" /></p>
+
+<p>接下来我会把 PVC 删掉，看一下PV 会不会根据我们的 reclaimPolicy 随之删掉呢？我们先看一下，这个时候 PVC 还是存在的，对应的 PV 也是存在的。</p>
+
+<p><img src="assets/Ft2vyWMQNtk0invLWtxoRLM4kDgJ" alt="avatar" /></p>
+
+<p>然后删一下 PVC，删完之后再看一下：我们的 PV 也被删了，也就是说根据 reclaimPolicy，我们在删除 PVC 的同时，PV 也会被删除掉。</p>
+
+<p><img src="assets/FrkV_53J6EMx7p7Ol-KOZydGskD_" alt="avatar" /></p>
+
+<p>我们的演示部分就到这里了。</p>
+
+<h2>架构设计</h2>
+
+<h3>PV 和 PVC 的处理流程</h3>
+
+<p>我们接下来看一下 K8s 中的 PV 和 PVC 体系的完整处理流程。我首先看一下这张图的右下部分里面提到的 csi。</p>
+
+<p><img src="assets/FpszYRyleOBPZv8gyFWEQwdV1wbu" alt="avatar" /></p>
+
+<p>csi 是什么？csi 的全称是 container storage interface，它是K8s社区后面对存储插件实现(out of tree)的官方推荐方式。csi 的实现大体可以分为两部分：</p>
+
+<ul>
+
+<li>第一部分是由k8s社区驱动实现的通用的部分，像我们这张图中的 csi-provisioner和 csi-attacher controller；</li>
+
+<li>另外一种是由云存储厂商实践的，对接云存储厂商的 OpenApi，主要是实现真正的 create/delete/mount/unmount 存储的相关操作，对应到上图中的csi-controller-server和csi-node-server。</li>
+
+</ul>
+
+<p>接下来看一下，当用户提交 yaml 之后，k8s内部的处理流程。用户在提交 PVCyaml 的时候，首先会在集群中生成一个 PVC 对象，然后 PVC 对象会被 csi-provisioner controller watch到，csi-provisioner 会结合 PVC 对象以及 PVC 对象中声明的 storageClass，通过 GRPC 调用 csi-controller-server，然后，到云存储服务这边去创建真正的存储，并最终创建出来 PV 对象。最后，由集群中的 PV controller 将 PVC 和 PV 对象做 bound 之后，这个 PV 就可以被使用了。</p>
+
+<p>用户在提交 pod 之后，首先会被调度器调度选中某一个合适的node，之后该 node 上面的 kubelet 在创建 pod 流程中会通过首先 csi-node-server 将我们之前创建的 PV 挂载到我们 pod 可以使用的路径，然后kubelet开始 create &amp;&amp; start pod中的所有container。</p>
+
+<h3>PV、PVC 以及通过 csi 使用存储流程</h3>
+
+<p>我们接下来通过另一张图来更加详细看一下我们 PV、PVC 以及通过 CSI 使用存储的完整流程。</p>
+
+<p><img src="assets/Fhy2xgbxikVRZjTVWgVHXxcCJ3cC" alt="avatar" /></p>
+
+<p>主要分为三个阶段：</p>
+
+<ul>
+
+<li>第一个阶段(Create阶段)是用户提交完 PVC，由 csi-provisioner 创建存储，并生成 PV 对象，之后 PV controller 将 PVC 及生成的 PV 对象做 bound，bound 之后，create 阶段就完成了；</li>
+
+<li>之后用户在提交 pod yaml 的时候，首先会被调度选中某一个 合适的node，等 pod 的运行 node 被选出来之后，会被 AD Controller watch 到 pod 选中的 node，它会去查找 pod 中使用了哪些 PV。然后它会生成一个内部的对象叫 VolumeAttachment 对象，从而去触发 csi-attacher去调用csi-controller-server 去做真正的 attache 操作，attach操作调到云存储厂商OpenAPI。这个 attach 操作就是将存储 attach到 pod 将会运行的 node 上面。第二个阶段 —— attach阶段完成；</li>
+
+<li>然后我们接下来看第三个阶段。第三个阶段 发生在kubelet 创建 pod的过程中，它在创建 pod 的过程中，首先要去做一个 mount，这里的 mount 操作是为了将已经attach到这个 node 上面那块盘，进一步 mount 到 pod 可以使用的一个具体路径，之后 kubelet 才开始创建并启动容器。这就是 PV 加 PVC 创建存储以及使用存储的第三个阶段 —— mount 阶段。</li>
+
+</ul>
+
+<p>总的来说，有三个阶段：第一个 create 阶段，主要是创建存储；第二个 attach 阶段，就是将那块存储挂载到 node 上面(通常为将存储load到node的/dev下面)；第三个 mount 阶段，将对应的存储进一步挂载到 pod 可以使用的路径。这就是我们的 PVC、PV、已经通过CSI实现的卷从创建到使用的完整流程。</p>
+
+<h2>结束语</h2>
+
+<p>我们今天的内容大概就到这里，下一节我将为大家来分享 Volume Snapshot 以及 Volume Topology-aware Scheduling 相关的知识以及具体处理流程，谢谢大家~</p>
+
+<h2>本节总结（需补充）</h2>
+
+<p>本节课的主要内容就到此为止了，这里为大家简单总结一下。</p>
+
+<ul>
+
+<li>K8s Volume是用户Pod保存业务数据的重要接口和手段</li>
+
+<li>PVC和PV体系增强了K8s Volumes在多Pod共享/迁移/存储扩展等场景下的能力</li>
+
+<li>PV（存储）的不同供给模式(static and dynamic)可以通过多种方式为集群中的Pod供给所需的存储</li>
+
+</ul>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/08 应用配置管理.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/CNCF X 阿里巴巴云原生技术公开课/10 应用存储和持久化数据卷：存储快照与拓扑调度(至天).md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996e950c943d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>068  性能设计篇之边缘计算.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/000 开篇词  洞悉技术的本质，享受科技的乐趣.md">000 开篇词  洞悉技术的本质，享受科技的乐趣.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/001  程序员如何用技术变现（上）.md">001  程序员如何用技术变现（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/002  程序员如何用技术变现（下）.md">002  程序员如何用技术变现（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/003  Equifax信息泄露始末.md">003  Equifax信息泄露始末.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/004  从Equifax信息泄露看数据安全.md">004  从Equifax信息泄露看数据安全.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/005  何为技术领导力.md">005  何为技术领导力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/006  如何拥有技术领导力.md">006  如何拥有技术领导力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/007  推荐阅读：每个程序员都该知道的事.md">007  推荐阅读：每个程序员都该知道的事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/008  Go语言，Docker和新技术.md">008  Go语言，Docker和新技术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/009  答疑解惑：渴望、热情和选择.md">009  答疑解惑：渴望、热情和选择.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/010  如何成为一个大家愿意追随的Leader？.md">010  如何成为一个大家愿意追随的Leader？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/011  程序中的错误处理：错误返回码和异常捕捉.md">011  程序中的错误处理：错误返回码和异常捕捉.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/012  程序中的错误处理：异步编程和最佳实践.md">012  程序中的错误处理：异步编程和最佳实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/013  魔数 0x5f3759df.md">013  魔数 0x5f3759df.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/014  推荐阅读：机器学习101.md">014  推荐阅读：机器学习101.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/015  时间管理：同扭曲时间的事儿抗争.md">015  时间管理：同扭曲时间的事儿抗争.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/016  时间管理：投资赚取时间.md">016  时间管理：投资赚取时间.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/017  故障处理最佳实践：应对故障.md">017  故障处理最佳实践：应对故障.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/018  故障处理最佳实践：故障改进.md">018  故障处理最佳实践：故障改进.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/019  答疑解惑：我们应该能够识别的表象和本质.md">019  答疑解惑：我们应该能够识别的表象和本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/020  分布式系统架构的冰与火.md">020  分布式系统架构的冰与火.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/021  从亚马逊的实践，谈分布式系统的难点.md">021  从亚马逊的实践，谈分布式系统的难点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/022  分布式系统的技术栈.md">022  分布式系统的技术栈.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/023  分布式系统关键技术：全栈监控.md">023  分布式系统关键技术：全栈监控.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/024  分布式系统关键技术：服务调度.md">024  分布式系统关键技术：服务调度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/025  分布式系统关键技术：流量与数据调度.md">025  分布式系统关键技术：流量与数据调度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/026  洞悉PaaS平台的本质.md">026  洞悉PaaS平台的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/027  推荐阅读：分布式系统架构经典资料.md">027  推荐阅读：分布式系统架构经典资料.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/028  编程范式游记（1）- 起源.md">028  编程范式游记（1）- 起源.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/029  编程范式游记（2）- 泛型编程.md">029  编程范式游记（2）- 泛型编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/030  编程范式游记（3） - 类型系统和泛型的本质.md">030  编程范式游记（3） - 类型系统和泛型的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/031  Git协同工作流，你该怎样选.md">031  Git协同工作流，你该怎样选.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/032  推荐阅读：分布式数据调度相关论文.md">032  推荐阅读：分布式数据调度相关论文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/033  编程范式游记（4）- 函数式编程.md">033  编程范式游记（4）- 函数式编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/034  编程范式游记（5）- 修饰器模式.md">034  编程范式游记（5）- 修饰器模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/035  编程范式游记（6）- 面向对象编程.md">035  编程范式游记（6）- 面向对象编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/036  编程范式游记（7）- 基于原型的编程范式.md">036  编程范式游记（7）- 基于原型的编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/037  编程范式游记（8）- Go 语言的委托模式.md">037  编程范式游记（8）- Go 语言的委托模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/038  编程范式游记（9）- 编程的本质.md">038  编程范式游记（9）- 编程的本质.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/039  编程范式游记（10）- 逻辑编程范式.md">039  编程范式游记（10）- 逻辑编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/040  编程范式游记（11）- 程序世界里的编程范式.md">040  编程范式游记（11）- 程序世界里的编程范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/041  弹力设计篇之“认识故障和弹力设计”.md">041  弹力设计篇之“认识故障和弹力设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/042  弹力设计篇之“隔离设计”.md">042  弹力设计篇之“隔离设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/043  弹力设计篇之“异步通讯设计”.md">043  弹力设计篇之“异步通讯设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/044  弹力设计篇之“幂等性设计”.md">044  弹力设计篇之“幂等性设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/045  弹力设计篇之“服务的状态”.md">045  弹力设计篇之“服务的状态”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/046  弹力设计篇之“补偿事务”.md">046  弹力设计篇之“补偿事务”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/047  弹力设计篇之“重试设计”.md">047  弹力设计篇之“重试设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/048  弹力设计篇之“熔断设计”.md">048  弹力设计篇之“熔断设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/049  弹力设计篇之“限流设计”.md">049  弹力设计篇之“限流设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/050  弹力设计篇之“降级设计”.md">050  弹力设计篇之“降级设计”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/051  弹力设计篇之“弹力设计总结”.md">051  弹力设计篇之“弹力设计总结”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/052  区块链技术 - 区块链的革命性及技术概要.md">052  区块链技术 - 区块链的革命性及技术概要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/053  区块链技术 - 区块链技术细节 - 哈希算法.md">053  区块链技术 - 区块链技术细节 - 哈希算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/054  区块链技术 - 区块链技术细节 - 加密和挖矿.md">054  区块链技术 - 区块链技术细节 - 加密和挖矿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/055  区块链技术 - 去中心化的共识机制.md">055  区块链技术 - 去中心化的共识机制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/056  区块链技术 - 智能合约.md">056  区块链技术 - 智能合约.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/057  区块链技术 - 传统金融和虚拟货币.md">057  区块链技术 - 传统金融和虚拟货币.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/058  管理设计篇之分布式锁.md">058  管理设计篇之分布式锁.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/059  管理设计篇之配置中心.md">059  管理设计篇之配置中心.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/060  管理设计篇之边车模式.md">060  管理设计篇之边车模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/061  管理设计篇之服务网格.md">061  管理设计篇之服务网格.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/062  管理设计篇之网关模式.md">062  管理设计篇之网关模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/063  管理设计篇之部署升级策略.md">063  管理设计篇之部署升级策略.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/064  性能设计篇之缓存.md">064  性能设计篇之缓存.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/065  性能设计篇之异步处理.md">065  性能设计篇之异步处理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/066  性能设计篇之数据库扩展.md">066  性能设计篇之数据库扩展.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/067  性能设计篇之秒杀.md">067  性能设计篇之秒杀.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/左耳听风/068  性能设计篇之边缘计算.md">068  性能设计篇之边缘计算.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/069  程序员练级攻略（2018）：开篇词.md">069  程序员练级攻略（2018）：开篇词.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/070  程序员练级攻略（2018）：零基础启蒙.md">070  程序员练级攻略（2018）：零基础启蒙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/071  程序员练级攻略（2018）：正式入门.md">071  程序员练级攻略（2018）：正式入门.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/072  程序员练级攻略（2018）：程序员修养.md">072  程序员练级攻略（2018）：程序员修养.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/073  程序员练级攻略（2018）：编程语言.md">073  程序员练级攻略（2018）：编程语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/074  程序员练级攻略：理论学科.md">074  程序员练级攻略：理论学科.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/075  程序员练级攻略（2018）：系统知识.md">075  程序员练级攻略（2018）：系统知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/076  程序员练级攻略（2018）：软件设计.md">076  程序员练级攻略（2018）：软件设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/077  程序员练级攻略（2018）：Linux系统、内存和网络.md">077  程序员练级攻略（2018）：Linux系统、内存和网络.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/078  程序员练级攻略（2018）：异步IO模型和Lock-Free编程.md">078  程序员练级攻略（2018）：异步IO模型和Lock-Free编程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/079  程序员练级攻略（2018）：Java底层知识.md">079  程序员练级攻略（2018）：Java底层知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/080  程序员练级攻略（2018）：数据库.md">080  程序员练级攻略（2018）：数据库.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/081  程序员练级攻略（2018）：分布式架构入门.md">081  程序员练级攻略（2018）：分布式架构入门.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/082  程序员练级攻略（2018）：分布式架构经典图书和论文.md">082  程序员练级攻略（2018）：分布式架构经典图书和论文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/083  程序员练级攻略（2018）：分布式架构工程设计.md">083  程序员练级攻略（2018）：分布式架构工程设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/084  程序员练级攻略（2018）：微服务.md">084  程序员练级攻略（2018）：微服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/085  程序员练级攻略（2018）：容器化和自动化运维.md">085  程序员练级攻略（2018）：容器化和自动化运维.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/086  程序员练级攻略（2018）：机器学习和人工智能.md">086  程序员练级攻略（2018）：机器学习和人工智能.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/087  程序员练级攻略（2018）：前端基础和底层原理.md">087  程序员练级攻略（2018）：前端基础和底层原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/088  程序员练级攻略（2018）：前端性能优化和框架.md">088  程序员练级攻略（2018）：前端性能优化和框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/089  程序员练级攻略（2018）：UIUX设计.md">089  程序员练级攻略（2018）：UIUX设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/090  程序员练级攻略（2018）：技术资源集散地.md">090  程序员练级攻略（2018）：技术资源集散地.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/091  程序员面试攻略：面试前的准备.md">091  程序员面试攻略：面试前的准备.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/092  程序员面试攻略：面试中的技巧.md">092  程序员面试攻略：面试中的技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/093  程序员面试攻略：面试风格.md">093  程序员面试攻略：面试风格.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/094  程序员面试攻略：实力才是王中王.md">094  程序员面试攻略：实力才是王中王.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/095  高效学习：端正学习态度.md">095  高效学习：端正学习态度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/096  高效学习：源头、原理和知识地图.md">096  高效学习：源头、原理和知识地图.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/097  高效学习：深度，归纳和坚持实践.md">097  高效学习：深度，归纳和坚持实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/098  高效学习：如何学习和阅读代码.md">098  高效学习：如何学习和阅读代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/099  高效学习：面对枯燥和量大的知识.md">099  高效学习：面对枯燥和量大的知识.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/100  高效沟通：Talk和Code同等重要.md">100  高效沟通：Talk和Code同等重要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/101  高效沟通：沟通阻碍和应对方法.md">101  高效沟通：沟通阻碍和应对方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/102  高效沟通：沟通方式及技巧.md">102  高效沟通：沟通方式及技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/103  高效沟通：沟通技术.md">103  高效沟通：沟通技术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/104  高效沟通：好老板要善于提问.md">104  高效沟通：好老板要善于提问.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/105  高效沟通：好好说话的艺术.md">105  高效沟通：好好说话的艺术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/106 加餐  谈谈我的“三观”.md">106 加餐  谈谈我的“三观”.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/左耳听风/107 结束语  业精于勤，行成于思.md">107 结束语  业精于勤，行成于思.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>068  性能设计篇之边缘计算</h1>
+
+<p>前面我们通过一个秒杀的示例，展示了在 CDN 结点上简单地部署个小服务，就可以完成在数据中心很难完成的事，你可以看到边缘结点的一些威力。今天，我会和你一起聊一下我所认识的边缘计算，这也是我正在创业要做的事情。</p>
+
+<p>首先，一说起边缘计算，网上大多数文章都会说这是和 IoT 相关的一个技术。其实，我觉得这个说法只说对了边缘计算的一部分，边缘计算可以做的事情还有很多很多。</p>
+
+<p>所谓边缘计算，它是相对于数据中心而言。数据中心喜欢把所有的服务放在一个机房里集中处理用户的数据和请求，集中式部署一方面便于管理和运维，另一方面也便于服务间的通讯有一个比较好的网络保障。的确没错。不过，我们依然需要像 CDN 这样的边缘式的内容发布网络，把我们的静态内容推到离用户最近的地方，然后获得更好的性能。</p>
+
+<p>如果我们让 CDN 的这些边缘结点拥有可定制的计算能力，那么就可以像秒杀那样，可以在边缘结点上处理很多事情，从而为我们的数据中心带来更好的性能，更好的扩展性，还有更好的稳定性。而我们的用户也会觉得响应飞快，从而有了更好的用户体验。</p>
+
+<p>下面，让我们来看看为什么边缘计算会变成一个必然的产物。这里，我有两个例子。</p>
+
+<h1>为什么要有边缘计算</h1>
+
+<h2>从趋势上来说</h2>
+
+<p>首先，我们得看一下整个时代是怎么发展的。我们处在信息化革命时代，也有人叫数字化革命，总之就是电脑时代。这个时代，把各式各样的信息都给数字化掉，然后交给计算机来处理。所以，我们要清楚地知道，<strong>整个计算机发展的本质就是我们人类生活信息化建设的过程</strong>。</p>
+
+<p>这个过程中，计算机硬件的发展也是非常迅猛的。CPU 的处理速度，硬盘的大小和速度，网络的带宽和速度都在拼命地升级和降价。我们用越来越低的成本，获得越来越快的速度、越来越大的带宽、越来越快的存储……</p>
+
+<p>所有的这一切，其实都是和信息还有数据有关。我们的信息和数据越来越多，越来越大，所以，我们需要更好、更快、更便宜的硬件和基础设施。这个演化过程中，在我参加工作这 20 年来就没有停止过，而且，我也不认为未来会停下来，这个过程只会越来越加剧。</p>
+
+<p>下面是我画的一个时代的变更图（不用太纠结其中的时间点，我只是想表示信息演进的过程）</p>
+
+<p><img src="assets/3257b6428ef87f7a663bd3677bb49ddb.png" alt="img" /></p>
+
+<p>从一开始，我们处在 MB 时代，那个时候，电脑也是几百兆的硬盘就够了。因为那个时候的信息量不够大，只有内容服务提供商在提供内容，他们主要以新闻资讯为主，所以数据还不多。</p>
+
+<p>然后，开始进入 UGC 时代，用户开始产生数据，他们写博客，发贴子，拍照片，拍视频……于是，信息越来越多，于是我们的数据进入了 GB 时代，于是计算机的硬件，网络的基础设施都在升级。</p>
+
+<p>再然后，我们进入了大数据时代，这个时代也是移动互联网的时代。以前你要打开电脑才能上网，现在你只要手机有电，你就是在线的，而且这个时代，大量的线下服务走到线上，比如外卖、叫车……于是，有各种各样的 App 在收集你的行为和数据。这个时候，是计算机在记录每个人的上网行为的时候，所以，数据量也不是一般的大。</p>
+
+<p>然后，这个趋势只会越来越大，下一个时间，我们的数据和信息只会越来越大，因为计算机正在吞噬可以被数字化的一切事情。除了继续吞噬线上的业务，一定会开始吞噬线下的信息和数据。比如，通过摄像头识别线下的各种活动，如车牌；通过一些传感器来收集线下的各种数据，如农业、水利……于是，数据只会变得越来越大。</p>
+
+<p>这个时候，我们想一想，如果把这么大量的数据都拿到数据中心来做分析和计算，一个数据中心顶得住吗？我现在已经接到好几个用户和我说，数据量太大了，不知道怎么架构数据中心了，各种慢，各种贵，各种痛苦……</p>
+
+<p>而且，还有另外一个需求就是要实时，对于大数据处理的实时需求越来越成为刚需了，因为，如果不能实时处理、实时响应，那么怎么能跟得上这个快速的时代呢。这就好像一个人脸识别的功能。如果苹果手机的人脸识别需要到服务器上算，然后把结果返回，那么用户的体验就很糟糕了。这就是为什么苹果在手机里直接植入了神经网络的芯片。</p>
+
+<p>**我们可以看到，数量越来越大，分析结果的速度需要越来越快，这两个需求，只会把我们逼到边缘计算上去。**如果你还是在数据中心处理，你会发现你的成本只会越来越高，到一时候就完全玩不下去了。</p>
+
+<h2>从成本上来说</h2>
+
+<p>上面这个是第一个示例，我们再来看看数据中心的成本，当一个公司需要支持几十万用户时候，并没有什么感觉。当他们要支撑上千万乃至上亿的用户的时候，我们就会发现，一个几十万用户的系统架构和一个支撑上千万用户的架构，在成本上来说，完全不是一个数量级的。就像文本中的图所画的一样（只是一个草图，用于说明问题）。</p>
+
+<p><img src="assets/f5337ffab2d65ae5fc114ba21da82de7.png" alt="img" /></p>
+
+<p>在这个图中，我们可以看到，当需要处理的数据或是用户请求的规模越来越大时，我们的成本是呈现快速上升的曲线，而不是一个线性上升的成本关系。</p>
+
+<p>我们可以来算一下，根据我过去服务过的 40 多家公司的经验，可以看到如下的投入：</p>
+
+<ul>
+
+<li>几十万用户的公司，只需要处理百级 QPS 的量，只需要 10 台左右的服务器；</li>
+
+<li>上百万用户的公司，只需要处理千级 QPS 的量，需要有 50 台左右的服务器；</li>
+
+<li>上千万用户的公司，需要处理万级到十万级 QPS 的量，需要 700 台左右的服务器；</li>
+
+<li>上亿用户的公司，其需要处理百万级 QPS 的量，需要上万台的服务器。</li>
+
+</ul>
+
+<p>可以看到，十万用户到上亿用户，也就多了 100 倍，为什么服务器需要 1000 倍？完全不是呈线性的关系。</p>
+
+<p>这时因为，当架构变复杂了后，你就要做很多非功能的东西了，比如，缓存、队列、服务发现、网关、自动化运维、监控等。</p>
+
+<p>那么，我们不妨开个脑洞。如果我们能够把那上亿的用户拆成 100 个百万级的用户，那么只需要 5000 多台机器（100 个 50 台服务器的数据中心）。</p>
+
+<p>我们还是同样服务了这么多的用户，但我们的成本下降得很快。只不过，我们需要运维 100 个小数据中心。不过，相信我，运维 100 个 50 台服务器的小数据中心的难度应该远远低于运维一个 10000 台服务器的数据中心。</p>
+
+<p>好了，问题来了，什么样的业务可以这么做？我觉得有地域性的业务是可以这么做的，比如：外卖、叫车、共享单车之类的。</p>
+
+<p>然而，100 个 50 台服务器的小数据中心也会带来一些复杂的问题，因为当你的公司有 100 万用户的时候的业务形态和有 1 亿用户的业务形态是完全不一样的，1 亿用户的业务形态可能会复杂得多得多。也就是说，我们不可能在一个小数据中心只有 50 台服务器，因为那是百万用户的业务形态，只有几十个服务。当公司成长到上亿用户的规模时，可能会有上百个服务，50 台服务器是不够部署的。</p>
+
+<p>所以，我上面那种多个数据中心的理想只存在于理论上，而实际上不会发生。</p>
+
+<p>但是，我们依然可以沿着这条路思考下去。我们不难发现，我们完全可以用边缘结点处理高峰流量，这样，我们的数据中心就不需要花那么大的成本来建设了。</p>
+
+<p>于是，还是到了边缘计算。</p>
+
+<h1>边缘计算的业务场景</h1>
+
+<p>通过上面的两个案例分析，我觉得边缘计算一定会成为一个必然产物，其会作为以数据中心为主的云计算的一个非常好的补充。这个补充在我看来，其主要是做下面一些事情。</p>
+
+<ul>
+
+<li>处理一些实时响应的业务。它和用户靠得很近，所以其可以实时响应用户的一些本地请求，比如，某公司的人脸门禁系统、共享单车的开锁。</li>
+
+<li>处理一些简单的业务逻辑。比如像秒杀、抢红包这样的业务场景。</li>
+
+<li>收集并结构化数据。比如，把视频中的车牌信息抠出来，转成文字，传回数据中心。</li>
+
+<li>实时设备监控。主要是线下设备的数据采集和监控。</li>
+
+<li>P2P 的一些去中心化的应用。比如：边缘结点作为一个服务发现的服务器，可以让本地设备之间进行 P2P 通讯。</li>
+
+<li>云资源调度。边缘结点非常适合用来做云端服务的调度。比如，允许用户使用不同生产商的云存储服务，使用不同生产商但是功能相同的 API 服务（比如支付 API 相关）。因为是流量接入方，所以可以调度流量。</li>
+
+<li>云资源聚合。比如，我们可以把语音转文字的 API 和语义识别的 API 相结合，聚合出来一个识别语音语义的 API，从而简化开发人员的开发成本。</li>
+
+<li>……</li>
+
+</ul>
+
+<p>其实还有很多，我觉得边缘计算带来的想象力还是很令人激动的。</p>
+
+<p>关于现实当中的一些案例，你可以看看 <a href="https://www.slideshare.net/MikeyCohen1/edge-architecture-ieee-international-conference-on-cloud-engineering-32240146">Netflix 的全球边缘架构的 PPT</a>。</p>
+
+<h1>边缘计算的关键技术</h1>
+
+<p>在我看来，边缘计算的关键技术如下。</p>
+
+<ul>
+
+<li>API Gateway。关于网关，这个就不说了，我们在管理设计篇中有一篇就是专门讨论这个东西的。</li>
+
+<li>Serverless/FaaS。就是服务函数化，这个技术就像是 AWS Lambda 服务一样，你写好一个函数，然后不用关心这个函数运行在哪里，直接发布就好了。然后就可以用了。</li>
+
+</ul>
+
+<p>Serverless 这个词第一次被使用大约是 2012 年由 Ken Form 所写的一篇名为《Why The Future of Software and Apps is Serverless》的文章。这篇文章谈到的内容是关于持续集成及源代码控制等，并不是我们今天所特指的这一种架构模式。</p>
+
+<p>但 Amazon 在 2014 年发布的 AWS Lambda 让 &quot;Serverless&quot; 这一范式提高到一个全新的层面，为云中运行的应用程序提供了一种全新的系统体系结构。至此再也不需要在服务器上持续运行进程以等待 HTTP 请求或 API 调用，而是可以通过某种事件机制触发代码的执行。</p>
+
+<p>通常，这只需要在 AWS 的某台服务器上配置一个简单的功能。此后 Ant Stanley 在 2015 年 7 月的名为《Server are Dead…》的文章中更是围绕着 AWS Lambda 及刚刚发布的 AWS API Gateway 这两个服务解释了他心目中的 Serverless，“Server are dead…they just don’t know it yet”。</p>
+
+<p>如果说微服务是以专注于单一责任与功能的小型功能块为基础，利用模块化的方式组合出复杂的大型应用程序，那么我们还可以进一步认为 Serverless 架构可以提供一种更加 &quot; 代码碎片化 &quot; 的软件架构范式，我们称之为 Function as a Services（FaaS）。所谓的 &quot; 函数 &quot;（Function）提供的是相比微服务更加细小的程序单元。</p>
+
+<p>目前比较流行的几个开源项目是：</p>
+
+<ul>
+
+<li><a href="https://github.com/serverless/serverless">Serverless Framework</a></li>
+
+<li><a href="https://github.com/fission/fission">Fission: Serverless Functions for Kubernetes</a></li>
+
+<li><a href="https://github.com/open-lambda/open-lambda">Open Lambda</a></li>
+
+<li><a href="https://github.com/openfaas/faas">Open FaaS</a></li>
+
+<li><a href="https://github.com/iron-io/functions">IronFunction</a></li>
+
+</ul>
+
+<h1>小结</h1>
+
+<p>好了，我们来总结一下今天分享的主要内容。首先，我描绘了边缘计算的初始想象。接着，我讲了从计算的发展趋势上来看，数据量的不断增大迫使边缘计算成为一个必然。大数据中心的成本问题，也需要通过边缘计算来降低。然后，我列举了边缘计算的业务场景。最后，我介绍了实现边缘计算所需的关键技术。希望对你有帮助。</p>
+
+<p>也欢迎你分享一下你对边缘计算的看法如何？有没有什么好的想法？</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/左耳听风/067  性能设计篇之秒杀.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/左耳听风/069  程序员练级攻略（2018）：开篇词.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099786dea923cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

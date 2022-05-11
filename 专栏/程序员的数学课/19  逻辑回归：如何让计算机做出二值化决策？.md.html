@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>19  逻辑回归：如何让计算机做出二值化决策？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/00 开篇词  数学，编程能力的营养根基.md">00 开篇词  数学，编程能力的营养根基.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/01  从计数开始，程序员必知必会的数制转换法.md">01  从计数开始，程序员必知必会的数制转换法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/02  逻辑与沟通，怎样才能讲出有逻辑的话？.md">02  逻辑与沟通，怎样才能讲出有逻辑的话？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/03  用数学决策，如何规划好投入、转化和产出？.md">03  用数学决策，如何规划好投入、转化和产出？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/04  万物可数学，经典公式是如何在生活中应用的？.md">04  万物可数学，经典公式是如何在生活中应用的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/05  求极值：如何找到复杂业务的最优解？.md">05  求极值：如何找到复杂业务的最优解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/06  向量及其导数：计算机如何完成对海量高维度数据计算？.md">06  向量及其导数：计算机如何完成对海量高维度数据计算？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/07  线性回归：如何在离散点中寻找数据规律？.md">07  线性回归：如何在离散点中寻找数据规律？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/08  加乘法则：如何计算复杂事件发生的概率？.md">08  加乘法则：如何计算复杂事件发生的概率？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/09  似然估计：如何利用 MLE 对参数进行估计？.md">09  似然估计：如何利用 MLE 对参数进行估计？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/10  信息熵：事件的不确定性如何计算？.md">10  信息熵：事件的不确定性如何计算？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/11  灰度实验：如何设计灰度实验并计算实验的收益？.md">11  灰度实验：如何设计灰度实验并计算实验的收益？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md">12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/13  复杂度：如何利用数学推导对程序进行优化？.md">13  复杂度：如何利用数学推导对程序进行优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/14  程序的循环：如何利用数学归纳法进行程序开发？.md">14  程序的循环：如何利用数学归纳法进行程序开发？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/15  递归：如何计算汉诺塔问题的移动步数？.md">15  递归：如何计算汉诺塔问题的移动步数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/16  二分法：如何利用指数爆炸优化程序？.md">16  二分法：如何利用指数爆炸优化程序？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/17  动态规划：如何利用最优子结构解决问题？.md">17  动态规划：如何利用最优子结构解决问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/18  AI 入门：利用 3 个公式搭建最简 AI 框架.md">18  AI 入门：利用 3 个公式搭建最简 AI 框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/程序员的数学课/19  逻辑回归：如何让计算机做出二值化决策？.md">19  逻辑回归：如何让计算机做出二值化决策？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/20  决策树：如何对 NP 难复杂问题进行启发式求解？.md">20  决策树：如何对 NP 难复杂问题进行启发式求解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md">21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/22  面试中那些坑了无数人的算法题.md">22  面试中那些坑了无数人的算法题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/23  站在生活的十字路口，如何用数学抉择？.md">23  站在生活的十字路口，如何用数学抉择？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/24 结束语  数学底子好，学啥都快.md">24 结束语  数学底子好，学啥都快.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>19  逻辑回归：如何让计算机做出二值化决策？</h1>
+
+<p>在上一讲，学习完 AI 的基本框架后，我们现在就开始围绕当前人工智能领域最常用的模型，来分别学习一下它们背后的原理。</p>
+
+<p>这一讲，我们从最常见的逻辑回归模型说起，逻辑回归是人工智能领域中入门级的基础模型，它在很多领域都有应用，例如用户的信贷模型、疾病识别等。</p>
+
+<p>逻辑回归是一种分类模型，可以对一个输入 x，识别并预测出一个二值化的类别标签 y。例如，要预测照片中人物的性别，可以采用逻辑回归建立模型。给模型输入一个描述照片的特征向量 x，经过模型的计算，可以得到输出值 y 为“男”或“女”。</p>
+
+<p>在深入学习逻辑回归的原理之前，我们先来了解一下什么是分类问题，以及分类问题有哪些类型。</p>
+
+<h3>分类问题</h3>
+
+<p>在人工智能领域中，分类问题是特别常见的一种问题类型。简而言之，分类问题就是对一个测试验本去预测它归属的类别。例如，预测胎儿性别、预测足球比赛结果。</p>
+
+<p>根据归属类别可能性的数量，分类问题又可以分为二分类问题和多分类问题。</p>
+
+<ul>
+
+<li>二分类问题，顾名思义就是预测的归属类别只有两个。例如，预测性别男/女、预测主场球队的胜负、预测明天是否下雨。</li>
+
+<li>多分类问题，预测的归属类别大于两个的那类问题。例如，预测足球比赛结果是胜、负，还是平局；预测明天天气是雨天、晴天，还是阴天。</li>
+
+</ul>
+
+<p>在研究分类的建模算法时，人们往往会从二分类问题入手，这主要是因为多分类问题可以用多个二分类问题来表示。例如，预测明天天气是雨天、晴天，还是阴天，这是个多分类问题（三分类）；它也可以表示为，预测明天是否下雨、预测明天是否晴天、预测明天是否阴天，这三个二分类问题。</p>
+
+<p>因此，二分类问题是分类问题的基础，在讨论分类算法时，人们往往会从二分类问题入手。</p>
+
+<h3>逻辑回归及其建模流程</h3>
+
+<p>逻辑回归（Logistic Regression，LR）是人工智能领域非常经典的算法之一，它可以用来对二分类问题进行建模，对于一个给定的输入，可以预测其类别为正 1 或负 0。接下来，我们就从 AI 基本框架的 3 个公式，来学习一下 LR 的建模流程。</p>
+
+<p>重温一下人工智能基本框架的 3 个公式分别是：</p>
+
+<ul>
+
+<li>第一步，根据假设，写出模型的输入、输出关系 y = f(<em><strong>w</strong></em>; x)；</li>
+
+<li>第二步，根据偏差的计算方法，写出描述偏差的损失函数 L(<em><strong>w</strong></em>)；</li>
+
+<li>第三步，对于损失函数，求解最优的参数值，即 <em><strong>w</strong></em>*= argmin L(<em><strong>w</strong></em>)。</li>
+
+</ul>
+
+<p>接下来，我会逐一展示这三步的过程。</p>
+
+<h4>1.模型的输入、输出关系（Sigmoid 函数）</h4>
+
+<p>在逻辑回归中，第一个公式的表达式非常简单，为 y=f(<em><strong>w;x</strong></em>)=sigmoid(<em><strong>w·x</strong></em>)=1/(1+e-<em><strong>w·x</strong></em>)。</p>
+
+<p>直观上来看，逻辑回归的模型假设是，把模型参数向量 <em><strong>w</strong></em> 和输入向量 <em><strong>x</strong></em> 的点乘（即线性变换）结果输入给 Sigmoid 函数中，即可得到预测值 y。</p>
+
+<p>此时的预测值 y 还是个 0～1 之间的连续值，这是因为 Sigmoid 函数的值域是 (0,1)。逻辑回归是个二分类模型，它的最终输出值只能是两个类别标签之一。通常，我们习惯于用“0”和“1”来分别标记二分类的两个类别。</p>
+
+<p>在逻辑回归中，常用预测值 y 和 0.5 的大小关系，来判断样本的类别归属。<strong>具体地，预测值 y 如果大于 0.5，则认为预测的类别为 1；反之，则预测的类别为 0。</strong></p>
+
+<p>我们把上面的描述进行总结，来汇总一下逻辑回归输入向量、预测值和类别标签之间的关系，则有下面的流程图。</p>
+
+<p><img src="assets/Cip5yF_lxJuAJjk2AAE7vKJA3Cg656.png" alt="图片1.png" /></p>
+
+<p>为了深入了解逻辑回归的模型假设，我们需要先认识下 Sigmoid 函数。Sigmoid 函数的表达式为 y = sigmoid(x)=1/(1+e-x)，它是个单调递增函数，定义域为 (-∞, +∞)，值域为 (0,1)，它的函数图像如下。
+
+<img src="assets/CgqCHl_lxKuAaTt2AAEuW5MrG8c228.png" alt="图片2.png" />
+
+我们可以看出，Sigmoid 函数可以将任意一个实数 x，单调地映射到 0 到 1 的区间内，这正好符合了“概率”的取值范围。</p>
+
+<p>我们还可以用求导公式来看一下 Sigmoid 函数的一阶导数。
+
+<img src="assets/Cip5yF_pVFqAQwAPAAA8cpQoHKA089.png" alt="WechatIMG1422.png" /></p>
+
+<h4>2.逻辑回归的损失函数</h4>
+
+<p>有了这些基本假设后，我们尝试根据偏差的计算方法，写出描述偏差的损失函数 L(<em><strong>w</strong></em>)。</p>
+
+<p>我们刚刚提到过，逻辑回归预测结果的值域 y 为 (0,1)，代表的是样本属于类别 1 的概率。</p>
+
+<ul>
+
+<li>具体而言，如果样本属于类别“1”的概率大于 0.5，则认为样本的预测类别为“1”；</li>
+
+<li>如果样本属于类别“1”的概率小于 0.5，则认为样本的预测类别为“0”。</li>
+
+</ul>
+
+<p>这里出现了这么多的概率，我们可以借鉴在《09 | 似然估计：如何利用 MLE 对参数进行估计？》中学的概率计算和极大似然估计的思想，尝试写出样本被正确预测的概率。
+
+<img src="assets/CgqCHl_pVHaAOfpZAAC78iA7-nA342.png" alt="WechatIMG1421.png" />
+
+我们将上面两个等式合并，就可以得到某个数据<em><strong>x</strong></em>i 被正确预测的概率，即 P(yi|xi,w)=Φ(zi)yi·[1-Φ(zi)]1-yi。</p>
+
+<ul>
+
+<li>如果真实结果 yi 为 1，则 P(yi|xi,w) = Φ(zi)，描述的是样本被预测为类别“1”的概率；</li>
+
+<li>如果真实结果 yi 为 0，则 P(yi|xi,w) = 1-Φ(zi)，描述的是样本被预测为类别“0”的概率。</li>
+
+</ul>
+
+<p>接下来可以将上式扩展到整个样本数据集中，则可采用极大似然估计得到 L(<em><strong>w</strong></em>)，即
+
+<img src="assets/Ciqc1F_lxSyACUiYAAA4FTEM9qs111.png" alt="图片4.png" /></p>
+
+<p>我们之前在《09 | 似然估计：如何利用 MLE 对参数进行估计？》学习极大似然估计 MLE 时，曾经提过一个常用的公式化简方法，那就是通过取对数，让连续乘积的大型运算变为连续求和，则有
+
+<img src="assets/CgpVE1_lxTyASfq6AAA1M4H_6RI019.png" alt="图片5.png" /></p>
+
+<h4><strong>3.求解最优的模型参数值</strong></h4>
+
+<p>AI 建模框架的最后一步，就是对损失函数求解最优的参数值，即<em><strong>w</strong></em>*= argmin l(<em><strong>w</strong></em>)。刚刚我们求得，损失函数为
+
+<img src="assets/CgpVE1_lxUmAc_dEAAA5bSwYYTY904.png" alt="图片6.png" />
+
+可见，损失函数是个关于 <em><strong>x</strong></em>i、yi 和 <em><strong>w</strong></em> 的函数，而<em><strong>x</strong></em>i 和 yi 是输入数据集中已知的条件，所以损失函数的未知数只有 <em><strong>w</strong></em>。</p>
+
+<p>于是可以得到结论，逻辑回归最后一步的建模公式，实质上就是求解函数极值的问题。</p>
+
+<blockquote>
+
+<p>关于求极值，我们在《05 | 求极值：如何找到复杂业务的最优解？》曾详细介绍过求导法和梯度下降法。</p>
+
+</blockquote>
+
+<p>在这里，由于损失函数包含了非线性的 sigmoid 函数，求导法是无法得到解析解的；因此，我们使用梯度下降法来求解参数<em><strong>w</strong></em>。
+
+<img src="assets/Cip5yF_lxYeAZOMOAADJ2CJBEHc898.png" alt="图片7.png" />
+
+<img src="assets/CgqCHl_lxb2ALAYhAACvGE2H5Rw210.png" alt="图片8.png" />
+
+我们已经计算出了损失函数关于模型参数的导数，这也是损失函数的梯度方向，我们可以利用先前所学的梯度下降法来求解函数的极值。</p>
+
+<p>然而，这里存在一个计算效率的缺陷，即梯度函数中包含了大型求和的运算。这里的大型求和是 i 从 1 到 n 的计算，也就是对于整个数据集全部的数据去进行的全量计算。</p>
+
+<blockquote>
+
+<p>可以想象出，当输入的数据量非常大的时候，梯度下降法每次的迭代都会产生大量的计算。这样，建模过程中会消耗大量计算资源，模型更新效率也会受到很大影响。</p>
+
+</blockquote>
+
+<h4>【随机梯度下降法】</h4>
+
+<p>为了解决这个问题，人工智能领域常常用<strong>随机梯度下降法</strong>来修正<strong>梯度下降法</strong>的不足。随机梯度下降法与梯度下降法的区别只有一点，那就是随机梯度下降在每轮更新参数时，只随机选取一个样本 dm 来计算梯度，而非计算整个数据集梯度。其余的计算过程，二者完全一致。</p>
+
+<p><img src="assets/CgqCHl_lxdaAQ749AADJ2O9gnkU384.png" alt="图片9.png" /></p>
+
+<p>根据上面更新公式的算法，我们通过多轮迭代，就能最终求解出让 l(w) 取得最大值的参数向量<em><strong>w</strong></em>。</p>
+
+<h3>逻辑回归代码实现</h3>
+
+<p>接下来，我们在下面的数据集上，分别采用逻辑回归来建立分类模型。</p>
+
+<p>第一个数据集如下，其中每一行是一个样本，每一列一个特征，最后一列是样本的类别。</p>
+
+<p><img src="assets/Cip5yF_lxgCAcT3PAADKvRlRWh8558.png" alt="图片10.png" /></p>
+
+<p>第二个数据集如下，格式与第一个数据集相同。</p>
+
+<p><img src="assets/Cip5yF_lxgaAbVaDAADgP88xevs672.png" alt="图片11.png" /></p>
+
+<p>我们采用下面的代码，建立逻辑回归模型。</p>
+
+<pre><code>import math
+
+
+
+import numpy as np
+
+
+
+import random
+
+
+
+x = np.array([[1,1,1],[0,0,1],[0,1,1],[1,0,1]])
+
+
+
+y = np.array([1,0,0,0])
+
+
+
+#y = np.array([0,0,1,1])
+
+
+
+w = np.array([0.5,0.5,0.5])
+
+
+
+a = 0.01
+
+
+
+maxloop = 10000
+
+
+
+for _ in range(maxloop):
+
+
+
+	m = random.randint(0,3)
+
+
+
+	fi = 1.0/(1+math.pow(math.e,-np.dot(x[m],w)))
+
+
+
+	g = (y[m] - fi)*x[m]
+
+
+
+	w = w + a*g
+
+
+
+	print w
+
+</code></pre>
+
+<p>【我们对代码进行走读】</p>
+
+<ul>
+
+<li>代码中，第 5～7 行分别输入数据集 x 和 y；</li>
+
+<li>第 9 行，初始化参数向量，在这里，我们采用固定的初始化方法，你也可以调整为随机初始化；</li>
+
+<li>第 11 行，设置学习率为 0.01；</li>
+
+<li>第 12 行，设置最大迭代轮数为 10000 次。</li>
+
+</ul>
+
+<p>接下来进入随机梯度下降法的循环体。</p>
+
+<ul>
+
+<li>第 14 行，从 0 到 3 中随机抽取一个数字作为本轮迭代梯度的样本；</li>
+
+<li>第 15 行，计算 Φ(zm)；</li>
+
+<li>第 16 行，计算样本 m 带来的梯度 g；</li>
+
+<li>第 17 行，利用随机梯度下降法更新参数 w；</li>
+
+<li>第 18 行，打印这一轮的结果。</li>
+
+</ul>
+
+<h4>【数据集一】</h4>
+
+<p>运行上述代码，我们对数据集一建模得到的最优参数为 [3.1,3.0,-4.8]。利用这组参数，我们可以对数据集一的学习效果进行测试，如下表所示</p>
+
+<p><img src="assets/CgqCHl_lxhOAFnR4AAIK9izy6Cs182.png" alt="图片12.png" /></p>
+
+<p>可见，数据集一上，我们的模型全部正确预测，效果非常好。</p>
+
+<h4>【数据集二】</h4>
+
+<p>再运行上述代码，我们对数据集二建模得到的最优参数为 [0.16, 0.10, -0.03]。利用这组参数，我们可以对数据集二的学习效果进行测试，如下表所示。
+
+<img src="assets/Ciqc1F_lxh2AB8_FAAIMnwsJ144124.png" alt="图片13.png" />
+
+我们发现，在数据集二上，模型的预测结果只能是马马虎虎，这体现在两点：</p>
+
+<ul>
+
+<li>4 个样本中，并没有全部正确预测，样本 1 预测错误；</li>
+
+<li>对于正确预测的 3 个样本而言，预测值都在边界线 0.5 附近，就算是正确预测，也没有压倒性优势。</li>
+
+</ul>
+
+<p>那么为什么同样的模型，只是换了数据集，效果就千差万别呢？</p>
+
+<h3>逻辑回归的不足</h3>
+
+<p>这是因为，逻辑回归是个线性模型，它只能处理线性问题。</p>
+
+<p>例如，对于一个二维平面来说，线性模型就是一条直线。如果数据的分布不支持用一条线来分割的话，逻辑回归就无法收敛，如下图所示。
+
+<img src="assets/CgqCHl_lximANu7DAAC6Cmxv9rM944.png" alt="图片3.png" />
+
+图中蓝色点是一类，黄色点是一类。现在，我们要用逻辑回归这样的线性模型来进行区分。可见，不论这条线怎么选，都是无法将两类样本进行分割的，这也是逻辑回归模型的缺陷。</p>
+
+<blockquote>
+
+<p>要想解决的话，只有用更复杂的模型，例如我们后续的课时中会介绍的决策树、神经网络等模型。</p>
+
+</blockquote>
+
+<h4>【逻辑回归与线性回归】</h4>
+
+<p>在上一讲《18 | AI 入门：利用 3 个公式搭建最简 AI 框架》中，通过“身高预测”，我们从人工智能模型的视角，重新认识了线性回归，那么逻辑回归和线性回归的不同有哪些呢？</p>
+
+<ul>
+
+<li><strong>从名字上比较</strong></li>
+
+</ul>
+
+<p>线性回归是回归模型，是用一根“线”去回归出输入和输出之间的关系，即用一根线去尽可能把全部样本“串”起来。</p>
+
+<p>而逻辑回归虽然名字里有“回归”二字，但其实是一个分类模型，它是希望用一根线去把两波样本尽可能分开。</p>
+
+<ul>
+
+<li><strong>从表达式上看</strong></li>
+
+</ul>
+
+<p>逻辑回归是在线性回归的基础上加了一个 Sigmoid 函数的映射，在最终的类别判断上，还需要对比一下预测值和 0.5 之间的大小关系。</p>
+
+<p>因此，线性回归解决的是回归问题，输出的连续值；而逻辑回归解决的是二分类问题，输出的是“0”或“1”的离散值。</p>
+
+<ul>
+
+<li><strong>从机理上看</strong></li>
+
+</ul>
+
+<p>逻辑回归增加了 sigmoid 函数，可以让预测结果在 0.5 附近产生更大的变化率，变化率更大，意味着梯度更大。</p>
+
+<p>在使用梯度下降法的时候，这样的机理，让模型的预测值会倾向于离开变化率大的地方，而收敛在“0”或“1”附近。这样的模型机理，会让它更适合用于分类问题的建模，具有更好的鲁棒性。</p>
+
+<h3>小结</h3>
+
+<p><strong>逻辑回归</strong>是人工智能领域中分类问题的入门级算法。利用 AI 基本框架来看，它的 3 个核心公式分别是
+
+<img src="assets/Ciqc1F_pRgWAY4ynAABjhuo5U0E756.png" alt="WechatIMG1406.png" />
+
+逻辑回归是个线性模型，具有计算简单、可解释性强等优势。它的不足是，只能处理线性问题，对于非线性问题则束手无策。</p>
+
+<p>最后，我们留一个思考题。试着把本课时中的代码，由随机梯度下降法改写为梯度下降法，再来求解一次参数 <em><strong>w</strong></em> 吧。原则上除了计算量会变大以外，对分类结果是不会产生改变的。不妨亲自试一下。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/程序员的数学课/18  AI 入门：利用 3 个公式搭建最简 AI 框架.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/程序员的数学课/20  决策树：如何对 NP 难复杂问题进行启发式求解？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997be83e773cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

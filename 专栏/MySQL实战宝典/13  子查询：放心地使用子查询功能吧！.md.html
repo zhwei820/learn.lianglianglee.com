@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>13  子查询：放心地使用子查询功能吧！.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/00 开篇词  从业务出发，开启海量 MySQL 架构设计.md">00 开篇词  从业务出发，开启海量 MySQL 架构设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/01  数字类型：避免自增踩坑.md">01  数字类型：避免自增踩坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/02  字符串类型：不能忽略的 COLLATION.md">02  字符串类型：不能忽略的 COLLATION.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/03  日期类型：TIMESTAMP 可能是巨坑.md">03  日期类型：TIMESTAMP 可能是巨坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/04  非结构存储：用好 JSON 这张牌.md">04  非结构存储：用好 JSON 这张牌.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/05  表结构设计：忘记范式准则.md">05  表结构设计：忘记范式准则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/06  表压缩：不仅仅是空间压缩.md">06  表压缩：不仅仅是空间压缩.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/07  表的访问设计：你该选择 SQL 还是 NoSQL？.md">07  表的访问设计：你该选择 SQL 还是 NoSQL？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/08  索引：排序的艺术.md">08  索引：排序的艺术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/09  索引组织表：万物皆索引.md">09  索引组织表：万物皆索引.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/10  组合索引：用好，性能提升 10 倍！.md">10  组合索引：用好，性能提升 10 倍！.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/11  索引出错：请理解 CBO 的工作原理.md">11  索引出错：请理解 CBO 的工作原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/12  JOIN 连接：到底能不能写 JOIN？.md">12  JOIN 连接：到底能不能写 JOIN？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/MySQL实战宝典/13  子查询：放心地使用子查询功能吧！.md">13  子查询：放心地使用子查询功能吧！.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/14  分区表：哪些场景我不建议用分区表？.md">14  分区表：哪些场景我不建议用分区表？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/15  MySQL 复制：最简单也最容易配置出错.md">15  MySQL 复制：最简单也最容易配置出错.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/16  读写分离设计：复制延迟？其实是你用错了.md">16  读写分离设计：复制延迟？其实是你用错了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/17  高可用设计：你怎么活用三大架构方案？.md">17  高可用设计：你怎么活用三大架构方案？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/18  金融级高可用架构：必不可少的数据核对.md">18  金融级高可用架构：必不可少的数据核对.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/19  高可用套件：选择这么多，你该如何选？.md">19  高可用套件：选择这么多，你该如何选？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/20  InnoDB Cluster：改变历史的新产品.md">20  InnoDB Cluster：改变历史的新产品.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/21  数据库备份：备份文件也要检查！.md">21  数据库备份：备份文件也要检查！.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/22  分布式数据库架构：彻底理解什么叫分布式数据库.md">22  分布式数据库架构：彻底理解什么叫分布式数据库.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/23  分布式数据库表结构设计：如何正确地将数据分片？.md">23  分布式数据库表结构设计：如何正确地将数据分片？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/24  分布式数据库索引设计：二级索引、全局索引的最佳设计实践.md">24  分布式数据库索引设计：二级索引、全局索引的最佳设计实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/25  分布式数据库架构选型：分库分表 or 中间件 ？.md">25  分布式数据库架构选型：分库分表 or 中间件 ？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/26  分布式设计之禅：全链路的条带化设计.md">26  分布式设计之禅：全链路的条带化设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/MySQL实战宝典/27  分布式事务：我们到底要不要使用 2PC？.md">27  分布式事务：我们到底要不要使用 2PC？.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>13  子查询：放心地使用子查询功能吧！</h1>
+
+<p>今天我想和你聊一聊“子查询”。</p>
+
+<p>上一讲，我提到了一种复杂的 SQL 情况，多表间的连接，以及怎么设计索引来提升 JOIN 的性能。</p>
+
+<p>除了多表连接之外，开发同学还会大量用子查询语句（subquery）。但是因为之前版本的MySQL 数据库对子查询优化有限，所以很多 OLTP 业务场合下，我们都要求在线业务尽可能不用子查询。</p>
+
+<p>然而，MySQL 8.0 版本中，子查询的优化得到大幅提升。所以从现在开始，<strong>放心大胆地在MySQL 中使用子查询吧！</strong></p>
+
+<h3>为什么开发同学这么喜欢写子查询？</h3>
+
+<p>我工作这么多年，发现相当多的开发同学喜欢写子查询，而不是传统的 JOIN 语句。举一个简单的例子，如果让开发同学“找出1993年，没有下过订单的客户数量”，大部分同学会用子查询来写这个需求，比如：</p>
+
+<pre><code>SELECT
+
+
+
+    COUNT(c_custkey) cnt
+
+
+
+FROM
+
+
+
+    customer
+
+
+
+WHERE
+
+
+
+    c_custkey NOT IN (
+
+
+
+        SELECT
+
+
+
+            o_custkey
+
+
+
+        FROM
+
+
+
+            orders
+
+
+
+        WHERE
+
+
+
+            o_orderdate &gt;=  '1993-01-01'
+
+
+
+            AND o_orderdate &lt;  '1994-01-01'
+
+
+
+	);
+
+</code></pre>
+
+<p>从中可以看到，子查询的逻辑非常清晰：通过 NOT IN 查询不在订单表的用户有哪些。</p>
+
+<p>不过上述查询是一个典型的 LEFT JOIN 问题（即在表 customer 存在，在表 orders 不存在的问题）。所以，这个问题如果用 LEFT JOIN 写，那么 SQL 如下所示：</p>
+
+<pre><code>SELECT
+
+
+
+    COUNT(c_custkey) cnt
+
+
+
+FROM
+
+
+
+    customer
+
+
+
+        LEFT JOIN
+
+
+
+    orders ON
+
+
+
+            customer.c_custkey = orders.o_custkey
+
+
+
+            AND o_orderdate &gt;= '1993-01-01'
+
+
+
+            AND o_orderdate &lt; '1994-01-01'
+
+
+
+WHERE
+
+
+
+    o_custkey IS NULL;
+
+</code></pre>
+
+<p>可以发现，虽然 LEFT JOIN 也能完成上述需求，但不容易理解，<strong>因为 LEFT JOIN 是一个代数关系，而子查询更偏向于人类的思维角度进行理解。</strong></p>
+
+<p>所以，大部分人都更倾向写子查询，即便是天天与数据库打交道的 DBA 。</p>
+
+<p>不过从优化器的角度看，LEFT JOIN 更易于理解，能进行传统 JOIN 的两表连接，而子查询则要求优化器聪明地将其转换为最优的 JOIN 连接。</p>
+
+<p>我们来看一下，在 MySQL 8.0 版本中，对于上述两条 SQL，最终的执行计划都是：</p>
+
+<p><img src="assets/CioPOWC4r3iAWVV7AACB4gS2UBo664.png" alt="Drawing 0.png" /></p>
+
+<p>可以看到，不论是子查询还是 LEFT JOIN，最终都被转换成了 Nested Loop Join，所以上述两条 SQL 的执行时间是一样的。</p>
+
+<p>即，在 MySQL 8.0 中，优化器会自动地将 IN 子查询优化，优化为最佳的 JOIN 执行计划，这样一来，会显著的提升性能。</p>
+
+<h3>子查询 IN 和 EXISTS，哪个性能更好？</h3>
+
+<p>除了“为什么开发同学都喜欢写子查询”，关于子查询，另一个经常被问到的问题是：“ IN 和EXISTS 哪个性能更好？”要回答这个问题，我们看一个例子。</p>
+
+<p>针对开篇的 NOT IN 子查询，你可以改写为 NOT EXISTS 子查询，重写后的 SQL 如下所示：</p>
+
+<pre><code>SELECT
+
+
+
+    COUNT(c_custkey) cnt
+
+
+
+FROM
+
+
+
+    customer
+
+
+
+WHERE
+
+
+
+    NOT EXISTS (
+
+
+
+        SELECT
+
+
+
+            1
+
+
+
+        FROM
+
+
+
+            orders
+
+
+
+        WHERE
+
+
+
+            o_orderdate &gt;=  '1993-01-01'
+
+
+
+            AND o_orderdate &lt;  '1994-01-01'
+
+
+
+            AND c_custkey = o_custkey
+
+
+
+    );
+
+</code></pre>
+
+<p>你要注意，千万不要盲目地相信网上的一些文章，有的说 IN 的性能更好，有的说 EXISTS 的子查询性能更好。你只关注 SQL 执行计划就可以，如果两者的执行计划一样，性能没有任何差别。</p>
+
+<p>接着说回来，对于上述 NOT EXISTS，它的执行计划如下图所示：</p>
+
+<p><img src="assets/Cgp9HWC4r4SAECp-AACB4gS2UBo705.png" alt="Drawing 0.png" /></p>
+
+<p>你可以看到，它和 NOT IN 的子查询执行计划一模一样，所以二者的性能也是一样的。讲完子查询的执行计划之后，接下来我们来看一下一种需要对子查询进行优化的 SQL：依赖子查询。</p>
+
+<h3>依赖子查询的优化</h3>
+
+<p>在 MySQL 8.0 版本之前，MySQL 对于子查询的优化并不充分。所以在子查询的执行计划中会看到 DEPENDENT SUBQUERY 的提示，这表示是一个依赖子查询，子查询需要依赖外部表的关联。</p>
+
+<p><strong>如果你看到这样的提示，就要警惕，</strong> 因为 DEPENDENT SUBQUERY 执行速度可能非常慢，大部分时候需要你手动把它转化成两张表之间的连接。</p>
+
+<p>我们以下面这条 SQL 为例：</p>
+
+<pre><code>SELECT
+
+
+
+    *
+
+
+
+FROM
+
+
+
+    orders
+
+
+
+WHERE
+
+
+
+    (o_clerk , o_orderdate) IN (
+
+
+
+        SELECT
+
+
+
+            o_clerk, MAX(o_orderdate)
+
+
+
+        FROM
+
+
+
+            orders
+
+
+
+        GROUP BY o_clerk);
+
+</code></pre>
+
+<p>上述 SQL 语句的子查询部分表示“计算出每个员工最后成交的订单时间”，然后最外层的 SQL表示返回订单的相关信息。</p>
+
+<p>这条 SQL 在最新的 MySQL 8.0 中，其执行计划如下所示：</p>
+
+<p><img src="assets/Cgp9HWDB0u6Aews9AALrVP9U7VI559.png" alt="111.png" /></p>
+
+<p>通过命令 EXPLAIN FORMAT=tree 输出执行计划，你可以看到，第 3 行有这样的提示：<em><strong>Select #2 (subquery in condition; run only once)</strong></em>。这表示子查询只执行了一次，然后把最终的结果保存起来了。</p>
+
+<p>执行计划的第 6 行<strong>Index lookup on &lt;materialized_subquery&gt;</strong>，表示对表 orders 和子查询结果所得到的表进行 JOIN 连接，最后返回结果。</p>
+
+<p>所以，当前这个执行计划是对表 orders 做2次扫描，每次扫描约 5587618 条记录：</p>
+
+<ul>
+
+<li>第 1 次扫描，用于内部的子查询操作，计算出每个员工最后一次成交的时间；</li>
+
+<li>第 2 次表 oders 扫描，查询并返回每个员工的订单信息，即返回每个员工最后一笔成交的订单信息。</li>
+
+</ul>
+
+<p>最后，直接用命令 EXPLAIN 查看执行计划，如下图所示：</p>
+
+<p><img src="assets/CioPOWC4r7KACYe5AACVxJNJeuI046.png" alt="Drawing 6.png" /></p>
+
+<p>MySQL 8.0 版本执行过程</p>
+
+<p>如果是老版本的 MySQL 数据库，它的执行计划将会是依赖子查询，执行计划如下所示：</p>
+
+<p><img src="assets/CioPOWC4r8iAfI8RAACR2EFttxI059.png" alt="Drawing 8.png" /></p>
+
+<p>老版本 MySQL 执行过程</p>
+
+<p>对比 MySQL 8.0，只是在第二行的 select_type 这里有所不同，一个是 SUBQUERY，一个是DEPENDENT SUBQUERY。</p>
+
+<p>接着通过命令 EXPLAIN FORMAT=tree 查看更详细的执行计划过程：</p>
+
+<p><img src="assets/CioPOWC4r-OAFOmSAAFZr4rEsTs855.png" alt="Drawing 10.png" /></p>
+
+<p>可以发现，第 3 行的执行技术输出是：Select #2 (subquery in condition; dependent)，并不像先前的执行计划，提示只执行一次。另外，通过第 1 行也可以发现，这条 SQL 变成了 exists 子查询，每次和子查询进行关联。</p>
+
+<p>所以，上述执行计划其实表示：先查询每个员工的订单信息，接着对每条记录进行内部的子查询进行依赖判断。也就是说，先进行外表扫描，接着做依赖子查询的判断。<strong>所以，子查询执行了5587618，而不是1次！！！</strong></p>
+
+<p>所以，两者的执行计划，扫描次数的对比如下所示：</p>
+
+<p><img src="assets/CioPOWC9iHGAGvHhAADKi9rGjL8095.png" alt="图片1.png" /></p>
+
+<p>对于依赖子查询的优化，就是要避免子查询由于需要对外部的依赖，而需要对子查询扫描多次的情况。所以可以通过<strong>派生表</strong>的方式，将外表和子查询的派生表进行连接，从而降低对于子查询表的扫描，从而提升 SQL 查询的性能。</p>
+
+<p>那么对于上面的这条 SQL ，可将其重写为：</p>
+
+<pre><code>SELECT * FROM orders o1,
+
+
+
+(
+
+
+
+    SELECT
+
+
+
+        o_clerk, MAX(o_orderdate)
+
+
+
+    FROM
+
+
+
+        orders
+
+
+
+    GROUP BY o_clerk
+
+
+
+) o2
+
+
+
+WHERE
+
+
+
+    o1.o_clerk = o2.o_clerk
+
+
+
+    AND o1.o_orderdate = o2.orderdate;
+
+</code></pre>
+
+<p>可以看到，我们将子查询改写为了派生表 o2，然后将表 o2 与外部表 orders 进行关联。关联的条件是：<em><strong>o1.o_clerk = o2.o_clerk AND o1.o_orderdate = o2.orderdate</strong></em>。
+
+通过上面的重写后，派生表 o2 对表 orders 进行了1次扫描，返回约 5587618 条记录。派生表o1 对表 orders 扫描 1 次，返回约 1792612 条记录。这与 8.0 的执行计划就非常相似了，其执行计划如下所示：</p>
+
+<p><img src="assets/CioPOWC4r_2AYA-8AACtbE83K7w426.png" alt="Drawing 13.png" /></p>
+
+<p>最后，来看下上述 SQL 的执行时间：</p>
+
+<p><img src="assets/CioPOWC4sAqAETsfAAA-Ui3vTHk812.png" alt="Drawing 15.png" /></p>
+
+<p>可以看到，经过 SQL 重写后，派生表的执行速度几乎与独立子查询一样。所以，<strong>若看到依赖子查询的执行计划，记得先进行 SQL 重写优化哦。</strong></p>
+
+<h3>总结</h3>
+
+<p>这一讲，我们学习了 MySQL 子查询的优势、新版本 MySQL 8.0 对子查询的优化，以及老版本MySQL 下如何对子查询进行优化。希望你在学完今天的内容之后，可以不再受子查询编写的困惑，而是在各种场景下用好子查询。</p>
+
+<p>总结来看：</p>
+
+<ol>
+
+<li>子查询相比 JOIN 更易于人类理解，所以受众更广，使用更多；</li>
+
+<li>当前 MySQL 8.0 版本可以“毫无顾忌”地写子查询，对于子查询的优化已经相当完备；</li>
+
+<li>对于老版本的 MySQL，<strong>请 Review 所有子查询的SQL执行计划，</strong> 对于出现 DEPENDENT SUBQUERY 的提示，请务必即使进行优化，否则对业务将造成重大的性能影响；</li>
+
+<li>DEPENDENT SUBQUERY 的优化，一般是重写为派生表进行表连接。表连接的优化就是我们12讲所讲述的内容。</li>
+
+</ol>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/MySQL实战宝典/12  JOIN 连接：到底能不能写 JOIN？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/MySQL实战宝典/14  分区表：哪些场景我不建议用分区表？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973172c1f3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

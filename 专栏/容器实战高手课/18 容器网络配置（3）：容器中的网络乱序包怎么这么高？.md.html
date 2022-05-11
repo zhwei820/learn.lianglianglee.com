@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>18 容器网络配置（3）：容器中的网络乱序包怎么这么高？</h1>
+
+<p>你好，我是程远。这一讲，我们来聊一下容器中发包乱序的问题。</p>
+
+<p>这个问题也同样来自于工作实践，我们的用户把他们的应用程序从物理机迁移到容器之后，从网络监控中发现，容器中数据包的重传的数量要比在物理机里高了不少。</p>
+
+<p>在网络的前面几讲里，我们已经知道了容器网络缺省的接口是 veth，veth 接口都是成对使用的。容器通过 veth 接口向外发送数据，首先需要从 veth 的一个接口发送给跟它成对的另一个接口。</p>
+
+<p>那么这种接口会不会引起更多的网络重传呢？如果会引起重传，原因是什么，我们又要如何解决呢？接下来我们就带着这三个问题开始今天的学习。</p>
+
+<h2>问题重现</h2>
+
+<p>我们可以在容器里运行一下 iperf3 命令，向容器外部发送一下数据，从 iperf3 的输出&quot;Retr&quot;列里，我们可以看到有多少重传的数据包。</p>
+
+<p>比如下面的例子里，我们可以看到有 162 个重传的数据包。</p>
+
+<pre><code># iperf3 -c 192.168.147.51
+
+Connecting to host 192.168.147.51, port 5201
+
+[  5] local 192.168.225.12 port 51700 connected to 192.168.147.51 port 5201
+
+[ ID] Interval           Transfer     Bitrate                        Retr    Cwnd
+
+[  5]   0.00-1.00   sec  1001 MBytes  8.40 Gbits/sec  162    192 KBytes
+
+…
+
+\- - - - - - - - - - - - - - - - - - - - - - - - -
+
+[ ID] Interval           Transfer     Bitrate         Retr
+
+[  5]   0.00-10.00  sec  9.85 GBytes  8.46 Gbits/sec  162             sender
+
+[  5]   0.00-10.04  sec  9.85 GBytes  8.42 Gbits/sec                  receiver
+
+
+
+iperf Done.
+
+</code></pre>
+
+<p>网络中发生了数据包的重传，有可能是数据包在网络中丢了，也有可能是数据包乱序导致的。那么，我们怎么来判断到底是哪一种情况引起的重传呢？</p>
+
+<p>最直接的方法就是用 tcpdump 去抓包，不过对于大流量的网络，用 tcpdump 抓包瞬间就会有几个 GB 的数据。可是这样做的话，带来的额外系统开销比较大，特别是在生产环境中这个方法也不太好用。</p>
+
+<p>所以这里我们有一个简单的方法，那就是运行 netstat 命令来查看协议栈中的丢包和重传的情况。比如说，在运行上面的 iperf3 命令前后，我们都在容器的 Network Namespace 里运行一下 netstat 看看重传的情况。</p>
+
+<p>我们会发现，一共发生了 162 次（604-442）快速重传（fast retransmits），这个数值和 iperf3 中的 Retr 列里的数值是一样的。</p>
+
+<pre><code>-bash-4.2# nsenter -t 51598 -n netstat -s | grep retran
+
+    454 segments retransmited
+
+    442 fast retransmits
+
+-bash-4.2# nsenter -t 51598 -n netstat -s | grep retran
+
+    616 segments retransmited
+
+    604 fast retransmits
+
+</code></pre>
+
+<h2>问题分析</h2>
+
+<h3>快速重传（fast retransmit）</h3>
+
+<p>在刚才的问题重现里，我们运行 netstat 命令后，统计了快速重传的次数。那什么是快速重传（fast retransmit）呢？这里我给你解释一下。</p>
+
+<p>我们都知道 TCP 协议里，发送端（sender）向接受端（receiver）发送一个数据包，接受端（receiver）都回应 ACK。如果超过一个协议栈规定的时间（RTO），发送端没有收到 ACK 包，那么发送端就会重传（Retransmit）数据包，就像下面的示意图一样。</p>
+
+<p><img src="assets/bc6a6059f49a5b61e95ba3705894b64b.jpeg" alt="img" /></p>
+
+<p>不过呢，这样等待一个超时之后再重传数据，对于实际应用来说太慢了，所以 TCP 协议又定义了快速重传 （fast retransmit）的概念。它的基本定义是这样的：如果发送端收到 3 个重复的 ACK，那么发送端就可以立刻重新发送 ACK 对应的下一个数据包。</p>
+
+<p>就像下面示意图里描述的那样，接受端没有收到 Seq 2 这个包，但是收到了 Seq 3–5 的数据包，那么接收端在回应 Ack 的时候，Ack 的数值只能是 2。这是因为按顺序来说收到 Seq 1 的包之后，后面 Seq 2 一直没有到，所以接收端就只能一直发送 Ack 2。</p>
+
+<p>那么当发送端收到 3 个重复的 Ack 2 后，就可以马上重新发送 Seq 2 这个数据包了，而不用再等到重传超时之后了。</p>
+
+<p><img src="assets/21935661dda5069f8dyy91e6cd5b295d.jpeg" alt="img" /></p>
+
+<p>虽然 TCP 快速重传的标准定义是需要收到 3 个重复的 Ack，不过你会发现在 Linux 中常常收到一个 Dup Ack（重复的 Ack）后，就马上重传数据了。这是什么原因呢？</p>
+
+<p>这里先需要提到 SACK 这个概念，SACK 也就是选择性确认（Selective Acknowledgement）。其实跟普通的 ACK 相比呢，SACK 会把接收端收到的所有包的序列信息，都反馈给发送端。</p>
+
+<p>你看看下面这张图，就能明白这是什么意思了。</p>
+
+<p><img src="assets/2d61334e4066391ceeb90cac0bb25d55.jpeg" alt="img" /></p>
+
+<p>那有了 SACK，对于发送端来说，在收到 SACK 之后就已经知道接收端收到了哪些数据，没有收到哪些数据。</p>
+
+<p>在 Linux 内核中会有个判断（你可以看看下面的这个函数），大概意思是这样的：如果在接收端收到的数据和还没有收到的数据之间，两者数据量差得太大的话（超过了 reordering*mss_cache），也可以马上重传数据。</p>
+
+<p>这里你需要注意一下，这里的数据量差是根据 bytes 来计算的，而不是按照包的数目来计算的，所以你会看到即使只收到一个 SACK，Linux 也可以重发数据包。</p>
+
+<pre><code>static bool tcp_force_fast_retransmit(struct sock *sk)
+
+{
+
+        struct tcp_sock *tp = tcp_sk(sk);
+
+ 
+
+        return after(tcp_highest_sack_seq(tp),
+
+                     tp-&gt;snd_una + tp-&gt;reordering * tp-&gt;mss_cache);
+
+}
+
+</code></pre>
+
+<p>好了，了解了快速重传的概念之后，我们再来看看，如果 netstat 中有大量的&quot;fast retransmits&quot;意味着什么？</p>
+
+<p>如果你再用 netstat 查看&quot;reordering&quot;，就可以看到大量的 SACK 发现的乱序包。</p>
+
+<pre><code>-bash-4.2# nsenter -t 51598 -n netstat -s  | grep reordering
+
+    Detected reordering 501067 times using SACK
+
+</code></pre>
+
+<p>其实在云平台的这种网络环境里，网络包乱序 +SACK 之后，产生的数据包重传的量要远远高于网络丢包引起的重传。</p>
+
+<p>比如说像下面这张图里展示的这样，Seq 2 与 Seq 3 这两个包如果乱序的话，那么就会引起 Seq 2 的立刻重传。</p>
+
+<p><img src="assets/a99709757a45279324600a45f7a44cd6.jpeg" alt="img" /></p>
+
+<h3>Veth 接口的数据包的发送</h3>
+
+<p>现在我们知道了网络包乱序会造成数据包的重传，接着我们再来看看容器的 veth 接口配置有没有可能会引起数据包的乱序。</p>
+
+<p>在上一讲里，我们讲过通过 veth 接口从容器向外发送数据包，会触发 peer veth 设备去接收数据包，这个接收的过程就是一个网络的 softirq 的处理过程。</p>
+
+<p>在触发 softirq 之前，veth 接口会模拟硬件接收数据的过程，通过 enqueue_to_backlog() 函数把数据包放到某个 CPU 对应的数据包队列里（softnet_data）。</p>
+
+<pre><code>static int netif_rx_internal(struct sk_buff *skb)
+
+{
+
+        int ret;
+
+
+
+        net_timestamp_check(netdev_tstamp_prequeue, skb);
+
+
+
+        trace_netif_rx(skb);
+
+
+
+#ifdef CONFIG_RPS
+
+        if (static_branch_unlikely(&amp;rps_needed)) {
+
+                struct rps_dev_flow voidflow, *rflow = &amp;voidflow;
+
+                int cpu;
+
+
+
+                preempt_disable();
+
+                rcu_read_lock();
+
+
+
+                cpu = get_rps_cpu(skb-&gt;dev, skb, &amp;rflow);
+
+                if (cpu &lt; 0)
+
+                        cpu = smp_processor_id();
+
+
+
+                ret = enqueue_to_backlog(skb, cpu, &amp;rflow-&gt;last_qtail);
+
+
+
+                rcu_read_unlock();
+
+                preempt_enable();
+
+        } else
+
+#endif
+
+        {
+
+                unsigned int qtail;
+
+
+
+                ret = enqueue_to_backlog(skb, get_cpu(), &amp;qtail);
+
+                put_cpu();
+
+        }
+
+        return ret;
+
+}
+
+</code></pre>
+
+<p>从上面的代码，我们可以看到，在缺省的状况下（也就是没有 RPS 的情况下），enqueue_to_backlog() 把数据包放到了“当前运行的 CPU”（get_cpu()）对应的数据队列中。如果是从容器里通过 veth 对外发送数据包，那么这个“当前运行的 CPU”就是容器中发送数据的进程所在的 CPU。</p>
+
+<p>对于多核的系统，这个发送数据的进程可以在多个 CPU 上切换运行。进程在不同的 CPU 上把数据放入队列并且 raise softirq 之后，因为每个 CPU 上处理 softirq 是个异步操作，所以两个 CPU network softirq handler 处理这个进程的数据包时，处理的先后顺序并不能保证。</p>
+
+<p>所以，veth 对的这种发送数据方式增加了容器向外发送数据出现乱序的几率。</p>
+
+<p><img src="assets/c11581ec8f390b13ebc89fdb4cc2043b.jpeg" alt="img" /></p>
+
+<h3>RSS 和 RPS</h3>
+
+<p>那么对于 veth 接口的这种发包方式，有办法减少一下乱序的几率吗？</p>
+
+<p>其实，我们在上面 netif_rx_internal() 那段代码中，有一段在&quot;#ifdef CONFIG_RPS&quot;中的代码。</p>
+
+<p>我们看到这段代码中在调用 enqueue_to_backlog() 的时候，传入的 CPU 并不是当前运行的 CPU，而是通过 get_rps_cpu() 得到的 CPU，那么这会有什么不同呢？这里的 RPS 又是什么意思呢？</p>
+
+<p>要解释 RPS 呢，需要先看一下 RSS，这个 RSS 不是我们之前说的内存 RSS，而是和网卡硬件相关的一个概念，它是 Receive Side Scaling 的缩写。</p>
+
+<p>现在的网卡性能越来越强劲了，从原来一条 RX 队列扩展到了 N 条 RX 队列，而网卡的硬件中断也从一个硬件中断，变成了每条 RX 队列都会有一个硬件中断。</p>
+
+<p>每个硬件中断可以由一个 CPU 来处理，那么对于多核的系统，多个 CPU 可以并行的接收网络包，这样就大大地提高了系统的网络数据的处理能力.</p>
+
+<p>同时，在网卡硬件中，可以根据数据包的 4 元组或者 5 元组信息来保证同一个数据流，比如一个 TCP 流的数据始终在一个 RX 队列中，这样也能保证同一流不会出现乱序的情况。</p>
+
+<p>下面这张图，大致描述了一下 RSS 是怎么工作的。</p>
+
+<p><img src="assets/ea365c0d44625cf89c746d91799f9633.jpeg" alt="img" /></p>
+
+<p>RSS 的实现在网卡硬件和驱动里面，而 RPS（Receive Packet Steering）其实就是在软件层面实现类似的功能。它主要实现的代码框架就在上面的 netif_rx_internal() 代码里，原理也不难。</p>
+
+<p>就像下面的这张示意图里描述的这样：在硬件中断后，CPU2 收到了数据包，再一次对数据包计算一次四元组的 hash 值，得到这个数据包与 CPU1 的映射关系。接着会把这个数据包放到 CPU1 对应的 softnet_data 数据队列中，同时向 CPU1 发送一个 IPI 的中断信号。</p>
+
+<p>这样一来，后面 CPU1 就会继续按照 Netowrk softirq 的方式来处理这个数据包了。</p>
+
+<p><img src="assets/e0413b74cbc1b5edcde5442fe94e11f9.jpeg" alt="img" /></p>
+
+<p>RSS 和 RPS 的目的都是把数据包分散到更多的 CPU 上进行处理，使得系统有更强的网络包处理能力。在把数据包分散到各个 CPU 时，保证了同一个数据流在一个 CPU 上，这样就可以减少包的乱序。</p>
+
+<p>明白了 RPS 的概念之后，我们再回头来看 veth 对外发送数据时候，在 enqueue_to_backlog() 的时候选择 CPU 的问题。显然，如果对应的 veth 接口上打开了 RPS 的配置以后，那么对于同一个数据流，就可以始终选择同一个 CPU 了。</p>
+
+<p>其实我们打开 RPS 的方法挺简单的，只要去 /sys 目录下，在网络接口设备接收队列中修改队列里的 rps_cpus 的值，这样就可以了。rps_cpus 是一个 16 进制的数，每个 bit 代表一个 CPU。</p>
+
+<p>比如说，我们在一个 12CPU 的节点上，想让 host 上的 veth 接口在所有的 12 个 CPU 上，都可以通过 RPS 重新分配数据包。那么就可以执行下面这段命令：</p>
+
+<pre><code># cat /sys/devices/virtual/net/veth57703b6/queues/rx-0/rps_cpus
+
+000
+
+# echo fff &gt; /sys/devices/virtual/net/veth57703b6/queues/rx-0/rps_cpus
+
+# cat /sys/devices/virtual/net/veth57703b6/queues/rx-0/rps_cpus
+
+fff
+
+</code></pre>
+
+<h2>重点小结</h2>
+
+<p>好了，今天的内容讲完了，我们做个总结。我们今天讨论的是容器中网络包乱序引起重传的问题。</p>
+
+<p>由于在容器平台中看到大部分的重传是快速重传（fast retransmits），我们先梳理了什么是快速重传。快速重传的基本定义是：如果发送端收到 3 个重复的 ACK，那么发送端就可以立刻重新发送 ACK 对应的下一个数据包，而不用等待发送超时。</p>
+
+<p>不过我们在 Linux 系统上还会看到发送端收到一个重复的 ACK 就快速重传的，这是因为 Linux 下对 SACK 做了一个特别的判断之后，就可以立刻重传数据包。</p>
+
+<p>我们再对容器云平台中的快速重传做分析，就会发现这些重传大部分是由包的乱序触发的。</p>
+
+<p>通过对容器 veth 网络接口进一步研究，我们知道它可能会增加数据包乱序的几率。同时在这个分析过程中，我们也看到了 Linux 网络 RPS 的特性。</p>
+
+<p>RPS 和 RSS 的作用类似，都是把数据包分散到更多的 CPU 上进行处理，使得系统有更强的网络包处理能力。它们的区别是 RSS 工作在网卡的硬件层，而 RPS 工作在 Linux 内核的软件层。</p>
+
+<p>在把数据包分散到各个 CPU 时，RPS 保证了同一个数据流是在一个 CPU 上的，这样就可以有效减少包的乱序。那么我们可以把 RPS 的这个特性配置到 veth 网络接口上，来减少数据包乱序的几率。</p>
+
+<p>不过，我这里还要说明的是，RPS 的配置还是会带来额外的系统开销，在某些网络环境中会引起 softirq CPU 使用率的增大。那接口要不要打开 RPS 呢？这个问题你需要根据实际情况来做个权衡。</p>
+
+<p>同时你还要注意，TCP 的乱序包，并不一定都会产生数据包的重传。想要减少网络数据包的重传，我们还可以考虑协议栈中其他参数的设置，比如 /proc/sys/net/ipv4/tcp_reordering。</p>
+
+<h2>思考题</h2>
+
+<p>在这一讲中，我们提到了 Linux 内核中的 tcp_force_fast_retransmit() 函数。那么你可以想想看，这个函数中的 tp-&gt;recording 和内核参数 /proc/sys/net/ipv4/tcp_reordering 是什么关系？它们对数据包的重传会带来什么影响？</p>
+
+<pre><code>static bool tcp_force_fast_retransmit(struct sock *sk)
+
+{
+
+        struct tcp_sock *tp = tcp_sk(sk);
+
+        return after(tcp_highest_sack_seq(tp),
+
+                     tp-&gt;snd_una + tp-&gt;reordering * tp-&gt;mss_cache);
+
+}
+
+</code></pre>
+
+<p>欢迎你在留言区分享你的思考或疑问。如果学完这一讲让你有所收获，也欢迎转发给你的同事、或者朋友，一起交流探讨。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977a82abb3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

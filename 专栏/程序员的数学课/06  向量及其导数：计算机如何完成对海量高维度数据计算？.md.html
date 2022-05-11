@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>06  向量及其导数：计算机如何完成对海量高维度数据计算？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/00 开篇词  数学，编程能力的营养根基.md">00 开篇词  数学，编程能力的营养根基.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/01  从计数开始，程序员必知必会的数制转换法.md">01  从计数开始，程序员必知必会的数制转换法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/02  逻辑与沟通，怎样才能讲出有逻辑的话？.md">02  逻辑与沟通，怎样才能讲出有逻辑的话？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/03  用数学决策，如何规划好投入、转化和产出？.md">03  用数学决策，如何规划好投入、转化和产出？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/04  万物可数学，经典公式是如何在生活中应用的？.md">04  万物可数学，经典公式是如何在生活中应用的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/05  求极值：如何找到复杂业务的最优解？.md">05  求极值：如何找到复杂业务的最优解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/程序员的数学课/06  向量及其导数：计算机如何完成对海量高维度数据计算？.md">06  向量及其导数：计算机如何完成对海量高维度数据计算？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/07  线性回归：如何在离散点中寻找数据规律？.md">07  线性回归：如何在离散点中寻找数据规律？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/08  加乘法则：如何计算复杂事件发生的概率？.md">08  加乘法则：如何计算复杂事件发生的概率？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/09  似然估计：如何利用 MLE 对参数进行估计？.md">09  似然估计：如何利用 MLE 对参数进行估计？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/10  信息熵：事件的不确定性如何计算？.md">10  信息熵：事件的不确定性如何计算？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/11  灰度实验：如何设计灰度实验并计算实验的收益？.md">11  灰度实验：如何设计灰度实验并计算实验的收益？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md">12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/13  复杂度：如何利用数学推导对程序进行优化？.md">13  复杂度：如何利用数学推导对程序进行优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/14  程序的循环：如何利用数学归纳法进行程序开发？.md">14  程序的循环：如何利用数学归纳法进行程序开发？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/15  递归：如何计算汉诺塔问题的移动步数？.md">15  递归：如何计算汉诺塔问题的移动步数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/16  二分法：如何利用指数爆炸优化程序？.md">16  二分法：如何利用指数爆炸优化程序？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/17  动态规划：如何利用最优子结构解决问题？.md">17  动态规划：如何利用最优子结构解决问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/18  AI 入门：利用 3 个公式搭建最简 AI 框架.md">18  AI 入门：利用 3 个公式搭建最简 AI 框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/19  逻辑回归：如何让计算机做出二值化决策？.md">19  逻辑回归：如何让计算机做出二值化决策？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/20  决策树：如何对 NP 难复杂问题进行启发式求解？.md">20  决策树：如何对 NP 难复杂问题进行启发式求解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md">21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/22  面试中那些坑了无数人的算法题.md">22  面试中那些坑了无数人的算法题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/23  站在生活的十字路口，如何用数学抉择？.md">23  站在生活的十字路口，如何用数学抉择？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/24 结束语  数学底子好，学啥都快.md">24 结束语  数学底子好，学啥都快.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>06  向量及其导数：计算机如何完成对海量高维度数据计算？</h1>
+
+<p>在上一课时，我们学习了利用梯度下降法求解函数的极值。我举了个例子，如果商品利润函数 r 和补贴金额 x 的关系为 r(x) = p(x)×(m - x - c) = (2/(1+e-x) - 1)×(16 - x - 8)，然后我又利用梯度下降法，求解出让利润最大的补贴额 x* 为 2.42 元。</p>
+
+<p>就这个例题而言，其实根本不需要求导法或者是梯度下降法。这是因为，商品定价是 8 元，补贴额 x 的<strong>决策空间</strong>就是从不打折的 0 元到不要钱的 8 元。如果最小颗粒度是“分”，那么决策空间就是 0.00元～8.00元，这 801 个变量而已。写个 for 循环，对每一个可能的补贴额都简单粗暴地计算一遍，也是一种简单可行的方法。</p>
+
+<p>然而，实际问题中可能会更加复杂。例如，购买概率除了与补贴额有关以外，还跟同行竞争对手的补贴额、商品的有效期、温度、天气、节假日等因素有关。假设有 n 个可能的因素，每个因素的<strong>决策空间</strong>都是 801 个，那么整体的<strong>决策空间</strong>就瞬间变成了 801n 个！</p>
+
+<p><strong>此时再用简单粗暴的 for 循环计算就变得不现实了，这也是在大数据环境下，数学算法对复杂业务环境求解计算的优势。</strong></p>
+
+<h3>向量是高维度数据的处理单元</h3>
+
+<p>我们提到，除了补贴额，影响商品购买率的因素还有很多。为了综合刻画这些因素对购买概率以及利润的影响，自然就需要用多元函数来表达，即 r(x,y,z...) = r(补贴额，有效期，温度...)。</p>
+
+<ul>
+
+<li><strong>维度</strong></li>
+
+</ul>
+
+<p>每个影响购买概率的因素，又可称作<strong>维度</strong>。当维度逐渐变多时，就意味着我们需要在<strong>高维度数据空间</strong>下处理某个多元函数。在计算机或数学领域中，通常用<strong>向量或矩阵</strong>来对高维度数据进行计算和表示。</p>
+
+<ul>
+
+<li><strong>向量</strong></li>
+
+</ul>
+
+<p>向量是高维度数据的表现形式，它由多个数字组合在一起，其中每个数字都是某个维度的特征值。通常印刷体用斜体、加粗的小写字母表示，例如 <em><strong>a</strong></em>=[1,2,3,4,5]，而手写时在字母顶上加一小箭头“→”即可。</p>
+
+<ul>
+
+<li><strong>矩阵</strong></li>
+
+</ul>
+
+<p>既然向量是多个数字的组合，同样我们也可以<strong>把多个向量组合在一起就得到了矩阵</strong>。矩阵通常用斜体、加粗的大写字母表示，例如：</p>
+
+<p><img src="assets/Ciqc1F-qW2KAVC2eAAAqW3NSwxg911.png" alt="图片1.png" /></p>
+
+<p>根据向量和矩阵的定义，不难发现向量是一种行数为 1 或列数为 1 的特殊矩阵。有了向量和矩阵，就能把高维度的数据用简单的数学符号表达了。</p>
+
+<h3>矩阵的基本运算</h3>
+
+<p>因为向量是一种特殊的矩阵，矩阵的基本运算对于向量也适用。</p>
+
+<h4>1.转置</h4>
+
+<p>先来介绍一下矩阵的转置。转置用大写字母 T 作为上标来表示，作用是<strong>交换矩阵行和列的值</strong>。这样原本的大小就由 n×m 变成 m×n 了，例如：</p>
+
+<p><img src="assets/CgqCHl-qW22ATIEBAABmF6xQrH8325.png" alt="图片2.png" /></p>
+
+<h4>2.向量的点乘运算</h4>
+
+<p>点乘运算只适用于向量，用“·”表示。计算的结果为，两个向量所有对应项的<strong>乘积之和</strong>。例如，向量 <em><strong>a</strong></em>= [a1,a2,...,an] ,<em><strong>b</strong></em>= [b1,b2,...,bn]，则<em><strong>a</strong></em>·<em><strong>b</strong></em>=a1b1+a2b2+……+anbn。例如 <em><strong>a</strong></em>= [1,2,3] ,<em><strong>b</strong></em>= [2,3,4]，则 <em><strong>a</strong></em>·<em><strong>b</strong></em>= 1×2 + 2×3 + 3×4 = 20。</p>
+
+<h4>3.矩阵的乘积运算</h4>
+
+<p>接下来看一下矩阵相关的乘积运算。矩阵可以有两种乘积相关的运算，第一个是矩阵的乘法，第二个是哈达玛积。</p>
+
+<ul>
+
+<li><strong>运算矩阵的乘法</strong></li>
+
+</ul>
+
+<p>如果有 n×p 的矩阵 <em><strong>A</strong></em> 和 p×m 的矩阵 <em><strong>B</strong></em>，则矩阵<em><strong>A</strong></em> 和 <em><strong>B</strong></em> 可以做乘法运算。其乘积结果 <em><strong>C</strong></em> =<em><strong>AB</strong></em> 的大小为 n×m，其中每个元素的数值为（<em><strong>C</strong></em> 矩阵中第 i 行第 j 列）</p>
+
+<p><img src="assets/Ciqc1F-qW36AaufQAACCC2N6w4Y661.png" alt="图片8.png" /></p>
+
+<p>需要注意的是，矩阵的乘法对维数有严格要求。<strong>第一个矩阵的列数与第二个的行数必须相等</strong>。所以，<strong>矩阵的乘法并不满足交换律</strong>。
+
+<img src="assets/CgqCHl-zPpaAdglhAACpwikeCDc307.png" alt="WechatIMG846.png" /></p>
+
+<ul>
+
+<li><strong>哈达玛积</strong></li>
+
+</ul>
+
+<p>哈达玛积在对海量数据预处理中会被高频使用，它的计算方式相对简单很多。哈达玛积<strong>要求两个矩阵的行列维数完全相同</strong>，计算方式是对应位置元素的乘积，例如：</p>
+
+<p><img src="assets/CgqCHl-qW5CASFf5AAB7d4ZJSIo496.png" alt="图片4.png" /></p>
+
+<h4>4.求逆运算</h4>
+
+<p>最后一个矩阵的基本运算是求逆运算，这很像在标量里对一个数字求倒数。</p>
+
+<p>我们先来介绍一个特殊的矩阵——<strong>单位矩阵</strong>。单位矩阵定义为主对角线元素为 1，其他元素为 0 的方阵，用<em><strong>I</strong></em>来表示，例如：</p>
+
+<p><img src="assets/Ciqc1F-qW5uAYSTVAAAmUORxc6w260.png" alt="图片5.png" /></p>
+
+<p>求逆运算只可应用在方阵上，用 -1 作为上标来表示，输出的结果也称作<strong>逆矩阵</strong>。逆矩阵满足的性质是，与原矩阵做乘法运算后，结果为单位矩阵，即 <em>A</em>×<em>A</em>-1=<em>I。</em>
+
+<img src="assets/Ciqc1F-snJuADWmWAACZ999lC2A440.png" alt="WechatIMG678.png" /></p>
+
+<h3>向量的求导</h3>
+
+<p>前面说过，在对复杂业务问题进行形式化定义后，再求解最优值的过程中，不管是用求导法还是梯度下降法，都是逃不开要对目标函数进行求导的。复杂业务环境中，<strong>自变量肯定不止一个，这就需要我们在向量或矩阵的环境中，掌握求导的运算。</strong></p>
+
+<p>实际工作中，矩阵的求导用得非常少，掌握向量的求导就足够了。因此，我们重点学习“向量关于向量”的导数计算。</p>
+
+<p>我们先给出向量关于向量的导数的计算方法。向量 <em><strong>y</strong></em> 关于向量 <em><strong>w</strong></em> 的求导结果是个矩阵，标记为<em><strong>A</strong></em>。矩阵 <em><strong>A</strong></em> 中第 i 行第 j 列的元素 aij，为向量 <em><strong>y</strong></em> 中第 i 个元素关于向量 <em><strong>w</strong></em> 中第 j 个元素的导数。例如，如果向量 <em><strong>w</strong></em> 的维数为 n×1，向量 <em><strong>y</strong></em> 的维数是 m×1，则 y 关于 w 的求导结果矩阵维数就是 n×m，其中第 i 行第 j 列的元素为：</p>
+
+<p><img src="assets/Ciqc1F-qW6-AUmfJAAA_3qflnHM248.png" alt="图片7.png" /></p>
+
+<p>此时，向量的求导就变成了标量的求导了，相信这并不会难倒我们。</p>
+
+<p>我们给出个相关例题：</p>
+
+<p>如果 <em><strong>w</strong></em>T<em><strong>x</strong></em>= y，其中 <em><strong>w</strong></em> 和 <em><strong>x</strong></em> 都为 n×1 的向量。显然这里的 y 是个标量，也就是一个 1×1 的特殊向量。求 y 关于 <em><strong>x</strong></em> 的导数。</p>
+
+<blockquote>
+
+<p>这里的 T 表示的是转置。此处 <em><strong>w</strong></em>T<em><strong>x</strong></em> 是矩阵乘法，1×n 和 n×1 才能相乘。另一种表示方法是 w·x，表示向量点乘。此处二者结果一样。</p>
+
+</blockquote>
+
+<p>它的解析过程如下图所示：
+
+<img src="assets/CgqCHl-7MuuANagGAAD83Oq_rRE087.png" alt="WechatIMG931.png" /></p>
+
+<h3>计算机处理海量数据</h3>
+
+<p>计算机在处理海量数据时，常常依赖复杂的数据结构进行存储。例如数组、链表、栈、哈希表、结构体等等。对于海量数据而言，一定要明确<strong>样本和维度</strong>这两个概念：</p>
+
+<ul>
+
+<li>样本，是指一条一条数据，代表的数据的个数；</li>
+
+<li>维度，是指每一条样本的数据集合，代表数据特征的数量。</li>
+
+</ul>
+
+<p>举个例子，全班 50 名同学语文、数学、英语的考试成绩，就可以视作微型的海量数据。在这个数据集中，50 个同学每个人都有自己的乘积，因此样本就是 50 个。而每个同学的样本，又包含了数学成绩、语文成绩 、英语成绩，这就是每个样本的 3 个维度，也可以称作 3 个特征。这样，就可以得到维数为 50×3 的成绩矩阵。</p>
+
+<p>假设你需要对全班同学的成绩做一些统计计算，那向量的知识就突显出来了。通过向量的加减法，你可以计算出每个人的总分，也可以计算出全班同学每一门课的平均分；通过向量的点乘、哈达玛积，你可以计算出每个同学的偏科情况，即方差。</p>
+
+<p>有了这些基础知识，你就能应对大数据环境中数据的存储、处理、计算和应用了。</p>
+
+<h3>小结</h3>
+
+<p>在实际工作中，你常会遇到高维度的数据，向量和矩阵就是必不可少的数学基础知识，计算机在处理海量数据时，就通常以向量或数组为单位。</p>
+
+<p>最后我们留一个作业：假设矩阵 50×3 的矩阵 <em><strong>A</strong></em> 为全班 50 个同学 3 门课的考试成绩矩阵，用代码来实现每个同学的得分方差的计算，其中方差的公式为：</p>
+
+<p><img src="assets/Ciqc1F-qW8GAWfqFAABETcKbFZI117.png" alt="图片10.png" /></p>
+
+<p>如果你用 Python 来开发，可能会用到 NumPy 库，你也可以考虑用 MATLAB 来实现。</p>
+
+<p>关于向量的运算，还可以应用在对散点进行线性回归的拟合中，我们会在下一讲“07 | 线性回归：如何在离散点中寻找数据规律？”中向你详细讲解。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/程序员的数学课/05  求极值：如何找到复杂业务的最优解？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/程序员的数学课/07  线性回归：如何在离散点中寻找数据规律？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997bc97c0a3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

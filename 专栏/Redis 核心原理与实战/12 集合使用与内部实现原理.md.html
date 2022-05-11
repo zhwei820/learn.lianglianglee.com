@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>12 集合使用与内部实现原理.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/01 Redis 是如何执行的.md">01 Redis 是如何执行的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/02 Redis 快速搭建与使用.md">02 Redis 快速搭建与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/03 Redis 持久化——RDB.md">03 Redis 持久化——RDB.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/04 Redis 持久化——AOF.md">04 Redis 持久化——AOF.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/05 Redis 持久化——混合持久化.md">05 Redis 持久化——混合持久化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/06 字符串使用与内部实现原理.md">06 字符串使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">07 附录：更多字符串操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/08 字典使用与内部实现原理.md">08 字典使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">09 附录：更多字典操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/10 列表使用与内部实现原理.md">10 列表使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">11 附录：更多列表操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Redis 核心原理与实战/12 集合使用与内部实现原理.md">12 集合使用与内部实现原理.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">13 附录：更多集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/14 有序集合使用与内部实现原理.md">14 有序集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/15 附录：更多有序集合操作命令.md">15 附录：更多有序集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/16 Redis 事务深入解析.md">16 Redis 事务深入解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/17 Redis 键值过期操作.md">17 Redis 键值过期操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/18 Redis 过期策略与源码分析.md">18 Redis 过期策略与源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/19 Redis 管道技术——Pipeline.md">19 Redis 管道技术——Pipeline.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/20 查询附近的人——GEO.md">20 查询附近的人——GEO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/21 游标迭代器（过滤器）——Scan.md">21 游标迭代器（过滤器）——Scan.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/22 优秀的基数统计算法——HyperLogLog.md">22 优秀的基数统计算法——HyperLogLog.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/23 内存淘汰机制与算法.md">23 内存淘汰机制与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">24 消息队列——发布订阅模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/25 消息队列的其他实现方式.md">25 消息队列的其他实现方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">26 消息队列终极解决方案——Stream（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">27 消息队列终极解决方案——Stream（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">28 实战：分布式锁详解与代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">29 实战：布隆过滤器安装与使用及原理分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">30 完整案例：实现延迟队列的两种方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/31 实战：定时任务案例.md">31 实战：定时任务案例.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/32 实战：RediSearch 高性能的全文搜索引擎.md">32 实战：RediSearch 高性能的全文搜索引擎.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/33 实战：Redis 性能测试.md">33 实战：Redis 性能测试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/34 实战：Redis 慢查询.md">34 实战：Redis 慢查询.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/35 实战：Redis 性能优化方案.md">35 实战：Redis 性能优化方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/36 实战：Redis 主从同步.md">36 实战：Redis 主从同步.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/37 实战：Redis哨兵模式（上）.md">37 实战：Redis哨兵模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/38 实战：Redis 哨兵模式（下）.md">38 实战：Redis 哨兵模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/39 实战：Redis 集群模式（上）.md">39 实战：Redis 集群模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/40 实战：Redis 集群模式（下）.md">40 实战：Redis 集群模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/41 案例：Redis 问题汇总和相关解决方案.md">41 案例：Redis 问题汇总和相关解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/42 技能学习指南.md">42 技能学习指南.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/43 加餐：Redis 的可视化管理工具.md">43 加餐：Redis 的可视化管理工具.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>12 集合使用与内部实现原理</h1>
+
+<p>集合类型 (Set) 是一个无序并唯一的键值集合。</p>
+
+<p>之所以说集合类型是一个无序集合，是因为它的存储顺序不会按照插入的先后顺序进行存储，如下代码所示：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; sadd myset v2 v1 v3 #插入数据 v2、v1、v3 
+
+(integer) 3
+
+127.0.0.1:6379&gt; smembers myset #查询数据
+
+1) &quot;v1&quot;
+
+2) &quot;v3&quot;
+
+3) &quot;v2&quot;
+
+
+
+</code></pre>
+
+<p>从上面代码执行结果可以看出，myset 的存储顺序并不是以插入的先后顺序进行存储的。</p>
+
+<p>集合类型和列表类型的区别如下：</p>
+
+<ul>
+
+<li>列表可以存储重复元素，集合只能存储非重复元素；</li>
+
+<li>列表是按照元素的先后顺序存储元素的，而集合则是无序方式存储元素的。</li>
+
+</ul>
+
+<h3>1 基础使用</h3>
+
+<p>集合类型的功能比列表类型丰富一些，集合类型可以用来统计多个集合的交集、错集和并集，如下代码所示。</p>
+
+<h4>1）添加一个或多个元素</h4>
+
+<p>语法：sadd key member [member ...] 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; sadd myset v1 v2 v3
+
+(integer) 3
+
+
+
+</code></pre>
+
+<h4>2）查询集合所有元素</h4>
+
+<p>语法：smembers key 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; smembers myset
+
+1) &quot;v1&quot;
+
+2) &quot;v3&quot;
+
+3) &quot;v2&quot;
+
+
+
+</code></pre>
+
+<h4>3）查询集合的成员数量</h4>
+
+<p>语法：scard key 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; scard myset
+
+(integer) 3
+
+
+
+</code></pre>
+
+<h4>4）查询集合中是否包含某个元素</h4>
+
+<p>语法：sismember key member 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; sismember myset v1
+
+(integer) 1
+
+127.0.0.1:6379&gt; sismember myset v4
+
+(integer) 0
+
+
+
+</code></pre>
+
+<h4>5）从一个集合中移动一个元素到另一个集合</h4>
+
+<p>语法：smove source destination member 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; smembers myset
+
+1) &quot;v1&quot;
+
+2) &quot;v3&quot;
+
+3) &quot;v2&quot;
+
+127.0.0.1:6379&gt; smembers myset2
+
+1) &quot;v1&quot;
+
+2) &quot;v8&quot;
+
+127.0.0.1:6379&gt; smove myset myset2 v3
+
+(integer) 1
+
+127.0.0.1:6379&gt; smembers myset2
+
+1) &quot;v1&quot;
+
+2) &quot;v8&quot;
+
+3) &quot;v3&quot;
+
+127.0.0.1:6379&gt; smembers myset
+
+1) &quot;v1&quot;
+
+2) &quot;v2&quot;
+
+
+
+</code></pre>
+
+<h4>6）移除集合中一个或多个元素</h4>
+
+<p>语法：srem key member [member ...] 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; smembers myset
+
+1) &quot;v4&quot;
+
+2) &quot;v1&quot;
+
+3) &quot;v3&quot;
+
+4) &quot;v2&quot;
+
+5) &quot;v5&quot;
+
+127.0.0.1:6379&gt; srem myset v5
+
+(integer) 1
+
+127.0.0.1:6379&gt; smembers myset
+
+1) &quot;v3&quot;
+
+2) &quot;v2&quot;
+
+3) &quot;v1&quot;
+
+4) &quot;v4&quot;
+
+
+
+</code></pre>
+
+<p>注意：使用 srem 指令，不存在的元素将会被忽略。 更多操作命令，详见附录部分。</p>
+
+<h3>2 代码实战</h3>
+
+<p>下面来看集合类型在 Java 中的使用，同样先添加 Jedis 框架，使用代码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+import java.util.Set;
+
+
+
+public class SetExample {
+
+    public static void main(String[] args) {
+
+        Jedis jedis = new Jedis(&quot;xxx.xxx.xxx.xxx&quot;, 6379);
+
+        jedis.auth(&quot;xxx&quot;);
+
+        // 创建集合并添加元素
+
+        jedis.sadd(&quot;set1&quot;, &quot;java&quot;, &quot;golang&quot;);
+
+        // 查询集合中的所有元素
+
+        Set&lt;String&gt; members = jedis.smembers(&quot;set1&quot;);
+
+        System.out.println(members); // 输出：[java, golang]
+
+        // 查询集合中的元素数量
+
+        System.out.println(jedis.scard(&quot;set1&quot;));
+
+        // 移除集合中的一个元素
+
+        jedis.srem(&quot;set1&quot;, &quot;golang&quot;);
+
+        System.out.println(jedis.smembers(&quot;set1&quot;)); // 输出：[java]
+
+        // 创建集合 set2 并添加元素
+
+        jedis.sadd(&quot;set2&quot;, &quot;java&quot;, &quot;golang&quot;);
+
+        // 查询两个集合中交集
+
+        Set&lt;String&gt; inters = jedis.sinter(&quot;set1&quot;, &quot;set2&quot;);
+
+        System.out.println(inters); // 输出：[java]
+
+        // 查询两个集合中并集
+
+        Set&lt;String&gt; unions = jedis.sunion(&quot;set1&quot;, &quot;set2&quot;);
+
+        System.out.println(unions); // 输出：[java,golang]
+
+        // 查询两个集合的错集
+
+        Set&lt;String&gt; diffs = jedis.sdiff(&quot;set2&quot;, &quot;set1&quot;);
+
+        System.out.println(diffs); // 输出：[golang]
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<h3>3 内部实现</h3>
+
+<p>集合类型是由 intset (整数集合) 或 hashtable (普通哈希表) 组成的。当集合类型以 hashtable 存储时，哈希表的 key 为要插入的元素值，而哈希表的 value 则为 Null，如下图所示： <img src="assets/2020-02-28-031226.png" alt="集合Set-hashtable.png" /></p>
+
+<p>当集合中所有的值都为整数时，Redis 会使用 intset 结构来存储，如下代码所示：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; sadd myset 1 9 3 -2
+
+(integer) 4
+
+127.0.0.1:6379&gt; object encoding myset
+
+&quot;intset&quot;
+
+
+
+</code></pre>
+
+<p>从上面代码可以看出，<strong>当所有元素都为整数时，集合会以 intset 结构进行(数据)存储</strong>。 当发生以下两种情况时，会导致集合类型使用 hashtable 而非 intset 存储： 1）当元素的个数超过一定数量时，默认是 512 个，该值可通过命令 <code>set-max-intset-entries xxx</code> 来配置。 2）当元素为非整数时，集合将会使用 hashtable 来存储，如下代码所示：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; sadd myht &quot;redis&quot; &quot;db&quot;
+
+(integer) 2
+
+127.0.0.1:6379&gt; object encoding myht
+
+&quot;hashtable&quot;
+
+
+
+</code></pre>
+
+<p>从上面代码可以看出，<strong>当元素为非整数时，集合会使用 hashtable 进行存储</strong>。</p>
+
+<h3>4 源码解析</h3>
+
+<p>集合源码在 t_set.c 文件中，核心源码如下：</p>
+
+<pre><code class="language-c">/* 
+
+ * 添加元素到集合
+
+ * 如果当前值已经存在，则返回 0 不作任何处理，否则就添加该元素，并返回 1。
+
+ */
+
+int setTypeAdd(robj *subject, sds value) {
+
+    long long llval;
+
+    if (subject-&gt;encoding == OBJ_ENCODING_HT) { // 字典类型
+
+        dict *ht = subject-&gt;ptr;
+
+        dictEntry *de = dictAddRaw(ht,value,NULL);
+
+        if (de) {
+
+            // 把 value 作为字典到 key，将 Null 作为字典到 value，将元素存入到字典
+
+            dictSetKey(ht,de,sdsdup(value));
+
+            dictSetVal(ht,de,NULL);
+
+            return 1;
+
+        }
+
+    } else if (subject-&gt;encoding == OBJ_ENCODING_INTSET) { // inset 数据类型
+
+        if (isSdsRepresentableAsLongLong(value,&amp;llval) == C_OK) {
+
+            uint8_t success = 0;
+
+            subject-&gt;ptr = intsetAdd(subject-&gt;ptr,llval,&amp;success);
+
+            if (success) {
+
+                // 超过 inset 的最大存储数量，则使用字典类型存储
+
+                if (intsetLen(subject-&gt;ptr) &gt; server.set_max_intset_entries)
+
+                    setTypeConvert(subject,OBJ_ENCODING_HT);
+
+                return 1;
+
+            }
+
+        } else {
+
+            // 转化为整数类型失败，使用字典类型存储
+
+            setTypeConvert(subject,OBJ_ENCODING_HT);
+
+
+
+            serverAssert(dictAdd(subject-&gt;ptr,sdsdup(value),NULL) == DICT_OK);
+
+            return 1;
+
+        }
+
+    } else {
+
+        // 未知编码(类型)
+
+        serverPanic(&quot;Unknown set encoding&quot;);
+
+    }
+
+    return 0;
+
+}
+
+
+
+</code></pre>
+
+<p>以上这些代码验证了，我们上面所说的内容，当元素都为整数并且元素的个数没有到达设置的最大值时，键值的存储使用的是 intset 的数据结构，反之到元素超过了一定的范围，又或者是存储的元素为非整数时，集合会选择使用 hashtable 的数据结构进行存储。</p>
+
+<h3>5 使用场景</h3>
+
+<p>集合类型的经典使用场景如下：</p>
+
+<ul>
+
+<li>微博关注我的人和我关注的人都适合用集合存储，可以保证人员不会重复；</li>
+
+<li>中奖人信息也适合用集合类型存储，这样可以保证一个人不会重复中奖。</li>
+
+</ul>
+
+<h3>6 小结</h3>
+
+<p>通过本文我们知道了，集合类型是由整数集合 (intset) 或者是哈希表 (hashtable) 组成的，集合类型比较适合用来数据去重和保障数据的唯一性，除此之外，集合类型还可以用来统计多个集合的交集、错集和并集 (见附录)。当我们存储的数据是无序并且需要去重的情况下，比较适合使用集合类型进行存储。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973c82f423d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

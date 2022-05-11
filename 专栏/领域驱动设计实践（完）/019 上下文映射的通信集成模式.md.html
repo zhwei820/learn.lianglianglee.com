@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>019 上下文映射的通信集成模式.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/001 「战略篇」访谈  DDD 和微服务是什么关系？.md">001 「战略篇」访谈  DDD 和微服务是什么关系？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典.md">002 「战略篇」开篇词：领域驱动设计，重焕青春的设计经典.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/003 领域驱动设计概览.md">003 领域驱动设计概览.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/004 深入分析软件的复杂度.md">004 深入分析软件的复杂度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/005 控制软件复杂度的原则.md">005 控制软件复杂度的原则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/006 领域驱动设计对软件复杂度的应对（上）.md">006 领域驱动设计对软件复杂度的应对（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/007 领域驱动设计对软件复杂度的应对（下）.md">007 领域驱动设计对软件复杂度的应对（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/008 软件开发团队的沟通与协作.md">008 软件开发团队的沟通与协作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/009 运用领域场景分析提炼领域知识（上）.md">009 运用领域场景分析提炼领域知识（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/010 运用领域场景分析提炼领域知识（下）.md">010 运用领域场景分析提炼领域知识（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/011 建立统一语言.md">011 建立统一语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/012 理解限界上下文.md">012 理解限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/013 限界上下文的控制力（上）.md">013 限界上下文的控制力（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/014 限界上下文的控制力（下）.md">014 限界上下文的控制力（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/015 识别限界上下文（上）.md">015 识别限界上下文（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/016 识别限界上下文（下）.md">016 识别限界上下文（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/017 理解上下文映射.md">017 理解上下文映射.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/018 上下文映射的团队协作模式.md">018 上下文映射的团队协作模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/领域驱动设计实践（完）/019 上下文映射的通信集成模式.md">019 上下文映射的通信集成模式.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/020 辨别限界上下文的协作关系（上）.md">020 辨别限界上下文的协作关系（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/021 辨别限界上下文的协作关系（下）.md">021 辨别限界上下文的协作关系（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/022 认识分层架构.md">022 认识分层架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/023 分层架构的演化.md">023 分层架构的演化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/024 领域驱动架构的演进.md">024 领域驱动架构的演进.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/025 案例  层次的职责与协作关系（图文篇）.md">025 案例  层次的职责与协作关系（图文篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/026 限界上下文与架构.md">026 限界上下文与架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/027 限界上下文对架构的影响.md">027 限界上下文对架构的影响.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/028 领域驱动设计的代码模型.md">028 领域驱动设计的代码模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/029 代码模型的架构决策.md">029 代码模型的架构决策.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/030 实践  先启阶段的需求分析.md">030 实践  先启阶段的需求分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/031 实践  先启阶段的领域场景分析（上）.md">031 实践  先启阶段的领域场景分析（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/032 实践  先启阶段的领域场景分析（下）.md">032 实践  先启阶段的领域场景分析（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/033 实践  识别限界上下文.md">033 实践  识别限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/034 实践  确定限界上下文的协作关系.md">034 实践  确定限界上下文的协作关系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/035 实践  EAS 的整体架构.md">035 实践  EAS 的整体架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？.md">036 「战术篇」访谈：DDD 能帮开发团队提高设计水平吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/037 「战术篇」开篇词：领域驱动设计的不确定性.md">037 「战术篇」开篇词：领域驱动设计的不确定性.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/038 什么是模型.md">038 什么是模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/039 数据分析模型.md">039 数据分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/040 数据设计模型.md">040 数据设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/041 数据模型与对象模型.md">041 数据模型与对象模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/042 数据实现模型.md">042 数据实现模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/043 案例  培训管理系统.md">043 案例  培训管理系统.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/044 服务资源模型.md">044 服务资源模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/045 服务行为模型.md">045 服务行为模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/046 服务设计模型.md">046 服务设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/047 领域模型驱动设计.md">047 领域模型驱动设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/048 领域实现模型.md">048 领域实现模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/049 理解领域模型.md">049 理解领域模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/050 领域模型与结构范式.md">050 领域模型与结构范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/051 领域模型与对象范式（上）.md">051 领域模型与对象范式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/052 领域模型与对象范式（中）.md">052 领域模型与对象范式（中）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/053 领域模型与对象范式（下）.md">053 领域模型与对象范式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/054 领域模型与函数范式.md">054 领域模型与函数范式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/055 领域驱动分层架构与对象模型.md">055 领域驱动分层架构与对象模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/056 统一语言与领域分析模型.md">056 统一语言与领域分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/057 精炼领域分析模型.md">057 精炼领域分析模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/058 彩色 UML 与彩色建模.md">058 彩色 UML 与彩色建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/059 四色建模法.md">059 四色建模法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/060 案例  订单核心流程的四色建模.md">060 案例  订单核心流程的四色建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/061 事件风暴与业务全景探索.md">061 事件风暴与业务全景探索.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/062 事件风暴与领域分析建模.md">062 事件风暴与领域分析建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/063 案例  订单核心流程的事件风暴.md">063 案例  订单核心流程的事件风暴.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/064 表达领域设计模型.md">064 表达领域设计模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/065 实体.md">065 实体.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/066 值对象.md">066 值对象.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/067 对象图与聚合.md">067 对象图与聚合.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/068 聚合设计原则.md">068 聚合设计原则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/069 聚合之间的关系.md">069 聚合之间的关系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/070 聚合的设计过程.md">070 聚合的设计过程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/071 案例  培训领域模型的聚合设计.md">071 案例  培训领域模型的聚合设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/072 领域模型对象的生命周期-工厂.md">072 领域模型对象的生命周期-工厂.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/073 领域模型对象的生命周期-资源库.md">073 领域模型对象的生命周期-资源库.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/074 领域服务.md">074 领域服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/075 案例  领域设计模型的价值.md">075 案例  领域设计模型的价值.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/076 应用服务.md">076 应用服务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/077 场景的设计驱动力.md">077 场景的设计驱动力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/078 案例  薪资管理系统的场景驱动设计.md">078 案例  薪资管理系统的场景驱动设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/079 场景驱动设计与 DCI 模式.md">079 场景驱动设计与 DCI 模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/080 领域事件.md">080 领域事件.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/081 发布者—订阅者模式.md">081 发布者—订阅者模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/082 事件溯源模式.md">082 事件溯源模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/083 测试优先的领域实现建模.md">083 测试优先的领域实现建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/084 深入理解简单设计.md">084 深入理解简单设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/085 案例  薪资管理系统的测试驱动开发（上）.md">085 案例  薪资管理系统的测试驱动开发（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/086 案例  薪资管理系统的测试驱动开发（下）.md">086 案例  薪资管理系统的测试驱动开发（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/087 对象关系映射（上）.md">087 对象关系映射（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/088 对象关系映射（下）.md">088 对象关系映射（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/089 领域模型与数据模型.md">089 领域模型与数据模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/090 领域驱动设计对持久化的影响.md">090 领域驱动设计对持久化的影响.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/091 领域驱动设计体系.md">091 领域驱动设计体系.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/092 子领域与限界上下文.md">092 子领域与限界上下文.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/093 限界上下文的边界与协作.md">093 限界上下文的边界与协作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/094 限界上下文之间的分布式通信.md">094 限界上下文之间的分布式通信.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/095 命令查询职责分离.md">095 命令查询职责分离.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/096 分布式柔性事务.md">096 分布式柔性事务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/097 设计概念的统一语言.md">097 设计概念的统一语言.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/098 模型对象.md">098 模型对象.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/099 领域驱动设计参考过程模型.md">099 领域驱动设计参考过程模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/100 领域驱动设计的精髓.md">100 领域驱动设计的精髓.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/101 实践  员工上下文的领域建模.md">101 实践  员工上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/102 实践  考勤上下文的领域建模.md">102 实践  考勤上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/103 实践  项目上下文的领域建模.md">103 实践  项目上下文的领域建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/104 实践  培训上下文的业务需求.md">104 实践  培训上下文的业务需求.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/105 实践  培训上下文的领域分析建模.md">105 实践  培训上下文的领域分析建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/106 实践  培训上下文的领域设计建模.md">106 实践  培训上下文的领域设计建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/107 实践  培训上下文的领域实现建模.md">107 实践  培训上下文的领域实现建模.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/108 实践  EAS 系统的代码模型.md">108 实践  EAS 系统的代码模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/领域驱动设计实践（完）/109 后记：如何学习领域驱动设计.md">109 后记：如何学习领域驱动设计.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>019 上下文映射的通信集成模式</h1>
+
+<p>无论采用何种设计，限界上下文之间的协作都是不可避免的，应用边界的上下文映射模式会以更加积极的态度来应对这种不可避免的协作；从设计的角度来讲，就是不遗余力地降低限界上下文之间的耦合关系。防腐层与开放主机服务的目的正是如此。</p>
+
+<h3>防腐层（Anticorruption Layer）</h3>
+
+<p>防腐层其实是设计思想“间接”的一种体现。在架构层面，通过引入一个间接的层，就可以有效隔离限界上下文之间的耦合，这个间接的防腐层还可以扮演“适配器”的角色、“调停者”的角色、“外观”的角色，没错，这都是 GOF 设计模式中常见的几种结构型模式。</p>
+
+<p>防腐层往往属于下游限界上下文，用以隔绝上游限界上下文可能发生的变化。因为不管是遵奉者模式，还是客户方-供应方模式，下游团队终究可能面临不可掌控的上游变化。在防腐层中定义一个映射上游限界上下文的服务接口，就可以将掌控权控制在下游团队中，即使上游发生了变化，影响的也仅仅是防腐层中的单一变化点，只要防腐层的接口不变，下游限界上下文的其他实现就不会受到影响。</p>
+
+<p>我们可以通过下图来对比引入防腐层的价值：</p>
+
+<p><img src="assets/08a9d920-ab37-11e8-bdd5-d99c499845ac" alt="enter image description here" /></p>
+
+<p>显然，在没有引入防腐层时，下游上下文可能存在多处对上游上下文领域模型的<strong>依赖</strong>，一旦上游发生变更，就会影响到下游的多处实现；引入防腐层后，之前产生的多处依赖转为对防腐层的依赖，再由防腐层指向上游上下文，形成单一依赖。上游变更时，影响的仅仅是防腐层，下游上下文自身并未受到影响。</p>
+
+<p>用以对付遗留系统时，防腐层可谓首选利刃。我在前面讲解限界上下文对遗留系统的应对时，已经述及采用“抽象分支”与“防腐层”的手法。对于遗留系统，我们不能粗暴地用新系统取代它，而应采用渐进的手段尽可能重用它的资产，剔除不好的设计与实现，完成逐步替换；我们可以将遗留系统视为一个整体的限界上下文，然后为调用它的下游上下文建立防腐层。由于防腐层是我们自己掌控的，就可以在其内动动手脚，例如，从调用者角度思考需要公开的服务接口，并引入领域驱动设计为其提炼出清晰的领域模型，然后再从遗留系统中去寻找对应的实现，慢慢将合适的代码搬移过来，适时对其重构。这种做法既保有了新设计的新鲜感，不受技术债的影响，又不至于走向极端，对旧有系统大动干戈，可谓选择了一条“中庸之道”，能够新旧并存地小步前行。</p>
+
+<h3>开放主机服务（Open Host Service）</h3>
+
+<p>如果说防腐层是下游限界上下文对抗上游变化的利器，那么开放主机服务就是上游服务用来吸引更多下游调用者的诱饵。设计开放主机服务，就是定义公开服务的协议，包括通信的方式、传递消息的格式（协议）。同时，也可视为是一种承诺，保证开放的服务不会轻易做出变化。</p>
+
+<p>开放主机服务常常与**发布语言（Published Language）**模式结合起来使用。当然，在定义这样的公开服务时，为了被更多调用者使用，需要力求语言的标准化，在分布式系统中，通常采用 RPC（Protocol Buffer）、WebService 或 RESTful。若使用消息队列中间件，则需要事先定义消息的格式，例如，在我参与过的一个分布式 CIMS（计算集成制造系统）中，客户端与服务端以及服务端之间的通信皆以消息形式传递，我们定义了如下的消息格式：</p>
+
+<pre><code>Message——Name 
+
+    ——ID
+
+    ——Body（MessageItemSequence）
+
+        ——Value
+
+        ——Item（MessageItem）
+
+            ——SubValue
+
+            ——SubItem（MessageItem）
+
+
+
+</code></pre>
+
+<p>采用这种消息格式，几乎所有的分布式服务都可以抽象为这样的接口：</p>
+
+<pre><code class="language-java">public interface RemotingService {
+
+    /**
+
+    * @param serviceName为需要调用的远程服务名
+
+    * @param request为Message类型的request消息
+
+    * @return 返回Message类型的response消息
+
+    * @throws 自定义的RemotingException，其中包含的message仍然为Message结构，表达Error
+
+    */
+
+    Message execute(String serviceName, Message request) throws RemotingException;
+
+}
+
+
+
+</code></pre>
+
+<p>为了降低上游与下游限界上下文之间的依赖，防腐层与开放主机服务都是一种有效的手段，前者归属于下游限界上下文的范围，后者则属于上游限界上下文的边界，但二者是存在区别的，上游限界上下文作为被依赖方，往往会被多个下游限界上下文消费，如果需要引入防腐层，意味着需要为每个下游都提供一个几乎完全相似的防腐层，导致了防腐层的重复。因此，倘若上、下游限界上下文都在开发团队内部，又或者二者之间建立了良好的团队协作，我更倾向于在上游限界上下文中定义开放主机服务。当然，在极端情况下，可能需要在为上游限界上下文提供开放主机服务的同时，还需要为下游限界上下文定义防腐层。</p>
+
+<p>在绘制上下文映射图时，我们往往用 ACL 缩写来代表防腐层，用 OHS 缩写代表开放主机服务。</p>
+
+<h3>发布/订阅事件</h3>
+
+<p>即使是确定了发布语言规范的开放主机服务，仍然会导致两个上下文之间存在耦合关系，下游限界上下文必须知道上游服务的 ABC（Address、Binding 与 Contract），对于不同的分布式实现，还需要在下游定义类似服务桩的客户端。例如，在基于 Spring Cloud 的微服务架构中，虽然通过引入 Euraka 实现了对服务的注册与发现，降低了对 Address、Binding 的依赖，但仍然需要在下游限界上下文定义 Feign 客户端，你可以将这个 Feign 客户端理解为是真实服务的一个代理（Proxy）。基于代理模式，我们要求代理与被代理的真实服务（Subject）保持相同的接口，这就意味着，一旦服务的接口发生变化，就需要修改客户端代码。</p>
+
+<p>采用发布/订阅事件的方式可以在解耦合方面走得更远。一个限界上下文作为事件的发布方，另外的多个限界上下文作为事件的订阅方，二者的协作通过经由消息中间件进行传递的事件消息来完成。当确定了消息中间件后，发布方与订阅方唯一存在的耦合点就是事件，准确地说，是事件持有的数据。由于业务场景通常较为稳定，我们只要保证事件持有的业务数据尽可能满足业务场景即可。这时，发布方不需要知道究竟有哪些限界上下文需要订阅该事件，它只需要按照自己的心意，随着一个业务命令的完成发布事件即可。订阅方也不用关心它所订阅的事件究竟来自何方，它要么通过 pull 方式主动去拉取存于消息中间件的事件消息，要么等着消息中间件将来自上游的事件消息根据事先设定的路由推送给它，通过消息中间件，发布方与订阅方完全隔离了。在上下文映射中，这种基于发布/订阅事件的协作关系，已经做到了力所能及的松耦合极致了。</p>
+
+<p><strong>以电商购物流程为例</strong>，从买家搜索商品并将商品加入到购物车开始，到下订单、支付、配送完成订单结束，整个过程由多个限界上下文一起协作完成。倘若以发布/订阅事件作为这些限界上下文之间的协作模式，则发布和订阅事件的流程如下所示：</p>
+
+<p><img src="assets/1802fc80-ab37-11e8-8793-2b2eb0e28f96" alt="enter image description here" /></p>
+
+<p>如果将发布事件的限界上下文定义为上游，订阅事件的限界上下文定义为下游，则下表展现了事件在上下游限界上下文之间的流转：</p>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th align="left">ID</th>
+
+<th align="left">Event</th>
+
+<th align="left">Upstream Context</th>
+
+<th align="left">Downstream Context</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td align="left">1</td>
+
+<td align="left">ProductSelected</td>
+
+<td align="left">Product Context</td>
+
+<td align="left">Basket Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">2</td>
+
+<td align="left">OrderRequested</td>
+
+<td align="left">Basket Context</td>
+
+<td align="left">Order Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">3</td>
+
+<td align="left">InventoryRequested</td>
+
+<td align="left">Order Context</td>
+
+<td align="left">Inventory Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">4</td>
+
+<td align="left">AvailabilityValidated</td>
+
+<td align="left">Inventory Context</td>
+
+<td align="left">Order Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">5</td>
+
+<td align="left">OrderValidated</td>
+
+<td align="left">Order Context</td>
+
+<td align="left">Payment Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">6</td>
+
+<td align="left">PaymentProcessed</td>
+
+<td align="left">Payment Context</td>
+
+<td align="left">Order Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">7</td>
+
+<td align="left">OrderConfirmed</td>
+
+<td align="left">Order Context</td>
+
+<td align="left">Shipment Context</td>
+
+</tr>
+
+<tr>
+
+<td align="left">8</td>
+
+<td align="left">ShipmentDelivered</td>
+
+<td align="left">Shipment Context</td>
+
+<td align="left">Order Context</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p>采用发布/订阅事件模式的限界上下文不必一定是分布式架构，关键在于负责传递事件的介质是什么？如果采用独立进程运行的消息中间件，例如 RabbitMQ 或者 Kafka，可以更加有效地利用资源，整个系统的可伸缩性会变得更好。然而，考虑到进程间通信带来的成本，以及维护事务一致性带来的阻碍，我们也可以开发运行在同一个 JVM 进程中的事件总线（Event Bus）来负责事件的发布和订阅。我们还可以采用 Actor 模式支持事件的发布与订阅，Actor 会维持一个 mailbox，它相当于是一个轻量级的消息队列。以电商系统为例，例如，Order Context 的 OrderActor 接收 OrderRequested 事件，Basket Context 的 BasketActor 负责处理 ConfirmBasket 命令：</p>
+
+<pre><code class="language-scala">class BasketActor(eventPublisher: ActorRef) extends Actor with ActorLogging {
+
+    def receive: Receive = {
+
+        case cmd: ConfirmBasket =&gt; 
+
+            // compose OrderRequested event with product list
+
+            eventPublisher ! OrderRequested(cmd.customerId(), cmd.products())
+
+    }
+
+}
+
+
+
+class OrderActor extends Actor with ActorLogging {
+
+    def receive: Receive = {
+
+        case event: OrderRequested =&gt; 
+
+            // validate order
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>发布/订阅事件模式是松耦合的，但它有特定的适用范围，通常用于异步非实时的业务场景。当然，它的非阻塞特性也使得整个架构具有更强的响应能力，因而常用于业务相对复杂却没有同步要求的命令（Command）场景。这种协作模式往往用于事件驱动架构或者 CQRS（Command Query Responsibility Segregation，命令查询职责分离）架构模式中。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/领域驱动设计实践（完）/018 上下文映射的团队协作模式.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/领域驱动设计实践（完）/020 辨别限界上下文的协作关系（上）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997e1cee613cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

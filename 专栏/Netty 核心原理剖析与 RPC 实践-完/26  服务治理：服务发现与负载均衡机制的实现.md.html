@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>26  服务治理：服务发现与负载均衡机制的实现.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/00 学好 Netty，是你修炼 Java 内功的必经之路.md">00 学好 Netty，是你修炼 Java 内功的必经之路.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/01  初识 Netty：为什么 Netty 这么流行？.md">01  初识 Netty：为什么 Netty 这么流行？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/02  纵览全局：把握 Netty 整体架构脉络.md">02  纵览全局：把握 Netty 整体架构脉络.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/03  引导器作用：客户端和服务端启动都要做些什么？.md">03  引导器作用：客户端和服务端启动都要做些什么？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/04 事件调度层：为什么 EventLoop 是 Netty 的精髓？.md">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/05  服务编排层：Pipeline 如何协调各类 Handler ？.md">05  服务编排层：Pipeline 如何协调各类 Handler ？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/06  粘包拆包问题：如何获取一个完整的网络包？.md">06  粘包拆包问题：如何获取一个完整的网络包？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/07  接头暗语：如何利用 Netty 实现自定义协议通信？.md">07  接头暗语：如何利用 Netty 实现自定义协议通信？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/08  开箱即用：Netty 支持哪些常用的解码器？.md">08  开箱即用：Netty 支持哪些常用的解码器？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/09  数据传输：writeAndFlush 处理流程剖析.md">09  数据传输：writeAndFlush 处理流程剖析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/10  双刃剑：合理管理 Netty 堆外内存.md">10  双刃剑：合理管理 Netty 堆外内存.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/11  另起炉灶：Netty 数据传输载体 ByteBuf 详解.md">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/12  他山之石：高性能内存分配器 jemalloc 基本原理.md">12  他山之石：高性能内存分配器 jemalloc 基本原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/13  举一反三：Netty 高性能内存管理设计（上）.md">13  举一反三：Netty 高性能内存管理设计（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/14  举一反三：Netty 高性能内存管理设计（下）.md">14  举一反三：Netty 高性能内存管理设计（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/15  轻量级对象回收站：Recycler 对象池技术解析.md">15  轻量级对象回收站：Recycler 对象池技术解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/16  IO 加速：与众不同的 Netty 零拷贝技术.md">16  IO 加速：与众不同的 Netty 零拷贝技术.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/17  源码篇：从 Linux 出发深入剖析服务端启动流程.md">17  源码篇：从 Linux 出发深入剖析服务端启动流程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/18  源码篇：解密 Netty Reactor 线程模型.md">18  源码篇：解密 Netty Reactor 线程模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/19  源码篇：一个网络请求在 Netty 中的旅程.md">19  源码篇：一个网络请求在 Netty 中的旅程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？.md">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer.md">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/22  技巧篇：高性能无锁队列 Mpsc Queue.md">22  技巧篇：高性能无锁队列 Mpsc Queue.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/23  架构设计：如何实现一个高性能分布式 RPC 框架.md">23  架构设计：如何实现一个高性能分布式 RPC 框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/24  服务发布与订阅：搭建生产者和消费者的基础框架.md">24  服务发布与订阅：搭建生产者和消费者的基础框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/25  远程通信：通信协议设计以及编解码的实现.md">25  远程通信：通信协议设计以及编解码的实现.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Netty 核心原理剖析与 RPC 实践-完/26  服务治理：服务发现与负载均衡机制的实现.md">26  服务治理：服务发现与负载均衡机制的实现.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/27  动态代理：为用户屏蔽 RPC 调用的底层细节.md">27  动态代理：为用户屏蔽 RPC 调用的底层细节.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/28  实战总结：RPC 实战总结与进阶延伸.md">28  实战总结：RPC 实战总结与进阶延伸.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/29  编程思想：Netty 中应用了哪些设计模式？.md">29  编程思想：Netty 中应用了哪些设计模式？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/30  实践总结：Netty 在项目开发中的一些最佳实践.md">30  实践总结：Netty 在项目开发中的一些最佳实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/31 结束语  技术成长之路：如何打造自己的技术体系.md">31 结束语  技术成长之路：如何打造自己的技术体系.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>26  服务治理：服务发现与负载均衡机制的实现</h1>
+
+<p>在分布式系统中，服务消费者和服务提供者都存在多个节点，如果服务提供者出现部分机器节点负载过高，那么可能会导致该节点上接收的请求处理超时，从而导致服务提供者整体可用率下降。所以 RPC 框架需要实现合理的负载均衡算法，那么如何控制流量能够均匀地分摊到每个服务提供者呢？今天这节课我们便讨论 RPC 框架负载均衡机制的相关实现。</p>
+
+<blockquote>
+
+<p>源码参考地址：<a href="https://github.com/wangyapu/mini-rpc">mini-rpc</a></p>
+
+</blockquote>
+
+<h3>注册中心选型</h3>
+
+<p>服务消费者在发起 RPC 调用之前，需要知道服务提供者有哪些节点是可用的，而且服务提供者节点会存在上线和下线的情况。所以服务消费者需要感知服务提供者的节点列表的动态变化，在 RPC 框架中一般采用注册中心来实现服务的注册和发现。</p>
+
+<p>目前主流的注册中心有 ZooKeeper、Eureka、Etcd、Consul、Nacos 等，选择一个高性能、高可用的注册中心对 RPC 框架至关重要。说到高可用自然离不开 CAP 理论，一致性 Consistency、可用性 Availability 和分区容忍性 Partition tolerance 是无法同时满足的，注册中心一般分为 CP 类型注册中心和 AP 类型注册中心。使用最为广泛的 Zookeeper 就是 CP 类型的注册中心，集群中会有一个节点作为 Leader，如果 Leader 节点挂了，会重新进行 Leader 选举，ZooKeeper 保证了所有节点的强一致性，但是在 Leader 选举的过程中是无法对外提供服务的，牺牲了部分可用性。Eureka 是典型的 AP 类型注册中心，在实现服务发现的场景下有很大的优势，整个集群是不存在 Leader、Flower 概念的，如果其中一个节点挂了，请求会立刻转移到其他节点上。可能会存在的问题是如果不同分区无法进行节点通信，那么可能会造成节点之间的数据是有差异的，所以 AP 类型的注册中心通过牺牲强一致性来保证高可用性 。</p>
+
+<p>对于 RPC 框架而言，即使注册中心出现问题，也不应该影响服务的正常调用，所以 AP 类型的注册中心在该场景下相比于 CP 类型的注册中心更有优势。对于成熟的 RPC 框架而言，会提供多种注册中心的选择，接下来我们便设计一个通用的注册中心接口，然后每种注册中心的实现都按该接口规范行扩展。</p>
+
+<h3>注册中心接口设计</h3>
+
+<p>注册中心主要用于存储服务的元数据信息，首先我们需要将服务元数据信息封装成一个对象，该对象包括服务名称、服务版本、服务地址和服务端口号，如下所示：</p>
+
+<pre><code>@Data
+
+
+
+public class ServiceMeta {
+
+
+
+    private String serviceName;
+
+
+
+    private String serviceVersion;
+
+
+
+    private String serviceAddr;
+
+
+
+    private int servicePort;
+
+
+
+}
+
+</code></pre>
+
+<p>接下来我们提供一个通用的注册中心接口，该接口主要的操作对象是 ServiceMeta，不应该与其他任何第三方的注册中心工具库有任何联系，如下所示。</p>
+
+<pre><code>public interface RegistryService {
+
+
+
+    void register(ServiceMeta serviceMeta) throws Exception;
+
+
+
+    void unRegister(ServiceMeta serviceMeta) throws Exception;
+
+
+
+    ServiceMeta discovery(String serviceName, int invokerHashCode) throws Exception;
+
+
+
+    void destroy() throws IOException;
+
+
+
+}
+
+</code></pre>
+
+<p>RegistryService 接口包含注册中心四个基本操作：<strong>服务注册 register</strong>、<strong>服务注销 unRegister</strong>、<strong>服务发现 discovery</strong>、<strong>注册中心销毁 destroy</strong>。下面我们以 ZooKeeper 注册中心实现为例，逐一实现上面四个接口。</p>
+
+<h3>注册中心初始化和销毁</h3>
+
+<p>Zookeeper 常用的开源客户端工具包有 ZkClient 和 Apache Curator，目前都推荐使用 Apache Curator 客户端。Apache Curator 相比于 ZkClient，不仅提供的功能更加丰富，而且它的抽象层次更高，提供了更加易用的 API 接口以及 Fluent 流式编程风格。在使用 Apache Curator 之前，我们需要在 pom.xml 中引入 Maven 依赖，如下所示：</p>
+
+<pre><code>&lt;dependency&gt;
+
+
+
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+
+
+
+    &lt;artifactId&gt;curator-framework&lt;/artifactId&gt;
+
+
+
+    &lt;version&gt;2.12.0&lt;/version&gt;
+
+
+
+    &lt;exclusions&gt;
+
+
+
+        &lt;exclusion&gt;
+
+
+
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+
+
+
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+
+
+
+        &lt;/exclusion&gt;
+
+
+
+    &lt;/exclusions&gt;
+
+
+
+&lt;/dependency&gt;
+
+
+
+&lt;dependency&gt;
+
+
+
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+
+
+
+    &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;
+
+
+
+    &lt;version&gt;2.12.0&lt;/version&gt;
+
+
+
+&lt;/dependency&gt;
+
+
+
+&lt;dependency&gt;
+
+
+
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+
+
+
+    &lt;artifactId&gt;curator-x-discovery&lt;/artifactId&gt;
+
+
+
+    &lt;version&gt;2.12.0&lt;/version&gt;
+
+
+
+&lt;/dependency&gt;
+
+</code></pre>
+
+<p>需要注意的是，Apache Curator 需要和 Zookeeeper 版本搭配使用，本项目使用的是 Zookeeeper 3.4.14，关于版本兼容性你需要更多关注 Curator 官网（<a href="https://curator.apache.org/">https://curator.apache.org</a>）的版本更新说明。</p>
+
+<p>首先我们需要构建 Zookeeeper 的客户端，使用 Apache Curator 初始化 Zookeeeper 客户端的基于用法大多都与如下代码类似：</p>
+
+<pre><code>public class ZookeeperRegistryService implements RegistryService {
+
+
+
+    public static final int BASE_SLEEP_TIME_MS = 1000;
+
+
+
+    public static final int MAX_RETRIES = 3;
+
+
+
+    public static final String ZK_BASE_PATH = &quot;/mini_rpc&quot;;
+
+
+
+    private final ServiceDiscovery&lt;ServiceMeta&gt; serviceDiscovery;
+
+
+
+    public ZookeeperRegistryService(String registryAddr) throws Exception {
+
+
+
+        CuratorFramework client = CuratorFrameworkFactory.newClient(registryAddr, new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS, MAX_RETRIES));
+
+
+
+        client.start();
+
+
+
+        JsonInstanceSerializer&lt;ServiceMeta&gt; serializer = new JsonInstanceSerializer&lt;&gt;(ServiceMeta.class);
+
+
+
+        this.serviceDiscovery = ServiceDiscoveryBuilder.builder(ServiceMeta.class)
+
+
+
+                .client(client)
+
+
+
+                .serializer(serializer)
+
+
+
+                .basePath(ZK_BASE_PATH)
+
+
+
+                .build();
+
+
+
+        this.serviceDiscovery.start();
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>通过 CuratorFrameworkFactory 采用工厂模式创建 CuratorFramework 实例，构造客户端唯一需你指定的是重试策略，创建完 CuratorFramework 实例之后需要调用 start() 进行启动。然后我们需要创建 ServiceDiscovery 对象，由 ServiceDiscovery 完成服务的注册和发现，在系统退出的时候需要将初始化的实例进行关闭，destroy() 方法实现非常简单，代码如下所示：</p>
+
+<pre><code>@Override
+
+
+
+public void destroy() throws IOException {
+
+
+
+    serviceDiscovery.close();
+
+
+
+}
+
+</code></pre>
+
+<h3>服务注册实现</h3>
+
+<p>初始化得到 ServiceDiscovery 实例之后，我们就可以将服务元数据信息 ServiceMeta 发布到注册中心，register() 方法的代码实现如下所示：</p>
+
+<pre><code>@Override
+
+
+
+public void register(ServiceMeta serviceMeta) throws Exception {
+
+
+
+    ServiceInstance&lt;ServiceMeta&gt; serviceInstance = ServiceInstance
+
+
+
+            .&lt;ServiceMeta&gt;builder()
+
+
+
+            .name(RpcServiceHelper.buildServiceKey(serviceMeta.getServiceName(), serviceMeta.getServiceVersion()))
+
+
+
+            .address(serviceMeta.getServiceAddr())
+
+
+
+            .port(serviceMeta.getServicePort())
+
+
+
+            .payload(serviceMeta)
+
+
+
+            .build();
+
+
+
+    serviceDiscovery.registerService(serviceInstance);
+
+
+
+}
+
+</code></pre>
+
+<p>ServiceInstance 对象代表一个服务实例，它包含名称 name、唯一标识 id、地址 address、端口 port 以及用户自定义的可选属性 payload，我们有必要了解  ServiceInstance 在 Zookeeper 服务器中的存储形式，如下图所示。</p>
+
+<p><img src="assets/CgpVE1_-X2qAZ0QwAALfB-0Ouy4852.png" alt="Drawing 0.png" /></p>
+
+<p>一般来说，我们会将相同版本的 RPC 服务归类在一起，所以可以将 ServiceInstance 的名称 name 根据服务名称和服务版本进行赋值，如下所示。</p>
+
+<pre><code>public class RpcServiceHelper {
+
+
+
+    public static String buildServiceKey(String serviceName, String serviceVersion) {
+
+
+
+        return String.join(&quot;#&quot;, serviceName, serviceVersion);
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>在《服务发布与订阅：搭建生产者和消费者的基础框架》课程中，我们讲解了 RpcProvider 在启动过程中是如何根据 @RpcService 注解识别需要发布的服务，现在我们可以使用 RegistryService 接口的 register() 方法将识别出的服务进行发布了，完善后的 RpcProvider#postProcessAfterInitialization() 方法实现如下。</p>
+
+<pre><code>@Override
+
+
+
+public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+
+
+
+    RpcService rpcService = bean.getClass().getAnnotation(RpcService.class);
+
+
+
+    if (rpcService != null) {
+
+
+
+        String serviceName = rpcService.serviceInterface().getName();
+
+
+
+        String serviceVersion = rpcService.serviceVersion();
+
+
+
+        try {
+
+
+
+            ServiceMeta serviceMeta = new ServiceMeta();
+
+
+
+            serviceMeta.setServiceAddr(serverAddress);
+
+
+
+            serviceMeta.setServicePort(serverPort);
+
+
+
+            serviceMeta.setServiceName(serviceName);
+
+
+
+            serviceMeta.setServiceVersion(serviceVersion);
+
+
+
+            serviceRegistry.register(serviceMeta); // 注册服务
+
+
+
+            rpcServiceMap.put(RpcServiceHelper.buildServiceKey(serviceMeta.getServiceName(), serviceMeta.getServiceVersion()), bean);
+
+
+
+        } catch (Exception e) {
+
+
+
+            log.error(&quot;failed to register service {}#{}&quot;, serviceName, serviceVersion, e);
+
+
+
+        }
+
+
+
+    }
+
+
+
+    return bean;
+
+
+
+}
+
+</code></pre>
+
+<p>至此，服务提供者在启动后就可以将 @RpcService 注解修饰的服务发布到注册中心了，下面我们继续看看服务消费者应当如何通过合理的负载均衡算法得到合适的服务节点呢？在此之前，我们先来了解下负载均衡算法的基础知识。</p>
+
+<h3>负载均衡算法基础</h3>
+
+<p>服务消费者在发起 RPC 调用之前，需要感知有多少服务端节点可用，然后从中选取一个进行调用。之前我们提到了几种常用的负载均衡策略：Round-Robin 轮询、Weighted Round-Robin 权重轮询、Least Connections 最少连接数、Consistent Hash 一致性 Hash 等。本节课我们讨论的主角是基于一致性 Hash 的负载均衡算法，一致性 Hash 算法可以保证每个服务节点分摊的流量尽可能均匀，而且能够把服务节点扩缩容带来的影响降到最低。下面我们一起看下一致性 Hash 算法的设计思路。</p>
+
+<p>在服务端节点扩缩容时，一致性 Hash 算法会尽可能保证客户端发起的 RPC 调用还是固定分配到相同的服务节点上。一致性 Hash 算法是采用哈希环来实现的，通过 Hash 函数将对象和服务器节点放置在哈希环上，一般来说服务器可以选择 IP + Port 进行 Hash，如下图所示。</p>
+
+<p><img src="assets/Cip5yF_-X3eAC2U7AAVmjGbnvBo221.png" alt="Drawing 1.png" /></p>
+
+<p>图中 C1、C2、C3、C4 是客户端对象，N1、N2、N3 为服务节点，然后在哈希环中顺时针查找距离客户端对象 Hash 值最近的服务节点，即为客户端对应要调用的服务节点。假设现在服务节点扩容了一台 N4，经过 Hash 函数计算将其放入到哈希环中，哈希环变化如下图所示。</p>
+
+<p><img src="assets/Ciqc1F_-X32AB67NAAWtkSEKYRo724.png" alt="Drawing 2.png" /></p>
+
+<p>此时 N2 和 N4 之间的客户端对象需要重新进行分配，可以看出只有 C3 会被分配到新的节点 N4 上，其他的都保持不变。服务节点下线与上线的处理过程是类似的，你可以自行分析下服务节点下线时哈希环是如何变化的。</p>
+
+<p>如果服务节点的数量很少，不管 Hash 算法如何，很大可能存在服务节点负载不均的现象。而且上图中在新增服务节点 N4 时，仅仅分担了 N1 节点的流量，其他节点并没有流量变化。为了解决上述问题，一致性 Hash 算法一般会引入虚拟节点的概念。如下图所示。</p>
+
+<p><img src="assets/CgqCHl_-X4WAKf5LAAgqURGXbLE488.png" alt="Drawing 3.png" /></p>
+
+<p>图中相同颜色表示同一组虚拟服务器，它们经过 Hash 函数计算后被均匀放置在哈希环中。如果真实的服务节点越多，那么所需的虚拟节点就越少。在为客户端对象分配节点的时候，需要顺时针从哈希环中找到距离最近的虚拟节点，然后即可确定真实的服务节点。</p>
+
+<p>有了上述一致性 Hash 算法的基础知识，下面我们看看一致性 Hash 算法是如何实现的。</p>
+
+<h3>负载均衡算法实现</h3>
+
+<p>与注册中心类似，我们也首先定义一个通用的负载均衡接口，Round-Robin 轮询、一致性 Hash 等负载均衡算法都需要实现该接口，接口的定义如下所示：</p>
+
+<pre><code>public interface ServiceLoadBalancer&lt;T&gt; {
+
+
+
+    T select(List&lt;T&gt; servers, int hashCode);
+
+
+
+}
+
+</code></pre>
+
+<p>select() 方法的传入参数是一批服务节点以及客户端对象的 hashCode，针对 Zookeeper 的场景，我们可以实现一个比较通用的一致性 Hash 算法。</p>
+
+<pre><code>public class ZKConsistentHashLoadBalancer implements ServiceLoadBalancer&lt;ServiceInstance&lt;ServiceMeta&gt;&gt; {
+
+
+
+    private final static int VIRTUAL_NODE_SIZE = 10;
+
+
+
+    private final static String VIRTUAL_NODE_SPLIT = &quot;#&quot;;
+
+
+
+    @Override
+
+
+
+    public ServiceInstance&lt;ServiceMeta&gt; select(List&lt;ServiceInstance&lt;ServiceMeta&gt;&gt; servers, int hashCode) {
+
+
+
+        TreeMap&lt;Integer, ServiceInstance&lt;ServiceMeta&gt;&gt; ring = makeConsistentHashRing(servers); // 构造哈希环
+
+
+
+        return allocateNode(ring, hashCode); // 根据 hashCode 分配节点
+
+
+
+    }
+
+
+
+    private ServiceInstance&lt;ServiceMeta&gt; allocateNode(TreeMap&lt;Integer, ServiceInstance&lt;ServiceMeta&gt;&gt; ring, int hashCode) {
+
+
+
+        Map.Entry&lt;Integer, ServiceInstance&lt;ServiceMeta&gt;&gt; entry = ring.ceilingEntry(hashCode); // 顺时针找到第一个节点
+
+
+
+        if (entry == null) {
+
+
+
+            entry = ring.firstEntry(); // 如果没有大于 hashCode 的节点，直接取第一个
+
+
+
+        }
+
+
+
+        return entry.getValue();
+
+
+
+    }
+
+
+
+    private TreeMap&lt;Integer, ServiceInstance&lt;ServiceMeta&gt;&gt; makeConsistentHashRing(List&lt;ServiceInstance&lt;ServiceMeta&gt;&gt; servers) {
+
+
+
+        TreeMap&lt;Integer, ServiceInstance&lt;ServiceMeta&gt;&gt; ring = new TreeMap&lt;&gt;();
+
+
+
+        for (ServiceInstance&lt;ServiceMeta&gt; instance : servers) {
+
+
+
+            for (int i = 0; i &lt; VIRTUAL_NODE_SIZE; i++) {
+
+
+
+                ring.put((buildServiceInstanceKey(instance) + VIRTUAL_NODE_SPLIT + i).hashCode(), instance);
+
+
+
+            }
+
+
+
+        }
+
+
+
+        return ring;
+
+
+
+    }
+
+
+
+    private String buildServiceInstanceKey(ServiceInstance&lt;ServiceMeta&gt; instance) {
+
+
+
+        ServiceMeta payload = instance.getPayload();
+
+
+
+        return String.join(&quot;:&quot;, payload.getServiceAddr(), String.valueOf(payload.getServicePort()));
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>JDK 提供了 TreeMap 数据结构，可以非常方便地构造哈希环。通过计算出每个服务实例 ServiceInstance 的地址和端口对应的 hashCode，然后直接放入 TreeMap 中，TreeMap 会对 hashCode 默认从小到大进行排序。在为客户端对象分配节点时，通过 TreeMap 的 ceilingEntry() 方法找出大于或等于客户端 hashCode 的第一个节点，即为客户端对应要调用的服务节点。如果没有找到大于或等于客户端 hashCode 的节点，那么直接去 TreeMap 中的第一个节点即可。</p>
+
+<p>至此，一个基本的一致性 Hash 算法已经实现完了，接下来我们就可以把注册中心的服务发现 discovery() 方法补充完整了。</p>
+
+<h3>服务发现实现</h3>
+
+<p>服务发现的实现思路比较简单，首先找出被调用服务所有的节点列表，然后通过 ZKConsistentHashLoadBalancer 提供的一致性 Hash 算法找出相应的服务节点。具体代码实现如下：</p>
+
+<pre><code>@Override
+
+
+
+public ServiceMeta discovery(String serviceName, int invokerHashCode) throws Exception {
+
+
+
+    Collection&lt;ServiceInstance&lt;ServiceMeta&gt;&gt; serviceInstances = serviceDiscovery.queryForInstances(serviceName);
+
+
+
+    ServiceInstance&lt;ServiceMeta&gt; instance = new ZKConsistentHashLoadBalancer().select((List&lt;ServiceInstance&lt;ServiceMeta&gt;&gt;) serviceInstances, invokerHashCode);
+
+
+
+    if (instance != null) {
+
+
+
+        return instance.getPayload();
+
+
+
+    }
+
+
+
+    return null;
+
+
+
+}
+
+</code></pre>
+
+<p>服务消费者通过动态代理发起 RPC 调用之前，需要通过服务发现接口获取到可调用的节点，在下节课《动态代理：为用户屏蔽 RPC 调用的底层细节》会有相应的代码实现，本节课先不做展开。</p>
+
+<h3>总结</h3>
+
+<p>服务注册和发现是 RPC 框架中非常重要的一环，本节课我们设计了通用的注册中心接口，并给出了 Zookeeper 场景下的默认实现。在服务发现中需要使用到负载均衡算法，其中一致性 Hash 算法在很多场景中被广泛使用，它可以保证每个服务节点分摊的流量尽可能均匀，而且能够把服务节点扩缩容带来的影响降到最低。关于一致性 Hash 算法的实现原理务必掌握，这也是面试中的高频问题。</p>
+
+<p>最后留两个课后任务：</p>
+
+<ol>
+
+<li>如果你对 Eureka 或者其他类型的注册中心比较熟悉，你可以尝试扩展 RegistryService 接口并实现它。</li>
+
+<li>在一致性 Hash 算法的实现中，我们只是简单使用了服务实例的 hashCode 作为哈希环的构建依据，更好的 Hash 函数可以参考更加高性能的 MurmurHash，Guava 工具库中就有默认实现，你可以引入 MurmurHash 对上文中的一致性 Hash 算法实现进行优化。</li>
+
+</ol>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/25  远程通信：通信协议设计以及编解码的实现.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/27  动态代理：为用户屏蔽 RPC 调用的底层细节.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099737c0fd53d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

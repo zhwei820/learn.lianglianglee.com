@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>动态代理种类及原理，你知道多少？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/AQS 万字图文全面解析.md">AQS 万字图文全面解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Docker 镜像构建原理及源码分析.md">Docker 镜像构建原理及源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/ElasticSearch 小白从入门到精通.md">ElasticSearch 小白从入门到精通.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/JVM CPU Profiler技术原理及源码深度解析.md">JVM CPU Profiler技术原理及源码深度解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/JVM 垃圾收集器.md">JVM 垃圾收集器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/JVM 面试的 30 个知识点.md">JVM 面试的 30 个知识点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java IO 体系、线程模型大总结.md">Java IO 体系、线程模型大总结.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java NIO浅析.md">Java NIO浅析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java 面试题集锦（网络篇）.md">Java 面试题集锦（网络篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java-直接内存 DirectMemory 详解.md">Java-直接内存 DirectMemory 详解.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java中9种常见的CMS GC问题分析与解决（上）.md">Java中9种常见的CMS GC问题分析与解决（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java中9种常见的CMS GC问题分析与解决（下）.md">Java中9种常见的CMS GC问题分析与解决（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java中的SPI.md">Java中的SPI.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java中的ThreadLocal.md">Java中的ThreadLocal.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java线程池实现原理及其在美团业务中的实践.md">Java线程池实现原理及其在美团业务中的实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Java魔法类：Unsafe应用解析.md">Java魔法类：Unsafe应用解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Kafka 源码阅读笔记.md">Kafka 源码阅读笔记.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理.md">Kafka、ActiveMQ、RabbitMQ、RocketMQ 区别以及高可用原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB Buffer Pool.md">MySQL · 引擎特性 · InnoDB Buffer Pool.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB IO子系统.md">MySQL · 引擎特性 · InnoDB IO子系统.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB 事务系统.md">MySQL · 引擎特性 · InnoDB 事务系统.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB 同步机制.md">MySQL · 引擎特性 · InnoDB 同步机制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB 数据页解析.md">MySQL · 引擎特性 · InnoDB 数据页解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · InnoDB崩溃恢复.md">MySQL · 引擎特性 · InnoDB崩溃恢复.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL · 引擎特性 · 临时表那些事儿.md">MySQL · 引擎特性 · 临时表那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 主从复制 半同步复制.md">MySQL 主从复制 半同步复制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 主从复制 基于GTID复制.md">MySQL 主从复制 基于GTID复制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 主从复制.md">MySQL 主从复制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 事务日志(redo log和undo log).md">MySQL 事务日志(redo log和undo log).md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 亿级别数据迁移实战代码分享.md">MySQL 亿级别数据迁移实战代码分享.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 从一条数据说起-InnoDB行存储数据结构.md">MySQL 从一条数据说起-InnoDB行存储数据结构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 地基基础：事务和锁的面纱.md">MySQL 地基基础：事务和锁的面纱.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 地基基础：数据字典.md">MySQL 地基基础：数据字典.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 地基基础：数据库字符集.md">MySQL 地基基础：数据库字符集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 性能优化：碎片整理.md">MySQL 性能优化：碎片整理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？.md">MySQL 故障诊断：一个 ALTER TALBE 执行了很久，你慌不慌？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 故障诊断：如何在日志中轻松定位大事务.md">MySQL 故障诊断：如何在日志中轻松定位大事务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 故障诊断：教你快速定位加锁的 SQL.md">MySQL 故障诊断：教你快速定位加锁的 SQL.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 日志详解.md">MySQL 日志详解.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL 的半同步是什么？.md">MySQL 的半同步是什么？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL中的事务和MVCC.md">MySQL中的事务和MVCC.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL事务_事务隔离级别详解.md">MySQL事务_事务隔离级别详解.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL优化：优化 select count().md">MySQL优化：优化 select count().md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL共享锁、排他锁、悲观锁、乐观锁.md">MySQL共享锁、排他锁、悲观锁、乐观锁.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/MySQL的MVCC（多版本并发控制）.md">MySQL的MVCC（多版本并发控制）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/QingStor 对象存储架构设计及最佳实践.md">QingStor 对象存储架构设计及最佳实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/RocketMQ 面试题集锦.md">RocketMQ 面试题集锦.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/SnowFlake 雪花算法生成分布式 ID.md">SnowFlake 雪花算法生成分布式 ID.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring Boot 2.x 结合 k8s 实现分布式微服务架构.md">Spring Boot 2.x 结合 k8s 实现分布式微服务架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring Boot 教程：如何开发一个 starter.md">Spring Boot 教程：如何开发一个 starter.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring MVC 原理.md">Spring MVC 原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring MyBatis和Spring整合的奥秘.md">Spring MyBatis和Spring整合的奥秘.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring 帮助你更好的理解Spring循环依赖.md">Spring 帮助你更好的理解Spring循环依赖.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring 循环依赖及解决方式.md">Spring 循环依赖及解决方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Spring中眼花缭乱的BeanDefinition.md">Spring中眼花缭乱的BeanDefinition.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/Vert.x 基础入门.md">Vert.x 基础入门.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/eBay 的 Elasticsearch 性能调优实践.md">eBay 的 Elasticsearch 性能调优实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/不可不说的Java“锁”事.md">不可不说的Java“锁”事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/互联网并发限流实战.md">互联网并发限流实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/从ReentrantLock的实现看AQS的原理及应用.md">从ReentrantLock的实现看AQS的原理及应用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/从SpringCloud开始，聊微服务架构.md">从SpringCloud开始，聊微服务架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/全面了解 JDK 线程池实现原理.md">全面了解 JDK 线程池实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/分布式一致性理论与算法.md">分布式一致性理论与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/分布式一致性算法 Raft.md">分布式一致性算法 Raft.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/分布式唯一 ID 解析.md">分布式唯一 ID 解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/分布式链路追踪：集群管理设计.md">分布式链路追踪：集群管理设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/文章/动态代理种类及原理，你知道多少？.md">动态代理种类及原理，你知道多少？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/响应式架构与 RxJava 在有赞零售的实践.md">响应式架构与 RxJava 在有赞零售的实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/大数据算法——布隆过滤器.md">大数据算法——布隆过滤器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/如何优雅地记录操作日志？.md">如何优雅地记录操作日志？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/如何设计一个亿级消息量的 IM 系统.md">如何设计一个亿级消息量的 IM 系统.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/异步网络模型.md">异步网络模型.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/当我们在讨论CQRS时，我们在讨论些神马？.md">当我们在讨论CQRS时，我们在讨论些神马？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/彻底理解 MySQL 的索引机制.md">彻底理解 MySQL 的索引机制.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/最全的 116 道 Redis 面试题解答.md">最全的 116 道 Redis 面试题解答.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/有赞权限系统(SAM).md">有赞权限系统(SAM).md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/有赞零售中台建设方法的探索与实践.md">有赞零售中台建设方法的探索与实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）.md">服务注册与发现原理剖析（Eureka、Zookeeper、Nacos）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/深入浅出Cache.md">深入浅出Cache.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/深入理解 MySQL 底层实现.md">深入理解 MySQL 底层实现.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/漫画讲解 git rebase VS git merge.md">漫画讲解 git rebase VS git merge.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/生成浏览器唯一稳定 ID 的探索.md">生成浏览器唯一稳定 ID 的探索.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/缓存 如何保证缓存与数据库的双写一致性？.md">缓存 如何保证缓存与数据库的双写一致性？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/网易严选怎么做全链路监控的？.md">网易严选怎么做全链路监控的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/美团万亿级 KV 存储架构与实践.md">美团万亿级 KV 存储架构与实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/美团点评Kubernetes集群管理实践.md">美团点评Kubernetes集群管理实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/美团百亿规模API网关服务Shepherd的设计与实现.md">美团百亿规模API网关服务Shepherd的设计与实现.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/解读《阿里巴巴 Java 开发手册》背后的思考.md">解读《阿里巴巴 Java 开发手册》背后的思考.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/认识 MySQL 和 Redis 的数据一致性问题.md">认识 MySQL 和 Redis 的数据一致性问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/进阶：Dockerfile 高阶使用指南及镜像优化.md">进阶：Dockerfile 高阶使用指南及镜像优化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/铁总在用的高性能分布式缓存计算框架 Geode.md">铁总在用的高性能分布式缓存计算框架 Geode.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/阿里云PolarDB及其共享存储PolarFS技术实现分析（上）.md">阿里云PolarDB及其共享存储PolarFS技术实现分析（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/阿里云PolarDB及其共享存储PolarFS技术实现分析（下）.md">阿里云PolarDB及其共享存储PolarFS技术实现分析（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/面试最常被问的 Java 后端题.md">面试最常被问的 Java 后端题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/领域驱动设计在互联网业务开发中的实践.md">领域驱动设计在互联网业务开发中的实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/领域驱动设计的菱形对称架构.md">领域驱动设计的菱形对称架构.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/文章/高效构建 Docker 镜像的最佳实践.md">高效构建 Docker 镜像的最佳实践.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>动态代理种类及原理，你知道多少？</h1>
+
+<h3>前言</h3>
+
+<p>提到动态代理，很多人都会对 JDK 动态代理、CGLib，或者 Proxy、InvocationHandler 等类感到熟悉，甚至有些人会直接提到 Spring AOP。的确动态代理的实现有时会给我们带来意想不到的优势，比如常见的业务解耦、无侵入式的代码扩展等。这篇文章就主要来探讨如下几种实现动态代理的常见方式及其原理：</p>
+
+<ul>
+
+<li>JDK 动态代理</li>
+
+<li>CGLib 动态代理</li>
+
+<li>javassist 动态代理</li>
+
+<li>javassist 字节码</li>
+
+<li>ASM 字节码</li>
+
+</ul>
+
+<h3>静态代理</h3>
+
+<p>为了下文叙述的方便，先来回顾一下静态代理。生活中身边不乏做微商的朋友，其实就是我们常说的微商代理，目的就是在朋友圈之类的为厂家宣传产品，厂家委托微商为其引流或者销售商品。将这个场景进行抽象，我们可以把微商代理看成“代理类”，厂家看成“委托类”或者“被代理类”等。</p>
+
+<p>那什么是静态代理呐？**若代理类在程序运行前就已经存在，那么这种代理方式就是静态代理。**因此在程序运行前，我们都会在程序中定义好代理类。同时，静态代理中的代理类和委托类都会实现同一接口或者派生自相同的父类。接下来，我们将会用一段代码进行演示，Factory 代表厂家，即委托类，BusinessAgent 代表微商，即代理类。代理类和委托类都实现 Operator 接口：</p>
+
+<pre><code>public interface Operator {
+
+    // 宣传，商品销售
+
+    void sale();
+
+    // 引流，业务扩张
+
+    void expand();
+
+}
+
+</code></pre>
+
+<p>Factory 类定义如下：</p>
+
+<pre><code>public class Factory implements Operator {
+
+
+
+    @Override
+
+    public void sale() {
+
+        System.out.println(&quot;sale .... &quot;);
+
+    }
+
+
+
+    @Override
+
+    public void expand() {
+
+        System.out.println(&quot;expand .... &quot;);
+
+    }
+
+}
+
+</code></pre>
+
+<p>BusinessAgent 类定义如下：</p>
+
+<pre><code>public class BusinessAgent implements Operator {
+
+
+
+    private Factory factory;
+
+
+
+    public BusinessAgent(Factory factory){
+
+        this.factory = factory;
+
+    }
+
+
+
+    @Override
+
+    public void sale() {
+
+        factory.sale();
+
+    }
+
+
+
+    @Override
+
+    public void expand() {
+
+        factory.expand();
+
+    }
+
+}
+
+</code></pre>
+
+<p>从 BusinessAgent 类的类结构定义可以看得出来，静态代理主要是通过聚合的方式，来让代理类持有一个委托类的引用，同时我们可以想象，如果我们需要为委托类中的方法做统一处理，比如记录运行时间，那么我们是不是得在代理类中每个方法都单独去处理一遍？</p>
+
+<h3>动态代理</h3>
+
+<p>在前文，我们对什么是代理，什么是静态代理有了简单回顾。而动态代理跟静态代理的区别在于，代理类是在程序运行时创建，而动态代理的优势在于可以很方便的对代理类的方法进行统一处理。比如记录委托类中每个方法的运行时间。接下来，我们将逐个讲解动态代理的实现方式及其原理。</p>
+
+<h3>JDK 动态原理</h3>
+
+<h4>实例演示</h4>
+
+<p>JDK 动态代理的实现主要是借助 InvocationHandler 接口、Proxy 类实现的。在使用时，我们得定义一个位于代理类与委托类之间的中介类，就像传统的微商代理，其实并不是直接跟厂家接触，他们之间可能还会存在一层中介。而这个中介类，需要实现 InvocationHandler 接口：</p>
+
+<pre><code>public interface InvocationHandler { 
+
+  Object invoke(Object proxy, Method method, Object[] args);
+
+}
+
+</code></pre>
+
+<ul>
+
+<li>proxy：表示程序运行期间生成的代理类对象，后面可以看见使用 Proxy.newProxyInstance()生成</li>
+
+<li>method：表示代理对象被调用的方法</li>
+
+<li>args：表示代理对象被调用的方法的参数</li>
+
+</ul>
+
+<p>调用代理对象的每个方法实际最终都是调用 InvocationHandler 的 invoke 方法。后面我们将论证这个结论。</p>
+
+<p>这里我们使用 AgencyHandler 表示中介类，中介类定义为：</p>
+
+<pre><code>public class AgencyHandler implements InvocationHandler {
+
+
+
+    // 委托类对象
+
+    private Object target;
+
+
+
+    public AgencyHandler(){}
+
+
+
+    public AgencyHandler(Object target){
+
+        this.target = target;
+
+    }
+
+
+
+    @Override
+
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable { 
+
+        long startTime = System.currentTimeMillis();
+
+        // 使用反射执行委托类对象具体方法
+
+        Object result = method.invoke(target, args);
+
+        System.out.println(method.getName() + &quot; cost time is:&quot; + (System.currentTimeMillis() - startTime));
+
+        return result;
+
+    }
+
+}
+
+</code></pre>
+
+<p>通过 Proxy 的静态方法 newProxyInstance 生成代理对象：</p>
+
+<pre><code>public class Main {
+
+
+
+    public static void main(String[] args) {
+
+        AgencyHandler agencyHandler = new AgencyHandler(new Factory());
+
+        // 创建代理对象
+
+        Operator operator = (Operator) Proxy.newProxyInstance(Operator.class.getClassLoader(), 
+
+                            new Class[]{Operator.class}, 
+
+                            agencyHandler);
+
+        operator.sale();
+
+        operator.expand();
+
+    }
+
+}
+
+public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)
+
+</code></pre>
+
+<ul>
+
+<li>loader：表示类加载器，将运行期动态生成的代理类加载到内存</li>
+
+<li>interfaces：表示委托类的接口，生成代理类需要实现的接口</li>
+
+<li>h：InvocationHandler 实现类对象，负责连接代理类和委托类的中介类</li>
+
+</ul>
+
+<p>正如预期运行结果为：</p>
+
+<pre><code>sale .... 
+
+sale cost time is:1s
+
+expand .... 
+
+expand cost time is:0s
+
+</code></pre>
+
+<p>这里我们将委托类对象 new Factory() 作为 AgencyHandler 构造方法入参创建了 agencyHandler 对象，然后通过 Proxy.newProxyInstance(…) 方法创建了一个代理对象，实际代理类就是这个时候动态生成的。我们调用该代理对象的方法就会调用到 agencyHandler 的 invoke 方法（类似于静态代理），而 invoke 方法实现中调用委托类对象 new Factory() 相应的 method（类似于静态代理）。因此，<strong>动态代理内部可以看成是由两组静态代理构成</strong>。</p>
+
+<h4>代理类源码分析</h4>
+
+<p>其实上面一段话已经对动态代理的原理讲得很清楚了，下面我们从源码的角度来梳理一下。既然 JDK 动态代理的代理对象是运行期生成的，那么它在运行期也会对应一段字节码，可以使用 ProxyGenerator.generateProxyClass 方法进行获取。为了让大家一步到位，这里贴一下这个工具类：</p>
+
+<pre><code>public class ProxyUtils {
+
+    public static boolean saveProxyClass(String path, String proxyClassName, Class[] interfaces) {
+
+        if (proxyClassName == null || path == null) {
+
+            return false;
+
+        }
+
+        byte[] classFile = ProxyGenerator.generateProxyClass(proxyClassName, interfaces);
+
+        FileOutputStream out = null;
+
+        try {
+
+            out = new FileOutputStream(path);
+
+            out.write(classFile);
+
+            out.flush();
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                out.close();
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+}
+
+</code></pre>
+
+<p>将得到的字节码文件进行反编译就能看到其中的源代码了：</p>
+
+<pre><code>import com.limynl.proxy.Operator;
+
+import java.lang.reflect.InvocationHandler;
+
+import java.lang.reflect.Method;
+
+import java.lang.reflect.Proxy;
+
+import java.lang.reflect.UndeclaredThrowableException;
+
+
+
+public final class $Proxy0 extends Proxy implements Operator {
+
+  // 这 5 个方法分别是 equals、expand、toString、sale、hashCode
+
+  private static Method m1;
+
+  private static Method m3;
+
+  private static Method m2;
+
+  private static Method m4;
+
+  private static Method m0;
+
+
+
+  static {
+
+    try {
+
+      m1 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;equals&quot;, new Class[] { Class.forName(&quot;java.lang.Object&quot;) });
+
+      m3 = Class.forName(&quot;com.limynl.proxy.Operator&quot;).getMethod(&quot;expand&quot;, new Class[0]);
+
+      m2 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;toString&quot;, new Class[0]);
+
+      m4 = Class.forName(&quot;com.limynl.proxy.Operator&quot;).getMethod(&quot;sale&quot;, new Class[0]);
+
+      m0 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;hashCode&quot;, new Class[0]);
+
+      return;
+
+    } catch (NoSuchMethodException noSuchMethodException) {
+
+      throw new NoSuchMethodError(noSuchMethodException.getMessage());
+
+    } catch (ClassNotFoundException classNotFoundException) {
+
+      throw new NoClassDefFoundError(classNotFoundException.getMessage());
+
+    } 
+
+  }
+
+  // 构造方法接收一个 InvocationHandler 对象为参数
+
+  public $Proxy0(InvocationHandler paramInvocationHandler) {
+
+    // 传至父类中的 InvocationHandler 类型变量 h
+
+    super(paramInvocationHandler);
+
+  }
+
+
+
+  public final boolean equals(Object paramObject) {
+
+    try {
+
+      // this.h.invoke 将会调用实现了 InvocationHandler 接口的类，上面我们传入的是 agencyHandler 对象，
+
+      // 因此会调用 AgencyHandler 的 invoke 方法
+
+      // 同时这里也印证了，invoke 的方法的第一个参数就是代理对象本身。下面其余方法类似
+
+      return ((Boolean)this.h.invoke(this, m1, new Object[] { paramObject })).booleanValue();
+
+    } catch (Error|RuntimeException error) {
+
+      throw null;
+
+    } catch (Throwable throwable) {
+
+      throw new UndeclaredThrowableException(throwable);
+
+    } 
+
+  }
+
+
+
+  public final void expand() {
+
+    try {
+
+      this.h.invoke(this, m3, null);
+
+      return;
+
+    } catch (Error|RuntimeException error) {
+
+      throw null;
+
+    } catch (Throwable throwable) {
+
+      throw new UndeclaredThrowableException(throwable);
+
+    } 
+
+  }
+
+
+
+  public final String toString() {
+
+    try {
+
+      return (String)this.h.invoke(this, m2, null);
+
+    } catch (Error|RuntimeException error) {
+
+      throw null;
+
+    } catch (Throwable throwable) {
+
+      throw new UndeclaredThrowableException(throwable);
+
+    } 
+
+  }
+
+
+
+  public final void sale() {
+
+    try {
+
+      this.h.invoke(this, m4, null);
+
+      return;
+
+    } catch (Error|RuntimeException error) {
+
+      throw null;
+
+    } catch (Throwable throwable) {
+
+      throw new UndeclaredThrowableException(throwable);
+
+    } 
+
+  }
+
+
+
+  public final int hashCode() {
+
+    try {
+
+      return ((Integer)this.h.invoke(this, m0, null)).intValue();
+
+    } catch (Error|RuntimeException error) {
+
+      throw null;
+
+    } catch (Throwable throwable) {
+
+      throw new UndeclaredThrowableException(throwable);
+
+    } 
+
+  }
+
+}
+
+</code></pre>
+
+<ul>
+
+<li>从中我们可以看出动态生成的代理类是以 $Proxy 为类名前缀，继承自 Proxy，并且实现了 Proxy.newProxyInstance(…) 第二个参数传入的所有接口。</li>
+
+<li>代理类的构造方法传入的是 InvocationHandler 对象，即 Proxy.newProxyInstance(…) 第三个参数，同时 sale()、expand() 都交给 h 去处理，最终会传递到 agencyHandler 对象的 invoke 方法里面，该方法里面继续使用反射的方式找到最终需要调用的委托类的方法。从而也论证了开头说的：调用代理对象的每个方法实际最终都是调用 InvocationHandler 的 invoke 方法。</li>
+
+<li>所以 InvocationHandler 的子类 AgencyHandler 连接代理类和委托类的中介类。</li>
+
+</ul>
+
+<p>到这里我们已经把 JDK 动态代理的原理讲完了，所以大家可以在脑海中回忆一下：JDK 动态代理内部可以看成是由两组静态代理构成，是不是这个意思？</p>
+
+<p>通过这个代理类也将明白（这里需要拿笔圈起来^_^）：</p>
+
+<ul>
+
+<li>为什么在 Proxy.newProxyInstance 过程需要接口：因为生成的代理类需要实现这个接口</li>
+
+<li>为什么 JDK 动态代理只能代理接口：因为 java 是单继承，代理类已经继承了 Proxy，因此没办法在继承另外一个类</li>
+
+<li>JDK 动态代理中除使用了反射外，也操作了字节码</li>
+
+</ul>
+
+<h3>CGLib 动态代理</h3>
+
+<p>JDK 动态代理的类必须实现一个接口，而且生成的代理类是其接口的实现类，对于不使用接口的类，无法使用 JDK 动态代理。此时就可以使用另外的替代方案，例如 CGLib。</p>
+
+<p>首先 CGLib 是一个强大、高性能代码生成包，底层采用字节码处理框架 ASM。它能够为没有实现接口的类提供代理。在强大的 Hibernate、Spring 等框架中都能够看见它的影子。其原理是：动态生成一个被代理类的子类，子类重写被代理类的所有非 final 方法。</p>
+
+<h4>实例演示</h4>
+
+<p>首先使用 CGLib，需要添加 CGLib 依赖：</p>
+
+<pre><code>&lt;dependency&gt;
+
+    &lt;groupId&gt;cglib&lt;/groupId&gt;
+
+    &lt;artifactId&gt;cglib&lt;/artifactId&gt;
+
+    &lt;version&gt;3.2.5&lt;/version&gt;
+
+&lt;/dependency&gt;
+
+</code></pre>
+
+<p>这里我们还是使用上面的厂家委托类，同样使用 CGLib 也需要在代理类和委托类中有一个中介类。这个中介类就是 MethodInterceptor 接口：</p>
+
+<pre><code>public interface MethodInterceptor extends Callback{
+
+    public Object intercept(Object obj, 
+
+                            java.lang.reflect.Method method, 
+
+                            Object[] args,
+
+                            MethodProxy proxy) throws Throwable;
+
+}
+
+</code></pre>
+
+<ul>
+
+<li>obj：动态生成的代理类对象</li>
+
+<li>method：被代理对象的方法</li>
+
+<li>args：需要被执行的方法参数</li>
+
+<li>proxy：生成的代理类的方法</li>
+
+</ul>
+
+<p>等会我们剖析代理类的源码时，对这几个参数便会有清晰的认识。</p>
+
+<p>接着我们创建中介类 AgencyInterceptor：</p>
+
+<pre><code>public class AgencyInterceptor implements MethodInterceptor {
+
+
+
+    @Override
+
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+
+        long startTime = System.currentTimeMillis();
+
+        // 执行父类中的具体方法，即执行委托类中对应方法
+
+        Object result = methodProxy.invokeSuper(o, objects);
+
+        System.out.println(method.getName() + &quot; cost time is:&quot; + (System.currentTimeMillis() - startTime) + &quot;s&quot;);
+
+        return result;
+
+    }
+
+}
+
+</code></pre>
+
+<p>通过 Enhancer.create 生成代理对象：</p>
+
+<pre><code>public class Main {
+
+
+
+    public static void main(String[] args) {
+
+        // 使用 enhancer 创建动态代理对象
+
+        Enhancer enhancer = new Enhancer();
+
+        // 指定需要代理的委托类
+
+        enhancer.setSuperclass(Factory.class);
+
+        // 设置回调，对于代理类上所有方法的调用，都会执行 AgencyInterceptor 中的 intercept 对其拦截
+
+        enhancer.setCallback(new AgencyInterceptor());
+
+        // 获得创建的代理对象
+
+        Factory factoryProxy = (Factory) enhancer.create();
+
+        // 使用代理对象进行代理访问
+
+        factoryProxy.sale();
+
+        factoryProxy.expand();
+
+    }
+
+}
+
+</code></pre>
+
+<p>运行结果为：</p>
+
+<pre><code>sale .... 
+
+sale cost time is:2s
+
+expand .... 
+
+expand cost time is:1s
+
+</code></pre>
+
+<p>从整体结构上来说，其实跟 JDK 动态代理的实现方式还是比较相似。下面将从源码的方式剖析其中的调用过程。</p>
+
+<h4>代理类源码解析</h4>
+
+<p>这里我们将得到的代理类 class 文件进行反编译，由于代码过长，我们将抽取主要部分进行梳理，并且这里我们以代理 sale() 为例进行讲解，其他方法执行原理一样。</p>
+
+<pre><code>public class Factory$$EnhancerByCGLIB$$f5927596 extends Factory implements Factory {
+
+  private boolean CGLIB$BOUND;
+
+  private static final Callback[] CGLIB$STATIC_CALLBACKS;
+
+
+
+  // 构造 Enhancer 时，传入的拦截器
+
+  private MethodInterceptor CGLIB$CALLBACK_0;
+
+  // 被代理的方法
+
+  private static final Method CGLIB$sale$1$Method;
+
+  // 代理方法
+
+  private static final MethodProxy CGLIB$sale$1$Proxy;
+
+
+
+  static void CGLIB$STATICHOOK1() {
+
+    ......
+
+    // 代理类
+
+    Class clazz1 = Class.forName(&quot;com.limynl.Factory$$EnhancerByCGLIB$$f5927596&quot;);
+
+    // 被代理类
+
+    Class clazz2;
+
+    CGLIB$sale$1$Method = ReflectUtils.findMethods(new String[] { &quot;expand&quot;, &quot;()V&quot;, &quot;sale&quot;, &quot;()V&quot; }, (clazz2 = Class.forName(&quot;com.limynl.Factory&quot;)).getDeclaredMethods())[1];
+
+    CGLIB$sale$1$Proxy = MethodProxy.create(clazz2, clazz1, &quot;()V&quot;, &quot;sale&quot;, &quot;CGLIB$sale$1&quot;);
+
+    ......
+
+  }
+
+}
+
+</code></pre>
+
+<p>从反编译 class 文件可以看见，代理类会继承委托类（注意和接口 Factory 区别，不要混淆），重写父类中的方法。</p>
+
+<pre><code>// 方法一
+
+public final void sale() {
+
+    MethodInterceptor tmp4_1 = this.CGLIB$CALLBACK_0;
+
+    //首先执行 CGLIB$BIND_CALLBACKS
+
+    if (tmp4_1 == null){        
+
+      CGLIB$BIND_CALLBACKS(this);
+
+      tmp4_1 = this.CGLIB$CALLBACK_0;
+
+    }
+
+    // 执行这里
+
+    if (this.CGLIB$CALLBACK_0!= null){
+
+        //调用拦截器，this 就是当前的代理类
+
+        tmp4_1.intercept(this, CGLIB$sale$1$Method, CGLIB$emptyArgs,CGLIB$sale$1$Proxy);
+
+    }
+
+    else{
+
+        super.sale();
+
+    }
+
+}
+
+
+
+// 方法二
+
+final void CGLIB$sale$1() {
+
+    super.sale();
+
+}
+
+</code></pre>
+
+<ul>
+
+<li>当通过代理对象执行：factoryProxy.sale() 便会调用上面的方法一 sale()，然后会调用 intercept，从这里我们就能清晰看见该方法各个参数的含义</li>
+
+<li>调用 intercept 拦截器，执行里面的 <code>methodProxy.invokeSuper(o, objects);</code></li>
+
+<li>执行完 <code>methodProxy.invokeSuper(o, objects)</code> 后，便会调用方法二 <code>CGLIB$sale$1()</code></li>
+
+<li>调用 super.sale()，就是需要执行的委托类方法</li>
+
+</ul>
+
+<p>接下里分析如何从 methodProxy.invokeSuper 方法到 <code>CGLIB$sale$1()</code>。</p>
+
+<p>在拦截器中，通过调用 MethodProxy 的 invokeSuper 方法来调用代理方法，还记得代理类中如下代码：</p>
+
+<pre><code>// MethodProxy CGLIB$sale$1$Proxy
+
+// 参数从左到右依次为：
+
+// 被代理对象，代理对象，入参类型，被代理方法名，代理方法名(注意一下代理方法名)
+
+CGLIB$sale$1$Proxy = MethodProxy.create(clazz2, clazz1, &quot;()V&quot;, &quot;sale&quot;, &quot;CGLIB$sale$1&quot;);
+
+</code></pre>
+
+<p>下面看下 methodProxy.invokeSuper 方法内部：</p>
+
+<pre><code>public Object invokeSuper(Object obj, Object[] args) throws Throwable {
+
+    try {
+
+        init();
+
+        FastClassInfo fci = fastClassInfo;
+
+        // fci.f2.invoke 方法参数依次为：代理方法索引、代理对象、方法参数
+
+        return fci.f2.invoke(fci.i2, obj, args);
+
+    } catch (InvocationTargetException e) {
+
+        throw e.getTargetException();
+
+    }
+
+}
+
+</code></pre>
+
+<p>调用了 init() 方法，该方法主要是生成一个 FastClassInfo 对象，该对象中包含两个 FastClass，分别是代理对象和被代理对象的详细信息：</p>
+
+<pre><code>private void init(){
+
+    // 首先执行这个分支，create 时并没有赋值
+
+    if (fastClassInfo == null){
+
+        // 获得对象锁，使用双重校验机制
+
+        synchronized (initLock){
+
+            if (fastClassInfo == null){
+
+                // createInfo 包含了代理类与被代理类的信息
+
+                CreateInfo ci = createInfo;
+
+                // 创建新的 FastClassInfo 对象
+
+                FastClassInfo fci = new FastClassInfo();
+
+                // 获得被代理对象的 FastClass，如果缓存中有就从缓存中取出，没有就生成新的 fastclass
+
+                fci.f1 = helper(ci, ci.c1);
+
+                // 获得代理对象的 FastClass，如果缓存中有就从缓存中取出，没有就生成新的 fastclass
+
+                fci.f2 = helper(ci, ci.c2);
+
+                // 获得被代理对象中被代理方法的索引
+
+                fci.i1 = fci.f1.getIndex(sig1);
+
+                // //获得代理对象中代理方法的索引
+
+                fci.i2 = fci.f2.getIndex(sig2);
+
+                fastClassInfo = fci;
+
+                createInfo = null;
+
+            }
+
+        }
+
+    }
+
+}
+
+</code></pre>
+
+<p>然后执行 FastClass 的 invoke 方法，从这里它就会找到代理对象中方法名为 <code>CGLIB$sale$1</code> 的代理方法。</p>
+
+<pre><code>fci.f2.invoke(fci.i2, obj, args);
+
+</code></pre>
+
+<p>这里我们准备不再深入了，简单说下 fci.f2.invoke 这个方法的原理。还记得生成的代理字节码文件吗，对于 CGLib 总共会生成 3 个字节码文件，其中有一个：</p>
+
+<pre><code>Factory$$EnhancerByCGLIB$$f5927596$$FastClassByCGLIB$$49bafad3.class
+
+</code></pre>
+
+<p>这个文件中主要跟 FastClass 有关，对应的是索引跟代理对象的方法之间的关系，因为每个代理方法，都有一个索引对应。因此 fci.f2.invoke 方法的第一个参数就是传递的方法索引，因此最终能够找到需要执行的代理方法，对于执行 factoryProxy.sale()，便会找到代理类中的 <code>CGLIB$sale$1</code> 方法，所以调用 methodProxy.invokeSuper 方法最终会到 <code>CGLIB$sale$1()</code> 处。对于流程还不太清晰的，可以在纸上画一画。</p>
+
+<blockquote>
+
+<p>FastClass 机制原理：为代理类中的每个方法生成一个索引，当调用时直接通过索引调用对应方法，否则使用反射调用将会带来更多的性能损耗。</p>
+
+</blockquote>
+
+<p>说到这里可以补充一个常见面试题：如果我们在拦截器 intercept 中直接调用 MethodProxy 的 invoke 方法将会直接出现栈溢出，因为程序出现了死循环。如果感兴趣，可以自己去分析一下原因。</p>
+
+<blockquote>
+
+<p>tips：注意 MethodProxy.invoke(…) 第一个参数，代表的是被代理类方法的索引，因此为什么死循环就很明了了。</p>
+
+</blockquote>
+
+<h3>javassist 字节码</h3>
+
+<p>javassist 是一个开源的分析、编辑和创建 Java 字节码的类库。它使程序能够在运行时定义或修改类，并在 JVM 加载时修改类文件。为了方便使用，javassist 提供了两个基本的方式：API 类操作级别和字节码级别。如果使用 API，可以直接编辑类文件而不需要了解 Java 字节码的规范，跟平常写 Java 代码一样。同时还可以以源文本的形式直接操作字节码文件，javassist 将即时编译它。平时使用多是操作 javassist 类库提供的 API，并且多用作：</p>
+
+<ul>
+
+<li>动态创建类或接口的二进制字节码（如：动态代理生成代理类）</li>
+
+<li>动态扩展已有类或接口的二进制字节码（如：扩展框架中的某些类）</li>
+
+</ul>
+
+<p>下面我们就通过两个小例子来了解一下 javassist。</p>
+
+<h4>动态创建类或接口</h4>
+
+<p>比如我们动态创建一个 User 类：</p>
+
+<pre><code>public class Person {
+
+    private String name;
+
+    public Person(String name){
+
+        this.name = name;
+
+    }
+
+    public String getName() {
+
+        return name;
+
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+
+    @Override
+
+    public String toString() {
+
+        return &quot;name=&quot; + this.name;
+
+    }
+
+}
+
+</code></pre>
+
+<p>首先引入依赖</p>
+
+<pre><code>&lt;dependency&gt;
+
+    &lt;groupId&gt;org.javassist&lt;/groupId&gt;
+
+    &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+
+    &lt;version&gt;3.21.0-GA&lt;/version&gt;
+
+&lt;/dependency&gt;
+
+</code></pre>
+
+<p>创建代码如下：</p>
+
+<pre><code>public class Main {
+
+
+
+    public static void main(String[] args) throws Exception {
+
+        String className = &quot;Person&quot;;
+
+
+
+        ClassPool classPool = ClassPool.getDefault();
+
+        // 定义一个名为 Person 的新类
+
+        CtClass ctClass = classPool.makeClass(className);
+
+
+
+        // 定义成员变量 name，类型为 String
+
+        CtField ctFieldName = new CtField(classPool.get(&quot;java.lang.String&quot;), &quot;name&quot;, ctClass);
+
+        // 设置成员变量 name 访问修饰符
+
+        ctFieldName.setModifiers(Modifier.PRIVATE);
+
+        // 添加为类 Person 的成员变量
+
+        ctClass.addField(ctFieldName);
+
+
+
+        //定义构造函数
+
+        CtClass[] parameters = new CtClass[]{classPool.get(&quot;java.lang.String&quot;)};
+
+        CtConstructor constructor = new CtConstructor(parameters, ctClass);
+
+        //方法体 $0 表示 this，$1 表示方法的第一个参数
+
+        String body = &quot;{$0.name = $1;}&quot;;
+
+        constructor.setBody(body);
+
+        ctClass.addConstructor(constructor);
+
+
+
+        // 定义 setName getName 方法
+
+        ctClass.addMethod(CtNewMethod.setter(&quot;setName&quot;, ctFieldName));
+
+        ctClass.addMethod(CtNewMethod.getter(&quot;getName&quot;, ctFieldName));
+
+
+
+        // 定义 toString 方法
+
+        CtClass returnType = classPool.get(&quot;java.lang.String&quot;);
+
+        CtMethod toStringMethod = new CtMethod(returnType, &quot;toString&quot;, null, ctClass);
+
+        toStringMethod.setModifiers(Modifier.PUBLIC);
+
+        toStringMethod.setBody(&quot;{return \&quot;name=\&quot;+$0.name;}&quot;);
+
+        ctClass.addMethod(toStringMethod);
+
+
+
+        // 生成 Class 对象
+
+        Class&lt;?&gt; c = ctClass.toClass();
+
+        Object person = c.getConstructor(String.class)
+
+                .newInstance(&quot;Limynl&quot;);
+
+
+
+        // 使用反射调用
+
+        Method method = person.getClass().getMethod(&quot;toString&quot;, null);
+
+        String result = (String) method.invoke(person, null);
+
+        System.out.println(result);
+
+    }
+
+}
+
+</code></pre>
+
+<p>通过 javassist 提供的相关 API，我们就可以在程序运行时创建新的类</p>
+
+<h4>动态扩展已有类或接口</h4>
+
+<p>接下来我们看看如何动态扩展已有类，比如我们想修改已有类 Person 的 toString() 方法，记录该方法运行时间。我们的实现思路为：将原方法命名为 toString$1， 然后重新创建一个新方法名为 toSting，在新方法的中调用原方法 toString$1，利用这个技巧就对原方法进行了扩展。</p>
+
+<pre><code>public class Main {
+
+
+
+    public static void main(String[] args) throws Exception {
+
+        //需要修改的已有的类名和方法名
+
+        String className = &quot;com.limynl.Person&quot;;
+
+        String methodName = &quot;toString&quot;;
+
+
+
+        //修改为原有类的方法名为 toString$1
+
+        CtClass clazz = ClassPool.getDefault().get(className);
+
+        CtMethod method = clazz.getDeclaredMethod(methodName);
+
+        String newname = methodName + &quot;$1&quot;;
+
+        method.setName(newname);
+
+
+
+        //使用原始方法名，定义一个新方法，在这个方法内部调用 loop$impl
+
+        CtMethod newMethod = CtNewMethod.make(&quot;public void &quot; + methodName + &quot;(){&quot; +
+
+                        &quot;long startTime=System.currentTimeMillis();&quot; +
+
+                        &quot;&quot; + newname + &quot;();&quot; +//调用 toString$1
+
+                        &quot;System.out.println(\&quot;耗时:\&quot;+(System.currentTimeMillis()-startTime));&quot; +
+
+                        &quot;}&quot;
+
+                , clazz);
+
+        clazz.addMethod(newMethod);
+
+
+
+        //调用修改后的 Person 类的 toString 方法
+
+        Person person = (Person) clazz.toClass().newInstance();
+
+        System.out.println(person.toString());
+
+    }
+
+}
+
+</code></pre>
+
+<p>这里我们就把 javassist 操作字节码常见 API 了解了一下，下面我们就看看如何使用 javassist 实现动态代理。</p>
+
+<h3>javassist 动态代理</h3>
+
+<p>这里我们回顾一下 JDK 动态代理的实现：</p>
+
+<ul>
+
+<li>动态生成一个代理类</li>
+
+<li>继承 Proxy，提供 InvocationHandler h 实现代理逻辑</li>
+
+<li>实现接口方法，调用 InvocationHandler 的 invoke 方法</li>
+
+<li>在 InvocationHandler 中 invoke 方法使用反射调用被代理类的方法</li>
+
+</ul>
+
+<p>因此这里最关键的就是生成一个<strong>代理类</strong>，因此就是 JDK 动态代理中这一步的实现：</p>
+
+<pre><code>Proxy.newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)
+
+</code></pre>
+
+<p>有了上面的 javassist 的基本了解，因此我们需要手动实现一个 newProxyInstance 方法来动态生成一个代理类 BusinessProxy，替换 JDK 动态代理中生成代理类的方式即可实现我们的需求。</p>
+
+<pre><code>public class ProxyGenerator {
+
+
+
+    public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h) throws Throwable {
+
+        ClassPool pool = ClassPool.getDefault();
+
+
+
+        // ①创建代理类：public class BusinessProxy
+
+        CtClass proxyCc = pool.makeClass(&quot;BusinessProxy&quot;);
+
+
+
+        // ②给代理类添加字段：private InvocationHandler h;
+
+        CtClass handlerCc = pool.get(InvocationHandler.class.getName());
+
+        CtField handlerField = new CtField(handlerCc, &quot;h&quot;, proxyCc);
+
+        handlerField.setModifiers(AccessFlag.PRIVATE);
+
+        proxyCc.addField(handlerField);
+
+
+
+        // ③生成构造函数：public BusinessProxy(InvocationHandler h) { this.h = h; }
+
+        CtConstructor ctConstructor = new CtConstructor(new CtClass[]{handlerCc}, proxyCc);
+
+        // $0 代表 this, $1 代表构造函数的第 1 个参数
+
+        ctConstructor.setBody(&quot;$0.h = $1;&quot;);
+
+        proxyCc.addConstructor(ctConstructor);
+
+
+
+        // ④依次为代理类实现相关接口
+
+        for (Class&lt;?&gt; interfaceClass : interfaces) {
+
+            // 为代理类添加相应接口方法及实现
+
+            CtClass interfaceCc = pool.get(interfaceClass.getName());
+
+            // 为代理类添加接口：public class BusinessProxy implements Operator
+
+            proxyCc.addInterface(interfaceCc);
+
+            // 为代理类添加相应方法及实现
+
+            CtMethod[] ctMethods = interfaceCc.getDeclaredMethods();
+
+            for (int i = 0; i &lt; ctMethods.length; i++) {
+
+                // 新的方法名，即需要被代理的方法
+
+                String methodFieldName = &quot;m&quot; + i;
+
+                // 为代理类添加反射方法字段
+
+                // 如：private static Method m1 = Class.forName(&quot;com.limynl.Operator&quot;).getDeclaredMethod(&quot;sale&quot;, new Class[0]);
+
+                // 构造反射字段声明及赋值语句
+
+                // 方法的多个参数类型以英文逗号分隔
+
+                String classParamsStr = &quot;new Class[0]&quot;;
+
+                // getParameterTypes 获取方法参数类型列表
+
+                if (ctMethods[i].getParameterTypes().length &gt; 0) {
+
+                    for (CtClass clazz : ctMethods[i].getParameterTypes()) {
+
+                        classParamsStr = ((&quot;new Class[0]&quot;.equals(classParamsStr)) ? clazz.getName() : classParamsStr + &quot;,&quot; + clazz.getName()) + &quot;.class&quot;;
+
+                    }
+
+                    classParamsStr = &quot;new Class[] {&quot; + classParamsStr + &quot;}&quot;;
+
+                }
+
+                String methodFieldTpl = &quot;private static java.lang.reflect.Method %s=Class.forName(\&quot;%s\&quot;).getDeclaredMethod(\&quot;%s\&quot;, %s);&quot;;
+
+                String methodFieldBody = String.format(methodFieldTpl, &quot;m&quot; + i, interfaceClass.getName(), ctMethods[i].getName(), classParamsStr);
+
+                // 为代理类添加反射方法字段. CtField.make(String sourceCodeText, CtClass addToThisClass)
+
+                CtField methodField = CtField.make(methodFieldBody, proxyCc);
+
+                proxyCc.addField(methodField);
+
+
+
+                // 为方法添加方法体
+
+                // 构造方法体. this.h.invoke(this, 反射字段名, 方法参数列表);
+
+                String methodBody = &quot;$0.h.invoke($0, &quot; + methodFieldName + &quot;, $args)&quot;;
+
+                // 如果方法有返回类型，则需要转换为相应类型后返回，因为 invoke 方法的返回类型为 Object
+
+                if (CtPrimitiveType.voidType != ctMethods[i].getReturnType()) {
+
+                    // 对 8 个基本类型进行转型
+
+                    // 例如：((Integer)this.h.invoke(this, this.m2, new Object[] { paramString, new Boolean(paramBoolean), paramObject })).intValue();
+
+                    if (ctMethods[i].getReturnType() instanceof CtPrimitiveType) {
+
+                        CtPrimitiveType ctPrimitiveType = (CtPrimitiveType) ctMethods[i].getReturnType();
+
+                        methodBody = &quot;return ((&quot; + ctPrimitiveType.getWrapperName() + &quot;) &quot; + methodBody + &quot;).&quot; + ctPrimitiveType.getGetMethodName() + &quot;()&quot;;
+
+                    } else {
+
+                        // 对于非基本类型直接转型即可
+
+                        methodBody = &quot;return (&quot; + ctMethods[i].getReturnType().getName() + &quot;) &quot; + methodBody;
+
+                    }
+
+                }
+
+                methodBody += &quot;;&quot;;
+
+                // 为代理类添加方法. CtMethod(CtClass returnType, String methodName, CtClass[] parameterTypes, CtClass addToThisClass)
+
+                CtMethod newMethod = new CtMethod(ctMethods[i].getReturnType(), ctMethods[i].getName(),
+
+                        ctMethods[i].getParameterTypes(), proxyCc);
+
+                newMethod.setBody(methodBody);
+
+                proxyCc.addMethod(newMethod);
+
+            }
+
+        }
+
+        // 将代理类字节码文件写到指定目录，方便我们查看源码
+
+        proxyCc.writeFile(&quot;D:/&quot;);
+
+
+
+        // ⑤生成代理实例. 将入参 InvocationHandler h 设置到代理类的 InvocationHandler h 变量
+
+        return proxyCc.toClass().getConstructor(InvocationHandler.class).newInstance(h);
+
+    }
+
+}
+
+</code></pre>
+
+<p>然后我们像 JDK 动态代理那样来使用：</p>
+
+<pre><code>public class Main {
+
+    public static void main(String[] args) throws Throwable {
+
+        AgencyHandler agencyHandler = new AgencyHandler(new Factory());
+
+        Operator operator = (Operator) ProxyGenerator
+
+                .newProxyInstance(Operator.class.getClassLoader(), 
+
+                new Class[]{Operator.class}, agencyHandler);
+
+        operator.sale();
+
+    }
+
+}
+
+</code></pre>
+
+<p>看到这里是不是跟 JDK 动态代理神似，因为我们思路就是仿照 JDK 的，只不过代理类的生成我们是借助 javassist 实现的。</p>
+
+<h3>ASM 字节码</h3>
+
+<p>这一节我们不会十分详细的介绍 ASM 原理以及字节码相关知识，就粗略的谈谈对 ASM 的认识，等真正有这方面需求时想起有这么个工具，再去深入了解，想必帮助会更大。</p>
+
+<h4>简介</h4>
+
+<p>前面介绍 CGLib 时提到过，它底层是采用 ASM 作为字节码处理，生成的代理类就是使用 ASM 实现的。因此 ASM 库是一个基于 Java 字节码层面的代码分析和修改工具，可以直接生产二进制的 class 文件，也可以在类被加载入 JVM 之前动态修改类行为。因此要想实际操作 ASM，对 class 文件格式的十分熟悉。</p>
+
+<p>ASM 中的<strong>每个 API 都和 class 文件格式中的特定部分相吻合</strong>，同时是采用<strong>访问者模式设计</strong>的。</p>
+
+<p>ASM 中比较重要的类有：</p>
+
+<ul>
+
+<li>**ClassReader：**它将字节数组或者 class 文件读入到内存当中，并以树的数据结构表示，树中的一个节点代表着 class 文件中的某个区域。</li>
+
+<li>**ClassVisitor：**ClassReader 对象创建之后，调用 ClassReader#accept() 方法，传入一个 ClassVisitor 对象。在 ClassReader 中遍历树结构的不同节点时会调用 ClassVisitor 对象中不同的 visit()方法，从而实现对字节码的修改。</li>
+
+<li>**ClassWriter：**ClassWriter 是 ClassVisitor 的实现类，它是生成字节码的工具类，它一般是责任链中的最后一个节点，其之前的每一个 ClassVisitor 都是致力于对原始字节码做修改。</li>
+
+</ul>
+
+<h4>动态创建类</h4>
+
+<p>比如我们将动态创建的类如下：</p>
+
+<pre><code>public class Person{
+
+    public String name;
+
+}
+
+</code></pre>
+
+<p>创建过程如下：</p>
+
+<pre><code>public class Main extends ClassLoader implements Opcodes {
+
+
+
+    public static void main(String[] args) throws Exception{
+
+        // 创建一个 ClassWriter, 以生成一个新的类
+
+        ClassWriter cw = new ClassWriter(0);
+
+        // V1_6 是生成的 class 的版本号  ACC_PUBLIC 是类访问修饰符
+
+        cw.visit(V1_6, ACC_PUBLIC, &quot;com/limynl/proxy/asm/Person&quot;, null, &quot;java/lang/Object&quot;, null);
+
+
+
+        // 生成构造方法，因此从这里可以看出，如果类中没有构造方法，系统会给我们一个默认的构造方法
+
+        MethodVisitor mw = cw.visitMethod(ACC_PUBLIC, &quot;&lt;init&gt;&quot;, &quot;()V&quot;, null,
+
+                null);
+
+        mw.visitVarInsn(ALOAD, 0);
+
+        mw.visitMethodInsn(INVOKESPECIAL, &quot;java/lang/Object&quot;, &quot;&lt;init&gt;&quot;, &quot;()V&quot;);
+
+        mw.visitInsn(RETURN);
+
+        mw.visitMaxs(1, 1);
+
+        mw.visitEnd();
+
+
+
+        // 添加字段，public 访问类型
+
+        FieldVisitor fv = cw.visitField(ACC_PUBLIC, &quot;name&quot;, &quot;Ljava/lang/String;&quot;, null, null);
+
+        fv.visitEnd();
+
+
+
+        // 转换成 Class 对象
+
+        byte[] code = cw.toByteArray();
+
+        Main loader = new Main();
+
+        Class&lt;?&gt; clazz = loader.defineClass(null, code, 0, code.length);
+
+
+
+        // 通过默认构造函数创建对象
+
+        Object beanObj = clazz.getConstructor().newInstance();
+
+        // 为成员变量 name 赋值 Limynl
+
+        clazz.getField(&quot;name&quot;).set(beanObj, &quot;Limynl&quot;);
+
+        String nameString = (String) clazz.getField(&quot;name&quot;).get(beanObj);
+
+        System.out.println(&quot;filed value : &quot; + nameString);
+
+    }
+
+}
+
+</code></pre>
+
+<p>从这个小例子我们能够看出，使用 ASM 生成类，还是比较复杂。单从这个例子其实还看不出来。</p>
+
+<blockquote>
+
+<p>Tips：这里有个小技巧，如果想学习练习 ASM 这些 API，推荐使用 ASMifier，可以帮助我们生成这些晦涩难懂的 ASM 代码。</p>
+
+</blockquote>
+
+<h3>总结</h3>
+
+<p>这里我们主要讨论了：</p>
+
+<ul>
+
+<li>JDK 动态代理</li>
+
+<li>CGLib 动态代理（实质使用 ASM）</li>
+
+<li>javassist 动态代理</li>
+
+<li>javassist 字节码和 ASM 字节码</li>
+
+</ul>
+
+<p>总的来说 Java 动态代理实现的原理：在编译期或运行期间操作修改 Java 的字节码。</p>
+
+<p>从实现上来说主要分为两种：</p>
+
+<ul>
+
+<li>操作字节码，创建新类或者修改已有类，比如 JDK 动态代理</li>
+
+<li>使用 Java 编码方式创建新类或者修改已有类，比如 javassist（也提供直接字节码层面操作）</li>
+
+</ul>
+
+<p>关于动态代理的性能：在 CGLib 和 JDK 代理对象调用时，使用的是反射，而在 javassist 生成的代理对象调用，是直接调用的。因此使用 CGLib 和 JDK 代理时可能会由于反射性能较慢。但是如果大家感兴趣的话，可以去测试一下，其实 CGLib 跟 javassist 性能持平，而对于 JDK 动态代理在低版本中性能很差，但在 1.8 及以上，已经有了非常大的提升。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/文章/分布式链路追踪：集群管理设计.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/文章/响应式架构与 RxJava 在有赞零售的实践.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099804a1f878b66","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

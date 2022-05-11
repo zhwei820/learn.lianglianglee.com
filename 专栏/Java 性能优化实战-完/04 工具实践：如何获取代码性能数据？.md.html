@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>04 工具实践：如何获取代码性能数据？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/00 Java 性能优化，是进阶高级架构师的炼金石.md">00 Java 性能优化，是进阶高级架构师的炼金石.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/01 理论分析：性能优化，有哪些衡量指标？需要注意什么？.md">01 理论分析：性能优化，有哪些衡量指标？需要注意什么？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/02 理论分析：性能优化有章可循，谈谈常用的切入点.md">02 理论分析：性能优化有章可循，谈谈常用的切入点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/03 深入剖析：哪些资源，容易成为瓶颈？.md">03 深入剖析：哪些资源，容易成为瓶颈？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Java 性能优化实战-完/04 工具实践：如何获取代码性能数据？.md">04 工具实践：如何获取代码性能数据？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/05 工具实践：基准测试 JMH，精确测量方法性能.md">05 工具实践：基准测试 JMH，精确测量方法性能.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/06 案例分析：缓冲区如何让代码加速.md">06 案例分析：缓冲区如何让代码加速.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/07  案例分析：无处不在的缓存，高并发系统的法宝.md">07  案例分析：无处不在的缓存，高并发系统的法宝.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/08  案例分析：Redis 如何助力秒杀业务.md">08  案例分析：Redis 如何助力秒杀业务.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/09  案例分析：池化对象的应用场景.md">09  案例分析：池化对象的应用场景.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/10  案例分析：大对象复用的目标和注意点.md">10  案例分析：大对象复用的目标和注意点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/11  案例分析：如何用设计模式优化性能.md">11  案例分析：如何用设计模式优化性能.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/12  案例分析：并行计算让代码“飞”起来.md">12  案例分析：并行计算让代码“飞”起来.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/13  案例分析：多线程锁的优化.md">13  案例分析：多线程锁的优化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/14  案例分析：乐观锁和无锁.md">14  案例分析：乐观锁和无锁.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/15  案例分析：从 BIO 到 NIO，再到 AIO.md">15  案例分析：从 BIO 到 NIO，再到 AIO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/16  案例分析：常见 Java 代码优化法则.md">16  案例分析：常见 Java 代码优化法则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/17  高级进阶：JVM 如何完成垃圾回收？.md">17  高级进阶：JVM 如何完成垃圾回收？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/18  高级进阶：JIT 如何影响 JVM 的性能？.md">18  高级进阶：JIT 如何影响 JVM 的性能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/19  高级进阶：JVM 常见优化参数.md">19  高级进阶：JVM 常见优化参数.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/20  SpringBoot 服务性能优化.md">20  SpringBoot 服务性能优化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/21  性能优化的过程方法与求职面经总结.md">21  性能优化的过程方法与求职面经总结.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 性能优化实战-完/22 结束语  实践出真知.md">22 结束语  实践出真知.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>04 工具实践：如何获取代码性能数据？</h1>
+
+<p>首先解答一下上一课时的问题。磁盘的速度这么慢，为什么 Kafka 操作磁盘，吞吐量还能那么高？</p>
+
+<p>这是因为，磁盘之所以慢，主要就是慢在寻道的操作上面。Kafka 官方测试表明，这个寻道时间长达 10ms。磁盘的顺序写和随机写的速度比，可以达到 6 千倍，Kafka 就是采用的顺序写的方式。</p>
+
+<p>经过上一课时我们了解到，想要进行深入排查，需要收集较详细的性能数据，包括操作系统性能数据、JVM 的性能数据、应用的性能数据等。</p>
+
+<p>那么，我们应该如何获取这些数据呢？本课时我将介绍一系列常用的性能测试工具。</p>
+
+<h1>nmon —— 获取系统性能数据</h1>
+
+<p>除了在上一课时中介绍的 top、free 等命令，还有一些将资源整合在一起的监控工具，</p>
+
+<p>nmon 便是一个老牌的 Linux 性能监控工具，它不仅有漂亮的监控界面（如下图所示），还能产出细致的监控报表。</p>
+
+<p><img src="assets/CgqCHl8X2gWANM2wAAkEF7IjoMg031.png" alt="Drawing 0.png" /></p>
+
+<p>我在对应用做性能评估时，通常会加上 nmon 的报告，这会让测试结果更加有说服力。你在平时工作中也可如此尝试。</p>
+
+<p>上一课时介绍的一些操作系统性能指标，都可从 nmon 中获取。它的监控范围很广，包括 CPU、内存、网络、磁盘、文件系统、NFS、系统资源等信息。</p>
+
+<p>nmon 在 sourceforge 发布，我已经下载下来并上传到了仓库中。比如我的是 CentOS 7 系统，选择对应的版本即可执行。</p>
+
+<pre><code>./nmon_x86_64_centos7
+
+</code></pre>
+
+<p>按 C 键可加入 CPU 面板；按 M 键可加入内存面板；按 N 键可加入网络；按 D 键可加入磁盘等。</p>
+
+<p>通过下面的命令，表示每 5 秒采集一次数据，共采集 12 次，它会把这一段时间之内的数据记录下来。比如本次生成了 localhost_200623_1633.nmon 这个文件，我们把它从服务器上下载下来。</p>
+
+<pre><code>./nmon_x86_64_centos7  -f -s 5 -c 12 -m  -m .
+
+</code></pre>
+
+<p><strong>注意：执行命令之后，可以通过 ps 命令找到这个进程。</strong></p>
+
+<pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="63110c0c17230f0c00020f0b0c1017">[email&#160;protected]</a> nmon16m_helpsystems]# ps -ef| grep nmon
+
+root      2228     1  0 16:33 pts/0    00:00:00 ./nmon_x86_64_centos7 -f -s 5 -c 12 -m .
+
+</code></pre>
+
+<p>使用 nmonchart 工具（见仓库），即可生成 html 文件。下面是生成文件的截图。</p>
+
+<p><img src="assets/Ciqc1F8X2m6ABh9lAAqiFOnIMT0061.png" alt="Drawing 1.png" />
+
+nmonchart 报表</p>
+
+<h1>jvisualvm —— 获取 JVM 性能数据</h1>
+
+<p>jvisualvm 原是随着 JDK 发布的一个工具，Java 9 之后开始单独发布。通过它，可以了解应用在运行中的内部情况。我们可以连接本地或者远程的服务器，监控大量的性能数据。</p>
+
+<p>通过插件功能，jvisualvm 能获得更强大的扩展。如下图所示，建议把所有的插件下载下来进行体验。</p>
+
+<p><img src="assets/CgqCHl8X3PeAPufLAAPBFcBR8qY801.png" alt="Drawing 2.png" />
+
+jvisualvm 插件安装</p>
+
+<p>要想监控远程的应用，还需要在被监控的 App 上加入 jmx 参数。</p>
+
+<pre><code>-Dcom.sun.management.jmxremote.port=14000
+
+-Dcom.sun.management.jmxremote.authenticate=false 
+
+-Dcom.sun.management.jmxremote.ssl=false
+
+</code></pre>
+
+<p>上述配置的意义是开启 JMX 连接端口 14000，同时配置不需要 SSL 安全认证方式连接。</p>
+
+<p>对于性能优化来说，我们主要用到它的采样器。注意，由于抽样分析过程对程序运行性能有较大的影响，一般我们只在测试环境中使用此功能。</p>
+
+<p><img src="assets/CgqCHl8X3QOANLEGAAaKW6xLOSg775.png" alt="Drawing 3.png" /></p>
+
+<p>jvisualvm CPU 性能采样图</p>
+
+<p>对于一个 Java 应用来说，除了要关注它的 CPU 指标，垃圾回收方面也是不容忽视的性能点，我们主要关注以下三点。</p>
+
+<ul>
+
+<li><strong>CPU 分析</strong>：统计方法的执行次数和执行耗时，这些数据可用于分析哪个方法执行时间过长，成为热点等。</li>
+
+<li><strong>内存分析</strong>：可以通过内存监视和内存快照等方式进行分析，进而检测内存泄漏问题，优化内存使用情况。</li>
+
+<li><strong>线程分析</strong>：可以查看线程的状态变化，以及一些死锁情况。</li>
+
+</ul>
+
+<h1>JMC —— 获取 Java 应用详细性能数据</h1>
+
+<p>对于我们常用的 HotSpot 来说，有更强大的工具，那就是 JMC。 JMC 集成了一个非常好用的功能：JFR（Java Flight Recorder）。</p>
+
+<p>Flight Recorder 源自飞机的黑盒子，是用来录制信息然后事后分析的。在 Java11 中，它可以通过 jcmd 命令进行录制，主要包括 configure、check、start、dump、stop 这五个命令，其执行顺序为，start — dump — stop，例如：</p>
+
+<pre><code>jcmd &lt;pid&gt; JFR.start
+
+jcmd &lt;pid&gt; JFR.dump filename=recording.jfr
+
+jcmd &lt;pid&gt; JFR.stop
+
+</code></pre>
+
+<p>JFR 功能是建在 JVM 内部的，不需要额外依赖，可以直接使用，它能够监测大量数据。比如，我们提到的锁竞争、延迟、阻塞等；甚至在 JVM 内部，比如 SafePoint、JIT 编译等，也能去分析。</p>
+
+<p><strong>JMC 集成了 JFR 的功能</strong>，下面介绍一下 JMC 的使用。</p>
+
+<h2>1.录制</h2>
+
+<p>下图是录制了一个 Tomcat 一分钟之后的结果，从左边的菜单栏即可进入相应的性能界面。</p>
+
+<p><img src="assets/CgqCHl8X3SyAbYa7AAfd6jZo6t4915.png" alt="Drawing 4.png" /></p>
+
+<p>JMC 录制结果主界面</p>
+
+<p>通过录制数据，可以清晰了解到某一分钟内，操作系统资源，以及 JVM 内部的性能数据情况。</p>
+
+<h2>2.线程</h2>
+
+<p>选择相应的线程，即可了解线程的执行情况，比如 Wait、Idle 、Block 等状态和时序。</p>
+
+<p>以 C2 编译器线程为例，可以看到详细的热点类，以及方法内联后的代码大小。如下图所示，C2 此时正在疯狂运转。</p>
+
+<p><img src="assets/Ciqc1F8X3TWASVq0AAY9V2QKEX8030.png" alt="Drawing 5.png" /></p>
+
+<p>JMC 录制结果 线程界面</p>
+
+<h2>3.内存</h2>
+
+<p>通过内存界面，可以看到每个时间段内内存的申请情况。在排查内存溢出、内存泄漏等情况时，这个功能非常有用。</p>
+
+<p><img src="assets/Ciqc1F8X3T6AesX5AAcyVYacyeQ529.png" alt="Drawing 6.png" /></p>
+
+<p>JMC 录制结果 内存界面</p>
+
+<h2>4.锁</h2>
+
+<p>一些竞争非常严重的锁信息，以及一些死锁信息，都可以在锁信息界面中找到。</p>
+
+<p>可以看到，一些锁的具体 ID，以及关联的线程信息，都可以进行联动分析。</p>
+
+<p><img src="assets/CgqCHl8X3UeAJ5L_AAQ7-kTs7YM289.png" alt="Drawing 7.png" /></p>
+
+<p>JMC 录制结果 锁信息界面</p>
+
+<h2>5.文件和 Socket</h2>
+
+<p>文件和 Socket 界面能够监控对 I/O 的读写，界面一目了然。如果你的应用 I/O 操作比较繁重，比如日志打印比较多、网络读写频繁，就可以在这里监控到相应的信息，并能够和执行栈关联起来。</p>
+
+<p><img src="assets/Ciqc1F8X3VGABH4xAAfkaSBZDio750.png" alt="Drawing 8.png" /></p>
+
+<p>JMC 录制结果 文件和 Socket 界面</p>
+
+<h2>6.方法调用</h2>
+
+<p>这个和 jvisualvm 的功能类似，展示的是方法调用信息和排行。从这里可以看到一些高耗时方法和热点方法。</p>
+
+<p><img src="assets/CgqCHl8X3WOAYQSCAAVmKbHpuBQ717.png" alt="Drawing 9.png" /></p>
+
+<p>JMC 录制结果 方法调用</p>
+
+<h2>7.垃圾回收</h2>
+
+<p>如果垃圾回收过于频繁，就会影响应用的性能。JFR 对垃圾回收进行了详细的记录，比如什么时候发生了垃圾回收，用的什么垃圾回收器，每次垃圾回收的耗时，甚至是什么原因引起的等问题，都可以在这里看到。</p>
+
+<p><img src="assets/Ciqc1F8X3X6ACtlVAAgwHnO3oHQ281.png" alt="Drawing 10.png" /></p>
+
+<p>JMC 录制结果 垃圾回收</p>
+
+<h2>8.JIT</h2>
+
+<p>JIT 编译后的代码，执行速度会特别快，但它需要一个编译过程。编译界面显示了详细的 JIT 编译过程信息，包括生成后的 CodeCache 大小、方法内联信息等。</p>
+
+<p><img src="assets/CgqCHl8X3Y2AWi8dAAZ8RGTPyoA991.png" alt="Drawing 11.png" /></p>
+
+<p>JMC 录制结果 JIT 信息</p>
+
+<h2>9.TLAB</h2>
+
+<p>JVM 默认给每个线程开辟一个 buffer 区域，用来加速对象分配，这就是 TLAB（Thread Local Allocation Buffer）的概念。这个 buffer，就放在 Eden 区。</p>
+
+<p>原理和 Java 语言中的 ThreadLocal 类似，能够避免对公共区的操作，可以减少一些锁竞争。如下图所示的界面，详细地显示了这个分配过程。</p>
+
+<p><img src="assets/CgqCHl8X3baAW4VFAAaz04YR1w4277.png" alt="Drawing 12.png" /></p>
+
+<p>JMC 录制结果 TLAB 信息</p>
+
+<p>在后面的课时中，我们会有多个使用此工具的分析案例。</p>
+
+<h1>Arthas —— 获取单个请求的调用链耗时</h1>
+
+<p>Arthas 是一个 Java 诊断工具，可以排查内存溢出、CPU 飙升、负载高等内容，可以说是一个 jstack、jmap 等命令的大集合。</p>
+
+<p><img src="assets/CgqCHl8X3eSAP67rAANG-JDjv2E614.png" alt="Drawing 13.png" /></p>
+
+<p>Arthas 启动界面</p>
+
+<p>Arthas 支持很多命令，我们以 trace 命令为例。</p>
+
+<p>有时候，我们统计到某个接口的耗时非常高，但又无法找到具体原因时，就可以使用这个 trace 命令。该命令会从方法执行开始记录整个链路上的执行情况，然后统计每个节点的性能开销，最终以树状打印，很多性能问题一眼就能看出来。</p>
+
+<p>下面就是一个执行结果示例。</p>
+
+<pre><code>$ trace demo.MathGame run
+
+Press Q or Ctrl+C to abort.
+
+Affect(class-cnt:1 , method-cnt:1) cost in 28 ms.
+
+`---ts=2019-12-04 00:45:08;thread_name=main;id=1;is_daemon=false;priority=5;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d98d9a9a95e4aaacb7f7b4b0aabaf795b8acb7bab1bcabfd98a9a99ab5b8aaaa95b6b8bdbcab99eabdedbcb8baefe0">[email&#160;protected]</a>
+
+    `---[0.617465ms] demo.MathGame:run()
+
+        `---[0.078946ms] demo.MathGame:primeFactors() #24 [throws Exception]
+
+
+
+`---ts=2019-12-04 00:45:09;thread_name=main;id=1;is_daemon=false;priority=5;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fbafb8b8b7c6888e95d596928898d5b79a8e9598939e89dfba8b8bb8979a8888b7949a9f9e89bbc89fcf9e9a98cdc2">[email&#160;protected]</a>
+
+    `---[1.276874ms] demo.MathGame:run()
+
+        `---[0.03752ms] demo.MathGame:primeFactors() #24 [throws Exception]
+
+</code></pre>
+
+<p>我们在后面的课时中，也会有实例来演示如何找到问题发生的具体原因。</p>
+
+<h1>wrk —— 获取 Web 接口的性能数据</h1>
+
+<p><a href="https://github.com/wg/wrk">wrk（点击进入 GitHub 网站查看）</a>是一款 HTTP 压测工具，和 ab 命令类似，它也是一个命令行工具。</p>
+
+<p>我们先来看一下它的执行结果。</p>
+
+<pre><code>Running 30s test @ http://127.0.0.1:8080/index.html
+
+  12 threads and 400 connections
+
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+
+    Latency   635.91us    0.89ms  12.92ms   93.69%
+
+    Req/Sec    56.20k     8.07k   62.00k    86.54%
+
+  22464657 requests in 30.00s, 17.76GB read
+
+Requests/sec: 748868.53
+
+Transfer/sec:    606.33MB
+
+</code></pre>
+
+<p>可以看到，wrk 统计了常见的性能指标，对 Web 服务性能测试非常有用。同时，wrk 支持 Lua 脚本，用来控制 setup、init、delay、request、response 等函数，可以更好地模拟用户请求。</p>
+
+<h1>小结</h1>
+
+<p>为了获取更多性能数据，我们在本课时介绍了以下 5 款工具。</p>
+
+<ul>
+
+<li><strong>nmon</strong> 获取系统性能数据；</li>
+
+<li><strong>jvisualvm</strong> 获取 JVM 性能数据；</li>
+
+<li><strong>jmc</strong> 获取 Java 应用详细性能数据；</li>
+
+<li><strong>arthas</strong> 获取单个请求的调用链耗时；</li>
+
+<li><strong>wrk</strong> 获取 Web 接口的性能数据。</li>
+
+</ul>
+
+<p>可以看出，这些工具有偏低层的、有偏应用的、有偏统计的、有偏细节的，在定位性能问题时，你需要灵活地使用这些工具，既从全貌上掌握应用的属性，也从细节上找到性能的瓶颈，对应用性能进行全方位的掌控。</p>
+
+<p>这些工具能够很好地帮助我们找到系统的瓶颈点，那么对代码进行优化时，如何分析优化效果呢？又如何对代码片段进行快速、专业的测试呢？下一课时，我将介绍“基准测试 JMH”，来解答以上问题。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Java 性能优化实战-完/03 深入剖析：哪些资源，容易成为瓶颈？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Java 性能优化实战-完/05 工具实践：基准测试 JMH，精确测量方法性能.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099712738d63d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

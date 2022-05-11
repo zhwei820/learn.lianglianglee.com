@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>29 实战：布隆过滤器安装与使用及原理分析.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/01 Redis 是如何执行的.md">01 Redis 是如何执行的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/02 Redis 快速搭建与使用.md">02 Redis 快速搭建与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/03 Redis 持久化——RDB.md">03 Redis 持久化——RDB.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/04 Redis 持久化——AOF.md">04 Redis 持久化——AOF.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/05 Redis 持久化——混合持久化.md">05 Redis 持久化——混合持久化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/06 字符串使用与内部实现原理.md">06 字符串使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">07 附录：更多字符串操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/08 字典使用与内部实现原理.md">08 字典使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">09 附录：更多字典操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/10 列表使用与内部实现原理.md">10 列表使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">11 附录：更多列表操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/12 集合使用与内部实现原理.md">12 集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">13 附录：更多集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/14 有序集合使用与内部实现原理.md">14 有序集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/15 附录：更多有序集合操作命令.md">15 附录：更多有序集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/16 Redis 事务深入解析.md">16 Redis 事务深入解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/17 Redis 键值过期操作.md">17 Redis 键值过期操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/18 Redis 过期策略与源码分析.md">18 Redis 过期策略与源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/19 Redis 管道技术——Pipeline.md">19 Redis 管道技术——Pipeline.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/20 查询附近的人——GEO.md">20 查询附近的人——GEO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/21 游标迭代器（过滤器）——Scan.md">21 游标迭代器（过滤器）——Scan.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/22 优秀的基数统计算法——HyperLogLog.md">22 优秀的基数统计算法——HyperLogLog.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/23 内存淘汰机制与算法.md">23 内存淘汰机制与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">24 消息队列——发布订阅模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/25 消息队列的其他实现方式.md">25 消息队列的其他实现方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">26 消息队列终极解决方案——Stream（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">27 消息队列终极解决方案——Stream（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">28 实战：分布式锁详解与代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">29 实战：布隆过滤器安装与使用及原理分析.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">30 完整案例：实现延迟队列的两种方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/31 实战：定时任务案例.md">31 实战：定时任务案例.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/32 实战：RediSearch 高性能的全文搜索引擎.md">32 实战：RediSearch 高性能的全文搜索引擎.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/33 实战：Redis 性能测试.md">33 实战：Redis 性能测试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/34 实战：Redis 慢查询.md">34 实战：Redis 慢查询.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/35 实战：Redis 性能优化方案.md">35 实战：Redis 性能优化方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/36 实战：Redis 主从同步.md">36 实战：Redis 主从同步.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/37 实战：Redis哨兵模式（上）.md">37 实战：Redis哨兵模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/38 实战：Redis 哨兵模式（下）.md">38 实战：Redis 哨兵模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/39 实战：Redis 集群模式（上）.md">39 实战：Redis 集群模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/40 实战：Redis 集群模式（下）.md">40 实战：Redis 集群模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/41 案例：Redis 问题汇总和相关解决方案.md">41 案例：Redis 问题汇总和相关解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/42 技能学习指南.md">42 技能学习指南.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/43 加餐：Redis 的可视化管理工具.md">43 加餐：Redis 的可视化管理工具.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>29 实战：布隆过滤器安装与使用及原理分析</h1>
+
+<p>我们前面有讲到过 HyperLogLog 可以用来做基数统计，但它没提供判断一个值是否存在的查询方法，那我们如何才能查询一个值是否存在于海量数据之中呢？</p>
+
+<p>如果使用传统的方式，例如 SQL 中的传统查询，因为数据量太多，查询效率又低有占用系统的资源，因此我们需要一个优秀的算法和功能来实现这个需求，这是我们今天要讲的——布隆过滤器。</p>
+
+<h3>开启布隆过滤器</h3>
+
+<p>在 Redis 中不能直接使用布隆过滤器，但我们可以通过 Redis 4.0 版本之后提供的 modules（扩展模块）的方式引入，本文提供两种方式的开启方式。</p>
+
+<h4><strong>方式一：编译方式</strong></h4>
+
+<p><strong>1. 下载并安装布隆过滤器</strong></p>
+
+<pre><code>git clone https://github.com/RedisLabsModules/redisbloom.git
+
+cd redisbloom
+
+make # 编译redisbloom
+
+
+
+</code></pre>
+
+<p>编译正常执行完，会在根目录生成一个 redisbloom.so 文件。</p>
+
+<p><strong>2. 启动 Redis 服务器</strong></p>
+
+<pre><code>&gt; ./src/redis-server redis.conf --loadmodule ./src/modules/RedisBloom-master/redisbloom.so
+
+
+
+</code></pre>
+
+<p>其中 <code>--loadmodule</code> 为加载扩展模块的意思，后面跟的是 redisbloom.so 文件的目录。</p>
+
+<h4><strong>方式二：Docker 方式</strong></h4>
+
+<pre><code>docker pull redislabs/rebloom &amp;nbsp;# 拉取镜像
+
+docker run -p6379:6379 redislabs/rebloom &amp;nbsp;# 运行容器
+
+
+
+</code></pre>
+
+<h4><strong>启动验证</strong></h4>
+
+<p>服务启动之后，我们需要判断布隆过滤器是否正常开启，此时我们只需使用 redis-cli 连接到服务端，输入 bf.add 看有没有命令提示，就可以判断是否正常启动了，如下图所示：</p>
+
+<p><img src="assets/5b01dac0-75b5-11ea-b264-6326f7cc0e82" alt="image.png" /></p>
+
+<p>如果有命令提示则表名 Redis 服务器已经开启了布隆过滤器。</p>
+
+<h3>布隆过滤器的使用</h3>
+
+<p>布隆过滤器的命令不是很多，主要包含以下几个：</p>
+
+<ol>
+
+<li>bf.add：添加元素</li>
+
+<li>bf.exists：判断某个元素是否存在</li>
+
+<li>bf.madd：添加多个元素</li>
+
+<li>bf.mexists：判断多个元素是否存在</li>
+
+<li>bf.reserve：<strong>设置布隆过滤器的准确率</strong></li>
+
+</ol>
+
+<p>具体使用如下所示：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; bf.add user xiaoming
+
+(integer) 1
+
+127.0.0.1:6379&gt; bf.add user xiaohong
+
+(integer) 1
+
+127.0.0.1:6379&gt; bf.add user laowang
+
+(integer) 1
+
+127.0.0.1:6379&gt; bf.exists user laowang
+
+(integer) 1
+
+127.0.0.1:6379&gt; bf.exists user lao
+
+(integer) 0
+
+127.0.0.1:6379&gt; bf.madd user huahua feifei
+
+1) (integer) 1
+
+2) (integer) 1
+
+127.0.0.1:6379&gt; bf.mexists user feifei laomiao
+
+1) (integer) 1
+
+2) (integer) 0
+
+
+
+</code></pre>
+
+<p>可以看出以上结果没有任何误差，我们再来看一下准确率 bf.reserve 的使用：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; bf.reserve user 0.01 200
+
+(error) ERR item exists #已经存的 key 设置会报错
+
+127.0.0.1:6379&gt; bf.reserve userlist 0.9 10
+
+OK
+
+
+
+</code></pre>
+
+<p>可以看出此命令必须在元素刚开始执行，否则会报错，它有三个参数：key、error_rate 和 initial_size。</p>
+
+<p>其中：</p>
+
+<ul>
+
+<li>error_rate：允许布隆过滤器的错误率，这个值越低过滤器占用空间也就越大，以为此值决定了位数组的大小，位数组是用来存储结果的，它的空间占用的越大（存储的信息越多），错误率就越低，它的默认值是 0.01。</li>
+
+<li>initial_size：布隆过滤器存储的元素大小，实际存储的值大于此值，准确率就会降低，它的默认值是 100。</li>
+
+</ul>
+
+<p>后面原理部分会讲到 error_rate 和 initial_size 对准确率影响的具体原因。</p>
+
+<h3>代码实战</h3>
+
+<p>下面我们用 Java 客户端来实现布隆过滤器的操作，因为 Jedis 没有直接操作布隆过滤器的方法，所以我们使用 Jedis 操作 Lua 脚本的方式来实现布隆过滤器，代码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+import utils.JedisUtils;
+
+
+
+import java.util.Arrays;
+
+
+
+public class BloomExample {
+
+    private static final String _KEY = &quot;user&quot;;
+
+
+
+    public static void main(String[] args) {
+
+        Jedis jedis = JedisUtils.getJedis();
+
+        for (int i = 1; i &lt; 10001; i++) {
+
+            bfAdd(jedis, _KEY, &quot;user_&quot; + i);
+
+            boolean exists = bfExists(jedis, _KEY, &quot;user_&quot; + i);
+
+            if (!exists) {
+
+                System.out.println(&quot;未找到数据 i=&quot; + i);
+
+                break;
+
+            }
+
+        }
+
+        System.out.println(&quot;执行完成&quot;);
+
+    }
+
+    /**
+
+     * 添加元素
+
+     * @param jedis Redis 客户端
+
+     * @param key   key
+
+     * @param value value
+
+     * @return boolean
+
+     */
+
+    public static boolean bfAdd(Jedis jedis, String key, String value) {
+
+        String luaStr = &quot;return redis.call('bf.add', KEYS[1], KEYS[2])&quot;;
+
+        Object result = jedis.eval(luaStr, Arrays.asList(key, value),
+
+                Arrays.asList());
+
+        if (result.equals(1L)) {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    /**
+
+     * 查询元素是否存在
+
+     * @param jedis Redis 客户端
+
+     * @param key   key
+
+     * @param value value
+
+     * @return boolean
+
+     */
+
+    public static boolean bfExists(Jedis jedis, String key, String value) {
+
+        String luaStr = &quot;return redis.call('bf.exists', KEYS[1], KEYS[2])&quot;;
+
+        Object result = jedis.eval(luaStr, Arrays.asList(key, value),
+
+                Arrays.asList());
+
+        if (result.equals(1L)) {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>但我们发现执行了半天，执行的结果竟然是：</p>
+
+<pre><code>执行完成
+
+
+
+</code></pre>
+
+<p>没有任何误差，奇怪了，于是我们在循环次数后面又加了一个 0，执行了大半天之后，发现依旧是相同的结果，依旧没有任何误差。</p>
+
+<p>这是因为<strong>对于布隆过滤器来说，它说没有的值一定没有，它说有的值有可能没有</strong>。</p>
+
+<p>于是我们把程序改一下，重新换一个 key 值，把条件改为查询存在的数据，代码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+import utils.JedisUtils;
+
+
+
+import java.util.Arrays;
+
+
+
+public class BloomExample {
+
+    private static final String _KEY = &quot;userlist&quot;;
+
+
+
+    public static void main(String[] args) {
+
+        Jedis jedis = JedisUtils.getJedis();
+
+        for (int i = 1; i &lt; 100001; i++) {
+
+            bfAdd(jedis, _KEY, &quot;user_&quot; + i);
+
+            boolean exists = bfExists(jedis, _KEY, &quot;user_&quot; + (i + 1));
+
+            if (exists) {
+
+                System.out.println(&quot;找到了&quot; + i);
+
+                break;
+
+            }
+
+        }
+
+        System.out.println(&quot;执行完成&quot;);
+
+    }
+
+
+
+    /**
+
+     * 添加元素
+
+     * @param jedis Redis 客户端
+
+     * @param key   key
+
+     * @param value value
+
+     * @return boolean
+
+     */
+
+    public static boolean bfAdd(Jedis jedis, String key, String value) {
+
+        String luaStr = &quot;return redis.call('bf.add', KEYS[1], KEYS[2])&quot;;
+
+        Object result = jedis.eval(luaStr, Arrays.asList(key, value),
+
+                Arrays.asList());
+
+        if (result.equals(1L)) {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+
+
+    /**
+
+     * 查询元素是否存在
+
+     * @param jedis Redis 客户端
+
+     * @param key   key
+
+     * @param value value
+
+     * @return boolean
+
+     */
+
+    public static boolean bfExists(Jedis jedis, String key, String value) {
+
+        String luaStr = &quot;return redis.call('bf.exists', KEYS[1], KEYS[2])&quot;;
+
+        Object result = jedis.eval(luaStr, Arrays.asList(key, value),
+
+                Arrays.asList());
+
+        if (result.equals(1L)) {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>这次我们发现执行不一会就出现了如下信息：</p>
+
+<pre><code>找到了344
+
+执行完成
+
+
+
+</code></pre>
+
+<p>说明循环执行了一会之后就出现误差了，代码执行也符合布隆过滤器的预期。</p>
+
+<h3>原理</h3>
+
+<p>上面我们学会了布隆过滤器的使用，下面我们就来看下它的实现原理。</p>
+
+<p>Redis 布隆过滤器的实现，依靠的是它数据结构中的一个位数组，每次存储键值的时候，不是直接把数据存储在数据结构中，因为这样太占空间了，它是利用几个不同的无偏哈希函数，把此元素的 hash 值均匀的存储在位数组中，也就是说，每次添加时会通过几个无偏哈希函数算出它的位置，把这些位置设置成 1 就完成了添加操作。</p>
+
+<p>当进行元素判断时，查询此元素的几个哈希位置上的值是否为 1，如果全部为 1，则表示此值存在，如果有一个值为 0，则表示不存在。因为此位置是通过 hash 计算得来的，所以即使这个位置是 1，并不能确定是那个元素把它标识为 1 的，因此<strong>布隆过滤器查询此值存在时，此值不一定存在，但查询此值不存在时，此值一定不存在</strong>。</p>
+
+<p>并且当位数组存储值比较稀疏的时候，查询的准确率越高，而当位数组存储的值越来越多时，误差也会增大。</p>
+
+<p>位数组和 key 之间的关系，如下图所示：</p>
+
+<p><img src="assets/c4f5b9b0-75b5-11ea-b61a-45f5a80e7f1b" alt="image.png" /></p>
+
+<h3>布隆过滤器使用场景</h3>
+
+<p>它的经典使用场景包括以下几个：</p>
+
+<ul>
+
+<li>垃圾邮件过滤</li>
+
+<li>爬虫里的 URL 去重</li>
+
+<li>判断一个元素在亿级数据中是否存在</li>
+
+</ul>
+
+<p>布隆过滤器在数据库领域的使用也比较广泛，例如：HBase、Cassandra、LevelDB、RocksDB 内部都有使用布隆过滤器。</p>
+
+<h3>小结</h3>
+
+<p>通过本文我们知道可以使用 Redis 4.0 之后提供的 modules 方式来开启布隆过滤器，并学习了布隆过滤器的三个重要操作方法 bf.add 添加元素、bf.exists 查询元素是否存在，还有 bf.reserve 设置布隆过滤器的准确率，其中 bf.reserve 有 2 个重要的参数：错误率和数组大小，错误率设置的越低，数组设置的越大，需要存储的空间就越大，相对来说查询的错误率也越低，需要如何设置需要使用者根据实际情况进行调整。我们也知道布隆过滤器的特点：当它查询有数据时，此数据不一定真的存在，当它查询没有此数据时，此数据一定不存在。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973ef3d203d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

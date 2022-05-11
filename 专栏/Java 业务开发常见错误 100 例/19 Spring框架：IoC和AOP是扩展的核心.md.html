@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>19 Spring框架：IoC和AOP是扩展的核心.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md">00 开篇词 业务代码真的会有这么多坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md">01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md">02 代码加锁：不要让“锁”事成为烦心事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md">03 线程池：业务代码最常用也最容易犯错的组件.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md">04 连接池：别让连接池帮了倒忙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md">05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md">06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md">07 数据库索引：索引并不是万能药.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md">08 判等问题：程序里如何确定你就是你？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md">09 数值计算：注意精度、舍入和溢出问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md">10 集合类：坑满地的List列表操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md">11 空值处理：分不清楚的null和恼人的空指针.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md">12 异常处理：别让自己在出问题的时候变为瞎子.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md">13 日志：日志记录真没你想象的那么简单.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md">14 文件IO：实现高效正确的文件读写并非易事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md">15 序列化：一来一回你还是原来的你吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md">16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md">17 别以为“自动挡”就不可能出现OOM.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md">18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md">19 Spring框架：IoC和AOP是扩展的核心.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md">20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md">21 代码重复：搞定代码重复的三个绝招.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md">22 接口设计：系统间对话的语言，一定要统一.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md">23 缓存设计：缓存可以锦上添花也可以落井下石.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md">24 业务代码写完，就意味着生产就绪了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md">25 异步处理好用，但非常容易用错.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md">27 数据源头：任何客户端的东西都不可信任.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md">29 数据和代码：数据就是数据，代码就是代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md">30 如何正确保存和传输敏感数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md">33 加餐3：定位应用问题，排错套路很重要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md">34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md">35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md">37 加餐7：程序员成长28计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md">答疑篇：代码篇思考题集锦（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md">答疑篇：代码篇思考题集锦（三）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md">答疑篇：代码篇思考题集锦（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md">答疑篇：加餐篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md">答疑篇：安全篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md">答疑篇：设计篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md">结束语 写代码时，如何才能尽量避免踩坑？.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>19 Spring框架：IoC和AOP是扩展的核心</h1>
+
+<p>你好，我是朱晔。今天，我们来聊聊 Spring 框架中的 IoC 和 AOP，及其容易出错的地方。</p>
+
+<p>熟悉 Java 的同学都知道，Spring 的家族庞大，常用的模块就有 Spring Data、Spring Security、Spring Boot、Spring Cloud 等。其实呢，Spring 体系虽然庞大，但都是围绕 Spring Core 展开的，而 Spring Core 中最核心的就是 IoC（控制反转）和 AOP（面向切面编程）。</p>
+
+<p>概括地说，IoC 和 AOP 的初衷是解耦和扩展。理解这两个核心技术，就可以让你的代码变得更灵活、可随时替换，以及业务组件间更解耦。在接下来的两讲中，我会与你深入剖析几个案例，带你绕过业务中通过 Spring 实现 IoC 和 AOP 相关的坑。</p>
+
+<p>为了便于理解这两讲中的案例，我们先回顾下 IoC 和 AOP 的基础知识。</p>
+
+<p>IoC，其实就是一种设计思想。使用 Spring 来实现 IoC，意味着将你设计好的对象交给 Spring 容器控制，而不是直接在对象内部控制。那，为什么要让容器来管理对象呢？或许你能想到的是，使用 IoC 方便、可以实现解耦。但在我看来，相比于这两个原因，更重要的是 IoC 带来了更多的可能性。</p>
+
+<p>如果以容器为依托来管理所有的框架、业务对象，我们不仅可以无侵入地调整对象的关系，还可以无侵入地随时调整对象的属性，甚至是实现对象的替换。这就使得框架开发者在程序背后实现一些扩展不再是问题，带来的可能性是无限的。比如我们要监控的对象如果是 Bean，实现就会非常简单。所以，这套容器体系，不仅被 Spring Core 和 Spring Boot 大量依赖，还实现了一些外部框架和 Spring 的无缝整合。</p>
+
+<p>AOP，体现了松耦合、高内聚的精髓，在切面集中实现横切关注点（缓存、权限、日志等），然后通过切点配置把代码注入合适的地方。切面、切点、增强、连接点，是 AOP 中非常重要的概念，也是我们这两讲会大量提及的。</p>
+
+<p>为方便理解，我们把 Spring AOP 技术看作为蛋糕做奶油夹层的工序。如果我们希望找到一个合适的地方把奶油注入蛋糕胚子中，那应该如何指导工人完成操作呢？</p>
+
+<p><img src="assets/c71f2ec73901f7bcaa8332f237dfeddb.png" alt="img" /></p>
+
+<p>首先，我们要提醒他，只能往蛋糕胚子里面加奶油，而不能上面或下面加奶油。这就是连接点（Join point），对于 Spring AOP 来说，连接点就是方法执行。</p>
+
+<p>然后，我们要告诉他，在什么点切开蛋糕加奶油。比如，可以在蛋糕坯子中间加入一层奶油，在中间切一次；也可以在中间加两层奶油，在 1/3 和 2/3 的地方切两次。这就是切点（Pointcut），Spring AOP 中默认使用 AspectJ 查询表达式，通过在连接点运行查询表达式来匹配切入点。</p>
+
+<p>接下来也是最重要的，我们要告诉他，切开蛋糕后要做什么，也就是加入奶油。这就是增强（Advice），也叫作通知，定义了切入切点后增强的方式，包括前、后、环绕等。Spring AOP 中，把增强定义为拦截器。</p>
+
+<p>最后，我们要告诉他，找到蛋糕胚子中要加奶油的地方并加入奶油。为蛋糕做奶油夹层的操作，对 Spring AOP 来说就是切面（Aspect），也叫作方面。切面 = 切点 + 增强。</p>
+
+<p>好了，理解了这几个核心概念，我们就可以继续分析案例了。</p>
+
+<p>我要首先说明的是，Spring 相关问题的问题比较复杂，一方面是 Spring 提供的 IoC 和 AOP 本就灵活，另一方面 Spring Boot 的自动装配、Spring Cloud 复杂的模块会让问题排查变得更复杂。因此，今天这一讲，我会带你先打好基础，通过两个案例来重点聊聊 IoC 和 AOP；然后，我会在下一讲中与你分享 Spring 相关的坑。</p>
+
+<h2>单例的 Bean 如何注入 Prototype 的 Bean？</h2>
+
+<p>我们虽然知道 Spring 创建的 Bean 默认是单例的，但当 Bean 遇到继承的时候，可能会忽略这一点。为什么呢？忽略这一点又会造成什么影响呢？接下来，我就和你分享一个由单例引起内存泄露的案例。</p>
+
+<p>架构师一开始定义了这么一个 SayService 抽象类，其中维护了一个类型是 ArrayList 的字段 data，用于保存方法处理的中间数据。每次调用 say 方法都会往 data 加入新数据，可以认为 SayService 是有状态，如果 SayService 是单例的话必然会 OOM：</p>
+
+<pre><code>@Slf4j
+
+
+
+public abstract class SayService {
+
+
+
+    List&lt;String&gt; data = new ArrayList&lt;&gt;();
+
+
+
+    public void say() {
+
+
+
+        data.add(IntStream.rangeClosed(1, 1000000)
+
+
+
+                .mapToObj(__ -&gt; &quot;a&quot;)
+
+
+
+                .collect(Collectors.joining(&quot;&quot;)) + UUID.randomUUID().toString());
+
+
+
+        log.info(&quot;I'm {} size:{}&quot;, this, data.size());
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>但实际开发的时候，开发同学没有过多思考就把 SayHello 和 SayBye 类加上了 @Service 注解，让它们成为了 Bean，也没有考虑到父类是有状态的：</p>
+
+<pre><code>@Service
+
+
+
+@Slf4j
+
+
+
+public class SayHello extends SayService {
+
+
+
+    @Override
+
+
+
+    public void say() {
+
+
+
+        super.say();
+
+
+
+        log.info(&quot;hello&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+@Service
+
+
+
+@Slf4j
+
+
+
+public class SayBye extends SayService {
+
+
+
+    @Override
+
+
+
+    public void say() {
+
+
+
+        super.say();
+
+
+
+        log.info(&quot;bye&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>许多开发同学认为，@Service 注解的意义在于，能通过 @Autowired 注解让 Spring 自动注入对象，就比如可以直接使用注入的 List获取到 SayHello 和 SayBye，而没想过类的生命周期：</p>
+
+<pre><code>@Autowired
+
+
+
+List&lt;SayService&gt; sayServiceList;
+
+
+
+@GetMapping(&quot;test&quot;)
+
+
+
+public void test() {
+
+
+
+    log.info(&quot;====================&quot;);
+
+
+
+    sayServiceList.forEach(SayService::say);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>这一个点非常容易忽略。开发基类的架构师将基类设计为有状态的，但并不知道子类是怎么使用基类的；而开发子类的同学，没多想就直接标记了 @Service，让类成为了 Bean，通过 @Autowired 注解来注入这个服务。但这样设置后，有状态的基类就可能产生内存泄露或线程安全问题。</p>
+
+<p>正确的方式是，在为类标记上 @Service 注解把类型交由容器管理前，首先评估一下类是否有状态，然后为 Bean 设置合适的 Scope。好在上线前，架构师发现了这个内存泄露问题，开发同学也做了修改，为 SayHello 和 SayBye 两个类都标记了 @Scope 注解，设置了 PROTOTYPE 的生命周期，也就是多例：</p>
+
+<pre><code>@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+
+
+
+</code></pre>
+
+<p>但，上线后还是出现了内存泄漏，证明修改是无效的。</p>
+
+<p>从日志可以看到，第一次调用和第二次调用的时候，SayBye 对象都是 4c0bfe9e，SayHello 也是一样的问题。从日志第 7 到 10 行还可以看到，第二次调用后 List 的元素个数变为了 2，说明父类 SayService 维护的 List 在不断增长，不断调用必然出现 OOM：</p>
+
+<pre><code>[15:01:09.349] [http-nio-45678-exec-1] [INFO ] [.s.d.BeanSingletonAndOrderController:22  ] - ====================
+
+
+
+[15:01:09.401] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="48273a2f662f2d2d232a29262f663c21252d662b272525272625213b3c29232d3b663b383a21262f662c2d252779661b29310a312d087c2b782a2e2d712d">[email&#160;protected]</a> size:1
+
+
+
+[15:01:09.402] [http-nio-45678-exec-1] [INFO ] [t.commonmistakes.spring.demo1.SayBye:16  ] - bye
+
+
+
+[15:01:09.469] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6a05180d440d0f0f01080b040d441e03070f440905070705040703191e0b010f1944191a1803040d440e0f07055b44390b13220f0606052a5e535a0c080f0b0b">[email&#160;protected]</a> size:1
+
+
+
+[15:01:09.469] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayHello           :17  ] - hello
+
+
+
+[15:01:15.167] [http-nio-45678-exec-2] [INFO ] [.s.d.BeanSingletonAndOrderController:22  ] - ====================
+
+
+
+[15:01:15.197] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29465b4e074e4c4c424b48474e075d40444c074a464444464744405a5d48424c5a075a595b40474e074d4c444618077a48506b504c691d4a194b4f4c104c">[email&#160;protected]</a> size:2
+
+
+
+[15:01:15.198] [http-nio-45678-exec-2] [INFO ] [t.commonmistakes.spring.demo1.SayBye:16  ] - bye
+
+
+
+[15:01:15.224] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm or<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12753c7577777970737c753c667b7f773c717d7f7f7d7c7f7b6166737977613c6162607b7c753c76777f7d233c41736b5a777e7e7d52262b227470777373">[email&#160;protected]</a> size:2
+
+
+
+[15:01:15.224] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayHello           :17  ] - hello
+
+
+
+</code></pre>
+
+<p>这就引出了单例的 Bean 如何注入 Prototype 的 Bean 这个问题。Controller 标记了 @RestController 注解，而 @RestController 注解 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bb86fbf8d4d5cfc9d4d7d7dec9">[email&#160;protected]</a> 注解 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2f99280b7a1a2bdbca1b790bdb6ab">[email&#160;protected]</a> 注解，又因为 @Controller 标记了 @Component 元注解，所以 @RestController 注解其实也是一个 Spring Bean：</p>
+
+<pre><code>//@RestController注解<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2ff8281adacb6b0adaeaea7b0">[email&#160;protected]</a>注解<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ac87ecfec9dfdcc3c2dfc9eec3c8d5">[email&#160;protected]</a>注解@Target(ElementType.TYPE)
+
+
+
+@Retention(RetentionPolicy.RUNTIME)
+
+
+
+@Documented
+
+
+
+@Controller
+
+
+
+@ResponseBody
+
+
+
+public @interface RestController {}
+
+
+
+//@Controller又标记了@Component元注解
+
+
+
+@Target({ElementType.TYPE})
+
+
+
+@Retention(RetentionPolicy.RUNTIME)
+
+
+
+@Documented
+
+
+
+@Component
+
+
+
+public @interface Controller {}
+
+
+
+</code></pre>
+
+<p>Bean 默认是单例的，所以单例的 Controller 注入的 Service 也是一次性创建的，即使 Service 本身标识了 prototype 的范围也没用。</p>
+
+<p>修复方式是，让 Service 以代理方式注入。这样虽然 Controller 本身是单例的，但每次都能从代理获取 Service。这样一来，prototype 范围的配置才能真正生效：</p>
+
+<pre><code>@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
+
+
+
+</code></pre>
+
+<p>通过日志可以确认这种修复方式有效：</p>
+
+<pre><code>[15:08:42.649] [http-nio-45678-exec-1] [INFO ] [.s.d.BeanSingletonAndOrderController:22  ] - ====================
+
+
+
+[15:08:42.747] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1dec3d69fd6d4d4dad3d0dfd69fc5d8dcd49fd2dedcdcdedfdcd8c2c5d0dad4c29fc2c1c3d8dfd69fd5d4dcde809fe2d0c8f3c8d4f182d7d08785868582">[email&#160;protected]</a> size:1
+
+
+
+[15:08:42.747] [http-nio-45678-exec-1] [INFO ] [t.commonmistakes.spring.demo1.SayBye:17  ] - bye
+
+
+
+[15:08:42.871] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b44594c054c4e4e40494a454c055f42464e054844464644454642585f4a404e5805585b5942454c054f4e46441a05784a52634e4747446b194d1b491c1c12">[email&#160;protected]</a> size:1
+
+
+
+[15:08:42.872] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo1.SayHello           :17  ] - hello
+
+
+
+[15:08:42.932] [http-nio-45678-exec-2] [INFO ] [.s.d.BeanSingletonAndOrderController:22  ] - ====================
+
+
+
+[15:08:42.991] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5cad7c28bc2c0c0cec7c4cbc28bd1ccc8c08bc6cac8c8cacbc8ccd6d1c4cec0d68bd6d5d7cccbc28bc1c0c8ca948bf6c4dce7dcc0e59296949cc7949dc0">[email&#160;protected]</a> size:1
+
+
+
+[15:08:42.992] [http-nio-45678-exec-2] [INFO ] [t.commonmistakes.spring.demo1.SayBye:17  ] - bye
+
+
+
+[15:08:43.046] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayService         :19  ] - I'm <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b34293c753c3e3e30393a353c752f32363e753834363634353632282f3a303e2875282b2932353c753f3e36346a75083a22133e3737341b6c6c696d6939686e">[email&#160;protected]</a> size:1
+
+
+
+[15:08:43.046] [http-nio-45678-exec-2] [INFO ] [o.g.t.c.spring.demo1.SayHello           :17  ] - hello
+
+
+
+</code></pre>
+
+<p>调试一下也可以发现，注入的 Service 都是 Spring 生成的代理类：</p>
+
+<p><img src="assets/a95f7a5f3a576b3b426c7c5625b29230.png" alt="img" /></p>
+
+<p>当然，如果不希望走代理的话还有一种方式是，每次直接从 ApplicationContext 中获取 Bean：</p>
+
+<pre><code>@Autowired
+
+
+
+private ApplicationContext applicationContext;
+
+
+
+@GetMapping(&quot;test2&quot;)
+
+
+
+public void test2() {
+
+
+
+applicationContext.getBeansOfType(SayService.class).values().forEach(SayService::say);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>如果细心的话，你可以发现另一个潜在的问题。这里 Spring 注入的 SayService 的 List，第一个元素是 SayBye，第二个元素是 SayHello。但，我们更希望的是先执行 Hello 再执行 Bye，所以注入一个 List Bean 时，需要进一步考虑 Bean 的顺序或者说优先级。</p>
+
+<p>大多数情况下顺序并不是那么重要，但对于 AOP，顺序可能会引发致命问题。我们继续往下看这个问题吧。</p>
+
+<h2>监控切面因为顺序问题导致 Spring 事务失效</h2>
+
+<p>实现横切关注点，是 AOP 非常常见的一个应用。我曾看到过一个不错的 AOP 实践，通过 AOP 实现了一个整合日志记录、异常处理和方法耗时打点为一体的统一切面。但后来发现，使用了 AOP 切面后，这个应用的声明式事务处理居然都是无效的。你可以先回顾下第 6 讲中提到的，Spring 事务失效的几种可能性。</p>
+
+<p>现在我们来看下这个案例，分析下 AOP 实现的监控组件和事务失效有什么关系，以及通过 AOP 实现监控组件是否还有其他坑。</p>
+
+<p>首先，定义一个自定义注解 Metrics，打上了该注解的方法可以实现各种监控功能：</p>
+
+<pre><code>@Retention(RetentionPolicy.RUNTIME)
+
+
+
+@Target({ElementType.METHOD, ElementType.TYPE})
+
+
+
+public @interface Metrics {
+
+
+
+    /**
+
+
+
+     \* 在方法成功执行后打点，记录方法的执行时间发送到指标系统，默认开启
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean recordSuccessMetrics() default true;
+
+
+
+    /**
+
+
+
+     \* 在方法成功失败后打点，记录方法的执行时间发送到指标系统，默认开启
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean recordFailMetrics() default true;
+
+
+
+    /**
+
+
+
+     \* 通过日志记录请求参数，默认开启
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean logParameters() default true;
+
+
+
+    /**
+
+
+
+     \* 通过日志记录方法返回值，默认开启
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean logReturn() default true;
+
+
+
+    /**
+
+
+
+     \* 出现异常后通过日志记录异常信息，默认开启
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean logException() default true;
+
+
+
+    /**
+
+
+
+     \* 出现异常后忽略异常返回默认值，默认关闭
+
+
+
+     *
+
+
+
+     \* @return
+
+
+
+     */
+
+
+
+    boolean ignoreException() default false;
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>然后，实现一个切面完成 Metrics 注解提供的功能。这个切面可以实现标记了 @RestController 注解的 Web 控制器的自动切入，如果还需要对更多 Bean 进行切入的话，再自行标记 @Metrics 注解。</p>
+
+<p>备注：这段代码有些长，里面还用到了一些小技巧，你需要仔细阅读代码中的注释。</p>
+
+<pre><code>@Aspect
+
+
+
+@Component
+
+
+
+@Slf4j
+
+
+
+public class MetricsAspect {
+
+
+
+    //让Spring帮我们注入ObjectMapper，以方便通过JSON序列化来记录方法入参和出参
+
+
+
+    
+
+
+
+    @Autowired
+
+
+
+    private ObjectMapper objectMapper;
+
+
+
+    //实现一个返回Java基本类型默认值的工具。其实，你也可以逐一写很多if-else判断类型，然后手动设置其默认值。这里为了减少代码量用了一个小技巧，即通过初始化一个具有1个元素的数组，然后通过获取这个数组的值来获取基本类型默认值
+
+
+
+    private static final Map&lt;Class&lt;?&gt;, Object&gt; DEFAULT_VALUES = Stream
+
+
+
+            .of(boolean.class, byte.class, char.class, double.class, float.class, int.class, long.class, short.class)
+
+
+
+            .collect(toMap(clazz -&gt; (Class&lt;?&gt;) clazz, clazz -&gt; Array.get(Array.newInstance(clazz, 1), 0)));
+
+
+
+    public static &lt;T&gt; T getDefaultValue(Class&lt;T&gt; clazz) {
+
+
+
+        return (T) DEFAULT_VALUES.get(clazz);
+
+
+
+    }
+
+
+
+    //@annotation指示器实现对标记了Metrics注解的方法进行匹配
+
+
+
+   @Pointcut(&quot;within(@org.geekbang.time.commonmistakes.springpart1.aopmetrics.Metrics *)&quot;)
+
+
+
+    public void withMetricsAnnotation() {
+
+
+
+    }
+
+
+
+    //within指示器实现了匹配那些类型上标记了@RestController注解的方法
+
+
+
+    @Pointcut(&quot;within(@org.springframework.web.bind.annotation.RestController *)&quot;)
+
+
+
+    public void controllerBean() {
+
+
+
+    }
+
+
+
+    @Around(&quot;controllerBean() || withMetricsAnnotation())&quot;)
+
+
+
+    public Object metrics(ProceedingJoinPoint pjp) throws Throwable {
+
+
+
+        //通过连接点获取方法签名和方法上Metrics注解，并根据方法签名生成日志中要输出的方法定义描述
+
+
+
+        MethodSignature signature = (MethodSignature) pjp.getSignature();
+
+
+
+        Metrics metrics = signature.getMethod().getAnnotation(Metrics.class);
+
+
+
+ 
+
+
+
+        String name = String.format(&quot;【%s】【%s】&quot;, signature.getDeclaringType().toString(), signature.toLongString());
+
+
+
+        //因为需要默认对所有@RestController标记的Web控制器实现@Metrics注解的功能，在这种情况下方法上必然是没有@Metrics注解的，我们需要获取一个默认注解。虽然可以手动实例化一个@Metrics注解的实例出来，但为了节省代码行数，我们通过在一个内部类上定义@Metrics注解方式，然后通过反射获取注解的小技巧，来获得一个默认的@Metrics注解的实例
+
+
+
+        if (metrics == null) {
+
+
+
+            @Metrics
+
+
+
+            final class c {}
+
+
+
+            metrics = c.class.getAnnotation(Metrics.class);
+
+
+
+        }
+
+
+
+        //尝试从请求上下文（如果有的话）获得请求URL，以方便定位问题
+
+
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+
+
+
+        if (requestAttributes != null) {
+
+
+
+            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+
+
+
+            if (request != null)
+
+
+
+                name += String.format(&quot;【%s】&quot;, request.getRequestURL().toString());
+
+
+
+        }
+
+
+
+        //实现的是入参的日志输出
+
+
+
+        if (metrics.logParameters())
+
+
+
+            log.info(String.format(&quot;【入参日志】调用 %s 的参数是：【%s】&quot;, name, objectMapper.writeValueAsString(pjp.getArgs())));
+
+
+
+        //实现连接点方法的执行，以及成功失败的打点，出现异常的时候还会记录日志
+
+
+
+        Object returnValue;
+
+
+
+        Instant start = Instant.now();
+
+
+
+        try {
+
+
+
+            returnValue = pjp.proceed();
+
+
+
+            if (metrics.recordSuccessMetrics())
+
+
+
+                //在生产级代码中，我们应考虑使用类似Micrometer的指标框架，把打点信息记录到时间序列数据库中，实现通过图表来查看方法的调用次数和执行时间，在设计篇我们会重点介绍
+
+
+
+                log.info(String.format(&quot;【成功打点】调用 %s 成功，耗时：%d ms&quot;, name, Duration.between(start, Instant.now()).toMillis()));
+
+
+
+        } catch (Exception ex) {
+
+
+
+            if (metrics.recordFailMetrics())
+
+
+
+                log.info(String.format(&quot;【失败打点】调用 %s 失败，耗时：%d ms&quot;, name, Duration.between(start, Instant.now()).toMillis()));
+
+
+
+            if (metrics.logException())
+
+
+
+                log.error(String.format(&quot;【异常日志】调用 %s 出现异常！&quot;, name), ex);
+
+
+
+            //忽略异常的时候，使用一开始定义的getDefaultValue方法，来获取基本类型的默认值
+
+
+
+            if (metrics.ignoreException())
+
+
+
+                returnValue = getDefaultValue(signature.getReturnType());
+
+
+
+            else
+
+
+
+                throw ex;
+
+
+
+        }
+
+
+
+        //实现了返回值的日志输出
+
+
+
+        if (metrics.logReturn())
+
+
+
+            log.info(String.format(&quot;【出参日志】调用 %s 的返回是：【%s】&quot;, name, returnValue));
+
+
+
+        return returnValue;
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>接下来，分别定义最简单的 Controller、Service 和 Repository，来测试 MetricsAspect 的功能。</p>
+
+<p>其中，Service 中实现创建用户的时候做了事务处理，当用户名包含 test 字样时会抛出异常，导致事务回滚。同时，我们为 Service 中的 createUser 标记了 @Metrics 注解。这样一来，我们还可以手动为类或方法标记 @Metrics 注解，实现 Controller 之外的其他组件的自动监控。</p>
+
+<pre><code>@Slf4j
+
+
+
+@RestController //自动进行监控
+
+
+
+@RequestMapping(&quot;metricstest&quot;)
+
+
+
+public class MetricsController {
+
+
+
+    @Autowired
+
+
+
+    private UserService userService;
+
+
+
+    @GetMapping(&quot;transaction&quot;)
+
+
+
+    public int transaction(@RequestParam(&quot;name&quot;) String name) {
+
+
+
+        try {
+
+
+
+            userService.createUser(new UserEntity(name));
+
+
+
+        } catch (Exception ex) {
+
+
+
+            log.error(&quot;create user failed because {}&quot;, ex.getMessage());
+
+
+
+        }
+
+
+
+        return userService.getUserCount(name);
+
+
+
+    }
+
+
+
+}
+
+
+
+@Service
+
+
+
+@Slf4j
+
+
+
+public class UserService {
+
+
+
+    @Autowired
+
+
+
+    private UserRepository userRepository;
+
+
+
+    @Transactional
+
+
+
+    @Metrics //启用方法监控
+
+
+
+    public void createUser(UserEntity entity) {
+
+
+
+        userRepository.save(entity);
+
+
+
+        if (entity.getName().contains(&quot;test&quot;))
+
+
+
+            throw new RuntimeException(&quot;invalid username!&quot;);
+
+
+
+    }
+
+
+
+    public int getUserCount(String name) {
+
+
+
+        return userRepository.findByName(name).size();
+
+
+
+    }
+
+
+
+}
+
+
+
+@Repository
+
+
+
+public interface UserRepository extends JpaRepository&lt;UserEntity, Long&gt; {
+
+
+
+    List&lt;UserEntity&gt; findByName(String name);
+
+
+
+}
+
+
+
+
+
+</code></pre>
+
+<p>使用用户名“test”测试一下注册功能：</p>
+
+<pre><code>[16:27:52.586] [http-nio-45678-exec-3] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :85  ] - 【入参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 的参数是：【[&quot;test&quot;]】
+
+
+
+[16:27:52.590] [http-nio-45678-exec-3] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :85  ] - 【入参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 的参数是：【[{&quot;id&quot;:null,&quot;name&quot;:&quot;test&quot;}]】
+
+
+
+[16:27:52.609] [http-nio-45678-exec-3] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :96  ] - 【失败打点】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 失败，耗时：19 ms
+
+
+
+[16:27:52.610] [http-nio-45678-exec-3] [ERROR] [o.g.t.c.spring.demo2.MetricsAspect      :98  ] - 【异常日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 出现异常！
+
+
+
+java.lang.RuntimeException: invalid username!
+
+
+
+  at org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(UserService.java:18)
+
+
+
+  at org.geekbang.time.commonmistakes.spring.demo2.UserService$$FastClassBySpringCGLIB$$9eec91f.invoke(&lt;generated&gt;)
+
+
+
+[16:27:52.614] [http-nio-45678-exec-3] [ERROR] [g.t.c.spring.demo2.MetricsController:21  ] - create user failed because invalid username!
+
+
+
+[16:27:52.617] [http-nio-45678-exec-3] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :93  ] - 【成功打点】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 成功，耗时：31 ms
+
+
+
+[16:27:52.618] [http-nio-45678-exec-3] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :108 ] - 【出参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 的返回是：【0】
+
+
+
+</code></pre>
+
+<p>看起来这个切面很不错，日志中打出了整个调用的出入参、方法耗时：</p>
+
+<p>第 1、8、9 和 10 行分别是 Controller 方法的入参日志、调用 Service 方法出错后记录的错误信息、成功执行的打点和出参日志。因为 Controller 方法内部进行了 try-catch 处理，所以其方法最终是成功执行的。出参日志中显示最后查询到的用户数量是 0，表示用户创建实际是失败的。</p>
+
+<p>第 2、3 和 4~7 行分别是 Service 方法的入参日志、失败打点和异常日志。正是因为 Service 方法的异常抛到了 Controller，所以整个方法才能被 @Transactional 声明式事务回滚。在这里，MetricsAspect 捕获了异常又重新抛出，记录了异常的同时又不影响事务回滚。</p>
+
+<p>一段时间后，开发同学觉得默认的 @Metrics 配置有点不合适，希望进行两个调整：</p>
+
+<p>对于 Controller 的自动打点，不要自动记录入参和出参日志，否则日志量太大；</p>
+
+<p>对于 Service 中的方法，最好可以自动捕获异常。</p>
+
+<p>于是，他就为 MetricsController 手动加上了 @Metrics 注解，设置 logParameters 和 logReturn 为 false；然后为 Service 中的 createUser 方法的 @Metrics 注解，设置了 ignoreException 属性为 true：</p>
+
+<pre><code>@Metrics(logParameters = false, logReturn = false) //改动点1
+
+
+
+public class MetricsController {
+
+
+
+@Service
+
+
+
+@Slf4j
+
+
+
+public class UserService {
+
+
+
+    @Transactional
+
+
+
+    @Metrics(ignoreException = true) //改动点2
+
+
+
+    public void createUser(UserEntity entity) {
+
+
+
+    ...
+
+
+
+</code></pre>
+
+<p>代码上线后发现日志量并没有减少，更要命的是事务回滚失效了，从输出看到最后查询到了名为 test 的用户：</p>
+
+<pre><code>[17:01:16.549] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :75  ] - 【入参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 的参数是：【[&quot;test&quot;]】
+
+
+
+[17:01:16.670] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :75  ] - 【入参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 的参数是：【[{&quot;id&quot;:null,&quot;name&quot;:&quot;test&quot;}]】
+
+
+
+[17:01:16.885] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :86  ] - 【失败打点】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 失败，耗时：211 ms
+
+
+
+[17:01:16.899] [http-nio-45678-exec-1] [ERROR] [o.g.t.c.spring.demo2.MetricsAspect      :88  ] - 【异常日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 出现异常！
+
+
+
+java.lang.RuntimeException: invalid username!
+
+
+
+  at org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(UserService.java:18)
+
+
+
+  at org.geekbang.time.commonmistakes.spring.demo2.UserService$$FastClassBySpringCGLIB$$9eec91f.invoke(&lt;generated&gt;)
+
+
+
+[17:01:16.902] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :98  ] - 【出参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.UserService】【public void org.geekbang.time.commonmistakes.spring.demo2.UserService.createUser(org.geekbang.time.commonmistakes.spring.demo2.UserEntity)】【http://localhost:45678/metricstest/transaction】 的返回是：【null】
+
+
+
+[17:01:17.466] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :83  ] - 【成功打点】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 成功，耗时：915 ms
+
+
+
+[17:01:17.467] [http-nio-45678-exec-1] [INFO ] [o.g.t.c.spring.demo2.MetricsAspect      :98  ] - 【出参日志】调用 【class org.geekbang.time.commonmistakes.spring.demo2.MetricsController】【public int org.geekbang.time.commonmistakes.spring.demo2.MetricsController.transaction(java.lang.String)】【http://localhost:45678/metricstest/transaction】 的返回是：【1】
+
+
+
+</code></pre>
+
+<p>在介绍数据库事务时，我们分析了 Spring 通过 TransactionAspectSupport 类实现事务。在 invokeWithinTransaction 方法中设置断点可以发现，在执行 Service 的 createUser 方法时，TransactionAspectSupport 并没有捕获到异常，所以自然无法回滚事务。原因就是，异常被 MetricsAspect 吃掉了。</p>
+
+<p>我们知道，切面本身是一个 Bean，Spring 对不同切面增强的执行顺序是由 Bean 优先级决定的，具体规则是：</p>
+
+<p>入操作（Around（连接点执行前）、Before），切面优先级越高，越先执行。一个切面的入操作执行完，才轮到下一切面，所有切面入操作执行完，才开始执行连接点（方法）。</p>
+
+<p>出操作（Around（连接点执行后）、After、AfterReturning、AfterThrowing），切面优先级越低，越先执行。一个切面的出操作执行完，才轮到下一切面，直到返回到调用点。</p>
+
+<p>同一切面的 Around 比 After、Before 先执行。</p>
+
+<p>对于 Bean 可以通过 @Order 注解来设置优先级，查看 @Order 注解和 Ordered 接口源码可以发现，默认情况下 Bean 的优先级为最低优先级，其值是 Integer 的最大值。其实，值越大优先级反而越低，这点比较反直觉：</p>
+
+<pre><code>@Retention(RetentionPolicy.RUNTIME)
+
+
+
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+
+
+
+@Documented
+
+
+
+public @interface Order {
+
+
+
+   int value() default Ordered.LOWEST_PRECEDENCE;
+
+
+
+}
+
+
+
+public interface Ordered {
+
+
+
+   int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
+
+
+
+   int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
+
+
+
+   int getOrder();
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>我们再通过一个例子，来理解下增强的执行顺序。新建一个 TestAspectWithOrder10 切面，通过 @Order 注解设置优先级为 10，在内部定义 @Before、@After、@Around 三类增强，三个增强的逻辑只是简单的日志输出，切点是 TestController 所有方法；然后再定义一个类似的 TestAspectWithOrder20 切面，设置优先级为 20：</p>
+
+<pre><code>@Aspect
+
+
+
+@Component
+
+
+
+@Order(10)
+
+
+
+@Slf4j
+
+
+
+public class TestAspectWithOrder10 {
+
+
+
+    @Before(&quot;execution(* org.geekbang.time.commonmistakes.springpart1.aopmetrics.TestController.*(..))&quot;)
+
+
+
+    public void before(JoinPoint joinPoint) throws Throwable {
+
+
+
+        log.info(&quot;TestAspectWithOrder10 @Before&quot;);
+
+
+
+    }
+
+
+
+    @After(&quot;execution(* org.geekbang.time.commonmistakes.springpart1.aopmetrics.TestController.*(..))&quot;)
+
+
+
+    public void after(JoinPoint joinPoint) throws Throwable {
+
+
+
+        log.info(&quot;TestAspectWithOrder10 @After&quot;);
+
+
+
+    }
+
+
+
+    @Around(&quot;execution(* org.geekbang.time.commonmistakes.springpart1.aopmetrics.TestController.*(..))&quot;)
+
+
+
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+
+
+
+        log.info(&quot;TestAspectWithOrder10 @Around before&quot;);
+
+
+
+        Object o = pjp.proceed();
+
+
+
+        log.info(&quot;TestAspectWithOrder10 @Around after&quot;);
+
+
+
+        return o;
+
+
+
+    }
+
+
+
+}
+
+
+
+@Aspect
+
+
+
+@Component
+
+
+
+@Order(20)
+
+
+
+@Slf4j
+
+
+
+public class TestAspectWithOrder20 {
+
+
+
+  ...
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>调用 TestController 的方法后，通过日志输出可以看到，增强执行顺序符合切面执行顺序的三个规则：</p>
+
+<p><img src="assets/3c687829083abebe1d6e347f5766903e.png" alt="img" /></p>
+
+<p>因为 Spring 的事务管理也是基于 AOP 的，默认情况下优先级最低也就是会先执行出操作，但是自定义切面 MetricsAspect 也同样是最低优先级，这个时候就可能出现问题：如果出操作先执行捕获了异常，那么 Spring 的事务处理就会因为无法捕获到异常导致无法回滚事务。</p>
+
+<p>解决方式是，明确 MetricsAspect 的优先级，可以设置为最高优先级，也就是最先执行入操作最后执行出操作：</p>
+
+<pre><code>//将MetricsAspect这个Bean的优先级设置为最高
+
+
+
+@Order(Ordered.HIGHEST_PRECEDENCE)
+
+
+
+public class MetricsAspect {
+
+
+
+    ...
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>此外，我们要知道切入的连接点是方法，注解定义在类上是无法直接从方法上获取到注解的。修复方式是，改为优先从方法获取，如果获取不到再从类获取，如果还是获取不到再使用默认的注解：</p>
+
+<pre><code>Metrics metrics = signature.getMethod().getAnnotation(Metrics.class);
+
+
+
+if (metrics == null) {
+
+
+
+    metrics = signature.getMethod().getDeclaringClass().getAnnotation(Metrics.class);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>经过这 2 处修改，事务终于又可以回滚了，并且 Controller 的监控日志也不再出现入参、出参信息。</p>
+
+<p>我再总结下这个案例。利用反射 + 注解 +Spring AOP 实现统一的横切日志关注点时，我们遇到的 Spring 事务失效问题，是由自定义的切面执行顺序引起的。这也让我们认识到，因为 Spring 内部大量利用 IoC 和 AOP 实现了各种组件，当使用 IoC 和 AOP 时，一定要考虑是否会影响其他内部组件。</p>
+
+<h2>重点回顾</h2>
+
+<p>今天，我通过 2 个案例和你分享了 Spring IoC 和 AOP 的基本概念，以及三个比较容易出错的点。</p>
+
+<p>第一，让 Spring 容器管理对象，要考虑对象默认的 Scope 单例是否适合，对于有状态的类型，单例可能产生内存泄露问题。</p>
+
+<p>第二，如果要为单例的 Bean 注入 Prototype 的 Bean，绝不是仅仅修改 Scope 属性这么简单。由于单例的 Bean 在容器启动时就会完成一次性初始化。最简单的解决方案是，把 Prototype 的 Bean 设置为通过代理注入，也就是设置 proxyMode 属性为 TARGET_CLASS。</p>
+
+<p>第三，如果一组相同类型的 Bean 是有顺序的，需要明确使用 @Order 注解来设置顺序。你可以再回顾下，两个不同优先级切面中 @Before、@After 和 @Around 三种增强的执行顺序，是什么样的。</p>
+
+<p>最后我要说的是，文内第二个案例是一个完整的统一日志监控案例，继续修改就可以实现一个完善的、生产级的方法调用监控平台。这些修改主要是两方面：把日志打点，改为对接 Metrics 监控系统；把各种功能的监控开关，从注解属性获取改为通过配置系统实时获取。</p>
+
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+
+<h2>思考与讨论</h2>
+
+<p>除了通过 @Autowired 注入 Bean 外，还可以使用 @Inject 或 @Resource 来注入 Bean。你知道这三种方式的区别是什么吗？</p>
+
+<p>当 Bean 产生循环依赖时，比如 BeanA 的构造方法依赖 BeanB 作为成员需要注入，BeanB 也依赖 BeanA，你觉得会出现什么问题呢？又有哪些解决方式呢？</p>
+
+<p>在下一讲中，我会继续与你探讨 Spring 核心的其他问题。我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把今天的内容分享给你的朋友或同事，一起交流。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709970408e663d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

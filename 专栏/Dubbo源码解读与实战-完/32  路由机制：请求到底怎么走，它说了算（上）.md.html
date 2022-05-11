@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>32  路由机制：请求到底怎么走，它说了算（上）.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/01  Dubbo 源码环境搭建：千里之行，始于足下.md">01  Dubbo 源码环境搭建：千里之行，始于足下.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/03  Dubbo SPI 精析，接口实现两极反转（上）.md">03  Dubbo SPI 精析，接口实现两极反转（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/04  Dubbo SPI 精析，接口实现两极反转（下）.md">04  Dubbo SPI 精析，接口实现两极反转（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/05  海量定时任务，一个时间轮搞定.md">05  海量定时任务，一个时间轮搞定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/08  代理模式与常见实现.md">08  代理模式与常见实现.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/09  Netty 入门，用它做网络编程都说好（上）.md">09  Netty 入门，用它做网络编程都说好（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/10  Netty 入门，用它做网络编程都说好（下）.md">10  Netty 入门，用它做网络编程都说好（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/11  简易版 RPC 框架实现（上）.md">11  简易版 RPC 框架实现（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/12  简易版 RPC 框架实现（下）.md">12  简易版 RPC 框架实现（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md">13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/14  重试机制是网络操作的基本保证.md">14  重试机制是网络操作的基本保证.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md">15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/23  核心接口介绍，RPC 层骨架梳理.md">23  核心接口介绍，RPC 层骨架梳理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md">28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md">30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/31  加餐：深潜 Directory 实现，探秘服务目录玄机.md">31  加餐：深潜 Directory 实现，探秘服务目录玄机.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Dubbo源码解读与实战-完/32  路由机制：请求到底怎么走，它说了算（上）.md">32  路由机制：请求到底怎么走，它说了算（上）.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/33  路由机制：请求到底怎么走，它说了算（下）.md">33  路由机制：请求到底怎么走，它说了算（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/34  加餐：初探 Dubbo 动态配置的那些事儿.md">34  加餐：初探 Dubbo 动态配置的那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/37  集群容错：一个好汉三个帮（上）.md">37  集群容错：一个好汉三个帮（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/38  集群容错：一个好汉三个帮（下）.md">38  集群容错：一个好汉三个帮（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md">39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/40  加餐：模拟远程调用，Mock 机制帮你搞定.md">40  加餐：模拟远程调用，Mock 机制帮你搞定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/41  加餐：一键通关服务发布全流程.md">41  加餐：一键通关服务发布全流程.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/42  加餐：服务引用流程全解析.md">42  加餐：服务引用流程全解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/43  服务自省设计方案：新版本新方案.md">43  服务自省设计方案：新版本新方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/45  加餐：深入服务自省方案中的服务发布订阅（上）.md">45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/46  加餐：深入服务自省方案中的服务发布订阅（下）.md">46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Dubbo源码解读与实战-完/49 结束语  认真学习，缩小差距.md">49 结束语  认真学习，缩小差距.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>32  路由机制：请求到底怎么走，它说了算（上）</h1>
+
+<p>作为 dubbo-cluster 模块分析的第二课时，本课时我们就来介绍一下 dubbo-cluster 模块中涉及的另一个核心概念—— Router。</p>
+
+<p><strong>Router 的主要功能就是根据用户配置的路由规则以及请求携带的信息，过滤出符合条件的 Invoker 集合，供后续负载均衡逻辑使用</strong>。在上一课时介绍 RegistryDirectory 实现的时候，我们就已经看到了 RouterChain 这个 Router 链的存在，但是没有深入分析，下面我们就来深入 Router 进行分析。</p>
+
+<h3>RouterChain、RouterFactory 与 Router</h3>
+
+<p>首先我们来看 RouterChain 的核心字段。</p>
+
+<ul>
+
+<li>invokers（List&lt;Invoker<code>&lt;T&gt;</code>&gt; 类型）：当前 RouterChain 对象要过滤的 Invoker 集合。我们可以看到，在 StaticDirectory 中是通过 RouterChain.setInvokers() 方法进行设置的。</li>
+
+<li>builtinRouters（List<code>&lt;Router&gt;</code> 类型）：当前 RouterChain 激活的内置 Router 集合。</li>
+
+<li>routers（List<code>&lt;Router&gt;</code> 类型）：当前 RouterChain 中真正要使用的 Router 集合，其中不仅包括了上面 builtinRouters 集合中全部的 Router 对象，还包括通过 addRouters() 方法添加的 Router 对象。</li>
+
+</ul>
+
+<p>在 RouterChain 的构造函数中，会在传入的 URL 参数中查找 router 参数值，并根据该值获取确定激活的 RouterFactory，之后通过 Dubbo SPI 机制加载这些激活的 RouterFactory 对象，由 RouterFactory 创建当前激活的内置 Router 实例，具体实现如下：</p>
+
+<pre><code>private RouterChain(URL url) {
+
+
+
+    // 通过ExtensionLoader加载激活的RouterFactory
+
+
+
+    List&lt;RouterFactory&gt; extensionFactories = ExtensionLoader.getExtensionLoader(RouterFactory.class)
+
+
+
+            .getActivateExtension(url, &quot;router&quot;);
+
+
+
+    // 遍历所有RouterFactory，调用其getRouter()方法创建相应的Router对象
+
+
+
+    List&lt;Router&gt; routers = extensionFactories.stream()
+
+
+
+            .map(factory -&gt; factory.getRouter(url))
+
+
+
+            .collect(Collectors.toList());
+
+
+
+    initWithRouters(routers); // 初始化buildinRouters字段以及routers字段
+
+
+
+}
+
+
+
+public void initWithRouters(List&lt;Router&gt; builtinRouters) {
+
+
+
+    this.builtinRouters = builtinRouters;
+
+
+
+    this.routers = new ArrayList&lt;&gt;(builtinRouters);
+
+
+
+    this.sort(); // 这里会对routers集合进行排序
+
+
+
+}
+
+</code></pre>
+
+<p>完成内置 Router 的初始化之后，在 Directory 实现中还可以通过 addRouter() 方法添加新的 Router 实例到 routers 字段中，具体实现如下：</p>
+
+<pre><code>public void addRouters(List&lt;Router&gt; routers) {
+
+
+
+    List&lt;Router&gt; newRouters = new ArrayList&lt;&gt;();
+
+
+
+    newRouters.addAll(builtinRouters); // 添加builtinRouters集合
+
+
+
+    newRouters.addAll(routers); // 添加传入的Router集合
+
+
+
+    CollectionUtils.sort(newRouters); // 重新排序
+
+
+
+    this.routers = newRouters;
+
+
+
+}
+
+</code></pre>
+
+<p>RouterChain.route() 方法会遍历 routers 字段，逐个调用 Router 对象的 route() 方法，对 invokers 集合进行过滤，具体实现如下：</p>
+
+<pre><code>public List&lt;Invoker&lt;T&gt;&gt; route(URL url, Invocation invocation) {
+
+
+
+    List&lt;Invoker&lt;T&gt;&gt; finalInvokers = invokers;
+
+
+
+    for (Router router : routers) { // 遍历全部的Router对象
+
+
+
+        finalInvokers = router.route(finalInvokers, url, invocation);
+
+
+
+    }
+
+
+
+    return finalInvokers;
+
+
+
+}
+
+</code></pre>
+
+<p>了解了 RouterChain 的大致逻辑之后，我们知道<strong>真正进行路由的是 routers 集合中的 Router 对象</strong>。接下来我们再来看 RouterFactory 这个工厂接口，<strong>RouterFactory 接口是一个扩展接口</strong>，具体定义如下：</p>
+
+<pre><code>@SPI
+
+
+
+public interface RouterFactory {
+
+
+
+    @Adaptive(&quot;protocol&quot;) // 动态生成的适配器会根据protocol参数选择扩展实现
+
+
+
+    Router getRouter(URL url);
+
+
+
+}
+
+</code></pre>
+
+<p>RouterFactory 接口有很多实现类，如下图所示：</p>
+
+<p><img src="assets/CgqCHl-qOLWAf_G5AACv9PqZOrc667.png" alt="Drawing 0.png" /></p>
+
+<p>RouterFactory 继承关系图</p>
+
+<p>下面我们就来深入介绍下每个 RouterFactory 实现类以及对应的 Router 实现对象。<strong>Router 决定了一次 Dubbo 调用的目标服务，Router 接口的每个实现类代表了一个路由规则</strong>，当 Consumer 访问 Provider 时，Dubbo 根据路由规则筛选出合适的 Provider 列表，之后通过负载均衡算法再次进行筛选。Router 接口的继承关系如下图所示：</p>
+
+<p><img src="assets/Ciqc1F-qOL2AAXYIAACMVPC1qW0732.png" alt="Drawing 1.png" /></p>
+
+<p>Router 继承关系图</p>
+
+<p>接下来我们就开始介绍 RouterFactory 以及 Router 的具体实现。</p>
+
+<h3>ConditionRouterFactory&amp;ConditionRouter</h3>
+
+<p>首先来看 ConditionRouterFactory 实现，其扩展名为 condition，在其 getRouter() 方法中会创建 ConditionRouter 对象，如下所示：</p>
+
+<pre><code>public Router getRouter(URL url) {
+
+
+
+    return new ConditionRouter(url);
+
+
+
+}
+
+</code></pre>
+
+<p><strong>ConditionRouter 是基于条件表达式的路由实现类</strong>，下面就是一条基于条件表达式的路由规则：</p>
+
+<pre><code>host = 192.168.0.100 =&gt; host = 192.168.0.150
+
+</code></pre>
+
+<p>在上述规则中，<code>=&gt;</code>之前的为 Consumer 匹配的条件，该条件中的所有参数会与 Consumer 的 URL 进行对比，当 Consumer 满足匹配条件时，会对该 Consumer 的此次调用执行 <code>=&gt;</code> 后面的过滤规则。</p>
+
+<p><code>=&gt;</code> 之后为 Provider 地址列表的过滤条件，该条件中的所有参数会和 Provider 的 URL 进行对比，Consumer 最终只拿到过滤后的地址列表。</p>
+
+<p><strong>如果 Consumer 匹配条件为空，表示 =&gt; 之后的过滤条件对所有 Consumer 生效</strong>，例如：=&gt; host != 192.168.0.150，含义是所有 Consumer 都不能请求 192.168.0.150 这个 Provider 节点。</p>
+
+<p><strong>如果 Provider 过滤条件为空，表示禁止访问所有 Provider</strong>，例如：host = 192.168.0.100 =&gt;，含义是 192.168.0.100 这个 Consumer 不能访问任何 Provider 节点。</p>
+
+<p>ConditionRouter 的核心字段有如下几个。</p>
+
+<ul>
+
+<li>url（URL 类型）：路由规则的 URL，可以从 rule 参数中获取具体的路由规则。</li>
+
+<li>ROUTE_PATTERN（Pattern 类型）：用于切分路由规则的正则表达式。</li>
+
+<li>priority（int 类型）：路由规则的优先级，用于排序，该字段值越大，优先级越高，默认值为 0。</li>
+
+<li>force（boolean 类型）：当路由结果为空时，是否强制执行。如果不强制执行，则路由结果为空的路由规则将会自动失效；如果强制执行，则直接返回空的路由结果。</li>
+
+<li>whenCondition（Map&lt;String, MatchPair&gt; 类型）：Consumer 匹配的条件集合，通过解析条件表达式 rule 的 <code>=&gt;</code> 之前半部分，可以得到该集合中的内容。</li>
+
+<li>thenCondition（Map&lt;String, MatchPair&gt; 类型）：Provider 匹配的条件集合，通过解析条件表达式 rule 的 <code>=&gt;</code> 之后半部分，可以得到该集合中的内容。</li>
+
+</ul>
+
+<p>在 ConditionRouter 的构造方法中，会根据 URL 中携带的相应参数初始化 priority、force、enable 等字段，然后从 URL 的 rule 参数中获取路由规则进行解析，具体的解析逻辑是在 init() 方法中实现的，如下所示：</p>
+
+<pre><code>public void init(String rule) {
+
+
+
+    // 将路由规则中的&quot;consumer.&quot;和&quot;provider.&quot;字符串清理掉
+
+
+
+    rule = rule.replace(&quot;consumer.&quot;, &quot;&quot;).replace(&quot;provider.&quot;, &quot;&quot;);
+
+
+
+    // 按照&quot;=&gt;&quot;字符串进行分割，得到whenRule和thenRule两部分
+
+
+
+    int i = rule.indexOf(&quot;=&gt;&quot;); 
+
+
+
+    String whenRule = i &lt; 0 ? null : rule.substring(0, i).trim();
+
+
+
+    String thenRule = i &lt; 0 ? rule.trim() : rule.substring(i + 2).trim();
+
+
+
+    // 解析whenRule和thenRule，得到whenCondition和thenCondition两个条件集合
+
+
+
+    Map&lt;String, MatchPair&gt; when = StringUtils.isBlank(whenRule) || &quot;true&quot;.equals(whenRule) ? new HashMap&lt;String, MatchPair&gt;() : parseRule(whenRule);
+
+
+
+    Map&lt;String, MatchPair&gt; then = StringUtils.isBlank(thenRule) || &quot;false&quot;.equals(thenRule) ? null : parseRule(thenRule);
+
+
+
+    this.whenCondition = when;
+
+
+
+    this.thenCondition = then;
+
+
+
+}
+
+</code></pre>
+
+<p>whenCondition 和 thenCondition 两个集合中，Key 是条件表达式中指定的参数名称（例如 host = 192.168.0.150 这个表达式中的 host）。ConditionRouter 支持三类参数：</p>
+
+<ul>
+
+<li>服务调用信息，例如，method、argument 等；</li>
+
+<li>URL 本身的字段，例如，protocol、host、port 等；</li>
+
+<li>URL 上的所有参数，例如，application 等。</li>
+
+</ul>
+
+<p>Value 是 MatchPair 对象，包含两个 Set 类型的集合—— matches 和 mismatches。在<strong>使用 MatchPair 进行过滤</strong>的时候，会按照下面四条规则执行。</p>
+
+<ol>
+
+<li>当 mismatches 集合为空的时候，会逐个遍历 matches 集合中的匹配条件，匹配成功任意一条即会返回 true。这里具体的匹配逻辑以及后续 mismatches 集合中条件的匹配逻辑，都是在 UrlUtils.isMatchGlobPattern() 方法中实现，其中完成了如下操作：如果匹配条件以 &quot;$&quot; 符号开头，则从 URL 中获取相应的参数值进行匹配；当遇到 &quot;<em>&quot; 通配符的时候，会处理&quot;</em>&quot;通配符在匹配条件开头、中间以及末尾三种情况。</li>
+
+<li>当 matches 集合为空的时候，会逐个遍历 mismatches 集合中的匹配条件，匹配成功任意一条即会返回 false。</li>
+
+<li>当 matches 集合和 mismatches 集合同时不为空时，会优先匹配 mismatches 集合中的条件，成功匹配任意一条规则，就会返回 false；若 mismatches 中的条件全部匹配失败，才会开始匹配 matches 集合，成功匹配任意一条规则，就会返回 true。</li>
+
+<li>当上述三个步骤都没有成功匹配时，直接返回 false。</li>
+
+</ol>
+
+<p>上述流程具体实现在 MatchPair 的 isMatch() 方法中，比较简单，这里就不再展示。</p>
+
+<p>了解了每个 MatchPair 的匹配流程之后，我们来看<strong>parseRule() 方法是如何解析一条完整的条件表达式，生成对应 MatchPair 的</strong>，具体实现如下：</p>
+
+<pre><code>private static Map&lt;String, MatchPair&gt; parseRule(String rule) throws ParseException {
+
+
+
+    Map&lt;String, MatchPair&gt; condition = new HashMap&lt;String, MatchPair&gt;();
+
+
+
+    MatchPair pair = null;
+
+
+
+    Set&lt;String&gt; values = null;
+
+
+
+    // 首先，按照ROUTE_PATTERN指定的正则表达式匹配整个条件表达式
+
+
+
+    final Matcher matcher = ROUTE_PATTERN.matcher(rule);
+
+
+
+    while (matcher.find()) { // 遍历匹配的结果
+
+
+
+        // 每个匹配结果有两部分(分组)，第一部分是分隔符，第二部分是内容
+
+
+
+        String separator = matcher.group(1); 
+
+
+
+        String content = matcher.group(2);
+
+
+
+        if (StringUtils.isEmpty(separator)) { // ---(1) 没有分隔符，content即为参数名称
+
+
+
+            pair = new MatchPair();
+
+
+
+            // 初始化MatchPair对象，并将其与对应的Key(即content)记录到condition集合中
+
+
+
+            condition.put(content, pair); 
+
+
+
+        }
+
+
+
+        else if (&quot;&amp;&quot;.equals(separator)) { // ---(4)
+
+
+
+            // &amp;分隔符表示多个表达式,会创建多个MatchPair对象
+
+
+
+            if (condition.get(content) == null) {
+
+
+
+                pair = new MatchPair();
+
+
+
+                condition.put(content, pair);
+
+
+
+            } else {
+
+
+
+                pair = condition.get(content);
+
+
+
+            }
+
+
+
+        }else if (&quot;=&quot;.equals(separator)) { // ---(2) 
+
+
+
+            // =以及!=两个分隔符表示KV的分界线
+
+
+
+            if (pair == null) {
+
+
+
+                throw new ParseException(&quot;...&quot;&quot;);
+
+
+
+            }
+
+
+
+            values = pair.matches;
+
+
+
+            values.add(content);
+
+
+
+        }else if (&quot;!=&quot;.equals(separator)) { // ---(5)
+
+
+
+            if (pair == null) {
+
+
+
+                throw new ParseException(&quot;...&quot;);
+
+
+
+            }
+
+
+
+            values = pair.mismatches;
+
+
+
+            values.add(content);
+
+
+
+        }else if (&quot;,&quot;.equals(separator)) { // ---(3)
+
+
+
+            // 逗号分隔符表示有多个Value值
+
+
+
+            if (values == null || values.isEmpty()) {
+
+
+
+                throw new ParseException(&quot;...&quot;);
+
+
+
+            }
+
+
+
+            values.add(content);
+
+
+
+        } else {
+
+
+
+            throw new ParseException(&quot;...&quot;);
+
+
+
+        }
+
+
+
+    }
+
+
+
+    return condition;
+
+
+
+}
+
+</code></pre>
+
+<p>介绍完 parseRule() 方法的实现之后，我们可以再通过下面这个条件表达式示例的解析流程，更深入地体会 parseRule() 方法的工作原理：</p>
+
+<pre><code>host = 2.2.2.2,1.1.1.1,3.3.3.3 &amp; method !=get =&gt; host = 1.2.3.4
+
+</code></pre>
+
+<p>经过 ROUTE_PATTERN 正则表达式的分组之后，我们得到如下分组：</p>
+
+<p><img src="assets/CgqCHl-uM9aALLGaAAFMMnXRAPw685.png" alt="2.png" /></p>
+
+<p>Rule 分组示意图</p>
+
+<p>我们先来看 <code>=&gt;</code> 之前的 Consumer 匹配规则的处理。</p>
+
+<ol>
+
+<li>分组 1 中，separator 为空字符串，content 为 host 字符串。此时会进入上面示例代码展示的 parseRule() 方法中（1）处的分支，创建 MatchPair 对象，并以 host 为 Key 记录到 condition 集合中。</li>
+
+<li>分组 2 中，separator 为 &quot;=&quot; 空字符串，content 为 &quot;2.2.2.2&quot; 字符串。处理该分组时，会进入 parseRule() 方法中（2） 处的分支，在 MatchPair 的 matches 集合中添加 &quot;2.2.2.2&quot; 字符串。</li>
+
+<li>分组 3 中，separator 为 &quot;,&quot; 字符串，content 为 &quot;3.3.3.3&quot; 字符串。处理该分组时，会进入 parseRule() 方法中（3）处的分支，继续向 MatchPair 的 matches 集合中添加 &quot;3.3.3.3&quot; 字符串。</li>
+
+<li>分组 4 中，separator 为 &quot;&amp;&quot; 字符串，content 为 &quot;method&quot; 字符串。处理该分组时，会进入 parseRule() 方法中（4）处的分支，创建新的 MatchPair 对象，并以 method 为 Key 记录到 condition 集合中。</li>
+
+<li>分组 5 中，separator 为 &quot;!=&quot; 字符串，content 为 &quot;get&quot; 字符串。处理该分组时，会进入 parseRule() 方法中（5）处的分支，向步骤 4 新建的 MatchPair 对象中的 mismatches 集合添加 &quot;get&quot; 字符串。</li>
+
+</ol>
+
+<p>最后，我们得到的 whenCondition 集合如下图所示：</p>
+
+<p><img src="assets/Ciqc1F-uM-OABiPoAADt1lcbl7U975.png" alt="3.png" /></p>
+
+<p>whenCondition 集合示意图</p>
+
+<p>同理，parseRule() 方法解析上述表达式 <code>=&gt;</code> 之后的规则得到的 thenCondition 集合，如下图所示：</p>
+
+<p><img src="assets/CgqCHl-uM-6AXnrOAAB6hJLFL50095.png" alt="1.png" /></p>
+
+<p>thenCondition 集合示意图</p>
+
+<p>了解了 ConditionRouter 解析规则的流程以及 MatchPair 内部的匹配原则之后，ConditionRouter 中最后一个需要介绍的内容就是它的 route() 方法了。</p>
+
+<p>ConditionRouter.route() 方法首先会尝试前面创建的 whenCondition 集合，判断此次发起调用的 Consumer 是否符合表达式中 <code>=&gt;</code> 之前的 Consumer 过滤条件，若不符合，直接返回整个 invokers 集合；若符合，则通过 thenCondition 集合对 invokers 集合进行过滤，得到符合 Provider 过滤条件的 Invoker 集合，然后返回给上层调用方。ConditionRouter.route() 方法的核心实现如下：</p>
+
+<pre><code>public &lt;T&gt; List&lt;Invoker&lt;T&gt;&gt; route(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation)
+
+
+
+        throws RpcException {
+
+
+
+    ... // 通过enable字段判断当前ConditionRouter对象是否可用
+
+
+
+    ... // 当前invokers集合为空，则直接返回
+
+
+
+    if (!matchWhen(url, invocation)) { // 匹配发起请求的Consumer是否符合表达式中=&gt;之前的过滤条件
+
+
+
+        return invokers;
+
+
+
+    }
+
+
+
+    List&lt;Invoker&lt;T&gt;&gt; result = new ArrayList&lt;Invoker&lt;T&gt;&gt;();
+
+
+
+    if (thenCondition == null) { // 判断=&gt;之后是否存在Provider过滤条件，若不存在则直接返回空集合，表示无Provider可用
+
+
+
+        return result;
+
+
+
+    }
+
+
+
+    for (Invoker&lt;T&gt; invoker : invokers) { // 逐个判断Invoker是否符合表达式中=&gt;之后的过滤条件
+
+
+
+        if (matchThen(invoker.getUrl(), url)) {
+
+
+
+            result.add(invoker); // 记录符合条件的Invoker
+
+
+
+        }
+
+
+
+    }
+
+
+
+    if (!result.isEmpty()) {
+
+
+
+        return result;
+
+
+
+    } else if (force) { // 在无Invoker符合条件时，根据force决定是返回空集合还是返回全部Invoker
+
+
+
+        return result;
+
+
+
+    }
+
+
+
+    return invokers;
+
+
+
+}
+
+</code></pre>
+
+<h3>ScriptRouterFactory&amp;ScriptRouter</h3>
+
+<p>ScriptRouterFactory 的扩展名为 script，其 getRouter() 方法中会创建一个 ScriptRouter 对象并返回。</p>
+
+<p><strong>ScriptRouter 支持 JDK 脚本引擎的所有脚本</strong>，例如，JavaScript、JRuby、Groovy 等，通过 <code>type=javascript</code> 参数设置脚本类型，缺省为 javascript。下面我们就定义一个 route() 函数进行 host 过滤：</p>
+
+<pre><code>function route(invokers, invocation, context){
+
+
+
+    var result = new java.util.ArrayList(invokers.size()); 
+
+
+
+	var targetHost = new java.util.ArrayList();
+
+
+
+	targetHost.add(&quot;10.134.108.2&quot;); 
+
+
+
+	for (var i = 0; i &lt; invokers.length; i) {  // 遍历Invoker集合
+
+
+
+        // 判断Invoker的host是否符合条件
+
+
+
+		if(targetHost.contains(invokers[i].getUrl().getHost())){
+
+
+
+			result.add(invokers[i]);
+
+
+
+		}
+
+
+
+	}
+
+
+
+	return result;
+
+
+
+}
+
+
+
+route(invokers, invocation, context)  // 立即执行route()函数
+
+</code></pre>
+
+<p>我们可以将上面这段代码进行编码并作为 rule 参数的值添加到 URL 中，在这个 URL 传入 ScriptRouter 的构造函数时，即可被 ScriptRouter 解析。</p>
+
+<p>ScriptRouter 的<strong>核心字段</strong>有如下几个。</p>
+
+<ul>
+
+<li>url（URL 类型）：路由规则的 URL，可以从 rule 参数中获取具体的路由规则。</li>
+
+<li>priority（int 类型）：路由规则的优先级，用于排序，该字段值越大，优先级越高，默认值为 0。</li>
+
+<li>ENGINES（ConcurrentHashMap&lt;String, ScriptEngine&gt; 类型）：这是一个 static 集合，其中的 Key 是脚本语言的名称，Value 是对应的 ScriptEngine 对象。这里会按照脚本语言的类型复用 ScriptEngine 对象。</li>
+
+<li>engine（ScriptEngine 类型）：当前 ScriptRouter 使用的 ScriptEngine 对象。</li>
+
+<li>rule（String 类型）：当前 ScriptRouter 使用的具体脚本内容。</li>
+
+<li>function（CompiledScript 类型）：根据 rule 这个具体脚本内容编译得到。</li>
+
+</ul>
+
+<p>在 ScriptRouter 的构造函数中，首先会初始化 url 字段以及 priority 字段（用于排序），然后根据 URL 中的 type 参数初始化 engine、rule 和 function 三个核心字段 ，具体实现如下：</p>
+
+<pre><code>public ScriptRouter(URL url) {
+
+
+
+    this.url = url;
+
+
+
+    this.priority = url.getParameter(PRIORITY_KEY, SCRIPT_ROUTER_DEFAULT_PRIORITY);
+
+
+
+    // 根据URL中的type参数值，从ENGINES集合中获取对应的ScriptEngine对象
+
+
+
+    engine = getEngine(url);
+
+
+
+    // 获取URL中的rule参数值，即为具体的脚本
+
+
+
+    rule = getRule(url);
+
+
+
+    Compilable compilable = (Compilable) engine;
+
+
+
+    // 编译rule字段中的脚本，得到function字段
+
+
+
+    function = compilable.compile(rule);
+
+
+
+}
+
+</code></pre>
+
+<p>接下来看 ScriptRouter 对 route() 方法的实现，其中首先会创建调用 function 函数所需的入参，也就是 Bindings 对象，然后调用 function 函数得到过滤后的 Invoker 集合，最后通过 getRoutedInvokers() 方法整理 Invoker 集合得到最终的返回值。</p>
+
+<pre><code>public &lt;T&gt; List&lt;Invoker&lt;T&gt;&gt; route(List&lt;Invoker&lt;T&gt;&gt; invokers, URL url, Invocation invocation) throws RpcException {
+
+
+
+    // 创建Bindings对象作为function函数的入参
+
+
+
+    Bindings bindings = createBindings(invokers, invocation);
+
+
+
+    if (function == null) {
+
+
+
+        return invokers;
+
+
+
+    }
+
+
+
+    // 调用function函数，并在getRoutedInvokers()方法中整理得到的Invoker集合
+
+
+
+    return getRoutedInvokers(function.eval(bindings));
+
+
+
+}
+
+
+
+private &lt;T&gt; Bindings createBindings(List&lt;Invoker&lt;T&gt;&gt; invokers, Invocation invocation) {
+
+
+
+    Bindings bindings = engine.createBindings();
+
+
+
+    // 与前面的javascript的示例脚本结合，我们可以看到这里在Bindings中为脚本中的route()函数提供了invokers、Invocation、context三个参数
+
+
+
+    bindings.put(&quot;invokers&quot;, new ArrayList&lt;&gt;(invokers));
+
+
+
+    bindings.put(&quot;invocation&quot;, invocation);
+
+
+
+    bindings.put(&quot;context&quot;, RpcContext.getContext());
+
+
+
+    return bindings;
+
+
+
+}
+
+</code></pre>
+
+<h3>总结</h3>
+
+<p>本课时重点介绍了 Router 接口的相关内容。首先我们介绍了 RouterChain 的核心实现以及构建过程，然后讲解了 RouterFactory 接口和 Router 接口中核心方法的功能。接下来，我们还深入分析了<strong>ConditionRouter 对条件路由功能的实现</strong>，以及<strong>ScriptRouter 对脚本路由功能的实现</strong>。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Dubbo源码解读与实战-完/31  加餐：深潜 Directory 实现，探秘服务目录玄机.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Dubbo源码解读与实战-完/33  路由机制：请求到底怎么走，它说了算（下）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996f5e28433d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

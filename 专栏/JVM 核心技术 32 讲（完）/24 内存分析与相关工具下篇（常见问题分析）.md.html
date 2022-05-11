@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>24 内存分析与相关工具下篇（常见问题分析）.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/01 阅读此专栏的正确姿势.md">01 阅读此专栏的正确姿势.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/02 环境准备：千里之行，始于足下.md">02 环境准备：千里之行，始于足下.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/03 常用性能指标：没有量化，就没有改进.md">03 常用性能指标：没有量化，就没有改进.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/04 JVM 基础知识：不积跬步，无以至千里.md">04 JVM 基础知识：不积跬步，无以至千里.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/05 Java 字节码技术：不积细流，无以成江河.md">05 Java 字节码技术：不积细流，无以成江河.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/06 Java 类加载器：山不辞土，故能成其高.md">06 Java 类加载器：山不辞土，故能成其高.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/07 Java 内存模型：海不辞水，故能成其深.md">07 Java 内存模型：海不辞水，故能成其深.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/08 JVM 启动参数详解：博观而约取、厚积而薄发.md">08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/09 JDK 内置命令行工具：工欲善其事，必先利其器.md">09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md">10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/11 JDWP 简介：十步杀一人，千里不留行.md">11 JDWP 简介：十步杀一人，千里不留行.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/12 JMX 与相关工具：山高月小，水落石出.md">12 JMX 与相关工具：山高月小，水落石出.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/13 常见的 GC 算法（GC 的背景与原理）.md">13 常见的 GC 算法（GC 的背景与原理）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/14 常见的 GC 算法（ParallelCMSG1）.md">14 常见的 GC 算法（ParallelCMSG1）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md">15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md">16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/17 GC 日志解读与分析（基础配置）.md">17 GC 日志解读与分析（基础配置）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md">18 GC 日志解读与分析（实例分析上篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/19 GC 日志解读与分析（实例分析中篇）.md">19 GC 日志解读与分析（实例分析中篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/20 GC 日志解读与分析（实例分析下篇）.md">20 GC 日志解读与分析（实例分析下篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/21 GC 日志解读与分析（番外篇可视化工具）.md">21 GC 日志解读与分析（番外篇可视化工具）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md">22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md">23 内存分析与相关工具上篇（内存布局与分析工具）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/JVM 核心技术 32 讲（完）/24 内存分析与相关工具下篇（常见问题分析）.md">24 内存分析与相关工具下篇（常见问题分析）.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md">25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md">26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/27 JVM 问题排查分析上篇（调优经验）.md">27 JVM 问题排查分析上篇（调优经验）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/28 JVM 问题排查分析下篇（案例实战）.md">28 JVM 问题排查分析下篇（案例实战）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md">29 GC 疑难情况问题排查与分析（上篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/30 GC 疑难情况问题排查与分析（下篇）.md">30 GC 疑难情况问题排查与分析（下篇）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md">31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md">32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>24 内存分析与相关工具下篇（常见问题分析）</h1>
+
+<p>Java 程序的内存可以分为几个部分：堆（Heap space）、非堆（Non-Heap）、栈（Stack）等等，如下图所示：</p>
+
+<p><img src="assets/b8e25a80-71db-11ea-964d-61a29639fe46" alt="2459010.png" /></p>
+
+<p>最常见的 java.lang.OutOfMemoryError 可以归为以下类型。</p>
+
+<h3>OutOfMemoryError: Java heap space</h3>
+
+<p>JVM 限制了 Java 程序的最大内存使用量，由 JVM 的启动参数决定。</p>
+
+<p>其中，堆内存的最大值，由 JVM 启动参数 <code>-Xmx</code> 指定。如果没有明确指定，则根据平台类型（OS 版本 + JVM 版本）和物理内存的大小来计算默认值。</p>
+
+<p>假如在创建新的对象时，堆内存中的空间不足以存放新创建的对象，就会引发“java.lang.OutOfMemoryError: Java heap space”错误。不管机器上还没有空闲的物理内存，只要堆内存使用量达到最大内存限制，就会抛出这个错误。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>产生“java.lang.OutOfMemoryError: Java heap space”错误的原因，很多时候就类似于将 XXL 号的对象，往 S 号的 Java heap space 里面塞。其实清楚了原因，问题就很容易解决了：只要增加堆内存的大小，程序就能正常运行。另外还有一些比较复杂的情况，主要是由代码问题导致的：</p>
+
+<ul>
+
+<li><strong>超出预期的访问量/数据量</strong>：应用系统设计时，一般是有“容量”定义的，部署这么多机器，用来处理一定流量的数据/业务。如果访问量突然飙升，超过预期的阈值，类似于时间坐标系中针尖形状的图谱。那么在峰值所在的时间段，程序很可能就会卡死、并触发“java.lang.OutOfMemoryError: Java heap space”错误。</li>
+
+<li><strong>内存泄露（Memory leak）</strong>：这也是一种经常出现的情形。由于代码中的某些隐蔽错误，导致系统占用的内存越来越多。如果某个方法/某段代码存在内存泄漏，每执行一次，就会（有更多的垃圾对象）占用更多的内存。随着运行时间的推移，泄漏的对象耗光了堆中的所有内存，那么“java.lang.OutOfMemoryError: Java heap space”错误就爆发了。</li>
+
+</ul>
+
+<h4><strong>一个非常简单的示例</strong></h4>
+
+<p>以下代码非常简单，程序试图分配容量为 16M 的 int 数组。如果指定启动参数 <code>-Xmx16m</code>，那么就会发生“java.lang.OutOfMemoryError: Java heap space”错误。而只要将参数稍微修改一下，变成 <code>-Xmx20m</code>，错误就不再发生。</p>
+
+<pre><code class="language-java">public class OOM {
+
+    static final int SIZE=16*1024*1024;
+
+    public static void main(String[] a) {
+
+        int[] i = new int[SIZE];
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>如果设置的最大内存不满足程序的正常运行，只需要增大堆内存即可，配置参数可以参考下文。</p>
+
+<p>但很多情况下，增加堆内存空间并不能解决问题。比如存在内存泄漏，增加堆内存只会推迟“java.lang.OutOfMemoryError: Java heap space”错误的触发时间。</p>
+
+<p>当然，增大堆内存，可能会增加 <a href="http://blog.csdn.net/renfufei/article/details/55102729#t6">GC 暂停时间</a>的时间，从而影响程序的 <a href="http://blog.csdn.net/renfufei/article/details/55102729#t7">吞吐量或延迟</a>。</p>
+
+<p>如果想从根本上解决问题，则需要排查分配内存的代码，简单来说就是需要搞清楚下列问题：</p>
+
+<ol>
+
+<li>哪类对象占用了最多内存？</li>
+
+<li>这些对象是在哪部分代码中分配的。</li>
+
+</ol>
+
+<p>要搞清这一点，可能需要花费不少时间来分析。下面是大致的流程：</p>
+
+<ul>
+
+<li>获得在生产服务器上执行堆转储（heap dump）的权限。“转储”(Dump)是堆内存的快照，稍后可以用于内存分析。这些快照中可能含有机密信息，例如密码、信用卡账号等，所以有时候由于企业的安全限制，要获得生产环境的堆转储并不容易。需要基于一些安全策略的情况下，既保证机密信息不泄露又能达到我们的目的（比如使用脱敏机制）。</li>
+
+<li>在适当的时间执行堆转储。一般来说，内存分析需要比对多个堆转储文件，假如获取的时机不对，那就可能是一个“废”的快照。另外，每次执行堆转储，都会对 JVM 进行“冻结”，所以生产环境中，也不能随意地执行太多的 Dump 操作，否则系统缓慢或者卡死，你的麻烦就大了。</li>
+
+<li>用另一台机器来加载 Dump 文件。一般来说，如果出问题的 JVM 内存是 8GB，那么分析 Heap Dump 的机器内存需要大于 8GB，打开转储分析软件（我们推荐 <a href="https://www.eclipse.org/mat/">Eclipse MAT</a>，当然你也可以使用其他工具）。</li>
+
+<li>检测快照中占用内存最大的 GC roots。这对新手来说可能有点困难，但这也会加深你对堆内存结构以及其他机制的理解。</li>
+
+<li>接下来，找出可能会分配大量对象的代码。如果对整个系统非常熟悉，可能很快就能定位了。</li>
+
+</ul>
+
+<p>一般来说，有了这些信息，就可以帮助我们定位到问题的根源，从而对症下药，例如适当地精简数据结构/模型，只占用必要的内存即可解决问题。</p>
+
+<p>当然，根据内存分析的结果，如果发现对象占用的内存很合理，也不需要修改源代码的话，那就修改 JVM 启动参数，增大堆内存吧，简单有效的让系统愉快工作，运行得更丝滑。</p>
+
+<h3>OutOfMemoryError: GC overhead limit exceeded</h3>
+
+<p>Java 运行时环境内置了<a href="http://blog.csdn.net/renfufei/article/details/53432995">垃圾收集（GC）</a> 模块。上一代的很多编程语言中并没有自动内存回收机制，需要程序员手工编写代码来进行内存分配和释放，以重复利用堆内存。在 Java 程序中，只需要关心内存分配就行。如果某块内存不再使用，<a href="http://blog.csdn.net/renfufei/article/details/54144385">垃圾收集（Garbage Collection）</a> 模块会自动执行清理。GC 的详细原理请参考 <a href="http://blog.csdn.net/column/details/14851.html">GC 性能优化</a>系列文章。一般来说，JVM 内置的垃圾收集算法就能够应对绝大多数的业务场景。</p>
+
+<p>而“java.lang.OutOfMemoryError: GC overhead limit exceeded”这种错误发生的原因是：<strong>程序基本上耗尽了所有的可用内存，GC 也清理不了</strong>。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>JVM 抛出“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误就是发出了这样的信号：执行垃圾收集的时间比例太大，有效的运算量太小。默认情况下，如果 GC 花费的时间超过 98%，并且 GC 回收的内存少于 2%，JVM 就会抛出这个错误。就是说，系统没法好好干活了，几乎所有资源都用来去做 GC，但是 GC 也没啥效果。此时系统就像是到了癌症晚期，身体的营养都被癌细胞占据了，真正用于身体使用的非常少了，而且就算是调用所有营养去杀灭癌细胞也晚了，因为杀的效果很差了，还远远没有癌细胞复制的速度快。</p>
+
+<p><img src="assets/f346d1f0-71dc-11ea-8377-13f07d2f46fb" alt="06cff4f1-b6a6-4cda-b7f5-8e8837f55c3a.png" /></p>
+
+<p>注意，“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误只在连续多次 <a href="http://blog.csdn.net/renfufei/article/details/54885190">GC</a> 都只回收了不到 2% 的极端情况下才会抛出。假如不抛出 GC overhead limit 错误会发生什么情况呢？那就是 GC 清理的这么点内存很快会再次填满，迫使 GC 再次执行。这样就形成恶性循环，CPU 使用率一直是 100%，而 GC 却没有任何成果。系统用户就会看到系统卡死——以前只需要几毫秒的操作，现在需要好几分钟甚至几小时才能完成。</p>
+
+<blockquote>
+
+<p>这也是一个很好的<a href="https://en.wikipedia.org/wiki/Fail-fast">快速失败原则</a>的案例。</p>
+
+</blockquote>
+
+<h4><strong>示例</strong></h4>
+
+<p>我们来模拟一下现象，以下代码在无限循环中往 Map 里添加数据，这会导致“GC overhead limit exceeded”错误：</p>
+
+<pre><code class="language-java">package com.cncounter.rtime;
+
+import java.util.Map;
+
+import java.util.Random;
+
+public class TestWrapper {
+
+    public static void main(String args[]) throws Exception {
+
+        Map map = System.getProperties();
+
+        Random r = new Random();
+
+        while (true) {
+
+            map.put(r.nextInt(), &quot;value&quot;);
+
+        }
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>配置 JVM 参数 <code>-Xmx12m</code>，执行后产生的错误信息如下所示：</p>
+
+<pre><code class="language-java">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: GC overhead limit exceeded
+
+    at java.util.Hashtable.addEntry(Hashtable.java:435)
+
+    at java.util.Hashtable.put(Hashtable.java:476)
+
+    at com.cncounter.rtime.TestWrapper.main(TestWrapper.java:11)
+
+
+
+</code></pre>
+
+<p>你碰到的错误信息不一定就是这个。确实，我们执行的 JVM 参数为：</p>
+
+<pre><code>java -Xmx12m -XX:+UseParallelGC TestWrapper
+
+
+
+</code></pre>
+
+<p>很快就看到了“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误提示消息。但实际上这个示例是有些坑的，因为配置不同的堆内存大小，选用不同的 <a href="http://blog.csdn.net/renfufei/article/details/54885190">GC 算法</a>，产生的错误信息也不尽相同。例如当 Java 堆内存设置为 10M 时（过小，导致系统还没有来得及回收就不够用了）：</p>
+
+<pre><code>java -Xmx10m -XX:+UseParallelGC TestWrapper
+
+
+
+</code></pre>
+
+<p>DEBUG 模式下错误信息如下所示：</p>
+
+<pre><code class="language-java">Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space
+
+    at java.util.Hashtable.rehash(Hashtable.java:401)
+
+    at java.util.Hashtable.addEntry(Hashtable.java:425)
+
+    at java.util.Hashtable.put(Hashtable.java:476)
+
+    at com.cncounter.rtime.TestWrapper.main(TestWrapper.java:11)
+
+
+
+</code></pre>
+
+<p>读者应该试着修改参数，执行看看具体。错误提示以及堆栈信息可能不太一样。</p>
+
+<p>这里在 Map 执行 rehash 方法时抛出了“java.lang.OutOfMemoryError: Java heap space”错误消息。如果使用其他 <a href="http://blog.csdn.net/renfufei/article/details/54885190">垃圾收集算法</a>，比如 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t6">-XX:+UseConcMarkSweepGC</a>，或者 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t9">-XX:+UseG1GC</a>，错误将被默认的 exception handler 所捕获，但是没有 stacktrace 信息，因为在创建 Exception 时 <a href="https://plumbr.eu/blog/how-not-to-create-a-permgen-leak">没办法填充 stacktrace 信息</a>。</p>
+
+<p>例如配置：</p>
+
+<pre><code>-Xmx12m -XX:+UseG1GC
+
+
+
+</code></pre>
+
+<p>在 Win7x64、Java 8 环境运行，产生的错误信息可能为：</p>
+
+<pre><code class="language-java">Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread &quot;main&quot;
+
+
+
+</code></pre>
+
+<p>建议读者修改内存配置，以及垃圾收集器进行测试。</p>
+
+<p>这些真实的案例表明，在资源受限的情况下，无法准确预测程序会死于哪种具体的原因。所以在这类错误面前，不能绑死某种特定的错误处理顺序。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>有一种应付了事的解决方案，就是不想抛出“java.lang.OutOfMemoryError: GC overhead limit exceeded“错误信息，则添加下面启动参数：</p>
+
+<pre><code>// 不推荐
+
+-XX:-UseGCOverheadLimit
+
+
+
+</code></pre>
+
+<p>我们强烈建议不要指定该选项：因为这不能真正地解决问题，只能推迟一点 out of memory 错误发生的时间，到最后还得进行其他处理。指定这个选项，会将原来的“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误掩盖，变成更常见的“java.lang.OutOfMemoryError: Java heap space”错误消息。</p>
+
+<blockquote>
+
+<p>需要注意：有时候触发 GC overhead limit 错误的原因，是因为分配给 JVM 的堆内存不足。这种情况下只需要增加堆内存大小即可。</p>
+
+</blockquote>
+
+<p>在大多数情况下，增加堆内存并不能解决问题。例如程序中存在内存泄漏，增加堆内存只能推迟产生“java.lang.OutOfMemoryError: Java heap space”错误的时间。</p>
+
+<blockquote>
+
+<p>再次强调：增大堆内存，还有可能会增加 <a href="http://blog.csdn.net/renfufei/article/details/55102729#t6">GC pauses</a> 的时间，从而影响程序的 <a href="http://blog.csdn.net/renfufei/article/details/55102729#t7">吞吐量或延迟</a>。</p>
+
+</blockquote>
+
+<p>如果想从根本上解决问题，则需要排查内存分配相关的代码，借助工具再次进行分析和诊断。具体步骤参考上一小节内容。</p>
+
+<h3>OutOfMemoryError: PermGen space</h3>
+
+<blockquote>
+
+<p>**说明：**PermGen（永久代）属于 JDK 1.7 及之前版本的概念。随着 Java 的发展，JDK 8 以后的版本采用限制更少的 MetaSpace 来代替，详情请参考下一篇文章：[OutOfMemoryError 系列（4）：Metaspace]</p>
+
+</blockquote>
+
+<p>“java.lang.OutOfMemoryError: PermGen space”错误信息所表达的意思是：<strong>永久代（Permanent Generation）内存区域已满</strong></p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>我们先看看 <strong>PermGen</strong> 是用来干什么的。</p>
+
+<p>在 JDK 1.7 及之前的版本，永久代（permanent generation）主要用于存储加载/缓存到内存中的 class 定义，包括 class 的名称（name）、字段（fields）、方法（methods）和字节码（method bytecode），以及常量池（constant pool information）、对象数组（object arrays）/类型数组（type arrays）所关联的 class，还有 JIT 编译器优化后的 class 信息等。</p>
+
+<p>很容易看出，PermGen 的使用量和 JVM 加载到内存中的 class 数量/大小有关。可以说“java.lang.OutOfMemoryError: PermGen space”的主要原因，是加载到内存中的 class 数量太多或体积太大，超过了 PermGen 区的大小。</p>
+
+<h4><strong>示例</strong></h4>
+
+<p>下面的代码演示了这种情况：</p>
+
+<pre><code class="language-java">import javassist.ClassPool;
+
+
+
+public class MicroGenerator {
+
+  public static void main(String[] args) throws Exception {
+
+    for (int i = 0; i &lt; 100_000_000; i++) {
+
+      generate(&quot;jvm.demo.Generated&quot; + i);
+
+    }
+
+  }
+
+
+
+  public static Class generate(String name) throws Exception {
+
+    ClassPool pool = ClassPool.getDefault();
+
+    return pool.makeClass(name).toClass();
+
+  }
+
+}
+
+
+
+</code></pre>
+
+<p>这段代码在 for 循环中，动态生成了很多 class。（可以看到，使用 <a href="http://www.csg.ci.i.u-tokyo.ac.jp/~chiba/javassist/">javassist</a> 工具类生成 class 是非常简单的）</p>
+
+<p>执行这段代码，会生成很多新的 class 并将其加载到内存中，随着生成的 class 越来越多，将会占满 Permgen 空间，然后抛出“java.lang.OutOfMemoryError: PermGen space”错误（当然也有可能会抛出其他类型的 OutOfMemoryError）。</p>
+
+<p>要快速看到效果，可以加上适当的 JVM 启动参数，如 <code>-Xmx200M -XX:MaxPermSize=16M</code> 之类的。</p>
+
+<h4><strong>Redeploy 时产生的 OutOfMemoryError</strong></h4>
+
+<p>下面的情形应该会更常见：在重新部署 Web 应用到 Tomcat 之类的容器时，很可能会引起“java.lang.OutOfMemoryError: PermGen space”错误。</p>
+
+<p>按道理说，redeploy 时，Tomcat 之类的容器会使用新的 classloader 来加载新的 class，让<a href="http://blog.csdn.net/renfufei/article/details/54885190">垃圾收集器</a>将之前的 classloader（连同加载的 class 一起）清理掉。</p>
+
+<p>但实际情况可能并不乐观，很多第三方库，以及某些受限的共享资源，如 thread、JDBC 驱动，以及文件系统句柄（handles），都会导致不能彻底卸载之前的 classloader。</p>
+
+<p>那么在 redeploy 时，之前的 class 仍然驻留在 PermGen 中，<strong>每次重新部署都会产生几十 MB，甚至上百 MB 的垃圾</strong>。就像牛皮癣一样待在内存里。</p>
+
+<p>假设某个应用在启动时，通过初始化代码加载 JDBC 驱动连接数据库。根据 JDBC 规范，驱动会将自身注册到 java.sql.DriverManager，也就是将自身的一个实例（instance）添加到 DriverManager 中的一个 static 域。</p>
+
+<p>那么，当应用从容器中卸载时，java.sql.DriverManager 依然持有 JDBC 实例（Tomcat 经常会发出警告），而 JDBC 驱动实例又持有 java.lang.Classloader 实例，那么 <a href="http://blog.csdn.net/renfufei/article/details/54885190">垃圾收集器</a> 也就没办法回收对应的内存空间。</p>
+
+<p>而 java.lang.ClassLoader 实例持有着其加载的所有 class，通常是几十/上百 MB 的内存。可以看到，redeploy 时会占用另一块差不多大小的 PermGen 空间，多次 redeploy 之后，就会造成“java.lang.OutOfMemoryError: PermGen space”错误，在日志文件中，你应该会看到相关的错误信息。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>既然我们了解到了问题的所在，那么就可以考虑对应的解决办法。</p>
+
+<p><strong>1. 解决程序启动时产生的 OutOfMemoryError</strong></p>
+
+<p>在程序启动时，如果 PermGen 耗尽而产生 OutOfMemoryError 错误，那很容易解决。增加 PermGen 的大小，让程序拥有更多的内存来加载 class 即可。修改 <code>-XX:MaxPermSize</code> 启动参数，例如：</p>
+
+<pre><code class="language-java">java -XX:MaxPermSize=512m com.yourcompany.YourClass
+
+
+
+</code></pre>
+
+<p>以上配置允许 JVM 使用的最大 PermGen 空间为 512MB，如果还不够，就会抛出 OutOfMemoryError。</p>
+
+<p><strong>2. 解决 redeploy 时产生的 OutOfMemoryError</strong></p>
+
+<p>我们可以进行堆转储分析（heap dump analysis）——在 redeploy 之后，执行堆转储，类似下面这样：</p>
+
+<pre><code>jmap -dump:format=b,file=dump.hprof &lt;process-id&gt;
+
+
+
+</code></pre>
+
+<p>然后通过堆转储分析器（如强悍的 Eclipse MAT）加载 dump 得到的文件。找出重复的类，特别是类加载器（classloader）对应的 class。你可能需要比对所有的 classloader，来找出当前正在使用的那个。</p>
+
+<p>对于不使用的类加载器（inactive classloader），需要先确定最短路径的 <a href="http://blog.csdn.net/renfufei/article/details/54407417#t0">GC root</a> ，看看是哪一个阻止其被 <a href="http://blog.csdn.net/renfufei/article/details/54144385">垃圾收集器</a> 所回收。这样才能找到问题的根源。如果是第三方库的原因，那么可以搜索 Google/StackOverflow 来查找解决方案。如果是自己的代码问题，则需要修改代码，在恰当的时机来解除相关引用。</p>
+
+<p><strong>3. 解决运行时产生的 OutOfMemoryError</strong></p>
+
+<p>如果在运行的过程中发生 OutOfMemoryError，首先需要确认 <a href="http://blog.csdn.net/renfufei/article/details/54144385#t6">GC 是否能从 PermGen 中卸载 class</a>。</p>
+
+<p>官方的 JVM 在这方面是相当的保守（在加载 class 之后，就一直让其驻留在内存中，即使这个类不再被使用）。</p>
+
+<p>但是，现代的应用程序在运行过程中，一般都会动态创建大量的 class，而这些 class 的生命周期基本上都很短暂，旧版本的 JVM 不能很好地处理这些问题。那么我们就需要允许 JVM 卸载 class，例如使用下面的启动参数：</p>
+
+<pre><code>-XX:+CMSClassUnloadingEnabled
+
+
+
+</code></pre>
+
+<p>默认情况下 CMSClassUnloadingEnabled 的值为 false，所以需要明确指定。用以后，<a href="http://blog.csdn.net/renfufei/article/details/54407417#t2">GC 将会清理</a> PermGen，卸载无用的 class. 当然，这个选项只有在设置 UseConcMarkSweepGC 时生效。如果使用了 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t3">ParallelGC</a> 或者 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t0">Serial GC</a> 时，那么需要切换为 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t6">CMS</a>。</p>
+
+<p>如果确定 class 可以被卸载，假若还存在 OutOfMemoryError，那就需要进行上一小节使用的堆转储分析了。</p>
+
+<blockquote>
+
+<p>扩展阅读：《<a href="http://www.importnew.com/14933.html">跟 OOM：PermGen 说再见吧</a>》</p>
+
+</blockquote>
+
+<h3>OutOfMemoryError: Metaspace</h3>
+
+<p>“java.lang.OutOfMemoryError: Metaspace”是 <strong>元数据区（Metaspace）已被用满</strong>产生的错误信息。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>从 Java 8 开始，内存结构发生重大改变，JVM 不再使用 PermGen，而是引入一个新的空间：Metaspace。这种改变基于多方面的考虑，部分原因列举如下：</p>
+
+<ul>
+
+<li>PermGen 空间的具体多大很难预测，指定小了会造成 <a href="http://blog.csdn.net/renfufei/article/details/77994177">java.lang.OutOfMemoryError: Permgen size</a> 错误，设置多了又造成浪费。</li>
+
+<li>为了 <a href="http://blog.csdn.net/renfufei/article/details/61924893">GC 性能</a> 的提升，使得垃圾收集过程中的并发阶段不再<a href="http://blog.csdn.net/renfufei/article/details/54885190">停顿</a>。</li>
+
+<li>对 <a href="http://blog.csdn.net/renfufei/article/details/54885190#t9">G1 垃圾收集器</a> 的并发 class unloading 进行深度优化，使得类卸载更有保障。</li>
+
+</ul>
+
+<p>在 Java 8 中，将之前 PermGen 中的所有内容，都移到了 Metaspace 空间，例如：class 名称、字段、方法、字节码、常量池、JIT 优化代码等等。</p>
+
+<p>这样，基本上 Metaspace 就等同于 PermGen。同样地，“java.lang.OutOfMemoryError: Metaspace”错误的主要原因，是加载到内存中的 class 数量太多或者体积太大。</p>
+
+<h4><strong>示例</strong></h4>
+
+<p>和 <a href="http://blog.csdn.net/renfufei/article/details/77994177">上一章的 PermGen</a> 类似，Metaspace 空间的使用量，与 JVM 加载的 class 数量有很大关系。下面是一个简单的示例:</p>
+
+<pre><code class="language-java">public class Metaspace {
+
+  static javassist.ClassPool cp = javassist.ClassPool.getDefault();
+
+
+
+  public static void main(String[] args) throws Exception{
+
+    for (int i = 0; ; i++) {
+
+      Class c = cp.makeClass(&quot;jvm.demo.Generated&quot; + i).toClass();
+
+    }
+
+  }
+
+}
+
+
+
+</code></pre>
+
+<p>代码跟上一小节基本一致，不再累述。</p>
+
+<p>执行这段代码，随着生成的 class 越来越多，最后将会占满 Metaspace 空间，抛出“java.lang.OutOfMemoryError: Metaspace”。根据我们的测试，在 Mac OS X 的 Java8 环境下，如果设置了启动参数 <code>-XX:MaxMetaspaceSize=64m</code>，大约加载 70000 个 class 后 JVM 就会挂掉。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>如果抛出与 Metaspace 有关的 OutOfMemoryError ，第一解决方案是增加 Metaspace 的大小（跟 PermGen 一样），例如：</p>
+
+<pre><code>-XX:MaxMetaspaceSize=512m
+
+
+
+</code></pre>
+
+<p>此外还有一种看起来很简单的方案，是直接去掉 Metaspace 的大小限制。</p>
+
+<p>但需要注意，不限制 Metaspace 内存的大小，假若物理内存不足，有可能会引起真实内存与虚拟内存的交换（swapping），严重拖累系统性能。</p>
+
+<p>此外还可能造成 native 内存分配失败等问题。</p>
+
+<blockquote>
+
+<p>注意：在现代应用集群中，宁可让应用节点死掉（fast-fail），也不希望其死慢死慢的。</p>
+
+</blockquote>
+
+<p>如果不想收到报警，可以像鸵鸟一样，把“java.lang.OutOfMemoryError: Metaspace”错误信息隐藏起来。但是这样也会带来更多问题，具体请参考前面的小节，认真寻找解决方案。</p>
+
+<h3>OutOfMemoryError: Unable to create new native thread</h3>
+
+<p>Java 程序本质上是多线程的，可以同时执行多项任务。类似于在播放视频的时候，可以拖放窗口中的内容，却不需要暂停视频播放，即便是物理机上只有一个 CPU。</p>
+
+<p>线程（thread）可以看作是干活的工人（workers）。如果只有一个工人，在同一时间就只能执行一项任务。假若有很多工人，那么就可以同时执行多项任务。</p>
+
+<p>和现实世界类似，JVM 中的线程也需要内存空间来执行自己的任务。如果线程数量太多，就会引入新的问题：</p>
+
+<p><img src="assets/7d551650-71e1-11ea-97af-c3b20af12573" alt="7ff0ad95-3c2e-4246-badc-e007abf84978.png" /></p>
+
+<p>“java.lang.OutOfMemoryError: Unable to create new native thread”错误是<strong>程序创建的线程数量已达到上限值</strong>的异常信息。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>JVM 向操作系统申请创建新的 native thread（原生线程）时，就有可能会碰到“java.lang.OutOfMemoryError: Unable to create new native thread”错误。如果底层操作系统创建新的 native thread 失败，JVM 就会抛出相应的 OutOfMemoryError。</p>
+
+<p>总体来说，导致“java.lang.OutOfMemoryError: Unable to create new native thread”错误的场景大多经历以下这些阶段：</p>
+
+<ol>
+
+<li>Java 程序向 JVM 请求创建一个新的 Java 线程；</li>
+
+<li>JVM 本地代码（native code）代理该请求，尝试创建一个操作系统级别的 native thread（原生线程）；</li>
+
+<li>操作系统尝试创建一个新的 native thread，需要同时分配一些内存给该线程；</li>
+
+<li>如果操作系统的内存已耗尽，或者是受到 32 位进程的地址空间限制（约 2~4GB），OS 就会拒绝本地内存分配；</li>
+
+<li>JVM 抛出“java.lang.OutOfMemoryError: Unable to create new native thread”错误。</li>
+
+</ol>
+
+<h4><strong>示例</strong></h4>
+
+<p>下面的代码在一个死循环中创建并启动很多新线程。代码执行后，很快就会达到操作系统的限制，产生“java.lang.OutOfMemoryError: unable to create new native thread”错误。</p>
+
+<pre><code class="language-java">package demo.jvm0205;
+
+import java.util.concurrent.TimeUnit;
+
+/**
+
+ * 演示: java.lang.OutOfMemoryError: unable to create new native thread
+
+ */
+
+public class UnableCreateNativeThread implements Runnable {
+
+    public static void main(String[] args) {
+
+        UnableCreateNativeThread task = new UnableCreateNativeThread();
+
+        int i = 0;
+
+        while (true){
+
+            System.out.println(&quot;尝试创建: &quot; + (i++));
+
+            // 持续创建线程
+
+            new Thread(task).start();
+
+        }
+
+    }
+
+    @Override
+
+    public void run() {
+
+        try {
+
+            TimeUnit.SECONDS.sleep(100);
+
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>在 16G 内存的 Mac OS X 机器上用 IDEA 启动并执行，结果如下：</p>
+
+<pre><code class="language-java">尝试创建: 0
+
+......
+
+尝试创建: 4069
+
+尝试创建: 4070
+
+Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: unable to create new native thread
+
+ at java.lang.Thread.start0(Native Method)
+
+ at java.lang.Thread.start(Thread.java:717)
+
+ at demo.jvm0205.UnableCreateNativeThread.main(UnableCreateNativeThread.java:16)
+
+
+
+</code></pre>
+
+<p>然后机器操作系统就崩溃重启了。</p>
+
+<p>我们也可以改一下代码，如果 catch 到异常，让虚拟机直接退出：</p>
+
+<pre><code class="language-java">// 持续创建线程
+
+try {
+
+    new Thread(task).start();
+
+} catch (Throwable e){
+
+    System.exit(0);
+
+}
+
+
+
+</code></pre>
+
+<p>再执行就好只会应用报错退出了，估计是 IDEA 注册了一些内存溢出错误的钩子，导致 JVM 暂时不能退出，进而导致操作系统崩溃。</p>
+
+<p>原生线程的数量由具体环境决定，比如，在 Windows、Linux 和 Mac OS X 系统上：</p>
+
+<ul>
+
+<li>64-bit Mac OS X 10.9，Java 1.7.0_45 – JVM 在创建 #2031 号线程之后挂掉。</li>
+
+<li>64-bit Ubuntu Linux，Java 1.7.0_45 – JVM 在创建 #31893 号线程之后挂掉。</li>
+
+<li>64-bit Windows 7，Java 1.7.0_45 – 由于操作系统使用了不一样的线程模型，这个错误信息似乎不会出现。创建 #250,000 号线程之后，Java 进程依然存在，但虚拟内存（swap file）的使用量达到了 10GB，系统运行极其缓慢，基本被卡死了。</li>
+
+</ul>
+
+<p>所以如果想知道系统的极限在哪儿，只需要一个小小的测试用例就够了，找到触发“java.lang.OutOfMemoryError: Unable to create new native thread”时创建的线程数量即可。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>有时可以修改系统限制来避开“Unable to create new native thread”问题。假如 JVM 受到用户空间（user space）文件数量的限制，例如 Linux 上增大可用文件描述符的最大值（Linux 上一切都是文件描述符/FD）：</p>
+
+<pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcaeb3b3a89cb8b9aa">[email&#160;protected]</a> ~]# ulimit -a
+
+core file size (blocks, -c) 0
+
+...... 省略部分内容 ......
+
+max user processes (-u) 1800
+
+
+
+</code></pre>
+
+<p>更多的情况，触发创建 native 线程时的 OutOfMemoryError，表明编程存在 Bug。比如，程序创建了成千上万的线程，很可能就是某些地方出大问题了——没有几个程序可以 Hold 住上万个线程的（CPU 数量有限，不可能太多的线程都同时拿到 CPU 的控制权来运行）。</p>
+
+<p>一种解决办法是执行线程转储（thread dump）来分析具体情况，我们会在后面的章节讲解。</p>
+
+<h3>OutOfMemoryError: Out of swap space</h3>
+
+<p>JVM 启动参数指定了最大内存限制，如 <code>-Xmx</code> 以及相关的其他启动参数。假若 JVM 使用的内存总量超过可用的物理内存，操作系统就会用到虚拟内存（一般基于磁盘文件）。</p>
+
+<p><img src="assets/d416dd70-71e1-11ea-b76f-3b9120f55521" alt="40dddc4d-f192-40dc-9a1f-ab4df65d6f12.png" /></p>
+
+<p>错误信息“java.lang.OutOfMemoryError: Out of swap space”表明，交换空间（swap space/虚拟内存）不足，此时由于物理内存和交换空间都不足，所以导致内存分配失败。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>如果 native heap 内存耗尽，内存分配时 JVM 就会抛出“java.lang.OutOfmemoryError: Out of swap space”错误消息，告诉用户，请求分配内存的操作失败了。</p>
+
+<p>Java 进程使用了虚拟内存才会发生这个错误。对 <a href="http://blog.csdn.net/renfufei/article/details/54144385">Java 的垃圾收集</a> 来说这是很难应付的场景。即使现代的 <a href="http://blog.csdn.net/renfufei/article/details/54885190">GC 算法</a>很先进，但虚拟内存交换引发的系统延迟，会让 <a href="http://blog.csdn.net/renfufei/article/details/61924893">GC 暂停时间</a>膨胀到令人难以容忍的地步。</p>
+
+<p>通常是操作系统层面的原因导致“java.lang.OutOfMemoryError: Out of swap space”问题，例如：</p>
+
+<ul>
+
+<li>操作系统的交换空间太小。</li>
+
+<li>机器上的某个进程耗光了所有的内存资源。</li>
+
+</ul>
+
+<p>当然也可能是应用程序的本地内存泄漏（native leak）引起的，例如，某个程序/库不断地申请本地内存，却不进行释放。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>这个问题有多种解决办法。</p>
+
+<p>第一种，也是最简单的方法，增加虚拟内存（swap space）的大小。各操作系统的设置方法不太一样，比如 Linux，可以使用下面的命令设置:</p>
+
+<pre><code>swapoff -a
+
+dd if=/dev/zero of=swapfile bs=1024 count=655360
+
+mkswap swapfile
+
+swapon swapfile
+
+
+
+</code></pre>
+
+<p>其中创建了一个大小为 640MB 的 swapfile（交换文件）并启用该文件。</p>
+
+<p>因为垃圾收集器需要清理整个内存空间，所以虚拟内存对 Java GC 来说是难以忍受的。存在内存交换时，执行<a href="http://blog.csdn.net/renfufei/article/details/54885190">垃圾收集</a>的<a href="http://blog.csdn.net/renfufei/article/details/61924893">暂停时间</a>会增加上百倍，所以最好不要增加，甚至是不要使用虚拟内存（毕竟访问内存的速度和磁盘的速度，差了几个数量级）。</p>
+
+<h3>OutOfMemoryError: Requested array size exceeds VM limit</h3>
+
+<p>Java 平台限制了数组的最大长度。各个版本的具体限制可能稍有不同，但范围都在 1~21 亿之间。（想想看，为什么是 21 亿？）</p>
+
+<p><img src="assets/15d241f0-71e2-11ea-9d98-f7fceb2428d3" alt="8cc643df-164f-4ee9-9142-7a27032418ec.png" /></p>
+
+<p>如果程序抛出“java.lang.OutOfMemoryError: Requested array size exceeds VM limit”错误，就说明程序想要创建的数组长度超过限制。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>这个错误是在真正为数组分配内存之前，JVM 会执行一项检查：要分配的数据结构在该平台是否可以寻址（addressable）。当然，这个错误比你所想的还要少见得多。</p>
+
+<p>一般很少看到这个错误，因为 Java 使用 int 类型作为数组的下标（index，索引）。在 Java 中，int 类型的最大值为 2^31-1=2147483647。大多数平台的限制都约等于这个值——例如在 64 位的 MB Pro 上，Java 1.7 平台可以分配长度为 2147483645，以及 Integer.MAX_VALUE-2）的数组。</p>
+
+<p>再增加一点点长度，变成 Integer.MAX_VALUE-1 时，就会抛出我们所熟知的 OutOfMemoryError：</p>
+
+<pre><code>Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+
+
+
+</code></pre>
+
+<p>在有的平台上，这个最大限制可能还会更小一些，例如在 32 位 Linux 与 OpenJDK 6 上面，数组长度大约在 11 亿左右（约 2^30）就会抛出“java.lang.OutOfMemoryError: Requested array size exceeds VM limit“错误。</p>
+
+<p>要找出具体的限制值，可以执行一个小小的测试用例，具体示例参见下文。</p>
+
+<h4><strong>示例</strong></h4>
+
+<p>以下代码用来演示“java.lang.OutOfMemoryError: Requested array size exceeds VM limit”错误：</p>
+
+<pre><code class="language-java"> for (int i = 3; i &gt;= 0; i--) {
+
+  try {
+
+    int[] arr = new int[Integer.MAX_VALUE-i];
+
+    System.out.format(&quot;Successfully initialized an array with %,d elements.\n&quot;, Integer.MAX_VALUE-i);
+
+  } catch (Throwable t) {
+
+    t.printStackTrace();
+
+  }
+
+}
+
+
+
+</code></pre>
+
+<p>其中 for 循环迭代 4 次，每次都去初始化一个 int 数组，长度从 Integer.MAX_VALUE-3 开始递增，到 Integer.MAX_VALUE 为止。</p>
+
+<p>在 64 位 Mac OS X 的 Hotspot 7 平台上，执行这段代码会得到类似下面这样的结果：</p>
+
+<pre><code class="language-java">java.lang.OutOfMemoryError: Java heap space
+
+  at jvm.demo.ArraySize.main(ArraySize.java:8)
+
+java.lang.OutOfMemoryError: Java heap space
+
+  at jvm.demo.ArraySize.main(ArraySize.java:8)
+
+java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+
+  at jvm.demo.ArraySize.main(ArraySize.java:8)
+
+java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+
+  at jvm.demo.ArraySize.main(ArraySize.java:8)
+
+
+
+</code></pre>
+
+<p>请注意，在后两次迭代抛出“java.lang.OutOfMemoryError: Requested array size exceeds VM limit”错误之前，先抛出了 2 次“java.lang.OutOfMemoryError: Java heap space”错误。</p>
+
+<p>这是因为 2^31-1 个 int 的数组占用的内存超过了 JVM 默认的 8GB 堆内存。</p>
+
+<p>此示例也展示了这个错误比较罕见的原因——要取得 JVM 对数组大小的限制，要分配长度差不多等于 Integer.MAX_INT 的数组。这个示例运行在 64 位的 Mac OS X，Hotspot 7 平台时，只有两个长度会抛出这个错误：Integer.MAX_INT-1 和 Integer.MAX_INT。</p>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>这个错误不常见，发生“java.lang.OutOfMemoryError: Requested array size exceeds VM limit”错误的原因可能是：</p>
+
+<ul>
+
+<li>数组太大，最终长度超过平台限制值，但小于 Integer.MAX_INT；</li>
+
+<li>为了测试系统限制，故意分配长度大于 2^31-1 的数组。</li>
+
+</ul>
+
+<p>第一种情况，需要检查业务代码，确认是否真的需要那么大的数组。如果可以减小数组长度，那就万事大吉。</p>
+
+<p>第二种情况，请记住 Java 数组用 int 值作为索引。所以数组元素不能超过 2^31-1 个。实际上，代码在编译阶段就会报错，提示信息为“error: integer number too large”。 如果确实需要处理超大数据集，那就要考虑调整解决方案了。例如拆分成多个小块，按批次加载，或者放弃使用标准库，而是自己处理数据结构，比如使用 sun.misc.Unsafe 类，通过 Unsafe 工具类可以像 C 语言一样直接分配内存。</p>
+
+<h3>OutOfMemoryError: Kill process or sacrifice child</h3>
+
+<p>这个错误一句话概括就是：</p>
+
+<blockquote>
+
+<p>一言不合就杀进程。。。</p>
+
+</blockquote>
+
+<p>为了理解这个错误，我们先回顾一下操作系统相关的基础知识。</p>
+
+<p>我们知道，操作系统（operating system）构建在进程（process）的基础上。进程由内核作业（kernel jobs）进行调度和维护，其中有一个内核作业称为“Out of memory killer（OOM 终结者）”，与本节所讲的 OutOfMemoryError 有关。</p>
+
+<p>Out of memory killer 在可用内存极低的情况下会杀死某些进程。只要达到触发条件就会激活，选中某个进程并杀掉。通常采用启发式算法，对所有进程计算评分（heuristics scoring），得分最低的进程将被 kill 掉。</p>
+
+<p>因此“Out of memory: Kill process or sacrifice child”和前面所讲的 <a href="http://blog.csdn.net/renfufei/article/category/5884735">OutOfMemoryError</a> 都不同，因为它既不由 JVM 触发，也不由 JVM 代理，而是系统内核内置的一种安全保护措施。</p>
+
+<p><img src="assets/f1e22a20-71e2-11ea-833b-93fabc8068c9" alt="13abc504-c840-4264-a905-e9011159484f.png" /></p>
+
+<p>如果可用内存（含 swap）不足，就有可能会影响系统稳定，这时候 Out of memory killer 就会设法找出流氓进程并杀死他，也就是引起“Out of memory: kill process or sacrifice child”错误。</p>
+
+<h4><strong>原因分析</strong></h4>
+
+<p>默认情况下，Linux kernels（内核）允许进程申请的量超过系统可用内存。这是因为, 在大多数情况下，很多进程申请了很多内存，但实际使用的量并没有那么多。</p>
+
+<p>有个简单的类比，宽带租赁的服务商可以进行“超卖”，可能他的总带宽只有 10Gbps，但却卖出远远超过 100 份以上的 100Mbps 带宽。原因是多数时候，宽带用户之间是错峰的，而且不可能每个用户都用满服务商所承诺的带宽。</p>
+
+<p>超卖行为会导致一个问题，假若某些程序占用了大量的系统内存，那么可用内存量就会极小，导致没有内存页面（pages）可以分配给真正需要的进程。为了防止发生这种情况，系统会自动激活 OOM killer，查找流氓进程并将其杀死。</p>
+
+<p>更多关于”Out of memory killer“的性能调优细节，请参考：<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-captun.html">RedHat 官方文档</a>。</p>
+
+<p>现在我们知道了为什么会发生这种问题，那为什么是半夜 5 点钟触发“killer”发报警信息给你呢？通常触发的原因在于操作系统配置。例如 /proc/sys/vm/overcommit_memory 配置文件的值，指定了是否允许所有的 malloc() 调用成功。</p>
+
+<blockquote>
+
+<p>请注意，在各操作系统中，这个配置对应的 proc 文件路径可能不同。</p>
+
+</blockquote>
+
+<h4><strong>示例</strong></h4>
+
+<p>在 Linux 上（如最新稳定版的 Ubuntu）编译并执行以下的示例代码：</p>
+
+<pre><code class="language-java">package jvm.demo;
+
+public class OOM {
+
+public static void main(String[] args){
+
+  java.util.List&lt;int[]&gt; l = new java.util.ArrayList();
+
+  for (int i = 10000; i &lt; 100000; i++) {
+
+      try {
+
+        l.add(new int[100_000_000]);
+
+      } catch (Throwable t) {
+
+        t.printStackTrace();
+
+      }
+
+    }
+
+  }
+
+}
+
+
+
+</code></pre>
+
+<p>将会在系统日志中（如 /var/log/kern.log 文件）看到一个错误，类似这样：</p>
+
+<pre><code class="language-c">Jun  4 07:41:59 jvm kernel:
+
+    [70667120.897649]
+
+    Out of memory: Kill process 29957 (java) score 366 or sacrifice child
+
+Jun  4 07:41:59 jvm kernel:
+
+    [70667120.897701]
+
+    Killed process 29957 (java) total-vm:2532680kB, anon-rss:1416508kB, file-rss:0kB
+
+
+
+</code></pre>
+
+<blockquote>
+
+<p><strong>提示</strong>：上述示例可能需要调整 swap 的大小并设置最大堆内存，例如堆内存配置为 <code>-Xmx2g</code>，swap 配置如下：</p>
+
+</blockquote>
+
+<pre><code>swapoff -a
+
+dd if=/dev/zero of=swapfile bs=1024 count=655360
+
+mkswap swapfile
+
+swapon swapfile
+
+
+
+</code></pre>
+
+<h4><strong>解决方案</strong></h4>
+
+<p>此问题也有多种处理办法。最简单的办法就是将系统迁移到内存更大的实例中。</p>
+
+<p>另外，还可以通过 <a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-captun.html">OOM killer 调优</a>，或者做负载均衡（水平扩展、集群），或者降低应用对内存的需求。</p>
+
+<p>不太推荐的方案是加大交换空间/虚拟内存（swap space）。</p>
+
+<p>试想一下，Java 包含了自动垃圾回收机制，增加交换内存的代价会很高昂。现代 GC 算法在处理物理内存时性能飞快（内存价格也越来越便宜）。</p>
+
+<p>但对交换内存来说，其效率就是硬伤了。交换内存可能导致 GC 暂停的时间增长几个数量级，因此在采用这个方案之前，看看是否真的有这个必要。</p>
+
+<h3>其他内存溢出错误</h3>
+
+<p>实际上还有各种其他类型的 OutOfMemoryError。</p>
+
+<p>“java.lang.OutOfMemoryError: reason stack_trace_with_native_method”一般是因为：</p>
+
+<ol>
+
+<li>native 线程内存分配失败。</li>
+
+<li>调用栈打印出来时，最顶部的 frame 属于 native 方法。</li>
+
+</ol>
+
+<p>再如这几个：</p>
+
+<ul>
+
+<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5MzYzMzkyMQ==&amp;mid=200069481&amp;idx=1&amp;sn=52e17d327c7ea5033665459f194c7b1b&amp;scene=4">HelloJava 公众号的文章 - java.lang.OutOfMemoryError:Map failed</a></li>
+
+<li><a href="http://hellojava.info/?tag=direct-buffer-memory">hellojavacases 公众号的文章 - java.lang.OutOfMemoryError:Direct Buffer Memory</a></li>
+
+<li><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/memleaks002.html">Oracle 官方文档 - Understand the OutOfMemoryError Exception</a></li>
+
+</ul>
+
+<p>这些错误都很罕见，遇到的话，需要 case by case 地使用操作系统提供的 Debug 工具来进行诊断。</p>
+
+<h3>小结</h3>
+
+<p>本节我们回顾了各类 OutOfMemoryError，它们在各种条件下发生，引起我们的系统崩溃宕机。通过这些示例分析和解决办法，我们就可以从容地使用系统化的方法对付这些问题，让我们的系统运行得更加稳定，更加高效。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996ff6fcce3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

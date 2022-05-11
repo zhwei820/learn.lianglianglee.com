@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>15  运行时反射：字符串和结构体之间如何转换？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md">00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/01  基础入门：编写你的第一个 Go 语言程序.md">01  基础入门：编写你的第一个 Go 语言程序.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/02  数据类型：你必须掌握的数据类型有哪些？.md">02  数据类型：你必须掌握的数据类型有哪些？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/03  控制结构：if、for、switch 逻辑语句的那些事儿.md">03  控制结构：if、for、switch 逻辑语句的那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/04  集合类型：如何正确使用 array、slice 和 map？.md">04  集合类型：如何正确使用 array、slice 和 map？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md">05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/06  struct 和 interface：结构体与接口都实现了哪些功能？.md">06  struct 和 interface：结构体与接口都实现了哪些功能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/07  错误处理：如何通过 error、deferred、panic 等处理错误？.md">07  错误处理：如何通过 error、deferred、panic 等处理错误？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/08  并发基础：Goroutines 和 Channels 的声明与使用.md">08  并发基础：Goroutines 和 Channels 的声明与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/09  同步原语：sync 包让你对并发控制得心应手.md">09  同步原语：sync 包让你对并发控制得心应手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/10  Context：你必须掌握的多线程并发控制神器.md">10  Context：你必须掌握的多线程并发控制神器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/11  并发模式：Go 语言中即学即用的高效并发模式.md">11  并发模式：Go 语言中即学即用的高效并发模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/12  指针详解：在什么情况下应该使用指针？.md">12  指针详解：在什么情况下应该使用指针？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/13  参数传递：值、引用及指针之间的区别？.md">13  参数传递：值、引用及指针之间的区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/14  内存分配：new 还是 make？什么情况下该用谁？.md">14  内存分配：new 还是 make？什么情况下该用谁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/22 讲通关 Go 语言-完/15  运行时反射：字符串和结构体之间如何转换？.md">15  运行时反射：字符串和结构体之间如何转换？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/16  非类型安全：让你既爱又恨的 unsafe.md">16  非类型安全：让你既爱又恨的 unsafe.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/17  SliceHeader：slice 如何高效处理数据？.md">17  SliceHeader：slice 如何高效处理数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/18  质量保证：Go 语言如何通过测试保证质量？.md">18  质量保证：Go 语言如何通过测试保证质量？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/19  性能优化：Go 语言如何进行代码检查和优化？.md">19  性能优化：Go 语言如何进行代码检查和优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/20  协作开发：模块化管理为什么能够提升研发效能？.md">20  协作开发：模块化管理为什么能够提升研发效能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/21  网络编程：Go 语言如何玩转 RESTful API 服务？.md">21  网络编程：Go 语言如何玩转 RESTful API 服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/23 结束语  你的 Go 语言成长之路.md">23 结束语  你的 Go 语言成长之路.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>15  运行时反射：字符串和结构体之间如何转换？</h1>
+
+<p>我们在开发中会接触很多字符串和结构体之间的转换，尤其是在调用 API 的时候，你需要把 API 返回的 JSON 字符串转换为 struct 结构体，便于操作。那么一个 JSON 字符串是如何转换为 struct 结构体的呢？这就需要用到反射的知识，这节课我会基于字符串和结构体之间的转换，一步步地为你揭开 Go 语言运行时反射的面纱。</p>
+
+<h3>反射是什么？</h3>
+
+<p>和 Java 语言一样，Go 语言也有运行时反射，这为我们提供了一种可以在运行时操作任意类型对象的能力。比如查看一个接口变量的具体类型、看看一个结构体有多少字段、修改某个字段的值等。</p>
+
+<p>Go 语言是静态编译类语言，比如在定义一个变量的时候，已经知道了它是什么类型，那么为什么还需要反射呢？这是因为有些事情只有在运行时才知道。比如你定义了一个函数，它有一个**interface{}**类型的参数，这也就意味着调用者可以传递任何类型的参数给这个函数。在这种情况下，如果你想知道调用者传递的是什么类型的参数，就需要用到反射。如果你想知道一个结构体有哪些字段和方法，也需要反射。</p>
+
+<p>还是以我常用的函数 fmt.Println 为例，如下所示：</p>
+
+<p><em><strong>src/fmt/print.go</strong></em></p>
+
+<pre><code>func Println(a ...interface{}) (n int, err error) {
+
+
+
+   return Fprintln(os.Stdout, a...)
+
+
+
+}
+
+</code></pre>
+
+<p>例子中 fmt.Println 的源代码有一个可变参数，类型为 interface{}，这意味着你可以传递零个或者多个任意类型参数给它，都能被正确打印。</p>
+
+<h3>reflect.Value 和 reflect.Type</h3>
+
+<p>在 Go 语言的反射定义中，任何接口都由两部分组成：接口的具体类型，以及具体类型对应的值。比如 var i int = 3，因为 interface{} 可以表示任何类型，所以变量 i 可以转为 interface{}。你可以把变量 i 当成一个接口，那么这个变量在 Go 反射中的表示就是 &lt;Value,Type&gt;。其中 Value 为变量的值，即 3，而 Type 为变量的类型，即 int。</p>
+
+<blockquote>
+
+<p>小提示：interface{} 是空接口，可以表示任何类型，也就是说你可以把任何类型转换为空接口，它通常用于反射、类型断言，以减少重复代码，简化编程。</p>
+
+</blockquote>
+
+<p>在 Go 反射中，标准库为我们提供了两种类型 reflect.Value 和 reflect.Type 来分别表示变量的值和类型，并且提供了两个函数 reflect.ValueOf 和 reflect.TypeOf 分别获取任意对象的 reflect.Value 和 reflect.Type。</p>
+
+<p>我用下面的代码进行演示：</p>
+
+<p><em><strong>ch15/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   i:=3
+
+
+
+   iv:=reflect.ValueOf(i)
+
+
+
+   it:=reflect.TypeOf(i)
+
+
+
+   fmt.Println(iv,it)//3 int
+
+
+
+}
+
+</code></pre>
+
+<p>代码定义了一个 int 类型的变量 i，它的值为 3，然后通过 reflect.ValueOf 和 reflect.TypeOf 函数就可以获得变量 i 对应的 reflect.Value 和 reflect.Type。通过 fmt.Println 函数打印后，可以看到结果是 3 int，这也可以证明 reflect.Value 表示的是变量的值，reflect.Type 表示的是变量的类型。</p>
+
+<h3>reflect.Value</h3>
+
+<p>reflect.Value 可以通过函数 reflect.ValueOf 获得，下面我将为你介绍它的结构和用法。</p>
+
+<h4>结构体定义</h4>
+
+<p>在 Go 语言中，reflect.Value 被定义为一个 struct 结构体，它的定义如下面的代码所示：</p>
+
+<pre><code>type Value struct {
+
+
+
+   typ *rtype
+
+
+
+   ptr unsafe.Pointer
+
+
+
+   flag
+
+
+
+}
+
+</code></pre>
+
+<p>我们发现 reflect.Value 结构体的字段都是私有的，也就是说，我们只能使用 reflect.Value 的方法。现在看看它有哪些常用方法，如下所示：</p>
+
+<pre><code>//针对具体类型的系列方法
+
+
+
+//以下是用于获取对应的值
+
+
+
+Bool
+
+
+
+Bytes
+
+
+
+Complex
+
+
+
+Float
+
+
+
+Int
+
+
+
+String
+
+
+
+Uint
+
+
+
+CanSet //是否可以修改对应的值
+
+
+
+以下是用于修改对应的值
+
+
+
+Set
+
+
+
+SetBool
+
+
+
+SetBytes
+
+
+
+SetComplex
+
+
+
+SetFloat
+
+
+
+SetInt
+
+
+
+SetString
+
+
+
+Elem //获取指针指向的值，一般用于修改对应的值
+
+
+
+//以下Field系列方法用于获取struct类型中的字段
+
+
+
+Field
+
+
+
+FieldByIndex
+
+
+
+FieldByName
+
+
+
+FieldByNameFunc
+
+
+
+Interface //获取对应的原始类型
+
+
+
+IsNil //值是否为nil
+
+
+
+IsZero //值是否是零值
+
+
+
+Kind //获取对应的类型类别，比如Array、Slice、Map等
+
+
+
+//获取对应的方法
+
+
+
+Method
+
+
+
+MethodByName
+
+
+
+NumField //获取struct类型中字段的数量
+
+
+
+NumMethod//类型上方法集的数量
+
+
+
+Type//获取对应的reflect.Type
+
+</code></pre>
+
+<p>看着比较多，其实就三类：一类用于获取和修改对应的值；一类和 struct 类型的字段有关，用于获取对应的字段；一类和类型上的方法集有关，用于获取对应的方法。</p>
+
+<p>下面我通过几个例子讲解如何使用它们。</p>
+
+<h4>获取原始类型</h4>
+
+<p>在上面的例子中，我通过 reflect.ValueOf 函数把任意类型的对象转为一个 reflect.Value，而如果想逆向转回来也可以，reflect.Value 为我们提供了 Inteface 方法，如下面的代码所示：</p>
+
+<p><em><strong>ch15/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   i:=3
+
+
+
+   //int to reflect.Value
+
+
+
+   iv:=reflect.ValueOf(i)
+
+
+
+   //reflect.Value to int
+
+
+
+   i1:=iv.Interface().(int)
+
+
+
+   fmt.Println(i1)
+
+
+
+}
+
+</code></pre>
+
+<p>这是 reflect.Value 和 int 类型互转，换成其他类型也可以。</p>
+
+<h4>修改对应的值</h4>
+
+<p>已经定义的变量可以通过反射在运行时修改，比如上面的示例 i=3，修改为 4，如下所示：</p>
+
+<p><em><strong>ch15/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   i:=3
+
+
+
+   ipv:=reflect.ValueOf(&amp;i)
+
+
+
+   ipv.Elem().SetInt(4)
+
+
+
+   fmt.Println(i)
+
+
+
+}
+
+</code></pre>
+
+<p>这样就通过反射修改了一个变量。因为 reflect.ValueOf 函数返回的是一份值的拷贝，所以我们要传入变量的指针才可以。 因为传递的是一个指针，所以需要调用 Elem 方法找到这个指针指向的值，这样才能修改。 最后我们就可以使用 SetInt 方法修改值了。</p>
+
+<p>要修改一个变量的值，有几个关键点：传递指针（可寻址），通过 Elem 方法获取指向的值，才可以保证值可以被修改，reflect.Value 为我们提供了 CanSet 方法判断是否可以修改该变量。</p>
+
+<p>那么如何修改 struct 结构体字段的值呢？参考变量的修改方式，可总结出以下步骤：</p>
+
+<ol>
+
+<li>传递一个 struct 结构体的指针，获取对应的 reflect.Value；</li>
+
+<li>通过 Elem 方法获取指针指向的值；</li>
+
+<li>通过 Field 方法获取要修改的字段；</li>
+
+<li>通过 Set 系列方法修改成对应的值。</li>
+
+</ol>
+
+<p>运行下面的代码，你会发现变量 p 中的 Name 字段已经被修改为张三了。</p>
+
+<p><em><strong>ch15/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   ppv:=reflect.ValueOf(&amp;p)
+
+
+
+   ppv.Elem().Field(0).SetString(&quot;张三&quot;)
+
+
+
+   fmt.Println(p)
+
+
+
+}
+
+
+
+type person struct {
+
+
+
+   Name string
+
+
+
+   Age int
+
+
+
+}
+
+</code></pre>
+
+<p>最后再来总结一下通过反射修改一个值的规则。</p>
+
+<ol>
+
+<li>可被寻址，通俗地讲就是要向 reflect.ValueOf 函数传递一个指针作为参数。</li>
+
+<li>如果要修改 struct 结构体字段值的话，该字段需要是可导出的，而不是私有的，也就是该字段的首字母为大写。</li>
+
+<li>记得使用 Elem 方法获得指针指向的值，这样才能调用 Set 系列方法进行修改。</li>
+
+</ol>
+
+<p>记住以上规则，你就可以在程序运行时通过反射修改一个变量或字段的值。</p>
+
+<h4>获取对应的底层类型</h4>
+
+<p>底层类型是什么意思呢？其实对应的主要是基础类型，比如接口、结构体、指针......因为我们可以通过 type 关键字声明很多新的类型。比如在上面的例子中，变量 p 的实际类型是 person，但是 person 对应的底层类型是 struct 这个结构体类型，而 &amp;p 对应的则是指针类型。我们来通过下面的代码进行验证：</p>
+
+<p><strong>ch15/main.go</strong></p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   ppv:=reflect.ValueOf(&amp;p)
+
+
+
+   fmt.Println(ppv.Kind())
+
+
+
+   pv:=reflect.ValueOf(p)
+
+
+
+   fmt.Println(pv.Kind())
+
+
+
+}
+
+</code></pre>
+
+<p>运行以上代码，可以看到如下打印输出：</p>
+
+<pre><code>ptr
+
+
+
+struct
+
+</code></pre>
+
+<p>Kind 方法返回一个 Kind 类型的值，它是一个常量，有以下可供使用的值：</p>
+
+<pre><code>type Kind uint
+
+
+
+const (
+
+
+
+   Invalid Kind = iota
+
+
+
+   Bool
+
+
+
+   Int
+
+
+
+   Int8
+
+
+
+   Int16
+
+
+
+   Int32
+
+
+
+   Int64
+
+
+
+   Uint
+
+
+
+   Uint8
+
+
+
+   Uint16
+
+
+
+   Uint32
+
+
+
+   Uint64
+
+
+
+   Uintptr
+
+
+
+   Float32
+
+
+
+   Float64
+
+
+
+   Complex64
+
+
+
+   Complex128
+
+
+
+   Array
+
+
+
+   Chan
+
+
+
+   Func
+
+
+
+   Interface
+
+
+
+   Map
+
+
+
+   Ptr
+
+
+
+   Slice
+
+
+
+   String
+
+
+
+   Struct
+
+
+
+   UnsafePointer
+
+
+
+)
+
+</code></pre>
+
+<p>从以上源代码定义的 Kind 常量列表可以看到，已经包含了 Go 语言的所有底层类型。</p>
+
+<h3>reflect.Type</h3>
+
+<p>reflect.Value 可以用于与值有关的操作中，而如果是和变量类型本身有关的操作，则最好使用 reflect.Type，比如要获取结构体对应的字段名称或方法。</p>
+
+<p>要反射获取一个变量的 reflect.Type，可以通过函数 reflect.TypeOf。</p>
+
+<h4>接口定义</h4>
+
+<p>和 reflect.Value 不同，reflect.Type 是一个接口，而不是一个结构体，所以也只能使用它的方法。</p>
+
+<p>以下是我列出来的 reflect.Type 接口常用的方法。从这个列表来看，大部分都和 reflect.Value 的方法功能相同。</p>
+
+<pre><code>type Type interface {
+
+
+
+   Implements(u Type) bool
+
+
+
+   AssignableTo(u Type) bool
+
+
+
+   ConvertibleTo(u Type) bool
+
+
+
+   Comparable() bool
+
+
+
+   //以下这些方法和Value结构体的功能相同
+
+
+
+   Kind() Kind
+
+
+
+   Method(int) Method
+
+
+
+   MethodByName(string) (Method, bool)
+
+
+
+   NumMethod() int
+
+
+
+   Elem() Type
+
+
+
+   Field(i int) StructField
+
+
+
+   FieldByIndex(index []int) StructField
+
+
+
+   FieldByName(name string) (StructField, bool)
+
+
+
+   FieldByNameFunc(match func(string) bool) (StructField, bool)
+
+
+
+   NumField() int
+
+
+
+}
+
+</code></pre>
+
+<p>其中几个特有的方法如下：</p>
+
+<ol>
+
+<li>Implements 方法用于判断是否实现了接口 u；</li>
+
+<li>AssignableTo 方法用于判断是否可以赋值给类型 u，其实就是是否可以使用 =，即赋值运算符；</li>
+
+<li>ConvertibleTo 方法用于判断是否可以转换成类型 u，其实就是是否可以进行类型转换；</li>
+
+<li>Comparable 方法用于判断该类型是否是可比较的，其实就是是否可以使用关系运算符进行比较。</li>
+
+</ol>
+
+<p>我同样会通过一些示例来讲解 reflect.Type 的使用。</p>
+
+<h4>遍历结构体的字段和方法</h4>
+
+<p>我还是采用上面示例中的 person 结构体进行演示，不过需要修改一下，为它增加一个方法 String，如下所示：</p>
+
+<pre><code>func (p person) String() string{
+
+
+
+   return fmt.Sprintf(&quot;Name is %s,Age is %d&quot;,p.Name,p.Age)
+
+
+
+}
+
+</code></pre>
+
+<p>新增一个 String 方法，返回对应的字符串信息，这样 person 这个 struct 结构体也实现了 fmt.Stringer 接口。</p>
+
+<p>你可以通过 NumField 方法获取结构体字段的数量，然后使用 for 循环，通过 Field 方法就可以遍历结构体的字段，并打印出字段名称。同理，遍历结构体的方法也是同样的思路，代码也类似，如下所示：</p>
+
+<p><em><strong>ch15/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   pt:=reflect.TypeOf(p)
+
+
+
+   //遍历person的字段
+
+
+
+   for i:=0;i&lt;pt.NumField();i++{
+
+
+
+      fmt.Println(&quot;字段：&quot;,pt.Field(i).Name)
+
+
+
+   }
+
+
+
+   //遍历person的方法
+
+
+
+   for i:=0;i&lt;pt.NumMethod();i++{
+
+
+
+      fmt.Println(&quot;方法：&quot;,pt.Method(i).Name)
+
+
+
+   }
+
+
+
+}
+
+</code></pre>
+
+<p>运行这个代码，可以看到如下结果：</p>
+
+<pre><code>字段： Name
+
+
+
+字段： Age
+
+
+
+方法： String
+
+</code></pre>
+
+<p>这正好和我在结构体 person 中定义的一致，说明遍历成功。</p>
+
+<blockquote>
+
+<p>小技巧：你可以通过 FieldByName 方法获取指定的字段，也可以通过 MethodByName 方法获取指定的方法，这在需要获取某个特定的字段或者方法时非常高效，而不是使用遍历。</p>
+
+</blockquote>
+
+<h4>是否实现某接口</h4>
+
+<p>通过 reflect.Type 还可以判断是否实现了某接口。我还是以 person 结构体为例，判断它是否实现了接口 fmt.Stringer 和 io.Writer，如下面的代码所示：</p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   pt:=reflect.TypeOf(p)
+
+
+
+   stringerType:=reflect.TypeOf((*fmt.Stringer)(nil)).Elem()
+
+
+
+   writerType:=reflect.TypeOf((*io.Writer)(nil)).Elem()
+
+
+
+   fmt.Println(&quot;是否实现了fmt.Stringer：&quot;,pt.Implements(stringerType))
+
+
+
+   fmt.Println(&quot;是否实现了io.Writer：&quot;,pt.Implements(writerType))
+
+
+
+}
+
+</code></pre>
+
+<blockquote>
+
+<p>小提示：尽可能通过类型断言的方式判断是否实现了某接口，而不是通过反射。</p>
+
+</blockquote>
+
+<p>这个示例通过 Implements 方法来判断是否实现了 fmt.Stringer 和 io.Writer 接口，运行它，你可以看到如下结果：</p>
+
+<pre><code>是否实现了fmt.Stringer： true
+
+
+
+是否实现了io.Writer： false
+
+</code></pre>
+
+<p>因为结构体 person 只实现了 fmt.Stringer 接口，没有实现 io.Writer 接口，所以和验证的结果一致。</p>
+
+<h3>字符串和结构体互转</h3>
+
+<p>在字符串和结构体互转的场景中，使用最多的就是 JSON 和 struct 互转。在这个小节中，我会用 JSON 和 struct 讲解 struct tag 这一功能的使用。</p>
+
+<h4>JSON 和 Struct 互转</h4>
+
+<p>Go 语言的标准库有一个 json 包，通过它可以把 JSON 字符串转为一个 struct 结构体，也可以把一个 struct 结构体转为一个 json 字符串。下面我还是以 person 这个结构体为例，讲解 JSON 和 struct 的相互转换。如下面的代码所示：</p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   //struct to json
+
+
+
+   jsonB,err:=json.Marshal(p)
+
+
+
+   if err==nil {
+
+
+
+      fmt.Println(string(jsonB))
+
+
+
+   }
+
+
+
+   //json to struct
+
+
+
+   respJSON:=&quot;{\&quot;Name\&quot;:\&quot;李四\&quot;,\&quot;Age\&quot;:40}&quot;
+
+
+
+   json.Unmarshal([]byte(respJSON),&amp;p)
+
+
+
+   fmt.Println(p)
+
+
+
+}
+
+</code></pre>
+
+<p>这个示例是我使用 Go 语言提供的 json 标准包做的演示。通过 json.Marshal 函数，你可以把一个 struct 转为 JSON 字符串。通过 json.Unmarshal 函数，你可以把一个 JSON 字符串转为 struct。</p>
+
+<p>运行以上代码，你会看到如下结果输出：</p>
+
+<pre><code>{&quot;Name&quot;:&quot;飞雪无情&quot;,&quot;Age&quot;:20}
+
+
+
+Name is 李四,Age is 40
+
+</code></pre>
+
+<p>仔细观察以上打印出的 JSON 字符串，你会发现 JSON 字符串的 Key 和 struct 结构体的字段名称一样，比如示例中的 Name 和 Age。那么是否可以改变它们呢？比如改成小写的 name 和 age，并且字段的名称还是大写的 Name 和 Age。当然可以，要达到这个目的就需要用到 struct tag 的功能了。</p>
+
+<h4>Struct Tag</h4>
+
+<p>顾名思义，struct tag 是一个添加在 struct 字段上的标记，使用它进行辅助，可以完成一些额外的操作，比如 json 和 struct 互转。在上面的示例中，如果想把输出的 json 字符串的 Key 改为小写的 name 和 age，可以通过为 struct 字段添加 tag 的方式，示例代码如下：</p>
+
+<pre><code>type person struct {
+
+
+
+   Name string `json:&quot;name&quot;`
+
+
+
+   Age int `json:&quot;age&quot;`
+
+
+
+}
+
+</code></pre>
+
+<p>为 struct 字段添加 tag 的方法很简单，只需要在字段后面通过反引号把一个键值对包住即可，比如以上示例中的 <code>json:&quot;name&quot;</code>。其中冒号前的 json 是一个 Key，可以通过这个 Key 获取冒号后对应的 name。</p>
+
+<blockquote>
+
+<p>小提示：json 作为 Key，是 Go 语言自带的 json 包解析 JSON 的一种约定，它会通过 json 这个 Key 找到对应的值，用于 JSON 的 Key 值。</p>
+
+</blockquote>
+
+<p>我们已经通过 struct tag 指定了可以使用 name 和 age 作为 json 的 Key，代码就可以修改成如下所示：</p>
+
+<pre><code>respJSON:=&quot;{\&quot;name\&quot;:\&quot;李四\&quot;,\&quot;age\&quot;:40}&quot;
+
+</code></pre>
+
+<p>没错，JSON 字符串也可以使用小写的 name 和 age 了。现在再运行这段代码，你会看到如下结果：</p>
+
+<pre><code>{&quot;name&quot;:&quot;张三&quot;,&quot;age&quot;:20}
+
+
+
+Name is 李四,Age is 40
+
+</code></pre>
+
+<p>输出的 JSON 字符串的 Key 是小写的 name 和 age，并且小写的 name 和 age JSON 字符串也可以转为 person 结构体。</p>
+
+<p>相信你已经发现，struct tag 是整个 JSON 和 struct 互转的关键，这个 tag 就像是我们为 struct 字段起的别名，那么 json 包是如何获得这个 tag 的呢？这就需要反射了。我们来看下面的代码：</p>
+
+<pre><code>//遍历person字段中key为json的tag
+
+
+
+for i:=0;i&lt;pt.NumField();i++{
+
+
+
+   sf:=pt.Field(i)
+
+
+
+   fmt.Printf(&quot;字段%s上,json tag为%s\n&quot;,sf.Name,sf.Tag.Get(&quot;json&quot;))
+
+
+
+}
+
+</code></pre>
+
+<p>要想获得字段上的 tag，就要先反射获得对应的字段，我们可以通过 Field 方法做到。该方法返回一个 StructField 结构体，它有一个字段是 Tag，存有字段的所有 tag。示例中要获得 Key 为 json 的 tag，所以只需要调用 sf.Tag.Get(&quot;json&quot;) 即可。</p>
+
+<p>结构体的字段可以有多个 tag，用于不同的场景，比如 json 转换、bson 转换、orm 解析等。如果有多个 tag，要使用空格分隔。采用不同的 Key 可以获得不同的 tag，如下面的代码所示：</p>
+
+<pre><code>//遍历person字段中key为json、bson的tag
+
+
+
+for i:=0;i&lt;pt.NumField();i++{
+
+
+
+   sf:=pt.Field(i)
+
+
+
+   fmt.Printf(&quot;字段%s上,json tag为%s\n&quot;,sf.Name,sf.Tag.Get(&quot;json&quot;))
+
+
+
+   fmt.Printf(&quot;字段%s上,bson tag为%s\n&quot;,sf.Name,sf.Tag.Get(&quot;bson&quot;))
+
+
+
+}
+
+
+
+type person struct {
+
+
+
+   Name string `json:&quot;name&quot; bson:&quot;b_name&quot;`
+
+
+
+   Age int `json:&quot;age&quot; bson:&quot;b_name&quot;`
+
+
+
+}
+
+</code></pre>
+
+<p>运行代码，你可以看到如下结果：</p>
+
+<pre><code>字段Name上,key为json的tag为name
+
+
+
+字段Name上,key为bson的tag为b_name
+
+
+
+字段Age上,key为json的tag为age
+
+
+
+字段Age上,key为bson的tag为b_name
+
+</code></pre>
+
+<p>可以看到，通过不同的 Key，使用 Get 方法就可以获得自定义的不同的 tag。</p>
+
+<h4>实现 Struct 转 JSON</h4>
+
+<p>相信你已经理解了什么是 struct tag，下面我再通过一个 struct 转 json 的例子演示它的使用：</p>
+
+<pre><code>func main() {
+
+
+
+   p:=person{Name: &quot;飞雪无情&quot;,Age: 20}
+
+
+
+   pv:=reflect.ValueOf(p)
+
+
+
+   pt:=reflect.TypeOf(p)
+
+
+
+   //自己实现的struct to json
+
+
+
+   jsonBuilder:=strings.Builder{}
+
+
+
+   jsonBuilder.WriteString(&quot;{&quot;)
+
+
+
+   num:=pt.NumField()
+
+
+
+   for i:=0;i&lt;num;i++{
+
+
+
+      jsonTag:=pt.Field(i).Tag.Get(&quot;json&quot;) //获取json tag
+
+
+
+      jsonBuilder.WriteString(&quot;\&quot;&quot;+jsonTag+&quot;\&quot;&quot;)
+
+
+
+      jsonBuilder.WriteString(&quot;:&quot;)
+
+
+
+      //获取字段的值
+
+
+
+      jsonBuilder.WriteString(fmt.Sprintf(&quot;\&quot;%v\&quot;&quot;,pv.Field(i)))
+
+
+
+      if i&lt;num-1{
+
+
+
+         jsonBuilder.WriteString(&quot;,&quot;)
+
+
+
+      }
+
+
+
+   }
+
+
+
+   jsonBuilder.WriteString(&quot;}&quot;)
+
+
+
+   fmt.Println(jsonBuilder.String())//打印json字符串
+
+
+
+}
+
+</code></pre>
+
+<p>这是一个比较简单的 struct 转 json 示例，但是已经可以很好地演示 struct 的使用。在上述示例中，自定义的 jsonBuilder 负责 json 字符串的拼接，通过 for 循环把每一个字段拼接成 json 字符串。运行以上代码，你可以看到如下打印结果：</p>
+
+<pre><code>{&quot;name&quot;:&quot;飞雪无情&quot;,&quot;age&quot;:&quot;20&quot;}
+
+</code></pre>
+
+<p>json 字符串的转换只是 struct tag 的一个应用场景，你完全可以把 struct tag 当成结构体中字段的元数据配置，使用它来做想做的任何事情，比如 orm 映射、xml 转换、生成 swagger 文档等。</p>
+
+<h3>反射定律</h3>
+
+<p>反射是计算机语言中程序检视其自身结构的一种方法，它属于元编程的一种形式。反射灵活、强大，但也存在不安全。它可以绕过编译器的很多静态检查，如果过多使用便会造成混乱。为了帮助开发者更好地理解反射，Go 语言的作者在博客上总结了<a href="https://blog.golang.org/laws-of-reflection">反射的三大定律</a>。</p>
+
+<ol>
+
+<li>任何接口值 interface{} 都可以反射出反射对象，也就是 reflect.Value 和 reflect.Type，通过函数 reflect.ValueOf 和 reflect.TypeOf 获得。</li>
+
+<li>反射对象也可以还原为 interface{} 变量，也就是第 1 条定律的可逆性，通过 reflect.Value 结构体的 Interface 方法获得。</li>
+
+<li>要修改反射的对象，该值必须可设置，也就是可寻址，参考上节课修改变量的值那一节的内容理解。</li>
+
+</ol>
+
+<blockquote>
+
+<p>小提示：任何类型的变量都可以转换为空接口 intferface{}，所以第 1 条定律中函数 reflect.ValueOf 和 reflect.TypeOf 的参数就是 interface{}，表示可以把任何类型的变量转换为反射对象。在第 2 条定律中，reflect.Value 结构体的 Interface 方法返回的值也是 interface{}，表示可以把反射对象还原为对应的类型变量。</p>
+
+</blockquote>
+
+<p>一旦你理解了这三大定律，就可以更好地理解和使用 Go 语言反射。</p>
+
+<h3>总结</h3>
+
+<p>在反射中，reflect.Value 对应的是变量的值，如果你需要进行和变量的值有关的操作，应该优先使用 reflect.Value，比如获取变量的值、修改变量的值等。reflect.Type 对应的是变量的类型，如果你需要进行和变量的类型本身有关的操作，应该优先使用 reflect.Type，比如获取结构体内的字段、类型拥有的方法集等。</p>
+
+<p>此外我要再次强调：反射虽然很强大，可以简化编程、减少重复代码，但是过度使用会让你的代码变得复杂混乱。所以除非非常必要，否则尽可能少地使用它们。</p>
+
+<p><img src="assets/Cip5yF_Z2aWAS1bVAAVmaigbiLc421.png" alt="go语言15金句.png" /></p>
+
+<p>这节课的作业是：自己写代码运行通过反射调用结构体的方法。</p>
+
+<p>下节课我将介绍“非类型安全：让你既爱又恨的 unsafe”，记得来听课！</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/14  内存分配：new 还是 make？什么情况下该用谁？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/16  非类型安全：让你既爱又恨的 unsafe.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996dc7ef0a3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

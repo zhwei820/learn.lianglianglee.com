@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>11  并发模式：Go 语言中即学即用的高效并发模式.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md">00 开篇词  Go 为开发者的需求设计，带你实现高效工作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/01  基础入门：编写你的第一个 Go 语言程序.md">01  基础入门：编写你的第一个 Go 语言程序.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/02  数据类型：你必须掌握的数据类型有哪些？.md">02  数据类型：你必须掌握的数据类型有哪些？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/03  控制结构：if、for、switch 逻辑语句的那些事儿.md">03  控制结构：if、for、switch 逻辑语句的那些事儿.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/04  集合类型：如何正确使用 array、slice 和 map？.md">04  集合类型：如何正确使用 array、slice 和 map？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md">05  函数和方法：Go 语言中的函数和方法到底有什么不同？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/06  struct 和 interface：结构体与接口都实现了哪些功能？.md">06  struct 和 interface：结构体与接口都实现了哪些功能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/07  错误处理：如何通过 error、deferred、panic 等处理错误？.md">07  错误处理：如何通过 error、deferred、panic 等处理错误？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/08  并发基础：Goroutines 和 Channels 的声明与使用.md">08  并发基础：Goroutines 和 Channels 的声明与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/09  同步原语：sync 包让你对并发控制得心应手.md">09  同步原语：sync 包让你对并发控制得心应手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/10  Context：你必须掌握的多线程并发控制神器.md">10  Context：你必须掌握的多线程并发控制神器.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/22 讲通关 Go 语言-完/11  并发模式：Go 语言中即学即用的高效并发模式.md">11  并发模式：Go 语言中即学即用的高效并发模式.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/12  指针详解：在什么情况下应该使用指针？.md">12  指针详解：在什么情况下应该使用指针？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/13  参数传递：值、引用及指针之间的区别？.md">13  参数传递：值、引用及指针之间的区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/14  内存分配：new 还是 make？什么情况下该用谁？.md">14  内存分配：new 还是 make？什么情况下该用谁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/15  运行时反射：字符串和结构体之间如何转换？.md">15  运行时反射：字符串和结构体之间如何转换？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/16  非类型安全：让你既爱又恨的 unsafe.md">16  非类型安全：让你既爱又恨的 unsafe.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/17  SliceHeader：slice 如何高效处理数据？.md">17  SliceHeader：slice 如何高效处理数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/18  质量保证：Go 语言如何通过测试保证质量？.md">18  质量保证：Go 语言如何通过测试保证质量？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/19  性能优化：Go 语言如何进行代码检查和优化？.md">19  性能优化：Go 语言如何进行代码检查和优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/20  协作开发：模块化管理为什么能够提升研发效能？.md">20  协作开发：模块化管理为什么能够提升研发效能？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/21  网络编程：Go 语言如何玩转 RESTful API 服务？.md">21  网络编程：Go 语言如何玩转 RESTful API 服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md">22  网络编程：Go 语言如何通过 RPC 实现跨平台服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/22 讲通关 Go 语言-完/23 结束语  你的 Go 语言成长之路.md">23 结束语  你的 Go 语言成长之路.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>11  并发模式：Go 语言中即学即用的高效并发模式</h1>
+
+<p>上节课我为你讲解了如何通过 Context 更好地控制多个协程，课程最后的思考题是：如何通过 Context 实现日志跟踪？</p>
+
+<p>要想跟踪一个用户的请求，必须有一个唯一的 ID 来标识这次请求调用了哪些函数、执行了哪些代码，然后通过这个唯一的 ID 把日志信息串联起来。这样就形成了一个日志轨迹，也就实现了用户的跟踪，于是思路就有了。</p>
+
+<ol>
+
+<li>在用户请求的入口点生成 TraceID。</li>
+
+<li>通过 context.WithValue 保存 TraceID。</li>
+
+<li>然后这个保存着 TraceID 的 Context 就可以作为参数在各个协程或者函数间传递。</li>
+
+<li>在需要记录日志的地方，通过 Context 的 Value 方法获取保存的 TraceID，然后把它和其他日志信息记录下来。</li>
+
+<li>这样具备同样 TraceID 的日志就可以被串联起来，达到日志跟踪的目的。</li>
+
+</ol>
+
+<p>以上思路实现的核心是 Context 的传值功能。</p>
+
+<p>目前我们已熟练掌握了 goroutine、channel、sync 包的同步原语，这些都是并发编程比较基础的元素。而这节课要介绍的是如何用这些基础元素组成并发模式，帮助我们更好地编写并发程序。</p>
+
+<h3>for select 循环模式</h3>
+
+<p>for select 循环模式非常常见，在前面的课程中也使用过，它一般和 channel 组合完成任务，代码格式如下：</p>
+
+<pre><code>for { //for无限循环，或者for range循环
+
+
+
+  select {
+
+
+
+    //通过一个channel控制
+
+
+
+  }
+
+
+
+}
+
+</code></pre>
+
+<p>这是一种 for 循环 +select 多路复用的并发模式，哪个 case 满足就执行哪个，直到满足一定的条件退出 for 循环（比如发送退出信号）。</p>
+
+<p>从具体实现上讲，for select 循环有两种模式，一种是上节课监控狗例子中的无限循环模式，只有收到终止指令才会退出，如下所示：</p>
+
+<pre><code>for  {
+
+
+
+   select {
+
+
+
+   case &lt;-done:
+
+
+
+      return
+
+
+
+   default:
+
+
+
+      //执行具体的任务
+
+
+
+   }
+
+
+
+ }
+
+</code></pre>
+
+<p>这种模式会一直执行 default 语句中的任务，直到 done 这个 channel 被关闭为止。</p>
+
+<p>第二种模式是 for range select 有限循环，一般用于把可以迭代的内容发送到 channel 上，如下所示：</p>
+
+<pre><code>for _,s:=range []int{}{
+
+
+
+   select {
+
+
+
+   case &lt;-done:
+
+
+
+      return
+
+
+
+   case resultCh &lt;- s:
+
+
+
+   }
+
+
+
+}
+
+</code></pre>
+
+<p>这种模式也会有一个 done channel，用于退出当前的 for 循环，而另外一个 resultCh channel 用于接收 for range 循环的值，这些值通过 resultCh 可以传送给其他的调用者。</p>
+
+<h3>select timeout 模式</h3>
+
+<p>假如需要访问服务器获取数据，因为网络的不同响应时间不一样，为保证程序的质量，不可能一直等待网络返回，所以需要设置一个超时时间，这时候就可以使用 select timeout 模式，如下所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   result := make(chan string)
+
+
+
+   go func() {
+
+
+
+      //模拟网络访问
+
+
+
+      time.Sleep(8 * time.Second)
+
+
+
+      result &lt;- &quot;服务端结果&quot;
+
+
+
+   }()
+
+
+
+   select {
+
+
+
+   case v := &lt;-result:
+
+
+
+      fmt.Println(v)
+
+
+
+   case &lt;-time.After(5 * time.Second):
+
+
+
+      fmt.Println(&quot;网络访问超时了&quot;)
+
+
+
+   }
+
+
+
+}
+
+</code></pre>
+
+<p>select timeout 模式的核心在于通过 time.After 函数设置一个超时时间，防止因为异常造成 select 语句的无限等待。</p>
+
+<blockquote>
+
+<p>小提示：如果可以使用 Context 的 WithTimeout 函数超时取消，要优先使用。</p>
+
+</blockquote>
+
+<h3>Pipeline 模式</h3>
+
+<p>Pipeline 模式也称为流水线模式，模拟的就是现实世界中的流水线生产。以手机组装为例，整条生产流水线可能有成百上千道工序，每道工序只负责自己的事情，最终经过一道道工序组装，就完成了一部手机的生产。</p>
+
+<p>从技术上看，每一道工序的输出，就是下一道工序的输入，在工序之间传递的东西就是数据，这种模式称为流水线模式，而传递的数据称为数据流。</p>
+
+<p><img src="assets/CgqCHl_HcfiAH8GxAAEpQcyhlLg927.png" alt="图片1.png" /></p>
+
+<p>（流水线模式）</p>
+
+<p>通过以上流水线模式示意图，可以看到从最开始的生产，经过工序 1、2、3、4 到最终成品，这就是一条比较形象的流水线，也就是 Pipeline。</p>
+
+<p>现在我以组装手机为例，讲解流水线模式的使用。假设一条组装手机的流水线有 3 道工序，分别是<strong>配件采购</strong>、<strong>配件组装</strong>、<strong>打包成品</strong>，如图所示：</p>
+
+<p><img src="assets/Ciqc1F_HcfGAWb6pAABvGsG8s_o830.png" alt="图片2.png" /></p>
+
+<p>(手机组装流水线)</p>
+
+<p>从以上示意图中可以看到，采购的配件通过 channel 传递给工序 2 进行组装，然后再通过 channel 传递给工序 3 打包成品。相对工序 2 来说，工序 1 是生产者，工序 3 是消费者。相对工序 1 来说，工序 2 是消费者。相对工序 3 来说，工序 2 是生产者。</p>
+
+<p>我用下面的几组代码进行演示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>//工序1采购
+
+
+
+func buy(n int) &lt;-chan string {
+
+
+
+   out := make(chan string)
+
+
+
+   go func() {
+
+
+
+      defer close(out)
+
+
+
+      for i := 1; i &lt;= n; i++ {
+
+
+
+         out &lt;- fmt.Sprint(&quot;配件&quot;, i)
+
+
+
+      }
+
+
+
+   }()
+
+
+
+   return out
+
+
+
+}
+
+</code></pre>
+
+<p>首先我们定义一个采购函数 buy，它有一个参数 n，可以设置要采购多少套配件。采购代码的实现逻辑是通过 for 循环产生配件，然后放到 channel 类型的变量 out 里，最后返回这个 out，调用者就可以从 out 中获得配件。</p>
+
+<p>有了采购好的配件，就可以开始组装了，如下面的代码所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>//工序2组装
+
+
+
+func build(in &lt;-chan string) &lt;-chan string {
+
+
+
+   out := make(chan string)
+
+
+
+   go func() {
+
+
+
+      defer close(out)
+
+
+
+      for c := range in {
+
+
+
+         out &lt;- &quot;组装(&quot; + c + &quot;)&quot;
+
+
+
+      }
+
+
+
+   }()
+
+
+
+   return out
+
+
+
+}
+
+</code></pre>
+
+<p>组装函数 build 有一个 channel 类型的参数 in，用于接收配件进行组装，组装后的手机放到 channel 类型的变量 out 中返回。</p>
+
+<p>有了组装好的手机，就可以放在精美的包装盒中售卖了，而包装的操作是工序 3 完成的，对应的函数是 pack，如下所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>//工序3打包
+
+
+
+func pack(in &lt;-chan string) &lt;-chan string {
+
+
+
+   out := make(chan string)
+
+
+
+   go func() {
+
+
+
+      defer close(out)
+
+
+
+      for c := range in {
+
+
+
+         out &lt;- &quot;打包(&quot; + c + &quot;)&quot;
+
+
+
+      }
+
+
+
+   }()
+
+
+
+   return out
+
+
+
+}
+
+</code></pre>
+
+<p>函数 pack 的代码实现和组装函数 build 基本相同，这里不再赘述。</p>
+
+<p>流水线上的三道工序都完成后，就可以通过一个组织者把三道工序组织在一起，形成一条完整的手机组装流水线，这个组织者可以是我们常用的 main 函数，如下面的代码所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   coms := buy(10)    //采购10套配件
+
+
+
+   phones := build(coms) //组装10部手机
+
+
+
+   packs := pack(phones) //打包它们以便售卖
+
+
+
+   //输出测试，看看效果
+
+
+
+   for p := range packs {
+
+
+
+      fmt.Println(p)
+
+
+
+   }
+
+
+
+}
+
+</code></pre>
+
+<p>按照流水线工序进行调用，最终把手机打包以便售卖，过程如下所示：</p>
+
+<pre><code>打包(组装(配件1))
+
+
+
+打包(组装(配件2))
+
+
+
+打包(组装(配件3))
+
+
+
+打包(组装(配件4))
+
+
+
+打包(组装(配件5))
+
+
+
+打包(组装(配件6))
+
+
+
+打包(组装(配件7))
+
+
+
+打包(组装(配件8))
+
+
+
+打包(组装(配件9))
+
+
+
+打包(组装(配件10))
+
+</code></pre>
+
+<p>从上述例子中，我们可以总结出一个流水线模式的构成：</p>
+
+<ol>
+
+<li>流水线由一道道工序构成，每道工序通过 channel 把数据传递到下一个工序；</li>
+
+<li>每道工序一般会对应一个函数，函数里有协程和 channel，协程一般用于处理数据并把它放入 channel 中，整个函数会返回这个 channel 以供下一道工序使用；</li>
+
+<li>最终要有一个组织者（示例中的 main 函数）把这些工序串起来，这样就形成了一个完整的流水线，对于数据来说就是数据流。</li>
+
+</ol>
+
+<h3>扇出和扇入模式</h3>
+
+<p>手机流水线经过一段时间的运转，组织者发现产能提不上去，经过调研分析，发现瓶颈在工序 2 配件组装。工序 2 过慢，导致上游工序 1 配件采购速度不得不降下来，下游工序 3 没太多事情做，不得不闲下来，这就是整条流水线产能低下的原因。</p>
+
+<p>为了提升手机产能，组织者决定对工序 2 增加两班人手。人手增加后，整条流水线的示意图如下所示：</p>
+
+<p><img src="assets/CgqCHl_HcgOAJjFKAAFXf-gaoW4824.png" alt="图片3.png" /></p>
+
+<p>（改进后的流水线）</p>
+
+<p>从改造后的流水线示意图可以看到，工序 2 共有工序 2-1、工序 2-2、工序 2-3 三班人手，工序 1 采购的配件会被工序 2 的三班人手同时组装，这三班人手组装好的手机会同时传给<strong>merge 组件</strong>汇聚，然后再传给工序 3 打包成品。在这个流程中，会产生两种模式：<strong>扇出和扇入</strong>。</p>
+
+<ul>
+
+<li>示意图中红色的部分是<strong>扇出</strong>，对于工序 1 来说，它同时为工序 2 的三班人手传递数据（采购配件）。以工序 1 为中点，三条传递数据的线发散出去，就像一把打开的扇子一样，所以叫扇出。</li>
+
+<li>示意图中蓝色的部分是<strong>扇入</strong>，对于 merge 组件来说，它同时接收工序 2 三班人手传递的数据（组装的手机）进行汇聚，然后传给工序 3。以 merge 组件为中点，三条传递数据的线汇聚到 merge 组件，也像一把打开的扇子一样，所以叫扇入。</li>
+
+</ul>
+
+<blockquote>
+
+<p>小提示：扇出和扇入都像一把打开的扇子，因为数据传递的方向不同，所以叫法也不一样，扇出的数据流向是发散传递出去，是输出流；扇入的数据流向是汇聚进来，是输入流。</p>
+
+</blockquote>
+
+<p>已经理解了扇出扇入的原理，就可以开始改造流水线了。这次改造中，三道工序的实现函数 buy、build、pack 都保持不变，只需要增加一个 merge 函数即可，如下面的代码所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>//扇入函数（组件），把多个chanel中的数据发送到一个channel中
+
+
+
+func merge(ins ...&lt;-chan string) &lt;-chan string {
+
+
+
+   var wg sync.WaitGroup
+
+
+
+   out := make(chan string)
+
+
+
+   //把一个channel中的数据发送到out中
+
+
+
+   p:=func(in &lt;-chan string) {
+
+
+
+      defer wg.Done()
+
+
+
+      for c := range in {
+
+
+
+         out &lt;- c
+
+
+
+      }
+
+
+
+   }
+
+
+
+   wg.Add(len(ins))
+
+
+
+   //扇入，需要启动多个goroutine用于处于多个channel中的数据
+
+
+
+   for _,cs:=range ins{
+
+
+
+      go p(cs)
+
+
+
+   }
+
+
+
+   //等待所有输入的数据ins处理完，再关闭输出out
+
+
+
+   go func() {
+
+
+
+      wg.Wait()
+
+
+
+      close(out)
+
+
+
+   }()
+
+
+
+   return out
+
+
+
+}
+
+</code></pre>
+
+<p>新增的 merge 函数的核心逻辑就是对输入的每个 channel 使用单独的协程处理，并将每个协程处理的结果都发送到变量 out 中，达到扇入的目的。总结起来就是通过多个协程并发，把多个 channel 合成一个。</p>
+
+<p>在整条手机组装流水线中，merge 函数非常小，而且和业务无关，不能当作一道工序，所以我把它叫作<strong>组件</strong>。该 merge 组件是可以复用的，流水线中的任何工序需要扇入的时候，都可以使用 merge 组件。</p>
+
+<blockquote>
+
+<p>小提示：这次的改造新增了 merge 函数，其他函数保持不变，符合开闭原则。开闭原则规定“软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的”。</p>
+
+</blockquote>
+
+<p>有了可以复用的 merge 组件，现在来看流水线的组织者 main 函数是如何使用扇出和扇入并发模式的，如下所示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   coms := buy(100)    //采购100套配件
+
+
+
+   //三班人同时组装100部手机
+
+
+
+   phones1 := build(coms)
+
+
+
+   phones2 := build(coms)
+
+
+
+   phones3 := build(coms)
+
+
+
+   //汇聚三个channel成一个
+
+
+
+   phones := merge(phones1,phones2,phones3)
+
+
+
+   packs := pack(phones) //打包它们以便售卖
+
+
+
+   //输出测试，看看效果
+
+
+
+   for p := range packs {
+
+
+
+      fmt.Println(p)
+
+
+
+   }
+
+
+
+}
+
+</code></pre>
+
+<p>这个示例采购了 100 套配件，也就是开始增加产能了。于是同时调用三次 build 函数，也就是为工序 2 增加人手，这里是三班人手同时组装配件，然后通过 merge 函数这个可复用的组件将三个 channel 汇聚为一个，然后传给 pack 函数打包。</p>
+
+<p>这样通过扇出和扇入模式，整条流水线就被扩充好了，大大提升了生产效率。因为已经有了通用的扇入组件 merge，所以整条流水中任何需要扇出、扇入提高性能的工序，都可以复用 merge 组件做扇入，并且不用做任何修改。</p>
+
+<h3>Futures 模式</h3>
+
+<p>Pipeline 流水线模式中的工序是相互依赖的，上一道工序做完，下一道工序才能开始。但是在我们的实际需求中，也有大量的任务之间相互独立、没有依赖，所以为了提高性能，这些独立的任务就可以并发执行。</p>
+
+<p>举个例子，比如我打算自己做顿火锅吃，那么就需要洗菜、烧水。洗菜、烧水这两个步骤相互之间没有依赖关系，是独立的，那么就可以同时做，但是最后做火锅这个步骤就需要洗好菜、烧好水之后才能进行。这个做火锅的场景就适用 Futures 模式。</p>
+
+<p>Futures 模式可以理解为未来模式，主协程不用等待子协程返回的结果，可以先去做其他事情，等未来需要子协程结果的时候再来取，如果子协程还没有返回结果，就一直等待。我用下面的代码进行演示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>//洗菜
+
+
+
+func washVegetables() &lt;-chan string {
+
+
+
+   vegetables := make(chan string)
+
+
+
+   go func() {
+
+
+
+      time.Sleep(5 * time.Second)
+
+
+
+      vegetables &lt;- &quot;洗好的菜&quot;
+
+
+
+   }()
+
+
+
+   return vegetables
+
+
+
+}
+
+
+
+//烧水
+
+
+
+func boilWater() &lt;-chan string {
+
+
+
+   water := make(chan string)
+
+
+
+   go func() {
+
+
+
+      time.Sleep(5 * time.Second)
+
+
+
+      water &lt;- &quot;烧开的水&quot;
+
+
+
+   }()
+
+
+
+   return water
+
+
+
+}
+
+</code></pre>
+
+<p>洗菜和烧水这两个相互独立的任务可以一起做，所以示例中通过开启协程的方式，实现同时做的功能。当任务完成后，结果会通过 channel 返回。</p>
+
+<blockquote>
+
+<p>小提示：示例中的等待 5 秒用来描述洗菜和烧火的耗时。</p>
+
+</blockquote>
+
+<p>在启动两个子协程同时去洗菜和烧水的时候，主协程就可以去干点其他事情（示例中是眯一会），等睡醒了，要做火锅的时候，就需要洗好的菜和烧好的水这两个结果了。我用下面的代码进行演示：</p>
+
+<p><em><strong>ch11/main.go</strong></em></p>
+
+<pre><code>func main() {
+
+
+
+   vegetablesCh := washVegetables() //洗菜
+
+
+
+   waterCh := boilWater()           //烧水
+
+
+
+   fmt.Println(&quot;已经安排洗菜和烧水了，我先眯一会&quot;)
+
+
+
+   time.Sleep(2 * time.Second)
+
+
+
+   fmt.Println(&quot;要做火锅了，看看菜和水好了吗&quot;)
+
+
+
+   vegetables := &lt;-vegetablesCh
+
+
+
+   water := &lt;-waterCh
+
+
+
+   fmt.Println(&quot;准备好了，可以做火锅了:&quot;,vegetables,water)
+
+
+
+}
+
+</code></pre>
+
+<p>Futures 模式下的协程和普通协程最大的区别是可以返回结果，而这个结果会在未来的某个时间点使用。所以在未来获取这个结果的操作必须是一个阻塞的操作，要一直等到获取结果为止。</p>
+
+<p>如果你的大任务可以拆解为一个个独立并发执行的小任务，并且可以通过这些小任务的结果得出最终大任务的结果，就可以使用 Futures 模式。</p>
+
+<h3>总结</h3>
+
+<p>并发模式和设计模式很相似，都是对现实场景的抽象封装，以便提供一个统一的解决方案。但和设计模式不同的是，并发模式更专注于异步和并发。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/10  Context：你必须掌握的多线程并发控制神器.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/22 讲通关 Go 语言-完/12  指针详解：在什么情况下应该使用指针？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996dc02cd23d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

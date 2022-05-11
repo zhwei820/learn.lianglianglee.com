@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>16 容器网络配置（1）：容器网络不通了要怎么调试.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>16 容器网络配置（1）：容器网络不通了要怎么调试</h1>
+
+<p>你好，我是程远。</p>
+
+<p>在上一讲，我们讲了 Network Namespace 隔离了网络设备，IP 协议栈和路由表，以及防火墙规则，那容器 Network Namespace 里的参数怎么去配置，我们现在已经很清楚了。</p>
+
+<p>其实对于网络配置的问题，我们还有一个最需要关心的内容，那就是容器和外面的容器或者节点是怎么通讯的，这就涉及到了容器网络接口配置的问题了。</p>
+
+<p>所以这一讲呢，我们就来聊一聊，容器 Network Namespace 里如何配置网络接口，还有当容器网络不通的时候，我们应该怎么去做一个简单调试。</p>
+
+<h2>问题再现</h2>
+
+<p>在前面的课程里，我们一直是用 docker run 这个命令来启动容器的。容器启动了之后，我们也可以看到，在容器里面有一个&quot;eth0&quot;的网络接口，接口上也配置了一个 IP 地址。</p>
+
+<p>不过呢，如果我们想从容器里访问外面的一个 IP 地址，比如说 39.106.233.176（这个是极客时间网址对应的 IP），结果就发现是不能 ping 通的。</p>
+
+<p>这时我们可能会想到，到底是不是容器内出了问题，在容器里无法访问，会不会宿主机也一样不行呢？</p>
+
+<p>所以我们需要验证一下，首先我们退出容器，然后在宿主机的 Network Namespace 下，再运行 ping 39.106.233.176，结果就会发现在宿主机上，却是可以连通这个地址的。</p>
+
+<pre><code># docker run -d --name if-test centos:8.1.1911 sleep 36000
+
+244d44f94dc2931626194c6fd3f99cec7b7c4bf61aafc6c702551e2c5ca2a371
+
+# docker exec -it if-test bash
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6c4d9d9c2f6848282d28282d08f82d2d584">[email&#160;protected]</a> /]# ip addr
+
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+
+    inet 127.0.0.1/8 scope host lo
+
+       valid_lft forever preferred_lft forever
+
+808: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b7e6f732b5b727d232b22">[email&#160;protected]</a>: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default
+
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+
+    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
+
+       valid_lft forever preferred_lft forever
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8af8e5e5fecab8bebeeebebeecb3beeee9b8">[email&#160;protected]</a> /]# ping 39.106.233.176       ### 容器中无法ping通
+
+PING 39.106.233.176 (39.106.233.176) 56(84) bytes of data.
+
+^C
+
+--- 39.106.233.176 ping statistics ---
+
+9 packets transmitted, 0 received, 100% packet loss, time 185ms
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4c6dbdbc0f4868080d08080d28d80d0d786">[email&#160;protected]</a> /]# exit             ###退出容器
+
+exit
+
+
+
+# ping 39.106.233.176                        ### 宿主机上可以ping通
+
+PING 39.106.233.176 (39.106.233.176) 56(84) bytes of data.
+
+64 bytes from 39.106.233.176: icmp_seq=1 ttl=78 time=296 ms
+
+64 bytes from 39.106.233.176: icmp_seq=2 ttl=78 time=306 ms
+
+64 bytes from 39.106.233.176: icmp_seq=3 ttl=78 time=303 ms
+
+^C
+
+--- 39.106.233.176 ping statistics ---
+
+4 packets transmitted, 3 received, 25% packet loss, time 7ms
+
+rtt min/avg/max/mdev = 296.059/301.449/305.580/4.037 ms
+
+</code></pre>
+
+<p>那么碰到这种容器内网络不通的问题，我们应该怎么分析调试呢？我们还是需要先来理解一下，容器 Network Namespace 里的网络接口是怎么配置的。</p>
+
+<h2>基本概念</h2>
+
+<p>在讲解容器的网络接口配置之前，我们需要先建立一个整体的认识，搞清楚容器网络接口在系统架构中处于哪个位置。</p>
+
+<p>你可以看一下我给你画的这张图，图里展示的是容器有自己的 Network Namespace，eth0 是这个 Network Namespace 里的网络接口。而宿主机上也有自己的 eth0，宿主机上的 eth0 对应着真正的物理网卡，可以和外面通讯。</p>
+
+<p><img src="assets/6848619c9d4db810560fe1a712fb2d98.jpeg" alt="img" /></p>
+
+<p>那你可以先想想，我们要让容器 Network Namespace 中的数据包最终发送到物理网卡上，需要完成哪些步骤呢？从图上看，我们大致可以知道应该包括这两步。</p>
+
+<p>第一步，就是要让数据包从容器的 Network Namespace 发送到 Host Network Namespace 上。</p>
+
+<p>第二步，数据包发到了 Host Network Namespace 之后，还要解决数据包怎么从宿主机上的 eth0 发送出去的问题。</p>
+
+<p>好，整体的思路已经理清楚了，接下来我们做具体分析。我们先来看第一步，怎么让数据包从容器的 Network Namespace 发送到 Host Network Namespace 上面。</p>
+
+<p>你可以查看一下Docker 网络的文档或者Kubernetes 网络的文档，这些文档里面介绍了很多种容器网络配置的方式。</p>
+
+<p>不过对于容器从自己的 Network Namespace 连接到 Host Network Namespace 的方法，一般来说就只有两类设备接口：一类是veth，另外一类是 macvlan/ipvlan。</p>
+
+<p>在这些方法中，我们使用最多的就是 veth 的方式，用 Docker 启动的容器缺省的网络接口用的也是这个 veth。既然它这么常见，所以我们就用 veth 作为例子来详细讲解。至于另外一类 macvlan/ipvlan 的方式，我们在下一讲里会讲到。</p>
+
+<p>那什么是 veth 呢？为了方便你更好地理解，我们先来模拟一下 Docker 为容器建立 eth0 网络接口的过程，动手操作一下，这样呢，你就可以很快明白什么是 veth 了。</p>
+
+<p>对于这个模拟操作呢，我们主要用到的是ip netns 这个命令，通过它来对 Network Namespace 做操作。</p>
+
+<p>首先，我们先启动一个不带网络配置的容器，和我们之前的命令比较，主要是多加上了&quot;--network none&quot;参数。我们可以看到，这样在启动的容器中，Network Namespace 里就只有 loopback 一个网络设备，而没有了 eth0 网络设备了。</p>
+
+<pre><code># docker run -d --name if-test --network none centos:8.1.1911 sleep 36000
+
+cf3d3105b11512658a025f5b401a09c888ed3495205f31e0a0d78a2036729472
+
+# docker exec -it if-test ip addr
+
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+
+    inet 127.0.0.1/8 scope host lo
+
+       valid_lft forever preferred_lft forever
+
+</code></pre>
+
+<p>完成刚才的设置以后，我们就在这个容器的 Network Namespace 里建立 veth，你可以执行一下后面的这个脚本。</p>
+
+<pre><code>pid=$(ps -ef | grep &quot;sleep 36000&quot; | grep -v grep | awk '{print $2}')
+
+echo $pid
+
+ln -s /proc/$pid/ns/net /var/run/netns/$pid
+
+
+
+# Create a pair of veth interfaces
+
+ip link add name veth_host type veth peer name veth_container
+
+# Put one of them in the new net ns
+
+ip link set veth_container netns $pid
+
+
+
+# In the container, setup veth_container
+
+ip netns exec $pid ip link set veth_container name eth0
+
+ip netns exec $pid ip addr add 172.17.1.2/16 dev eth0
+
+ip netns exec $pid ip link set eth0 up
+
+ip netns exec $pid ip route add default via 172.17.0.1
+
+
+
+# In the host, set veth_host up
+
+ip link set veth_host up
+
+</code></pre>
+
+<p>我在这里解释一下，这个 veth 的建立过程是什么样的。</p>
+
+<p>首先呢，我们先找到这个容器里运行的进程&quot;sleep 36000&quot;的 pid，通过 &quot;/proc/$pid/ns/net&quot;这个文件得到 Network Namespace 的 ID，这个 Network Namespace ID 既是这个进程的，也同时属于这个容器。</p>
+
+<p>然后我们在&quot;/var/run/netns/&quot;的目录下建立一个符号链接，指向这个容器的 Network Namespace。完成这步操作之后，在后面的&quot;ip netns&quot;操作里，就可以用 pid 的值作为这个容器的 Network Namesapce 的标识了。</p>
+
+<p>接下来呢，我们用 ip link 命令来建立一对 veth 的虚拟设备接口，分别是 veth_container 和 veth_host。从名字就可以看出来，veth_container 这个接口会被放在容器 Network Namespace 里，而 veth_host 会放在宿主机的 Host Network Namespace。</p>
+
+<p>所以我们后面的命令也很好理解了，就是用 ip link set veth_container netns $pid 把 veth_container 这个接口放入到容器的 Network Namespace 中。</p>
+
+<p>再然后我们要把 veth_container 重新命名为 eth0，因为这时候接口已经在容器的 Network Namesapce 里了，eth0 就不会和宿主机上的 eth0 冲突了。</p>
+
+<p>最后对容器内的 eht0，我们还要做基本的网络 IP 和缺省路由配置。因为 veth_host 已经在宿主机的 Host Network Namespace 了，就不需要我们做什么了，这时我们只需要 up 一下这个接口就可以了。</p>
+
+<p>那刚才这些操作完成以后，我们就建立了一对 veth 虚拟设备接口。我给你画了一张示意图，图里直观展示了这对接口在容器和宿主机上的位置。</p>
+
+<p><img src="assets/569287c365c99d3778858b7bc42b5989.jpeg" alt="img" /></p>
+
+<p>现在，我们再来看看 veth 的定义了，其实它也很简单。veth 就是一个虚拟的网络设备，一般都是成对创建，而且这对设备是相互连接的。当每个设备在不同的 Network Namespaces 的时候，Namespace 之间就可以用这对 veth 设备来进行网络通讯了。</p>
+
+<p>比如说，你可以执行下面的这段代码，试试在 veth_host 上加上一个 IP，172.17.1.1/16，然后从容器里就可以 ping 通这个 IP 了。这也证明了从容器到宿主机可以利用这对 veth 接口来通讯了。</p>
+
+<pre><code># ip addr add 172.17.1.1/16 dev veth_host
+
+# docker exec -it if-test ping 172.17.1.1
+
+PING 172.17.1.1 (172.17.1.1) 56(84) bytes of data.
+
+64 bytes from 172.17.1.1: icmp_seq=1 ttl=64 time=0.073 ms
+
+64 bytes from 172.17.1.1: icmp_seq=2 ttl=64 time=0.092 ms
+
+^C
+
+--- 172.17.1.1 ping statistics ---
+
+2 packets transmitted, 2 received, 0% packet loss, time 30ms
+
+rtt min/avg/max/mdev = 0.073/0.082/0.092/0.013 ms
+
+</code></pre>
+
+<p>好了，这样我们完成了第一步，通过一对 veth 虚拟设备，可以让数据包从容器的 Network Namespace 发送到 Host Network Namespace 上。</p>
+
+<p>那下面我们再来看第二步， 数据包到了 Host Network Namespace 之后呢，怎么把它从宿主机上的 eth0 发送出去?</p>
+
+<p>其实这一步呢，就是一个普通 Linux 节点上数据包转发的问题了。这里我们解决问题的方法有很多种，比如说用 nat 来做个转发，或者建立 Overlay 网络发送，也可以通过配置 proxy arp 加路由的方法来实现。</p>
+
+<p>因为考虑到网络环境的配置，同时 Docker 缺省使用的是 bridge + nat 的转发方式， 那我们就在刚才讲的第一步基础上，再手动实现一下 bridge+nat 的转发方式。对于其他的配置方法，你可以看一下 Docker 或者 Kubernetes 相关的文档。</p>
+
+<p>Docker 程序在节点上安装完之后，就会自动建立了一个 docker0 的 bridge interface。所以我们只需要把第一步中建立的 veth_host 这个设备，接入到 docker0 这个 bridge 上。</p>
+
+<p>这里我要提醒你注意一下，如果之前你在 veth_host 上设置了 IP 的，就需先运行一下&quot;ip addr delete 172.17.1.1/16 dev veth_host&quot;，把 IP 从 veth_host 上删除。</p>
+
+<pre><code># ip addr delete 172.17.1.1/16 dev veth_host 
+
+ip link set veth_host master docker0
+
+</code></pre>
+
+<p>这个命令执行完之后，容器和宿主机的网络配置就会发生变化，这种配置是什么样呢？你可以参考一下面这张图的描述。</p>
+
+<p><img src="assets/a006f0707d02d38917983523c9356869.jpeg" alt="img" /></p>
+
+<p>从这张示意图中，我们可以看出来，容器和 docker0 组成了一个子网，docker0 上的 IP 就是这个子网的网关 IP。</p>
+
+<p>如果我们要让子网通过宿主机上 eth0 去访问外网的话，那么加上 iptables 的规则就可以了，也就是下面这条规则。</p>
+
+<pre><code>iptables -P FORWARD ACCEPT
+
+</code></pre>
+
+<p>好了，进行到这里，我们通过 bridge+nat 的配置，似乎已经完成了第二步——让数据从宿主机的 eth0 发送出去。</p>
+
+<p>那么我们这样配置，真的可以让容器里发送数据包到外网了吗？这需要我们做个测试，再重新尝试下这一讲开始的操作，从容器里 ping 外网的 IP，这时候，你会发现还是 ping 不通。</p>
+
+<p>其实呢，做到这一步，我们通过自己的逐步操作呢，重现了这一讲了最开始的问题。</p>
+
+<h2>解决问题</h2>
+
+<p>既然现在我们清楚了，在这个节点上容器和宿主机上的网络配置是怎么一回事。那么要调试这个问题呢，也有了思路，关键就是找到数据包传到哪个环节时发生了中断。</p>
+
+<p>那最直接的方法呢，就是在容器中继续 ping 外网的 IP 39.106.233.176，然后在容器的 eth0 (veth_container)，容器外的 veth_host，docker0，宿主机的 eth0 这一条数据包的路径上运行 tcpdump。</p>
+
+<p>这样就可以查到，到底在哪个设备接口上没有收到 ping 的 icmp 包。我把 tcpdump 运行的结果我列到了下面。</p>
+
+<p>容器的 eth0：</p>
+
+<pre><code># ip netns exec $pid tcpdump -i eth0 host 39.106.233.176 -nn
+
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+
+listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+
+00:47:29.934294 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 1, length 64
+
+00:47:30.934766 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 2, length 64
+
+00:47:31.958875 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 3, length 64
+
+
+
+veth_host：
+
+
+
+# tcpdump -i veth_host host 39.106.233.176 -nn
+
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+
+listening on veth_host, link-type EN10MB (Ethernet), capture size 262144 bytes
+
+00:48:01.654720 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 32, length 64
+
+00:48:02.678752 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 33, length 64
+
+00:48:03.702827 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 34, length 64
+
+
+
+docker0：
+
+
+
+# tcpdump -i docker0 host 39.106.233.176 -nn
+
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+
+listening on docker0, link-type EN10MB (Ethernet), capture size 262144 bytes
+
+00:48:20.086841 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 50, length 64
+
+00:48:21.110765 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 51, length 64
+
+00:48:22.134839 IP 172.17.1.2 &gt; 39.106.233.176: ICMP echo request, id 71, seq 52, length 64
+
+
+
+host eth0：
+
+
+
+# tcpdump -i eth0 host 39.106.233.176 -nn
+
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+
+listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+
+^C
+
+0 packets captured
+
+0 packets received by filter
+
+0 packets dropped by kernel
+
+</code></pre>
+
+<p>通过上面的输出结果，我们发现 icmp 包到达了 docker0，但是没有到达宿主机上的 eth0。</p>
+
+<p>因为我们已经配置了 iptables nat 的转发，这个也可以通过查看 iptables 的 nat 表确认一下，是没有问题的，具体的操作命令如下：</p>
+
+<pre><code># iptables -L  -t nat
+
+Chain PREROUTING (policy ACCEPT)
+
+target     prot opt source               destination
+
+DOCKER     all  --  anywhere             anywhere             ADDRTYPE match dst-type LOCAL
+
+
+
+Chain INPUT (policy ACCEPT)
+
+target     prot opt source               destination
+
+
+
+Chain POSTROUTING (policy ACCEPT)
+
+target     prot opt source               destination
+
+MASQUERADE  all  --  172.17.0.0/16        anywhere
+
+
+
+Chain OUTPUT (policy ACCEPT)
+
+target     prot opt source               destination
+
+DOCKER     all  --  anywhere            !127.0.0.0/8          ADDRTYPE match dst-type LOCAL
+
+
+
+Chain DOCKER (2 references)
+
+target     prot opt source               destination
+
+RETURN     all  --  anywhere             anywhere
+
+</code></pre>
+
+<p>那么会是什么问题呢？因为这里需要做两个网络设备接口之间的数据包转发，也就是从 docker0 把数据包转发到 eth0 上，你可能想到了 Linux 协议栈里的一个常用参数 ip_forward。</p>
+
+<p>我们可以看一下，它的值是 0，当我们把它改成 1 之后，那么我们就可以从容器中 ping 通外网 39.106.233.176 这个 IP 了！</p>
+
+<pre><code># cat /proc/sys/net/ipv4/ip_forward
+
+0
+
+# echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+
+
+# docker exec -it if-test ping 39.106.233.176
+
+PING 39.106.233.176 (39.106.233.176) 56(84) bytes of data.
+
+64 bytes from 39.106.233.176: icmp_seq=1 ttl=77 time=359 ms
+
+64 bytes from 39.106.233.176: icmp_seq=2 ttl=77 time=346 ms
+
+^C
+
+--- 39.106.233.176 ping statistics ---
+
+2 packets transmitted, 2 received, 0% packet loss, time 1ms
+
+rtt min/avg/max/mdev = 345.889/352.482/359.075/6.593 ms
+
+</code></pre>
+
+<h2>重点小结</h2>
+
+<p>这一讲，我们主要解决的问题是如何给容器配置网络接口，让容器可以和外面通讯；同时我们还学习了当容器网络不通的时候，我们应该怎么来做一个简单调试。</p>
+
+<p>解决容器与外界通讯的问题呢，一共需要完成两步。第一步是，怎么让数据包从容器的 Network Namespace 发送到 Host Network Namespace 上；第二步，数据包到了 Host Network Namespace 之后，还需要让它可以从宿主机的 eth0 发送出去。</p>
+
+<p>我们想让数据从容器 Netowrk Namespace 发送到 Host Network Namespace，可以用配置一对 veth 虚拟网络设备的方法实现。而让数据包从宿主机的 eth0 发送出去，就用可 bridge+nat 的方式完成。</p>
+
+<p>这里我讲的是最基本的一种配置，但它也是很常用的一个网络配置。针对其他不同需要，容器网络还有很多种。那你学习完这一讲，了解了基本的概念和操作之后呢，还可以查看更多的网上资料，学习不同的网络配置。</p>
+
+<p>遇到容器中网络不通的情况，我们先要理解自己的容器以及容器在宿主机上的配置，通过对主要设备上做 tcpdump 可以找到具体在哪一步数据包停止了转发。</p>
+
+<p>然后我们结合内核网络配置参数，路由表信息，防火墙规则，一般都可以定位出根本原因，最终解决这种网络完全不通的问题。</p>
+
+<p>但是如果是网络偶尔丢包的问题，这个就需要用到其他的一些工具来做分析了，这个我们会在之后的章节做讲解。</p>
+
+<h2>思考题</h2>
+
+<p>我们这一讲的例子呢，实现了从容器访问外面的 IP。那么如果要实现节点外的程序来访问容器的 IP，我们应该怎么配置网络呢？</p>
+
+<p>欢迎你在留言区分享你的思考和问题。如果这篇文章对你有启发，也欢迎分享给你的朋友，一起学习进步。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977a379093cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

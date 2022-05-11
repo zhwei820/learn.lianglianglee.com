@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>08 字典使用与内部实现原理.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/01 Redis 是如何执行的.md">01 Redis 是如何执行的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/02 Redis 快速搭建与使用.md">02 Redis 快速搭建与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/03 Redis 持久化——RDB.md">03 Redis 持久化——RDB.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/04 Redis 持久化——AOF.md">04 Redis 持久化——AOF.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/05 Redis 持久化——混合持久化.md">05 Redis 持久化——混合持久化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/06 字符串使用与内部实现原理.md">06 字符串使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">07 附录：更多字符串操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Redis 核心原理与实战/08 字典使用与内部实现原理.md">08 字典使用与内部实现原理.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">09 附录：更多字典操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/10 列表使用与内部实现原理.md">10 列表使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">11 附录：更多列表操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/12 集合使用与内部实现原理.md">12 集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">13 附录：更多集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/14 有序集合使用与内部实现原理.md">14 有序集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/15 附录：更多有序集合操作命令.md">15 附录：更多有序集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/16 Redis 事务深入解析.md">16 Redis 事务深入解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/17 Redis 键值过期操作.md">17 Redis 键值过期操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/18 Redis 过期策略与源码分析.md">18 Redis 过期策略与源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/19 Redis 管道技术——Pipeline.md">19 Redis 管道技术——Pipeline.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/20 查询附近的人——GEO.md">20 查询附近的人——GEO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/21 游标迭代器（过滤器）——Scan.md">21 游标迭代器（过滤器）——Scan.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/22 优秀的基数统计算法——HyperLogLog.md">22 优秀的基数统计算法——HyperLogLog.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/23 内存淘汰机制与算法.md">23 内存淘汰机制与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">24 消息队列——发布订阅模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/25 消息队列的其他实现方式.md">25 消息队列的其他实现方式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">26 消息队列终极解决方案——Stream（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">27 消息队列终极解决方案——Stream（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">28 实战：分布式锁详解与代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">29 实战：布隆过滤器安装与使用及原理分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">30 完整案例：实现延迟队列的两种方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/31 实战：定时任务案例.md">31 实战：定时任务案例.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/32 实战：RediSearch 高性能的全文搜索引擎.md">32 实战：RediSearch 高性能的全文搜索引擎.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/33 实战：Redis 性能测试.md">33 实战：Redis 性能测试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/34 实战：Redis 慢查询.md">34 实战：Redis 慢查询.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/35 实战：Redis 性能优化方案.md">35 实战：Redis 性能优化方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/36 实战：Redis 主从同步.md">36 实战：Redis 主从同步.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/37 实战：Redis哨兵模式（上）.md">37 实战：Redis哨兵模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/38 实战：Redis 哨兵模式（下）.md">38 实战：Redis 哨兵模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/39 实战：Redis 集群模式（上）.md">39 实战：Redis 集群模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/40 实战：Redis 集群模式（下）.md">40 实战：Redis 集群模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/41 案例：Redis 问题汇总和相关解决方案.md">41 案例：Redis 问题汇总和相关解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/42 技能学习指南.md">42 技能学习指南.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/43 加餐：Redis 的可视化管理工具.md">43 加餐：Redis 的可视化管理工具.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>08 字典使用与内部实现原理</h1>
+
+<p>字典类型 (Hash) 又被成为散列类型或者是哈希表类型，它是将一个键值 (key) 和一个特殊的“哈希表”关联起来，这个“哈希表”表包含两列数据：字段和值。例如我们使用字典类型来存储一篇文章的详情信息，存储结构如下图所示： <img src="assets/2020-02-28-031216.png" alt="哈希表存储结构.png" /> 同理我们也可以使用字典类型来存储用户信息，并且使用字典类型来存储此类信息，是不需要手动序列化和反序列化数据的，所以使用起来更加的方便和高效。</p>
+
+<h3>1.基础使用</h3>
+
+<p>首先我们使用命令行工具 redis-cli，来对字典类型进行相关的操作。</p>
+
+<h4>1）插入单个元素</h4>
+
+<p>语法：hset key field value 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hset myhash key1 value1
+
+(integer) 1
+
+127.0.0.1:6379&gt; hset myhash key2 value2
+
+(integer) 1
+
+
+
+</code></pre>
+
+<h4>2）当某键不存在时，插入数据</h4>
+
+<p>语法：hsetnx key field value 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hsetnx myhash k4 v4
+
+(integer) 1
+
+127.0.0.1:6379&gt; hget myhash k4
+
+&quot;v4&quot;
+
+
+
+</code></pre>
+
+<p>如果<strong>尝试插入已存在的键</strong>，不会改变原来的值，示例如下：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hsetnx myhash k4 val4
+
+(integer) 0
+
+127.0.0.1:6379&gt; hget myhash k4
+
+&quot;v4&quot;
+
+
+
+</code></pre>
+
+<p>尝试修改已经存在的 k4 赋值为 val4，但并没有生效，查询 k4 的结果依然是原来的值 v4。</p>
+
+<h4>3）查询单个元素</h4>
+
+<p>语法：hget key field 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hget myhash key1
+
+&quot;value1&quot;
+
+
+
+</code></pre>
+
+<h4>4）删除 key 中的一个或多个元素</h4>
+
+<p>语法：hdel myhash field [field ...] 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hdel myhash key1 key2
+
+(integer) 1
+
+
+
+</code></pre>
+
+<p>注意：不能使用类似于 <code>hdel myhash</code> 的命令删除整个 Hash 值的。</p>
+
+<h4>5）某个整数值累加计算</h4>
+
+<p>语法：hincrby key field increment 示例：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; hset myhash k3 3
+
+(integer) 1
+
+127.0.0.1:6379&gt; hincrby myhash k3 2
+
+(integer) 5
+
+127.0.0.1:6379&gt; hget myhash k3
+
+&quot;5&quot;
+
+
+
+</code></pre>
+
+<p>更多操作命令，详见附录部分。</p>
+
+<h3>2.代码实战</h3>
+
+<p>接下来我们用 Java 代码实现对 Redis 的操作，同样我们先引入 Jedis 框架 ，接下来再用代码来对字典类型进行操作，示例代码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+import java.util.Map;
+
+
+
+public class HashExample {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
+
+        // 把 Key 值定义为变量
+
+        final String REDISKEY = &quot;myhash&quot;;
+
+        // 插入单个元素
+
+        jedis.hset(REDISKEY, &quot;key1&quot;, &quot;value1&quot;);
+
+        // 查询单个元素
+
+        Map&lt;String, String&gt; singleMap = jedis.hgetAll(REDISKEY);
+
+        System.out.println(singleMap.get(&quot;key1&quot;));  // 输出：value1
+
+        // 查询所有元素
+
+        Map&lt;String, String&gt; allMap = jedis.hgetAll(REDISKEY);
+
+        System.out.println(allMap.get(&quot;k2&quot;)); // 输出：val2
+
+        System.out.println(allMap); // 输出：{key1=value1, k1=val1, k2=val2, k3=9.2, k4=v4...}
+
+        // 删除单个元素
+
+        Long delResult = jedis.hdel(REDISKEY, &quot;key1&quot;);
+
+        System.out.println(&quot;删除结果：&quot; + delResult);    // 输出：删除结果：1
+
+        // 查询单个元素
+
+        System.out.println(jedis.hget(REDISKEY, &quot;key1&quot;)); // 输出：返回 null
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>从代码中可以看出，在 Jedis 中我们可以直接使用 Map 来接收 Redis 中读取的字典类型的数据，省去了手动转化的麻烦，还是比较方便的。</p>
+
+<h3>3.数据结构</h3>
+
+<p>字典类型本质上是由数组和链表结构组成的，来看字典类型的源码实现：</p>
+
+<pre><code class="language-c">typedef struct dictEntry { // dict.h
+
+    void *key;
+
+    union {
+
+        void *val;
+
+        uint64_t u64;
+
+        int64_t s64;
+
+        double d;
+
+    } v;
+
+    struct dictEntry *next; // 下一个 entry
+
+} dictEntry;
+
+
+
+</code></pre>
+
+<p>字典类型的数据结构，如下图所示：</p>
+
+<p><img src="assets/2020-02-28-031217.png" alt="Redis-HashType-02.png" /></p>
+
+<p>通常情况下字典类型会使用数组的方式来存储相关的数据，但发生哈希冲突时才会使用链表的结构来存储数据。</p>
+
+<h3>4.哈希冲突</h3>
+
+<p>字典类型的存储流程是先将键值进行 Hash 计算，得到存储键值对应的数组索引，再根据数组索引进行数据存储，但在小概率事件下可能会出完全不相同的键值进行 Hash 计算之后，得到相同的 Hash 值，这种情况我们称之为<strong>哈希冲突</strong>。</p>
+
+<p>哈希冲突一般通过链表的形式解决，相同的哈希值会对应一个链表结构，每次有哈希冲突时，就把新的元素插入到链表的尾部，请参考上面数据结构的那张图。</p>
+
+<p>键值查询的流程如下：</p>
+
+<ul>
+
+<li>通过算法 (Hash，计算和取余等) 操作获得数组的索引值，根据索引值找到对应的元素；</li>
+
+<li>判断元素和查找的键值是否相等，相等则成功返回数据，否则需要查看 next 指针是否还有对应其他元素，如果没有，则返回 null，如果有的话，重复此步骤。</li>
+
+</ul>
+
+<p>键值查询流程，如下图所示：</p>
+
+<p><img src="assets/2020-02-28-031218.png" alt="Redis-HashType-03.png" /></p>
+
+<h3>5.渐进式rehash</h3>
+
+<p>Redis 为了保证应用的高性能运行，提供了一个重要的机制——渐进式 rehash。 渐进式 rehash 是用来保证字典缩放效率的，也就是说在字典进行扩容或者缩容是会采取渐进式 rehash 的机制。</p>
+
+<h4>1）扩容</h4>
+
+<p>当元素数量等于数组长度时就会进行扩容操作，源码在 dict.c 文件中，核心代码如下：</p>
+
+<pre><code class="language-c">int dictExpand(dict *d, unsigned long size)
+
+{
+
+    /* 需要的容量小于当前容量，则不需要扩容 */
+
+    if (dictIsRehashing(d) || d-&gt;ht[0].used &gt; size)
+
+        return DICT_ERR;
+
+    dictht n; 
+
+    unsigned long realsize = _dictNextPower(size); // 重新计算扩容后的值
+
+    /* 计算新的扩容大小等于当前容量，不需要扩容 */
+
+    if (realsize == d-&gt;ht[0].size) return DICT_ERR;
+
+    /* 分配一个新的哈希表，并将所有指针初始化为NULL */
+
+    n.size = realsize;
+
+    n.sizemask = realsize-1;
+
+    n.table = zcalloc(realsize*sizeof(dictEntry*));
+
+    n.used = 0;
+
+    if (d-&gt;ht[0].table == NULL) {
+
+        // 第一次初始化
+
+        d-&gt;ht[0] = n;
+
+        return DICT_OK;
+
+    }
+
+    d-&gt;ht[1] = n; // 把增量输入放入新 ht[1] 中
+
+    d-&gt;rehashidx = 0; // 非默认值 -1，表示需要进行 rehash
+
+    return DICT_OK;
+
+}
+
+
+
+</code></pre>
+
+<p>从以上源码可以看出，如果需要扩容则会申请一个新的内存地址赋值给 ht[1]，并把字典的 rehashindex 设置为 0，表示之后需要进行 rehash 操作。</p>
+
+<h4>2）缩容</h4>
+
+<p>当字典的使用容量不足总空间的 10% 时就会触发缩容，Redis 在进行缩容时也会把 rehashindex 设置为 0，表示之后需要进行 rehash 操作。</p>
+
+<h4>3）渐进式rehash流程</h4>
+
+<p>在进行渐进式 rehash 时，会同时保留两个 hash 结构，新键值对加入时会直接插入到新的 hash 结构中，并会把旧 hash 结构中的元素一点一点的移动到新的 hash 结构中，当移除完最后一个元素时，清空旧 hash 结构，主要的执行流程如下：</p>
+
+<ul>
+
+<li>扩容或者缩容时把字典中的字段 rehashidx 标识为 0；</li>
+
+<li>在执行定时任务或者执行客户端的 hset、hdel 等操作指令时，判断是否需要触发 rehash 操作（通过 rehashidx 标识判断），如果需要触发 rehash 操作，也就是调用 dictRehash 函数，dictRehash 函数会把 ht[0] 中的元素依次添加到新的 Hash 表 ht[1] 中；</li>
+
+<li>rehash 操作完成之后，清空 Hash 表 ht[0]，然后对调 ht[1] 和 ht[0] 的值，把新的数据表 ht[1] 更改为 ht[0]，然后把字典中的 rehashidx 标识为 -1，表示不需要执行 rehash 操作。</li>
+
+</ul>
+
+<h3>6.使用场景</h3>
+
+<p>哈希字典的典型使用场景如下：</p>
+
+<ul>
+
+<li>商品购物车，购物车非常适合用哈希字典表示，使用人员唯一编号作为字典的 key，value 值可以存储商品的 id 和数量等信息；</li>
+
+<li>存储用户的属性信息，使用人员唯一编号作为字典的 key，value 值为属性字段和对应的值；</li>
+
+<li>存储文章详情页信息等。</li>
+
+</ul>
+
+<h3>7.小结</h3>
+
+<p>本文我们学习了字典类型的操作命令和在代码中的使用，也明白了字典类型实际是由数组和链表组成的，当字典进行扩容或者缩容时会进行渐进式 rehash 操作，渐进式 rehash 是用来保证 Redis 运行效率的，它的执行流程是同时保留两个哈希表，把旧表中的元素一点一点的移动到新表中，查询的时候会先查询两个哈希表，当所有元素都移动到新的哈希表之后，就会删除旧的哈希表。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973bf4a883d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

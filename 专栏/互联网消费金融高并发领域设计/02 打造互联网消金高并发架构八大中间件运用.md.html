@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>02 打造互联网消金高并发架构八大中间件运用.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/01 互联网消费金融高并发架构设计体系的设计原则.md">01 互联网消费金融高并发架构设计体系的设计原则.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/互联网消费金融高并发领域设计/02 打造互联网消金高并发架构八大中间件运用.md">02 打造互联网消金高并发架构八大中间件运用.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/03 互联网金融高并发架构微服务治理方案实践.md">03 互联网金融高并发架构微服务治理方案实践.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/04 构建高并发互联网消费金融体系的领域规划设计.md">04 构建高并发互联网消费金融体系的领域规划设计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/互联网消费金融高并发领域设计/05 互联网消费金融高并发场景下监控体系建设.md">05 互联网消费金融高并发场景下监控体系建设.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>02 打造互联网消金高并发架构八大中间件运用</h1>
+
+<h1>大规模线上化的业务对互联网消费金融架构的要求</h1>
+
+<p>互联网金融业务的快速发展，对架构设计在系统稳定性、交付能力、管理效率、技术栈规划方面提出了更高的要求。</p>
+
+<p>大规模线上化业务的挑战：</p>
+
+<p><strong>1. 系统稳定性</strong>
+
+业务高速发展，流量和数据量大增；
+
+在系统稳定性、可用性、扩展性、安全性和成本等面临挑战；</p>
+
+<p><strong>2. 交付能力</strong>
+
+快速上线、快速交付能力（Time To Market），交付时间面临挑战；
+
+管理结构BU化，千人研发人员并行开发，系统交付的质量面临挑战；</p>
+
+<p><strong>3. 管理效率</strong>
+
+分布式的系统，复杂度高，调用链长，超出个人的处理能力，工具化势在必行；
+
+多数据中心的部署，大量机器和应用服务面临治理的挑战；</p>
+
+<p><strong>4. 技术栈规划</strong>
+
+编程语言： Java，NodeJs，Python，GO等
+
+数据库：Oracle，MySQL，PostgreSQL，MongoDB等
+
+中间件：Redis，RocketMQ，Apollo等</p>
+
+<h1>打造互联网消费金融八大核心中间件</h1>
+
+<p>打造八大核心中间，支持未来在消费金融线上化交易业务未来10倍、100倍快速增长。</p>
+
+<p>1）服务框架：Dubbo，阿里开源的一个高性能的优秀服务框架；
+
+2）服务框架：Spring Cloud，由美国Pivotal公司出品，由Spring官方背书，由Netflix、Alibaba等众多知名互联网企业技术输出；
+
+3） 路由网关Gateway：分布式集群路由，负载均衡，协议适配，支撑峰值交易；
+
+4）配置中心Apollo：配置集中化，配置与代码分离，快速响应能力；
+
+5）数据访问层DAL：支持数据库横向扩展，分库分表，故障转移；
+
+6）消息队列MQ：业务解耦，组织解耦，流量削峰填谷；
+
+7）缓存服务Redis：高性能，高吞吐，秒杀利器；
+
+8）作业调度Job：定时作业，批量处理，支撑每日大规模作业。</p>
+
+<h2>打造互联网金融服务框架</h2>
+
+<p>服务框架的选型，目前主流的有两类，一是由阿里背书的Dubbo体系，二是由Spring背书的Spring Cloud，下面就两类框架分别进行介绍。</p>
+
+<p><strong>服务框架Dubbo介绍</strong>
+
+对于互联网消费金融架构来说，Dubbo适用于系统技术相对简单，业务调用链短，系统对并发量和吞吐量要求很高，对生态的要求不高，服务治理等外围系统不需要非常强大的业务场景。对迭代迅速、小短快，控制流程不需要很严格的互联网金融公司。</p>
+
+<p><strong>服务框架Dubbo架构图</strong>
+
+<img src="assets/cd9d8105535e7c6a1e9e8a534f5c6a83.png" alt="img" /></p>
+
+<p><strong>服务框架Dubbo简单介绍</strong></p>
+
+<blockquote>
+
+<p>背景：中国Alibaba公司出品，由Alibaba官方背书，捐献给了Apache开源组；
+
+定位：本土化、高性能、轻量级、封闭式的开源RPC调用和SOA框架
+
+技术：基于Spring（低版本）/Spring Boot（高版本），服务注册发现（依赖zookeeper），负载均衡RPC、REST（3.x版本支持）调用；
+
+协议：Apache License 2.0</p>
+
+</blockquote>
+
+<p><strong>服务框架Dubbo发展历程</strong></p>
+
+<blockquote>
+
+<p>诞生：2009年初开源，推出1.0版，10年多发展历史；
+
+成熟：2012年10月23日推出2.5.3版成熟稳定版后，停止维护和升级，当当网接手维护，推出DubboX版；
+
+恢复：2017年9月7日恢复维护，2018年1月8日合并DubboX，发布2.6.0版；
+
+近况：阿里巴巴中间件部门计划推出3.0版</p>
+
+</blockquote>
+
+<p><strong>服务框架Dubbo的未来规划</strong></p>
+
+<blockquote>
+
+<p>Streaming：支持Streaming为内核，取代同时兼容RPC；
+
+Reactor：支持“反应式编程”模式（Reactive Programming），去掉一切阻塞；
+
+Spring Cloud：支持Dubbo接入Spring Cloud，使两者达到互通，Spring Cloud Alibaba产品组已经着手支持；
+
+Service Mesh：支持Service Mesh，由Dubbo-Mesh进行IPC，路由、负载均衡和熔断机制将由</p>
+
+</blockquote>
+
+<p><strong>服务框架Dubbo组件体系</strong></p>
+
+<blockquote>
+
+<p>服务注册发现中心：Apache Zookeeper，Alibaba Nacos
+
+服务调用方式：
+
+RPC：Netty、Mina、Grizzly、Hessian、RMI、Thrift等
+
+REST：DubboX
+
+服务调用序列化：
+
+FastJson、FST、Hessian2、Kryo、ProtoStuff、JDK
+
+服务负载均衡：
+
+ConsistentHash、LeastActiveLoadBalance、RoundRobin、Random</p>
+
+</blockquote>
+
+<p><strong>服务框架Spring Cloud介绍</strong></p>
+
+<p>对于中大型互联网消费金融公司来说，Spring Cloud是个不错的选择，但同时开发的预支也较大，适用于系统较为复杂，业务调用链较长，对生态的要求很高，微服务配套包括服务治理、监控、路由、网关、灰度发布等需要面面俱到的互联网金融公司。要求公司基础设施强大，架构团队、DevOps、运维等力量雄厚，自动化部署能力较强。同时具备，迭代周期较长，流程控制较为严格，较为正规化。</p>
+
+<p><strong>服务框架Spring Cloud架构图</strong>
+
+<img src="assets/ae0c4e9e3998c29f2f38ba31bec40b76.png" alt="img" /></p>
+
+<p><strong>服务框架Spring Cloud简单介绍</strong></p>
+
+<blockquote>
+
+<p>背景：由美国Pivotal公司出品，由Spring官方背书，由众多知名互联网企业技术输出，如：Netflix，Alibaba等；
+
+定位：国际化、全生态、全开放、全插件式的开源微服务架构解决方案和体系，拥抱全球知名云厂商；
+
+技术：基于Spring/Spring Boot，服务注册发现，负载均衡，熔断降级RPC、REST调用，API网关等
+
+协议：Apache License 2.0</p>
+
+</blockquote>
+
+<p><strong>服务框架Spirng Cloud发展历程</strong></p>
+
+<ul>
+
+<li>诞生：2015年7月开源，推出Angle版，将近4年多发展历史，每年定期推出打迭代版本；</li>
+
+<li>成熟：相继陆续推出了Brixton版、Camden版等</li>
+
+<li>飞跃：Finchley版于2018年6月19日发布，属于划时代版本，支持Spring Boot2.x，Spring5.x，WebFlux；</li>
+
+<li>近况：社区活跃，各大互联网公司技术推出众多组件，如Alibaba Nacos；</li>
+
+</ul>
+
+<p><strong>服务框架Spirng Cloud现状和未来</strong></p>
+
+<ul>
+
+<li>WebFlux（已发布）：支持Spring WebFlux异步响应式框架，采用Reactor或RxJava，未来将逐步取代Spring WebMVC；</li>
+
+<li>Spring Cloud GW（已发布）：支持响应式的服务网关，使用Spring WebFlux，网关吞吐量得到卓越提升；</li>
+
+<li>Kubernetes支持（已发布）：支持Kubernetes的组件，Spring Cloud官方推出直接集成Kubernetes的组件，朝着专业化DevOps踏出更坚实一步；</li>
+
+<li>Serverless支持（已发布）：支持Spring Cloud Function，面向函数式编程，支持跨Serverless Providers的统一编程模型，实现Faas（函数即服务），进一步简化Pass（平台即服务）；</li>
+
+<li>Spring Cloud LB（孵化中）：支持异步响应的负载均衡Spring Cloud Loadbalancer，使用Spring WebFlux，大幅度降低负载均衡时候的性能损耗；</li>
+
+<li>Service Mesh（规划中）：支持Service Mesh，拭目以待。</li>
+
+</ul>
+
+<p><strong>服务框架Spirng Cloud技术组件体系</strong></p>
+
+<ul>
+
+<li>服务注册发现中心：Netflix Eureka、HashiCorp Consul、Alibaba Nacos、CoreOS Etcd（孵化中）；</li>
+
+<li>服务负载均衡：Netflix Ribbon、支持异步WebFlux；</li>
+
+<li>服务调用方式：REST&amp;RPC，FeignClient，RestTemplate；</li>
+
+<li>服务调用序列化：Json；</li>
+
+<li>服务API网关：Netflix Zuul（同步）、Spring Cloud Gateway（异步）；</li>
+
+<li>断路器：Hystrix、Alibaba Sentinel；</li>
+
+<li>分布式配置：Spring Cloud Config、Apollo；</li>
+
+<li>调用链：Sleuth、Zipkin、Pinpoint、Skywalking等；</li>
+
+<li>消息驱动：Spring Cloud Stream；</li>
+
+<li>消息总线：Spring Cloud Bus；</li>
+
+<li>容器化支持：Spring Cloud Kubernetes。</li>
+
+</ul>
+
+<h2>建设路由网关Gateway</h2>
+
+<p>对于互联网消费金融的架构来说，建设路由网关是一项很重要的工作。有了路由网关，能为我们的平台带来很多好处，除了常用的网关的路由功能外，我们还能在金融系统的升级、微服务线上化的过程中，根据需要把流量在新老系统之间切换，也为灰度发布、蓝绿发布、同城双活、异地多活的建设打下基础。</p>
+
+<p><strong>路由网关Gateway的主要特性</strong></p>
+
+<ol>
+
+<li>智能路由</li>
+
+<li>业务隔离</li>
+
+<li>熔断限流</li>
+
+<li>动态更新</li>
+
+<li>灰度发布</li>
+
+<li>监控告警</li>
+
+</ol>
+
+<p><strong>路由网关Gateway架构设计</strong>
+
+互联网消费金融网关架构图：
+
+<img src="assets/685b795532e1b4cd8e56064f9dbb5321.png" alt="img" /></p>
+
+<p><strong>基于OpenResty打造高性能网关</strong></p>
+
+<p>OpenResty是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。</p>
+
+<p>OpenResty 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。这样，Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统。</p>
+
+<p>OpenResty 的目标是让你的Web服务直接跑在 Nginx 服务内部，充分利用 Nginx 的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应。</p>
+
+<p><img src="assets/790d8e56711892a03e9c380d34b7215a.png" alt="img" /></p>
+
+<h2>打造互联网消费金融配置中心Apollo</h2>
+
+<p><strong>Apollo配置中心的主要特点</strong></p>
+
+<blockquote>
+
+<p>简单易用
+
+多环境多集群配置
+
+配置修改实时生效
+
+版本发布管理
+
+支持灰度发布
+
+支持权限/审核/审计管理
+
+开放API管理</p>
+
+</blockquote>
+
+<p><strong>消费金融Apollo配置中心实践</strong></p>
+
+<p>在互联网消费金融领域，打造分布式的配置中心，不但能够为服务架构Dubbo或Spring Cloud提供统一的配置化管理，而且在业务服务的架构上也能提供很多便利，它让我们可以将一些配置项存储于配置中心，减少主要业务数据库的压力的同时，又能动态更新配置项。下面我总结了一些在业务方面的配置化实践：</p>
+
+<p>1）消费金融涉及众多业务功能，大量的开关功能是免不了的，我们可以业务开关放在Apollo进行统一管理。如：自动审批开关、新功能验证开关、风控规则启用开关等；
+
+2）还有消费金融业务配置项管理：如利率范围根据国家政策经常变动，可以用Apollo配置管理起来；又如审批的节点管理，根据贷款类型，有抵押、无抵押，类型不一样，审批的节点也不一样，可以用Apollo管理；
+
+3）同城双活、蓝绿发布的流量管理、Ip路由管理等等。</p>
+
+<h2>打造互联网消费金融数据访问层DAL</h2>
+
+<p><strong>数据访问层DAL的主要特性</strong></p>
+
+<blockquote>
+
+<p>支持多数据源：Oracle、MySQL等
+
+统一的API封装
+
+简单、安全
+
+统一数据源
+
+支持分库分表策略
+
+Read/Write
+
+Mod N
+
+Range
+
+Hash
+
+代码生成技术，比如统一加时间戳等等
+
+统一的监控和统计</p>
+
+</blockquote>
+
+<p><strong>数据访问层DAL架构设计</strong></p>
+
+<p><img src="assets/b0a199573781aa83b99cefb8a6899835.png" alt="img" /></p>
+
+<p><strong>互联网消费金融数据访问层DAL实践</strong></p>
+
+<p>在互联网消费金融领域，业务复杂，建设好DAL数据访问层，能为我们带来很多便利：</p>
+
+<ol>
+
+<li>金融业务表众多，开发团队大，在DAL层为每张表统一封装好时间戳，这样做能为以后的大数据平台增量同步数据提供便利；</li>
+
+<li>金融行业涉及到的账务数据，数据量大，对每日并行报批，查询服务都有不小挑战，建设统一的分库分表组件，应对未来数据量10倍100倍的增长；</li>
+
+<li>对一些监控的需要，如关键表的SQL执行次数，用户行为留存，历史操作记录等，都可以在DAL层统一设计实现。</li>
+
+</ol>
+
+<h2>打造互联网消费金融消息队列MQ</h2>
+
+<p><strong>消息队列MQ的主要特性</strong></p>
+
+<p>1）消息特性</p>
+
+<blockquote>
+
+<p>高吞吐
+
+低延时
+
+可靠
+
+有序（统一分片内）
+
+多生产者
+
+多消费者</p>
+
+</blockquote>
+
+<p>2）存储特性</p>
+
+<blockquote>
+
+<p>支持MySQL等数据存储
+
+Kafka支持持久化</p>
+
+</blockquote>
+
+<p>3）跨平台支持</p>
+
+<blockquote>
+
+<p>JAVA
+
+.NET</p>
+
+</blockquote>
+
+<p><strong>消息队列MQ架构设计</strong>
+
+<img src="assets/f07a590292dd1c7de87aa564879985bc.png" alt="img" /></p>
+
+<p><strong>互联网消费金融消息队列MQ架构实践</strong></p>
+
+<p>1）服务之间的解耦：消费金融的业务链路特别长的场景，可以用MQ来解耦，比如一笔进件，经历贷前校验，到风控平台风险规则，风险探测，准入，核额，再到贷中审批流程，调用链比较长，业务环节也比较多，可以通过消息队列MQ进行系统&amp;模块间的解耦；</p>
+
+<p>2）异步的处理提升系统性能：在一些耗时环节，设计成异步的交互方式，通过MQ进行异步的结果通知，可以大大减少系统的同步响应处理，提升系统的吞吐量。例如：用户进行还款时，在进行跨行转账支付时可能会耗时比较长，而且要等待他行的返回结果，与支付服务的交互时，可以通过异步MQ的方式进交互，异步的返回交易的结果，成功或者失败。</p>
+
+<p><strong>互联网消费金融消息队列MQ技术选型</strong></p>
+
+<blockquote>
+
+<p>目前MQ中间件开源技术众多，比较流行的有Kafka，RocketMQ，RabbitMQ，ActiveMQ。</p>
+
+</blockquote>
+
+<p><strong>Kafka介绍</strong></p>
+
+<blockquote>
+
+<p>消息存储：内存、磁盘、数据库。支持大量堆积。
+
+单节点吞吐量：十万级。
+
+分布式集群架构：支持较好。天然的‘Leader-Slave’无状态集群，每台服务器既是Master也是Slave。
+
+社区活跃度：高
+
+适用场景：大数据日志采集</p>
+
+</blockquote>
+
+<p><strong>RocketMQ介绍</strong></p>
+
+<blockquote>
+
+<p>消息存储：磁盘。支持大量堆积。
+
+单节点吞吐量：十万级。
+
+分布式集群架构：支持较好。常用 多对'Master-Slave' 模式，开源版本需手动切换Slave变成Master。
+
+社区活跃度：高
+
+适用场景：较大型公司使用，需要有专业人员研究源码，主要是有阿里背书，大公司用的比较广泛。</p>
+
+</blockquote>
+
+<p><strong>RabbitMQ介绍</strong></p>
+
+<blockquote>
+
+<p>消息存储：内存、磁盘。支持少量堆积。
+
+单节点吞吐量：万级。
+
+分布式集群架构：支持不太好。支持简单集群，'复制'模式，对高级集群模式支持不好。
+
+社区活跃度：高
+
+适用场景：中小型公司，比较稳定成熟。</p>
+
+</blockquote>
+
+<p><strong>ActiveMQ介绍</strong></p>
+
+<blockquote>
+
+<p>消息存储：内存、磁盘、数据库。支持少量堆积。
+
+单节点吞吐量：万级。
+
+分布式集群架构：支持不好。支持简单集群模式，比如'主-备'，对高级集群模式支持不好。
+
+社区活跃度：低
+
+适用场景：中小型公司，比较稳定成熟。</p>
+
+</blockquote>
+
+<h2>打造互联网消费金融缓存服务Redis</h2>
+
+<p><strong>缓存服务Redis的主要特性</strong></p>
+
+<blockquote>
+
+<p>高性能，高吞吐，读的速度是110000次/s,写的速度是81000次/s ；
+
+丰富的数据类型： Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作；
+
+原子性：Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行；</p>
+
+</blockquote>
+
+<p><strong>缓存服务Redis的架构设计</strong></p>
+
+<p>我们在上一章举了一个贷款进度查询的例子，首先进行查询缓存，如缓存没有，再去查数据库，大大降低了数据库的压力。下面我将这个图扩展一下，重点示例Redis的集群结构：
+
+<img src="assets/a2465df95a52a14e8ee54b1e958d7577.png" alt="img" /></p>
+
+<blockquote>
+
+<p>Redis哨兵的作用：</p>
+
+</blockquote>
+
+<p>Redis sentinel 是一个分布式系统中监控 redis 主从服务器，并在主服务器下线时自动进行故障转移。其中三个特性：</p>
+
+<p>监控（Monitoring）： Sentinel 会不断地检查你的主服务器和从服务器是否运作正常。
+
+提醒（Notification）： 当被监控的某个 Redis 服务器出现问题时， Sentinel 可以通过 API 向管理员或者其他应用程序发送通知。
+
+自动故障迁移（Automatic failover）： 当一个主服务器不能正常工作时， Sentinel 会开始一次自动故障迁移操作。</p>
+
+<p>特点：
+
+1、保证高可用
+
+2、监控各个节点
+
+3、自动故障迁移</p>
+
+<p><strong>互联网消费金融缓存服务Redis实践</strong>
+
+在互联网消费金融业务领域里，Redis有很多实践场景：</p>
+
+<p>1）. 实现接口幂等性：在金融领域，很多业务行为对幂等性要求很高，比如支付，重复扣款，重复下单等。在调用接口之前先调用获取token的接口生成对应的令牌(token)，并存放在redis当中，在调用接口的时候，将第一步得到的token放入请求头中。解析请求头，如果能获取到该令牌，就放行，执行既定的业务逻辑，并从redis中删除该token。如果获取不到该令牌，就返回错误信息;</p>
+
+<p>2）. 热点数据缓存：比如常用的金融业务配置项，客户经理的状态等热点信息，可以存放在redis，快速访问，减少数据库压力，增强系统性能；</p>
+
+<p>3）. 分布式Session保存：消费金融领域涉及到的系统众多，特别是后台服务比如给业务经理用的系统可能就有审批系统、报表系统、查询信息系统等，可以将各个进行统一Session会话保存到redis，减少每次系统重新登录，提升用户体验；</p>
+
+<p>4）. 分布式锁：这是一个比较常用的场景，主要使用setnx命令功能来编写分布式的锁，跟幂等性的实现原理类似，比如用户在发起还款时，请求开始到结束会经过很多系统，还款金额校验、卡余额校验，还款发起服务等，需要对关键资源点进行加锁，防止并发场景带来故障；</p>
+
+<p>5）. 对互联网消费金融门户网站/APP首页排行榜信息进行缓存，比如商品信息贷款品种、贷款金额排行榜等。</p>
+
+<h2>打造互联网消费金融作业调度Job</h2>
+
+<p><strong>互联网消费金融作业调度Job的架构挑战</strong></p>
+
+<p>场景复杂：在互联网消费金融业务，涉及到很多跑批作业，而且作业间互相依赖，有分支，有汇总的场景特别多，比如：每日夜间批扣，财务分录，利率计算&amp;减免等等；</p>
+
+<p>数据量大：互联网消费金融业务的线上交易量的增长，无疑会大大增加作业Job的数据量。而且批量作业的数据跟交易量是10倍级别的增长，比如一笔贷款分12期还（一年12个月），这样就是1：12的关系。</p>
+
+<p>监控的难度增加。</p>
+
+<p><strong>互联网消费金融作业调度Job的架构设计</strong>
+
+<img src="assets/220696a22ee7cbda13fd97136972422b.png" alt="img" /></p>
+
+<p><strong>作业调度Job分布式设计</strong>
+
+支持集群部署，提升调度系统可用性，同时提升任务处理能力。构建作业注册中心，实现的全局作业注册控制中心。用于注册，控制和协调分布式作业执行。</p>
+
+<p><strong>作业调度Job分片设计</strong>
+
+前面的章节也介绍过分片设计的好处，能够并行处理海量数据，支持动态横向扩展，提升系统的处理能力。将任务拆分为n个任务项后，各个服务器分别执行各自分配到的任务项。一旦有新的服务器加入集群，或现有服务器下线，将在保留本次任务执行不变的情况下，下次任务开始前触发任务重分片。</p>
+
+<p><img src="assets/31642ba23822e502932695ac0bfdf9e2.png" alt="img" /></p>
+
+<p><strong>作业调度Job监控设计</strong>
+
+互联网消费金融作业Job的监控，涉及到的方面：
+
+1）作业的进度监控；
+
+2）作业状态监控，是否正常或异常；
+
+3）异常分类与报警；
+
+4）消息通知。</p>
+
+<p><strong>互联网消费金融作业调度Job的架构选型</strong></p>
+
+<p><strong>Quartz</strong>：Java事实上的定时任务标准。但Quartz关注点在于定时任务而非数据，并无一套根据数据处理而定制化的流程。虽然Quartz可以基于数据库实现作业的高可用，但缺少分布式并行调度的功能</p>
+
+<p><strong>TBSchedule</strong>：阿里早期开源的分布式任务调度系统。代码略陈旧，使用timer而非线程池执行任务调度。众所周知，timer在处理异常状况时是有缺陷的。而且TBSchedule作业类型较为单一，只能是获取/处理数据一种模式。还有就是文档缺失比较严重</p>
+
+<p><strong>elastic-job</strong>：当当开发的弹性分布式任务调度系统，功能丰富强大，采用zookeeper实现分布式协调，实现任务高可用以及分片，目前是版本2.15，并且可以支持云开发</p>
+
+<p><strong>Saturn</strong>：是唯品会自主研发的分布式的定时任务的调度平台，基于当当的elastic-job 版本1开发，并且可以很好的部署到docker容器上。</p>
+
+<p><strong>xxl-job</strong>: 是大众点评员工徐雪里于2015年发布的分布式任务调度平台，是一个轻量级分布式任务调度框架，其核心设计目标是开发迅速、学习简单、轻量级、易扩展。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/互联网消费金融高并发领域设计/01 互联网消费金融高并发架构设计体系的设计原则.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/互联网消费金融高并发领域设计/03 互联网金融高并发架构微服务治理方案实践.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709976133a373cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

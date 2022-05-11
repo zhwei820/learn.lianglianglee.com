@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>17 容器网络配置（2）：容器网络延时要比宿主机上的高吗</h1>
+
+<p>你好，我是程远。</p>
+
+<p>在上一讲里，我们学习了在容器中的网络接口配置，重点讲解的是 veth 的接口配置方式，这也是绝大部分容器用的缺省的网络配置方式。</p>
+
+<p>不过呢，从 veth 的这种网络接口配置上看，一个数据包要从容器里发送到宿主机外，需要先从容器里的 eth0 (veth_container) 把包发送到宿主机上 veth_host，然后再在宿主机上通过 nat 或者路由的方式，经过宿主机上的 eth0 向外发送。</p>
+
+<p><img src="assets/2fba246fb4aaa6315661a11996fa04be.jpg" alt="img" /></p>
+
+<p>这种容器向外发送数据包的路径，相比宿主机上直接向外发送数据包的路径，很明显要多了一次接口层的发送和接收。尽管 veth 是虚拟网络接口，在软件上还是会增加一些开销。</p>
+
+<p>如果我们的应用程序对网络性能有很高的要求，特别是之前运行在物理机器上，现在迁移到容器上的，如果网络配置采用 veth 方式，就会出现网络延时增加的现象。</p>
+
+<p>那今天我们就来聊一聊，容器网络接口对于容器中应用程序网络延时有怎样的影响，还有这个问题应该怎么解决。</p>
+
+<h2>问题重现</h2>
+
+<p>对于这种 veth 接口配置导致网络延时增加的现象，我们可以通过运行netperf（Netperf 是一个衡量网络性能的工具，它可以提供单向吞吐量和端到端延迟的测试）来模拟一下。</p>
+
+<p>这里我们需要两台虚拟机或者物理机，这两台机器需要同处于一个二层的网络中。</p>
+
+<p>具体的配置示意图如下：</p>
+
+<p><img src="assets/24bc885e34e6477cd69324f67e65f120.jpeg" alt="img" /></p>
+
+<p>首先，我们需要在第一台机器上启动一个 veth 接口的容器，容器的启动和宿主机上的配置你可以参考一下这里的脚本。在第二台机器上，我们只要启动一个 netserver 就可以了。</p>
+
+<p>然后呢，我们分别在容器里和宿主机上运行与 netserver 交互的 netperf，再比较一下它们延时的差异。</p>
+
+<p>我们可以运行 netperf 的 TCP_RR 测试用例，TCP_RR 是 netperf 里专门用来测试网络延时的，缺省每次运行 10 秒钟。运行以后，我们还要计算平均每秒钟 TCP request/response 的次数，这个次数越高，就说明延时越小。</p>
+
+<p>接下来，我们先在第一台机器的宿主机上直接运行 netperf 的 TCP_RR 测试用例 3 轮，得到的值分别是 2504.92，2410.14 和 2422.81，计算一下可以得到三轮 Transactions 平均值是 2446/s。</p>
+
+<pre><code># ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2504.92
+
+16384  131072
+
+# ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2410.14
+
+16384  131072
+
+
+
+# ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2422.81
+
+16384  131072
+
+</code></pre>
+
+<p>同样，我们再在容器中运行一下 netperf 的 TCP_RR，也一样运行三轮，计算一下这三次的平均值，得到的值是 2141。</p>
+
+<p>那么我们拿这次容器环境中的平均值和宿主机上得到的值 2446 做比较，会发现 Transactions 下降了大概 12.5%，也就是网络的延时超过了 10%。</p>
+
+<pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32405d5d4672060307025700530a06005007">[email&#160;protected]</a> /]# ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2104.68
+
+16384  131072
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d2cfcfd4e094919590c592c1989492c295">[email&#160;protected]</a> /]# ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2146.34
+
+16384  131072
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="70021f1f0430444145401542114844421245">[email&#160;protected]</a> /]# ./netperf -H 192.168.0.194 -t TCP_RR
+
+MIGRATED TCP REQUEST/RESPONSE TEST from 0.0.0.0 (0.0.0.0) port 0 AF_INET to 192.168.0.194 () port 0 AF_INET : first burst 0
+
+Local /Remote
+
+Socket Size   Request  Resp.   Elapsed  Trans.
+
+Send   Recv   Size     Size    Time     Rate
+
+bytes  Bytes  bytes    bytes   secs.    per sec
+
+
+
+16384  131072 1        1       10.00    2173.79
+
+16384  131072
+
+</code></pre>
+
+<h2>分析问题</h2>
+
+<p>刚才我们已经得到了测试的数值，我们发现 veth 方式的确带来了很高的网络延时。那现在我们先来分析一下，为什么 veth 会带来这么大的网络延时，然后再看看有什么方法可以降低容器里的网络延时。</p>
+
+<p>我们先回顾一下容器里 veth 接口的配置，还是拿我们上一讲里容器 veth 的图作为例子。</p>
+
+<p><img src="assets/569287c365c99d3778858b7bc42b5989-1646463668751.jpeg" alt="img" /></p>
+
+<p>上一讲中我提到过，veth 的虚拟网络接口一般都是成对出现，就像上面图里的 veth_container 和 veth_host 一样。</p>
+
+<p>在每次网络传输的过程中，数据包都需要通过 veth_container 这个接口向外发送，而且必须保证 veth_host 先接收到这个数据包。</p>
+
+<p>虽然 veth 是一个虚拟的网络接口，但是在接收数据包的操作上，这个虚拟接口和真实的网路接口并没有太大的区别。这里除了没有硬件中断的处理，其他操作都差不多，特别是软中断（softirq）的处理部分其实就和真实的网络接口是一样的。</p>
+
+<p>我们可以通过阅读 Linux 内核里的 veth 的驱动代码（drivers/net/veth.c）确认一下。</p>
+
+<p>veth 发送数据的函数是 veth_xmit()，它里面的主要操作就是找到 veth peer 设备，然后触发 peer 设备去接收数据包。</p>
+
+<p>比如 veth_container 这个接口调用了 veth_xmit() 来发送数据包，最后就是触发了它的 peer 设备 veth_host 去调用 netif_rx() 来接收数据包。主要的代码我列在下面了：</p>
+
+<pre><code>static netdev_tx_t veth_xmit(struct sk_buff *skb, struct net_device *dev)
+
+{
+
+…
+
+       /* 拿到veth peer设备的net_device */
+
+       rcv = rcu_dereference(priv-&gt;peer);
+
+…
+
+       /* 将数据送到veth peer设备 */ 
+
+       if (likely(veth_forward_skb(rcv, skb, rq, rcv_xdp) == NET_RX_SUCCESS)) {
+
+
+
+…
+
+}
+
+
+
+static int veth_forward_skb(struct net_device *dev, struct sk_buff *skb,
+
+                            struct veth_rq *rq, bool xdp)
+
+{
+
+        /* 这里最后调用了 netif_rx() */
+
+        return __dev_forward_skb(dev, skb) ?: xdp ?
+
+                veth_xdp_rx(rq, skb) :
+
+                netif_rx(skb);
+
+}
+
+</code></pre>
+
+<p>而 netif_rx() 是一个网络设备驱动里面标准的接收数据包的函数，netif_rx() 里面会为这个数据包 raise 一个 softirq。</p>
+
+<pre><code>   __raise_softirq_irqoff(NET_RX_SOFTIRQ);
+
+</code></pre>
+
+<p>其实 softirq 这个概念，我们之前在CPU 的模块中也提到过。在处理网络数据的时候，一些运行时间较长而且不能在硬中断中处理的工作，就会通过 softirq 来处理。</p>
+
+<p>一般在硬件中断处理结束之后，网络 softirq 的函数才会再去执行没有完成的包的处理工作。即使这里 softirq 的执行速度很快，还是会带来额外的开销。</p>
+
+<p>所以，根据 veth 这个虚拟网络设备的实现方式，我们可以看到它必然会带来额外的开销，这样就会增加数据包的网络延时。</p>
+
+<h2>解决问题</h2>
+
+<p>那么我们有什么方法可以减少容器的网络延时呢？你可能会想到，我们可不可以不使用 veth 这个方式配置网络接口，而是换成别的方式呢？</p>
+
+<p>的确是这样，其实除了 veth 之外，容器还可以选择其他的网络配置方式。在 Docker 的文档中提到了 macvlan 的配置方式，和 macvlan 很类似的方式还有 ipvlan。</p>
+
+<p>那我们先来简单看一下 macvlan 和 ipvlan 的异同点。</p>
+
+<p>我们先来看这两个方式的相同之处，无论是 macvlan 还是 ipvlan，它们都是在一个物理的网络接口上再配置几个虚拟的网络接口。在这些虚拟的网络接口上，都可以配置独立的 IP，并且这些 IP 可以属于不同的 Namespace。</p>
+
+<p>然后我再说说它们的不同点。对于 macvlan，每个虚拟网络接口都有自己独立的 mac 地址；而 ipvlan 的虚拟网络接口是和物理网络接口共享同一个 mac 地址。而且它们都有自己的 L2/L3 的配置方式，不过我们主要是拿 macvlan/ipvlan 来和 veth 做比较，这里可以先忽略 macvlan/ipvlan 这些详细的特性。</p>
+
+<p>我们就以 ipvlan 为例，运行下面的这个脚本，为容器手动配置上 ipvlan 的网络接口。</p>
+
+<pre><code>docker run --init --name lat-test-1 --network none -d registry/latency-test:v1 sleep 36000
+
+
+
+pid1=$(docker inspect lat-test-1 | grep -i Pid | head -n 1 | awk '{print $2}' | awk -F &quot;,&quot; '{print $1}')
+
+echo $pid1
+
+ln -s /proc/$pid1/ns/net /var/run/netns/$pid1
+
+ 
+
+ip link add link eth0 ipvt1 type ipvlan mode l2
+
+ip link set dev ipvt1 netns $pid1
+
+
+
+ip netns exec $pid1 ip link set ipvt1 name eth0
+
+ip netns exec $pid1 ip addr add 172.17.3.2/16 dev eth0
+
+ip netns exec $pid1 ip link set eth0 up
+
+</code></pre>
+
+<p>在这个脚本里，我们先启动一个容器，这里我们用&quot;—network none&quot;的方式来启动，也就是在容器中没有配置任何的网络接口。</p>
+
+<p>接着我们在宿主机 eth0 的接口上增加一个 ipvlan 虚拟网络接口 ipvt1，再把它加入到容器的 Network Namespace 里面，重命名为容器内的 eth0，并且配置上 IP。这样我们就配置好了第一个用 ipvlan 网络接口的容器。</p>
+
+<p>我们可以用同样的方式配置第二个容器，这样两个容器可以相互 ping 一下 IP，看看网络是否配置成功了。脚本你可以在这里得到。</p>
+
+<p>两个容器配置好之后，就像下面图中描述的一样了。从这张图里，你很容易就能看出 macvlan/ipvlan 与 veth 网络配置有什么不一样。容器的虚拟网络接口，直接连接在了宿主机的物理网络接口上了，形成了一个网络二层的连接。</p>
+
+<p><img src="assets/1e78d66a93e7a0aab1315056c4b937a0.jpeg" alt="img" /></p>
+
+<p>如果从容器里向宿主机外发送数据，看上去通过的接口要比 veth 少了，那么实际情况是不是这样呢？我们先来看一下 ipvlan 接口发送数据的代码。</p>
+
+<p>从下面的 ipvlan 接口的发送代码中，我们可以看到，如果是往宿主机外发送数据，发送函数会直接找到 ipvlan 虚拟接口对应的物理网络接口。</p>
+
+<p>比如在我们的例子中，这个物理接口就是宿主机上的 eth0，然后直接调用 dev_queue_xmit()，通过物理接口把数据直接发送出去。</p>
+
+<pre><code>static int ipvlan_xmit_mode_l2(struct sk_buff *skb, struct net_device *dev)
+
+{
+
+…
+
+        if (!ipvlan_is_vepa(ipvlan-&gt;port) &amp;&amp;
+
+            ether_addr_equal(eth-&gt;h_dest, eth-&gt;h_source)) {
+
+…
+
+        } else if (is_multicast_ether_addr(eth-&gt;h_dest)) {
+
+…
+
+        }
+
+        /* 
+
+         \* 对于普通的对外发送数据，上面的if 和 else if中的条件都不成立，
+
+         \* 所以会执行到这一步，拿到ipvlan对应的物理网路接口设备，
+
+         \* 然后直接从这个设备发送数据。
+
+         */ 
+
+        skb-&gt;dev = ipvlan-&gt;phy_dev;
+
+        return dev_queue_xmit(skb);
+
+}
+
+</code></pre>
+
+<p>和 veth 接口相比，我们用 ipvlan 发送对外数据就要简单得多，因为这种方式没有内部额外的 softirq 处理开销。</p>
+
+<p>现在我们还可以看一下，在实际生产环境中，一个应用程序跑在使用 veth 接口的容器中，跟这个应用程序跑在使用 ipvlan 接口的容器中，两者的网络延时差异是怎样的。</p>
+
+<p>下面这张图是网络延时的监控图，图里蓝色的线表示程序运行在 veth 容器中，黄色线表示程序运行在 ipvlan 的容器里，绿色的线代表程序直接运行在物理机上。</p>
+
+<p>从这张延时（Latency）图里，我们可以看到，在 veth 容器里程序的网络延时要明显高一些，而程序在 ipvlan 容器里的网络延时已经比较接近物理机上的网络延时了。</p>
+
+<p><img src="assets/5de6462780275acca261d63661b9e018.png" alt="img" /></p>
+
+<p>所以对于网络延时敏感的应用程序，我们可以考虑使用 ipvlan/macvlan 的容器网络配置方式来替换缺省的 veth 网络配置。</p>
+
+<h2>重点小结</h2>
+
+<p>好了，今天的内容讲完了，我们来做个总结。今天我们主要讨论了容器网络接口对容器中应用程序网络延时的影响。</p>
+
+<p>容器通常缺省使用 veth 虚拟网络接口，不过 veth 接口会有比较大的网络延时。我们可以使用 netperf 这个工具来比较网络延时，相比物理机上的网络延时，使用 veth 接口容器的网络延时会增加超过 10%。</p>
+
+<p>我们通过对 veth 实现的代码做分析，可以看到由于 veth 接口是成对工作，在对外发送数据的时候，peer veth 接口都会 raise softirq 来完成一次收包操作，这样就会带来数据包处理的额外开销。</p>
+
+<p>如果要减小容器网络延时，就可以给容器配置 ipvlan/macvlan 的网络接口来替代 veth 网络接口。Ipvlan/macvlan 直接在物理网络接口上虚拟出接口，在发送对外数据包的时候可以直接通过物理接口完成，没有节点内部类似 veth 的那种 softirq 的开销。容器使用 ipvlan/maclan 的网络接口，它的网络延时可以非常接近物理网络接口的延时。</p>
+
+<p>对于延时敏感的应用程序，我们可以考虑使用 ipvlan/macvlan 网络接口的容器。不过，由于 ipvlan/macvlan 网络接口直接挂载在物理网络接口上，对于需要使用 iptables 规则的容器，比如 Kubernetes 里使用 service 的容器，就不能工作了。这就需要你结合实际应用的需求做个判断，再选择合适的方案。</p>
+
+<h2>思考题</h2>
+
+<p>在这节课的最后，我提到“由于 ipvlan/macvlan 网络接口直接挂载在物理网络接口上，对于需要使用 iptables 规则的容器，比如 Kubernetes 里使用 service 的容器，就不能工作了”，请你思考一下这个判断背后的具体原因。</p>
+
+<p>欢迎你在留言区写下你的思考和疑问。如果这篇文章让你有所收获，也欢迎分享给你的朋友，一起交流进步。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977a5cdcc3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

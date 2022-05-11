@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md">00 开篇词  为什么大厂面试必考操作系统？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md">00 课前必读  构建知识体系，可以这样做！.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md">02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md">03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md">05 (1) 加餐  练习题详解（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md">06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md">07  进程、重定向和管道指令：xargs 指令的作用是？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md">12 (1)加餐  练习题详解（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md">14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md">16 (1)加餐  练习题详解（三）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md">17  进程和线程：进程的开销比线程大在了哪里？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md">20  线程的调度：线程调度都有哪些方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md">22  进程间通信： 进程间通信都有哪些方法？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md">23 (1)加餐  练习题详解（四）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md">24  虚拟内存 ：一个程序最多能使用多少内存？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md">25  内存管理单元： 什么情况下使用大内存分页？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md">26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md">27  内存回收上篇：如何解决内存的循环引用问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md">28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md">28 (1)加餐  练习题详解（五）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md">29  Linux 下的各个目录有什么作用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md">32  HDFS 介绍：分布式文件系统是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md">32 (1)加餐  练习题详解（六）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md">33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md">34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md">35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md">36  公私钥体系和网络安全：什么是中间人攻击？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md">36 (1)加餐  练习题详解（七）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md">37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md">39  Linux 架构优秀在哪里.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md">40  商业操作系统：电商操作系统是不是一个噱头？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md">40 (1)加餐  练习题详解（八）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md">41 结束语  论程序员的发展——信仰、选择和博弈.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>02  程序的执行：相比 32 位，64 位的优势是什么？（上）</h1>
+
+<p>本节课给你讲学习操作系统之前的一个前置知识：程序是如何执行的？</p>
+
+<p><strong>我们先来看一道常规的面试题：相比 32 位，64 位的优势是什么</strong>？</p>
+
+<p>面试官考察这种类型的问题，主要是想看求职者是否有扎实的计算机基础，同时想知道求职者在工作中是否充满好奇，会主动学习、寻根问底，毕竟 32、64 位是经常出现在程序员视野的词汇，常见的东西都弄明白了，那说明这个人学习能力强。</p>
+
+<p>其实 ，面试官在这里给你挖了一个陷阱，因为他没有说清楚 32、64 位指的是操作系统、是软件、还是 CPU？</p>
+
+<ul>
+
+<li>如果是软件，那么我们的数据库有 32 位和 64 位版本；</li>
+
+<li>如果是操作系统，那么在阿里云上选择 Centos 和 Debian 版本的时候，也会有 32/64 版本；</li>
+
+<li>如果是 CPU，那么有 32 位 CPU，也有 64 位 CPU。</li>
+
+</ul>
+
+<p>接下来请你带着问题开始今天的课程学习，本课时的重点是带你学懂程序执行的原理。</p>
+
+<h3>图灵机的构造</h3>
+
+<p>想要学懂程序执行的原理，就要从图灵机说起了。它在计算机科学方面有两个巨大的贡献：</p>
+
+<p>第一，它清楚地定义了计算机能力的边界，也就是可计算理论；</p>
+
+<p>第二，它定义了计算机由哪些部分组成，程序又是如何执行的。</p>
+
+<p><img src="assets/Ciqc1F9YkgKAMPJ6ABSBvBPOVvk790.png" alt="Drawing 0.png" /></p>
+
+<p>我们先来看一看图灵机的内部构造：</p>
+
+<ol>
+
+<li>图灵机拥有一条无限长的纸带，纸带上是一个格子挨着一个格子，格子中可以写字符，你可以把纸带看作内存，而这些字符可以看作是内存中的数据或者程序。</li>
+
+<li>图灵机有一个读写头，读写头可以读取任意格子上的字符，也可以改写任意格子的字符。</li>
+
+<li>读写头上面的盒子里是一些精密的零件，包括图灵机的存储、控制单元和运算单元。</li>
+
+</ol>
+
+<h3>图灵机如何执行程序</h3>
+
+<p>下面我们来举一个例子，让大家弄清楚图灵机是如何工作的，比如我们要计算 11 + 15 的值，具体的运算步骤如下：</p>
+
+<ul>
+
+<li>首先，我们将“11、15、+” 分别写入纸带上的 3 个格子（现在纸带上的字符串是11、15、 +)，然后将读写头先停在 11 对应的格子上。</li>
+
+</ul>
+
+<p><img src="assets/Ciqc1F9YoK6AM2frAAAtDcKchOk422.png" alt="1.png" /></p>
+
+<ul>
+
+<li>接下来，图灵机通过读写头读入 11 到它的存储设备中（这个存储设备也叫作图灵机的状态）。图灵机没有说读写头为什么可以识别纸带上的字符，而是假定读写头可以做到这点。</li>
+
+</ul>
+
+<p><img src="assets/Ciqc1F9YoLWAYNkqAABb6DZsrMk959.png" alt="2.png" /></p>
+
+<ul>
+
+<li>然后读写头向右移动一个格，用同样的方法将 15 读入图灵机的状态中。现在图灵机的状态中有两个连续的数字，11 和 15。</li>
+
+</ul>
+
+<p><img src="assets/CgqCHl9YoL2AYCJbAABc5X0-CI4938.png" alt="3.png" /></p>
+
+<ul>
+
+<li>接下来重复上面的过程，会读到一个+号。下面我详细说一下这个运算流程：
+
+<ul>
+
+<li>读写头读到一个 + 号 ；</li>
+
+<li>然后将 + 号传输给控制单元 ；</li>
+
+<li>控制单元发现是一个 + 号，所以没有存入状态中。因为 + 号是一个我们预设的控制符（指令），它的作用是加和目前状态。因此，控制单元识别出是控制符，并通知运算单元工作；</li>
+
+<li>运算单元从状态中读入 11、15 并进行计算，将结果 26 存储到状态；</li>
+
+<li>运算单元将结果回传给控制单元；</li>
+
+<li>控制单元将结果传输给读写头。</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+<p><img src="assets/Ciqc1F9YoMSAa9_WAADEZsnCSoU226.png" alt="4.png" /></p>
+
+<ul>
+
+<li>读写头向右移动，将结果 26 写入纸带。</li>
+
+</ul>
+
+<p><img src="assets/CgqCHl9YoMqAB2JiAAA2igzBi94334.png" alt="5.png" /></p>
+
+<p>这样，我们就通过图灵机计算出了 11+15 的值。不知道你有没有发现，图灵机构造的这一台机器，主要功能就是读写纸带然后计算；纸带中有数据、也有控制字符（也就是指令），这个设计和我们今天的计算机是一样的。</p>
+
+<p>图灵通过数学证明了，一个问题如果可以拆解成图灵机的可执行步骤，那问题就是可计算的。另一方面，图灵机定义了计算机的组成以及工作原理，但是没有给出具体的实现。</p>
+
+<h3>冯诺依曼模型</h3>
+
+<p><img src="assets/CgqCHl9e5VaANB2BAAEVncqxxwI213.png" alt="1.png" /></p>
+
+<p>具体的实现是 1945 年冯诺依曼和其他几位科学家在著名的 101 页报告中提出的。报告遵循了图灵机的设计，并提出用电子元件构造计算机，约定了用二进制进行计算和存储，并且将计算机结构分成以下 5 个部分：</p>
+
+<ol>
+
+<li>输入设备；</li>
+
+<li>输出设备；</li>
+
+<li>内存；</li>
+
+<li>中央处理器；</li>
+
+<li>总线。</li>
+
+</ol>
+
+<p>这个模型也被称为冯诺依曼模型，下面我们具体来看看这 5 部分的作用。</p>
+
+<h4>内存</h4>
+
+<p>在冯诺依曼模型中，程序和数据被存储在一个被称作内存的线性排列存储区域。存储的数据单位是一个二进制位，英文是 bit。最小的存储单位叫作字节，也就是 8 位，英文是 byte，每一个字节都对应一个内存地址。内存地址由 0 开始编号，比如第 1 个地址是 0，第 2 个地址是 1， 然后自增排列，最后一个地址是内存中的字节数减 1。</p>
+
+<p>我们通常说的内存都是随机存取器，也就是读取任何一个地址数据的速度是一样的，写入任何一个地址数据的速度也是一样的。</p>
+
+<h4>CPU</h4>
+
+<p>冯诺依曼模型中 CPU 负责控制和计算。为了方便计算较大的数值，CPU 每次可以计算多个字节的数据。</p>
+
+<ul>
+
+<li>如果 CPU 每次可以计算 4 个 byte，那么我们称作 32 位 CPU；</li>
+
+<li>如果 CPU 每次可以计算 8 个 byte，那么我们称作 64 位 CPU。</li>
+
+</ul>
+
+<p>这里的 32 和 64，称作 CPU 的位宽。</p>
+
+<p>为什么 CPU 要这样设计呢？ 因为一个 byte 最大的表示范围就是 0~255。比如要计算 20000*50，就超出了byte 最大的表示范围了。因此，CPU 需要支持多个 byte 一起计算。当然，CPU 位数越大，可以计算的数值就越大。但是在现实生活中不一定需要计算这么大的数值。比如说 32 位 CPU 能计算的最大整数是 4294967295，这已经非常大了。</p>
+
+<p><strong>控制单元和逻辑运算单元</strong></p>
+
+<p>CPU 中有一个控制单元专门负责控制 CPU 工作；还有逻辑运算单元专门负责计算。具体的工作原理我们在指令部分给大家分析。</p>
+
+<p><strong>寄存器</strong></p>
+
+<p>CPU 要进行计算，比如最简单的加和两个数字时，因为 CPU 离内存太远，所以需要一种离自己近的存储来存储将要被计算的数字。这种存储就是寄存器。寄存器就在 CPU 里，控制单元和逻辑运算单元非常近，因此速度很快。</p>
+
+<ul>
+
+<li>寄存器中有一部分是可供用户编程用的，比如用来存加和指令的两个参数，是<strong>通用寄存器</strong>。</li>
+
+<li>还有一部分寄存器有特殊的用途，叫作<strong>特殊寄存器</strong>。比如程序指针，就是一个特殊寄存器。它存储了 CPU 要执行的下一条指令所在的内存地址。注意，程序指针不是存储了下一条要执行的指令，此时指令还在内存中，程序指针只是存储了下一条指令的地址。</li>
+
+<li>下一条要执行的指令，会从内存读入到另一个特殊的寄存器中，这个寄存器叫作<strong>指令寄存器</strong>。指令被执行完成之前，指令都存储在这里。</li>
+
+</ul>
+
+<h4>总线</h4>
+
+<p>CPU 和内存以及其他设备之间，也需要通信，因此我们用一种特殊的设备进行控制，就是总线。总线分成 3 种：</p>
+
+<ul>
+
+<li>一种是<strong>地址总线</strong>，专门用来指定 CPU 将要操作的内存地址。</li>
+
+<li>还有一种是<strong>数据总线</strong>，用来读写内存中的数据。</li>
+
+</ul>
+
+<p>当 CPU 需要读写内存的时候，先要通过地址总线来指定内存地址，再通过数据总线来传输数据。</p>
+
+<ul>
+
+<li>最后一种总线叫作<strong>控制总线</strong>，用来发送和接收关键信号，比如后面我们会学到的中断信号，还有设备复位、就绪等信号，都是通过控制总线传输。同样的，CPU 需要对这些信号进行响应，这也需要控制总线。</li>
+
+</ul>
+
+<h4>输入、输出设备</h4>
+
+<p>输入设备向计算机输入数据，计算机经过计算，将结果通过输出设备向外界传达。如果输入设备、输出设备想要和 CPU 进行交互，比如说用户按键需要 CPU 响应，这时候就需要用到控制总线。</p>
+
+<p>到这里，相信你已经对冯诺依曼模型的构造有了一定的了解。这里我再强调几个问题：</p>
+
+<h5>1. 线路位宽问题</h5>
+
+<p>第一个问题是，你可能会好奇数据如何通过线路传递。其实是通过操作电压，低电压是 0，高电压是 1。</p>
+
+<p>如果只有一条线路，每次只能传递 1 个信号，因为你必须在 0,1 中选一个。比如你构造高高低低这样的信号，其实就是 1100，相当于你传了一个数字 10 过去。大家注意，这种传递是相当慢的，因为你需要传递 4 次。</p>
+
+<p>这种一个 bit 一个 bit 发送的方式，我们叫作串行。如果希望每次多传一些数据，就需要增加线路，也就是需要并行。</p>
+
+<p>如果只有 1 条地址总线，那每次只能表示 0-1 两种情况，所以只能操作 2 个内存地址；如果有 10 条地址总线，一次就可以表示 210 种情况，也就是可以操作 1024 个内存地址；如果你希望操作 4G 的内存，那么就需要 32 条线，因为 232 是 4G。</p>
+
+<p>到这里，你可能会问，那我串行发送行不行？当然也不是不行，只是速度会很慢，因为每多增加一条线路速度就会翻倍。</p>
+
+<h5>2. 64 位和 32 位的计算</h5>
+
+<p>第二个问题是，CPU 的位宽会对计算造成什么影响？</p>
+
+<p>我们来看一个具体场景：要用 32 位宽的 CPU，加和两个 64 位的数字。</p>
+
+<p>32 位宽的 CPU 控制 40 位宽的地址总线、数据总线工作会非常麻烦，需要双方制定协议。 因此通常 32 位宽 CPU 最多操作 32 位宽的地址总线和数据总线。</p>
+
+<p>因此必须把两个 64 位数字拆成 2 个 32 位数字来计算，这样就需要一个算法，比如用像小时候做加法竖式一样，先加和两个低位的 32 位数字，算出进位，然后加和两个高位的 32 位数字，最后再加上进位。</p>
+
+<p>而 64 位的 CPU 就可以一次读入 64 位的数字，同时 64 位的 CPU 内部的逻辑计算单元，也支持 64 位的数字进行计算。但是你千万不要仅仅因为位宽的区别，就认为 64 位 CPU 性能比 32 位高很多。</p>
+
+<p>要知道大部分应用不需要计算超过 32 位的数字，比如你做一个电商网站，用户的金额通常是 10 万以下的，而 32 位有符号整数，最大可以到 20 亿。所以这样的计算在 32 位还是 64 位中没有什么区别。</p>
+
+<p>还有一点要注意，32 位宽的 CPU 没办法控制超过 32 位的地址总线、数据总线工作。比如说你有一条 40 位的地址总线（其实就是 40 条线），32 位的 CPU 没有办法一次给 40 个信号，因为它最多只有 32 位的寄存器。因此 32 位宽的 CPU 最多操作 232 个内存地址，也就是 4G 内存地址。</p>
+
+<h3>总结</h3>
+
+<p>关于计算机组成和指令部分，我们就先学到这里。这节课我们通过图灵机和冯诺依曼模型学习了计算机的组成、CPU 的工作原理等。此外，我们还顺带讨论了 32 位和 64 位的区别，现在，<strong>你可以回答 64 位和 32 位比较有哪些优势了吗</strong>？</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997d47ac7c3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

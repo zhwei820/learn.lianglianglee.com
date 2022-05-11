@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>25 消息队列的其他实现方式.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/01 Redis 是如何执行的.md">01 Redis 是如何执行的.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/02 Redis 快速搭建与使用.md">02 Redis 快速搭建与使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/03 Redis 持久化——RDB.md">03 Redis 持久化——RDB.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/04 Redis 持久化——AOF.md">04 Redis 持久化——AOF.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/05 Redis 持久化——混合持久化.md">05 Redis 持久化——混合持久化.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/06 字符串使用与内部实现原理.md">06 字符串使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/07 附录：更多字符串操作命令.md">07 附录：更多字符串操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/08 字典使用与内部实现原理.md">08 字典使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/09 附录：更多字典操作命令.md">09 附录：更多字典操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/10 列表使用与内部实现原理.md">10 列表使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/11 附录：更多列表操作命令.md">11 附录：更多列表操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/12 集合使用与内部实现原理.md">12 集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/13 附录：更多集合操作命令.md">13 附录：更多集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/14 有序集合使用与内部实现原理.md">14 有序集合使用与内部实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/15 附录：更多有序集合操作命令.md">15 附录：更多有序集合操作命令.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/16 Redis 事务深入解析.md">16 Redis 事务深入解析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/17 Redis 键值过期操作.md">17 Redis 键值过期操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/18 Redis 过期策略与源码分析.md">18 Redis 过期策略与源码分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/19 Redis 管道技术——Pipeline.md">19 Redis 管道技术——Pipeline.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/20 查询附近的人——GEO.md">20 查询附近的人——GEO.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/21 游标迭代器（过滤器）——Scan.md">21 游标迭代器（过滤器）——Scan.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/22 优秀的基数统计算法——HyperLogLog.md">22 优秀的基数统计算法——HyperLogLog.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/23 内存淘汰机制与算法.md">23 内存淘汰机制与算法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">24 消息队列——发布订阅模式.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Redis 核心原理与实战/25 消息队列的其他实现方式.md">25 消息队列的其他实现方式.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">26 消息队列终极解决方案——Stream（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/27 消息队列终极解决方案——Stream（下）.md">27 消息队列终极解决方案——Stream（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/28 实战：分布式锁详解与代码.md">28 实战：分布式锁详解与代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/29 实战：布隆过滤器安装与使用及原理分析.md">29 实战：布隆过滤器安装与使用及原理分析.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/30 完整案例：实现延迟队列的两种方法.md">30 完整案例：实现延迟队列的两种方法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/31 实战：定时任务案例.md">31 实战：定时任务案例.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/32 实战：RediSearch 高性能的全文搜索引擎.md">32 实战：RediSearch 高性能的全文搜索引擎.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/33 实战：Redis 性能测试.md">33 实战：Redis 性能测试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/34 实战：Redis 慢查询.md">34 实战：Redis 慢查询.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/35 实战：Redis 性能优化方案.md">35 实战：Redis 性能优化方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/36 实战：Redis 主从同步.md">36 实战：Redis 主从同步.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/37 实战：Redis哨兵模式（上）.md">37 实战：Redis哨兵模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/38 实战：Redis 哨兵模式（下）.md">38 实战：Redis 哨兵模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/39 实战：Redis 集群模式（上）.md">39 实战：Redis 集群模式（上）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/40 实战：Redis 集群模式（下）.md">40 实战：Redis 集群模式（下）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/41 案例：Redis 问题汇总和相关解决方案.md">41 案例：Redis 问题汇总和相关解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/42 技能学习指南.md">42 技能学习指南.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Redis 核心原理与实战/43 加餐：Redis 的可视化管理工具.md">43 加餐：Redis 的可视化管理工具.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>25 消息队列的其他实现方式</h1>
+
+<p>在 Redis 5.0 之前消息队列的实现方式有很多种，比较常见的除了我们上文介绍的发布订阅模式，还有两种：List 和 ZSet 的实现方式。</p>
+
+<p>List 和 ZSet 的方式解决了发布订阅模式不能持久化的问题，但这两种方式也有自己的缺点，接下来我们一起来了解一下，先从 List 实现消息队列的方式说起。</p>
+
+<h3>List 版消息队列</h3>
+
+<p>List 方式是实现消息队列最简单和最直接的方式，它主要是通过 lpush 和 rpop 存入和读取实现消息队列的，如下图所示：</p>
+
+<p><img src="assets/50837e00-6f6b-11ea-8377-13f07d2f46fb" alt="list存取图.png" /></p>
+
+<p>List 使用命令的方式实现消息队列：</p>
+
+<pre><code class="language-shell">127.0.0.1:6379&gt; lpush mq &quot;hello&quot; #推送消息 hello
+
+(integer) 1
+
+127.0.0.1:6379&gt; lpush mq &quot;msg&quot; #推送消息 msg
+
+(integer) 2
+
+127.0.0.1:6379&gt; rpop mq #接收到消息 hello
+
+&quot;hello&quot;
+
+127.0.0.1:6379&gt; rpop mq #接收到消息 msg
+
+&quot;mq&quot;
+
+
+
+</code></pre>
+
+<p>其中，mq 就相当于频道名称 channel，而 lpush 用于生产消息， rpop 拉取消息。</p>
+
+<h4><strong>代码实现</strong></h4>
+
+<p>接下来我们用 Java 代码的方式来实现 List 形式的消息队列，源码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+
+
+public class ListMQExample {
+
+    public static void main(String[] args){
+
+        // 消费者
+
+        new Thread(() -&gt; consumer()).start();
+
+        // 生产者
+
+        producer();
+
+    }
+
+    /**
+
+     * 生产者
+
+     */
+
+    public static void producer() {
+
+        Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
+
+        // 推送消息
+
+        jedis.lpush(&quot;mq&quot;, &quot;Hello, List.&quot;);
+
+    }
+
+    /**
+
+     * 消费者
+
+     */
+
+    public static void consumer() {
+
+        Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
+
+        // 消费消息
+
+        while (true) {
+
+            // 获取消息
+
+            String msg = jedis.rpop(&quot;mq&quot;);
+
+            if (msg != null) {
+
+                // 接收到了消息
+
+                System.out.println(&quot;接收到消息：&quot; + msg);
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>以上程序的运行结果是：</p>
+
+<pre><code>接收到消息：Hello, List.
+
+
+
+</code></pre>
+
+<p>我们使用无限循环来获取队列中的数据，这样就可以实时地获取相关信息了，但这样会带来另一个新的问题，当队列中如果没有数据的情况下，无限循环会一直消耗系统的资源，这时候我们可以使用 brpop 替代 rpop 来完美解决这个问题。</p>
+
+<p>b 是 blocking 的缩写，表示阻塞读，也就是当队列没有数据时，它会进入休眠状态，当有数据进入队列之后，它才会“苏醒”过来执行读取任务，这样就可以解决 while 循环一直执行消耗系统资源的问题了，改良版代码如下：</p>
+
+<pre><code class="language-java">import redis.clients.jedis.Jedis;
+
+
+
+public class ListMQExample {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        // 消费者 改良版
+
+        new Thread(() -&gt; bConsumer()).start();
+
+        // 生产者
+
+        producer();
+
+    }
+
+    /**
+
+     * 生产者
+
+     */
+
+    public static void producer() throws InterruptedException {
+
+        Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
+
+        // 推送消息
+
+        jedis.lpush(&quot;mq&quot;, &quot;Hello, List.&quot;);
+
+        Thread.sleep(1000);
+
+        jedis.lpush(&quot;mq&quot;, &quot;message 2.&quot;);
+
+        Thread.sleep(2000);
+
+        jedis.lpush(&quot;mq&quot;, &quot;message 3.&quot;);
+
+    }
+
+    /**
+
+     * 消费者（阻塞版）
+
+     */
+
+    public static void bConsumer() {
+
+        Jedis jedis = new Jedis(&quot;127.0.0.1&quot;, 6379);
+
+        while (true) {
+
+            // 阻塞读
+
+            for (String item : jedis.brpop(0,&quot;mq&quot;)) {
+
+                // 读取到相关数据，进行业务处理
+
+                System.out.println(item);
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+</code></pre>
+
+<p>其中，brpop() 方法的第一个参数是设置超时时间的，设置 0 表示一直阻塞。</p>
+
+<h4><strong>优缺点分析</strong></h4>
+
+<p>List 优点：</p>
+
+<ul>
+
+<li>消息可以被持久化，借助 Redis 本身的持久化（AOF、RDB 或者是混合持久化），可以有效的保存数据；</li>
+
+<li>消费者可以积压消息，不会因为客户端的消息过多而被强行断开。</li>
+
+</ul>
+
+<p>List 缺点：</p>
+
+<ul>
+
+<li>消息不能被重复消费，一个消息消费完就会被删除；</li>
+
+<li>没有主题订阅的功能。</li>
+
+</ul>
+
+<h3>ZSet 版消息队列</h3>
+
+<p>ZSet 版消息队列相比于之前的两种方式，List 和发布订阅方式在实现上要复杂一些，但 ZSet 因为多了一个 score（分值）属性，从而使它具备更多的功能，例如我们可以用它来存储时间戳，以此来实现延迟消息队列等。</p>
+
+<p>它的实现思路和 List 相同也是利用 zadd 和 zrangebyscore 来实现存入和读取，这里就不重复叙述了，读者可以根据 List 的实现方式来实践一下，看能不能实现相应的功能，如果写不出来也没关系，本课程的后面章节，介绍延迟队列的时候会用 ZSet 来实现。</p>
+
+<h4><strong>优缺点分析</strong></h4>
+
+<p>ZSet 优点：</p>
+
+<ul>
+
+<li>支持消息持久化；</li>
+
+<li>相比于 List 查询更方便，ZSet 可以利用 score 属性很方便的完成检索，而 List 则需要遍历整个元素才能检索到某个值。</li>
+
+</ul>
+
+<p>ZSet 缺点：</p>
+
+<ul>
+
+<li>ZSet 不能存储相同元素的值，也就是如果有消息是重复的，那么只能插入一条信息在有序集合中；</li>
+
+<li>ZSet 是根据 score 值排序的，不能像 List 一样，按照插入顺序来排序；</li>
+
+<li>ZSet 没有向 List 的 brpop 那样的阻塞弹出的功能。</li>
+
+</ul>
+
+<h3>小结</h3>
+
+<p>本文介绍了消息队列的另外两种实现方式 List 和 ZSet，它们都是利用自身方法，先把数据放到队列里，在使用无限循环读取队列中的消息，以实现消息队列的功能，相比发布订阅模式本文介绍的这两种方式的优势是支持持久化，当然它们各自都存在一些问题，所以期待下一课时 Stream 的出现能够解决这些问题。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Redis 核心原理与实战/24 消息队列——发布订阅模式.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Redis 核心原理与实战/26 消息队列终极解决方案——Stream（上）.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973e639143d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

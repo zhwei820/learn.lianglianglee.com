@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>02 理解进程（1）：为什么我在容器中不能kill 1号进程？</h1>
+
+<p>你好，我是程远。</p>
+
+<p>今天，我们正式进入理解进程的模块。我会通过 3 讲内容，带你了解容器 init 进程的特殊之处，还有它需要具备哪些功能，才能保证容器在运行过程中不会出现类似僵尸进程，或者应用程序无法 graceful shutdown 的问题。</p>
+
+<p>那么通过这一讲，我会带你掌握 init 进程和 Linux 信号的核心概念。</p>
+
+<h2>问题再现</h2>
+
+<p>接下来，我们一起再现用 kill 1 命令重启容器的问题。</p>
+
+<p>我猜你肯定想问，为什么要在容器中执行 kill 1 或者 kill -9 1 的命令呢？其实这是我们团队里的一位同学提出的问题。</p>
+
+<p>这位同学当时遇到的情况是这样的，他想修改容器镜像里的一个 bug，但因为网路配置的问题，这个同学又不想为了重建 pod 去改变 pod IP。</p>
+
+<p>如果你用过 Kubernetes 的话，你也肯定知道，Kubernetes 上是没有 restart pod 这个命令的。这样看来，他似乎只能让 pod 做个原地重启了。当时我首先想到的，就是在容器中使用 kill pid 1 的方式重启容器。</p>
+
+<p>为了模拟这个过程，我们可以进行下面的这段操作。</p>
+
+<p>如果你没有在容器中做过 kill 1 ，你可以下载我在 GitHub 上的这个例子，运行 make image 来做一个容器镜像。</p>
+
+<p>然后，我们用 Docker 构建一个容器，用例子中的 init.sh 脚本作为这个容器的 init 进程。</p>
+
+<p>最后，我们在容器中运行 kill 1 和 kill -9 1 ，看看会发生什么。</p>
+
+<pre><code>
+
+# docker stop sig-proc;docker rm sig-proc
+
+# docker run --name sig-proc -d registry/sig-proc:v1 /init.sh
+
+# docker exec -it sig-proc bash
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4c6dbdbc0f481d7d7828d848782d683d686">[email&#160;protected]</a> /]# ps -ef
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  0 07:23 ?        00:00:00 /bin/bash /init.sh
+
+root         8     1  0 07:25 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 100
+
+root         9     0  6 07:27 pts/0    00:00:00 bash
+
+root        22     9  0 07:27 pts/0    00:00:00 ps -ef
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5c7dadac1f580d6d6838c858683d782d787">[email&#160;protected]</a> /]# kill 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ae8f5f5eedaaff9f9aca3aaa9acf8adf8a8">[email&#160;protected]</a> /]# kill -9 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4a6bbbba094e1b7b7e2ede4e7e2b6e3b6e6">[email&#160;protected]</a> /]# ps -ef
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  0 07:23 ?        00:00:00 /bin/bash /init.sh
+
+root         9     0  0 07:27 pts/0    00:00:00 bash
+
+root        23     1  0 07:27 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 100
+
+root        24     9  0 07:27 pts/0    00:00:00 ps -ef
+
+
+
+</code></pre>
+
+<p>当我们完成前面的操作，就会发现无论运行 kill 1 （对应 Linux 中的 SIGTERM 信号）还是 kill -9 1（对应 Linux 中的 SIGKILL 信号），都无法让进程终止。</p>
+
+<p>那么问题来了，这两个常常用来终止进程的信号，都对容器中的 init 进程不起作用，这是怎么回事呢？</p>
+
+<p>要解释这个问题，我们就要回到容器的两个最基本概念——init 进程和 Linux 信号中寻找答案。</p>
+
+<h2>知识详解</h2>
+
+<h3>如何理解 init 进程？</h3>
+
+<p>init 进程的意思并不难理解，你只要认真听我讲完，这块内容基本就不会有问题了。我们下面来看一看。</p>
+
+<p>使用容器的理想境界是一个容器只启动一个进程，但这在现实应用中有时是做不到的。</p>
+
+<p>比如说，在一个容器中除了主进程之外，我们可能还会启动辅助进程，做监控或者 rotate logs；再比如说，我们需要把原来运行在虚拟机（VM）的程序移到容器里，这些原来跑在虚拟机上的程序本身就是多进程的。</p>
+
+<p>一旦我们启动了多个进程，那么容器里就会出现一个 pid 1，也就是我们常说的 1 号进程或者 init 进程，然后由这个进程创建出其他的子进程。</p>
+
+<p>接下来，我带你梳理一下 init 进程是怎么来的。</p>
+
+<p>一个 Linux 操作系统，在系统打开电源，执行 BIOS/boot-loader 之后，就会由 boot-loader 负责加载 Linux 内核。</p>
+
+<p>Linux 内核执行文件一般会放在 /boot 目录下，文件名类似 vmlinuz*。在内核完成了操作系统的各种初始化之后，这个程序需要执行的第一个用户态程就是 init 进程。</p>
+
+<p>内核代码启动 1 号进程的时候，在没有外面参数指定程序路径的情况下，一般会从几个缺省路径尝试执行 1 号进程的代码。这几个路径都是 Unix 常用的可执行代码路径。</p>
+
+<p>系统启动的时候先是执行内核态的代码，然后在内核中调用 1 号进程的代码，从内核态切换到用户态。</p>
+
+<p>目前主流的 Linux 发行版，无论是 RedHat 系的还是 Debian 系的，都会把 /sbin/init 作为符号链接指向 Systemd。Systemd 是目前最流行的 Linux init 进程，在它之前还有 SysVinit、UpStart 等 Linux init 进程。</p>
+
+<p>但无论是哪种 Linux init 进程，它最基本的功能都是创建出 Linux 系统中其他所有的进程，并且管理这些进程。具体在 kernel 里的代码实现如下：</p>
+
+<pre><code>
+
+init/main.c
+
+        /*
+
+         * We try each of these until one succeeds.
+
+         *
+
+         * The Bourne shell can be used instead of init if we are
+
+         * trying to recover a really broken machine.
+
+         */
+
+
+
+        if (execute_command) {
+
+                ret = run_init_process(execute_command);
+
+                if (!ret)
+
+                        return 0;
+
+                panic(&quot;Requested init %s failed (error %d).&quot;,
+
+                      execute_command, ret);
+
+        }
+
+
+
+        if (!try_to_run_init_process(&quot;/sbin/init&quot;) ||
+
+            !try_to_run_init_process(&quot;/etc/init&quot;) ||
+
+            !try_to_run_init_process(&quot;/bin/init&quot;) ||
+
+            !try_to_run_init_process(&quot;/bin/sh&quot;))
+
+                return 0;
+
+        panic(&quot;No working init found.  Try passing init= option to kernel. &quot;
+
+              &quot;See Linux Documentation/admin-guide/init.rst for guidance.&quot;);
+
+
+
+$ ls -l /sbin/init
+
+lrwxrwxrwx 1 root root 20 Feb  5 01:07 /sbin/init -&gt; /lib/systemd/systemd
+
+
+
+</code></pre>
+
+<p>在 Linux 上有了容器的概念之后，一旦容器建立了自己的 Pid Namespace（进程命名空间），这个 Namespace 里的进程号也是从 1 开始标记的。所以，容器的 init 进程也被称为 1 号进程。</p>
+
+<p>怎么样，1 号进程是不是不难理解？关于这个知识点，你只需要记住： 1 号进程是第一个用户态的进程，由它直接或者间接创建了 Namespace 中的其他进程。</p>
+
+<h3>如何理解 Linux 信号？</h3>
+
+<p>刚才我给你讲了什么是 1 号进程，要想解决“为什么我在容器中不能 kill 1 号进程”这个问题，我们还得看看 kill 命令起到的作用。</p>
+
+<p>我们运行 kill 命令，其实在 Linux 里就是发送一个信号，那么信号到底是什么呢？这就涉及到 Linux 信号的概念了。</p>
+
+<p>其实信号这个概念在很早期的 Unix 系统上就有了。它一般会从 1 开始编号，通常来说，信号编号是 1 到 31，这个编号在所有的 Unix 系统上都是一样的。</p>
+
+<p>在 Linux 上我们可以用 kill -l 来看这些信号的编号和名字，具体的编号和名字我给你列在了下面，你可以看一看。</p>
+
+<pre><code>
+
+$ kill -l
+
+ 1) SIGHUP      2) SIGINT    3) SIGQUIT    4) SIGILL    5) SIGTRAP
+
+ 6) SIGABRT     7) SIGBUS    8) SIGFPE     9) SIGKILL  10) SIGUSR1
+
+11) SIGSEGV    12) SIGUSR2  13) SIGPIPE   14) SIGALRM  15) SIGTERM
+
+16) SIGSTKFLT  17) SIGCHLD  18) SIGCONT   19) SIGSTOP  20) SIGTSTP
+
+21) SIGTTIN    22) SIGTTOU  23) SIGURG    24) SIGXCPU  25) SIGXFSZ
+
+26) SIGVTALRM  27) SIGPROF  28) SIGWINCH  29) SIGIO    30) SIGPWR
+
+31) SIGSYS
+
+
+
+</code></pre>
+
+<p>用一句话来概括，信号（Signal）其实就是 Linux 进程收到的一个通知。这些通知产生的源头有很多种，通知的类型也有很多种。</p>
+
+<p>比如下面这几个典型的场景，你可以看一下：</p>
+
+<p>如果我们按下键盘“Ctrl+C”，当前运行的进程就会收到一个信号 SIGINT 而退出；</p>
+
+<p>如果我们的代码写得有问题，导致内存访问出错了，当前的进程就会收到另一个信号 SIGSEGV；</p>
+
+<p>我们也可以通过命令 kill pid，直接向一个进程发送一个信号，缺省情况下不指定信号的类型，那么这个信号就是 SIGTERM。也可以指定信号类型，比如命令 &quot;kill -9 pid&quot;, 这里的 9，就是编号为 9 的信号，SIGKILL 信号。</p>
+
+<p>在这一讲中，我们主要用到 SIGTERM（15）和 SIGKILL（9）这两个信号，所以这里你主要了解这两个信号就可以了，其他信号以后用到时再做介绍。</p>
+
+<p>进程在收到信号后，就会去做相应的处理。怎么处理呢？对于每一个信号，进程对它的处理都有下面三个选择。</p>
+
+<p>第一个选择是忽略（Ignore），就是对这个信号不做任何处理，但是有两个信号例外，对于 SIGKILL 和 SIGSTOP 这个两个信号，进程是不能忽略的。这是因为它们的主要作用是为 Linux kernel 和超级用户提供删除任意进程的特权。</p>
+
+<p>第二个选择，就是捕获（Catch），这个是指让用户进程可以注册自己针对这个信号的 handler。具体怎么做我们目前暂时涉及不到，你先知道就行，我们在后面课程会进行详细介绍。</p>
+
+<p>对于捕获，SIGKILL 和 SIGSTOP 这两个信号也同样例外，这两个信号不能有用户自己的处理代码，只能执行系统的缺省行为。</p>
+
+<p>还有一个选择是缺省行为（Default），Linux 为每个信号都定义了一个缺省的行为，你可以在 Linux 系统中运行 man 7 signal来查看每个信号的缺省行为。</p>
+
+<p>对于大部分的信号而言，应用程序不需要注册自己的 handler，使用系统缺省定义行为就可以了。</p>
+
+<p><img src="assets/dae0e2bdfb4bae2d900e58cb3490dc0d.jpeg" alt="img" /></p>
+
+<p>我刚才说了，SIGTERM（15）和 SIGKILL（9）这两个信号是我们重点掌握的。现在我们已经讲解了信号的概念和处理方式，我就拿这两个信号为例，再带你具体分析一下。</p>
+
+<p>首先我们来看 SIGTERM（15），这个信号是 Linux 命令 kill 缺省发出的。前面例子里的命令 kill 1 ，就是通过 kill 向 1 号进程发送一个信号，在没有别的参数时，这个信号类型就默认为 SIGTERM。</p>
+
+<p>SIGTERM 这个信号是可以被捕获的，这里的“捕获”指的就是用户进程可以为这个信号注册自己的 handler，而这个 handler，我们后面会看到，它可以处理进程的 graceful-shutdown 问题。</p>
+
+<p>我们再来了解一下 SIGKILL (9)，这个信号是 Linux 里两个特权信号之一。什么是特权信号呢？</p>
+
+<p>前面我们已经提到过了，特权信号就是 Linux 为 kernel 和超级用户去删除任意进程所保留的，不能被忽略也不能被捕获。那么进程一旦收到 SIGKILL，就要退出。</p>
+
+<p>在前面的例子里，我们运行的命令 kill -9 1 里的参数“-9”，其实就是指发送编号为 9 的这个 SIGKILL 信号给 1 号进程。</p>
+
+<h2>现象解释</h2>
+
+<p>现在，你应该理解 init 进程和 Linux 信号这两个概念了，让我们回到开头的问题上来：“为什么我在容器中不能 kill 1 号进程，甚至 SIGKILL 信号也不行？”</p>
+
+<p>你还记得么，在课程的最开始，我们已经尝试过用 bash 作为容器 1 号进程，这样是无法把 1 号进程杀掉的。那么我们再一起来看一看，用别的编程语言写的 1 号进程是否也杀不掉。</p>
+
+<p>我们现在用 C 程序作为 init 进程，尝试一下杀掉 1 号进程。和 bash init 进程一样，无论 SIGTERM 信号还是 SIGKILL 信号，在容器里都不能杀死这个 1 号进程。</p>
+
+<pre><code># cat c-init-nosig.c
+
+#include &lt;stdio.h&gt;
+
+#include &lt;unistd.h&gt;
+
+int main(int argc, char *argv[])
+
+{
+
+       printf(&quot;Process is sleeping\n&quot;);
+
+       while (1) {
+
+              sleep(100);
+
+       }
+
+       return 0;
+
+}
+
+
+
+</code></pre>
+
+<pre><code># docker stop sig-proc;docker rm sig-proc
+
+# docker run --name sig-proc -d registry/sig-proc:v1 /c-init-nosig
+
+# docker exec -it sig-proc bash
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdcfd2d2c9fd88d98ed9898fdc8d8e8cdf8c">[email&#160;protected]</a> /]# ps -ef
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  0 07:48 ?        00:00:00 /c-init-nosig
+
+root         6     0  5 07:48 pts/0    00:00:00 bash
+
+root        19     6  0 07:48 pts/0    00:00:00 ps -ef
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91e3fefee5d1a4f5a2f5a5a3f0a1a2a0f3a0">[email&#160;protected]</a> /]# kill 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cab8a5a5be8affaef9aefef8abfaf9fba8fb">[email&#160;protected]</a> /]# kill -9 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e99b86869da9dc8dda8ddddb88d9dad88bd8">[email&#160;protected]</a> /]# ps -ef
+
+
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  0 07:48 ?        00:00:00 /c-init-nosig
+
+root         6     0  0 07:48 pts/0    00:00:00 bash
+
+root        20     6  0 07:49 pts/0    00:00:00 ps -ef
+
+
+
+</code></pre>
+
+<p>我们是不是这样就可以得出结论——“容器里的 1 号进程，完全忽略了 SIGTERM 和 SIGKILL 信号了”呢？你先别着急，我们再拿其他语言试试。</p>
+
+<p>接下来，我们用 Golang 程序作为 1 号进程，我们再在容器中执行 kill -9 1 和 kill 1 。</p>
+
+<p>这次，我们发现 kill -9 1 这个命令仍然不能杀死 1 号进程，也就是说，SIGKILL 信号和之前的两个测试一样不起作用。</p>
+
+<p>但是，我们执行 kill 1 以后，SIGTERM 这个信号把 init 进程给杀了，容器退出了。</p>
+
+<pre><code>
+
+# cat go-init.go
+
+package main
+
+
+
+import (
+
+       &quot;fmt&quot;
+
+       &quot;time&quot;
+
+)
+
+
+
+func main() {
+
+       fmt.Println(&quot;Start app\n&quot;)
+
+       time.Sleep(time.Duration(100000) * time.Millisecond)
+
+}
+
+
+
+</code></pre>
+
+<pre><code>
+
+# docker stop sig-proc;docker rm sig-proc
+
+# docker run --name sig-proc -d registry/sig-proc:v1 /go-init
+
+# docker exec -it sig-proc bash
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="05776a6a71453736316437366464303c3267">[email&#160;protected]</a> /]# ps -ef
+
+
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  1 08:04 ?        00:00:00 /go-init
+
+root        10     0  9 08:04 pts/0    00:00:00 bash
+
+root        23    10  0 08:04 pts/0    00:00:00 ps -ef
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8efce1e1facebcbdbaefbcbdefefbbb7b9ec">[email&#160;protected]</a> /]# kill -9 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e1938e8e95a1d3d2d580d3d28080d4d8d683">[email&#160;protected]</a> /]# kill 1
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="285a47475c681a1b1c491a1b49491d111f4a">[email&#160;protected]</a> /]# [~]# docker ps
+
+
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+
+
+</code></pre>
+
+<p>对于这个测试结果，你是不是反而觉得更加困惑了？</p>
+
+<p>为什么使用不同程序，结果就不一样呢？接下来我们就看看 kill 命令下达之后，Linux 里究竟发生了什么事，我给你系统地梳理一下整个过程。</p>
+
+<p>在我们运行 kill 1 这个命令的时候，希望把 SIGTERM 这个信号发送给 1 号进程，就像下面图里的带箭头虚线。</p>
+
+<p>在 Linux 实现里，kill 命令调用了 kill() 的这个系统调用（所谓系统调用就是内核的调用接口）而进入到了内核函数 sys_kill()， 也就是下图里的实线箭头。</p>
+
+<p>而内核在决定把信号发送给 1 号进程的时候，会调用 sig_task_ignored() 这个函数来做个判断，这个判断有什么用呢？</p>
+
+<p>它会决定内核在哪些情况下会把发送的这个信号给忽略掉。如果信号被忽略了，那么 init 进程就不能收到指令了。</p>
+
+<p>所以，我们想要知道 init 进程为什么收到或者收不到信号，都要去看看 sig_task_ignored() 的这个内核函数的实现。</p>
+
+<p><img src="assets/cec445b6af1c0f678cc1b538bb03d67f.jpeg" alt="img" /></p>
+
+<p>sig_task_ignored()内核函数实现示意图</p>
+
+<p>在 sig_task_ignored() 这个函数中有三个 if{}判断，第一个和第三个 if{}判断和我们的问题没有关系，并且代码有注释，我们就不讨论了。</p>
+
+<p>我们重点来看第二个 if{}。我来给你分析一下，在容器中执行 kill 1 或者 kill -9 1 的时候，这第二个 if{}里的三个子条件是否可以被满足呢？</p>
+
+<p>我们来看下面这串代码，这里表示一旦这三个子条件都被满足，那么这个信号就不会发送给进程。</p>
+
+<pre><code>kernel/signal.c
+
+
+
+static bool sig_task_ignored(struct task_struct *t, int sig, bool force)
+
+{
+
+        void __user *handler;
+
+        handler = sig_handler(t, sig);
+
+
+
+        /* SIGKILL and SIGSTOP may not be sent to the global init */
+
+        if (unlikely(is_global_init(t) &amp;&amp; sig_kernel_only(sig)))
+
+
+
+                return true;
+
+
+
+        if (unlikely(t-&gt;signal-&gt;flags &amp; SIGNAL_UNKILLABLE) &amp;&amp;
+
+            handler == SIG_DFL &amp;&amp; !(force &amp;&amp; sig_kernel_only(sig)))
+
+                return true;
+
+
+
+        /* Only allow kernel generated signals to this kthread */
+
+        if (unlikely((t-&gt;flags &amp; PF_KTHREAD) &amp;&amp;
+
+                     (handler == SIG_KTHREAD_KERNEL) &amp;&amp; !force))
+
+                return true;
+
+
+
+        return sig_handler_ignored(handler, sig);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>接下来，我们就逐一分析一下这三个子条件，我们来说说这个&quot;!(force &amp;&amp; sig_kernel_only(sig))&quot; 。</p>
+
+<p>第一个条件里 force 的值，对于同一个 Namespace 里发出的信号来说，调用值是 0，所以这个条件总是满足的。</p>
+
+<p>我们再来看一下第二个条件 “handler == SIG_DFL”，第二个条件判断信号的 handler 是否是 SIG_DFL。</p>
+
+<p>那么什么是 SIG_DFL 呢？对于每个信号，用户进程如果不注册一个自己的 handler，就会有一个系统缺省的 handler，这个缺省的 handler 就叫作 SIG_DFL。</p>
+
+<p>对于 SIGKILL，我们前面介绍过它是特权信号，是不允许被捕获的，所以它的 handler 就一直是 SIG_DFL。这第二个条件对 SIGKILL 来说总是满足的。</p>
+
+<p>对于 SIGTERM，它是可以被捕获的。也就是说如果用户不注册 handler，那么这个条件对 SIGTERM 也是满足的。</p>
+
+<p>最后再来看一下第三个条件，&quot;t-&gt;signal-&gt;flags &amp; SIGNAL_UNKILLABLE&quot;，这里的条件判断是这样的，进程必须是 SIGNAL_UNKILLABLE 的。</p>
+
+<p>这个 SIGNAL_UNKILLABLE flag 是在哪里置位的呢？</p>
+
+<p>可以参考我们下面的这段代码，在每个 Namespace 的 init 进程建立的时候，就会打上 SIGNAL_UNKILLABLE 这个标签，也就是说只要是 1 号进程，就会有这个 flag，这个条件也是满足的。</p>
+
+<pre><code>kernel/fork.c
+
+                       if (is_child_reaper(pid)) {
+
+                                ns_of_pid(pid)-&gt;child_reaper = p;
+
+                                p-&gt;signal-&gt;flags |= SIGNAL_UNKILLABLE;
+
+                        }
+
+
+
+/*
+
+
+
+ * is_child_reaper returns true if the pid is the init process
+
+ * of the current namespace. As this one could be checked before
+
+ * pid_ns-&gt;child_reaper is assigned in copy_process, we check
+
+ * with the pid number.
+
+ */
+
+
+
+static inline bool is_child_reaper(struct pid *pid)
+
+{
+
+        return pid-&gt;numbers[pid-&gt;level].nr == 1;
+
+}
+
+
+
+</code></pre>
+
+<p>我们可以看出来，其实最关键的一点就是 handler == SIG_DFL 。Linux 内核针对每个 Nnamespace 里的 init 进程，把只有 default handler 的信号都给忽略了。</p>
+
+<p>如果我们自己注册了信号的 handler（应用程序注册信号 handler 被称作&quot;Catch the Signal&quot;），那么这个信号 handler 就不再是 SIG_DFL 。即使是 init 进程在接收到 SIGTERM 之后也是可以退出的。</p>
+
+<p>不过，由于 SIGKILL 是一个特例，因为 SIGKILL 是不允许被注册用户 handler 的（还有一个不允许注册用户 handler 的信号是 SIGSTOP），那么它只有 SIG_DFL handler。</p>
+
+<p>所以 init 进程是永远不能被 SIGKILL 所杀，但是可以被 SIGTERM 杀死。</p>
+
+<p>说到这里，我们该怎么证实这一点呢？我们可以做下面两件事来验证。</p>
+
+<p>第一件事，你可以查看 1 号进程状态中 SigCgt Bitmap。</p>
+
+<p>我们可以看到，在 Golang 程序里，很多信号都注册了自己的 handler，当然也包括了 SIGTERM(15)，也就是 bit 15。</p>
+
+<p>而 C 程序里，缺省状态下，一个信号 handler 都没有注册；bash 程序里注册了两个 handler，bit 2 和 bit 17，也就是 SIGINT 和 SIGCHLD，但是没有注册 SIGTERM。</p>
+
+<p>所以，C 程序和 bash 程序里 SIGTERM 的 handler 是 SIG_DFL（系统缺省行为），那么它们就不能被 SIGTERM 所杀。</p>
+
+<p>具体我们可以看一下这段 /proc 系统的进程状态：</p>
+
+<pre><code># ## golang init
+
+# cat /proc/1/status | grep -i SigCgt
+
+SigCgt:     fffffffe7fc1feff
+
+
+
+# ## C init
+
+# cat /proc/1/status | grep -i SigCgt
+
+SigCgt:     0000000000000000
+
+
+
+# ## bash init
+
+# cat /proc/1/status | grep -i SigCgt
+
+SigCgt:     0000000000010002
+
+
+
+</code></pre>
+
+<p>第二件事，给 C 程序注册一下 SIGTERM handler，捕获 SIGTERM。</p>
+
+<p>我们调用 signal() 系统调用注册 SIGTERM 的 handler，在 handler 里主动退出，再看看容器中 kill 1 的结果。</p>
+
+<p>这次我们就可以看到，在进程状态的 SigCgt bitmap 里，bit 15 (SIGTERM) 已经置位了。同时，运行 kill 1 也可以把这个 C 程序的 init 进程给杀死了。</p>
+
+<pre><code># include &lt;stdio.h&gt;
+
+# include &lt;stdlib.h&gt;
+
+# include &lt;sys/types.h&gt;
+
+# include &lt;sys/wait.h&gt;
+
+# include &lt;unistd.h&gt;
+
+
+
+void sig_handler(int signo)
+
+{
+
+    if (signo == SIGTERM) {
+
+           printf(&quot;received SIGTERM\n&quot;);
+
+           exit(0);
+
+    }
+
+}
+
+
+
+int main(int argc, char *argv[])
+
+{
+
+    signal(SIGTERM, sig_handler);
+
+
+
+    printf(&quot;Process is sleeping\n&quot;);
+
+    while (1) {
+
+           sleep(100);
+
+    }
+
+    return 0;
+
+}
+
+
+
+</code></pre>
+
+<pre><code># docker stop sig-proc;docker rm sig-proc
+
+# docker run --name sig-proc -d registry/sig-proc:v1 /c-init-sig
+
+# docker exec -it sig-proc bash
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9bba6a6bd89f9fdfaaffdaffef8feaaabfc">[email&#160;protected]</a> /]# ps -ef
+
+
+
+UID        PID  PPID  C STIME TTY          TIME CMD
+
+root         1     0  0 09:05 ?        00:00:00 /c-init-sig
+
+root         6     0 18 09:06 pts/0    00:00:00 bash
+
+root        19     6  0 09:06 pts/0    00:00:00 ps -ef
+
+
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deacb1b1aa9eeeeaedb8eab8e9efe9bdbceb">[email&#160;protected]</a> /]# cat /proc/1/status | grep SigCgt
+
+SigCgt: 0000000000004000
+
+
+
+[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4d6cbcbd0e4949097c290c2939593c7c691">[email&#160;protected]</a> /]# kill 1
+
+# docker ps
+
+
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+
+
+
+
+</code></pre>
+
+<p>好了，到这里我们可以确定这两点：</p>
+
+<p>kill -9 1 在容器中是不工作的，内核阻止了 1 号进程对 SIGKILL 特权信号的响应。</p>
+
+<p>kill 1 分两种情况，如果 1 号进程没有注册 SIGTERM 的 handler，那么对 SIGTERM 信号也不响应，如果注册了 handler，那么就可以响应 SIGTERM 信号。</p>
+
+<h2>重点总结</h2>
+
+<p>好了，今天的内容讲完了。我们来总结一下。</p>
+
+<p>这一讲我们主要讲了 init 进程。围绕这个知识点，我提出了一个真实发生的问题：“为什么我在容器中不能 kill 1 号进程?”。</p>
+
+<p>想要解决这个问题，我们需要掌握两个基本概念。</p>
+
+<p>第一个概念是 Linux 1 号进程。它是第一个用户态的进程。它直接或者间接创建了 Namespace 中的其他进程。</p>
+
+<p>第二个概念是 Linux 信号。Linux 有 31 个基本信号，进程在处理大部分信号时有三个选择：忽略、捕获和缺省行为。其中两个特权信号 SIGKILL 和 SIGSTOP 不能被忽略或者捕获。</p>
+
+<p>只知道基本概念还不行，我们还要去解决问题。我带你尝试了用 bash, C 语言还有 Golang 程序作为容器 init 进程，发现它们对 kill 1 的反应是不同的。</p>
+
+<p>因为信号的最终处理都是在 Linux 内核中进行的，因此，我们需要对 Linux 内核代码进行分析。</p>
+
+<p>容器里 1 号进程对信号处理的两个要点，这也是这一讲里我想让你记住的两句话：</p>
+
+<ol>
+
+<li>在容器中，1 号进程永远不会响应 SIGKILL 和 SIGSTOP 这两个特权信号；</li>
+
+<li>对于其他的信号，如果用户自己注册了 handler，1 号进程可以响应。</li>
+
+</ol>
+
+<h2>思考题</h2>
+
+<p>这一讲的最开始，有这样一个 C 语言的 init 进程，它没有注册任何信号的 handler。如果我们从 Host Namespace 向它发送 SIGTERM，会发生什么情况呢？</p>
+
+<p>欢迎留言和我分享你的想法。如果你的朋友也对 1 号进程有困惑，欢迎你把这篇文章分享给他，说不定就帮他解决了一个难题。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977820f353cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

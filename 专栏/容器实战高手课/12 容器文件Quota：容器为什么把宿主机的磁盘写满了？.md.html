@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>12 容器文件Quota：容器为什么把宿主机的磁盘写满了？</h1>
+
+<p>你好，我是程远。今天我们聊一聊容器文件 Quota。</p>
+
+<p>上一讲，我们学习了容器文件系统 OverlayFS，这个 OverlayFS 有两层，分别是 lowerdir 和 upperdir。lowerdir 里是容器镜像中的文件，对于容器来说是只读的；upperdir 存放的是容器对文件系统里的所有改动，它是可读写的。</p>
+
+<p>从宿主机的角度看，upperdir 就是一个目录，如果容器不断往容器文件系统中写入数据，实际上就是往宿主机的磁盘上写数据，这些数据也就存在于宿主机的磁盘目录中。</p>
+
+<p>当然对于容器来说，如果有大量的写操作是不建议写入容器文件系统的，一般是需要给容器挂载一个 volume，用来满足大量的文件读写。</p>
+
+<p>但是不能避免的是，用户在容器中运行的程序有错误，或者进行了错误的配置。</p>
+
+<p>比如说，我们把 log 写在了容器文件系统上，并且没有做 log rotation，那么时间一久，就会导致宿主机上的磁盘被写满。这样影响的就不止是容器本身了，而是整个宿主机了。</p>
+
+<p>那对于这样的问题，我们该怎么解决呢？</p>
+
+<h2>问题再现</h2>
+
+<p>我们可以自己先启动一个容器，一起试试不断地往容器文件系统中写入数据，看看是一个什么样的情况。</p>
+
+<p>用 Docker 启动一个容器后，我们看到容器的根目录 (/) 也就是容器文件系统 OverlayFS，它的大小是 160G，已经使用了 100G。其实这个大小也是宿主机上的磁盘空间和使用情况。</p>
+
+<p><img src="assets/d32c83e404a81b301fbf8bdfd7a9c23e.png" alt="img" /></p>
+
+<p>这时候，我们可以回到宿主机上验证一下，就会发现宿主机的根目录 (/) 的大小也是 160G，同样是使用了 100G。</p>
+
+<p><img src="assets/b54deb08e46ff1155303581e9d1c8f0b.png" alt="img" /></p>
+
+<p>好，那现在我们再往容器的根目录里写入 10GB 的数据。</p>
+
+<p>这里我们可以看到容器的根目录使用的大小增加了，从刚才的 100G 变成现在的 110G。而多写入的 10G 大小的数据，对应的是 test.log 这个文件。</p>
+
+<p><img src="assets/c04dcff3aa4773302495113dd2a8d546.png" alt="img" /></p>
+
+<p>接下来，我们再回到宿主机上，可以看到宿主机上的根目录 (/) 里使用的大小也是 110G 了。</p>
+
+<p><img src="assets/155d30bc20b72c0678d1948f25cbe29d.png" alt="img" /></p>
+
+<p>我们还是继续看宿主机，看看 OverlayFS 里 upperdir 目录中有什么文件？</p>
+
+<p>这里我们仍然可以通过 /proc/mounts 这个路径，找到容器 OverlayFS 对应的 lowerdir 和 upperdir。因为写入的数据都在 upperdir 里，我们就只要看 upperdir 对应的那个目录就行了。果然，里面存放着容器写入的文件 test.log，它的大小是 10GB。</p>
+
+<p><img src="assets/4d32334dc0f1ba69881c686037f6577d.png" alt="img" /></p>
+
+<p>通过这个例子，我们已经验证了在容器中对于 OverlayFS 中写入数据，其实就是往宿主机的一个目录（upperdir）里写数据。我们现在已经写了 10GB 的数据，如果继续在容器中写入数据，结果估计你也知道了，就是会写满宿主机的磁盘。</p>
+
+<p>那遇到这种情况，我们该怎么办呢？</p>
+
+<h2>知识详解</h2>
+
+<p>容器写自己的 OverlayFS 根目录，结果把宿主机的磁盘写满了。发生这个问题，我们首先就会想到需要对容器做限制，限制它写入自己 OverlayFS 的数据量，比如只允许一个容器写 100MB 的数据。</p>
+
+<p>不过我们实际查看 OverlayFS 文件系统的特性，就会发现没有直接限制文件写入量的特性。别担心，在没有现成工具的情况下，我们只要搞懂了原理，就能想出解决办法。</p>
+
+<p>所以我们再来分析一下 OverlayFS，它是通过 lowerdir 和 upperdir 两层目录联合挂载来实现的，lowerdir 是只读的，数据只会写在 upperdir 中。</p>
+
+<p>那我们是不是可以通过限制 upperdir 目录容量的方式，来限制一个容器 OverlayFS 根目录的写入数据量呢？</p>
+
+<p>沿着这个思路继续往下想，因为 upperdir 在宿主机上也是一个普通的目录，这样就要看宿主机上的文件系统是否可以支持对一个目录限制容量了。</p>
+
+<p>对于 Linux 上最常用的两个文件系统 XFS 和 ext4，它们有一个特性 Quota，那我们就以 XFS 文件系统为例，学习一下这个 Quota 概念，然后看看这个特性能不能限制一个目录的使用量。</p>
+
+<h3>XFS  Quota</h3>
+
+<p>在 Linux 系统里的 XFS 文件系统缺省都有 Quota 的特性，这个特性可以为 Linux 系统里的一个用户（user），一个用户组（group）或者一个项目（project）来限制它们使用文件系统的额度（quota），也就是限制它们可以写入文件系统的文件总量。</p>
+
+<p>因为我们的目标是要限制一个目录中总体的写入文件数据量，那么显然给用户和用户组限制文件系统的写入数据量的模式，并不适合我们的这个需求。</p>
+
+<p>因为同一个用户或者用户组可以操作多个目录，多个用户或者用户组也可以操作同一个目录，这样对一个用户或者用户组的限制，就很难用来限制一个目录。</p>
+
+<p>那排除了限制用户或用户组的模式，我们再来看看 Project 模式。Project 模式是怎么工作的呢？</p>
+
+<p>我举一个例子你会更好理解，对 Linux 熟悉的同学可以一边操作，一边体会一下它的工作方式。不熟悉的同学也没关系，可以重点关注我后面的讲解思路。</p>
+
+<p>首先我们要使用 XFS Quota 特性，必须在文件系统挂载的时候加上对应的 Quota 选项，比如我们目前需要配置 Project Quota，那么这个挂载参数就是&quot;pquota&quot;。</p>
+
+<p>对于根目录来说，这个参数必须作为一个内核启动的参数&quot;rootflags=pquota&quot;，这样设置就可以保证根目录在启动挂载的时候，带上 XFS Quota 的特性并且支持 Project 模式。</p>
+
+<p>我们可以从 /proc/mounts 信息里，看看根目录是不是带&quot;prjquota&quot;字段。如果里面有这个字段，就可以确保文件系统已经带上了支持 project 模式的 XFS quota 特性。</p>
+
+<p><img src="assets/72d653f67717fe047c98fce37156da3d.png" alt="img" /></p>
+
+<p>下一步，我们还需要给一个指定的目录打上一个 Project ID。这个步骤我们可以使用 XFS 文件系统自带的工具 xfs_quota 来完成，然后执行下面的这个命令就可以了。</p>
+
+<p>执行命令之前，我先对下面的命令和输出做两点解释，让你理解这个命令的含义。</p>
+
+<p>第一点，新建的目录 /tmp/xfs_prjquota，我们想对它做 Quota 限制。所以在这里要对它打上一个 Project ID。</p>
+
+<p>第二点，通过 xfs_quota 这条命令，我们给 /tmp/xfs_prjquota 打上 Project ID 值 101，这个 101 是我随便选的一个数字，就是个 ID 标识，你先有个印象。在后面针对 Project 进行 Quota 限制的时候，我们还会用到这个 ID。</p>
+
+<pre><code># mkdir -p  /tmp/xfs_prjquota
+
+# xfs_quota -x -c 'project -s -p /tmp/xfs_prjquota 101' /
+
+Setting up project 101 (path /tmp/xfs_prjquota)...
+
+Processed 1 (/etc/projects and cmdline) paths for project 101 with recursion depth infinite (-1).
+
+</code></pre>
+
+<p>最后，我们还是使用 xfs_quota 命令，对 101（我们刚才建立的这个 Project ID）做 Quota 限制。</p>
+
+<p>你可以执行下面这条命令，里面的&quot;-p bhard=10m 101&quot;就代表限制 101 这个 project ID，限制它的数据块写入量不能超过 10MB。</p>
+
+<pre><code># xfs_quota -x -c 'limit -p bhard=10m 101' /
+
+</code></pre>
+
+<p>做好限制之后，我们可以尝试往 /tmp/xfs_prjquota 写数据，看看是否可以超过 10MB。比如说，我们尝试写入 20MB 的数据到 /tmp/xfs_prjquota 里。</p>
+
+<p>我们可以看到，执行 dd 写入命令，就会有个出错返回信息&quot;No space left on device&quot;。这表示已经不能再往这个目录下写入数据了，而最后写入数据的文件 test.file 大小也停留在了 10MB。</p>
+
+<pre><code># dd if=/dev/zero of=/tmp/xfs_prjquota/test.file bs=1024 count=20000
+
+dd: error writing '/tmp/xfs_prjquota/test.file': No space left on device
+
+10241+0 records in
+
+10240+0 records out
+
+10485760 bytes (10 MB, 10 MiB) copied, 0.0357122 s, 294 MB/s
+
+
+
+# ls -l /tmp/xfs_prjquota/test.file
+
+-rw-r--r-- 1 root root 10485760 Oct 31 10:00 /tmp/xfs_prjquota/test.file
+
+</code></pre>
+
+<p>好了，做到这里，我们发现使用 XFS Quota 的 Project 模式，确实可以限制一个目录里的写入数据量，它实现的方式其实也不难，就是下面这两步。</p>
+
+<p>第一步，给目标目录打上一个 Project ID，这个 ID 最终是写到目录对应的 inode 上。</p>
+
+<p>这里我解释一下，inode 是文件系统中用来描述一个文件或者一个目录的元数据，里面包含文件大小，数据块的位置，文件所属用户 / 组，文件读写属性以及其他一些属性。</p>
+
+<p>那么一旦目录打上这个 ID 之后，在这个目录下的新建的文件和目录也都会继承这个 ID。</p>
+
+<p>第二步，在 XFS 文件系统中，我们需要给这个 project ID 设置一个写入数据块的限制。</p>
+
+<p>有了 ID 和限制值之后，文件系统就可以统计所有带这个 ID 文件的数据块大小总和，并且与限制值进行比较。一旦所有文件大小的总和达到限制值，文件系统就不再允许更多的数据写入了。</p>
+
+<p>用一句话概括，XFS Quota 就是通过前面这两步限制了一个目录里写入的数据量。</p>
+
+<h2>解决问题</h2>
+
+<p>我们理解了 XFS Quota 对目录限流的机制之后，再回到我们最开始的问题，如何确保容器不会写满宿主机上的磁盘。</p>
+
+<p>你应该已经想到了，方法就是对 OverlayFS 的 upperdir 目录做 XFS Quota 的限流，没错，就是这个解决办法！</p>
+
+<p>其实 Docker 也已经实现了限流功能，也就是用 XFS Quota 来限制容器的 OverlayFS 大小。</p>
+
+<p>我们在用 docker run 启动容器的时候，加上一个参数 --storage-opt size= <SIZE> ，就能限制住容器 OverlayFS 文件系统可写入的最大数据量了。</p>
+
+<p>我们可以一起试一下，这里我们限制的 size 是 10MB。</p>
+
+<p>进入容器之后，先运行 df -h 命令，这时候你可以看到根目录 (/)overlayfs 文件系统的大小就 10MB，而不是我们之前看到的 160GB 的大小了。这样容器在它的根目录下，最多只能写 10MB 数据，就不会把宿主机的磁盘给写满了。</p>
+
+<p><img src="assets/a7906f56d9d107f0a290e610b8cd6f8a.png" alt="img" /></p>
+
+<p>完成了上面这个小试验之后，我们可以再看一下 Docker 的代码，看看它的实现是不是和我们想的一样。</p>
+
+<p>Docker 里SetQuota()函数就是用来实现 XFS Quota 限制的，我们可以看到它里面最重要的两步，分别是 setProjectID 和 setProjectQuota 。</p>
+
+<p>其实，这两步做的就是我们在基本概念中提到的那两步：</p>
+
+<p>第一步，给目标目录打上一个 Project ID；第二步，为这个 Project ID 在 XFS 文件系统中，设置一个写入数据块的限制。</p>
+
+<pre><code>// SetQuota - assign a unique project id to directory and set the quota limits
+
+// for that project id
+
+
+
+func (q *Control) SetQuota(targetPath string, quota Quota) error {
+
+        q.RLock()
+
+        projectID, ok := q.quotas[targetPath]
+
+        q.RUnlock()
+
+
+
+        if !ok {
+
+                q.Lock()
+
+                projectID = q.nextProjectID
+
+
+
+                //
+
+                // assign project id to new container directory
+
+                //
+
+
+
+                err := setProjectID(targetPath, projectID)
+
+                if err != nil {
+
+                        q.Unlock()
+
+                        return err
+
+                }
+
+
+
+                q.quotas[targetPath] = projectID
+
+                q.nextProjectID++
+
+                q.Unlock()
+
+        }
+
+
+
+        //
+
+        // set the quota limit for the container's project id
+
+        //
+
+
+
+        logrus.Debugf(&quot;SetQuota(%s, %d): projectID=%d&quot;, targetPath, quota.Size, projectID)
+
+        return setProjectQuota(q.backingFsBlockDev, projectID, quota)
+
+}
+
+</code></pre>
+
+<p>那 setProjectID 和  setProjectQuota 是如何实现的呢？</p>
+
+<p>你可以进入到这两个函数里看一下，它们分别调用了 ioctl() 和 quotactl() 这两个系统调用来修改内核中 XFS 的数据结构，从而完成 project ID 的设置和 Quota 值的设置。具体的细节，我不在这里展开了，如果你有兴趣，可以继续去查看内核中对应的代码。</p>
+
+<p>好了，Docker 里 XFS Quota 操作的步骤完全和我们先前设想的一样，那么还有最后一个问题要解决，XFS Quota 限制的目录是哪一个？</p>
+
+<p>这个我们可以根据 /proc/mounts 中容器的 OverlayFS Mount 信息，再结合 Docker 的代码，就可以知道限制的目录是&quot;/var/lib/docker/overlay2/&lt;docker_id&gt;&quot;。那这个目录下有什么呢？果然 upperdir 目录中有对应的&quot;diff&quot;目录，就在里面！</p>
+
+<p><img src="assets/4d4d995f052c9a8e3ff3e413c0e1199f.png" alt="img" /></p>
+
+<p>讲到这里，我想你已经清楚了对于使用 OverlayFS 的容器，我们应该如何去防止它把宿主机的磁盘给写满了吧？方法就是对 OverlayFS 的 upperdir 目录做 XFS Quota 的限流。</p>
+
+<h2>重点总结</h2>
+
+<p>我们这一讲的问题是，容器写了大量数据到 OverlayFS 文件系统的根目录，在这个情况下，就会把宿主机的磁盘写满。</p>
+
+<p>由于 OverlayFS 自己没有专门的特性，可以限制文件数据写入量。这时我们通过实际试验找到了解决思路：依靠底层文件系统的 Quota 特性来限制 OverlayFS 的 upperdir 目录的大小，这样就能实现限制容器写磁盘的目的。</p>
+
+<p>底层文件系统 XFS Quota 的 Project 模式，能够限制一个目录的文件写入量，这个功能具体是通过这两个步骤实现：</p>
+
+<p>第一步，给目标目录打上一个 Project ID。</p>
+
+<p>第二步，给这个 Project ID 在 XFS 文件系统中设置一个写入数据块的限制。</p>
+
+<p>Docker 正是使用了这个方法，也就是用 XFS Quota 来限制 OverlayFS 的 upperdir 目录，通过这个方式控制容器 OverlayFS 的根目录大小。</p>
+
+<p>当我们理解了这个方法后，对于不是用 Docker 启动的容器，比如直接由 containerd 启动起来的容器，也可以自己实现 XFS Quota 限制 upperdir 目录。这样就能有效控制容器对 OverlayFS 的写数据操作，避免宿主机的磁盘被写满。</p>
+
+<h2>思考题</h2>
+
+<p>在正文知识详解的部分，我们使用&quot;xfs_quota&quot;给目录打了 project ID 并且限制了文件写入的数据量。那在做完这样的限制之后，我们是否能用 xfs_quota 命令，查询到被限制目录的 project ID 和限制的数据量呢？</p>
+
+<p>欢迎你在留言区分享你的思考或疑问。如果这篇文章让你有所收获，也欢迎转发给你的同事、朋友，一起交流和学习。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997799db423cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

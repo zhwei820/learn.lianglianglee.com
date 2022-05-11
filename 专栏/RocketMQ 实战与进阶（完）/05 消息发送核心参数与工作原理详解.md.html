@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>05 消息发送核心参数与工作原理详解.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/01 搭建学习环境准备篇.md">01 搭建学习环境准备篇.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/02 RocketMQ 核心概念扫盲篇.md">02 RocketMQ 核心概念扫盲篇.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/03 消息发送 API 详解与版本变迁说明.md">03 消息发送 API 详解与版本变迁说明.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/04 结合实际应用场景谈消息发送.md">04 结合实际应用场景谈消息发送.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/RocketMQ 实战与进阶（完）/05 消息发送核心参数与工作原理详解.md">05 消息发送核心参数与工作原理详解.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/06 消息发送常见错误与解决方案.md">06 消息发送常见错误与解决方案.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/07 事务消息使用及方案选型思考.md">07 事务消息使用及方案选型思考.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/08 消息消费 API 与版本变迁说明.md">08 消息消费 API 与版本变迁说明.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/09 DefaultMQPushConsumer 核心参数与工作原理.md">09 DefaultMQPushConsumer 核心参数与工作原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/10 DefaultMQPushConsumer 使用示例与注意事项.md">10 DefaultMQPushConsumer 使用示例与注意事项.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/11 DefaultLitePullConsumer 核心参数与实战.md">11 DefaultLitePullConsumer 核心参数与实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/12 结合实际场景再聊 DefaultLitePullConsumer 的使用.md">12 结合实际场景再聊 DefaultLitePullConsumer 的使用.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/13 结合实际场景顺序消费、消息过滤实战.md">13 结合实际场景顺序消费、消息过滤实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/14 消息消费积压问题排查实战.md">14 消息消费积压问题排查实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/15 RocketMQ 常用命令实战.md">15 RocketMQ 常用命令实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/16 RocketMQ 集群性能摸高.md">16 RocketMQ 集群性能摸高.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/17 RocketMQ 集群性能调优.md">17 RocketMQ 集群性能调优.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/18 RocketMQ 集群平滑运维.md">18 RocketMQ 集群平滑运维.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/19 RocketMQ 集群监控（一）.md">19 RocketMQ 集群监控（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/20 RocketMQ 集群监控（二）.md">20 RocketMQ 集群监控（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/21 RocketMQ 集群告警.md">21 RocketMQ 集群告警.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/22 RocketMQ 集群踩坑记.md">22 RocketMQ 集群踩坑记.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/23 消息轨迹、ACL 与多副本搭建.md">23 消息轨迹、ACL 与多副本搭建.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/24 RocketMQ-Console 常用页面指标获取逻辑.md">24 RocketMQ-Console 常用页面指标获取逻辑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/25 RocketMQ Nameserver 背后的设计理念.md">25 RocketMQ Nameserver 背后的设计理念.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/26 Java 并发编程实战.md">26 Java 并发编程实战.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/27 从 RocketMQ 学基于文件的编程模式（一）.md">27 从 RocketMQ 学基于文件的编程模式（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/28 从 RocketMQ 学基于文件的编程模式（二）.md">28 从 RocketMQ 学基于文件的编程模式（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/29 从 RocketMQ 学 Netty 网络编程技巧.md">29 从 RocketMQ 学 Netty 网络编程技巧.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/RocketMQ 实战与进阶（完）/30 RocketMQ 学习方法之我见.md">30 RocketMQ 学习方法之我见.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>05 消息发送核心参数与工作原理详解</h1>
+
+<p>经过前面几篇的讲解，我相信大家对 RocketMQ 的消息发送已经有了一个较为详细的认识，已经能够非常顺畅地使用 DefaultMQProducer 相关的 API。</p>
+
+<p>本篇将重点关注 DefaultMQProducer 中的相关属性，以便从这些属性窥探 RocketMQ 消息发送较为底层的原理。</p>
+
+<p><img src="assets/20200801154622753.png" alt="1" /></p>
+
+<p>从 DefaultMQProducer 的类图就可以看出其属性主要来源于 ClientConfig、DefaultMQProducer，故接下来将分两部分进行介绍。</p>
+
+<h3>DefaultMQProducer 参数一览</h3>
+
+<p>DefaultMQProducer 的参数如下：</p>
+
+<pre><code>InternalLogger log = ClientLogger.getLog()
+
+
+
+</code></pre>
+
+<p>客户端的日志实现类，RocketMQ 客户端的日志路径为 <code>${user.home}/logs/rocketmqlogs/rocketmq_client.log</code>。在排查问题时可以从日志文件下手，寻找错误日志，为解决问题提供必要的信息。其中 user.home 为用户的主目录。</p>
+
+<pre><code>producerGroup
+
+
+
+</code></pre>
+
+<p>发送者所属组，开源版本的 RocketMQ，发送者所属组主要的用途是事务消息，Broker 需要向消息发送者回查事务状态。可以通过相关命令或 RocketMQ-Console 查看某一个 Topic 指定消费组的客户端，如下图所示：</p>
+
+<p><img src="assets/20200801154629423.png" alt="2" /></p>
+
+<pre><code>defaultTopicQueueNums = 4
+
+
+
+</code></pre>
+
+<p>通过生产者创建 Topic 时默认的队列数量。</p>
+
+<pre><code>sendMsgTimeout = 3000
+
+
+
+</code></pre>
+
+<p>消息发送默认超时时间，单位为毫秒。值得注意的是在 RocketMQ 4.3.0 版本之前，由于存在重试机制，设置的设计为单次重试的超时时间，即如果设置重试次数为 3 次，则 <code>DefaultMQProducer#send</code> 方法可能会超过 9s 才返回；该问题在 RocketMQ 4.3.0 版本进行了优化，设置的超时时间为总的超时时间，即如果超时时间设置 3s，重试次数设置为 10 次，可能不会重试 10 次，例如在重试到第 5 次的时候，已经超过 3s 了，试图尝试第 6 次重试时会退出，抛出超时异常，停止重试。</p>
+
+<pre><code>compressMsgBodyOverHowmuch
+
+
+
+</code></pre>
+
+<p>压缩的阔值，默认为 4k，即当消息的消息体超过 4k，则会使用 zip 对消息体进行压缩，会增加 Broker 端的 CPU 消耗，但能提高网络方面的开销。</p>
+
+<pre><code>retryTimesWhenSendFailed
+
+
+
+</code></pre>
+
+<p>同步消息发送重试次数。RocketMQ 客户端内部在消息发送失败时默认会重试 2 次。请主要该参数与 sendMsgTimeout 会联合起来生效，详情请参照上文所述。</p>
+
+<pre><code>retryTimesWhenSendAsyncFailed
+
+
+
+</code></pre>
+
+<p>异步消息发送重试次数，默认为 2，即重试 2 次，通常情况下有三次机会。</p>
+
+<pre><code>retryAnotherBrokerWhenNotStoreOK
+
+
+
+</code></pre>
+
+<p>该参数的本意是如果客户端收到的结果不是 SEND_OK，应该是不问源由的继续向另外一个 Broker 重试，但根据代码分析，目前这个参数并不能按预期运作，应该是一个 Bug。</p>
+
+<pre><code>int maxMessageSize
+
+
+
+</code></pre>
+
+<p>允许发送的最大消息体，默认为 4M，服务端（Broker）也有 maxMessageSize 这个参数的设置，故客户端的设置不能超过服务端的配置，最佳实践为客户端的配置小于服务端的配置。</p>
+
+<pre><code>sendLatencyFaultEnable
+
+
+
+</code></pre>
+
+<p>是否开启失败延迟规避机制。RocketMQ 客户端内部在重试时会规避上一次发送失败的 Broker，如果开启延迟失败规避，则在未来的某一段时间内不向该 Broker 发送消息，具体机制在本篇的第三部分详细展开。默认为 false，不开启。</p>
+
+<pre><code>notAvailableDuration
+
+
+
+</code></pre>
+
+<p>不可用的延迟数组，默认值为 {0L, 0L, 30000L, 60000L, 120000L, 180000L, 600000L}，即每次触发 Broker 的延迟时间是一个阶梯的，会根据每次消息发送的延迟时间来选择在未来多久内不向该 Broker 发送消息。</p>
+
+<pre><code>latencyMax
+
+
+
+</code></pre>
+
+<p>设置消息发送的最大延迟级别，默认值为 {50L, 100L, 550L, 1000L, 2000L, 3000L, 15000L}，个数与 notAvailableDuration 对应，关于 Broker 的延迟关闭机制将在本文第三部详细探讨。</p>
+
+<h3>ClientConfig 参数一览</h3>
+
+<p>ClientConfig 顾名思义，客户端的配置，在 RocketMQ 中消息发送者（Producer）和消息消费者（Consumer），即上面的配置生产者、消费者是通用的。</p>
+
+<p><strong>namesrvAddr</strong></p>
+
+<p>NameServer 的地址列表。</p>
+
+<p><strong>clientIP</strong></p>
+
+<p>客户端 IP，通过 <code>RemotingUtil#getLocalAddress</code> 方法获取，在 4.7.0 版本中优先会返回不是 127.0.0.1 和 192.168 开头的最后一个 IPV4 或第一个 IPV6。客户端 IP 主要是用来定位消费者的，clientIP 会当成客户端 id 的组成部分。</p>
+
+<p>如下图所示：在菜单 [Consumer] 列表中点击一个消费组，点击按钮 [client] 可以查阅其客户端（消费者）。</p>
+
+<p><img src="assets/20200801154637230.png" alt="3" /></p>
+
+<p><strong>instanceName</strong></p>
+
+<p>客户端实例名称，是客户端标识 CID 的组成部分，在第三篇会详细其 CID 与场景的使用问题。</p>
+
+<p><strong>unitName</strong></p>
+
+<p>定义一个单元，主要用途：客户端 CID 的组成部分；如果获取 NameServer 的地址是通过 URL 进行动态更新的话，会将该值附加到当中，即可以区分不同的获取 NameServer 地址的服务。</p>
+
+<p><strong>clientCallbackExecutorThreads</strong></p>
+
+<p>客户端 public 回调的线程池线程数量，默认为 CPU 核数，不建议改变该值。</p>
+
+<p><strong>namespace</strong></p>
+
+<p>客户端命名空间，从 4.5.1 版本被引入，在第三篇中已详细介绍。</p>
+
+<p><strong>pollNameServerInterval</strong></p>
+
+<p>客户端从 NameServer 更新 Topic 的间隔，默认值 30s，就 Producer、Consumer 会每隔 30s 向 NameServer 更新 Topic 的路由信息，该值不建议修改。</p>
+
+<p><strong>heartbeatBrokerInterval</strong></p>
+
+<p>客户端向 Broker 发送心跳包的时间间隔，默认为 30s，该值不建议修改。</p>
+
+<p><strong>persistConsumerOffsetInterval</strong></p>
+
+<p>客户端持久化消息消费进度的间隔，默认为 5s，该值不建议修改。</p>
+
+<h3>核心参数工作机制与使用建议</h3>
+
+<h4><strong>消息发送高可用设计与故障规避机制</strong></h4>
+
+<p>熟悉 RocketMQ 的小伙伴应该都知道，RocketMQ Topic 路由注册中心 NameServer 采用的是最终一致性模型，而且客户端是定时向 NameServer 更新 Topic 的路由信息，即客户端（Producer、Consumer）是无法实时感知 Broker 宕机的，这样消息发送者会继续向已宕机的 Broker 发送消息，造成消息发送异常。那 RocketMQ 是如何保证消息发送的高可用性呢？</p>
+
+<p>RocketMQ 为了保证消息发送的高可用性，在内部引入了重试机制，默认重试 2 次。RocketMQ 消息发送端采取的队列负载均衡默认采用轮循。</p>
+
+<p>在 RocketMQ 中消息发送者是线程安全的，即一个消息发送者可以在多线程环境中安全使用。每一个消息发送者全局会维护一个 Topic 上一次选择的队列，然后基于这个序号进行递增轮循，引入了 ThreadLocal 机制，即每一个发送者线程持有一个上一次选择的队列，用 sendWhichQueue 表示。</p>
+
+<p>接下来举例消息队列负载机制，例如 topicA 的路由信息如下图所示：</p>
+
+<p><img src="assets/20200801181739197.png" alt="4" /></p>
+
+<p>正如上图所 topicA 在 broker-a、broker-b 上分别创建了 4 个队列，例如一个线程使用 Producer 发送消息时，通过对 sendWhichQueue getAndIncrement() 方法获取下一个队列。</p>
+
+<p>例如在发送之前 sendWhichQueue 该值为 broker-a 的 q1，如果由于此时 broker-a 的突发流量异常大导致消息发送失败，会触发重试，按照轮循机制，下一个选择的队列为 broker-a 的 q2 队列，此次消息发送大概率还是会失败，<strong>即尽管会重试 2 次，但都是发送给同一个 Broker 处理，此过程会显得不那么靠谱，即大概率还是会失败，那这样重试的意义将大打折扣。</strong></p>
+
+<p>故 RocketMQ 为了解决该问题，引入了<strong>故障规避机制</strong>，在消息重试的时候，会尽量规避上一次发送的 Broker，回到上述示例，当消息发往 broker-a q1 队列时返回发送失败，那重试的时候，会先排除 broker-a 中所有队列，即这次会选择 broker-b q1 队列，增大消息发送的成功率。</p>
+
+<p>上述规避思路是默认生效的，即无需干预。</p>
+
+<p>但 RocketMQ 提供了两种规避策略，该参数由 <strong>sendLatencyFaultEnable</strong> 控制，用户可干预，表示是否开启延迟规避机制，默认为不开启。</p>
+
+<ul>
+
+<li>sendLatencyFaultEnable 设置为 false：默认值，不开启，延迟规避策略只在重试时生效，例如在一次消息发送过程中如果遇到消息发送失败，规避 broekr-a，但是在下一次消息发送时，即再次调用 DefaultMQProducer 的 send 方法发送消息时，还是会选择 broker-a 的消息进行发送，只要继续发送失败后，重试时再次规避 broker-a。</li>
+
+<li>sendLatencyFaultEnable 设置为 true：开启延迟规避机制，一旦消息发送失败会将 broker-a “悲观”地认为在接下来的一段时间内该 Broker 不可用，在为未来某一段时间内所有的客户端不会向该 Broker 发送消息。这个延迟时间就是通过 notAvailableDuration、latencyMax 共同计算的，就首先先计算本次消息发送失败所耗的时延，然后对应 latencyMax 中哪个区间，即计算在 latencyMax 的下标，然后返回 notAvailableDuration 同一个下标对应的延迟值。</li>
+
+</ul>
+
+<blockquote>
+
+<p>温馨提示：如果所有的 Broker 都触发了故障规避，并且 Broker 只是那一瞬间压力大，那岂不是明明存在可用的 Broker，但经过你这样规避，反倒是没有 Broker 可用来，那岂不是更糟糕了？针对这个问题，会退化到队列轮循机制，即不考虑故障规避这个因素，按自然顺序进行选择进行兜底。</p>
+
+</blockquote>
+
+<p><strong>笔者实战经验分享</strong></p>
+
+<p>按照笔者的实践经验，RocketMQ Broker 的繁忙基本都是瞬时的，而且通常与系统 PageCache 内核的管理相关，很快就能恢复，故不建议开启延迟机制。因为一旦开启延迟机制，例如 5 分钟内不会向一个 Broker 发送消息，这样会导致消息在其他 Broker 激增，从而会导致部分消费端无法消费到消息，增大其他消费者的处理压力，导致整体消费性能的下降。</p>
+
+<h4><strong>客户端 ID 与使用陷进</strong></h4>
+
+<p>介绍客户端 ID 主要的目的是，能在如下场景正确使用消息发送与消费。</p>
+
+<ul>
+
+<li>同一套代码能否在同一台机器上部署多个实例？</li>
+
+<li>同一套代码能向不同的 NameServer 集群发送消息、消费消息吗？</li>
+
+</ul>
+
+<p>本篇的试验环境部署架构如下：</p>
+
+<p><img src="assets/20200801154659919.png" alt="5" /></p>
+
+<p>部署了两套 RocketMQ 集群，在 DefaultCluster 集群上创建 Topic——dw_test_01，并在 DefaultClusterb 上创建 Topic——dw_test_02，现在的需求是 order-service-app 要向 dw_test_01、dw_test_02 上发送消息。给出的示例代码如下：</p>
+
+<pre><code>public static void main(String[] args) throws Exception{
+
+        //　创建第一个生产者
+
+        DefaultMQProducer producer = new DefaultMQProducer(&quot;dw_test_producer_group1&quot;);
+
+        producer.setNamesrvAddr(&quot;192.168.3.10:9876&quot;);
+
+        producer.start();
+
+        //　创建第二个生产者
+
+        DefaultMQProducer producer2 = new DefaultMQProducer(&quot;dw_test_producer_group2&quot;);
+
+        producer2.setNamesrvAddr(&quot;192.168.3.19:9876&quot;);
+
+        producer2.start();
+
+        try {
+
+            //　向第一个 RocketMQ 集群发送消息
+
+            SendResult result1 = producer.send( new Message(&quot;dw_test_01&quot; , &quot;hello 
+
+                 192.168.3.10 nameserver&quot;.getBytes()));
+
+            System.out.printf(&quot;%s%n&quot;, result1);
+
+        } catch (Throwable e) {
+
+            System.out.println(&quot;-----first------------&quot;);
+
+            e.printStackTrace();
+
+            System.out.println(&quot;-----first------------&quot;);
+
+        }
+
+
+
+        try {
+
+            //　向第一个 RocketMQ 集群发送消息
+
+            SendResult result2 = producer2.send( new Message(&quot;dw_test_02&quot; , &quot;hello 
+
+                192.168.3.19 nameserver&quot;.getBytes()));
+
+            System.out.printf(&quot;%s%n&quot;, result2);
+
+        } catch (Throwable e) {
+
+            System.out.println(&quot;-----secornd------------&quot;);
+
+            e.printStackTrace();
+
+            System.out.println(&quot;-----secornd------------&quot;);
+
+        }
+
+        //睡眠 10s，简单延迟该任务的结束
+
+        Thread.sleep(10000);
+
+    }
+
+
+
+</code></pre>
+
+<p>运行结果如下图所示：</p>
+
+<p><img src="assets/20200801154707534.png" alt="6" /></p>
+
+<p>在向集群 2 发送消息时出现 Topic 不存在，但明明创建了 dw_test_02，而且如果单独向集群 2 的 dw_test_02 发送消息确能成功，<strong>初步排查是创建了两个到不同集群的 Producer 引起的，那这是为什么呢？如果解决呢？</strong></p>
+
+<p><strong>1. 问题分析</strong></p>
+
+<p>要解决该问题，首先得理解 RocketMQ Client 的核心组成部分，如下图所示：</p>
+
+<p><img src="assets/20200801154714361.png" alt="7" /></p>
+
+<p>上述中几个核心关键点如下：</p>
+
+<ul>
+
+<li>MQClientInstance：RocketMQ 客户端一个非常重要的对象，代表一个 MQ 客户端，并且其唯一标识为 clientId。该对象中会持有众多的消息发送者客户端 producerTable，其键为消息发送者组；同样可以创建多个消费组，以消费组为键存储在 consumerTable 中。</li>
+
+<li>一个 JVM 进程中，即一个应用程序中是否能创建多个 MQClientInstance 呢？同样是可以的，MQClientManager 对象持有一个 MQClientInstance 容器，键为 clientId。</li>
+
+</ul>
+
+<p>那既然一个 JVM 中能支持创建多个生产者，那为什么上面的示例中创建了两个生产者，并且生产者组也不一样，那为什么不能正常工作呢？</p>
+
+<p>这是因为上述两个 Producer 对应的 clinetId 相同，会对应同一个 MQClientInstance 对象，这样两个生产者都会注册到一个 MQClientInstance，即这两个生产者使用的配置为第一个生产者的配置，即配置的 nameserver 地址为 192.168.3.10:9876，而在集群 1 上并没有创建 topic——dw_test_02，故无法找到对应的主题，而抛出上述错误。</p>
+
+<p>我们可以通过调用 DefaultMQProducer 的 buildMQClientId() 方法，查看其生成的 clientId，运行后的结果如下图所示：</p>
+
+<p><img src="assets/2020080115472163.png" alt="8" /></p>
+
+<p>那解决思路就非常清晰了，我们只需要改变两者的 clientId 即可，故接下来看一下 RocketMQ 中 clientId 的生成规则。</p>
+
+<p><img src="assets/20200801154727926.png" alt="ClientConfig#buildMQClientId" /></p>
+
+<blockquote>
+
+<p>温馨提示：该方法定义在 ClientConfig 中，RocketMQ 生产者、消费者都是 ClientConfig 的子类。</p>
+
+</blockquote>
+
+<p><strong>clientId 的生成策略如下：</strong></p>
+
+<ul>
+
+<li>clientIp：客户端的 IP 地址。</li>
+
+<li>instanceName：实例名称，默认值为 DEFAULT，但在真正 clientConfig 的 getInstanceName 方法时如果实例名称为 DEFAULT，会自动将其替换为进程的 PID。</li>
+
+<li>unitName：单元名称，如果不为空，则会追加到 clientId 中。</li>
+
+</ul>
+
+<p>了解到 clientId 的生成规则后，提出解决方案已是水到渠成的事情了。</p>
+
+<p><strong>2. 解决方案</strong></p>
+
+<p>结合 clientId 三个组成部分，我不建议修改 instanceName，让其保持默认值 DEFAULT，这样在真正的运行过程中会自动变更为进程的 pid，这样能解决同一套代码在同一台机器上部署多个进程，这样 clientId 并不会重复，故我建议大家修改 unitName，可以考虑将其修改为集群的名称，修改后的代码如下所示：</p>
+
+<pre><code>public static void main(String[] args) throws Exception{
+
+        //省略代码
+
+        DefaultMQProducer producer2 = new DefaultMQProducer(&quot;dw_test_producer_group2&quot;);
+
+        producer2.setNamesrvAddr(&quot;192.168.3.19:9876&quot;);
+
+        producer2.setUnitName(&quot;DefaultClusterb&quot;);
+
+        producer2.start();
+
+    　　//省略代码
+
+
+
+</code></pre>
+
+<p>运行结果如下图所示：</p>
+
+<p><img src="assets/20200801154735297.png" alt="10" /></p>
+
+<p>完美解决。</p>
+
+<h3>小结</h3>
+
+<p>本篇首先介绍了消息发送者所有的配置参数及其基本含义，紧接着详细介绍了 RocketMQ 消息发送故障规避机制、消息客户端 ID 的生成策略，以及实战中如何使用，并且告知如何避坑。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/RocketMQ 实战与进阶（完）/04 结合实际应用场景谈消息发送.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/RocketMQ 实战与进阶（完）/06 消息发送常见错误与解决方案.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099741abb723d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

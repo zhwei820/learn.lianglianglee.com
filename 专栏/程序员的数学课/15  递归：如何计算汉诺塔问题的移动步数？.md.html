@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>15  递归：如何计算汉诺塔问题的移动步数？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/00 开篇词  数学，编程能力的营养根基.md">00 开篇词  数学，编程能力的营养根基.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/01  从计数开始，程序员必知必会的数制转换法.md">01  从计数开始，程序员必知必会的数制转换法.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/02  逻辑与沟通，怎样才能讲出有逻辑的话？.md">02  逻辑与沟通，怎样才能讲出有逻辑的话？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/03  用数学决策，如何规划好投入、转化和产出？.md">03  用数学决策，如何规划好投入、转化和产出？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/04  万物可数学，经典公式是如何在生活中应用的？.md">04  万物可数学，经典公式是如何在生活中应用的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/05  求极值：如何找到复杂业务的最优解？.md">05  求极值：如何找到复杂业务的最优解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/06  向量及其导数：计算机如何完成对海量高维度数据计算？.md">06  向量及其导数：计算机如何完成对海量高维度数据计算？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/07  线性回归：如何在离散点中寻找数据规律？.md">07  线性回归：如何在离散点中寻找数据规律？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/08  加乘法则：如何计算复杂事件发生的概率？.md">08  加乘法则：如何计算复杂事件发生的概率？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/09  似然估计：如何利用 MLE 对参数进行估计？.md">09  似然估计：如何利用 MLE 对参数进行估计？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/10  信息熵：事件的不确定性如何计算？.md">10  信息熵：事件的不确定性如何计算？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/11  灰度实验：如何设计灰度实验并计算实验的收益？.md">11  灰度实验：如何设计灰度实验并计算实验的收益？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md">12  统计学方法：如何证明灰度实验效果不是偶然得到的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/13  复杂度：如何利用数学推导对程序进行优化？.md">13  复杂度：如何利用数学推导对程序进行优化？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/14  程序的循环：如何利用数学归纳法进行程序开发？.md">14  程序的循环：如何利用数学归纳法进行程序开发？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/程序员的数学课/15  递归：如何计算汉诺塔问题的移动步数？.md">15  递归：如何计算汉诺塔问题的移动步数？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/16  二分法：如何利用指数爆炸优化程序？.md">16  二分法：如何利用指数爆炸优化程序？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/17  动态规划：如何利用最优子结构解决问题？.md">17  动态规划：如何利用最优子结构解决问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/18  AI 入门：利用 3 个公式搭建最简 AI 框架.md">18  AI 入门：利用 3 个公式搭建最简 AI 框架.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/19  逻辑回归：如何让计算机做出二值化决策？.md">19  逻辑回归：如何让计算机做出二值化决策？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/20  决策树：如何对 NP 难复杂问题进行启发式求解？.md">20  决策树：如何对 NP 难复杂问题进行启发式求解？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md">21  神经网络与深度学习：计算机是如何理解图像、文本和语音的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/22  面试中那些坑了无数人的算法题.md">22  面试中那些坑了无数人的算法题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/23  站在生活的十字路口，如何用数学抉择？.md">23  站在生活的十字路口，如何用数学抉择？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/程序员的数学课/24 结束语  数学底子好，学啥都快.md">24 结束语  数学底子好，学啥都快.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>15  递归：如何计算汉诺塔问题的移动步数？</h1>
+
+<p>递归是重要的程序开发思想，比如程序源代码缩进、树形数据结构、XML 语法、快速排序法等都有递归的影子。</p>
+
+<p>那么，递归思维的本质到底是什么呢？递归的理念看似隐讳，实则非常清晰明了。</p>
+
+<p>为了让你由浅入深地理解它，这一讲我会先从“汉诺塔问题”入手，带你找出“递归思维”，然后将其应用在两个经典问题中，让你感受递归的作用及其缺点。</p>
+
+<p>最后，你便会发现递归与上一讲所学的循环有相似之处，我便会在这两者的对比辨析中，带你探讨它们的本质差异。</p>
+
+<h3>汉诺塔问题及其代码实现</h3>
+
+<p>我们先来看下汉诺塔问题的规则。</p>
+
+<blockquote>
+
+<p>假设有 A、B、C 三根柱子。其中在 A 柱子上，从下往上有 N 个从大到小叠放的盘子。我们的目标是，希望用尽可能少的移动次数，把所有的盘子由 A 柱移动到 C 柱。过程中，每次只能移动一个盘子，且在任何时候，大盘子都不可以在小盘子上面。</p>
+
+</blockquote>
+
+<p><img src="assets/CgqCHl_TVDSALxIBAABSKrjlVnE038.png" alt="图片1.png" /></p>
+
+<h4>1.汉诺塔问题解密</h4>
+
+<p>这个题目需要一定的窍门，否则只能碰运气去乱走了。</p>
+
+<p>我们先脑补这样一个画面：假设 A 柱子上除了最后一个大盘子（代号“大盘子”）以外，其他的 N-1 个小盘子都合并起来，成为一个新的盘子（代号为“合并盘”）。那这个问题就简单了，只需要把“合并盘”移动到 B 柱，再把“大盘子”移动到 C 柱，最后把“合并盘”移动到 C 柱。</p>
+
+<p>上述过程如下图所示：</p>
+
+<p><img src="assets/Ciqc1F_TU_iAUMtzADErA8ghlBo479.gif" alt="动图GIF.gif" /></p>
+
+<p>在这个过程中，问题由全部 N 个盘子由 A 移动到 C，转变为 N-1 个“合并盘”从 A 移动到 B 再移动 C。新的问题和原问题是完全一致的，但盘子数量由 N 个减少为 N-1 个。如果继续用上面的思想，就能把 N-1 个“合并盘”再度减少为 N-2 个，直到只剩一个。</p>
+
+<p>我们用数学重写上面的过程：令 H(x) 表示把某个柱子上的全部 x 个盘子移动到另一个柱子上需要的步数，那么原问题 N 个盘子由 A 柱子移动到 C 柱子的数学表示就是 H(N)。</p>
+
+<p>根据我们第一次的分解可知 <strong>H(N)=H(N-1)+1+H(N-1)</strong>。</p>
+
+<blockquote>
+
+<p>也就是，把 N 个盘子从 A 移动到 C=把合并盘从 A 移动到 B + 把大盘子从 A 移动到 C + 把合并盘从 B 移动到 C。</p>
+
+</blockquote>
+
+<p>再继续分析，你还会得到 H(N-1)=H(N-2)+1+H(N-2)。</p>
+
+<p>……</p>
+
+<p>直到最终 H(2)=H(1)+1+H(1)=1+1+1=3。</p>
+
+<p>我们把这个问题的计算过程整理到下面的表中，并尝试求解 H(n) 的表达式。
+
+<img src="assets/CgqCHl_TVHyAF8NlAAFaKneT0mU188.png" alt="图片4.png" /></p>
+
+<p>因为 H(N)=1+2H(N-1)，所以可以得到 H(N-1)=1+2H(N-2)，把这两个等式两边分别进行相减，则可以得到 H(N)-H(N-1)=2(H(N-1)-H(N-2))。</p>
+
+<p>令 aN=H(N)-H(N-1)，则有 aN=2aN-1，可见 {aN} 是个首项为 1、公比为 2 的等比数列，通项公式为 aN = 2N-1。</p>
+
+<p>接着利用这些信息，我们尝试去推导 H(N)，则有
+
+<img src="assets/CgqCHl_TVE-AVc6tAABmqSmmY4Q925.png" alt="图片2.png" /></p>
+
+<p>别忘了 H(1)=1，a1=1，所以 H(1)=a1，则有
+
+<img src="assets/CgqCHl_TVIyADNOKAABiOs7Ikp0327.png" alt="图片3.png" />
+
+因此如果盘子的数量是 5 个，将 5 代入这个 2N-1，则最少需要 31 步完成移动。</p>
+
+<h4>2.汉诺塔问题的代码实现</h4>
+
+<p>我们尝试用程序代码来实现汉诺塔问题。不难发现，这里最高频使用的是，把 n 个盘子从某个柱子 x，移动到另一个柱子 z。因此，考虑对这个功能进行函数化的封装，代码如下：</p>
+
+<pre><code>def hanoi(N,x,y,z):
+
+
+
+    if N == 1:
+
+
+
+        print x + '-&gt;' + z
+
+
+
+    else:
+
+
+
+        hanoi(N - 1, x, z, y)
+
+
+
+        print x + '-&gt;' + z
+
+
+
+        hanoi(N - 1, y, x, z)
+
+</code></pre>
+
+<p>我们对代码进行走读。</p>
+
+<p>第 2、3 行，如果盘子数量为 1，则直接把盘子从 x 柱子移动到 z 柱子即可；若不为 1，则进行第 4～7 行的处理。</p>
+
+<blockquote>
+
+<p>此时盘子数量超过了 1，则拆分为“合并盘”和“大盘子”两部分。</p>
+
+</blockquote>
+
+<ul>
+
+<li>首先，函数调用自己，把“合并盘”从 x 移动到 y；</li>
+
+<li>然后，把“大盘子”从 x 移动到 z；</li>
+
+<li>最后，函数再调用自己，把“合并盘”从 y 移动到 z。</li>
+
+</ul>
+
+<p>想象着会很复杂的代码，实际上非常简单，在主函数中只要执行</p>
+
+<pre><code>hanoi(3, 'a', 'b', 'c')
+
+</code></pre>
+
+<p>就能打印出把 3 个盘子从 a 柱子移动到 c 柱子的详细步骤。</p>
+
+<p>每一步的移动结果如下图，执行后需要 7 步，这和我们数学上的计算完全一致。</p>
+
+<p><img src="assets/CgqCHl_TVUGAIlaEAABg-6pIFp0225.png" alt="Drawing 4.png" /></p>
+
+<h3>递归——自己调用自己的程序开发思想</h3>
+
+<p>汉诺塔问题解法的核心步骤就是：移动全部盘子，等价于移动“合并盘”，加上移动“大盘子”，加上再移动“合并盘”，然后你需要重复执行这个步骤。</p>
+
+<p><strong>用函数表达这个过程，就是 f(全部盘子) = f(合并盘) + f(大盘子) + f(合并盘)。</strong></p>
+
+<p>为了代码实现这个功能，我们定义这个函数为<strong>hanoi(N,x,y,z)，</strong> 并且在这个函数中，需要调用自己才能完成“合并盘”的移动，<strong>这种会调用自己的编码方式在程序开发中，就叫作递归</strong>。</p>
+
+<p><strong>严格意义来说，递归并不是个算法，它是一种重要的程序开发思想，是某个算法的实现方式。</strong></p>
+
+<p>在使用递归进行程序开发时，需要注意下面两个关键问题。</p>
+
+<ul>
+
+<li>第一个问题，递归必须要有<strong>终止条件</strong>，否则程序就会进入不停调用自己的死循环。</li>
+
+</ul>
+
+<blockquote>
+
+<p>有这样一个故事：从前有座山，山里有个庙，庙里有个和尚讲故事；故事是，从前有座山，山里有个庙，庙里有个和尚讲故事；故事是...</p>
+
+</blockquote>
+
+<p>这就是一个典型的没有终止条件的递归。在汉诺塔问题中，我们的终止条件，就是当盘子数量为 1 时，直接从 x 移动到 z，而不用再递归调用自身。</p>
+
+<ul>
+
+<li>第二个问题，写代码之前需要先写出<strong>递归公式</strong>。
+
+在汉诺塔问题中，递归公式是<strong>H(N)=H(N-1)+1+H(N-1)</strong>，这也是递归函数代码中除了终止条件以外的部分。</li>
+
+</ul>
+
+<blockquote>
+
+<p>对应于“循环结构”中的循环体，这部分代码对于“递归”而言，偶尔也被人称作“<strong>递归体</strong>”。</p>
+
+</blockquote>
+
+<p>递归代码的基本结构如下：</p>
+
+<pre><code>def fun(N,x):
+
+
+
+	if condition(N):
+
+
+
+		xxx
+
+
+
+	else:
+
+
+
+		fun(N1,x)
+
+</code></pre>
+
+<p>我们对这个代码结构进行解析。
+
+对某个函数 fun(N,x) 而言，如果要用递归实现它，代码中至少包括<strong>终止条件</strong>和<strong>递归体</strong>两部分。</p>
+
+<ul>
+
+<li>终止条件的判断基于某个入参 N，如果满足，则函数不再调用自己，终止递归；如果还不满足，则进入到递归体。</li>
+
+<li>在递归体中，终止条件判断的入参 N 一定会发生改变。通常而言，是变成比 N 小的一个数值N1。只有这样，递归才能慢慢向终止条件靠近。在递归体中，基于新的参数 N1，再调用函数自身 fun(N1,x)，完成一次递归操作。</li>
+
+</ul>
+
+<p>接着我们带着递归思维，去看一下“阶乘问题”和“斐波那契序列问题”。</p>
+
+<h3>递归思维的应用</h3>
+
+<h4>1.阶乘问题</h4>
+
+<p>数学中，阶乘的定义公式为 n!=1×2×...×(n-2)×(n-1)×n。现在请你用递归来写一个函数，输入是某个<strong>正整数</strong>n，输出是 n 的阶乘。</p>
+
+<p>利用递归写代码时，需要优先处理递归的两个关键问题，那就是终止条件和递归体。</p>
+
+<ul>
+
+<li>对于终止条件而言，当 n=1 时，返回的值为 1!=1。</li>
+
+<li>对于递归体而言，需要先写出递归公式。根据阶乘公式的定义可知，当 n&gt;1 时，H(n)=n!=1×2×...×(n-2)×(n-1)×n= [1×2×...×(n-2)×(n-1)]×n=n×(n-1)!= n×H(n-1)。</li>
+
+</ul>
+
+<p>有了这些信息后，我们可以尝试写出下面的代码：</p>
+
+<pre><code>def jiecheng(n):
+
+
+
+	if n == 1:
+
+
+
+		return 1
+
+
+
+	else:
+
+
+
+		return n * jiecheng(n-1)
+
+</code></pre>
+
+<p>我们对代码进行走读。这段代码的代码量非常少，第 2、3 行判断 n 是否为 1。如果是，则返回1；否则，则跳转到第 5 行，根据递归公式返回 n×(n-1)!，即 n×jiecheng(n-1)。</p>
+
+<p>题目中限定了输入参数 n 为正整数，所以一些异常判断可以被忽略。但如果你追求代码的工程完备性，还可以补充 n 为 0、n 为负数、甚至 n 为小数的一些异常判断。</p>
+
+<blockquote>
+
+<p>在这里，我们就不展开了。</p>
+
+</blockquote>
+
+<h4>2.斐波那契序列问题</h4>
+
+<p>在数学上，斐波那契数列定义为 1、1、2、3、5、8、13、21、34…… 。简而言之，在斐波那契数列中，除了前两项以外，后续的每一项都是前面两项之和，而前两项的值都定义为 1。</p>
+
+<p>我们用 F(n) 表示斐波那契数列中的第 n 项的值，例如：</p>
+
+<p>F(1)=1</p>
+
+<p>F(2)=1</p>
+
+<p>F(3)=1+1=2</p>
+
+<p>F(4)=1+2=3</p>
+
+<p>现在希望你用递归来写代码，实现的功能是，输入某个正整数 n，输出斐波那契数列中第 n 项的值。</p>
+
+<blockquote>
+
+<p>你可以假设输入的 n 都是合法的，不用做异常判断。</p>
+
+</blockquote>
+
+<p>围绕递归的开发逻辑，关键问题仍然是终止条件和递归体：</p>
+
+<ul>
+
+<li>斐波那契数列的<strong>终止条件</strong>很显然，就是当 n 为 1 或 2 时，返回值就是 1；</li>
+
+<li>而它的<strong>递归体</strong>可以根据斐波那契数列的定义得到，也就是 F(n)=F(n-1)+F(n-2)。</li>
+
+</ul>
+
+<p>我们把以上定义直接翻译成代码，则有</p>
+
+<pre><code>def fib(n):
+
+
+
+	if n == 1 or n == 2:
+
+
+
+		return 1
+
+
+
+	else:
+
+
+
+		return fib(n-1) + fib(n-2)
+
+</code></pre>
+
+<p>我们对代码进行走读：</p>
+
+<ul>
+
+<li>在第 2 行，判断 n 是否为 1 或 2。</li>
+
+<li>如果是，则第 3 行返回 1；</li>
+
+<li>反之，则跳转到第 5 行，返回前两项之和，即 fib(n-1)+fib(n-2)。</li>
+
+</ul>
+
+<p>基于这段代码，主函数中执行 print fib(10)，即计算斐波那契数列的第 10 位，如下图所示，运行结果为 55。
+
+<img src="assets/Ciqc1F_TVKyAGpYIAAGWje6rD9g967.png" alt="图片5.png" /></p>
+
+<p>而我们手动计算斐波那契数列的前 10 位发现，结果也是 55，说明我们刚刚的代码实现是正确的。
+
+<img src="assets/Ciqc1F_TVNCAChNqAACHQwln93E852.png" alt="图片6.png" /></p>
+
+<h3>递归的优缺点</h3>
+
+<p>讲完了递归思维在“阶乘问题”和“斐波那契序列问题”中的应用后，我们总结以下递归的优缺点。</p>
+
+<p>递归有很多优势，例如代码结构简单、代码量少、阅读方便、维护简单等；然而递归也有一些缺陷和不足，一个明显的问题就是，递归的计算量非常大，而且存在重复计算的可能性。</p>
+
+<p>我们以斐波那契数列问题为例，把代码进行如下修改：</p>
+
+<pre><code>def fib(n):
+
+
+
+	if n == 1 or n == 2:
+
+
+
+		return 1
+
+
+
+	else:
+
+
+
+		print &quot;fib: &quot; + str(n-1)
+
+
+
+		print &quot;fib: &quot; + str(n-2)
+
+
+
+		return fib(n-1) + fib(n-2)
+
+</code></pre>
+
+<p>其中，在第 5、6 行插入两个打印的动作。它们的功能，是每次执行递归体之前，打印出要递归计算的内容。</p>
+
+<p>这样，在主函数运行 fib(10) 时，你会看到下面的部分运行结果：
+
+<img src="assets/Ciqc1F_TVReAZCcsAADUlplI5dc678.png" alt="Drawing 6.png" /></p>
+
+<p>很简单，在执行 fib(9) 时，需要递归计算 fib(8) 和 fib(7)；而 fib(8) 的计算，又需要递归计算 fib(7) 和 fib(6)。很可惜，在得到 fib(7) 的时候，结果并不会进行保存；而另一边，也要计算 fib(7)，这只能再整体进行一次递归计算。</p>
+
+<p>所以，上图中我们能看到计算 fib(10) 的过程中，存在大量重复的递归计算。</p>
+
+<p>重复计算是递归的一个问题，但也并不是绝对会发生，这就需要程序员去综合分析你遇到的具体问题了。</p>
+
+<blockquote>
+
+<p>在后面的《17 | 动态规划：如何利用最优子结构解决问题？》我会采用“设置全局变量来缓存中间结果”的方式来避免重复计算，减少计算量。</p>
+
+</blockquote>
+
+<h3>小结——递归与循环</h3>
+
+<p>学完这一讲，你可能会发现，递归和循环比较<strong>相像</strong>。确实，递归和循环都是通过解决若干个简单问题来解决复杂问题的，它们也都有自己的终止条件和循环体/递归体，都是重复进行某个步骤。</p>
+
+<p>然而，它们也有很多<strong>差异性</strong>，主要体现在以下两方面。</p>
+
+<p><strong>迭代次数</strong></p>
+
+<ul>
+
+<li><strong>循环</strong>对于迭代的次数更敏感，绝大多数场景会定义一个用来计数的变量 i，来控制循环的次数；</li>
+
+<li>而<strong>递归</strong>对于迭代次数不敏感，取决于什么时候满足终止条件。</li>
+
+</ul>
+
+<p><strong>问题复杂性</strong></p>
+
+<p>不管是循环还是递归，每一轮迭代处理的问题类型都是非常趋同的，但<strong>问题的复杂性</strong>却不一样。</p>
+
+<ul>
+
+<li>对于<strong>循环</strong>而言，每一轮处理的问题难度几乎是一样的；</li>
+
+<li>而<strong>递归</strong>则是缩小搜索范围（例如二分查找）的思路，一般而言，每轮处理的问题相对上一轮而言是更简单的。</li>
+
+</ul>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/程序员的数学课/14  程序的循环：如何利用数学归纳法进行程序开发？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/程序员的数学课/16  二分法：如何利用指数爆炸优化程序？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997bdeba9b3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

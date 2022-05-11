@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>加餐02 理解perf：怎么用perf聚焦热点函数？.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/00 开篇词 一个态度两个步骤，成为容器实战高手.md">00 开篇词 一个态度两个步骤，成为容器实战高手.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/01 认识容器：容器的基本操作和实现原理.md">01 认识容器：容器的基本操作和实现原理.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md">02 理解进程（1）：为什么我在容器中不能kill 1号进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md">03 理解进程（2）：为什么我的容器里有这么多僵尸进程？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md">04 理解进程（3）：为什么我在容器中的进程被强制杀死了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/05 容器CPU（1）：怎么限制容器的CPU使用？.md">05 容器CPU（1）：怎么限制容器的CPU使用？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md">06 容器CPU（2）：如何正确地拿到容器CPU的开销？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md">07 Load Average：加了CPU Cgroup限制，为什么我的容器还是很慢？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/08 容器内存：我的容器为什么被杀了？.md">08 容器内存：我的容器为什么被杀了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/09 Page Cache：为什么我的容器内存使用量总是在临界点.md">09 Page Cache：为什么我的容器内存使用量总是在临界点.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/10 Swap：容器可以使用Swap空间吗？.md">10 Swap：容器可以使用Swap空间吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/11 容器文件系统：我在容器中读写文件怎么变慢了.md">11 容器文件系统：我在容器中读写文件怎么变慢了.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md">12 容器文件Quota：容器为什么把宿主机的磁盘写满了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md">13 容器磁盘限速：我的容器里磁盘读写为什么不稳定.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md">14 容器中的内存与IO：容器写文件的延时为什么波动很大？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md">15 容器网络：我修改了procsysnet下的参数，为什么在容器中不起效？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/16 容器网络配置（1）：容器网络不通了要怎么调试.md">16 容器网络配置（1）：容器网络不通了要怎么调试.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md">17 容器网络配置（2）：容器网络延时要比宿主机上的高吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md">18 容器网络配置（3）：容器中的网络乱序包怎么这么高？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/19 容器安全（1）：我的容器真的需要privileged权限吗.md">19 容器安全（1）：我的容器真的需要privileged权限吗.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md">20 容器安全（2）：在容器中，我不以root用户来运行程序可以吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/容器实战高手课/加餐02 理解perf：怎么用perf聚焦热点函数？.md">加餐02 理解perf：怎么用perf聚焦热点函数？.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md">加餐04 理解ftrace（2）：怎么理解ftrace背后的技术tracepoint和kprobe？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐05 eBPF：怎么更加深入地查看内核中的函数？.md">加餐05 eBPF：怎么更加深入地查看内核中的函数？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐06 BCC：入门eBPF的前端工具.md">加餐06 BCC：入门eBPF的前端工具.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/加餐福利 课后思考题答案合集.md">加餐福利 课后思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/容器实战高手课/结束语 跳出舒适区，突破思考的惰性.md">结束语 跳出舒适区，突破思考的惰性.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>加餐02 理解perf：怎么用perf聚焦热点函数？</h1>
+
+<p>你好，我是程远。今天我要和你聊一聊容器中如何使用 perf。</p>
+
+<p>上一讲中，我们分析了一个生产环境里的一个真实例子，由于节点中的大量的 IPVS 规则导致了容器在往外发送网络包的时候，时不时会有很高的延时。在调试分析这个网络延时问题的过程中，我们会使用多种 Linux 内核的调试工具，利用这些工具，我们就能很清晰地找到这个问题的根本原因。</p>
+
+<p>在后面的课程里，我们会挨个来讲解这些工具，其中 perf 工具的使用相对来说要简单些，所以这一讲我们先来看 perf 这个工具。</p>
+
+<h2>问题回顾</h2>
+
+<p>在具体介绍 perf 之前，我们先来回顾一下，上一讲中，我们是在什么情况下开始使用 perf 工具的，使用了 perf 工具之后给我们带来了哪些信息。</p>
+
+<p>在调试网路延时的时候，我们使用了 ebpf 的工具之后，发现了节点上一个 CPU，也就是 CPU32 的 Softirq CPU Usage（在运行 top 时，%Cpu 那行中的 si 数值就是 Softirq CPU Usage）时不时地会增高一下。</p>
+
+<p>在发现 CPU Usage 异常增高的时候，我们肯定想知道是什么程序引起了 CPU Usage 的异常增高，这时候我们就可以用到 perf 了。</p>
+
+<p>具体怎么操作呢？我们可以通过抓取数据、数据读取和异常聚焦三个步骤来实现。</p>
+
+<p>第一步，抓取数据。当时我们运行了下面这条 perf 命令，这里的参数 -C 32 是指定只抓取 CPU32 的执行指令；-g 是指 call-graph enable，也就是记录函数调用关系； sleep 10 主要是为了让 perf 抓取 10 秒钟的数据。</p>
+
+<pre><code># perf record -C 32 -g -- sleep 10
+
+</code></pre>
+
+<p>执行完 perf record 之后，我们可以用 perf report 命令进行第二步，也就是读取数据。为了更加直观地看到 CPU32 上的函数调用情况，我给你生成了一个火焰图（火焰图的生产方法，我们在后面介绍）。</p>
+
+<p>通过这个火焰图，我们发现了在 Softirq 里 TIMER softirq （run_timer_softirq）的占比很高，并且 timer 主要处理的都是 estimation_timer() 这个函数，也就是看火焰图 X 轴占比比较大的函数。这就是第三步异常聚焦，也就是说我们通过 perf 在 CPU Usage 异常的 CPU32 上，找到了具体是哪一个内核函数使用占比较高。这样在后面的调试分析中，我们就可以聚焦到这个内核函数 estimation_timer() 上了。</p>
+
+<p><img src="assets/7f66d31a3e32f8bcfc8600abe713962e.jpg" alt="img" /></p>
+
+<p>好了，通过回顾我们在网络延时例子中是如何使用 perf 的，我们知道了这一点，perf 可以在 CPU Usage 增高的节点上找到具体的引起 CPU 增高的函数，然后我们就可以有针对性地聚焦到那个函数做分析。</p>
+
+<p>既然 perf 工具这么有用，想要更好地使用这个工具，我们就要好好认识一下它，那我们就一起看看 perf 的基本概念和常用的使用方法。</p>
+
+<h2>如何理解 Perf 的概念和工作机制？</h2>
+
+<p>Perf 这个工具最早是 Linux 内核著名开发者 Ingo Molnar 开发的，它的源代码在内核源码tools 目录下，在每个 Linux 发行版里都有这个工具，比如 CentOS 里我们可以运行 yum install perf 来安装，在 Ubuntu 里我们可以运行 apt install linux-tools-common 来安装。</p>
+
+<h3>Event</h3>
+
+<p>第一次上手使用 perf 的时候，我们可以先运行一下 perf list 这个命令，然后就会看到 perf 列出了大量的 event，比如下面这个例子就列出了常用的 event。</p>
+
+<pre><code># perf list
+
+…
+
+  branch-instructions OR branches                    [Hardware event]
+
+  branch-misses                                      [Hardware event]
+
+  bus-cycles                                         [Hardware event]
+
+  cache-misses                                       [Hardware event]
+
+  cache-references                                   [Hardware event]
+
+  cpu-cycles OR cycles                               [Hardware event]
+
+  instructions                                       [Hardware event]
+
+  ref-cycles                                         [Hardware event]
+
+ 
+
+  alignment-faults                                   [Software event]
+
+  bpf-output                                         [Software event]
+
+  context-switches OR cs                             [Software event]
+
+  cpu-clock                                          [Software event]
+
+  cpu-migrations OR migrations                       [Software event]
+
+  dummy                                              [Software event]
+
+  emulation-faults                                   [Software event]
+
+  major-faults                                       [Software event]
+
+  minor-faults                                       [Software event]
+
+  page-faults OR faults                              [Software event]
+
+  task-clock                                         [Software event]
+
+…
+
+
+
+  block:block_bio_bounce                             [Tracepoint event]
+
+  block:block_bio_complete                           [Tracepoint event]
+
+  block:block_bio_frontmerge                         [Tracepoint event]
+
+  block:block_bio_queue                              [Tracepoint event]
+
+  block:block_bio_remap                              [Tracepoint event]
+
+</code></pre>
+
+<p>从这里我们可以了解到 event 都有哪些类型， perf list 列出的每个 event 后面都有一个&quot;[]&quot;，里面写了这个 event 属于什么类型，比如&quot;Hardware event&quot;、&quot;Software event&quot;等。完整的 event 类型，我们在内核代码枚举结构 perf_type_id 里可以看到。</p>
+
+<p>接下来我们就说三个主要的 event，它们分别是 Hardware event、Software event 还有 Tracepoints event。</p>
+
+<p>Hardware event</p>
+
+<p>Hardware event 来自处理器中的一个 PMU（Performance Monitoring Unit），这些 event 数目不多，都是底层处理器相关的行为，perf 中会命名几个通用的事件，比如 cpu-cycles，执行完成的 instructions，Cache 相关的 cache-misses。</p>
+
+<p>不同的处理器有自己不同的 PMU 事件，对于 Intel x86 处理器，PMU 的使用和编程都可以在“Intel 64 and IA-32 Architectures Developer's Manual: Vol. 3B”（Intel 架构的开发者手册）里查到。</p>
+
+<p>我们运行一下 perf stat ，就可以看到在这段时间里这些 Hardware event 发生的数目。</p>
+
+<pre><code># perf stat
+
+^C
+
+ Performance counter stats for 'system wide':
+
+
+
+          58667.77 msec cpu-clock                 #   63.203 CPUs utilized
+
+            258666      context-switches          #    0.004 M/sec
+
+              2554      cpu-migrations            #    0.044 K/sec
+
+             30763      page-faults               #    0.524 K/sec
+
+       21275365299      cycles                    #    0.363 GHz
+
+       24827718023      instructions              #    1.17  insn per cycle
+
+        5402114113      branches                  #   92.080 M/sec
+
+          59862316      branch-misses             #    1.11% of all branches
+
+
+
+       0.928237838 seconds time elapsed
+
+</code></pre>
+
+<p>Software event</p>
+
+<p>Software event 是定义在 Linux 内核代码中的几个特定的事件，比较典型的有进程上下文切换（内核态到用户态的转换）事件 context-switches、发生缺页中断的事件 page-faults 等。</p>
+
+<p>为了让你更容易理解，这里我举个例子。就拿 page-faults 这个 perf 事件来说，我们可以看到，在内核代码处理缺页中断的函数里，就是调用了 perf_sw_event() 来注册了这个 page-faults。</p>
+
+<pre><code>/*
+
+ \* Explicitly marked noinline such that the function tracer sees this as the
+
+ \* page_fault entry point. __do_page_fault 是Linux内核处理缺页中断的主要函数
+
+ */
+
+static noinline void
+
+__do_page_fault(struct pt_regs *regs, unsigned long hw_error_code,
+
+                unsigned long address)
+
+{
+
+        prefetchw(&amp;current-&gt;mm-&gt;mmap_sem);
+
+ 
+
+        if (unlikely(kmmio_fault(regs, address)))
+
+                return;
+
+
+
+        /* Was the fault on kernel-controlled part of the address space? */
+
+        if (unlikely(fault_in_kernel_space(address)))
+
+                do_kern_addr_fault(regs, hw_error_code, address);
+
+        else
+
+                do_user_addr_fault(regs, hw_error_code, address); 
+
+                /* 在do_user_addr_fault()里面调用了perf_sw_event() */ 
+
+}
+
+
+
+/* Handle faults in the user portion of the address space */
+
+static inline
+
+void do_user_addr_fault(struct pt_regs *regs,
+
+                        unsigned long hw_error_code,
+
+                        unsigned long address)
+
+{
+
+…
+
+     perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, address);
+
+…
+
+}
+
+</code></pre>
+
+<p>Tracepoints event</p>
+
+<p>你可以在 perf list 中看到大量的 Tracepoints event，这是因为内核中很多关键函数里都有 Tracepoints。它的实现方式和 Software event 类似，都是在内核函数中注册了 event。</p>
+
+<p>不过，这些 tracepoints 不仅是用在 perf 中，它已经是 Linux 内核 tracing 的标准接口了，ftrace，ebpf 等工具都会用到它，后面我们还会再详细介绍 tracepoint。</p>
+
+<p>好了，讲到这里，你要重点掌握的内容是，event 是 perf 工作的基础，主要有两种：有使用硬件的 PMU 里的 event，也有在内核代码中注册的 event。</p>
+
+<p>那么在这些 event 都准备好了之后，perf 又是怎么去使用这些 event 呢？前面我也提到过，有计数和采样两种方式，下面我们分别来看看。</p>
+
+<h3>计数（count）</h3>
+
+<p>计数的这种工作方式比较好理解，就是统计某个 event 在一段时间里发生了多少次。</p>
+
+<p>那具体我们怎么进行计数的呢？perf stat 这个命令就是来查看 event 的数目的，前面我们已经运行过 perf stat 来查看所有的 Hardware events。</p>
+
+<p>这里我们可以加上&quot;-e&quot;参数，指定某一个 event 来看它的计数，比如 page-faults，这里我们看到在当前 CPU 上，这个 event 在 1 秒钟内发生了 49 次：</p>
+
+<pre><code># perf stat -e page-faults -- sleep 1
+
+
+
+ Performance counter stats for 'sleep 1':
+
+
+
+                49      page-faults
+
+
+
+       1.001583032 seconds time elapsed
+
+
+
+       0.001556000 seconds user
+
+       0.000000000 seconds sys
+
+</code></pre>
+
+<h3>采样（sample）</h3>
+
+<p>说完了计数，我们再来看看采样。在开头回顾网路延时问题的时候，我提到通过 perf record -C 32 -g -- sleep 10 这个命令，来找到 CPU32 上 CPU 开销最大的 Softirq 相关函数。这里使用的 perf record 命令就是通过采样来得到热点函数的，我们来分析一下它是怎么做的。</p>
+
+<p>perf record 在不加 -e 指定 event 的时候，它缺省的 event 就是 Hardware event cycles。我们先用 perf stat来查看 1 秒钟 cycles 事件的数量，在下面的例子里这个数量是 1878165 次。</p>
+
+<p>我们可以想一下，如果每次 cycles event 发生的时候，我们都记录当时的 IP（就是处理器当时要执行的指令地址）、IP 所属的进程等信息的话，这样系统的开销就太大了。所以 perf 就使用了对 event 采样的方式来记录 IP、进程等信息。</p>
+
+<pre><code># perf stat -e cycles -- sleep 1
+
+
+
+ Performance counter stats for 'sleep 1':
+
+
+
+           1878165      cycles
+
+</code></pre>
+
+<p>Perf 对 event 的采样有两种模式：</p>
+
+<p>第一种是按照 event 的数目（period），比如每发生 10000 次 cycles event 就记录一次 IP、进程等信息， perf record 中的  -c 参数可以指定每发生多少次，就做一次记录。</p>
+
+<p>比如在下面的例子里，我们指定了每 10000 cycles event 做一次采样之后，在 1 秒里总共就做了 191 次采样，比我们之前看到 1 秒钟 1878165 次 cycles 的次数要少多了。</p>
+
+<pre><code># perf record  -e cycles -c 10000 -- sleep 1
+
+[ perf record: Woken up 1 times to write data ]
+
+[ perf record: Captured and wrote 0.024 MB perf.data (191 samples) ]
+
+</code></pre>
+
+<p>第二种是定义一个频率（frequency）， perf record 中的 -F 参数就是指定频率的，比如 perf record -e cycles -F 99 -- sleep 1 ，就是指采样每秒钟做 99 次。</p>
+
+<p>在 perf record 运行结束后，会在磁盘的当前目录留下 perf.data 这个文件，里面记录了所有采样得到的信息。然后我们再运行 perf report 命令，查看函数或者指令在这些采样里的分布比例，后面我们会用一个例子说明。</p>
+
+<p>好，说到这里，我们已经把 perf 的基本概念和使用机制都讲完了。接下来，我们看看在容器中怎么使用 perf？</p>
+
+<h2>容器中怎样使用 perf？</h2>
+
+<p>如果你的 container image 是基于 Ubuntu 或者 CentOS 等 Linux 发行版的，你可以尝试用它们的 package repo 安装 perf 的包。不过，这么做可能会有个问题，我们在前面介绍 perf 的时候提过，perf 是和 Linux kernel 一起发布的，也就是说 perf 版本最好是和 Linux kernel 使用相同的版本。</p>
+
+<p>如果容器中 perf 包是独立安装的，那么容器中安装的 perf 版本可能会和宿主机上的内核版本不一致，这样有可能导致 perf 无法正常工作。</p>
+
+<p>所以，我们在容器中需要跑 perf 的时候，最好从相应的 Linux kernel 版本的源代码里去编译，并且采用静态库（-static）的链接方式。然后，我们把编译出来的 perf 直接 copy 到容器中就可以使用了。</p>
+
+<p>如何在 Linux kernel 源代码里编译静态链接的 perf，你可以参考后面的代码：</p>
+
+<pre><code># cd $(KERNEL_SRC_ROOT)/tools/perf
+
+# vi Makefile.perf
+
+  #### ADD “LDFLAGS=-static” in Makefile.perf
+
+# make clean; make
+
+# file perf
+
+perf: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=9a42089e52026193fabf693da3c0adb643c2313e, with debug_info, not stripped, too many notes (256)
+
+# ls -lh perf
+
+-rwxr-xr-x 1 root root 19M Aug 14 07:08 perf
+
+</code></pre>
+
+<p>我这里给了一个带静态链接 perf（kernel 5.4）的 container image例子，你可以运行 make image 来生成这个 image。</p>
+
+<p>在容器中运行 perf，还要注意一个权限的问题，有两点注意事项需要你留意。</p>
+
+<p>第一点，Perf 通过系统调用 perf_event_open() 来完成对 perf event 的计数或者采样。不过 Docker 使用 seccomp（seccomp 是一种技术，它通过控制系统调用的方式来保障 Linux 安全）会默认禁止 perf_event_open()。</p>
+
+<p>所以想要让 Docker 启动的容器可以运行 perf，我们要怎么处理呢？</p>
+
+<p>其实这个也不难，在用 Docker 启动容器的时候，我们需要在 seccomp 的 profile 里，允许 perf_event_open() 这个系统调用在容器中使用。在我们的例子中，启动 container 的命令里，已经加了这个参数允许了，参数是&quot;--security-opt seccomp=unconfined&quot;。</p>
+
+<p>第二点，需要允许容器在没有 SYS_ADMIN 这个 capability（Linux capability 我们在第 19 讲说过）的情况下，也可以让 perf 访问这些 event。那么现在我们需要做的就是，在宿主机上设置出 echo -1 &gt; /proc/sys/kernel/perf_event_paranoid，这样普通的容器里也能执行 perf 了。</p>
+
+<p>完成了权限设置之后，在容器中运行 perf，就和在 VM/BM 上运行没有什么区别了。</p>
+
+<p>最后，我们再来说一下我们在定位 CPU Uage 异常时最常用的方法，常规的步骤一般是这样的：</p>
+
+<p>首先，调用 perf record 采样几秒钟，一般需要加 -g 参数，也就是 call-graph，还需要抓取函数的调用关系。在多核的机器上，还要记得加上 -a 参数，保证获取所有 CPU Core 上的函数运行情况。至于采样数据的多少，在讲解 perf 概念的时候说过，我们可以用 -c 或者 -F 参数来控制。</p>
+
+<p>接着，我们需要运行 perf report 读取数据。不过很多时候，为了更加直观地看到各个函数的占比，我们会用 perf script 命令把 perf record 生成的 perf.data 转化成分析脚本，然后用 FlameGraph 工具来读取这个脚本，生成火焰图。</p>
+
+<p>下面这组命令，就是刚才说过的使用 perf 的常规步骤：</p>
+
+<pre><code># perf record -a -g -- sleep 60
+
+# perf script &gt; out.perf
+
+# git clone --depth 1 https://github.com/brendangregg/FlameGraph.git
+
+# FlameGraph/stackcollapse-perf.pl out.perf &gt; out.folded
+
+# FlameGraph/flamegraph.pl out.folded &gt; out.sv
+
+</code></pre>
+
+<h2>重点总结</h2>
+
+<p>我们这一讲学习了如何使用 perf，这里我来给你总结一下重点。</p>
+
+<p>首先，我们在线上网络延时异常的那个实际例子中使用了 perf。我们发现可以用 perf 工具，通过抓取数据、数据读取和异常聚焦这三个步骤的操作，在 CPU Usage 增高的节点上找到具体引起 CPU 增高的函数。</p>
+
+<p>之后我带你更深入地学习了 perf 是什么，它的工作方式是怎样的？这里我把 perf 的重点再给你强调一遍：</p>
+
+<p>Perf 的实现基础是 event，有两大类，一类是基于硬件 PMU 的，一类是内核中的软件注册。而 Perf 在使用时的工作方式也是两大类，计数和采样。</p>
+
+<p>先看一下计数，它执行的命令是 perf stat，用来查看每种 event 发生的次数；</p>
+
+<p>采样执行的命令是perf record，它可以使用 period 方式，就是每 N 个 event 发生后记录一次 event 发生时的 IP/ 进程信息，或者用 frequency 方式，每秒钟以固定次数来记录信息。记录的信息会存在当前目录的 perf.data 文件中。</p>
+
+<p>如果我们要在容器中使用 perf，要注意这两点：</p>
+
+<ol>
+
+<li>
+
+<p>容器中的 perf 版本要和宿主机内核版本匹配，可以直接从源代码编译出静态链接的 perf。</p>
+
+</li>
+
+<li>
+
+<p>我们需要解决两个权限的问题，一个是 seccomp 对系统调用的限制，还有一个是内核对容器中没有 SYC_ADMIN capability 的限制。</p>
+
+</li>
+
+</ol>
+
+<p>在我们日常分析系统性能异常的时候，使用 perf 最常用的方式是perf record获取采样数据，然后用 FlameGraph 工具来生成火焰图。</p>
+
+<h2>思考题</h2>
+
+<p>你可以在自己的一台 Linux 机器上运行一些带负载的程序，然后使用 perf 并且生成火焰图，看看开销最大的函数是哪一个。</p>
+
+<p>欢迎在留言区分享你的疑惑和见解。你也可以把今天的内容分享给你的朋友，和他一起学习和进步。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/容器实战高手课/加餐01 案例分析：怎么解决海量IPVS规则带来的网络延时抖动问题？.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/容器实战高手课/加餐03 理解ftrace（1）：怎么应用ftrace查看长延时内核函数？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709977b1c8f33cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+

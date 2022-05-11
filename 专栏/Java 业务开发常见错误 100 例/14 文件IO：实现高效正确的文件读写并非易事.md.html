@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="/static/favicon.png">
+
+        <title>14 文件IO：实现高效正确的文件读写并非易事.md</title>
+
+        <!-- Spectre.css framework -->
+
+        <link rel="stylesheet" href="/static/index.css">
+
+        <!-- theme css & js -->
+
+        <meta name="generator" content="Hexo 4.2.0">
+
+    </head>
+
+
+
+<body>
+
+
+
+<div class="book-container">
+
+    <div class="book-sidebar">
+
+        <div class="book-brand">
+
+            <a href="/">
+
+                <img src="/static/favicon.png">
+
+                <span>技术文章摘抄</span>
+
+            </a>
+
+        </div>
+
+        <div class="book-menu uncollapsible">
+
+            <ul class="uncollapsible">
+
+                <li><a href="/" class="current-tab">首页</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li><a href="../">上一级</a></li>
+
+            </ul>
+
+
+
+            <ul class="uncollapsible">
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md">00 开篇词 业务代码真的会有这么多坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md">01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md">02 代码加锁：不要让“锁”事成为烦心事.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md">03 线程池：业务代码最常用也最容易犯错的组件.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md">04 连接池：别让连接池帮了倒忙.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md">05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md">06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md">07 数据库索引：索引并不是万能药.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md">08 判等问题：程序里如何确定你就是你？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md">09 数值计算：注意精度、舍入和溢出问题.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md">10 集合类：坑满地的List列表操作.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md">11 空值处理：分不清楚的null和恼人的空指针.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md">12 异常处理：别让自己在出问题的时候变为瞎子.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md">13 日志：日志记录真没你想象的那么简单.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md">14 文件IO：实现高效正确的文件读写并非易事.md.html</a>
+
+                    
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md">15 序列化：一来一回你还是原来的你吗？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md">16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md">17 别以为“自动挡”就不可能出现OOM.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md">18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md">19 Spring框架：IoC和AOP是扩展的核心.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md">20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md">21 代码重复：搞定代码重复的三个绝招.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md">22 接口设计：系统间对话的语言，一定要统一.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md">23 缓存设计：缓存可以锦上添花也可以落井下石.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md">24 业务代码写完，就意味着生产就绪了？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md">25 异步处理好用，但非常容易用错.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md">27 数据源头：任何客户端的东西都不可信任.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md">29 数据和代码：数据就是数据，代码就是代码.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md">30 如何正确保存和传输敏感数据？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md">33 加餐3：定位应用问题，排错套路很重要.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md">34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md">35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md">37 加餐7：程序员成长28计.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md">答疑篇：代码篇思考题集锦（一）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md">答疑篇：代码篇思考题集锦（三）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md">答疑篇：代码篇思考题集锦（二）.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md">答疑篇：加餐篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md">答疑篇：安全篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md">答疑篇：设计篇思考题答案合集.md.html</a>
+
+
+
+                </li>
+
+                <li>
+
+
+
+                    
+
+                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md">结束语 写代码时，如何才能尽量避免踩坑？.md.html</a>
+
+
+
+                </li>
+
+            </ul>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+
+        <div class="sidebar-toggle-inner"></div>
+
+    </div>
+
+
+
+    <script>
+
+        function add_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.add('show')
+
+        }
+
+
+
+        function remove_inner() {
+
+            let inner = document.querySelector('.sidebar-toggle-inner')
+
+            inner.classList.remove('show')
+
+        }
+
+
+
+        function sidebar_toggle() {
+
+            let sidebar_toggle = document.querySelector('.sidebar-toggle')
+
+            let sidebar = document.querySelector('.book-sidebar')
+
+            let content = document.querySelector('.off-canvas-content')
+
+            if (sidebar_toggle.classList.contains('extend')) { // show
+
+                sidebar_toggle.classList.remove('extend')
+
+                sidebar.classList.remove('hide')
+
+                content.classList.remove('extend')
+
+            } else { // hide
+
+                sidebar_toggle.classList.add('extend')
+
+                sidebar.classList.add('hide')
+
+                content.classList.add('extend')
+
+            }
+
+        }
+
+
+
+
+
+function open_sidebar() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.add('show')
+
+    overlay.classList.add('show')
+
+}
+
+function hide_canvas() {
+
+    let sidebar = document.querySelector('.book-sidebar')
+
+    let overlay = document.querySelector('.off-canvas-overlay')
+
+    sidebar.classList.remove('show')
+
+    overlay.classList.remove('show')
+
+}
+
+
+
+    </script>
+
+
+
+    <div class="off-canvas-content">
+
+        <div class="columns">
+
+            <div class="column col-12 col-lg-12">
+
+                <div class="book-navbar">
+
+                    <!-- For Responsive Layout -->
+
+                    <header class="navbar">
+
+                        <section class="navbar-section">
+
+                            <a onclick="open_sidebar()">
+
+                                <i class="icon icon-menu"></i>
+
+                            </a>
+
+                        </section>
+
+                    </header>
+
+                </div>
+
+                <div class="book-content" style="max-width: 960px; margin: 0 auto;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;">
+
+                    <div class="book-post">
+
+                        <p id="tip" align="center"></p>
+
+                        <div><h1>14 文件IO：实现高效正确的文件读写并非易事</h1>
+
+<p>你好，我是朱晔。今天，我们来聊聊如何实现高效、正确的文件操作。</p>
+
+<p>随着数据库系统的成熟和普及，需要直接做文件 IO 操作的需求越来越少，这就导致我们对相关 API 不够熟悉，以至于遇到类似文件导出、三方文件对账等需求时，只能临时抱佛脚，随意搜索一些代码完成需求，出现性能问题或者 Bug 后不知从何处入手。</p>
+
+<p>今天这篇文章，我就会从字符编码、缓冲区和文件句柄释放这 3 个常见问题出发，和你分享如何解决与文件操作相关的性能问题或者 Bug。如果你对文件操作相关的 API 不够熟悉，可以查看Oracle 官网的介绍。</p>
+
+<h2>文件读写需要确保字符编码一致</h2>
+
+<p>有一个项目需要读取三方的对账文件定时对账，原先一直是单机处理的，没什么问题。后来为了提升性能，使用双节点同时处理对账，每一个节点处理部分对账数据，但新增的节点在处理文件中中文的时候总是读取到乱码。</p>
+
+<p>程序代码都是一致的，为什么老节点就不会有问题呢？我们知道，这很可能是写代码时没有注意编码问题导致的。接下来，我们就分析下这个问题吧。</p>
+
+<p>为模拟这个场景，我们使用 GBK 编码把“你好 hi”写入一个名为 hello.txt 的文本文件，然后直接以字节数组形式读取文件内容，转换为十六进制字符串输出到日志中：</p>
+
+<pre><code>Files.deleteIfExists(Paths.get(&quot;hello.txt&quot;));
+
+
+
+Files.write(Paths.get(&quot;hello.txt&quot;), &quot;你好hi&quot;.getBytes(Charset.forName(&quot;GBK&quot;)));
+
+
+
+log.info(&quot;bytes:{}&quot;, Hex.encodeHexString(Files.readAllBytes(Paths.get(&quot;hello.txt&quot;))).toUpperCase());
+
+
+
+</code></pre>
+
+<p>输出如下：</p>
+
+<pre><code>13:06:28.955 [main] INFO org.geekbang.time.commonmistakes.io.demo3.FileBadEncodingIssueApplication - bytes:C4E3BAC36869
+
+
+
+</code></pre>
+
+<p>虽然我们打开文本文件时看到的是“你好 hi”，但不管是什么文字，计算机中都是按照一定的规则将其以二进制保存的。这个规则就是字符集，字符集枚举了所有支持的字符映射成二进制的映射表。在处理文件读写的时候，如果是在字节层面进行操作，那么不会涉及字符编码问题；而如果需要在字符层面进行读写的话，就需要明确字符的编码方式也就是字符集了。</p>
+
+<p>当时出现问题的文件读取代码是这样的：</p>
+
+<pre><code>char[] chars = new char[10];
+
+
+
+String content = &quot;&quot;;
+
+
+
+try (FileReader fileReader = new FileReader(&quot;hello.txt&quot;)) {
+
+
+
+    int count;
+
+
+
+    while ((count = fileReader.read(chars)) != -1) {
+
+
+
+        content += new String(chars, 0, count);
+
+
+
+    }
+
+
+
+}
+
+
+
+log.info(&quot;result:{}&quot;, content);
+
+
+
+</code></pre>
+
+<p>可以看到，是使用了 FileReader 类以字符方式进行文件读取，日志中读取出来的“你好”变为了乱码：</p>
+
+<pre><code>13:06:28.961 [main] INFO org.geekbang.time.commonmistakes.io.demo3.FileBadEncodingIssueApplication - result:���hi
+
+
+
+</code></pre>
+
+<p>显然，这里并没有指定以什么字符集来读取文件中的字符。查看JDK 文档可以发现，FileReader 是以当前机器的默认字符集来读取文件的，如果希望指定字符集的话，需要直接使用 InputStreamReader 和 FileInputStream。</p>
+
+<p>到这里我们就明白了，FileReader 虽然方便但因为使用了默认字符集对环境产生了依赖，这就是为什么老的机器上程序可以正常运作，在新节点上读取中文时却产生了乱码。</p>
+
+<p>那，怎么确定当前机器的默认字符集呢？写一段代码输出当前机器的默认字符集，以及 UTF-8 方式编码的“你好 hi”的十六进制字符串：</p>
+
+<pre><code>log.info(&quot;charset: {}&quot;, Charset.defaultCharset());
+
+
+
+Files.write(Paths.get(&quot;hello2.txt&quot;), &quot;你好hi&quot;.getBytes(Charsets.UTF_8));
+
+
+
+log.info(&quot;bytes:{}&quot;, Hex.encodeHexString(Files.readAllBytes(Paths.get(&quot;hello2.txt&quot;))).toUpperCase());
+
+
+
+</code></pre>
+
+<p>输出结果如下：</p>
+
+<pre><code>13:06:28.961 [main] INFO org.geekbang.time.commonmistakes.io.demo3.FileBadEncodingIssueApplication - charset: UTF-8
+
+
+
+13:06:28.962 [main] INFO org.geekbang.time.commonmistakes.io.demo3.FileBadEncodingIssueApplication - bytes:E4BDA0E5A5BD6869
+
+
+
+</code></pre>
+
+<p>可以看到，当前机器默认字符集是 UTF-8，当然无法读取 GBK 编码的汉字。UTF-8 编码的“你好”的十六进制是 E4BDA0E5A5BD，每一个汉字需要三个字节；而 GBK 编码的汉字，每一个汉字两个字节。字节长度都不一样，以 GBK 编码后保存的汉字，以 UTF8 进行解码读取，必然不会成功。</p>
+
+<p>定位到问题后，修复就很简单了。按照文档所说，直接使用 FileInputStream 拿文件流，然后使用 InputStreamReader 读取字符流，并指定字符集为 GBK：</p>
+
+<pre><code>private static void right1() throws IOException {
+
+
+
+    char[] chars = new char[10];
+
+
+
+    String content = &quot;&quot;;
+
+
+
+    try (FileInputStream fileInputStream = new FileInputStream(&quot;hello.txt&quot;);
+
+
+
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, Charset.forName(&quot;GBK&quot;))) {
+
+
+
+        int count;
+
+
+
+        while ((count = inputStreamReader.read(chars)) != -1) {
+
+
+
+            content += new String(chars, 0, count);
+
+
+
+        }
+
+
+
+    }
+
+
+
+    log.info(&quot;result: {}&quot;, content);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>从日志中看到，修复后的代码正确读取到了“你好 Hi”。</p>
+
+<pre><code>13:06:28.963 [main] INFO org.geekbang.time.commonmistakes.io.demo3.FileBadEncodingIssueApplication - result: 你好hi
+
+
+
+</code></pre>
+
+<p>如果你觉得这种方式比较麻烦的话，使用 JDK1.7 推出的 Files 类的 readAllLines 方法，可以很方便地用一行代码完成文件内容读取：</p>
+
+<pre><code>log.info(&quot;result: {}&quot;, Files.readAllLines(Paths.get(&quot;hello.txt&quot;), Charset.forName(&quot;GBK&quot;)).stream().findFirst().orElse(&quot;&quot;));
+
+
+
+</code></pre>
+
+<p>但这种方式有个问题是，读取超出内存大小的大文件时会出现 OOM。为什么呢？</p>
+
+<p>打开 readAllLines 方法的源码可以看到，readAllLines 读取文件所有内容后，放到一个 List<String> 中返回，如果内存无法容纳这个 List，就会 OOM：</p>
+
+<pre><code>public static List&lt;String&gt; readAllLines(Path path, Charset cs) throws IOException {
+
+
+
+    try (BufferedReader reader = newBufferedReader(path, cs)) {
+
+
+
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+
+
+
+        for (;;) {
+
+
+
+            String line = reader.readLine();
+
+
+
+            if (line == null)
+
+
+
+                break;
+
+
+
+            result.add(line);
+
+
+
+        }
+
+
+
+        return result;
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>那么，有没有办法实现按需的流式读取呢？比如，需要消费某行数据时再读取，而不是把整个文件一次性读取到内存？</p>
+
+<p>当然有，解决方案就是 File 类的 lines 方法。接下来，我就与你说说使用 lines 方法时需要注意的一些问题。</p>
+
+<h2>使用 Files 类静态方法进行文件操作注意释放文件句柄</h2>
+
+<p>与 readAllLines 方法返回 List<String> 不同，lines 方法返回的是 Stream<String>。这，使得我们在需要时可以不断读取、使用文件中的内容，而不是一次性地把所有内容都读取到内存中，因此避免了 OOM。</p>
+
+<p>接下来，我通过一段代码测试一下。我们尝试读取一个 1 亿 1 万行的文件，文件占用磁盘空间超过 4GB。如果使用 -Xmx512m -Xms512m 启动 JVM 控制最大堆内存为 512M 的话，肯定无法一次性读取这样的大文件，但通过 Files.lines 方法就没问题。</p>
+
+<p>在下面的代码中，首先输出这个文件的大小，然后计算读取 20 万行数据和 200 万行数据的耗时差异，最后逐行读取文件，统计文件的总行数：</p>
+
+<pre><code>//输出文件大小
+
+
+
+log.info(&quot;file size:{}&quot;, Files.size(Paths.get(&quot;test.txt&quot;)));
+
+
+
+StopWatch stopWatch = new StopWatch();
+
+
+
+stopWatch.start(&quot;read 200000 lines&quot;);
+
+
+
+//使用Files.lines方法读取20万行数据
+
+
+
+log.info(&quot;lines {}&quot;, Files.lines(Paths.get(&quot;test.txt&quot;)).limit(200000).collect(Collectors.toList()).size());
+
+
+
+stopWatch.stop();
+
+
+
+stopWatch.start(&quot;read 2000000 lines&quot;);
+
+
+
+//使用Files.lines方法读取200万行数据
+
+
+
+log.info(&quot;lines {}&quot;, Files.lines(Paths.get(&quot;test.txt&quot;)).limit(2000000).collect(Collectors.toList()).size());
+
+
+
+stopWatch.stop();
+
+
+
+log.info(stopWatch.prettyPrint());
+
+
+
+AtomicLong atomicLong = new AtomicLong();
+
+
+
+//使用Files.lines方法统计文件总行数
+
+
+
+Files.lines(Paths.get(&quot;test.txt&quot;)).forEach(line-&gt;atomicLong.incrementAndGet());
+
+
+
+log.info(&quot;total lines {}&quot;, atomicLong.get());
+
+
+
+</code></pre>
+
+<p>输出结果如下：</p>
+
+<p><img src="assets/29ee0fd687642ed87badaa96f9bdfd77.png" alt="img" /></p>
+
+<p>可以看到，实现了全文件的读取、统计了整个文件的行数，并没有出现 OOM；读取 200 万行数据耗时 760ms，读取 20 万行数据仅需 267ms。这些都可以说明，File.lines 方法并不是一次性读取整个文件的，而是按需读取。</p>
+
+<p>到这里，你觉得这段代码有什么问题吗？</p>
+
+<p>问题在于读取完文件后没有关闭。我们通常会认为静态方法的调用不涉及资源释放，因为方法调用结束自然代表资源使用完成，由 API 释放资源，但对于 Files 类的一些返回 Stream 的方法并不是这样。这，是一个很容易被忽略的严重问题。</p>
+
+<p>我就曾遇到过一个案例：程序在生产上运行一段时间后就会出现 too many files 的错误，我们想当然地认为是 OS 设置的最大文件句柄太小了，就让运维放开这个限制，但放开后还是会出现这样的问题。经排查发现，其实是文件句柄没有释放导致的，问题就出在 Files.lines 方法上。</p>
+
+<p>我们来重现一下这个问题，随便写入 10 行数据到一个 demo.txt 文件中：</p>
+
+<pre><code>Files.write(Paths.get(&quot;demo.txt&quot;),
+
+
+
+IntStream.rangeClosed(1, 10).mapToObj(i -&gt; UUID.randomUUID().toString()).collect(Collectors.toList())
+
+
+
+, UTF_8, CREATE, TRUNCATE_EXISTING);
+
+
+
+</code></pre>
+
+<p>然后使用 Files.lines 方法读取这个文件 100 万次，每读取一行计数器 +1：</p>
+
+<pre><code>LongAdder longAdder = new LongAdder();
+
+
+
+IntStream.rangeClosed(1, 1000000).forEach(i -&gt; {
+
+
+
+    try {
+
+
+
+        Files.lines(Paths.get(&quot;demo.txt&quot;)).forEach(line -&gt; longAdder.increment());
+
+
+
+    } catch (IOException e) {
+
+
+
+        e.printStackTrace();
+
+
+
+    }
+
+
+
+});
+
+
+
+log.info(&quot;total : {}&quot;, longAdder.longValue());  
+
+
+
+</code></pre>
+
+<p>运行后马上可以在日志中看到如下错误：</p>
+
+<pre><code>java.nio.file.FileSystemException: demo.txt: Too many open files
+
+
+
+at sun.nio.fs.UnixException.translateToIOException(UnixException.java:91)
+
+
+
+at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+
+
+
+at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+
+
+
+</code></pre>
+
+<p>使用 lsof 命令查看进程打开的文件，可以看到打开了 1 万多个 demo.txt：</p>
+
+<pre><code>lsof -p 63937
+
+
+
+...
+
+
+
+java    63902 zhuye *238r   REG                1,4      370         12934160647 /Users/zhuye/Documents/common-mistakes/demo.txt
+
+
+
+java    63902 zhuye *239r   REG                1,4      370         12934160647 /Users/zhuye/Documents/common-mistakes/demo.txt
+
+
+
+...
+
+
+
+lsof -p 63937 | grep demo.txt | wc -l
+
+
+
+   10007
+
+
+
+</code></pre>
+
+<p>其实，在JDK 文档中有提到，注意使用 try-with-resources 方式来配合，确保流的 close 方法可以调用释放资源。</p>
+
+<p>这也很容易理解，使用流式处理，如果不显式地告诉程序什么时候用完了流，程序又如何知道呢，它也不能帮我们做主何时关闭文件。</p>
+
+<p>修复方式很简单，使用 try 来包裹 Stream 即可：</p>
+
+<pre><code>LongAdder longAdder = new LongAdder();
+
+
+
+IntStream.rangeClosed(1, 1000000).forEach(i -&gt; {
+
+
+
+    try (Stream&lt;String&gt; lines = Files.lines(Paths.get(&quot;demo.txt&quot;))) {
+
+
+
+        lines.forEach(line -&gt; longAdder.increment());
+
+
+
+    } catch (IOException e) {
+
+
+
+        e.printStackTrace();
+
+
+
+    }
+
+
+
+});
+
+
+
+log.info(&quot;total : {}&quot;, longAdder.longValue());
+
+
+
+</code></pre>
+
+<p>修改后的代码不再出现错误日志，因为读取了 100 万次包含 10 行数据的文件，所以最终正确输出了 1000 万：</p>
+
+<pre><code>14:19:29.410 [main] INFO org.geekbang.time.commonmistakes.io.demo2.FilesStreamOperationNeedCloseApplication - total : 10000000
+
+
+
+</code></pre>
+
+<p>查看 lines 方法源码可以发现，Stream 的 close 注册了一个回调，来关闭 BufferedReader 进行资源释放：</p>
+
+<pre><code>public static Stream&lt;String&gt; lines(Path path, Charset cs) throws IOException {
+
+
+
+    BufferedReader br = Files.newBufferedReader(path, cs);
+
+
+
+    try {
+
+
+
+        return br.lines().onClose(asUncheckedRunnable(br));
+
+
+
+    } catch (Error|RuntimeException e) {
+
+
+
+        try {
+
+
+
+            br.close();
+
+
+
+        } catch (IOException ex) {
+
+
+
+            try {
+
+
+
+                e.addSuppressed(ex);
+
+
+
+            } catch (Throwable ignore) {}
+
+
+
+        }
+
+
+
+        throw e;
+
+
+
+    }
+
+
+
+}
+
+
+
+private static Runnable asUncheckedRunnable(Closeable c) {
+
+
+
+    return () -&gt; {
+
+
+
+        try {
+
+
+
+            c.close();
+
+
+
+        } catch (IOException e) {
+
+
+
+            throw new UncheckedIOException(e);
+
+
+
+        }
+
+
+
+    };
+
+
+
+}
+
+</code></pre>
+
+<p>从命名上可以看出，使用 BufferedReader 进行字符流读取时，用到了缓冲。这里缓冲 Buffer 的意思是，使用一块内存区域作为直接操作的中转。</p>
+
+<p>比如，读取文件操作就是一次性读取一大块数据（比如 8KB）到缓冲区，后续的读取可以直接从缓冲区返回数据，而不是每次都直接对应文件 IO。写操作也是类似。如果每次写几十字节到文件都对应一次 IO 操作，那么写一个几百兆的大文件可能就需要千万次的 IO 操作，耗时会非常久。</p>
+
+<p>接下来，我就通过几个实验，和你说明使用缓冲 Buffer 的重要性，并对比下不同使用方式的文件读写性能，来帮助你用对、用好 Buffer。</p>
+
+<h2>注意读写文件要考虑设置缓冲区</h2>
+
+<p>我曾遇到过这么一个案例，一段先进行文件读入再简单处理后写入另一个文件的业务代码，由于开发人员使用了单字节的读取写入方式，导致执行得巨慢，业务量上来后需要数小时才能完成。</p>
+
+<p>我们来模拟一下相关实现。创建一个文件随机写入 100 万行数据，文件大小在 35MB 左右：</p>
+
+<pre><code>Files.write(Paths.get(&quot;src.txt&quot;),
+
+
+
+IntStream.rangeClosed(1, 1000000).mapToObj(i -&gt; UUID.randomUUID().toString()).collect(Collectors.toList())
+
+
+
+, UTF_8, CREATE, TRUNCATE_EXISTING);
+
+
+
+</code></pre>
+
+<p>当时开发人员写的文件处理代码大概是这样的：使用 FileInputStream 获得一个文件输入流，然后调用其 read 方法每次读取一个字节，最后通过一个 FileOutputStream 文件输出流把处理后的结果写入另一个文件。</p>
+
+<p>为了简化逻辑便于理解，这里我们不对数据进行处理，直接把原文件数据写入目标文件，相当于文件复制：</p>
+
+<pre><code>private static void perByteOperation() throws IOException {
+
+
+
+    try (FileInputStream fileInputStream = new FileInputStream(&quot;src.txt&quot;);
+
+
+
+         FileOutputStream fileOutputStream = new FileOutputStream(&quot;dest.txt&quot;)) {
+
+
+
+        int i;
+
+
+
+        while ((i = fileInputStream.read()) != -1) {
+
+
+
+            fileOutputStream.write(i);
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>这样的实现，复制一个 35MB 的文件居然耗时 190 秒。</p>
+
+<p>显然，每读取一个字节、每写入一个字节都进行一次 IO 操作，代价太大了。解决方案就是，考虑使用缓冲区作为过渡，一次性从原文件读取一定数量的数据到缓冲区，一次性写入一定数量的数据到目标文件。</p>
+
+<p>改良后，使用 100 字节作为缓冲区，使用 FileInputStream 的 byte[]的重载来一次性读取一定字节的数据，同时使用 FileOutputStream 的 byte[]的重载实现一次性从缓冲区写入一定字节的数据到文件：</p>
+
+<pre><code>private static void bufferOperationWith100Buffer() throws IOException {
+
+
+
+    try (FileInputStream fileInputStream = new FileInputStream(&quot;src.txt&quot;);
+
+
+
+         FileOutputStream fileOutputStream = new FileOutputStream(&quot;dest.txt&quot;)) {
+
+
+
+        byte[] buffer = new byte[100];
+
+
+
+        int len = 0;
+
+
+
+        while ((len = fileInputStream.read(buffer)) != -1) {
+
+
+
+            fileOutputStream.write(buffer, 0, len);
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+</code></pre>
+
+<p>仅仅使用了 100 个字节的缓冲区作为过渡，完成 35M 文件的复制耗时缩短到了 26 秒，是无缓冲时性能的 7 倍；如果把缓冲区放大到 1000 字节，耗时可以进一步缩短到 342 毫秒。可以看到，在进行文件 IO 处理的时候，使用合适的缓冲区可以明显提高性能。</p>
+
+<p>你可能会说，实现文件读写还要自己 new 一个缓冲区出来，太麻烦了，不是有一个 BufferedInputStream 和 BufferedOutputStream 可以实现输入输出流的缓冲处理吗？</p>
+
+<p>是的，它们在内部实现了一个默认 8KB 大小的缓冲区。但是，在使用 BufferedInputStream 和 BufferedOutputStream 时，我还是建议你再使用一个缓冲进行读写，不要因为它们实现了内部缓冲就进行逐字节的操作。</p>
+
+<p>接下来，我写一段代码比较下使用下面三种方式读写一个字节的性能：</p>
+
+<p>直接使用 BufferedInputStream 和 BufferedOutputStream；</p>
+
+<p>额外使用一个 8KB 缓冲，使用 BufferedInputStream 和 BufferedOutputStream；</p>
+
+<p>直接使用 FileInputStream 和 FileOutputStream，再使用一个 8KB 的缓冲。</p>
+
+<pre><code>//使用BufferedInputStream和BufferedOutputStream
+
+
+
+private static void bufferedStreamByteOperation() throws IOException {
+
+
+
+   try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(&quot;src.txt&quot;));
+
+
+
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(&quot;dest.txt&quot;))) {
+
+
+
+        int i;
+
+
+
+        while ((i = bufferedInputStream.read()) != -1) {
+
+
+
+            bufferedOutputStream.write(i);
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+//额外使用一个8KB缓冲，再使用BufferedInputStream和BufferedOutputStream
+
+
+
+private static void bufferedStreamBufferOperation() throws IOException {
+
+
+
+    try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(&quot;src.txt&quot;));
+
+
+
+         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(&quot;dest.txt&quot;))) {
+
+
+
+        byte[] buffer = new byte[8192];
+
+
+
+        int len = 0;
+
+
+
+        while ((len = bufferedInputStream.read(buffer)) != -1) {
+
+
+
+            bufferedOutputStream.write(buffer, 0, len);
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+//直接使用FileInputStream和FileOutputStream，再使用一个8KB的缓冲
+
+
+
+private static void largerBufferOperation() throws IOException {
+
+
+
+    try (FileInputStream fileInputStream = new FileInputStream(&quot;src.txt&quot;);
+
+
+
+        FileOutputStream fileOutputStream = new FileOutputStream(&quot;dest.txt&quot;)) {
+
+
+
+        byte[] buffer = new byte[8192];
+
+
+
+        int len = 0;
+
+
+
+        while ((len = fileInputStream.read(buffer)) != -1) {
+
+
+
+            fileOutputStream.write(buffer, 0, len);
+
+
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>结果如下：</p>
+
+<pre><code>\---------------------------------------------
+
+
+
+ns         %     Task name
+
+
+
+\---------------------------------------------
+
+
+
+1424649223  086%  bufferedStreamByteOperation
+
+
+
+117807808  007%  bufferedStreamBufferOperation
+
+
+
+112153174  007%  largerBufferOperation
+
+
+
+</code></pre>
+
+<p>可以看到，第一种方式虽然使用了缓冲流，但逐字节的操作因为方法调用次数实在太多还是慢，耗时 1.4 秒；后面两种方式的性能差不多，耗时 110 毫秒左右。虽然第三种方式没有使用缓冲流，但使用了 8KB 大小的缓冲区，和缓冲流默认的缓冲区大小相同。</p>
+
+<p>看到这里，你可能会疑惑了，既然这样使用 BufferedInputStream 和 BufferedOutputStream 有什么意义呢？</p>
+
+<p>其实，这里我是为了演示所以示例三使用了固定大小的缓冲区，但在实际代码中每次需要读取的字节数很可能不是固定的，有的时候读取几个字节，有的时候读取几百字节，这个时候有一个固定大小较大的缓冲，也就是使用 BufferedInputStream 和 BufferedOutputStream 做为后备的稳定的二次缓冲，就非常有意义了。</p>
+
+<p>最后我要补充说明的是，对于类似的文件复制操作，如果希望有更高性能，可以使用 FileChannel 的 transfreTo 方法进行流的复制。在一些操作系统（比如高版本的 Linux 和 UNIX）上可以实现 DMA（直接内存访问），也就是数据从磁盘经过总线直接发送到目标文件，无需经过内存和 CPU 进行数据中转：</p>
+
+<pre><code>private static void fileChannelOperation() throws IOException {
+
+
+
+    FileChannel in = FileChannel.open(Paths.get(&quot;src.txt&quot;), StandardOpenOption.READ);
+
+
+
+    FileChannel out = FileChannel.open(Paths.get(&quot;dest.txt&quot;), CREATE, WRITE);
+
+
+
+    in.transferTo(0, in.size(), out);
+
+
+
+}
+
+
+
+</code></pre>
+
+<p>你可以通过这篇文章，了解 transferTo 方法的更多细节。</p>
+
+<p>在测试 FileChannel 性能的同时，我再运行一下这一小节中的所有实现，比较一下读写 35MB 文件的耗时。</p>
+
+<pre><code>\---------------------------------------------
+
+
+
+ns         %     Task name
+
+
+
+\---------------------------------------------
+
+
+
+183673362265  098%  perByteOperation
+
+
+
+2034504694  001%  bufferOperationWith100Buffer
+
+
+
+749967898  000%  bufferedStreamByteOperation
+
+
+
+110602155  000%  bufferedStreamBufferOperation
+
+
+
+114542834  000%  largerBufferOperation
+
+
+
+050068602  000%  fileChannelOperation
+
+
+
+</code></pre>
+
+<p>可以看到，最慢的是单字节读写文件流的方式，耗时 183 秒，最快的是 FileChannel.transferTo 方式进行流转发的方式，耗时 50 毫秒。两者耗时相差达到 3600 倍！</p>
+
+<h2>重点回顾</h2>
+
+<p>今天，我通过三个案例和你分享了文件读写操作中最重要的几个方面。</p>
+
+<p>第一，如果需要读写字符流，那么需要确保文件中字符的字符集和字符流的字符集是一致的，否则可能产生乱码。</p>
+
+<p>第二，使用 Files 类的一些流式处理操作，注意使用 try-with-resources 包装 Stream，确保底层文件资源可以释放，避免产生 too many open files 的问题。</p>
+
+<p>第三，进行文件字节流操作的时候，一般情况下不考虑进行逐字节操作，使用缓冲区进行批量读写减少 IO 次数，性能会好很多。一般可以考虑直接使用缓冲输入输出流 BufferedXXXStream，追求极限性能的话可以考虑使用 FileChannel 进行流转发。</p>
+
+<p>最后我要强调的是，文件操作因为涉及操作系统和文件系统的实现，JDK 并不能确保所有 IO API 在所有平台的逻辑一致性，代码迁移到新的操作系统或文件系统时，要重新进行功能测试和性能测试。</p>
+
+<p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
+
+<h2>思考与讨论</h2>
+
+<p>Files.lines 方法进行流式处理，需要使用 try-with-resources 进行资源释放。那么，使用 Files 类中其他返回 Stream 包装对象的方法进行流式处理，比如 newDirectoryStream 方法返回 DirectoryStream<Path>，list、walk 和 find 方法返回 Stream<Path>，也同样有资源释放问题吗？</p>
+
+<p>Java 的 File 类和 Files 类提供的文件复制、重命名、删除等操作，是原子性的吗？</p>
+
+<p>对于文件操作，你还遇到过什么坑吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
+
+</div>
+
+                    </div>
+
+                    <div>
+
+                        <div style="float: left">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md">上一页</a>
+
+                        </div>
+
+                        <div style="float: right">
+
+                            <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md">下一页</a>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+
+</div>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709970328f593d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
+
+<script>
+
+    window.dataLayer = window.dataLayer || [];
+
+
+
+    function gtag() {
+
+        dataLayer.push(arguments);
+
+    }
+
+
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-NPSEEVD756');
+
+    var path = window.location.pathname
+
+    var cookie = getCookie("lastPath");
+
+    console.log(path)
+
+    if (path.replace("/", "") === "") {
+
+        if (cookie.replace("/", "") !== "") {
+
+            console.log(cookie)
+
+            document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
+
+        }
+
+    } else {
+
+        setCookie("lastPath", path)
+
+    }
+
+
+
+    function setCookie(cname, cvalue) {
+
+        var d = new Date();
+
+        d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+
+        var expires = "expires=" + d.toGMTString();
+
+        document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
+
+    }
+
+
+
+    function getCookie(cname) {
+
+        var name = cname + "=";
+
+        var ca = document.cookie.split(';');
+
+        for (var i = 0; i < ca.length; i++) {
+
+            var c = ca[i].trim();
+
+            if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+
+        }
+
+        return "";
+
+    }
+
+
+
+</script>
+
+
+
+</html>
+
