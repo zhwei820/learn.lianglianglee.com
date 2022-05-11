@@ -12,7 +12,9 @@
         <!-- theme css & js -->
         <meta name="generator" content="Hexo 4.2.0">
     </head>
+
 <body>
+
 <div class="book-container">
     <div class="book-sidebar">
         <div class="book-brand">
@@ -25,61 +27,86 @@
             <ul class="uncollapsible">
                 <li><a href="/" class="current-tab">首页</a></li>
             </ul>
+
             <ul class="uncollapsible">
                 <li><a href="../">上一级</a></li>
             </ul>
+
             <ul class="uncollapsible">
                 <li>
+
                     
                     <a href="/极客时间/Java基础36讲.md.html">Java基础36讲.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/Linux性能优化.md.html">Linux性能优化.md.html</a>
+
                 </li>
                 <li>
+
                     <a class="current-tab" href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲.md.html</a>
                     
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/从0开始学微服务.md.html">从0开始学微服务.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/代码精进之路.md.html">代码精进之路.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/持续交付36讲.md.html">持续交付36讲.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略.md.html</a>
+
                 </li>
                 <li>
+
                     
                     <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议.md.html</a>
+
                 </li>
             </ul>
+
         </div>
     </div>
+
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
         <div class="sidebar-toggle-inner"></div>
     </div>
+
     <script>
         function add_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.add('show')
         }
+
         function remove_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.remove('show')
         }
+
         function sidebar_toggle() {
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
             let sidebar = document.querySelector('.book-sidebar')
@@ -94,6 +121,8 @@
                 content.classList.add('extend')
             }
         }
+
+
 function open_sidebar() {
     let sidebar = document.querySelector('.book-sidebar')
     let overlay = document.querySelector('.off-canvas-overlay')
@@ -106,7 +135,9 @@ function hide_canvas() {
     sidebar.classList.remove('show')
     overlay.classList.remove('show')
 }
+
     </script>
+
     <div class="off-canvas-content">
         <div class="columns">
             <div class="column col-12 col-lg-12">
@@ -1287,19 +1318,19 @@ mysql&gt; alter table SUser add index index2(email(6));
 <p>从图中你可以看到，由于 email(6) 这个索引结构中每个邮箱字段都只取前 6 个字节（即：zhangs），所以占用的空间会更小，这就是使用前缀索引的优势。</p>
 <p>但，这同时带来的损失是，可能会增加额外的记录扫描次数。</p>
 <p>接下来，我们再看看下面这个语句，在这两个索引定义下分别是怎么执行的。</p>
-<pre><code>select id,name,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfa5b7beb1b8acaca7a6a59fa7a7a7f1bcb0b2">[email&#160;protected]</a>';
+<pre><code>select id,name,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8c2d0d9d6dfcbcbc0c1c2f8c0c0c096dbd7d5">[email&#160;protected]</a>';
 </code></pre>
 <p><strong>如果使用的是 index1</strong>（即 email 整个字符串的索引结构），执行顺序是这样的：</p>
 <ol>
-<li>从 index1 索引树找到满足索引值是’<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8df7e5ece3eafefef5f4f7cdf5f5f5a3eee2e0">[email&#160;protected]</a>’的这条记录，取得 ID2 的值；</li>
+<li>从 index1 索引树找到满足索引值是’<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="473d2f26292034343f3e3d073f3f3f6924282a">[email&#160;protected]</a>’的这条记录，取得 ID2 的值；</li>
 <li>到主键上查到主键值是 ID2 的行，判断 email 的值是正确的，将这行记录加入结果集；</li>
-<li>取 index1 索引树上刚刚查到的位置的下一条记录，发现已经不满足 email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c06141d121b0f0f0405063c040404521f1311">[email&#160;protected]</a>’的条件了，循环结束。</li>
+<li>取 index1 索引树上刚刚查到的位置的下一条记录，发现已经不满足 email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6dccec7c8c1d5d5dedfdce6dedede88c5c9cb">[email&#160;protected]</a>’的条件了，循环结束。</li>
 </ol>
 <p>这个过程中，只需要回主键索引取一次数据，所以系统认为只扫描了一行。</p>
 <p><strong>如果使用的是 index2</strong>（即 email(6) 索引结构），执行顺序是这样的：</p>
 <ol>
 <li>从 index2 索引树找到满足索引值是’zhangs’的记录，找到的第一个是 ID1；</li>
-<li>到主键上查到主键值是 ID1 的行，判断出 email 的值不是’<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ef4e6efe0e9fdfdf6f7f4cef6f6f6a0ede1e3">[email&#160;protected]</a>’，这行记录丢弃；</li>
+<li>到主键上查到主键值是 ID1 的行，判断出 email 的值不是’<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8b2a0a9a6afbbbbb0b1b288b0b0b0e6aba7a5">[email&#160;protected]</a>’，这行记录丢弃；</li>
 <li>取 index2 上刚刚查到的位置的下一条记录，发现仍然是’zhangs’，取出 ID2，再到 ID 索引上取整行然后判断，这次值对了，将这行记录加入结果集；</li>
 <li>重复上一步，直到在 idxe2 上取到的值不是’zhangs’时，循环结束。</li>
 </ol>
@@ -1324,10 +1355,10 @@ from SUser;
 <h2>前缀索引对覆盖索引的影响</h2>
 <p>前面我们说了使用前缀索引可能会增加扫描行数，这会影响到性能。其实，前缀索引的影响不止如此，我们再看一下另外一个场景。</p>
 <p>你先来看看这个 SQL 语句：</p>
-<pre><code>select id,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e59f8d848b8296969d9c9fa59d9d9dcb868a88">[email&#160;protected]</a>';
+<pre><code>select id,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc86949d929b8f8f848586bc848484d29f9391">[email&#160;protected]</a>';
 </code></pre>
 <p>与前面例子中的 SQL 语句</p>
-<pre><code>select id,name,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ce6f4fdf2fbefefe4e5e6dce4e4e4b2fff3f1">[email&#160;protected]</a>';
+<pre><code>select id,name,email from SUser where email='<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e64767f70796d6d6667645e666666307d7173">[email&#160;protected]</a>';
 </code></pre>
 <p>相比，这个语句只要求返回 id 和 email 字段。</p>
 <p>所以，如果使用 index1（即 email 整个字符串的索引结构）的话，可以利用覆盖索引，从 index1 查到结果后直接就返回了，不需要回到 ID 索引再去查一次。而如果使用 index2（即 email(6) 索引结构）的话，就不得不回到 ID 索引再去判断 email 字段的值。</p>
@@ -2014,7 +2045,7 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`\G
 /* @b 保存 Innodb_rows_read 的当前值 */
 select VARIABLE_VALUE into @b from performance_schema.session_status where variable_name = 'Innodb_rows_read'; 
 /* 计算 Innodb_rows_read 差值 */
-select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb99d6bb9a">[email&#160;protected]</a>;
+select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9efcb3deff">[email&#160;protected]</a>;
 </code></pre>
 <p>这个方法是通过查看 OPTIMIZER_TRACE 的结果来确认的，你可以从 number_of_tmp_files 中看到是否使用了临时文件。</p>
 <p><img src="assets/89baf99cdeefe90a22370e1d6f5e6495-1584367392864.png" alt="img" /></p>
@@ -2025,8 +2056,8 @@ select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail=
 <p>接下来，我再和你解释一下图 4 中其他两个值的意思。</p>
 <p>我们的示例表中有 4000 条满足 city='杭州’的记录，所以你可以看到 examined_rows=4000，表示参与排序的行数是 4000 行。</p>
 <p>sort_mode 里面的 packed_additional_fields 的意思是，排序过程对字符串做了“紧凑”处理。即使 name 字段的定义是 varchar(16)，在排序过程中还是要按照实际长度来分配空间的。</p>
-<p>同时，最后一个查询语句 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98fab5d8f9">[email&#160;protected]</a> 的返回结果是 4000，表示整个执行过程只扫描了 4000 行。</p>
-<p>这里需要注意的是，为了避免对结论造成干扰，我把 internal_tmp_disk_storage_engine 设置成 MyISAM。否则，select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67054a2706">[email&#160;protected]</a> 的结果会显示为 4001。</p>
+<p>同时，最后一个查询语句 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb9f69bba">[email&#160;protected]</a> 的返回结果是 4000，表示整个执行过程只扫描了 4000 行。</p>
+<p>这里需要注意的是，为了避免对结论造成干扰，我把 internal_tmp_disk_storage_engine 设置成 MyISAM。否则，select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d4f006d4c">[email&#160;protected]</a> 的结果会显示为 4001。</p>
 <p>这是因为查询 OPTIMIZER_TRACE 这个表时，需要用到临时表，而 internal_tmp_disk_storage_engine 的默认值是 InnoDB。如果使用的是 InnoDB 引擎的话，把数据从临时表取出来的时候，会让 Innodb_rows_read 的值加 1。</p>
 <h2>rowid 排序</h2>
 <p>在上面这个算法过程里面，只对原表的数据读了一遍，剩下的操作都是在 sort_buffer 和临时文件中执行的。但这个算法有一个问题，就是如果查询要返回的字段很多的话，那么 sort_buffer 里面要放的字段数太多，这样内存里能够同时放下的行数很少，要分成很多个临时文件，排序的性能会很差。</p>
@@ -2053,9 +2084,9 @@ select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail=
 <p>图 5 rowid 排序</p>
 <p>对比图 3 的全字段排序流程图你会发现，rowid 排序多访问了一次表 t 的主键索引，就是步骤 7。</p>
 <p>需要说明的是，最后的“结果集”是一个逻辑概念，实际上 MySQL 服务端从排序后的 sort_buffer 中依次取出 id，然后到原表查到 city、name 和 age 这三个字段的结果，不需要在服务端再耗费内存存储结果，是直接返回给客户端的。</p>
-<p>根据这个说明过程和图示，你可以想一下，这个时候执行 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3c731e3f">[email&#160;protected]</a>，结果会是多少呢？</p>
+<p>根据这个说明过程和图示，你可以想一下，这个时候执行 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e3acc1e0">[email&#160;protected]</a>，结果会是多少呢？</p>
 <p>现在，我们就来看看结果有什么不同。</p>
-<p>首先，图中的 examined_rows 的值还是 4000，表示用于排序的数据是 4000 行。但是 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8cc3ae8f">[email&#160;protected]</a> 这个语句的值变成 5000 了。</p>
+<p>首先，图中的 examined_rows 的值还是 4000，表示用于排序的数据是 4000 行。但是 select @<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3c731e3f">[email&#160;protected]</a> 这个语句的值变成 5000 了。</p>
 <p>因为这时候除了排序过程外，在排序完成后，还要根据 id 去原表取值。由于语句是 limit 1000，因此会多读 1000 行。</p>
 <p><img src="assets/27f164804d1a4689718291be5d10f89b-1584367392865.png" alt="img" /></p>
 <p>图 6 rowid 排序的 OPTIMIZER_TRACE 部分输出</p>
@@ -2286,7 +2317,7 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`\G
 </ol>
 <p>我们把这个算法，暂时称作随机算法 1。这里，我直接给你贴一下执行语句的序列:</p>
 <pre><code>mysql&gt; select max(id),min(id) into @M,@N from t ;
-set @X= floor((@<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f2bfdfb2bc">[email&#160;protected]</a>+1)*rand() + @N);
+set @X= floor((@<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="216c0c616f">[email&#160;protected]</a>+1)*rand() + @N);
 select * from t where id &gt;= @X limit 1;
 </code></pre>
 <p>这个方法效率很高，因为取 max(id) 和 min(id) 都是不需要扫描索引的，而第三步的 select 也可以用索引快速定位，可以认为就只扫描了 3 行。但实际上，这个算法本身并不严格满足题目的随机要求，因为 ID 中间可能有空洞，因此选择不同行的概率不一样，不是真正的随机。</p>
@@ -6374,7 +6405,7 @@ create table db2.t like db1.t
 <p>为了便于说明，我先创建一个用户：</p>
 <pre><code>create user 'ua'@'%' identified by 'pa';
 </code></pre>
-<p>这条语句的逻辑是创建一个用户’ua’@’%’，密码是 pa。注意，在 MySQL 里面，用户名 (user)+ 地址 (host) 才表示一个用户，因此 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96e3f7d6ffe6a7">[email&#160;protected]</a> 和 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f1a0e2f061f5d">[email&#160;protected]</a> 代表的是两个不同的用户。</p>
+<p>这条语句的逻辑是创建一个用户’ua’@’%’，密码是 pa。注意，在 MySQL 里面，用户名 (user)+ 地址 (host) 才表示一个用户，因此 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8adb998b1a8e9">[email&#160;protected]</a> 和 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="047165446d7436">[email&#160;protected]</a> 代表的是两个不同的用户。</p>
 <p>这条命令做了两个动作：</p>
 <ol>
 <li>磁盘上，往 mysql.user 表里插入一行，由于没有指定权限，所以这行数据上所有表示权限的字段的值都是 N；</li>
@@ -6580,21 +6611,25 @@ GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
                             <a href="/极客时间/从0开始学微服务.md.html">下一页</a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709980a94b828b66","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709ba3afc855fbdc","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
 </body>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
         dataLayer.push(arguments);
     }
+
     gtag('js', new Date());
     gtag('config', 'G-NPSEEVD756');
     var path = window.location.pathname
@@ -6608,12 +6643,14 @@ GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
     } else {
         setCookie("lastPath", path)
     }
+
     function setCookie(cname, cvalue) {
         var d = new Date();
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toGMTString();
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
     }
+
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -6623,5 +6660,7 @@ GRANT SELECT(id), INSERT (id,a) ON mydb.mytbl TO 'ua'@'%' with grant option;
         }
         return "";
     }
+
 </script>
+
 </html>
