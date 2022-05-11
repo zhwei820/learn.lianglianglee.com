@@ -1,932 +1,466 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>13  缓存优化：那些基于缓存的优化方案.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
 
 <body>
 
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
 
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
 
-
-
             <ul class="uncollapsible">
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/00 开篇词  建立上帝视角，全面系统掌握前端效率工程化.md.html">00 开篇词  建立上帝视角，全面系统掌握前端效率工程化.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/01  项目基石：前端脚手架工具探秘.md.html">01  项目基石：前端脚手架工具探秘.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/02  界面调试：热更新技术如何开着飞机修引擎？.md.html">02  界面调试：热更新技术如何开着飞机修引擎？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/03  构建提速：如何正确使用 SourceMap？.md.html">03  构建提速：如何正确使用 SourceMap？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/04  接口调试：Mock 工具如何快速进行接口调试？.md.html">04  接口调试：Mock 工具如何快速进行接口调试？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/05  编码效率：如何提高编写代码的效率？.md.html">05  编码效率：如何提高编写代码的效率？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/06  团队工具：如何利用云开发提升团队开发效率？.md.html">06  团队工具：如何利用云开发提升团队开发效率？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/07  低代码工具：如何用更少的代码实现更灵活的需求.md.html">07  低代码工具：如何用更少的代码实现更灵活的需求.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/08  无代码工具：如何做到不写代码就能高效交付？.md.html">08  无代码工具：如何做到不写代码就能高效交付？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/09  构建总览：前端构建工具的演进.md.html">09  构建总览：前端构建工具的演进.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/10  流程分解：Webpack 的完整构建流程.md.html">10  流程分解：Webpack 的完整构建流程.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/11  编译提效：如何为 Webpack 编译阶段提速？.md.html">11  编译提效：如何为 Webpack 编译阶段提速？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/12  打包提效：如何为 Webpack 打包阶段提速？.md.html">12  打包提效：如何为 Webpack 打包阶段提速？.md.html</a>
 
-
-
                 </li>
-
                 <li>
-
-
 
                     <a class="current-tab" href="/专栏/前端工程化精讲-完/13  缓存优化：那些基于缓存的优化方案.md.html">13  缓存优化：那些基于缓存的优化方案.md.html</a>
-
                     
-
-
 
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/14  增量构建：Webpack 中的增量构建.md.html">14  增量构建：Webpack 中的增量构建.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/15  版本特性：Webpack 5 中的优化细节.md.html">15  版本特性：Webpack 5 中的优化细节.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/16  无包构建：盘点那些 No-bundle 的构建方案.md.html">16  无包构建：盘点那些 No-bundle 的构建方案.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/17  部署初探：为什么一般不在开发环境下部署代码？.md.html">17  部署初探：为什么一般不在开发环境下部署代码？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/18  工具盘点：掌握那些流行的代码部署工具.md.html">18  工具盘点：掌握那些流行的代码部署工具.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/19  安装提效：部署流程中的依赖安装效率优化.md.html">19  安装提效：部署流程中的依赖安装效率优化.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/20  流程优化：部署流程中的构建流程策略优化.md.html">20  流程优化：部署流程中的构建流程策略优化.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/21  容器方案：从构建到部署，容器化方案的优势有哪些？.md.html">21  容器方案：从构建到部署，容器化方案的优势有哪些？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/22  案例分析：搭建基本的前端高效部署系统.md.html">22  案例分析：搭建基本的前端高效部署系统.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/前端工程化精讲-完/23 结束语  前端效率工程化的未来展望.md.html">23 结束语  前端效率工程化的未来展望.md.html</a>
 
-
-
                 </li>
-
             </ul>
 
-
-
         </div>
-
     </div>
-
-
 
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
 
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
 
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
 
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
 
 
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
 
     </script>
 
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>13  缓存优化：那些基于缓存的优化方案</h1>
-
 <p>上节课的思考题是 Webpack 4 中 Tree Shaking 的触发条件有哪些？我们一起来回忆一下，要让引入的模块支持 Tree Shaking，一般有 4 点需要注意：</p>
-
 <ol>
-
 <li>引入的模块需要是 ES6 类型的，CommonJS 类型的则不支持。</li>
-
 <li>引入方式不能使用 default。</li>
-
 <li>引用第三方依赖包的情况下，对应的 package.json 需要设置 sideEffects:false 来表明无副作用。</li>
-
 <li>使用 Babel 的情况下，需要注意不同版本 Babel 对于模块化的预设不同。</li>
-
 </ol>
-
 <p>在前面的两节课中，我们讨论了 Webpack 在编译和优化打包阶段的提效方向，以及各自对应的实践方法。除了这些针对具体处理过程的优化方法外，还有一个特定类型的优化方法没有聊到，就是利用缓存数据来加速构建过程的处理。这节课我们就将介绍它。</p>
-
 <h3>缓存优化的基本原理</h3>
-
 <p>在讲缓存优化的原理之前我们先来看下面的例子，如下面的代码和图片所示（本节课的完整示例代码参见 <a href="https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/13_cache">13_cache</a>）：</p>
-
 <pre><code>./src/example-basic.js
 
-
-
 import _ from 'lodash'
-
 </code></pre>
-
 <p><img src="assets/Ciqc1F9kXKSADBZcAAE6sFADuy0456.png" alt="Drawing 0.png" />
-
 <img src="assets/CgqCHl9kXKmAUFg3AAErEUA8F2E549.png" alt="Drawing 1.png" /></p>
-
 <p>可以看到，在没有增加任何优化设置的情况下，初次构建时在 optimizeChunkAssets 阶段的耗时是 1000ms 左右，而再次构建时的耗时直接降到了 18ms，几乎可以忽略不计。</p>
-
 <p>这里的原因就在于，Webpack 4 内置了压缩插件 TerserWebpackPlugin，且默认开启了<a href="https://webpack.js.org/plugins/terser-webpack-plugin/#cache">缓存</a>参数。在初次构建的压缩代码过程中，就将这一阶段的结果写入了缓存目录（node_modules/.cache/terser-webpack-plugin/）中，当再次构建进行到压缩代码阶段时，即可对比读取已有缓存，如下面的代码所示（相关的代码逻辑在插件的<a href="https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/src/index.js">源代码</a>中可以看到）。</p>
-
 <pre><code>terser-webpack-plugin/src/index.js:
 
-
-
 ...
-
-
 
 if (cache.isEnabled()) {
 
-
-
   let taskResult;
-
-
 
   try {
 
-
-
     taskResult = await cache.get(task); //读取缓存
-
-
 
   } catch (ignoreError) {
 
-
-
     return enqueue(task); //缓存未命中情况下执行任务
 
-
-
   }
-
-
 
   task.callback(taskResult); //缓存命中情况下返回缓存结果
 
-
-
   ...
-
-
 
   const enqueue = async (task) =&gt; {
 
-
-
     let taskResult;
-
-
 
     if (cache.isEnabled() &amp;&amp; !taskResult.error) {
 
-
-
       await cache.store(task, taskResult); //写入缓存
 
-
-
     }
-
-
 
   }
 
-
-
 }
-
 </code></pre>
-
 <p>以上就是 TerserWebpackPlugin 插件中利用缓存的基本原理。事实上，在 Webpack 构建流程中还有许多处理过程支持使用缓存，下面我们就来梳理编译和优化打包阶段分别有哪些任务环境可以用到缓存。</p>
-
 <h3>编译阶段的缓存优化</h3>
-
 <p>编译过程的耗时点主要在使用不同加载器（Loader）来编译模块的过程。下面我们来分别看下几个典型 Loader 中的缓存处理：</p>
-
 <h4>Babel-loader</h4>
-
 <p><a href="https://webpack.js.org/loaders/babel-loader/">Babel-loader</a> 是绝大部分项目中会使用到的 JS/JSX/TS 编译器。在 Babel-loader 中，与缓存相关的设置主要有：</p>
-
 <ul>
-
 <li><strong>cacheDirectory</strong>：默认为 false，即不开启缓存。当值为 true 时开启缓存并使用默认缓存目录（./node_modules/.cache/babel-loader/），也可以指定其他路径值作为缓存目录。</li>
-
 <li><strong>cacheIdentifier</strong>：用于计算缓存标识符。默认使用 Babel 相关依赖包的版本、babelrc 配置文件的内容，以及环境变量等与模块内容一起参与计算缓存标识符。如果上述内容发生变化，即使模块内容不变，也不能命中缓存。</li>
-
 <li><strong>cacheCompression</strong>：默认为 true，将缓存内容压缩为 gz 包以减小缓存目录的体积。在设为 false 的情况下将跳过压缩和解压的过程，从而提升这一阶段的速度。</li>
-
 </ul>
-
 <p>开启缓存选项前后的构建时长效果如图所示（示例中运行 npm run build:babel），可以看到，由于开启了 Babel 的缓存，再次构建的速度比初次构建时要快了许多。</p>
-
 <p><img src="assets/CgqCHl9kXL6AIfhNAAB0Ns1VzFM141.png" alt="Drawing 2.png" />
-
 <img src="assets/CgqCHl9kXMOAND8YAACPsQpEG1k472.png" alt="Drawing 3.png" /></p>
-
 <h4>Cache-loader</h4>
-
 <p>在编译过程中利用缓存的第二种方式是使用<a href="https://webpack.js.org/loaders/cache-loader/"> Cache-loader</a>。在使用时，需要将 cache-loader 添加到对构建效率影响较大的 Loader（如 babel-loader 等）之前，如下面的代码所示：</p>
-
 <pre><code>./webpack.cache.config.js
 
-
-
 ...
-
-
 
 module: {
 
-
-
   rules: [
-
-
 
     {
 
-
-
       test: /\.js$/,
-
-
 
       use: ['cache-loader', 'babel-loader'],
 
-
-
     },
-
-
 
   ],
 
-
-
 }
 
-
-
 ...
-
 </code></pre>
-
 <p>执行两次构建后可以发现，使用 cache-loader 后，比使用 babel-loader 的开启缓存选项后的构建时间更短，如下图所示：</p>
-
 <p><img src="assets/CgqCHl9kXOqAGqBaAAB8XJNiH2c187.png" alt="Drawing 4.png" />
-
 <img src="assets/Ciqc1F9kXO-Ae1fcAABt0doSQD0218.png" alt="Drawing 5.png" /></p>
-
 <p>主要原因是 babel-loader 中的<strong>缓存信息较少</strong>，而 cache-loader 中存储的<strong>Buffer 形式的数据处理效率更高</strong>。下面的示例代码，是 babel-loader 和 cache-loader 入口模块的缓存信息对比：</p>
-
 <pre><code>//babel-loader中的缓存数据
-
-
 
 {&quot;ast&quot;:null,&quot;code&quot;:&quot;import _ from 'lodash';&quot;,&quot;map&quot;:null,&quot;metadata&quot;:{},&quot;sourceType&quot;:&quot;module&quot;}
 
-
-
 //cache-loader中的缓存数据
 
-
-
 {&quot;remainingRequest&quot;:&quot;...lessons_fe_efficiency/13_cache/node_modules/babel-loader/lib/index.js!.../lessons_fe_efficiency/13_cache/src/example-basic.js&quot;,&quot;dependencies&quot;:[{&quot;path&quot;:&quot;...lessons_fe_efficiency/13_cache/src/example-basic.js&quot;,&quot;mtime&quot;:1599191174705},{&quot;path&quot;:&quot;...lessons_fe_efficiency/13_cache/node_modules/cache-loader/dist/cjs.js&quot;,&quot;mtime&quot;:499162500000},{&quot;path&quot;:&quot;.../lessons_fe_efficiency/13_cache/node_modules/babel-loader/lib/index.js&quot;,&quot;mtime&quot;:499162500000}],&quot;contextDependencies&quot;:[],&quot;result&quot;:[{&quot;type&quot;:&quot;Buffer&quot;,&quot;data&quot;:&quot;base64:aW1wb3J0IF8gZnJvbSAnbG9kYXNoJzs=&quot;},null]}
-
 </code></pre>
-
 <h3>优化打包阶段的缓存优化</h3>
-
 <h4>生成 ChunkAsset 时的缓存优化</h4>
-
 <p>在 Webpack 4 中，生成 ChunkAsset 过程中的缓存优化是受限制的：只有在 watch 模式下，且配置中开启 <a href="https://v4.webpack.js.org/configuration/other-options/#cache">cache</a> 时（development 模式下自动开启）才能在这一阶段执行缓存的逻辑。这是因为，在 Webpack 4 中，缓存插件是基于内存的，只有在 watch 模式下才能在内存中获取到相应的缓存数据对象。而在 Webpack 5 中这一问题得到解决，具体的我们会在后续课程中再次展开。</p>
-
 <h4>代码压缩时的缓存优化</h4>
-
 <p>在上一课时中曾提到，在代码压缩阶段，对于 JS 的压缩，TerserWebpackPlugin 和 UglifyJSPlugin 都是支持缓存设置的。而对于 CSS 的压缩，目前最新发布的 CSSMinimizerWebpackPlugin 支持且默认开启缓存，其他的插件如 OptimizeCSSAssetsPlugin 和 OptimizeCSSNanoPlugin 目前还不支持使用缓存。</p>
-
 <p>TerserWebpackPlugin 插件的效果在本节课的开头部分我们已经演示过了，这里再来看一下 CSSMinimizerWebpackPlugin 的缓存效果对比，如下面的图片所示，开启该插件的缓存后，再次构建的时长降低到了初次构建的 1/4。</p>
-
 <p><img src="assets/Ciqc1F9kXQGAWkf8AACuXoea9dE075.png" alt="Drawing 6.png" />
-
 <img src="assets/CgqCHl9kXQaAEle1AACx-Pmol-Q677.png" alt="Drawing 7.png" /></p>
-
 <p>以上就是 Webpack 4 中编译与优化打包阶段可用的几种缓存方案。接下来我们再来看下在构建过程中使用缓存的一些注意点。</p>
-
 <h3>缓存的失效</h3>
-
 <p>尽管上面示例所显示的再次构建时间要比初次构建时间快很多，但前提是两次构建没有任何代码发生变化，也就是说，最佳效果是在缓存完全命中的情况下。而现实中，通常需要重新构建的原因是代码发生了变化。因此<strong>如何最大程度地让缓存命中</strong>，成为我们选择缓存方案后首先要考虑的事情。</p>
-
 <h4>缓存标识符发生变化导致的缓存失效</h4>
-
 <p>在上面介绍的支持缓存的 Loader 和插件中，会根据一些固定字段的值加上所处理的模块或 Chunk 的数据 hash 值来生成对应缓存的标识符，例如特定依赖包的版本、对应插件的配置项信息、环境变量等。一旦其中的值发生变化，对应缓存标识符就会发生改变。这也意味着对应工具中，<strong>所有之前的缓存都将失效</strong>。因此，通常情况下我们需要尽可能少地变更会影响到缓存标识符生成的字段。</p>
-
 <p>其中<strong>尤其需要注意的是</strong>，在许多项目的集成构建环境中，特定依赖包由于安装时所生成的语义化版本，导致构建版本时常自动更新，并造成缓存失效。因此，建议大家还是在使用缓存时根据项目的构建使用场景来合理设置对应缓存标识符的计算属性，从而尽可能地减少因为标识符变化而导致缓存失效的情况。</p>
-
 <h4>编译阶段的缓存失效</h4>
-
 <p>编译阶段的执行时间由每个模块的编译时间相加而成。在开启缓存的情况下，代码发生变化的模块将被重新编译，但不影响它所依赖的及依赖它的其他模块，其他模块将继续使用缓存。因此，这一阶段不需要考虑缓存失效扩大化的问题。</p>
-
 <h4>优化打包阶段的缓存失效</h4>
-
 <p>优化打包阶段的缓存失效问题则需要引起注意。还是以课程开头的 example-basic 为例，在使用缓存快速构建后，当我们任意修改入口文件的代码后会发现，代码压缩阶段的时间再次变为和初次构建时相近，也就是说，这一 Chunk 的 Terser 插件的缓存完全失效了，如下面的图片所示。</p>
-
 <p><img src="assets/Ciqc1F9kXRGAUqisAAEy5POkOmg344.png" alt="Drawing 8.png" />
-
 <img src="assets/CgqCHl9kXRaAH-yTAAEq_mHfoPo473.png" alt="Drawing 9.png" /></p>
-
 <p>之所以会出现这样的结果，是因为，尽管在模块编译阶段每个模块是单独执行编译的，但是当进入到代码压缩环节时，各模块已经被组织到了相关联的 Chunk 中。如上面的示例，4 个模块最后只生成了一个 Chunk，任何一个模块发生变化都会导致整个 Chunk 的内容发生变化，而使之前保存的缓存失效。</p>
-
 <p>在知道了失效原因后，<strong>对应的优化思路也就显而易见了</strong>：尽可能地把那些不变的处理成本高昂的模块打入单独的 Chunk 中。这就涉及了 Webpack 中的分包配置——<a href="https://webpack.js.org/configuration/optimization/#optimizationsplitchunks">splitChunks</a>。</p>
-
 <h4>使用 splitChunks 优化缓存利用率</h4>
-
 <p>构建分包的好处有许多，比如合并通用依赖、提升构建缓存利用率、提升资源访问的缓存利用率、资源懒加载等，我们只讨论其中提升构建缓存利用率的部分。在上面示例的基础上，只要对设定稍加更改（webpack.cache-miss.config.js），就会看到，即使变更了入口模块的代码，也不会对压缩阶段的时间产生多少影响，因为主要的依赖包已经分离为独立的 Chunk，如下面的代码和图片所示：</p>
-
 <pre><code>./webpack.cache-miss.config.js
 
-
-
 ...
-
-
 
 optimization: {
 
-
-
   splitChunks: {
-
-
 
     chunks: 'all',
 
-
-
   },
-
-
 
 },
 
-
-
 ...
-
 </code></pre>
-
 <p><img src="assets/CgqCHl9kXSeAOtCSAAEiD0YND3g006.png" alt="Drawing 10.png" /></p>
-
 <h3>其他使用缓存的注意事项</h3>
-
 <h4>CI/CD 中的缓存目录问题</h4>
-
 <p>在许多自动化集成的系统中，项目的构建空间会在每次构建执行完毕后，立即回收清理。在这种情况下，默认的项目构建缓存目录（node_mo dules/.cache）将无法留存，导致即使项目中开启了缓存设置，也无法享受缓存的便利性，反而因为需要写入缓存文件而浪费额外的时间。因此，在集成化的平台中构建部署的项目，如果需要使用缓存，则需要根据对应平台的规范，将缓存设置到公共缓存目录下。这类问题我们会在第三模块部署优化中再次展开。</p>
-
 <h4>缓存的清理</h4>
-
 <p>缓存的便利性本质在于用磁盘空间换取构建时间。对于一个大量使用缓存的项目，随着时间的流逝，缓存空间会不断增大。这在只有少数项目的个人电脑中还不是非常大的问题，但对于上述多项目的集成环境而言，则需要考虑对缓存区域的定期清理。</p>
-
 <h4>与产物的持久化缓存相区别</h4>
-
 <p>这节课我们没有谈到浏览器端加载资源的缓存问题，以及相对应的如何在 Webpack 中生成产物的持久化缓存方法（即那些你可能比较熟悉的 hash、chunkhash、contenthash），因为这一部分知识所影响的是项目访问的性能，而对构建的效率没有影响。希望你在学习时，清楚地区分这两者的区别。</p>
-
 <h3>总结</h3>
-
 <p>今天我们聊了 Webpack 常规构建效率优化的第三个方面：缓存优化主题的内容。Webpack 的构建缓存优化分为两个阶段：编译阶段的针对 Loader 的缓存优化，以及优化打包阶段的针对压缩代码过程的缓存优化。除了了解这些优化的工具和设置外，在使用缓存时还需要额外注意如何减少缓存的失效。此外，针对不同的构建环境，还需要考虑到缓存目录的留存与清理等问题。</p>
-
 <p>这节课的<strong>课后思考题是</strong>：课程中介绍的几种支持缓存的工具在设定上有哪些相似的功能选项？建议你在课后对它们做一个整理对比，以便加深印象。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/前端工程化精讲-完/12  打包提效：如何为 Webpack 打包阶段提速？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/前端工程化精讲-完/14  增量构建：Webpack 中的增量构建.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997763ff303cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
 
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
 
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
 
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
 
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
 
 </script>
 
-
-
 </html>
-
