@@ -1,750 +1,375 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>05  海量并发场景下，如何回答分布式事务一致性问题？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
 
 <body>
 
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
 
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
 
-
-
             <ul class="uncollapsible">
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/00 开篇词  中高级研发面试，逃不开架构设计这一环.md.html">00 开篇词  中高级研发面试，逃不开架构设计这一环.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/01  研发工程师想提升面试竞争力，该具备这三个技术认知.md.html">01  研发工程师想提升面试竞争力，该具备这三个技术认知.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/02  研发工程师如何用架构师视角回答架构设计方案？.md.html">02  研发工程师如何用架构师视角回答架构设计方案？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/03  面试官如何考察与 CAP 有关的分布式理论？.md.html">03  面试官如何考察与 CAP 有关的分布式理论？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/04  亿级商品存储下，如何深度回答分布式系统的原理性问题？.md.html">04  亿级商品存储下，如何深度回答分布式系统的原理性问题？.md.html</a>
 
-
-
                 </li>
-
                 <li>
-
-
 
                     <a class="current-tab" href="/专栏/架构设计面试精讲/05  海量并发场景下，如何回答分布式事务一致性问题？.md.html">05  海量并发场景下，如何回答分布式事务一致性问题？.md.html</a>
-
                     
-
-
 
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/06  分布式系统中，如何回答锁的实现原理？.md.html">06  分布式系统中，如何回答锁的实现原理？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/07  RPC：如何在面试中展现出“造轮子”的能力？.md.html">07  RPC：如何在面试中展现出“造轮子”的能力？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/08  MQ：如何回答消息队列的丢失、重复与积压问题.md.html">08  MQ：如何回答消息队列的丢失、重复与积压问题.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/08 案例串联  如何让系统抗住双十一的预约抢购活动？.md.html">08 案例串联  如何让系统抗住双十一的预约抢购活动？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/09  如何回答 MySQL 的索引原理与优化问题？.md.html">09  如何回答 MySQL 的索引原理与优化问题？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/10  如何回答 MySQL 的事务隔离级别和锁的机制？.md.html">10  如何回答 MySQL 的事务隔离级别和锁的机制？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/11  读多写少：MySQL 如何优化数据查询方案？.md.html">11  读多写少：MySQL 如何优化数据查询方案？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/12  写多读少：MySQL 如何优化数据存储方案？.md.html">12  写多读少：MySQL 如何优化数据存储方案？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/13  缓存原理：应对面试你要掌握 Redis 哪些原理？.md.html">13  缓存原理：应对面试你要掌握 Redis 哪些原理？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/14  缓存策略：面试中如何回答缓存穿透、雪崩等问题？.md.html">14  缓存策略：面试中如何回答缓存穿透、雪崩等问题？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/15  如何向面试官证明你做的系统是高可用的？.md.html">15  如何向面试官证明你做的系统是高可用的？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/16  如何从架构师角度回答系统容错、降级等高可用问题？.md.html">16  如何从架构师角度回答系统容错、降级等高可用问题？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/17  如何向面试官证明你做的系统是高性能的？.md.html">17  如何向面试官证明你做的系统是高性能的？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/18  如何从架构师角度回答怎么应对千万级流量的问题？.md.html">18  如何从架构师角度回答怎么应对千万级流量的问题？.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/19 彩蛋  互联网架构设计面试，你需要掌握的知识体系.md.html">19 彩蛋  互联网架构设计面试，你需要掌握的知识体系.md.html</a>
 
-
-
                 </li>
-
                 <li>
 
-
-
                     
-
                     <a href="/专栏/架构设计面试精讲/结束语  程序员的道、术、势.md.html">结束语  程序员的道、术、势.md.html</a>
 
-
-
                 </li>
-
             </ul>
 
-
-
         </div>
-
     </div>
-
-
 
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
 
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
 
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
 
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
 
 
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
 
     </script>
 
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>05  海量并发场景下，如何回答分布式事务一致性问题？</h1>
-
 <p>上一讲我通过亿级商品存储，带你了解了分布式技术下的数据分片、存储、复制与一致性的原理性问题，这一讲我将继续带你了解一致性的另一个话题：事务一致性。</p>
-
 <h3>案例背景</h3>
-
 <p>在互联网分布式场景中，原本一个系统被拆分成多个子系统，要想完成一次写入操作，你需要同时协调多个系统，这就带来了分布式事务的问题（分布式事务是指：一次大的操作由多个小操作组成，这些小的操作分布在不同的服务器上，分布式事务需要保证这些小操作要么全部成功，要么全部失败）。<strong>那怎么设计才能实现系统之间的事务一致性呢？</strong> 这就是咱们今天要讨论的问题，也是面试的高频问题。</p>
-
 <p>这一讲，我先从“解决分布式事务”这个问题本身出发，讲解答题思路和你要掌握的知识点。然后再结合“高并发”场景，看在该场景下如何保证分布式系统事务一致性？希望通过这种方式，让你彻底掌握分布式系统事务一致性的解题思路和技术认知。</p>
-
 <p>以京东旅行系统为例，早期的交易系统是通过 .NET 实现的，所有的交易下单逻辑都写在一个独立的系统中。随着技术改造，我们用 Java 重写了核心系统，原本的系统也被拆分成多个子系统，如商品系统、促销系统、订单系统（为了方便理解，我只拿这三个系统举例）。当用户下单时，订单系统生成订单，商品系统扣减库存，促销系统扣减优惠券，只有当三个系统的事务都提交之后，才认为此次下单成功，否则失败。</p>
-
 <h3>案例分析</h3>
-
 <p>这是一个很典型的分布式事务问题，解决方案也很多，有两阶段提交协议（Two-Phase Commit，2PC）、3PC 、TCC 和基于消息队列的实现方式。</p>
-
 <p>所以当很多候选者听到“怎么实现系统之间的分布式一致性？”的问题之后，会信心满满地选择一个方案，回答说：方案很多，可以选择 2PC ，2PC 实现的流程是……</p>
-
 <p>这种答题思路犯了一个很明显的错误，因为在实际工作中，很少采用前几种方案，基本都是基于 MQ 的可靠消息投递的方式来实现。所以一上来就说 2PC、3PC 或者 TCC 会让我觉得你并没有实际做过。<strong>那答题的套路是什么呢？</strong></p>
-
 <p>我建议你先介绍目前主流实现分布式系统事务一致性的方案（也就是基于 MQ 的可靠消息投递的机制）然后回答出可实现方案和关键知识点。另外，为了和面试官进一步交流，你可以提出 2PC 或 TCC （这是一种交流方案）。因为 2PC 或 TCC 在工业界落地代价很大，不适合互联网场景，所以只有少部分的强一致性业务场景（如金融支付领域）会基于这两种方案实现。而你可以围绕它们的解决思路和方案弊端与面试官讨论，<strong>这会让你和面试官由不平等的“面试与被面试”变成平等且友好的“双方沟通”，是一种面试套路。</strong></p>
-
 <p>但要做到这几点，需要建立在你深入掌握分布式事务一致性问题的基础之上，所以接下来，我们就解析一下面试中最为常见的两种实现方案。</p>
-
 <h3>案例解答</h3>
-
 <h4>基于两阶段提交的解决方案</h4>
-
 <p>2PC 是分布式事务教父级协议，它是数据库领域解决分布式事务最典型的协议。它的处理过程分为准备和提交两个阶段，每个阶段都由协调者（Coordinator）和参与者（Participant）共同完成：</p>
-
 <ul>
-
 <li>协调者就是事务管理器；</li>
-
 <li>参与者就是具体操作执行的资源管理器。</li>
-
 </ul>
-
 <p>Java 程序员都知道，XA 是由 X/Open 组织提出的分布式事务的规范，规范主要定义了事务管理器（Transaction Manager）和资源管理器（Resource Manager）之间的接口，事务管理器负责全局事务的协调者，资源管理器负责管理实际资源（如 MySQL、Oracle 等数据库）。而Java 平台上事务规范 JTA（Java Transaction API）就是对 XA 分布式事务规范标准的实现。例如在 Spring 中就通过 JtaTransactionManager 来配置分布式事务，然后通过管理多个 ResourceManager 来管理多个数据源，进而操作多个数据库之间的事务。</p>
-
 <p><strong>那么 2PC 具体是如何运行的呢？</strong> 以课程开头的系统为例，订单数据、商品数据，以及促销数据被分别存储在多个数据库实例中，用户在执行下单的时候，交易主流程的业务逻辑则集中部署在一个应用服务器集群上，然后通过 Spring 容器访问底层的数据库实例，而容器中的 JTA 事务管理器在这里就作为事务管理器，Resource 资源管理器就作为底层的数据库实例的资源管理器。</p>
-
 <p><img src="assets/Ciqc1F_-ekKAVX8CAAD_lE98vHY368.png" alt="18.png" /></p>
-
 <p>Spring事务管理</p>
-
 <p>我们假设订单数据，商品数据和促销数据分别保存在数据库 D1，数据库 D2 和数据库 D3 上。</p>
-
 <ul>
-
 <li><strong>准备阶段</strong>，事务管理器首先通知所有资源管理器开启事务，询问是否做好提交事务的准备。如资源管理器此时会将 undo 日志和 redo 日志计入事务日志中，并做出应答，当协调者接收到反馈 Yes 后，则准备阶段结束。
-
 <img src="assets/Cip5yF_-ek-AeszEAAGVNQOE9EQ982.png" alt="19.png" /></li>
-
 </ul>
-
 <p>2PC 准备阶段</p>
-
 <ul>
-
 <li><strong>提交阶段</strong>，当收到所有数据库实例的 Yes 后，事务管理器会发出提交指令。每个数据库接受指令进行本地操作，正式提交更新数据，然后向协调者返回 Ack 消息，事务结束。
-
 <img src="assets/CgpVE1_-elyAMxAUAAGGnETIxqE263.png" alt="20.png" /></li>
-
 </ul>
-
 <p>2PC 提交阶段</p>
-
 <ul>
-
 <li><strong>中断阶段</strong>，如果任何一个参与者向协调者反馈了 No 响应，例如用户 B 在数据库 D3 上面的余额在执行其他扣款操作，导致数据库 D3 的数据无法锁定，则只能向事务管理器返回失败。此时，协调者向所有参与者发出 Rollback 请求，参与者接收 Rollback 请求后，会利用其在准备阶段中记录的 undo 日志来进行回滚操作，并且在完成事务回滚之后向协调者发送 Ack 消息，完成事务回滚操作。</li>
-
 </ul>
-
 <p><img src="assets/Cip5yF_-emuANRvWAAJkZ2BNZ00511.png" alt="21.png" /></p>
-
 <p>2PC 中断阶段</p>
-
 <p>以上就是基于 2PC 实现分布式事务的原理。</p>
-
 <p>当你和面试官交流 2PC 的原理时，往往不止于此，就像我们开篇提到的，我们并不会基于 2PC 来实现分布式事务一致性，虽然 2PC 可以借助数据库的本地事务操作，实现起来较为简单，不用侵入业务逻辑，但是它也存在着很多问题。</p>
-
 <p>2PC 在准备阶段会要求每个资源管理器进行资源锁定，如 MySQL 的行锁。否则如果在提交阶段提交之前数据发生改变，就会出现数据不一致的情况。</p>
-
 <p>还是上面的例子，如果商品库存数据为 1，也就是数据库 D1 为 1，在准备阶段询问是否可以扣减库存，商品数据返回可以，此时如果不锁定数据，在提交阶段之前另外一个请求去扣减了数据库 D1 的数据，这时候，在提交阶段再去扣减库存时，数据库 D1 的数据就会超售变成了负 1。</p>
-
 <p>但正因为要加锁，会导致两阶段提交存在一系列问题，<strong>最严重的就是死锁问题</strong>，一旦发生故障，数据库就会阻塞，尤其在提交阶段，如果发生故障，数据都还处于资源锁定状态，将无法完成后续的事务提交操作。</p>
-
 <p>其次是<strong>性能问题</strong>，数据库（如 MySQL ）在执行过程中会对操作的数据行执行数据行锁，如果此时其他的事务刚好也要操作被锁定的数据行，那它们就只能阻塞等待，使分布式事务出现高延迟和性能低下。</p>
-
 <p>再有就是<strong>数据不一致性</strong>，在提交阶段，当事务管理器向参与者发送提交事务请求之后，如果此时出现了网络异常，只有部分数据库接收到请求，那么会导致未接收到请求的数据库无法提交事务，整个系统出现数据不一致性。</p>
-
 <p>至此，我们就了解了基于 2PC 实现的分布式事务一致性的解决方案，你可以从这几点出发，与面试官进行友好的交流。</p>
-
 <h4>基于 MQ 的可靠消息投递方案</h4>
-
 <p>基于 MQ 的可靠消息队列投递方案是目前互联网最为常用的方式，在应对高并发场景下的分布式事务问题时，种方案通过放弃强一致性，而选择最终一致性，来提高系统的可用性。</p>
-
 <p>还是拿下单场景举例，当订单系统调用优惠券系统时，将扣减优惠券的事件放入消息队列中，最终给优惠券系统来执行，然后只要保证事件消息能够在优惠券系统内被执行就可以了，因为消息已经持久化在消息中间件中，即使消息中间件发生了宕机，我们将它重启后也不会出现消息丢失的问题。
-
 <img src="assets/Cip5yF_-enyATCEeAACzkaFkExY342.png" alt="10.png" /></p>
-
 <p>基于 MQ 的消息投递</p>
-
 <p>基于 MQ 的可靠消息投递的方案不仅可以解决由于业务流程的同步执行而造成的阻塞问题，还可以实现业务解耦合流量削峰。这种方案中的可选型的 MQ 也比较多，比如基于 RabbitMQ 或者 RocketMQ，但并不是引入了消息队列中间件就万事大吉了，通常情况下，<strong>面试官会着重通过以下两个知识点来考察你对这种方案的掌握程度</strong>。</p>
-
 <ul>
-
 <li><strong>MQ 自动应答机制导致的消息丢失</strong></li>
-
 </ul>
-
 <p>订阅消息事件的优惠券服务在接收订单服务投递的消息后，消息中间件（如 RabbitMQ）默认是开启消息自动应答机制，当优惠券系统消费了消息，消息中间件就会删除这个持久化的消息。</p>
-
 <p>但在优惠券系统执行的过程中，很可能因为执行异常导致流程中断，那这时候消息中间件中就没有这个数据了，进而会导致消息丢失。因此你要采取编程的方式手动发送应答，也就是当优惠券系统执行业务成功之后，消息中间件才能删除这条持久化消息。</p>
-
 <p>这个知识点很容易被忽略掉，但却很重要，会让面试官认为你切切实实的做过，另外还有一个高频的问题，就是在大促的时候，瞬时流量剧增，很多没能及时消费的消息积压在 MQ 队列中，<strong>这个问题如何解决呢？</strong></p>
-
 <ul>
-
 <li><strong>高并发场景下的消息积压导致消息丢失</strong></li>
-
 </ul>
-
 <p>分布式部署环境基于网络进行通信，而在网络通信的过程中，上下游可能因为各种原因而导致消息丢失。比如优惠券系统由于流量过大而触发限流，不能保证事件消息能够被及时地消费，这个消息就会被消息队列不断地重试，最后可能由于超过了最大重试次数而被丢弃到死信队列中。</p>
-
 <p>但实际上，你需要人工干预处理移入死信队列的消息，于是在这种场景下，事件消息大概率会被丢弃。而这个问题源于订单系统作为事件的生产者进行消息投递后，无法感知它下游（即优惠券系统）的所有操作，那么优惠券系统作为事件的消费者，是消费成功还是消费失败，订单系统并不知道。</p>
-
 <p>顺着这个思路，如果让订单知道消费执行结果的响应，即使出现了消息丢失的情况，订单系统也还是可以通过定时任务扫描的方式，将未完成的消息重新投递来进行消息补偿。<strong>这是基于消息队列实现分布式事务的关键</strong>，是一种双向消息确认的机制。</p>
-
 <p>那么如何落地实现呢？你可以先让订单系统把要发送的消息持久化到本地数据库里，然后将这条消息记录的状态设置为代发送，紧接着订单系统再投递消息到消息队列，优惠券系统消费成功后，也会向消息队列发送一个通知消息。当订单系统接收到这条通知消息后，再把本地持久化的这条消息的状态设置为完成。
-
 <img src="assets/Cip5yF_-epGAWFi1AAE-yrH59GA499.png" alt="11.png" /></p>
-
 <p>队列双向确认</p>
-
 <p>这样做后，即使最终 MQ 出现了消息丢失，也可以通过定时任务从订单系统的本地数据库中扫描出一段时间内未完成的消息，进行重新投递，最终保证订单系统和优惠券系统的最终事务一致性。</p>
-
 <h3>总结</h3>
-
 <p>无论是初中级还是高级工程师，都需要掌握“分布式事务”，对初中级研发工程师来说，它是你的加分项，对于高级研发工程师来说，它是你的必备能力。所以这一讲中我并没有针对不同的人群给予不同的解答思路，主要想强调这样几个重点：</p>
-
 <ul>
-
 <li>基于 MQ 的可靠消息投递的考核点是可落地性，所以你在回答时要抓住“双向确认”的核心原则，只要能实现生产端和消费端的双向确认，这个方案就是可落地了，又因为基于 MQ 来实现，所以天生具有业务解耦合流量削峰的优势。</li>
-
 <li>基于 2PC 的实现方案很少有实际的场景，但你还是要掌握它的实现原理和存在的问题，因为面试不同于实际工作，有些问题的回答是为了告诉面试官：我有这个能力。尽管它在实际工作中并不适用。</li>
-
 </ul>
-
 <p>最后，有一点需要你注意，在实际工作中，并不是所有的业务对事务一致性的要求都那么高。因为更高的要求意味着更多的成本，这也是很多架构复杂度来源之一，所以你要尽可能地站在业务实际场景的立足点来回答分布式事务问题。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/架构设计面试精讲/04  亿级商品存储下，如何深度回答分布式系统的原理性问题？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/架构设计面试精讲/06  分布式系统中，如何回答锁的实现原理？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099790dea9d3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
 
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
 
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
 
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
 
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
 
 </script>
 
-
-
 </html>
-
