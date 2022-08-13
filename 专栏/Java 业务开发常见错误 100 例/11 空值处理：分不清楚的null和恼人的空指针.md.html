@@ -1,1740 +1,572 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>11 空值处理：分不清楚的null和恼人的空指针.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md.html">00 开篇词 业务代码真的会有这么多坑？.md.html</a>
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md.html">00 开篇词 业务代码真的会有这么多坑？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md.html">02 代码加锁：不要让“锁”事成为烦心事</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md.html">03 线程池：业务代码最常用也最容易犯错的组件</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md.html">04 连接池：别让连接池帮了倒忙</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md.html">07 数据库索引：索引并不是万能药</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md.html">08 判等问题：程序里如何确定你就是你？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md.html">09 数值计算：注意精度、舍入和溢出问题</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md.html">10 集合类：坑满地的List列表操作</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md.html">11 空值处理：分不清楚的null和恼人的空指针</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md.html">12 异常处理：别让自己在出问题的时候变为瞎子</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md.html">02 代码加锁：不要让“锁”事成为烦心事.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md.html">13 日志：日志记录真没你想象的那么简单</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md.html">03 线程池：业务代码最常用也最容易犯错的组件.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md.html">14 文件IO：实现高效正确的文件读写并非易事</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md.html">04 连接池：别让连接池帮了倒忙.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md.html">15 序列化：一来一回你还是原来的你吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html">05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md.html">17 别以为“自动挡”就不可能出现OOM</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md.html">07 数据库索引：索引并不是万能药.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md.html">08 判等问题：程序里如何确定你就是你？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md.html">19 Spring框架：IoC和AOP是扩展的核心</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md.html">09 数值计算：注意精度、舍入和溢出问题.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md.html">10 集合类：坑满地的List列表操作.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md.html">21 代码重复：搞定代码重复的三个绝招</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md.html">11 空值处理：分不清楚的null和恼人的空指针.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md.html">22 接口设计：系统间对话的语言，一定要统一</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md.html">12 异常处理：别让自己在出问题的时候变为瞎子.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md.html">13 日志：日志记录真没你想象的那么简单.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md.html">24 业务代码写完，就意味着生产就绪了？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md.html">14 文件IO：实现高效正确的文件读写并非易事.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md.html">25 异步处理好用，但非常容易用错</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md.html">15 序列化：一来一回你还是原来的你吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md.html">27 数据源头：任何客户端的东西都不可信任</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md.html">17 别以为“自动挡”就不可能出现OOM.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md.html">29 数据和代码：数据就是数据，代码就是代码</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md.html">19 Spring框架：IoC和AOP是扩展的核心.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md.html">30 如何正确保存和传输敏感数据？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md.html">21 代码重复：搞定代码重复的三个绝招.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md.html">22 接口设计：系统间对话的语言，一定要统一.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md.html">33 加餐3：定位应用问题，排错套路很重要</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md.html">23 缓存设计：缓存可以锦上添花也可以落井下石.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md.html">24 业务代码写完，就意味着生产就绪了？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md.html">25 异步处理好用，但非常容易用错.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md.html">37 加餐7：程序员成长28计</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md.html">27 数据源头：任何客户端的东西都不可信任.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md.html">答疑篇：代码篇思考题集锦（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md.html">29 数据和代码：数据就是数据，代码就是代码.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md.html">答疑篇：代码篇思考题集锦（三）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md.html">30 如何正确保存和传输敏感数据？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md.html">答疑篇：代码篇思考题集锦（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md.html">答疑篇：加餐篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md.html">答疑篇：安全篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md.html">33 加餐3：定位应用问题，排错套路很重要.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md.html">答疑篇：设计篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md.html">结束语 写代码时，如何才能尽量避免踩坑？</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md.html">37 加餐7：程序员成长28计.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md.html">答疑篇：代码篇思考题集锦（一）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md.html">答疑篇：代码篇思考题集锦（三）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md.html">答疑篇：代码篇思考题集锦（二）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md.html">答疑篇：加餐篇思考题答案合集.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md.html">答疑篇：安全篇思考题答案合集.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md.html">答疑篇：设计篇思考题答案合集.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md.html">结束语 写代码时，如何才能尽量避免踩坑？.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>11 空值处理：分不清楚的null和恼人的空指针</h1>
-
 <p>你好，我是朱晔。今天，我要和你分享的主题是，空值处理：分不清楚的 null 和恼人的空指针。</p>
-
 <p>有一天我收到一条短信，内容是“尊敬的 null 你好，XXX”。当时我就笑了，这是程序员都能 Get 的笑点，程序没有获取到我的姓名，然后把空格式化为了 null。很明显，这是没处理好 null。哪怕把 null 替换为贵宾、顾客，也不会引发这样的笑话。</p>
-
 <p>程序中的变量是 null，就意味着它没有引用指向或者说没有指针。这时，我们对这个变量进行任何操作，都必然会引发空指针异常，在 Java 中就是 NullPointerException。那么，空指针异常容易在哪些情况下出现，又应该如何修复呢？</p>
-
 <p>空指针异常虽然恼人但好在容易定位，更麻烦的是要弄清楚 null 的含义。比如，客户端给服务端的一个数据是 null，那么其意图到底是给一个空值，还是没提供值呢？再比如，数据库中字段的 NULL 值，是否有特殊的含义呢，针对数据库中的 NULL 值，写 SQL 需要特别注意什么呢？</p>
-
 <p>今天，就让我们带着这些问题开始 null 的踩坑之旅吧。</p>
-
 <h2>修复和定位恼人的空指针问题</h2>
-
 <p>NullPointerException 是 Java 代码中最常见的异常，我将其最可能出现的场景归为以下 5 种：</p>
-
 <p>参数值是 Integer 等包装类型，使用时因为自动拆箱出现了空指针异常；</p>
-
 <p>字符串比较出现空指针异常；</p>
-
 <p>诸如 ConcurrentHashMap 这样的容器不支持 Key 和 Value 为 null，强行 put null 的 Key 或 Value 会出现空指针异常；</p>
-
 <p>A 对象包含了 B，在通过 A 对象的字段获得 B 之后，没有对字段判空就级联调用 B 的方法出现空指针异常；</p>
-
 <p>方法或远程服务返回的 List 不是空而是 null，没有进行判空就直接调用 List 的方法出现空指针异常。</p>
-
 <p>为模拟说明这 5 种场景，我写了一个 wrongMethod 方法，并用一个 wrong 方法来调用它。wrong 方法的入参 test 是一个由 0 和 1 构成的、长度为 4 的字符串，第几位设置为 1 就代表第几个参数为 null，用来控制 wrongMethod 方法的 4 个入参，以模拟各种空指针情况：</p>
-
 <pre><code>
-
 private List&lt;String&gt; wrongMethod(FooService fooService, Integer i, String s, String t) {
-
-
-
     log.info(&quot;result {} {} {} {}&quot;, i + 1, s.equals(&quot;OK&quot;), s.equals(t),
-
-
-
             new ConcurrentHashMap&lt;String, String&gt;().put(null, null));
-
-
-
     if (fooService.getBarService().bar().equals(&quot;OK&quot;))
-
-
-
         log.info(&quot;OK&quot;);
-
-
-
     return null;
-
-
-
 }
-
-
-
 @GetMapping(&quot;wrong&quot;)
-
-
-
 public int wrong(@RequestParam(value = &quot;test&quot;, defaultValue = &quot;1111&quot;) String test) {
-
-
-
     return wrongMethod(test.charAt(0) == '1' ? null : new FooService(),
-
-
-
             test.charAt(1) == '1' ? null : 1,
-
-
-
             test.charAt(2) == '1' ? null : &quot;OK&quot;,
-
-
-
             test.charAt(3) == '1' ? null : &quot;OK&quot;).size();
-
-
-
 }
-
-
-
 class FooService {
-
-
-
     @Getter
-
-
-
     private BarService barService;
-
-
-
 }
-
-
-
 class BarService {
-
-
-
     String bar() {
-
-
-
         return &quot;OK&quot;;
-
-
-
     }
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>很明显，这个案例出现空指针异常是因为变量是一个空指针，尝试获得变量的值或访问变量的成员会获得空指针异常。但，这个异常的定位比较麻烦。</p>
-
 <p>在测试方法 wrongMethod 中，我们通过一行日志记录的操作，在一行代码中模拟了 4 处空指针异常：</p>
-
 <p>对入参 Integer i 进行 +1 操作；</p>
-
 <p>对入参 String s 进行比较操作，判断内容是否等于&quot;OK&quot;；</p>
-
 <p>对入参 String s 和入参 String t 进行比较操作，判断两者是否相等；</p>
-
 <p>对 new 出来的 ConcurrentHashMap 进行 put 操作，Key 和 Value 都设置为 null。</p>
-
 <p>输出的异常信息如下：</p>
-
 <pre><code>java.lang.NullPointerException: null
-
-
-
   at org.geekbang.time.commonmistakes.nullvalue.demo2.AvoidNullPointerExceptionController.wrongMethod(AvoidNullPointerExceptionController.java:37)
-
-
-
   at org.geekbang.time.commonmistakes.nullvalue.demo2.AvoidNullPointerExceptionController.wrong(AvoidNullPointerExceptionController.java:20)
-
-
-
 </code></pre>
-
 <p>这段信息确实提示了这行代码出现了空指针异常，但我们很难定位出到底是哪里出现了空指针，可能是把入参 Integer 拆箱为 int 的时候出现的，也可能是入参的两个字符串任意一个为 null，也可能是因为把 null 加入了 ConcurrentHashMap。</p>
-
 <p>你可能会想到，要排查这样的问题，只要设置一个断点看一下入参即可。但，在真实的业务场景中，空指针问题往往是在特定的入参和代码分支下才会出现，本地难以重现。如果要排查生产上出现的空指针问题，设置代码断点不现实，通常是要么把代码进行拆分，要么增加更多的日志，但都比较麻烦。</p>
-
 <p>在这里，我推荐使用阿里开源的 Java 故障诊断神器Arthas。Arthas 简单易用功能强大，可以定位出大多数的 Java 生产问题。</p>
-
 <p>接下来，我就和你演示下如何在 30 秒内知道 wrongMethod 方法的入参，从而定位到空指针到底是哪个入参引起的。如下截图中有三个红框，我先和你分析第二和第三个红框：</p>
-
 <p>第二个红框表示，Arthas 启动后被附加到了 JVM 进程；</p>
-
 <p>第三个红框表示，通过 watch 命令监控 wrongMethod 方法的入参。</p>
-
 <p><img src="assets/e2d39e5da91a8258c5aab3691e515c6b.png" alt="img" /></p>
-
 <p>watch 命令的参数包括类名表达式、方法表达式和观察表达式。这里，我们设置观察类为 AvoidNullPointerExceptionController，观察方法为 wrongMethod，观察表达式为 params 表示观察入参：</p>
-
 <pre><code>watch org.geekbang.time.commonmistakes.nullvalue.demo2.AvoidNullPointerExceptionController wrongMethod params
-
-
-
 </code></pre>
-
 <p>开启 watch 后，执行 2 次 wrong 方法分别设置 test 入参为 1111 和 1101，也就是第一次传入 wrongMethod 的 4 个参数都为 null，第二次传入的第 1、2 和 4 个参数为 null。</p>
-
 <p>配合图中第一和第四个红框可以看到，第二次调用时，第三个参数是字符串 OK 其他参数是 null，Archas 正确输出了方法的所有入参，这样我们很容易就能定位到空指针的问题了。</p>
-
 <p>到这里，如果是简单的业务逻辑的话，你就可以定位到空指针异常了；如果是分支复杂的业务逻辑，你需要再借助 stack 命令来查看 wrongMethod 方法的调用栈，并配合 watch 命令查看各方法的入参，就可以很方便地定位到空指针的根源了。</p>
-
 <p>下图演示了通过 stack 命令观察 wrongMethod 的调用路径：</p>
-
 <p><img src="assets/6c9ac7f4345936ece0b0d31c1ad974ef.png" alt="img" /></p>
-
 <p>如果你想了解 Arthas 各种命令的详细使用方法，可以点击这里查看。</p>
-
 <p>接下来，我们看看如何修复上面出现的 5 种空指针异常。</p>
-
 <p>其实，对于任何空指针异常的处理，最直白的方式是先判空后操作。不过，这只能让异常不再出现，我们还是要找到程序逻辑中出现的空指针究竟是来源于入参还是 Bug：</p>
-
 <p>如果是来源于入参，还要进一步分析入参是否合理等；</p>
-
 <p>如果是来源于 Bug，那空指针不一定是纯粹的程序 Bug，可能还涉及业务属性和接口调用规范等。</p>
-
 <p>在这里，因为是 Demo，所以我们只考虑纯粹的空指针判空这种修复方式。如果要先判空后处理，大多数人会想到使用 if-else 代码块。但，这种方式既增加代码量又会降低易读性，我们可以尝试利用 Java 8 的 Optional 类来消除这样的 if-else 逻辑，使用一行代码进行判空和处理。</p>
-
 <p>修复思路如下：</p>
-
 <p>对于 Integer 的判空，可以使用 Optional.ofNullable 来构造一个 Optional，然后使用 orElse(0) 把 null 替换为默认值再进行 +1 操作。</p>
-
 <p>对于 String 和字面量的比较，可以把字面量放在前面，比如&quot;OK&quot;.equals(s)，这样即使 s 是 null 也不会出现空指针异常；而对于两个可能为 null 的字符串变量的 equals 比较，可以使用 Objects.equals，它会做判空处理。</p>
-
 <p>对于 ConcurrentHashMap，既然其 Key 和 Value 都不支持 null，修复方式就是不要把 null 存进去。HashMap 的 Key 和 Value 可以存入 null，而 ConcurrentHashMap 看似是 HashMap 的线程安全版本，却不支持 null 值的 Key 和 Value，这是容易产生误区的一个地方。</p>
-
 <p>对于类似 fooService.getBarService().bar().equals(“OK”) 的级联调用，需要判空的地方有很多，包括 fooService、getBarService() 方法的返回值，以及 bar 方法返回的字符串。如果使用 if-else 来判空的话可能需要好几行代码，但使用 Optional 的话一行代码就够了。</p>
-
 <p>对于 rightMethod 返回的 List，由于不能确认其是否为 null，所以在调用 size 方法获得列表大小之前，同样可以使用 Optional.ofNullable 包装一下返回值，然后通过.orElse(Collections.emptyList()) 实现在 List 为 null 的时候获得一个空的 List，最后再调用 size 方法。</p>
-
 <pre><code>private List&lt;String&gt; rightMethod(FooService fooService, Integer i, String s, String t) {
-
-
-
     log.info(&quot;result {} {} {} {}&quot;, Optional.ofNullable(i).orElse(0) + 1, &quot;OK&quot;.equals(s), Objects.equals(s, t), new HashMap&lt;String, String&gt;().put(null, null));
-
-
-
     Optional.ofNullable(fooService)
-
-
-
             .map(FooService::getBarService)
-
-
-
             .filter(barService -&gt; &quot;OK&quot;.equals(barService.bar()))
-
-
-
             .ifPresent(result -&gt; log.info(&quot;OK&quot;));
-
-
-
     return new ArrayList&lt;&gt;();
-
-
-
 }
-
-
-
 @GetMapping(&quot;right&quot;)
-
-
-
 public int right(@RequestParam(value = &quot;test&quot;, defaultValue = &quot;1111&quot;) String test) {
-
-
-
     return Optional.ofNullable(rightMethod(test.charAt(0) == '1' ? null : new FooService(),
-
-
-
             test.charAt(1) == '1' ? null : 1,
-
-
-
             test.charAt(2) == '1' ? null : &quot;OK&quot;,
-
-
-
             test.charAt(3) == '1' ? null : &quot;OK&quot;))
-
-
-
             .orElse(Collections.emptyList()).size();
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>经过修复后，调用 right 方法传入 1111，也就是给 rightMethod 的 4 个参数都设置为 null，日志中也看不到任何空指针异常了：</p>
-
 <pre><code>[21:43:40.619] [http-nio-45678-exec-2] [INFO ] [.AvoidNullPointerExceptionController:45  ] - result 1 false true null
-
-
-
 </code></pre>
-
 <p>但是，如果我们修改 right 方法入参为 0000，即传给 rightMethod 方法的 4 个参数都不可能是 null，最后日志中也无法出现 OK 字样。这又是为什么呢，BarService 的 bar 方法不是返回了 OK 字符串吗？</p>
-
 <p>我们还是用 Arthas 来定位问题，使用 watch 命令来观察方法 rightMethod 的入参，-x 参数设置为 2 代表参数打印的深度为 2 层：</p>
-
 <p><img src="assets/0ce3c96788f243791cbd512aecfa6382.png" alt="img" /></p>
-
 <p>可以看到，FooService 中的 barService 字段为 null，这样也就可以理解为什么最终出现这个 Bug 了。</p>
-
 <p>这又引申出一个问题，使用判空方式或 Optional 方式来避免出现空指针异常，不一定是解决问题的最好方式，空指针没出现可能隐藏了更深的 Bug。因此，解决空指针异常，还是要真正 case by case 地定位分析案例，然后再去做判空处理，而处理时也并不只是判断非空然后进行正常业务流程这么简单，同样需要考虑为空的时候是应该出异常、设默认值还是记录日志等。</p>
-
 <h2>POJO 中属性的 null 到底代表了什么？</h2>
-
 <p>在我看来，相比判空避免空指针异常，更容易出错的是 null 的定位问题。对程序来说，null 就是指针没有任何指向，而结合业务逻辑情况就复杂得多，我们需要考虑：</p>
-
 <p>DTO 中字段的 null 到底意味着什么？是客户端没有传给我们这个信息吗？</p>
-
 <p>既然空指针问题很讨厌，那么 DTO 中的字段要设置默认值么？</p>
-
 <p>如果数据库实体中的字段有 null，那么通过数据访问框架保存数据是否会覆盖数据库中的既有数据？</p>
-
 <p>如果不能明确地回答这些问题，那么写出的程序逻辑很可能会混乱不堪。接下来，我们看一个实际案例吧。</p>
-
 <p>有一个 User 的 POJO，同时扮演 DTO 和数据库 Entity 角色，包含用户 ID、姓名、昵称、年龄、注册时间等属性：</p>
-
 <pre><code>@Data
-
-
-
 @Entity
-
-
-
 public class User {
-
-
-
     @Id
-
-
-
     @GeneratedValue(strategy = IDENTITY)
-
-
-
     private Long id;
-
-
-
     private String name;
-
-
-
     private String nickname;
-
-
-
     private Integer age;
-
-
-
     private Date createDate = new Date();
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>有一个 Post 接口用于更新用户数据，更新逻辑非常简单，根据用户姓名自动设置一个昵称，昵称的规则是“用户类型 + 姓名”，然后直接把客户端在 RequestBody 中使用 JSON 传过来的 User 对象通过 JPA 更新到数据库中，最后返回保存到数据库的数据。</p>
-
 <pre><code>@Autowired
-
-
-
 private UserRepository userRepository;
-
-
-
 @PostMapping(&quot;wrong&quot;)
-
-
-
 public User wrong(@RequestBody User user) {
-
-
-
     user.setNickname(String.format(&quot;guest%s&quot;, user.getName()));
-
-
-
     return userRepository.save(user);
-
-
-
 }
-
-
-
 @Repository
-
-
-
 public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>首先，在数据库中初始化一个用户，age=36、name=zhuye、create_date=2020 年 1 月 4 日、nickname 是 NULL：</p>
-
 <p><img src="assets/de1bcb580ea63505a8e093c51c4cd567.png" alt="img" /></p>
-
 <p>然后，使用 cURL 测试一下用户信息更新接口 Post，传入一个 id=1、name=null 的 JSON 字符串，期望把 ID 为 1 的用户姓名设置为空：</p>
-
 <pre><code>curl -H &quot;Content-Type:application/json&quot; -X POST -d '{ &quot;id&quot;:1, &quot;name&quot;:null}' http://localhost:45678/pojonull/wrong
-
-
-
 {&quot;id&quot;:1,&quot;name&quot;:null,&quot;nickname&quot;:&quot;guestnull&quot;,&quot;age&quot;:null,&quot;createDate&quot;:&quot;2020-01-05T02:01:03.784+0000&quot;}%
-
-
-
 </code></pre>
-
 <p>接口返回的结果和数据库中记录一致：</p>
-
 <p><img src="assets/af9c07a63ba837683ad059a6afcceafd.png" alt="img" /></p>
-
 <p>可以看到，这里存在如下三个问题：</p>
-
 <p>调用方只希望重置用户名，但 age 也被设置为了 null；</p>
-
 <p>nickname 是用户类型加姓名，name 重置为 null 的话，访客用户的昵称应该是 guest，而不是 guestnull，重现了文首提到的那个笑点；</p>
-
 <p>用户的创建时间原来是 1 月 4 日，更新了用户信息后变为了 1 月 5 日。</p>
-
 <p>归根结底，这是如下 5 个方面的问题：</p>
-
 <p>明确 DTO 中 null 的含义。对于 JSON 到 DTO 的反序列化过程，null 的表达是有歧义的，客户端不传某个属性，或者传 null，这个属性在 DTO 中都是 null。但，对于用户信息更新操作，不传意味着客户端不需要更新这个属性，维持数据库原先的值；传了 null，意味着客户端希望重置这个属性。因为 Java 中的 null 就是没有这个数据，无法区分这两种表达，所以本例中的 age 属性也被设置为了 null，或许我们可以借助 Optional 来解决这个问题。</p>
-
 <p>POJO 中的字段有默认值。如果客户端不传值，就会赋值为默认值，导致创建时间也被更新到了数据库中。</p>
-
 <p>注意字符串格式化时可能会把 null 值格式化为 null 字符串。比如昵称的设置，我们只是进行了简单的字符串格式化，存入数据库变为了 guestnull。显然，这是不合理的，也是开头我们说的笑话的来源，还需要进行判断。</p>
-
 <p>DTO 和 Entity 共用了一个 POJO。对于用户昵称的设置是程序控制的，我们不应该把它们暴露在 DTO 中，否则很容易把客户端随意设置的值更新到数据库中。此外，创建时间最好让数据库设置为当前时间，不用程序控制，可以通过在字段上设置 columnDefinition 来实现。</p>
-
 <p>数据库字段允许保存 null，会进一步增加出错的可能性和复杂度。因为如果数据真正落地的时候也支持 NULL 的话，可能就有 NULL、空字符串和字符串 null 三种状态。这一点我会在下一小节展开。如果所有属性都有默认值，问题会简单一点。</p>
-
 <p>按照这个思路，我们对 DTO 和 Entity 进行拆分，修改后代码如下所示：</p>
-
 <p>UserDto 中只保留 id、name 和 age 三个属性，且 name 和 age 使用 Optional 来包装，以区分客户端不传数据还是故意传 null。</p>
-
 <p>在 UserEntity 的字段上使用 @Column 注解，把数据库字段 name、nickname、age 和 createDate 都设置为 NOT NULL，并设置 createDate 的默认值为 CURRENT_TIMESTAMP，由数据库来生成创建时间。</p>
-
 <p>使用 Hibernate 的 @DynamicUpdate 注解实现更新 SQL 的动态生成，实现只更新修改后的字段，不过需要先查询一次实体，让 Hibernate 可以“跟踪”实体属性的当前状态，以确保有效。</p>
-
 <pre><code>@Data
-
-
-
 public class UserDto {
-
-
-
     private Long id;
-
-
-
     private Optional&lt;String&gt; name;
-
-
-
     private Optional&lt;Integer&gt; age;
-
-
-
-; 
-
-
-
+;
 @Data
-
-
-
 @Entity
-
-
-
 @DynamicUpdate
-
-
-
 public class UserEntity {
-
-
-
     @Id
-
-
-
     @GeneratedValue(strategy = IDENTITY)
-
-
-
     private Long id;
-
-
-
     @Column(nullable = false)
-
-
-
     private String name;
-
-
-
     @Column(nullable = false)
-
-
-
     private String nickname;
-
-
-
     @Column(nullable = false)
-
-
-
     private Integer age;
-
-
-
     @Column(nullable = false, columnDefinition = &quot;TIMESTAMP DEFAULT CURRENT_TIMESTAMP&quot;)
-
-
-
     private Date createDate;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>在重构了 DTO 和 Entity 后，我们重新定义一个 right 接口，以便对更新操作进行更精细化的处理。首先是参数校验：</p>
-
 <p>对传入的 UserDto 和 ID 属性先判空，如果为空直接抛出 IllegalArgumentException。</p>
-
 <p>根据 id 从数据库中查询出实体后进行判空，如果为空直接抛出 IllegalArgumentException。</p>
-
 <p>然后，由于 DTO 中已经巧妙使用了 Optional 来区分客户端不传值和传 null 值，那么业务逻辑实现上就可以按照客户端的意图来分别实现逻辑。如果不传值，那么 Optional 本身为 null，直接跳过 Entity 字段的更新即可，这样动态生成的 SQL 就不会包含这个列；如果传了值，那么进一步判断传的是不是 null。</p>
-
 <p>下面，我们根据业务需要分别对姓名、年龄和昵称进行更新：</p>
-
 <p>对于姓名，我们认为客户端传 null 是希望把姓名重置为空，允许这样的操作，使用 Optional 的 orElse 方法一键把空转换为空字符串即可。</p>
-
 <p>对于年龄，我们认为如果客户端希望更新年龄就必须传一个有效的年龄，年龄不存在重置操作，可以使用 Optional 的 orElseThrow 方法在值为空的时候抛出 IllegalArgumentException。</p>
-
 <p>对于昵称，因为数据库中姓名不可能为 null，所以可以放心地把昵称设置为 guest 加上数据库取出来的姓名。</p>
-
 <pre><code>@PostMapping(&quot;right&quot;)
-
-
-
 public UserEntity right(@RequestBody UserDto user) {
-
-
-
     if (user == null || user.getId() == null)
-
-
-
         throw new IllegalArgumentException(&quot;用户Id不能为空&quot;);
-
-
-
     UserEntity userEntity = userEntityRepository.findById(user.getId())
-
-
-
             .orElseThrow(() -&gt; new IllegalArgumentException(&quot;用户不存在&quot;));
-
-
-
     if (user.getName() != null) {
-
-
-
         userEntity.setName(user.getName().orElse(&quot;&quot;));
-
-
-
     }
-
-
-
     userEntity.setNickname(&quot;guest&quot; + userEntity.getName());
-
-
-
     if (user.getAge() != null) {
-
-
-
         userEntity.setAge(user.getAge().orElseThrow(() -&gt; new IllegalArgumentException(&quot;年龄不能为空&quot;)));
-
-
-
     }
-
-
-
     return userEntityRepository.save(userEntity);
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>假设数据库中已经有这么一条记录，id=1、age=36、create_date=2020 年 1 月 4 日、name=zhuye、nickname=guestzhuye：</p>
-
 <p><img src="assets/5f1d46ea87f37a570b32f94ac44ca947.png" alt="img" /></p>
-
 <p>使用相同的参数调用 right 接口，再来试试是否解决了所有问题。传入一个 id=1、name=null 的 JSON 字符串，期望把 id 为 1 的用户姓名设置为空：</p>
-
 <pre><code>curl -H &quot;Content-Type:application/json&quot; -X POST -d '{ &quot;id&quot;:1, &quot;name&quot;:null}' http://localhost:45678/pojonull/right
-
-
-
 {&quot;id&quot;:1,&quot;name&quot;:&quot;&quot;,&quot;nickname&quot;:&quot;guest&quot;,&quot;age&quot;:36,&quot;createDate&quot;:&quot;2020-01-04T11:09:20.000+0000&quot;}%
-
-
-
 </code></pre>
-
 <p>结果如下：</p>
-
 <p><img src="assets/a68db8e14e7dca3ff9b22e2348272a4a.png" alt="img" /></p>
-
 <p>可以看到，right 接口完美实现了仅重置 name 属性的操作，昵称也不再有 null 字符串，年龄和创建时间字段也没被修改。</p>
-
 <p>通过日志可以看到，Hibernate 生成的 SQL 语句只更新了 name 和 nickname 两个字段：</p>
-
 <pre><code>Hibernate: update user_entity set name=?, nickname=? where id=?
-
-
-
 </code></pre>
-
 <p>接下来，为了测试使用 Optional 是否可以有效区分 JSON 中没传属性还是传了 null，我们在 JSON 中设置了一个 null 的 age，结果是正确得到了年龄不能为空的错误提示：</p>
-
 <pre><code>curl -H &quot;Content-Type:application/json&quot; -X POST -d '{ &quot;id&quot;:1, &quot;age&quot;:null}' http://localhost:45678/pojonull/right
-
-
-
 {&quot;timestamp&quot;:&quot;2020-01-05T03:14:40.324+0000&quot;,&quot;status&quot;:500,&quot;error&quot;:&quot;Internal Server Error&quot;,&quot;message&quot;:&quot;年龄不能为空&quot;,&quot;path&quot;:&quot;/pojonull/right&quot;}%
-
-
-
 </code></pre>
-
 <h2>小心 MySQL 中有关 NULL 的三个坑</h2>
-
 <p>前面提到，数据库表字段允许存 NULL 除了会让我们困惑外，还容易有坑。这里我会结合 NULL 字段，和你着重说明 sum 函数、count 函数，以及 NULL 值条件可能踩的坑。</p>
-
 <p>为方便演示，首先定义一个只有 id 和 score 两个字段的实体：</p>
-
 <pre><code>@Entity
-
-
-
 @Data
-
-
-
 public class User {
-
-
-
     @Id
-
-
-
     @GeneratedValue(strategy = IDENTITY)
-
-
-
     private Long id;
-
-
-
     private Long score;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>程序启动的时候，往实体初始化一条数据，其 id 是自增列自动设置的 1，score 是 NULL：</p>
-
 <pre><code>@Autowired
-
-
-
 private UserRepository userRepository;
-
-
-
 @PostConstruct
-
-
-
 public void init() {
-
-
-
     userRepository.save(new User());
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>然后，测试下面三个用例，来看看结合数据库中的 null 值可能会出现的坑：</p>
-
 <p>通过 sum 函数统计一个只有 NULL 值的列的总和，比如 SUM(score)；</p>
-
 <p>select 记录数量，count 使用一个允许 NULL 的字段，比如 COUNT(score)；</p>
-
 <p>使用 =NULL 条件查询字段值为 NULL 的记录，比如 score=null 条件。</p>
-
 <pre><code>@Repository
-
-
-
 public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
-
-
-
     @Query(nativeQuery=true,value = &quot;SELECT SUM(score) FROM `user`&quot;)
-
-
-
     Long wrong1();
-
-
-
     @Query(nativeQuery = true, value = &quot;SELECT COUNT(score) FROM `user`&quot;)
-
-
-
     Long wrong2();
-
-
-
     @Query(nativeQuery = true, value = &quot;SELECT * FROM `user` WHERE score=null&quot;)
-
-
-
     List&lt;User&gt; wrong3();
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>得到的结果，分别是 null、0 和空 List：</p>
-
-<pre><code>[11:38:50.137] [http-nio-45678-exec-1] [INFO ] [t.c.nullvalue.demo3.DbNullController:26  ] - result: null 0 [] 
-
-
-
+<pre><code>[11:38:50.137] [http-nio-45678-exec-1] [INFO ] [t.c.nullvalue.demo3.DbNullController:26  ] - result: null 0 []
 </code></pre>
-
 <p>显然，这三条 SQL 语句的执行结果和我们的期望不同：</p>
-
 <p>虽然记录的 score 都是 NULL，但 sum 的结果应该是 0 才对；</p>
-
 <p>虽然这条记录的 score 是 NULL，但记录总数应该是 1 才对；</p>
-
 <p>使用 =NULL 并没有查询到 id=1 的记录，查询条件失效。</p>
-
 <p>原因是：</p>
-
 <p>MySQL 中 sum 函数没统计到任何记录时，会返回 null 而不是 0，可以使用 IFNULL 函数把 null 转换为 0；</p>
-
 <p>MySQL 中 count 字段不统计 null 值，COUNT(*) 才是统计所有记录数量的正确方式。</p>
-
 <p>MySQL 中使用诸如 =、&lt;、&gt; 这样的算数比较操作符比较 NULL 的结果总是 NULL，这种比较就显得没有任何意义，需要使用 IS NULL、IS NOT NULL 或 ISNULL() 函数来比较。</p>
-
 <p>修改一下 SQL：</p>
-
 <pre><code>@Query(nativeQuery = true, value = &quot;SELECT IFNULL(SUM(score),0) FROM `user`&quot;)
-
-
-
 Long right1();
-
-
-
 @Query(nativeQuery = true, value = &quot;SELECT COUNT(*) FROM `user`&quot;)
-
-
-
 Long right2();
-
-
-
 @Query(nativeQuery = true, value = &quot;SELECT * FROM `user` WHERE score IS NULL&quot;)
-
-
-
 List&lt;User&gt; right3();
-
-
-
 </code></pre>
-
 <p>可以得到三个正确结果，分别为 0、1、[User(id=1, score=null)] ：</p>
-
-<pre><code>[14:50:35.768] [http-nio-45678-exec-1] [INFO ] [t.c.nullvalue.demo3.DbNullController:31  ] - result: 0 1 [User(id=1, score=null)] 
-
-
-
+<pre><code>[14:50:35.768] [http-nio-45678-exec-1] [INFO ] [t.c.nullvalue.demo3.DbNullController:31  ] - result: 0 1 [User(id=1, score=null)]
 </code></pre>
-
 <h2>重点回顾</h2>
-
 <p>今天，我和你讨论了做好空值处理需要注意的几个问题。</p>
-
 <p>我首先总结了业务代码中 5 种最容易出现空指针异常的写法，以及相应的修复方式。针对判空，通过 Optional 配合 Stream 可以避免大多数冗长的 if-else 判空逻辑，实现一行代码优雅判空。另外，要定位和修复空指针异常，除了可以通过增加日志进行排查外，在生产上使用 Arthas 来查看方法的调用栈和入参会更快捷。</p>
-
 <p>在我看来，业务系统最基本的标准是不能出现未处理的空指针异常，因为它往往代表了业务逻辑的中断，所以我建议每天查询一次生产日志来排查空指针异常，有条件的话建议订阅空指针异常报警，以便及时发现及时处理。</p>
-
 <p>POJO 中字段的 null 定位，从服务端的角度往往很难分清楚，到底是客户端希望忽略这个字段还是有意传了 null，因此我们尝试用 Optional类来区分 null 的定位。同时，为避免把空值更新到数据库中，可以实现动态 SQL，只更新必要的字段。</p>
-
 <p>最后，我分享了数据库字段使用 NULL 可能会带来的三个坑（包括 sum 函数、count 函数，以及 NULL 值条件），以及解决方式。</p>
-
 <p>总结来讲，null 的正确处理以及避免空指针异常，绝不是判空这么简单，还要根据业务属性从前到后仔细考虑，客户端传入的 null 代表了什么，出现了 null 是否允许使用默认值替代，入库的时候应该传入 null 还是空值，并确保整个逻辑处理的一致性，才能尽量避免 Bug。</p>
-
 <p>为处理好 null，作为客户端的开发者，需要和服务端对齐字段 null 的含义以及降级逻辑；而作为服务端的开发者，需要对入参进行前置判断，提前挡掉服务端不可接受的空值，同时在整个业务逻辑过程中进行完善的空值处理。</p>
-
 <p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
-
 <h2>思考与讨论</h2>
-
 <p>ConcurrentHashMap 的 Key 和 Value 都不能为 null，而 HashMap 却可以，你知道这么设计的原因是什么吗？TreeMap、Hashtable 等 Map 的 Key 和 Value 是否支持 null 呢？</p>
-
 <p>对于 Hibernate 框架可以使用 @DynamicUpdate 注解实现字段的动态更新，对于 MyBatis 框架如何实现类似的动态 SQL 功能，实现插入和修改 SQL 只包含 POJO 中的非空字段？</p>
-
 <p>关于程序和数据库中的 null、空指针问题，你还遇到过什么坑吗？我是朱晔，欢迎在评论区与我留言分享，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099702a5b983d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

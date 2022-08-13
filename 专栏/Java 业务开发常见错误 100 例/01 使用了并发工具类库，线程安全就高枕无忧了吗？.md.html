@@ -1,1982 +1,611 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md.html">00 开篇词 业务代码真的会有这么多坑？.md.html</a>
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md.html">00 开篇词 业务代码真的会有这么多坑？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/Java 业务开发常见错误 100 例/01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html">01 使用了并发工具类库，线程安全就高枕无忧了吗？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md.html">02 代码加锁：不要让“锁”事成为烦心事</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md.html">02 代码加锁：不要让“锁”事成为烦心事.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md.html">03 线程池：业务代码最常用也最容易犯错的组件</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/03 线程池：业务代码最常用也最容易犯错的组件.md.html">03 线程池：业务代码最常用也最容易犯错的组件.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md.html">04 连接池：别让连接池帮了倒忙</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/04 连接池：别让连接池帮了倒忙.md.html">04 连接池：别让连接池帮了倒忙.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html">05 HTTP调用：你考虑到超时、重试、并发了吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html">05 HTTP调用：你考虑到超时、重试、并发了吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html">06 2成的业务代码的Spring声明式事务，可能都没处理正确.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md.html">07 数据库索引：索引并不是万能药</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/07 数据库索引：索引并不是万能药.md.html">07 数据库索引：索引并不是万能药.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md.html">08 判等问题：程序里如何确定你就是你？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/08 判等问题：程序里如何确定你就是你？.md.html">08 判等问题：程序里如何确定你就是你？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md.html">09 数值计算：注意精度、舍入和溢出问题</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/09 数值计算：注意精度、舍入和溢出问题.md.html">09 数值计算：注意精度、舍入和溢出问题.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md.html">10 集合类：坑满地的List列表操作</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/10 集合类：坑满地的List列表操作.md.html">10 集合类：坑满地的List列表操作.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md.html">11 空值处理：分不清楚的null和恼人的空指针</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/11 空值处理：分不清楚的null和恼人的空指针.md.html">11 空值处理：分不清楚的null和恼人的空指针.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md.html">12 异常处理：别让自己在出问题的时候变为瞎子</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/12 异常处理：别让自己在出问题的时候变为瞎子.md.html">12 异常处理：别让自己在出问题的时候变为瞎子.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md.html">13 日志：日志记录真没你想象的那么简单</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/13 日志：日志记录真没你想象的那么简单.md.html">13 日志：日志记录真没你想象的那么简单.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md.html">14 文件IO：实现高效正确的文件读写并非易事</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/14 文件IO：实现高效正确的文件读写并非易事.md.html">14 文件IO：实现高效正确的文件读写并非易事.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md.html">15 序列化：一来一回你还是原来的你吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/15 序列化：一来一回你还是原来的你吗？.md.html">15 序列化：一来一回你还是原来的你吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html">16 用好Java 8的日期时间类，少踩一些“老三样”的坑.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md.html">17 别以为“自动挡”就不可能出现OOM</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/17 别以为“自动挡”就不可能出现OOM.md.html">17 别以为“自动挡”就不可能出现OOM.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html">18 当反射、注解和泛型遇到OOP时，会有哪些坑？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md.html">19 Spring框架：IoC和AOP是扩展的核心</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/19 Spring框架：IoC和AOP是扩展的核心.md.html">19 Spring框架：IoC和AOP是扩展的核心.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html">20 Spring框架：框架帮我们做了很多工作也带来了复杂度.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md.html">21 代码重复：搞定代码重复的三个绝招</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/21 代码重复：搞定代码重复的三个绝招.md.html">21 代码重复：搞定代码重复的三个绝招.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md.html">22 接口设计：系统间对话的语言，一定要统一</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/22 接口设计：系统间对话的语言，一定要统一.md.html">22 接口设计：系统间对话的语言，一定要统一.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md.html">23 缓存设计：缓存可以锦上添花也可以落井下石</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/23 缓存设计：缓存可以锦上添花也可以落井下石.md.html">23 缓存设计：缓存可以锦上添花也可以落井下石.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md.html">24 业务代码写完，就意味着生产就绪了？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/24 业务代码写完，就意味着生产就绪了？.md.html">24 业务代码写完，就意味着生产就绪了？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md.html">25 异步处理好用，但非常容易用错</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/25 异步处理好用，但非常容易用错.md.html">25 异步处理好用，但非常容易用错.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html">26 数据存储：NoSQL与RDBMS如何取长补短、相辅相成？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md.html">27 数据源头：任何客户端的东西都不可信任</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/27 数据源头：任何客户端的东西都不可信任.md.html">27 数据源头：任何客户端的东西都不可信任.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html">28 安全兜底：涉及钱时，必须考虑防刷、限量和防重.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md.html">29 数据和代码：数据就是数据，代码就是代码</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/29 数据和代码：数据就是数据，代码就是代码.md.html">29 数据和代码：数据就是数据，代码就是代码.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md.html">30 如何正确保存和传输敏感数据？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/30 如何正确保存和传输敏感数据？.md.html">30 如何正确保存和传输敏感数据？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html">31 加餐1：带你吃透课程中Java 8的那些重要知识点（一）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html">32 加餐2：带你吃透课程中Java 8的那些重要知识点（二）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md.html">33 加餐3：定位应用问题，排错套路很重要</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/33 加餐3：定位应用问题，排错套路很重要.md.html">33 加餐3：定位应用问题，排错套路很重要.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html">34 加餐4：分析定位Java问题，一定要用好这些工具（一）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html">35 加餐5：分析定位Java问题，一定要用好这些工具（二）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html">36 加餐6：这15年来，我是如何在工作中学习技术和英语的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md.html">37 加餐7：程序员成长28计</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/37 加餐7：程序员成长28计.md.html">37 加餐7：程序员成长28计.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html">38 加餐8：Java程序从虚拟机迁移到Kubernetes的一些坑.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md.html">答疑篇：代码篇思考题集锦（一）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（一）.md.html">答疑篇：代码篇思考题集锦（一）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md.html">答疑篇：代码篇思考题集锦（三）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（三）.md.html">答疑篇：代码篇思考题集锦（三）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md.html">答疑篇：代码篇思考题集锦（二）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：代码篇思考题集锦（二）.md.html">答疑篇：代码篇思考题集锦（二）.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md.html">答疑篇：加餐篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：加餐篇思考题答案合集.md.html">答疑篇：加餐篇思考题答案合集.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md.html">答疑篇：安全篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：安全篇思考题答案合集.md.html">答疑篇：安全篇思考题答案合集.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md.html">答疑篇：设计篇思考题答案合集</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/答疑篇：设计篇思考题答案合集.md.html">答疑篇：设计篇思考题答案合集.md.html</a>
-
-
-
+                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md.html">结束语 写代码时，如何才能尽量避免踩坑？</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 业务开发常见错误 100 例/结束语 写代码时，如何才能尽量避免踩坑？.md.html">结束语 写代码时，如何才能尽量避免踩坑？.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>01 使用了并发工具类库，线程安全就高枕无忧了吗？</h1>
-
 <p>你好，我是朱晔。作为课程的第一讲，我今天要和你聊聊使用并发工具类库相关的话题。</p>
-
 <p>在代码审核讨论的时候，我们有时会听到有关线程安全和并发工具的一些片面的观点和结论，比如“把 HashMap 改为 ConcurrentHashMap，就可以解决并发问题了呀”“要不我们试试无锁的 CopyOnWriteArrayList 吧，性能更好”。事实上，这些说法都不太准确。</p>
-
 <p>的确，为了方便开发者进行多线程编程，现代编程语言会提供各种并发工具类。但如果我们没有充分了解它们的使用场景、解决的问题，以及最佳实践的话，盲目使用就可能会导致一些坑，小则损失性能，大则无法确保多线程情况下业务逻辑的正确性。</p>
-
 <p>我需要先说明下，这里的并发工具类是指用来解决多线程环境下并发问题的工具类库。一般而言并发工具包括同步器和容器两大类，业务代码中使用并发容器的情况会多一些，我今天分享的例子也会侧重并发容器。</p>
-
 <p>接下来，我们就看看在使用并发工具时，最常遇到哪些坑，以及如何解决、避免这些坑吧。</p>
-
 <h2>没有意识到线程重用导致用户信息错乱的 Bug</h2>
-
 <p>之前有业务同学和我反馈，在生产上遇到一个诡异的问题，有时获取到的用户信息是别人的。查看代码后，我发现他使用了 ThreadLocal 来缓存获取到的用户信息。</p>
-
 <p>我们知道，ThreadLocal 适用于变量在线程间隔离，而在方法或类间共享的场景。如果用户信息的获取比较昂贵（比如从数据库查询用户信息），那么在 ThreadLocal 中缓存数据是比较合适的做法。但，这么做为什么会出现用户信息错乱的 Bug 呢？</p>
-
 <p>我们看一个具体的案例吧。</p>
-
 <p>使用 Spring Boot 创建一个 Web 应用程序，使用 ThreadLocal 存放一个 Integer 的值，来暂且代表需要在线程中保存的用户信息，这个值初始是 null。在业务逻辑中，我先从 ThreadLocal 获取一次值，然后把外部传入的参数设置到 ThreadLocal 中，来模拟从当前上下文获取到用户信息的逻辑，随后再获取一次值，最后输出两次获得的值和线程名称。</p>
-
 <pre><code>private static final ThreadLocal&lt;Integer&gt; currentUser = ThreadLocal.withInitial(() -&gt; null);
-
-
-
 @GetMapping(&quot;wrong&quot;)
-
-
-
 public Map wrong(@RequestParam(&quot;userId&quot;) Integer userId) {
-
-
-
     //设置用户信息之前先查询一次ThreadLocal中的用户信息
-
-
-
     String before  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();
-
-
-
     //设置用户信息到ThreadLocal
-
-
-
     currentUser.set(userId);
-
-
-
     //设置用户信息之后再查询一次ThreadLocal中的用户信息
-
-
-
     String after  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();
-
-
-
     //汇总输出两次查询结果
-
-
-
     Map result = new HashMap();
-
-
-
     result.put(&quot;before&quot;, before);
-
-
-
     result.put(&quot;after&quot;, after);
-
-
-
     return result;
-
-
-
 }
-
-
-
-
-
 </code></pre>
-
 <p>按理说，在设置用户信息之前第一次获取的值始终应该是 null，但我们要意识到，程序运行在 Tomcat 中，执行程序的线程是 Tomcat 的工作线程，而 Tomcat 的工作线程是基于线程池的。</p>
-
 <p>顾名思义，线程池会重用固定的几个线程，一旦线程重用，那么很可能首次从 ThreadLocal 获取的值是之前其他用户的请求遗留的值。这时，ThreadLocal 中的用户信息就是其他用户的信息。</p>
-
 <p>为了更快地重现这个问题，我在配置文件中设置一下 Tomcat 的参数，把工作线程池最大线程数设置为 1，这样始终是同一个线程在处理请求：</p>
-
 <pre><code>server.tomcat.max-threads=1
-
-
-
 </code></pre>
-
 <p>运行程序后先让用户 1 来请求接口，可以看到第一和第二次获取到用户 ID 分别是 null 和 1，符合预期：</p>
-
 <p><img src="assets/4b8f38415d03423132c7a3608ebe2430.png" alt="img" /></p>
-
 <p>随后用户 2 来请求接口，这次就出现了 Bug，第一和第二次获取到用户 ID 分别是 1 和 2，显然第一次获取到了用户 1 的信息，原因就是 Tomcat 的线程池重用了线程。从图中可以看到，两次请求的线程都是同一个线程：http-nio-8080-exec-1。</p>
-
 <p><img src="assets/a9ccd42716d807687b3acff9a0baf2db.png" alt="img" /></p>
-
 <p>这个例子告诉我们，在写业务代码时，首先要理解代码会跑在什么线程上：</p>
-
 <p>我们可能会抱怨学多线程没用，因为代码里没有开启使用多线程。但其实，可能只是我们没有意识到，在 Tomcat 这种 Web 服务器下跑的业务代码，本来就运行在一个多线程环境（否则接口也不可能支持这么高的并发），并不能认为没有显式开启多线程就不会有线程安全问题。</p>
-
 <p>因为线程的创建比较昂贵，所以 Web 服务器往往会使用线程池来处理请求，这就意味着线程会被重用。这时，使用类似 ThreadLocal 工具来存放一些数据时，需要特别注意在代码运行完后，显式地去清空设置的数据。如果在代码中使用了自定义的线程池，也同样会遇到这个问题。</p>
-
 <p>理解了这个知识点后，我们修正这段代码的方案是，在代码的 finally 代码块中，显式清除 ThreadLocal 中的数据。这样一来，新的请求过来即使使用了之前的线程也不会获取到错误的用户信息了。修正后的代码如下：</p>
-
 <pre><code>@GetMapping(&quot;right&quot;)
-
-
-
 public Map right(@RequestParam(&quot;userId&quot;) Integer userId) {
-
-
-
     String before  = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();
-
-
-
     currentUser.set(userId);
-
-
-
     try {
-
-
-
         String after = Thread.currentThread().getName() + &quot;:&quot; + currentUser.get();
-
-
-
         Map result = new HashMap();
-
-
-
         result.put(&quot;before&quot;, before);
-
-
-
         result.put(&quot;after&quot;, after);
-
-
-
         return result;
-
-
-
     } finally {
-
-
-
         //在finally代码块中删除ThreadLocal中的数据，确保数据不串
-
-
-
         currentUser.remove();
-
-
-
     }
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>重新运行程序可以验证，再也不会出现第一次查询用户信息查询到之前用户请求的 Bug：</p>
-
 <p><img src="assets/0dfe40fca441b58d491fc799d120a7cc.png" alt="img" /></p>
-
 <p>ThreadLocal 是利用独占资源的方式，来解决线程安全问题，那如果我们确实需要有资源在线程之间共享，应该怎么办呢？这时，我们可能就需要用到线程安全的容器了。</p>
-
 <h2>使用了线程安全的并发工具，并不代表解决了所有线程安全问题</h2>
-
 <p>JDK 1.5 后推出的 ConcurrentHashMap，是一个高性能的线程安全的哈希表容器。“线程安全”这四个字特别容易让人误解，因为 ConcurrentHashMap 只能保证提供的原子性读写操作是线程安全的。</p>
-
 <p>我在相当多的业务代码中看到过这个误区，比如下面这个场景。有一个含 900 个元素的 Map，现在再补充 100 个元素进去，这个补充操作由 10 个线程并发进行。开发人员误以为使用了 ConcurrentHashMap 就不会有线程安全问题，于是不加思索地写出了下面的代码：在每一个线程的代码逻辑中先通过 size 方法拿到当前元素数量，计算 ConcurrentHashMap 目前还需要补充多少元素，并在日志中输出了这个值，然后通过 putAll 方法把缺少的元素添加进去。</p>
-
 <p>为方便观察问题，我们输出了这个 Map 一开始和最后的元素个数。</p>
-
 <pre><code>//线程个数
-
-
-
 private static int THREAD_COUNT = 10;
-
-
-
 //总元素数量
-
-
-
 private static int ITEM_COUNT = 1000;
-
-
-
 //帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
-
-
-
 private ConcurrentHashMap&lt;String, Long&gt; getData(int count) {
-
-
-
     return LongStream.rangeClosed(1, count)
-
-
-
             .boxed()
-
-
-
             .collect(Collectors.toConcurrentMap(i -&gt; UUID.randomUUID().toString(), Function.identity(),
-
-
-
                     (o1, o2) -&gt; o1, ConcurrentHashMap::new));
-
-
-
 }
-
-
-
 @GetMapping(&quot;wrong&quot;)
-
-
-
 public String wrong() throws InterruptedException {
-
-
-
     ConcurrentHashMap&lt;String, Long&gt; concurrentHashMap = getData(ITEM_COUNT - 100);
-
-
-
     //初始900个元素
-
-
-
     log.info(&quot;init size:{}&quot;, concurrentHashMap.size());
-
-
-
     ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
-
-
-
     //使用线程池并发处理逻辑
-
-
-
     forkJoinPool.execute(() -&gt; IntStream.rangeClosed(1, 10).parallel().forEach(i -&gt; {
-
-
-
         //查询还需要补充多少个元素
-
-
-
         int gap = ITEM_COUNT - concurrentHashMap.size();
-
-
-
         log.info(&quot;gap size:{}&quot;, gap);
-
-
-
         //补充元素
-
-
-
         concurrentHashMap.putAll(getData(gap));
-
-
-
     }));
-
-
-
     //等待所有任务完成
-
-
-
     forkJoinPool.shutdown();
-
-
-
     forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
-
-
-
     //最后元素个数会是1000吗？
-
-
-
     log.info(&quot;finish size:{}&quot;, concurrentHashMap.size());
-
-
-
     return &quot;OK&quot;;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>访问接口后程序输出的日志内容如下：</p>
-
 <p><img src="assets/2eaf5cd1b910b2678aca15fee6144070.png" alt="img" /></p>
-
 <p>从日志中可以看到：</p>
-
 <p>初始大小 900 符合预期，还需要填充 100 个元素。</p>
-
 <p>worker1 线程查询到当前需要填充的元素为 36，竟然还不是 100 的倍数。</p>
-
 <p>worker13 线程查询到需要填充的元素数是负的，显然已经过度填充了。</p>
-
 <p>最后 HashMap 的总项目数是 1536，显然不符合填充满 1000 的预期。</p>
-
 <p>针对这个场景，我们可以举一个形象的例子。ConcurrentHashMap 就像是一个大篮子，现在这个篮子里有 900 个桔子，我们期望把这个篮子装满 1000 个桔子，也就是再装 100 个桔子。有 10 个工人来干这件事儿，大家先后到岗后会计算还需要补多少个桔子进去，最后把桔子装入篮子。</p>
-
 <p>ConcurrentHashMap 这个篮子本身，可以确保多个工人在装东西进去时，不会相互影响干扰，但无法确保工人 A 看到还需要装 100 个桔子但是还未装的时候，工人 B 就看不到篮子中的桔子数量。更值得注意的是，你往这个篮子装 100 个桔子的操作不是原子性的，在别人看来可能会有一个瞬间篮子里有 964 个桔子，还需要补 36 个桔子。</p>
-
 <p>回到 ConcurrentHashMap，我们需要注意 ConcurrentHashMap 对外提供的方法或能力的限制：</p>
-
 <p>使用了 ConcurrentHashMap，不代表对它的多个操作之间的状态是一致的，是没有其他线程在操作它的，如果需要确保需要手动加锁。</p>
-
 <p>诸如 size、isEmpty 和 containsValue 等聚合方法，在并发情况下可能会反映 ConcurrentHashMap 的中间状态。因此在并发情况下，这些方法的返回值只能用作参考，而不能用于流程控制。显然，利用 size 方法计算差异值，是一个流程控制。</p>
-
 <p>诸如 putAll 这样的聚合方法也不能确保原子性，在 putAll 的过程中去获取数据可能会获取到部分数据。</p>
-
 <p>代码的修改方案很简单，整段逻辑加锁即可：</p>
-
 <pre><code>@GetMapping(&quot;right&quot;)
-
-
-
 public String right() throws InterruptedException {
-
-
-
     ConcurrentHashMap&lt;String, Long&gt; concurrentHashMap = getData(ITEM_COUNT - 100);
-
-
-
     log.info(&quot;init size:{}&quot;, concurrentHashMap.size());
 
-
-
-
-
-
-
     ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
-
-
-
     forkJoinPool.execute(() -&gt; IntStream.rangeClosed(1, 10).parallel().forEach(i -&gt; {
-
-
-
         //下面的这段复合逻辑需要锁一下这个ConcurrentHashMap
-
-
-
         synchronized (concurrentHashMap) {
-
-
-
             int gap = ITEM_COUNT - concurrentHashMap.size();
-
-
-
             log.info(&quot;gap size:{}&quot;, gap);
-
-
-
             concurrentHashMap.putAll(getData(gap));
-
-
-
         }
-
-
-
     }));
-
-
-
     forkJoinPool.shutdown();
-
-
-
     forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
-
-
-
     log.info(&quot;finish size:{}&quot;, concurrentHashMap.size());
-
-
-
     return &quot;OK&quot;;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>重新调用接口，程序的日志输出结果符合预期：</p>
-
 <p><img src="assets/1151b5b87f27073725060b76c56d95b8.png" alt="img" /></p>
-
 <p>可以看到，只有一个线程查询到了需要补 100 个元素，其他 9 个线程查询到不需要补元素，最后 Map 大小为 1000。</p>
-
 <p>到了这里，你可能又要问了，使用 ConcurrentHashMap 全程加锁，还不如使用普通的 HashMap 呢。</p>
-
 <p>其实不完全是这样。</p>
-
 <p>ConcurrentHashMap 提供了一些原子性的简单复合逻辑方法，用好这些方法就可以发挥其威力。这就引申出代码中常见的另一个问题：在使用一些类库提供的高级工具类时，开发人员可能还是按照旧的方式去使用这些新类，因为没有使用其特性，所以无法发挥其威力。</p>
-
 <h2>没有充分了解并发工具的特性，从而无法发挥其威力</h2>
-
 <p>我们来看一个使用 Map 来统计 Key 出现次数的场景吧，这个逻辑在业务代码中非常常见。</p>
-
 <p>使用 ConcurrentHashMap 来统计，Key 的范围是 10。</p>
-
 <p>使用最多 10 个并发，循环操作 1000 万次，每次操作累加随机的 Key。</p>
-
 <p>如果 Key 不存在的话，首次设置值为 1。</p>
-
 <p>代码如下：</p>
-
 <pre><code>//循环次数
-
-
-
 private static int LOOP_COUNT = 10000000;
-
-
-
 //线程数量
-
-
-
 private static int THREAD_COUNT = 10;
-
-
-
 //元素数量
-
-
-
 private static int ITEM_COUNT = 10;
-
-
-
 private Map&lt;String, Long&gt; normaluse() throws InterruptedException {
-
-
-
     ConcurrentHashMap&lt;String, Long&gt; freqs = new ConcurrentHashMap&lt;&gt;(ITEM_COUNT);
-
-
-
     ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
-
-
-
     forkJoinPool.execute(() -&gt; IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -&gt; {
-
-
-
         //获得一个随机的Key
-
-
-
         String key = &quot;item&quot; + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
-
-
-
-                synchronized (freqs) {      
-
-
-
+                synchronized (freqs) {
                     if (freqs.containsKey(key)) {
-
-
-
                         //Key存在则+1
-
-
-
                         freqs.put(key, freqs.get(key) + 1);
-
-
-
                     } else {
-
-
-
                         //Key不存在则初始化为1
-
-
-
                         freqs.put(key, 1L);
-
-
-
                     }
-
-
-
                 }
-
-
-
             }
-
-
-
     ));
-
-
-
     forkJoinPool.shutdown();
-
-
-
     forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
-
-
-
     return freqs;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>我们吸取之前的教训，直接通过锁的方式锁住 Map，然后做判断、读取现在的累计值、加 1、保存累加后值的逻辑。这段代码在功能上没有问题，但无法充分发挥 ConcurrentHashMap 的威力，改进后的代码如下：</p>
-
 <pre><code>private Map&lt;String, Long&gt; gooduse() throws InterruptedException {
-
-
-
     ConcurrentHashMap&lt;String, LongAdder&gt; freqs = new ConcurrentHashMap&lt;&gt;(ITEM_COUNT);
-
-
-
     ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
-
-
-
     forkJoinPool.execute(() -&gt; IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -&gt; {
-
-
-
         String key = &quot;item&quot; + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
-
-
-
                 //利用computeIfAbsent()方法来实例化LongAdder，然后利用LongAdder来进行线程安全计数
-
-
-
                 freqs.computeIfAbsent(key, k -&gt; new LongAdder()).increment();
-
-
-
             }
-
-
-
     ));
-
-
-
     forkJoinPool.shutdown();
-
-
-
     forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
-
-
-
     //因为我们的Value是LongAdder而不是Long，所以需要做一次转换才能返回
-
-
-
     return freqs.entrySet().stream()
-
-
-
             .collect(Collectors.toMap(
-
-
-
                     e -&gt; e.getKey(),
-
-
-
                     e -&gt; e.getValue().longValue())
-
-
-
             );
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>在这段改进后的代码中，我们巧妙利用了下面两点：</p>
-
 <p>使用 ConcurrentHashMap 的原子性方法 computeIfAbsent 来做复合逻辑操作，判断 Key 是否存在 Value，如果不存在则把 Lambda 表达式运行后的结果放入 Map 作为 Value，也就是新创建一个 LongAdder 对象，最后返回 Value。</p>
-
 <p>由于 computeIfAbsent 方法返回的 Value 是 LongAdder，是一个线程安全的累加器，因此可以直接调用其 increment 方法进行累加。</p>
-
 <p>这样在确保线程安全的情况下达到极致性能，把之前 7 行代码替换为了 1 行。</p>
-
 <p>我们通过一个简单的测试比较一下修改前后两段代码的性能：</p>
-
 <pre><code>
-
 @GetMapping(&quot;good&quot;)
-
-
-
 public String good() throws InterruptedException {
-
-
-
     StopWatch stopWatch = new StopWatch();
-
-
-
     stopWatch.start(&quot;normaluse&quot;);
-
-
-
     Map&lt;String, Long&gt; normaluse = normaluse();
-
-
-
     stopWatch.stop();
-
-
-
     //校验元素数量
-
-
-
     Assert.isTrue(normaluse.size() == ITEM_COUNT, &quot;normaluse size error&quot;);
-
-
-
-    //校验累计总数    
-
-
-
+    //校验累计总数
     Assert.isTrue(normaluse.entrySet().stream()
-
-
-
                     .mapToLong(item -&gt; item.getValue()).reduce(0, Long::sum) == LOOP_COUNT
-
-
-
             , &quot;normaluse count error&quot;);
-
-
-
     stopWatch.start(&quot;gooduse&quot;);
-
-
-
     Map&lt;String, Long&gt; gooduse = gooduse();
-
-
-
     stopWatch.stop();
-
-
-
     Assert.isTrue(gooduse.size() == ITEM_COUNT, &quot;gooduse size error&quot;);
-
-
-
     Assert.isTrue(gooduse.entrySet().stream()
-
-
-
                     .mapToLong(item -&gt; item.getValue())
-
-
-
                     .reduce(0, Long::sum) == LOOP_COUNT
-
-
-
             , &quot;gooduse count error&quot;);
-
-
-
     log.info(stopWatch.prettyPrint());
-
-
-
     return &quot;OK&quot;;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>这段测试代码并无特殊之处，使用 StopWatch 来测试两段代码的性能，最后跟了一个断言判断 Map 中元素的个数以及所有 Value 的和，是否符合预期来校验代码的正确性。测试结果如下：</p>
-
 <p><img src="assets/751d484ecd8c3114c15588e7fff3263a.png" alt="img" /></p>
-
 <p>可以看到，优化后的代码，相比使用锁来操作 ConcurrentHashMap 的方式，性能提升了 10 倍。</p>
-
 <p>你可能会问，computeIfAbsent 为什么如此高效呢？</p>
-
 <p>答案就在源码最核心的部分，也就是 Java 自带的 Unsafe 实现的 CAS。它在虚拟机层面确保了写入数据的原子性，比加锁的效率高得多：</p>
-
 <pre><code>    static final &lt;K,V&gt; boolean casTabAt(Node&lt;K,V&gt;[] tab, int i,
-
-
-
                                         Node&lt;K,V&gt; c, Node&lt;K,V&gt; v) {
-
-
-
         return U.compareAndSetObject(tab, ((long)i &lt;&lt; ASHIFT) + ABASE, c, v);
-
-
-
     }
-
-
-
 </code></pre>
-
 <p>像 ConcurrentHashMap 这样的高级并发工具的确提供了一些高级 API，只有充分了解其特性才能最大化其威力，而不能因为其足够高级、酷炫盲目使用。</p>
-
 <h2>没有认清并发工具的使用场景，因而导致性能问题</h2>
-
 <p>除了 ConcurrentHashMap 这样通用的并发工具类之外，我们的工具包中还有些针对特殊场景实现的生面孔。一般来说，针对通用场景的通用解决方案，在所有场景下性能都还可以，属于“万金油”；而针对特殊场景的特殊实现，会有比通用解决方案更高的性能，但一定要在它针对的场景下使用，否则可能会产生性能问题甚至是 Bug。</p>
-
 <p>之前在排查一个生产性能问题时，我们发现一段简单的非数据库操作的业务逻辑，消耗了超出预期的时间，在修改数据时操作本地缓存比回写数据库慢许多。查看代码发现，开发同学使用了 CopyOnWriteArrayList 来缓存大量的数据，而数据变化又比较频繁。</p>
-
 <p>CopyOnWrite 是一个时髦的技术，不管是 Linux 还是 Redis 都会用到。在 Java 中，CopyOnWriteArrayList 虽然是一个线程安全的 ArrayList，但因为其实现方式是，每次修改数据时都会复制一份数据出来，所以有明显的适用场景，即读多写少或者说希望无锁读的场景。</p>
-
 <p>如果我们要使用 CopyOnWriteArrayList，那一定是因为场景需要而不是因为足够酷炫。如果读写比例均衡或者有大量写操作的话，使用 CopyOnWriteArrayList 的性能会非常糟糕。</p>
-
 <p>我们写一段测试代码，来比较下使用 CopyOnWriteArrayList 和普通加锁方式 ArrayList 的读写性能吧。在这段代码中我们针对并发读和并发写分别写了一个测试方法，测试两者一定次数的写或读操作的耗时。</p>
-
 <pre><code>//测试并发写的性能
-
-
-
 @GetMapping(&quot;write&quot;)
-
-
-
 public Map testWrite() {
-
-
-
     List&lt;Integer&gt; copyOnWriteArrayList = new CopyOnWriteArrayList&lt;&gt;();
-
-
-
     List&lt;Integer&gt; synchronizedList = Collections.synchronizedList(new ArrayList&lt;&gt;());
-
-
-
     StopWatch stopWatch = new StopWatch();
-
-
-
     int loopCount = 100000;
-
-
-
     stopWatch.start(&quot;Write:copyOnWriteArrayList&quot;);
-
-
-
     //循环100000次并发往CopyOnWriteArrayList写入随机元素
-
-
-
     IntStream.rangeClosed(1, loopCount).parallel().forEach(__ -&gt; copyOnWriteArrayList.add(ThreadLocalRandom.current().nextInt(loopCount)));
-
-
-
     stopWatch.stop();
-
-
-
     stopWatch.start(&quot;Write:synchronizedList&quot;);
-
-
-
     //循环100000次并发往加锁的ArrayList写入随机元素
-
-
-
     IntStream.rangeClosed(1, loopCount).parallel().forEach(__ -&gt; synchronizedList.add(ThreadLocalRandom.current().nextInt(loopCount)));
-
-
-
     stopWatch.stop();
-
-
-
     log.info(stopWatch.prettyPrint());
-
-
-
     Map result = new HashMap();
-
-
-
     result.put(&quot;copyOnWriteArrayList&quot;, copyOnWriteArrayList.size());
-
-
-
     result.put(&quot;synchronizedList&quot;, synchronizedList.size());
-
-
-
     return result;
-
-
-
 }
-
-
-
 //帮助方法用来填充List
-
-
-
 private void addAll(List&lt;Integer&gt; list) {
-
-
-
     list.addAll(IntStream.rangeClosed(1, 1000000).boxed().collect(Collectors.toList()));
-
-
-
 }
-
-
-
 //测试并发读的性能
-
-
-
 @GetMapping(&quot;read&quot;)
-
-
-
 public Map testRead() {
-
-
-
     //创建两个测试对象
-
-
-
     List&lt;Integer&gt; copyOnWriteArrayList = new CopyOnWriteArrayList&lt;&gt;();
-
-
-
     List&lt;Integer&gt; synchronizedList = Collections.synchronizedList(new ArrayList&lt;&gt;());
-
-
-
-    //填充数据   
-
-
-
+    //填充数据
     addAll(copyOnWriteArrayList);
-
-
-
     addAll(synchronizedList);
-
-
-
     StopWatch stopWatch = new StopWatch();
-
-
-
     int loopCount = 1000000;
-
-
-
     int count = copyOnWriteArrayList.size();
-
-
-
     stopWatch.start(&quot;Read:copyOnWriteArrayList&quot;);
-
-
-
     //循环1000000次并发从CopyOnWriteArrayList随机查询元素
-
-
-
     IntStream.rangeClosed(1, loopCount).parallel().forEach(__ -&gt; copyOnWriteArrayList.get(ThreadLocalRandom.current().nextInt(count)));
-
-
-
     stopWatch.stop();
-
-
-
     stopWatch.start(&quot;Read:synchronizedList&quot;);
-
-
-
     //循环1000000次并发从加锁的ArrayList随机查询元素
-
-
-
     IntStream.range(0, loopCount).parallel().forEach(__ -&gt; synchronizedList.get(ThreadLocalRandom.current().nextInt(count)));
-
-
-
     stopWatch.stop();
-
-
-
     log.info(stopWatch.prettyPrint());
-
-
-
     Map result = new HashMap();
-
-
-
     result.put(&quot;copyOnWriteArrayList&quot;, copyOnWriteArrayList.size());
-
-
-
     result.put(&quot;synchronizedList&quot;, synchronizedList.size());
-
-
-
     return result;
-
-
-
 }
-
-
-
 </code></pre>
-
 <p>运行程序可以看到，大量写的场景（10 万次 add 操作），CopyOnWriteArray 几乎比同步的 ArrayList 慢一百倍：</p>
-
 <p><img src="assets/9789fe2019a1267b7883606b60e498b4.png" alt="img" /></p>
-
 <p>而在大量读的场景下（100 万次 get 操作），CopyOnWriteArray 又比同步的 ArrayList 快五倍以上：</p>
-
 <p><img src="assets/30ba652fb3295c58b03f51de0a132436.png" alt="img" /></p>
-
 <p>你可能会问，为何在大量写的场景下，CopyOnWriteArrayList 会这么慢呢？</p>
-
 <p>答案就在源码中。以 add 方法为例，每次 add 时，都会用 Arrays.copyOf 创建一个新数组，频繁 add 时内存的申请释放消耗会很大：</p>
-
 <pre><code>    /**
-
-
-
      \* Appends the specified element to the end of this list.
-
-
-
      *
-
-
-
      \* @param e element to be appended to this list
-
-
-
      \* @return {@code true} (as specified by {@link Collection#add})
-
-
-
      */
-
-
-
     public boolean add(E e) {
-
-
-
         synchronized (lock) {
-
-
-
             Object[] elements = getArray();
-
-
-
             int len = elements.length;
-
-
-
             Object[] newElements = Arrays.copyOf(elements, len + 1);
-
-
-
             newElements[len] = e;
-
-
-
             setArray(newElements);
-
-
-
             return true;
-
-
-
         }
-
-
-
     }
-
-
-
 </code></pre>
-
 <h2>重点回顾</h2>
-
 <p>今天，我主要与你分享了，开发人员使用并发工具来解决线程安全问题时容易犯的四类错。</p>
-
 <p>一是，只知道使用并发工具，但并不清楚当前线程的来龙去脉，解决多线程问题却不了解线程。比如，使用 ThreadLocal 来缓存数据，以为 ThreadLocal 在线程之间做了隔离不会有线程安全问题，没想到线程重用导致数据串了。请务必记得，在业务逻辑结束之前清理 ThreadLocal 中的数据。</p>
-
 <p>二是，误以为使用了并发工具就可以解决一切线程安全问题，期望通过把线程不安全的类替换为线程安全的类来一键解决问题。比如，认为使用了 ConcurrentHashMap 就可以解决线程安全问题，没对复合逻辑加锁导致业务逻辑错误。如果你希望在一整段业务逻辑中，对容器的操作都保持整体一致性的话，需要加锁处理。</p>
-
 <p>三是，没有充分了解并发工具的特性，还是按照老方式使用新工具导致无法发挥其性能。比如，使用了 ConcurrentHashMap，但没有充分利用其提供的基于 CAS 安全的方法，还是使用锁的方式来实现逻辑。你可以阅读一下ConcurrentHashMap 的文档，看一下相关原子性操作 API 是否可以满足业务需求，如果可以则优先考虑使用。</p>
-
 <p>四是，没有了解清楚工具的适用场景，在不合适的场景下使用了错误的工具导致性能更差。比如，没有理解 CopyOnWriteArrayList 的适用场景，把它用在了读写均衡或者大量写操作的场景下，导致性能问题。对于这种场景，你可以考虑是用普通的 List。</p>
-
 <p>其实，这四类坑之所以容易踩到，原因可以归结为，我们在使用并发工具的时候，并没有充分理解其可能存在的问题、适用场景等。所以最后，我还要和你分享两点建议：</p>
-
 <p>一定要认真阅读官方文档（比如 Oracle JDK 文档）。充分阅读官方文档，理解工具的适用场景及其 API 的用法，并做一些小实验。了解之后再去使用，就可以避免大部分坑。</p>
-
 <p>如果你的代码运行在多线程环境下，那么就会有并发问题，并发问题不那么容易重现，可能需要使用压力测试模拟并发场景，来发现其中的 Bug 或性能问题。</p>
-
 <p>今天用到的代码，我都放在了 GitHub 上，你可以点击这个链接查看。</p>
-
 <h2>思考与讨论</h2>
-
 <p>今天我们多次用到了 ThreadLocalRandom，你觉得是否可以把它的实例设置到静态变量中，在多线程情况下重用呢？</p>
-
 <p>ConcurrentHashMap 还提供了 putIfAbsent 方法，你能否通过查阅JDK 文档，说说 computeIfAbsent 和 putIfAbsent 方法的区别？</p>
-
 <p>你在使用并发工具时，还遇到过其他坑吗？我是朱晔，欢迎在评论区与我留言分享你的想法，也欢迎你把这篇文章分享给你的朋友或同事，一起交流。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Java 业务开发常见错误 100 例/00 开篇词 业务代码真的会有这么多坑？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Java 业务开发常见错误 100 例/02 代码加锁：不要让“锁”事成为烦心事.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709970109ee43d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

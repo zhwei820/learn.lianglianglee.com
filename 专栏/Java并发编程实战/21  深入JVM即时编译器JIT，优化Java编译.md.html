@@ -1,1428 +1,548 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>21  深入JVM即时编译器JIT，优化Java编译.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/00 开篇词你为什么需要学习并发编程？.md.html">00 开篇词你为什么需要学习并发编程？.md.html</a>
-
-
+                    <a href="/专栏/Java并发编程实战/00 开篇词你为什么需要学习并发编程？.md.html">00 开篇词你为什么需要学习并发编程？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/01  如何制定性能调优标准？.md.html">01  如何制定性能调优标准？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/02  如何制定性能调优策略？.md.html">02  如何制定性能调优策略？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/03  字符串性能优化不容小觑，百M内存轻松存储几十G数据.md.html">03  字符串性能优化不容小觑，百M内存轻松存储几十G数据</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/04  慎重使用正则表达式.md.html">04  慎重使用正则表达式</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/05  ArrayList还是LinkedList？使用不当性能差千倍.md.html">05  ArrayList还是LinkedList？使用不当性能差千倍</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/06  Stream如何提高遍历集合效率？.md.html">06  Stream如何提高遍历集合效率？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/07  深入浅出HashMap的设计与优化.md.html">07  深入浅出HashMap的设计与优化</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/08  网络通信优化之IO模型：如何解决高并发下IO瓶颈？.md.html">08  网络通信优化之IO模型：如何解决高并发下IO瓶颈？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/09  网络通信优化之序列化：避免使用Java序列化.md.html">09  网络通信优化之序列化：避免使用Java序列化</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/10  网络通信优化之通信协议：如何优化RPC网络通信？.md.html">10  网络通信优化之通信协议：如何优化RPC网络通信？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/11  答疑课堂：深入了解NIO的优化实现原理.md.html">11  答疑课堂：深入了解NIO的优化实现原理</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/12  多线程之锁优化（上）：深入了解Synchronized同步锁的优化方法.md.html">12  多线程之锁优化（上）：深入了解Synchronized同步锁的优化方法</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/13  多线程之锁优化（中）：深入了解Lock同步锁的优化方法.md.html">13  多线程之锁优化（中）：深入了解Lock同步锁的优化方法</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/14  多线程之锁优化（下）：使用乐观锁优化并行操作.md.html">14  多线程之锁优化（下）：使用乐观锁优化并行操作</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/15  多线程调优（上）：哪些操作导致了上下文切换？.md.html">15  多线程调优（上）：哪些操作导致了上下文切换？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/16  多线程调优（下）：如何优化多线程上下文切换？.md.html">16  多线程调优（下）：如何优化多线程上下文切换？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/17  并发容器的使用：识别不同场景下最优容器.md.html">17  并发容器的使用：识别不同场景下最优容器</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/18  如何设置线程池大小？.md.html">18  如何设置线程池大小？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/19  如何用协程来优化多线程业务？.md.html">19  如何用协程来优化多线程业务？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Java并发编程实战/20  磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型.md.html">20  磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/Java并发编程实战/21  深入JVM即时编译器JIT，优化Java编译.md.html">21  深入JVM即时编译器JIT，优化Java编译</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/01  如何制定性能调优标准？.md.html">01  如何制定性能调优标准？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/22  如何优化垃圾回收机制？.md.html">22  如何优化垃圾回收机制？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/02  如何制定性能调优策略？.md.html">02  如何制定性能调优策略？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/23  如何优化JVM内存分配？.md.html">23  如何优化JVM内存分配？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/03  字符串性能优化不容小觑，百M内存轻松存储几十G数据.md.html">03  字符串性能优化不容小觑，百M内存轻松存储几十G数据.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/24  内存持续上升，我该如何排查问题？.md.html">24  内存持续上升，我该如何排查问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/04  慎重使用正则表达式.md.html">04  慎重使用正则表达式.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/25  答疑课堂：模块四热点问题解答.md.html">25  答疑课堂：模块四热点问题解答</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/05  ArrayList还是LinkedList？使用不当性能差千倍.md.html">05  ArrayList还是LinkedList？使用不当性能差千倍.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/26  单例模式：如何创建单一对象优化系统性能？.md.html">26  单例模式：如何创建单一对象优化系统性能？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/06  Stream如何提高遍历集合效率？.md.html">06  Stream如何提高遍历集合效率？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/27  原型模式与享元模式：提升系统性能的利器.md.html">27  原型模式与享元模式：提升系统性能的利器</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/07  深入浅出HashMap的设计与优化.md.html">07  深入浅出HashMap的设计与优化.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/28  如何使用设计模式优化并发编程？.md.html">28  如何使用设计模式优化并发编程？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/08  网络通信优化之IO模型：如何解决高并发下IO瓶颈？.md.html">08  网络通信优化之IO模型：如何解决高并发下IO瓶颈？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/29  生产者消费者模式：电商库存设计优化.md.html">29  生产者消费者模式：电商库存设计优化</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/09  网络通信优化之序列化：避免使用Java序列化.md.html">09  网络通信优化之序列化：避免使用Java序列化.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/30  装饰器模式：如何优化电商系统中复杂的商品价格策略？.md.html">30  装饰器模式：如何优化电商系统中复杂的商品价格策略？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/10  网络通信优化之通信协议：如何优化RPC网络通信？.md.html">10  网络通信优化之通信协议：如何优化RPC网络通信？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/31  答疑课堂：模块五思考题集锦.md.html">31  答疑课堂：模块五思考题集锦</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/11  答疑课堂：深入了解NIO的优化实现原理.md.html">11  答疑课堂：深入了解NIO的优化实现原理.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/32  MySQL调优之SQL语句：如何写出高性能SQL语句？.md.html">32  MySQL调优之SQL语句：如何写出高性能SQL语句？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/12  多线程之锁优化（上）：深入了解Synchronized同步锁的优化方法.md.html">12  多线程之锁优化（上）：深入了解Synchronized同步锁的优化方法.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/33  MySQL调优之事务：高并发场景下的数据库事务调优.md.html">33  MySQL调优之事务：高并发场景下的数据库事务调优</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/13  多线程之锁优化（中）：深入了解Lock同步锁的优化方法.md.html">13  多线程之锁优化（中）：深入了解Lock同步锁的优化方法.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/34  MySQL调优之索引：索引的失效与优化.md.html">34  MySQL调优之索引：索引的失效与优化</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/14  多线程之锁优化（下）：使用乐观锁优化并行操作.md.html">14  多线程之锁优化（下）：使用乐观锁优化并行操作.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/35  记一次线上SQL死锁事故：如何避免死锁？.md.html">35  记一次线上SQL死锁事故：如何避免死锁？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/15  多线程调优（上）：哪些操作导致了上下文切换？.md.html">15  多线程调优（上）：哪些操作导致了上下文切换？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/36  什么时候需要分表分库？.md.html">36  什么时候需要分表分库？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/16  多线程调优（下）：如何优化多线程上下文切换？.md.html">16  多线程调优（下）：如何优化多线程上下文切换？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/37  电商系统表设计优化案例分析.md.html">37  电商系统表设计优化案例分析</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/17  并发容器的使用：识别不同场景下最优容器.md.html">17  并发容器的使用：识别不同场景下最优容器.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/38  数据库参数设置优化，失之毫厘差之千里.md.html">38  数据库参数设置优化，失之毫厘差之千里</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/18  如何设置线程池大小？.md.html">18  如何设置线程池大小？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/39  答疑课堂：MySQL中InnoDB的知识点串讲.md.html">39  答疑课堂：MySQL中InnoDB的知识点串讲</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/19  如何用协程来优化多线程业务？.md.html">19  如何用协程来优化多线程业务？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/41  如何设计更优的分布式锁？.md.html">41  如何设计更优的分布式锁？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/20  磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型.md.html">20  磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/42  电商系统的分布式事务调优.md.html">42  电商系统的分布式事务调优</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/Java并发编程实战/21  深入JVM即时编译器JIT，优化Java编译.md.html">21  深入JVM即时编译器JIT，优化Java编译.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/Java并发编程实战/43  如何使用缓存优化系统性能？.md.html">43  如何使用缓存优化系统性能？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/22  如何优化垃圾回收机制？.md.html">22  如何优化垃圾回收机制？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/44  记一次双十一抢购性能瓶颈调优.md.html">44  记一次双十一抢购性能瓶颈调优</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/23  如何优化JVM内存分配？.md.html">23  如何优化JVM内存分配？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/加餐  什么是数据的强、弱一致性？.md.html">加餐  什么是数据的强、弱一致性？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/24  内存持续上升，我该如何排查问题？.md.html">24  内存持续上升，我该如何排查问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/加餐  推荐几款常用的性能测试工具.md.html">加餐  推荐几款常用的性能测试工具</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/25  答疑课堂：模块四热点问题解答.md.html">25  答疑课堂：模块四热点问题解答.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/答疑课堂：模块三热点问题解答.md.html">答疑课堂：模块三热点问题解答</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/26  单例模式：如何创建单一对象优化系统性能？.md.html">26  单例模式：如何创建单一对象优化系统性能？.md.html</a>
-
-
-
+                    <a href="/专栏/Java并发编程实战/结束语  栉风沐雨，砥砺前行！.md.html">结束语  栉风沐雨，砥砺前行！</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/27  原型模式与享元模式：提升系统性能的利器.md.html">27  原型模式与享元模式：提升系统性能的利器.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/28  如何使用设计模式优化并发编程？.md.html">28  如何使用设计模式优化并发编程？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/29  生产者消费者模式：电商库存设计优化.md.html">29  生产者消费者模式：电商库存设计优化.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/30  装饰器模式：如何优化电商系统中复杂的商品价格策略？.md.html">30  装饰器模式：如何优化电商系统中复杂的商品价格策略？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/31  答疑课堂：模块五思考题集锦.md.html">31  答疑课堂：模块五思考题集锦.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/32  MySQL调优之SQL语句：如何写出高性能SQL语句？.md.html">32  MySQL调优之SQL语句：如何写出高性能SQL语句？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/33  MySQL调优之事务：高并发场景下的数据库事务调优.md.html">33  MySQL调优之事务：高并发场景下的数据库事务调优.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/34  MySQL调优之索引：索引的失效与优化.md.html">34  MySQL调优之索引：索引的失效与优化.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/35  记一次线上SQL死锁事故：如何避免死锁？.md.html">35  记一次线上SQL死锁事故：如何避免死锁？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/36  什么时候需要分表分库？.md.html">36  什么时候需要分表分库？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/37  电商系统表设计优化案例分析.md.html">37  电商系统表设计优化案例分析.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/38  数据库参数设置优化，失之毫厘差之千里.md.html">38  数据库参数设置优化，失之毫厘差之千里.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/39  答疑课堂：MySQL中InnoDB的知识点串讲.md.html">39  答疑课堂：MySQL中InnoDB的知识点串讲.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/41  如何设计更优的分布式锁？.md.html">41  如何设计更优的分布式锁？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/42  电商系统的分布式事务调优.md.html">42  电商系统的分布式事务调优.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/43  如何使用缓存优化系统性能？.md.html">43  如何使用缓存优化系统性能？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/44  记一次双十一抢购性能瓶颈调优.md.html">44  记一次双十一抢购性能瓶颈调优.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/加餐  什么是数据的强、弱一致性？.md.html">加餐  什么是数据的强、弱一致性？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/加餐  推荐几款常用的性能测试工具.md.html">加餐  推荐几款常用的性能测试工具.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/答疑课堂：模块三热点问题解答.md.html">答疑课堂：模块三热点问题解答.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java并发编程实战/结束语  栉风沐雨，砥砺前行！.md.html">结束语  栉风沐雨，砥砺前行！.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>21  深入JVM即时编译器JIT，优化Java编译</h1>
-
 <p>你好，我是刘超。</p>
-
 <p>说到编译，我猜你一定会想到 .java 文件被编译成 .class 文件的过程，这个编译我们一般称为前端编译。Java 的编译和运行过程非常复杂，除了前端编译，还有运行时编译。由于机器无法直接运行 Java 生成的字节码，所以在运行时，JIT 或解释器会将字节码转换成机器码，这个过程就叫运行时编译。</p>
-
 <p>类文件在运行时被进一步编译，它们可以变成高度优化的机器代码，由于 C/C++ 编译器的所有优化都是在编译期间完成的，运行期间的性能监控仅作为基础的优化措施则无法进行，例如，调用频率预测、分支频率预测、裁剪未被选择的分支等，而 Java 在运行时的再次编译，就可以进行基础的优化措施。因此，JIT 编译器可以说是 JVM 中运行时编译最重要的部分之一。</p>
-
 <p>然而许多 Java 开发人员对 JIT 编译器的了解并不多，不深挖其工作原理，也不深究如何检测应用程序的即时编译情况，线上发生问题后很难做到从容应对。今天我们就来学习运行时编译如何实现对 Java 代码的优化。</p>
-
 <h2>类编译加载执行过程</h2>
-
 <p>在这之前，我们先了解下 Java 从编译到运行的整个过程，为后面的学习打下基础。请看下图：</p>
-
 <p><img src="assets/8d4ec9c73ec37d69adb105aa7d052717.jpg" alt="img" /></p>
-
 <h3>类编译</h3>
-
 <p>在编写好代码之后，我们需要将 .java 文件编译成 .class 文件，才能在虚拟机上正常运行代码。文件的编译通常是由 JDK 中自带的 Javac 工具完成，一个简单的 .java 文件，我们可以通过 javac 命令来生成 .class 文件。</p>
-
 <p>下面我们通过 javap（ [第 12 讲] 讲过如何使用 javap 反编译命令行）反编译来看看一个 class 文件结构中主要包含了哪些信息：</p>
-
 <p><img src="assets/605dbbcfbbfcc09143d7d9e7fed5ac7e.png" alt="img" /></p>
-
 <p>看似一个简单的命令执行，前期编译的过程其实是非常复杂的，包括词法分析、填充符号表、注解处理、语义分析以及生成 class 文件，这个过程我们不用过多关注。只要从上图中知道，编译后的字节码文件主要包括常量池和方法表集合这两部分就可以了。</p>
-
 <p>常量池主要记录的是类文件中出现的字面量以及符号引用。字面常量包括字符串常量（例如 String str=“abc”，其中&quot;abc&quot;就是常量），声明为 final 的属性以及一些基本类型（例如，范围在 -127-128 之间的整型）的属性。符号引用包括类和接口的全限定名、类引用、方法引用以及成员变量引用（例如 String str=“abc”，其中 str 就是成员变量引用）等。</p>
-
 <p>方法表集合中主要包含一些方法的字节码、方法访问权限（public、protect、prviate 等）、方法名索引（与常量池中的方法引用对应）、描述符索引、JVM 执行指令以及属性集合等。</p>
-
 <h3>类加载</h3>
-
 <p>当一个类被创建实例或者被其它对象引用时，虚拟机在没有加载过该类的情况下，会通过类加载器将字节码文件加载到内存中。</p>
-
 <p>不同的实现类由不同的类加载器加载，JDK 中的本地方法类一般由根加载器（Bootstrp loader）加载进来，JDK 中内部实现的扩展类一般由扩展加载器（ExtClassLoader ）实现加载，而程序中的类文件则由系统加载器（AppClassLoader ）实现加载。</p>
-
 <p>在类加载后，class 类文件中的常量池信息以及其它数据会被保存到 JVM 内存的方法区中。</p>
-
 <h3>类连接</h3>
-
 <p>类在加载进来之后，会进行连接、初始化，最后才会被使用。在连接过程中，又包括验证、准备和解析三个部分。</p>
-
 <p>**验证：**验证类符合 Java 规范和 JVM 规范，在保证符合规范的前提下，避免危害虚拟机安全。</p>
-
 <p>**准备：**为类的静态变量分配内存，初始化为系统的初始值。对于 final static 修饰的变量，直接赋值为用户的定义值。例如，private final static int value=123，会在准备阶段分配内存，并初始化值为 123，而如果是 private static int value=123，这个阶段 value 的值仍然为 0。</p>
-
 <p>**解析：**将符号引用转为直接引用的过程。我们知道，在编译时，Java 类并不知道所引用的类的实际地址，因此只能使用符号引用来代替。类结构文件的常量池中存储了符号引用，包括类和接口的全限定名、类引用、方法引用以及成员变量引用等。如果要使用这些类和方法，就需要把它们转化为 JVM 可以直接获取的内存地址或指针，即直接引用。</p>
-
 <h3>类初始化</h3>
-
 <p>类初始化阶段是类加载过程的最后阶段，在这个阶段中，JVM 首先将执行构造器 <clinit> 方法，编译器会在将 .java 文件编译成 .class 文件时，收集所有类初始化代码，包括静态变量赋值语句、静态代码块、静态方法，收集在一起成为 <clinit>() 方法。</p>
-
 <p>初始化类的静态变量和静态代码块为用户自定义的值，初始化的顺序和 Java 源码从上到下的顺序一致。例如：</p>
-
 <pre><code>private static int i=1；
-
 static{
-
   i=0;
-
 }
-
 public static void main(String [] args){
-
   System.out.println(i);
-
 }
-
- 
 
 </code></pre>
-
 <p>此时运行结果为：</p>
-
 <pre><code>0
-
-
-
 </code></pre>
-
 <p>再来看看以下代码：</p>
-
 <pre><code>static{
-
   i=0;
-
 }
-
 private static int i=1；
-
 public static void main(String [] args){
-
   System.out.println(i);
-
 }
-
 </code></pre>
-
 <p>此时运行结果为：</p>
-
 <pre><code>1
-
-
-
 </code></pre>
-
 <p>子类初始化时会首先调用父类的 <clinit>() 方法，再执行子类的 <clinit>() 方法，运行以下代码：</p>
-
 <pre><code>public class Parent{
-
   public static String parentStr= &quot;parent static string&quot;;
-
   static{
-
     System.out.println(&quot;parent static fields&quot;);
-
     System.out.println(parentStr);
-
   }
-
   public Parent(){
-
     System.out.println(&quot;parent instance initialization&quot;);
-
  }
-
 }
-
- 
 
 public class Sub extends Parent{
-
   public static String subStr= &quot;sub static string&quot;;
-
   static{
-
     System.out.println(&quot;sub static fields&quot;);
-
     System.out.println(subStr);
-
   }
-
- 
 
   public Sub(){
-
     System.out.println(&quot;sub instance initialization&quot;);
-
   }
 
- 
-
   public static void main(String[] args){
-
     System.out.println(&quot;sub main&quot;);
-
     new Sub();
-
  }
-
 }
-
 </code></pre>
-
 <p>运行结果：</p>
-
 <pre><code>parent static fields
-
 parent static string
-
 sub static fields
-
 sub static string
-
 sub main
-
 parent instance initialization
-
 sub instance initialization
-
 </code></pre>
-
 <p>JVM 会保证 <clinit>() 方法的线程安全，保证同一时间只有一个线程执行。</p>
-
 <p>JVM 在初始化执行代码时，如果实例化一个新对象，会调用 <init> 方法对实例变量进行初始化，并执行对应的构造方法内的代码。</p>
-
 <h2>即时编译</h2>
-
 <p>初始化完成后，类在调用执行过程中，执行引擎会把字节码转为机器码，然后在操作系统中才能执行。在字节码转换为机器码的过程中，虚拟机中还存在着一道编译，那就是即时编译。</p>
-
 <p>最初，虚拟机中的字节码是由解释器（ Interpreter ）完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁的时候，就会把这些代码认定为“热点代码”。</p>
-
 <p>为了提高热点代码的执行效率，在运行时，即时编译器（JIT）会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化，然后保存到内存中。</p>
-
 <h3>即时编译器类型</h3>
-
 <p>在 HotSpot 虚拟机中，内置了两个 JIT，分别为 C1 编译器和 C2 编译器，这两个编译器的编译过程是不一样的。</p>
-
 <p>C1 编译器是一个简单快速的编译器，主要的关注点在于局部性的优化，适用于执行时间较短或对启动性能有要求的程序，例如，GUI 应用对界面启动速度就有一定要求。</p>
-
 <p>C2 编译器是为长期运行的服务器端应用程序做性能调优的编译器，适用于执行时间较长或对峰值性能有要求的程序。根据各自的适配性，这两种即时编译也被称为 Client Compiler 和 Server Compiler。</p>
-
 <p>在 Java7 之前，需要根据程序的特性来选择对应的 JIT，虚拟机默认采用解释器和其中一个编译器配合工作。</p>
-
 <p>Java7 引入了分层编译，这种方式综合了 C1 的启动性能优势和 C2 的峰值性能优势，我们也可以通过参数 “-client”“-server” 强制指定虚拟机的即时编译模式。<strong>分层编译将 JVM 的执行状态分为了 5 个层次：</strong></p>
-
 <ul>
-
 <li>第 0 层：程序解释执行，默认开启性能监控功能（Profiling），如果不开启，可触发第二层编译；</li>
-
 <li>第 1 层：可称为 C1 编译，将字节码编译为本地代码，进行简单、可靠的优化，不开启 Profiling；</li>
-
 <li>第 2 层：也称为 C1 编译，开启 Profiling，仅执行带方法调用次数和循环回边执行次数 profiling 的 C1 编译；</li>
-
 <li>第 3 层：也称为 C1 编译，执行所有带 Profiling 的 C1 编译；</li>
-
 <li>第 4 层：可称为 C2 编译，也是将字节码编译为本地代码，但是会启用一些编译耗时较长的优化，甚至会根据性能监控信息进行一些不可靠的激进优化。</li>
-
 </ul>
-
 <p>在 Java8 中，默认开启分层编译，-client 和 -server 的设置已经是无效的了。如果只想开启 C2，可以关闭分层编译（-XX:-TieredCompilation），如果只想用 C1，可以在打开分层编译的同时，使用参数：-XX:TieredStopAtLevel=1。</p>
-
 <p>除了这种默认的混合编译模式，我们还可以使用“-Xint”参数强制虚拟机运行于只有解释器的编译模式下，这时 JIT 完全不介入工作；我们还可以使用参数“-Xcomp”强制虚拟机运行于只有 JIT 的编译模式下。</p>
-
 <p>通过 java -version 命令行可以直接查看到当前系统使用的编译模式。如下图所示：</p>
-
 <p><img src="assets/6ea0938770cccc1b17c46f7b37d20711.jpg" alt="img" /></p>
-
 <h3>热点探测</h3>
-
 <p>在 HotSpot 虚拟机中的热点探测是 JIT 优化的条件，热点探测是基于计数器的热点探测，采用这种方法的虚拟机会为每个方法建立计数器统计方法的执行次数，如果执行次数超过一定的阈值就认为它是“热点方法” 。</p>
-
 <p>虚拟机为每个方法准备了两类计数器：方法调用计数器（Invocation Counter）和回边计数器（Back Edge Counter）。在确定虚拟机运行参数的前提下，这两个计数器都有一个确定的阈值，当计数器超过阈值溢出了，就会触发 JIT 编译。</p>
-
 <p>**方法调用计数器：**用于统计方法被调用的次数，方法调用计数器的默认阈值在 C1 模式下是 1500 次，在 C2 模式在是 10000 次，可通过 -XX: CompileThreshold 来设定；而在分层编译的情况下，-XX: CompileThreshold 指定的阈值将失效，此时将会根据当前待编译的方法数以及编译线程数来动态调整。当方法计数器和回边计数器之和超过方法计数器阈值时，就会触发 JIT 编译器。</p>
-
 <p>**回边计数器：**用于统计一个方法中循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令称为“回边”（Back Edge），该值用于计算是否触发 C1 编译的阈值，在不开启分层编译的情况下，C1 默认为 13995，C2 默认为 10700，可通过 -XX: OnStackReplacePercentage=N 来设置；而在分层编译的情况下，-XX: OnStackReplacePercentage 指定的阈值同样会失效，此时将根据当前待编译的方法数以及编译线程数来动态调整。</p>
-
 <p>建立回边计数器的主要目的是为了触发 OSR（On StackReplacement）编译，即栈上编译。在一些循环周期比较长的代码段中，当循环达到回边计数器阈值时，JVM 会认为这段是热点代码，JIT 编译器就会将这段代码编译成机器语言并缓存，在该循环时间段内，会直接将执行代码替换，执行缓存的机器语言。</p>
-
 <h3>编译优化技术</h3>
-
 <p>JIT 编译运用了一些经典的编译优化技术来实现代码的优化，即通过一些例行检查优化，可以智能地编译出运行时的最优性能代码。今天我们主要来学习以下两种优化手段：</p>
-
 <p><strong>1. 方法内联</strong></p>
-
 <p>调用一个方法通常要经历压栈和出栈。调用方法是将程序执行顺序转移到存储该方法的内存地址，将方法的内容执行完后，再返回到执行该方法前的位置。</p>
-
 <p>这种执行操作要求在执行前保护现场并记忆执行的地址，执行后要恢复现场，并按原来保存的地址继续执行。 因此，方法调用会产生一定的时间和空间方面的开销。</p>
-
 <p>那么对于那些方法体代码不是很大，又频繁调用的方法来说，这个时间和空间的消耗会很大。方法内联的优化行为就是把目标方法的代码复制到发起调用的方法之中，避免发生真实的方法调用。</p>
-
 <p>例如以下方法：</p>
-
 <pre><code>private int add1(int x1, int x2, int x3, int x4) {
-
     return add2(x1, x2) + add2(x3, x4);
-
 }
-
 private int add2(int x1, int x2) {
-
     return x1 + x2;
-
 }
-
 </code></pre>
-
 <p>最终会被优化为：</p>
-
 <pre><code>private int add1(int x1, int x2, int x3, int x4) {
-
     return x1 + x2+ x3 + x4;
-
 }
-
 </code></pre>
-
 <p>JVM 会自动识别热点方法，并对它们使用方法内联进行优化。我们可以通过 -XX:CompileThreshold 来设置热点方法的阈值。但要强调一点，热点方法不一定会被 JVM 做内联优化，如果这个方法体太大了，JVM 将不执行内联操作。而方法体的大小阈值，我们也可以通过参数设置来优化：</p>
-
 <ul>
-
 <li>经常执行的方法，默认情况下，方法体大小小于 325 字节的都会进行内联，我们可以通过 -XX:MaxFreqInlineSize=N 来设置大小值；</li>
-
 <li>不是经常执行的方法，默认情况下，方法大小小于 35 字节才会进行内联，我们也可以通过 -XX:MaxInlineSize=N 来重置大小值。</li>
-
 </ul>
-
 <p>之后我们就可以通过配置 JVM 参数来查看到方法被内联的情况：</p>
-
 <pre><code>-XX:+PrintCompilation // 在控制台打印编译过程信息
-
 -XX:+UnlockDiagnosticVMOptions // 解锁对 JVM 进行诊断的选项参数。默认是关闭的，开启后支持一些特定参数对 JVM 进行诊断
-
 -XX:+PrintInlining // 将内联方法打印出来
-
 </code></pre>
-
 <p>当我们设置 VM 参数：-XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining 之后，运行以下代码：</p>
-
 <pre><code>	public static void main(String[] args) {
-
 		for(int i=0; i&lt;1000000; i++) {// 方法调用计数器的默认阈值在 C1 模式下是 1500 次，在 C2 模式在是 10000 次，我们循环遍历超过需要阈值
-
 			add1(1,2,3,4);
-
 		}
-
 	}
-
 </code></pre>
-
 <p>我们可以看到运行结果中，显示了方法内联的日志：</p>
-
 <p><img src="assets/eda343938d9fa4ebb6b3331ae7b62680.jpg" alt="img" /></p>
-
 <p>热点方法的优化可以有效提高系统性能，一般我们可以通过以下几种方式来提高方法内联：</p>
-
 <ul>
-
 <li>通过设置 JVM 参数来减小热点阈值或增加方法体阈值，以便更多的方法可以进行内联，但这种方法意味着需要占用更多地内存；</li>
-
 <li>在编程中，避免在一个方法中写大量代码，习惯使用小方法体；</li>
-
 <li>尽量使用 final、private、static 关键字修饰方法，编码方法因为继承，会需要额外的类型检查。</li>
-
 </ul>
-
 <p>\2. 逃逸分析</p>
-
 <p>逃逸分析（Escape Analysis）是判断一个对象是否被外部方法引用或外部线程访问的分析技术，编译器会根据逃逸分析的结果对代码进行优化。</p>
-
 <p><strong>栈上分配</strong></p>
-
 <p>我们知道，在 Java 中默认创建一个对象是在堆中分配内存的，而当堆内存中的对象不再使用时，则需要通过垃圾回收机制回收，这个过程相对分配在栈中的对象的创建和销毁来说，更消耗时间和性能。这个时候，逃逸分析如果发现一个对象只在方法中使用，就会将对象分配在栈上。</p>
-
 <p>以下是通过循环获取学生年龄的案例，方法中创建一个学生对象，我们现在通过案例来看看打开逃逸分析和关闭逃逸分析后，堆内存对象创建的数量对比。</p>
-
 <pre><code>public static void main(String[] args) {
-
     for (int i = 0; i &lt; 200000 ; i++) {
-
     	getAge();
-
     }
-
 }
-
- 
 
 public static int getAge(){
-
-	Student person = new Student(&quot; 小明 &quot;,18,30);   
-
+	Student person = new Student(&quot; 小明 &quot;,18,30);
     return person.getAge();
-
 }
-
- 
 
 static class Student {
-
     private String name;
-
     private int age;
 
-   
-
     public Student(String name, int age) {
-
         this.name = name;
-
         this.age = age;
-
     }
-
- 
 
     public String getName() {
-
         return name;
-
     }
-
- 
 
     public void setName(String name) {
-
         this.name = name;
-
     }
-
- 
 
     public int getAge() {
-
         return age;
-
     }
-
- 
 
     public void setAge(int age) {
-
         this.age = age;
-
     }
-
 }
-
 </code></pre>
-
 <p>然后，我们分别设置 VM 参数：Xmx1000m -Xms1000m -XX:-DoEscapeAnalysis -XX:+PrintGC 以及 -Xmx1000m -Xms1000m -XX:+DoEscapeAnalysis -XX:+PrintGC，通过之前讲过的 VisualVM 工具，查看堆中创建的对象数量。</p>
-
 <p>然而，运行结果却没有达到我们想要的优化效果，也许你怀疑是 JDK 版本的问题，然而我分别在 1.6~1.8 版本都测试过了，效果还是一样的：</p>
-
 <p>（-server -Xmx1000m -Xms1000m -XX:-DoEscapeAnalysis -XX:+PrintGC）</p>
-
 <p><img src="assets/8313c788b71e4df16b29a98bb4b63ca5.jpg" alt="img" /></p>
-
 <p>（-server -Xmx1000m -Xms1000m -XX:+DoEscapeAnalysis -XX:+PrintGC）</p>
-
 <p><img src="assets/259bd540cca1120813146cebbebef763.jpg" alt="img" /></p>
-
 <p>这其实是因为由于 HotSpot 虚拟机目前的实现导致栈上分配实现比较复杂，可以说，在 HotSpot 中暂时没有实现这项优化。随着即时编译器的发展与逃逸分析技术的逐渐成熟，相信不久的将来 HotSpot 也会实现这项优化功能。</p>
-
 <p><strong>锁消除</strong></p>
-
 <p>在非线程安全的情况下，尽量不要使用线程安全容器，比如 StringBuffer。由于 StringBuffer 中的 append 方法被 Synchronized 关键字修饰，会使用到锁，从而导致性能下降。</p>
-
 <p>但实际上，在以下代码测试中，StringBuffer 和 StringBuilder 的性能基本没什么区别。这是因为在局部方法中创建的对象只能被当前线程访问，无法被其它线程访问，这个变量的读写肯定不会有竞争，这个时候 JIT 编译会对这个对象的方法锁进行锁消除。</p>
-
 <pre><code>     public static String getString(String s1, String s2) {
-
         StringBuffer sb = new StringBuffer();
-
         sb.append(s1);
-
         sb.append(s2);
-
         return sb.toString();
-
     }
-
 </code></pre>
-
 <p><strong>标量替换</strong></p>
-
 <p>逃逸分析证明一个对象不会被外部访问，如果这个对象可以被拆分的话，当程序真正执行的时候可能不创建这个对象，而直接创建它的成员变量来代替。将对象拆分后，可以分配对象的成员变量在栈或寄存器上，原本的对象就无需分配内存空间了。这种编译优化就叫做标量替换。</p>
-
 <p>我们用以下代码验证：</p>
-
 <pre><code>   public void foo() {
-
         TestInfo info = new TestInfo();
-
         info.id = 1;
-
         info.count = 99;
-
           ...//to do something
-
     }
-
 </code></pre>
-
 <p>逃逸分析后，代码会被优化为：</p>
-
-<pre><code>   
-
+<pre><code>
    public void foo() {
-
         id = 1;
-
         count = 99;
-
         ...//to do something
-
     }
-
 </code></pre>
-
 <p>我们可以通过设置 JVM 参数来开关逃逸分析，还可以单独开关同步消除和标量替换，在 JDK1.8 中 JVM 是默认开启这些操作的。</p>
-
 <pre><code>-XX:+DoEscapeAnalysis 开启逃逸分析（jdk1.8 默认开启，其它版本未测试）
-
 -XX:-DoEscapeAnalysis 关闭逃逸分析
 
- 
-
 -XX:+EliminateLocks 开启锁消除（jdk1.8 默认开启，其它版本未测试）
-
 -XX:-EliminateLocks 关闭锁消除
 
- 
-
 -XX:+EliminateAllocations 开启标量替换（jdk1.8 默认开启，其它版本未测试）
-
 -XX:-EliminateAllocations 关闭就可以了
-
 </code></pre>
-
 <h2>总结</h2>
-
 <p>今天我们主要了解了 JKD1.8 以及之前的类的编译和加载过程，Java 源程序是通过 Javac 编译器编译成 .class 文件，其中文件中包含的代码格式我们称之为 Java 字节码（bytecode）。</p>
-
 <p>这种代码格式无法直接运行，但可以被不同平台 JVM 中的 Interpreter 解释执行。由于 Interpreter 的效率低下，JVM 中的 JIT 会在运行时有选择性地将运行次数较多的方法编译成二进制代码，直接运行在底层硬件上。</p>
-
 <p>在 Java8 之前，HotSpot 集成了两个 JIT，用 C1 和 C2 来完成 JVM 中的即时编译。虽然 JIT 优化了代码，但收集监控信息会消耗运行时的性能，且编译过程会占用程序的运行时间。</p>
-
 <p>到了 Java9，AOT 编译器被引入。和 JIT 不同，AOT 是在程序运行前进行的静态编译，这样就可以避免运行时的编译消耗和内存消耗，且 .class 文件通过 AOT 编译器是可以编译成 .so 的二进制文件的。</p>
-
 <p>到了 Java10，一个新的 JIT 编译器 Graal 被引入。Graal 是一个以 Java 为主要编程语言、面向 Java bytecode 的编译器。与用 C++ 实现的 C1 和 C2 相比，它的模块化更加明显，也更容易维护。Graal 既可以作为动态编译器，在运行时编译热点方法；也可以作为静态编译器，实现 AOT 编译。</p>
-
 <h2>思考题</h2>
-
 <p>我们知道 Class.forName 和 ClassLoader.loadClass 都能加载类，你知道这两者在加载类时的区别吗？</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Java并发编程实战/20  磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Java并发编程实战/22  如何优化垃圾回收机制？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709971892ef83d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

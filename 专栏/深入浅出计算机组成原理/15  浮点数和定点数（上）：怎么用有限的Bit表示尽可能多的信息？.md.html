@@ -1,1114 +1,366 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/00 开篇词  为什么你需要学习计算机组成原理？.md.html">00 开篇词  为什么你需要学习计算机组成原理？.md.html</a>
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/00 开篇词  为什么你需要学习计算机组成原理？.md.html">00 开篇词  为什么你需要学习计算机组成原理？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/01  冯·诺依曼体系结构：计算机组成的金字塔.md.html">01  冯·诺依曼体系结构：计算机组成的金字塔</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/02  给你一张知识地图，计算机组成原理应该这么学.md.html">02  给你一张知识地图，计算机组成原理应该这么学</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/03  通过你的CPU主频，我们来谈谈“性能”究竟是什么？.md.html">03  通过你的CPU主频，我们来谈谈“性能”究竟是什么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/04  穿越功耗墙，我们该从哪些方面提升“性能”？.md.html">04  穿越功耗墙，我们该从哪些方面提升“性能”？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/05  计算机指令：让我们试试用纸带编程.md.html">05  计算机指令：让我们试试用纸带编程</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/06  指令跳转：原来if...else就是goto.md.html">06  指令跳转：原来if...else就是goto</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/07  函数调用：为什么会发生stack overflow？.md.html">07  函数调用：为什么会发生stack overflow？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/08  ELF和静态链接：为什么程序无法同时在Linux和Windows下运行？.md.html">08  ELF和静态链接：为什么程序无法同时在Linux和Windows下运行？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/09  程序装载：“640K内存”真的不够用么？.md.html">09  程序装载：“640K内存”真的不够用么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/10  动态链接：程序内部的“共享单车”.md.html">10  动态链接：程序内部的“共享单车”</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/11  二进制编码：“手持两把锟斤拷，口中疾呼烫烫烫”？.md.html">11  二进制编码：“手持两把锟斤拷，口中疾呼烫烫烫”？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/12  理解电路：从电报机到门电路，我们如何做到“千里传信”？.md.html">12  理解电路：从电报机到门电路，我们如何做到“千里传信”？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/13  加法器：如何像搭乐高一样搭电路（上）？.md.html">13  加法器：如何像搭乐高一样搭电路（上）？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入浅出计算机组成原理/14  乘法器：如何像搭乐高一样搭电路（下）？.md.html">14  乘法器：如何像搭乐高一样搭电路（下）？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/深入浅出计算机组成原理/15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？.md.html">15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/01  冯·诺依曼体系结构：计算机组成的金字塔.md.html">01  冯·诺依曼体系结构：计算机组成的金字塔.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/16  浮点数和定点数（下）：深入理解浮点数到底有什么用？.md.html">16  浮点数和定点数（下）：深入理解浮点数到底有什么用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/02  给你一张知识地图，计算机组成原理应该这么学.md.html">02  给你一张知识地图，计算机组成原理应该这么学.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/17  建立数据通路（上）：指令加运算=CPU.md.html">17  建立数据通路（上）：指令加运算=CPU</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/03  通过你的CPU主频，我们来谈谈“性能”究竟是什么？.md.html">03  通过你的CPU主频，我们来谈谈“性能”究竟是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/18  建立数据通路（中）：指令加运算=CPU.md.html">18  建立数据通路（中）：指令加运算=CPU</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/04  穿越功耗墙，我们该从哪些方面提升“性能”？.md.html">04  穿越功耗墙，我们该从哪些方面提升“性能”？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/19  建立数据通路（下）：指令加运算=CPU.md.html">19  建立数据通路（下）：指令加运算=CPU</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/05  计算机指令：让我们试试用纸带编程.md.html">05  计算机指令：让我们试试用纸带编程.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/20  面向流水线的指令设计（上）：一心多用的现代CPU.md.html">20  面向流水线的指令设计（上）：一心多用的现代CPU</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/06  指令跳转：原来if...else就是goto.md.html">06  指令跳转：原来if...else就是goto.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/21  面向流水线的指令设计（下）：奔腾4是怎么失败的？.md.html">21  面向流水线的指令设计（下）：奔腾4是怎么失败的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/07  函数调用：为什么会发生stack overflow？.md.html">07  函数调用：为什么会发生stack overflow？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/22  冒险和预测（一）：hazard是“危”也是“机”.md.html">22  冒险和预测（一）：hazard是“危”也是“机”</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/08  ELF和静态链接：为什么程序无法同时在Linux和Windows下运行？.md.html">08  ELF和静态链接：为什么程序无法同时在Linux和Windows下运行？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/23  冒险和预测（二）：流水线里的接力赛.md.html">23  冒险和预测（二）：流水线里的接力赛</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/09  程序装载：“640K内存”真的不够用么？.md.html">09  程序装载：“640K内存”真的不够用么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/24  冒险和预测（三）：CPU里的“线程池”.md.html">24  冒险和预测（三）：CPU里的“线程池”</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/10  动态链接：程序内部的“共享单车”.md.html">10  动态链接：程序内部的“共享单车”.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/25  冒险和预测（四）：今天下雨了，明天还会下雨么？.md.html">25  冒险和预测（四）：今天下雨了，明天还会下雨么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/11  二进制编码：“手持两把锟斤拷，口中疾呼烫烫烫”？.md.html">11  二进制编码：“手持两把锟斤拷，口中疾呼烫烫烫”？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/26  Superscalar和VLIW：如何让CPU的吞吐率超过1？.md.html">26  Superscalar和VLIW：如何让CPU的吞吐率超过1？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/12  理解电路：从电报机到门电路，我们如何做到“千里传信”？.md.html">12  理解电路：从电报机到门电路，我们如何做到“千里传信”？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/27  SIMD：如何加速矩阵乘法？.md.html">27  SIMD：如何加速矩阵乘法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/13  加法器：如何像搭乐高一样搭电路（上）？.md.html">13  加法器：如何像搭乐高一样搭电路（上）？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/28  异常和中断：程序出错了怎么办？.md.html">28  异常和中断：程序出错了怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/14  乘法器：如何像搭乐高一样搭电路（下）？.md.html">14  乘法器：如何像搭乐高一样搭电路（下）？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/29  CISC和RISC：为什么手机芯片都是ARM？.md.html">29  CISC和RISC：为什么手机芯片都是ARM？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/深入浅出计算机组成原理/15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？.md.html">15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/30  GPU（上）：为什么玩游戏需要使用GPU？.md.html">30  GPU（上）：为什么玩游戏需要使用GPU？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/16  浮点数和定点数（下）：深入理解浮点数到底有什么用？.md.html">16  浮点数和定点数（下）：深入理解浮点数到底有什么用？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/31  GPU（下）：为什么深度学习需要使用GPU？.md.html">31  GPU（下）：为什么深度学习需要使用GPU？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/17  建立数据通路（上）：指令加运算=CPU.md.html">17  建立数据通路（上）：指令加运算=CPU.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/32  FPGA、ASIC和TPU（上）：计算机体系结构的黄金时代.md.html">32  FPGA、ASIC和TPU（上）：计算机体系结构的黄金时代</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/18  建立数据通路（中）：指令加运算=CPU.md.html">18  建立数据通路（中）：指令加运算=CPU.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/33  解读TPU：设计和拆解一块ASIC芯片.md.html">33  解读TPU：设计和拆解一块ASIC芯片</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/19  建立数据通路（下）：指令加运算=CPU.md.html">19  建立数据通路（下）：指令加运算=CPU.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/34  理解虚拟机：你在云上拿到的计算机是什么样的？.md.html">34  理解虚拟机：你在云上拿到的计算机是什么样的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/20  面向流水线的指令设计（上）：一心多用的现代CPU.md.html">20  面向流水线的指令设计（上）：一心多用的现代CPU.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/35  存储器层次结构全景：数据存储的大金字塔长什么样？.md.html">35  存储器层次结构全景：数据存储的大金字塔长什么样？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/21  面向流水线的指令设计（下）：奔腾4是怎么失败的？.md.html">21  面向流水线的指令设计（下）：奔腾4是怎么失败的？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/36  局部性原理：数据库性能跟不上，加个缓存就好了？.md.html">36  局部性原理：数据库性能跟不上，加个缓存就好了？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/22  冒险和预测（一）：hazard是“危”也是“机”.md.html">22  冒险和预测（一）：hazard是“危”也是“机”.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/37  理解CPU Cache（上）：“4毫秒”究竟值多少钱？.md.html">37  理解CPU Cache（上）：“4毫秒”究竟值多少钱？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/23  冒险和预测（二）：流水线里的接力赛.md.html">23  冒险和预测（二）：流水线里的接力赛.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/38  高速缓存（下）：你确定你的数据更新了么？.md.html">38  高速缓存（下）：你确定你的数据更新了么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/24  冒险和预测（三）：CPU里的“线程池”.md.html">24  冒险和预测（三）：CPU里的“线程池”.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/39  MESI协议：如何让多核CPU的高速缓存保持一致？.md.html">39  MESI协议：如何让多核CPU的高速缓存保持一致？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/25  冒险和预测（四）：今天下雨了，明天还会下雨么？.md.html">25  冒险和预测（四）：今天下雨了，明天还会下雨么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/40  理解内存（上）：虚拟内存和内存保护是什么？.md.html">40  理解内存（上）：虚拟内存和内存保护是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/26  Superscalar和VLIW：如何让CPU的吞吐率超过1？.md.html">26  Superscalar和VLIW：如何让CPU的吞吐率超过1？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/41  理解内存（下）：解析TLB和内存保护.md.html">41  理解内存（下）：解析TLB和内存保护</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/27  SIMD：如何加速矩阵乘法？.md.html">27  SIMD：如何加速矩阵乘法？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/42  总线：计算机内部的高速公路.md.html">42  总线：计算机内部的高速公路</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/28  异常和中断：程序出错了怎么办？.md.html">28  异常和中断：程序出错了怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/43  输入输出设备：我们并不是只能用灯泡显示“0”和“1”.md.html">43  输入输出设备：我们并不是只能用灯泡显示“0”和“1”</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/29  CISC和RISC：为什么手机芯片都是ARM？.md.html">29  CISC和RISC：为什么手机芯片都是ARM？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/44  理解IO_WAIT：IO性能到底是怎么回事儿？.md.html">44  理解IO_WAIT：IO性能到底是怎么回事儿？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/30  GPU（上）：为什么玩游戏需要使用GPU？.md.html">30  GPU（上）：为什么玩游戏需要使用GPU？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/45  机械硬盘：Google早期用过的“黑科技”.md.html">45  机械硬盘：Google早期用过的“黑科技”</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/31  GPU（下）：为什么深度学习需要使用GPU？.md.html">31  GPU（下）：为什么深度学习需要使用GPU？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/46  SSD硬盘（上）：如何完成性能优化的KPI？.md.html">46  SSD硬盘（上）：如何完成性能优化的KPI？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/32  FPGA、ASIC和TPU（上）：计算机体系结构的黄金时代.md.html">32  FPGA、ASIC和TPU（上）：计算机体系结构的黄金时代.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/47  SSD硬盘（下）：如何完成性能优化的KPI？.md.html">47  SSD硬盘（下）：如何完成性能优化的KPI？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/33  解读TPU：设计和拆解一块ASIC芯片.md.html">33  解读TPU：设计和拆解一块ASIC芯片.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/48  DMA：为什么Kafka这么快？.md.html">48  DMA：为什么Kafka这么快？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/34  理解虚拟机：你在云上拿到的计算机是什么样的？.md.html">34  理解虚拟机：你在云上拿到的计算机是什么样的？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/49  数据完整性（上）：硬件坏了怎么办？.md.html">49  数据完整性（上）：硬件坏了怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/35  存储器层次结构全景：数据存储的大金字塔长什么样？.md.html">35  存储器层次结构全景：数据存储的大金字塔长什么样？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/50  数据完整性（下）：如何还原犯罪现场？.md.html">50  数据完整性（下）：如何还原犯罪现场？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/36  局部性原理：数据库性能跟不上，加个缓存就好了？.md.html">36  局部性原理：数据库性能跟不上，加个缓存就好了？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/51  分布式计算：如果所有人的大脑都联网会怎样？.md.html">51  分布式计算：如果所有人的大脑都联网会怎样？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/37  理解CPU Cache（上）：“4毫秒”究竟值多少钱？.md.html">37  理解CPU Cache（上）：“4毫秒”究竟值多少钱？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/52  设计大型DMP系统（上）：MongoDB并不是什么灵丹妙药.md.html">52  设计大型DMP系统（上）：MongoDB并不是什么灵丹妙药</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/38  高速缓存（下）：你确定你的数据更新了么？.md.html">38  高速缓存（下）：你确定你的数据更新了么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/53  设计大型DMP系统（下）：SSD拯救了所有的DBA.md.html">53  设计大型DMP系统（下）：SSD拯救了所有的DBA</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/39  MESI协议：如何让多核CPU的高速缓存保持一致？.md.html">39  MESI协议：如何让多核CPU的高速缓存保持一致？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/54  理解Disruptor（上）：带你体会CPU高速缓存的风驰电掣.md.html">54  理解Disruptor（上）：带你体会CPU高速缓存的风驰电掣</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/40  理解内存（上）：虚拟内存和内存保护是什么？.md.html">40  理解内存（上）：虚拟内存和内存保护是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/55  理解Disruptor（下）：不需要换挡和踩刹车的CPU，有多快？.md.html">55  理解Disruptor（下）：不需要换挡和踩刹车的CPU，有多快？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/41  理解内存（下）：解析TLB和内存保护.md.html">41  理解内存（下）：解析TLB和内存保护.md.html</a>
-
-
-
+                    <a href="/专栏/深入浅出计算机组成原理/结束语  知也无涯，愿你也享受发现的乐趣.md.html">结束语  知也无涯，愿你也享受发现的乐趣</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/42  总线：计算机内部的高速公路.md.html">42  总线：计算机内部的高速公路.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/43  输入输出设备：我们并不是只能用灯泡显示“0”和“1”.md.html">43  输入输出设备：我们并不是只能用灯泡显示“0”和“1”.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/44  理解IO_WAIT：IO性能到底是怎么回事儿？.md.html">44  理解IO_WAIT：IO性能到底是怎么回事儿？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/45  机械硬盘：Google早期用过的“黑科技”.md.html">45  机械硬盘：Google早期用过的“黑科技”.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/46  SSD硬盘（上）：如何完成性能优化的KPI？.md.html">46  SSD硬盘（上）：如何完成性能优化的KPI？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/47  SSD硬盘（下）：如何完成性能优化的KPI？.md.html">47  SSD硬盘（下）：如何完成性能优化的KPI？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/48  DMA：为什么Kafka这么快？.md.html">48  DMA：为什么Kafka这么快？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/49  数据完整性（上）：硬件坏了怎么办？.md.html">49  数据完整性（上）：硬件坏了怎么办？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/50  数据完整性（下）：如何还原犯罪现场？.md.html">50  数据完整性（下）：如何还原犯罪现场？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/51  分布式计算：如果所有人的大脑都联网会怎样？.md.html">51  分布式计算：如果所有人的大脑都联网会怎样？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/52  设计大型DMP系统（上）：MongoDB并不是什么灵丹妙药.md.html">52  设计大型DMP系统（上）：MongoDB并不是什么灵丹妙药.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/53  设计大型DMP系统（下）：SSD拯救了所有的DBA.md.html">53  设计大型DMP系统（下）：SSD拯救了所有的DBA.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/54  理解Disruptor（上）：带你体会CPU高速缓存的风驰电掣.md.html">54  理解Disruptor（上）：带你体会CPU高速缓存的风驰电掣.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/55  理解Disruptor（下）：不需要换挡和踩刹车的CPU，有多快？.md.html">55  理解Disruptor（下）：不需要换挡和踩刹车的CPU，有多快？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入浅出计算机组成原理/结束语  知也无涯，愿你也享受发现的乐趣.md.html">结束语  知也无涯，愿你也享受发现的乐趣.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>15  浮点数和定点数（上）：怎么用有限的Bit表示尽可能多的信息？</h1>
-
 <p>在我们日常的程序开发中，不只会用到整数。更多情况下，我们用到的都是实数。比如，我们开发一个电商 App，商品的价格常常会是 9 块 9；再比如，现在流行的深度学习算法，对应的机器学习里的模型里的各个权重也都是 1.23 这样的数。可以说，在实际的应用过程中，这些有零有整的实数，是和整数同样常用的数据类型，我们也需要考虑到。</p>
-
 <h2>浮点数的不精确性</h2>
-
 <p>那么，我们能不能用二进制表示所有的实数，然后在二进制下计算它的加减乘除呢？先不着急，我们从一个有意思的小案例来看。</p>
-
 <p>你可以在 Linux 下打开 Python 的命令行 Console，也可以在 Chrome 浏览器里面通过开发者工具，打开浏览器里的 Console，在里面输入“0.3 + 0.6”，然后看看你会得到一个什么样的结果。</p>
-
 <pre><code>&gt;&gt;&gt; 0.3 + 0.6
-
 0.8999999999999999
-
 </code></pre>
-
 <p>不知道你有没有大吃一惊，这么简单的一个加法，无论是在 Python 还是在 JavaScript 里面，算出来的结果居然不是准确的 0.9，而是 0.8999999999999999 这么个结果。这是为什么呢？</p>
-
 <p>在回答为什么之前，我们先来想一个更抽象的问题。通过前面的这么多讲，你应该知道我们现在用的计算机通常用 16/32 个比特（bit）来表示一个数。那我问你，我们用 32 个比特，能够表示所有实数吗？</p>
-
 <p>答案很显然是不能。32 个比特，只能表示 2 的 32 次方个不同的数，差不多是 40 亿个。如果表示的数要超过这个数，就会有两个不同的数的二进制表示是一样的。那计算机可就会一筹莫展，不知道这个数到底是多少。</p>
-
 <p>40 亿个数看似已经很多了，但是比起无限多的实数集合却只是沧海一粟。所以，这个时候，计算机的设计者们，就要面临一个问题了：我到底应该让这 40 亿个数映射到实数集合上的哪些数，在实际应用中才能最划得来呢？</p>
-
 <h2>定点数的表示</h2>
-
 <p>有一个很直观的想法，就是我们用 4 个比特来表示 0～9 的整数，那么 32 个比特就可以表示 8 个这样的整数。然后我们把最右边的 2 个 0～9 的整数，当成小数部分；把左边 6 个 0～9 的整数，当成整数部分。这样，我们就可以用 32 个比特，来表示从 0 到 999999.99 这样 1 亿个实数了。</p>
-
 <p><img src="assets/f5a0b0f2188ebe0d18f4424578a588b3.jpg" alt="img" /></p>
-
 <p>这种用二进制来表示十进制的编码方式，叫作<a href="https://zh.wikipedia.org/wiki/二進碼十進數"><strong>BCD 编码</strong></a>（Binary-Coded Decimal）。其实它的运用非常广泛，最常用的是在超市、银行这样需要用小数记录金额的情况里。在超市里面，我们的小数最多也就到分。这样的表示方式，比较直观清楚，也满足了小数部分的计算。</p>
-
 <p>不过，这样的表示方式也有几个缺点。</p>
-
 <p>**第一，这样的表示方式有点“浪费”。**本来 32 个比特我们可以表示 40 亿个不同的数，但是在 BCD 编码下，只能表示 1 亿个数，如果我们要精确到分的话，那么能够表示的最大金额也就是到 100 万。如果我们的货币单位是人民币或者美元还好，如果我们的货币单位变成了津巴布韦币，这个数量就不太够用了。</p>
-
 <p>**第二，这样的表示方式没办法同时表示很大的数字和很小的数字。**我们在写程序的时候，实数的用途可能是多种多样的。有时候我们想要表示商品的金额，关心的是 9.99 这样小的数字；有时候，我们又要进行物理学的运算，需要表示光速，也就是 3×1083×108 这样很大的数字。那么，我们有没有一个办法，既能够表示很小的数，又能表示很大的数呢？</p>
-
 <h2>浮点数的表示</h2>
-
 <p>答案当然是有的，就是你可能经常听说过的<strong>浮点数</strong>（Floating Point），也就是<strong>float 类型</strong>。</p>
-
 <p>我们先来想一想。如果我们想在一张便签纸上，用一行来写一个十进制数，能够写下多大范围的数？因为我们要让人能够看清楚，所以字最小也有一个限制。你会发现一个和上面我们用 BCD 编码表示数一样的问题，就是纸张的宽度限制了我们能够表示的数的大小。如果宽度只放得下 8 个数字，那么我们还是只能写下最大到 99999999 这样的数字。</p>
-
 <p><img src="assets/c321a0b9d95ba475439f9fbdff07bf56.png" alt="img" /></p>
-
 <p>有限宽度的便签，只能写下有限大小的数字</p>
-
 <p>其实，这里的纸张宽度，就和我们 32 个比特一样，是在空间层面的限制。那么，在现实生活中，我们是怎么表示一个很大的数的呢？比如说，我们想要在一本科普书里，写一下宇宙内原子的数量，莫非是用一页纸，用好多行写下很多个 0 么？</p>
-
 <p>当然不是了，我们会用科学计数法来表示这个数字。宇宙内的原子的数量，大概在 10 的 82 次方左右，我们就用 1.0×10821.0×1082 这样的形式来表示这个数值，不需要写下 82 个 0。</p>
-
 <p>在计算机里，我们也可以用一样的办法，用科学计数法来表示实数。浮点数的科学计数法的表示，有一个<strong>IEEE</strong>的标准，它定义了两个基本的格式。一个是用 32 比特表示单精度的浮点数，也就是我们常常说的 float 或者 float32 类型。另外一个是用 64 比特表示双精度的浮点数，也就是我们平时说的 double 或者 float64 类型。</p>
-
 <p>双精度类型和单精度类型差不多，这里，我们来看单精度类型，双精度你自然也就明白了。</p>
-
 <p><img src="assets/914b71bf1d85fb6ed76e1135f39b6941.jpg" alt="img" /></p>
-
 <p>单精度的 32 个比特可以分成三部分。</p>
-
 <p>第一部分是一个<strong>符号位</strong>，用来表示是正数还是负数。我们一般用<strong>s</strong>来表示。在浮点数里，我们不像正数分符号数还是无符号数，所有的浮点数都是有符号的。</p>
-
 <p>接下来是一个 8 个比特组成的<strong>指数位</strong>。我们一般用<strong>e</strong>来表示。8 个比特能够表示的整数空间，就是 0～255。我们在这里用 1～254 映射到 -126～127 这 254 个有正有负的数上。因为我们的浮点数，不仅仅想要表示很大的数，还希望能够表示很小的数，所以指数位也会有负数。</p>
-
 <p>你发现没，我们没有用到 0 和 255。没错，这里的 0（也就是 8 个比特全部为 0） 和 255 （也就是 8 个比特全部为 1）另有它用，我们等一下再讲。</p>
-
 <p>最后，是一个 23 个比特组成的<strong>有效数位</strong>。我们用<strong>f</strong>来表示。综合科学计数法，我们的浮点数就可以表示成下面这样：</p>
-
 <p>(−1)s×1.f×2e(−1)s×1.f×2e</p>
-
 <p>你会发现，这里的浮点数，没有办法表示 0。的确，要表示 0 和一些特殊的数，我们就要用上在 e 里面留下的 0 和 255 这两个表示，这两个表示其实是两个标记位。在 e 为 0 且 f 为 0 的时候，我们就把这个浮点数认为是 0。至于其它的 e 是 0 或者 255 的特殊情况，你可以看下面这个表格，分别可以表示出无穷大、无穷小、NAN 以及一个特殊的不规范数。</p>
-
 <p><img src="assets/f922249a89667c4d10239eb8840dc94c.jpg" alt="img" /></p>
-
 <p>我们可以以 0.5 为例子。0.5 的符号为 s 应该是 0，f 应该是 0，而 e 应该是 -1，也就是</p>
-
 <p>0.5=(−1)0×1.0×2−1=0.50.5=(−1)0×1.0×2−1=0.5，对应的浮点数表示，就是 32 个比特。</p>
-
 <p><img src="assets/5168fce3f313f4fc0b600ce5d1805c50.jpeg" alt="img" /></p>
-
 <p>s=0，e=2−1s=0，e=2−1，需要注意，e 表示从 -126 到 127 个，-1 是其中的第 126 个数，这里的 e 如果用整数表示，就是 26+25+24+23+22+21=12626+25+24+23+22+21=126，1.f=1.01.f=1.0。</p>
-
 <p>在这样的浮点数表示下，不考虑符号的话，浮点数能够表示的最小的数和最大的数，差不多是 1.17×10−381.17×10−38 和 3.40×10383.40×1038。比前面的 BCD 编码能够表示的范围大多了。</p>
-
 <h2>总结延伸</h2>
-
 <p>你会看到，在这样的表示方式下，浮点数能够表示的数据范围一下子大了很多。正是因为这个数对应的小数点的位置是“浮动”的，它才被称为浮点数。随着指数位 e 的值的不同，小数点的位置也在变动。对应的，前面的 BCD 编码的实数，就是小数点固定在某一位的方式，我们也就把它称为<strong>定点数</strong>。</p>
-
 <p>回到我们最开头，为什么我们用 0.3 + 0.6 不能得到 0.9 呢？这是因为，浮点数没有办法精确表示 0.3、0.6 和 0.9。事实上，我们拿出 0.1～0.9 这 9 个数，其中只有 0.5 能够被精确地表示成二进制的浮点数，也就是 s = 0、e = -1、f = 0 这样的情况。</p>
-
 <p>而 0.3、0.6 乃至我们希望的 0.9，都只是一个近似的表达。这个也为我们带来了一个挑战，就是浮点数无论是表示还是计算其实都是近似计算。那么，在使用过程中，我们该怎么来使用浮点数，以及使用浮点数会遇到些什么问题呢？下一讲，我会用更多的实际代码案例，来带你看看浮点数计算中的各种“坑”。</p>
-
 <h2>推荐阅读</h2>
-
 <p>如果对浮点数的表示还不是很清楚，你可以仔细阅读一下《计算机组成与设计：硬件 / 软件接口》的 3.5.1 节。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/深入浅出计算机组成原理/14  乘法器：如何像搭乐高一样搭电路（下）？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/深入浅出计算机组成原理/16  浮点数和定点数（下）：深入理解浮点数到底有什么用？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997aa4ddd93cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

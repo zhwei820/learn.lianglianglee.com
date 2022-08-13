@@ -1,1402 +1,436 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>36 有哪几种常见的阻塞队列？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/00 由点及面，搭建你的 Java 并发知识网.md.html">00 由点及面，搭建你的 Java 并发知识网.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/00 由点及面，搭建你的 Java 并发知识网.md.html">00 由点及面，搭建你的 Java 并发知识网</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/01 为何说只有 1 种实现线程的方法？.md.html">01 为何说只有 1 种实现线程的方法？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/01 为何说只有 1 种实现线程的方法？.md.html">01 为何说只有 1 种实现线程的方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？.md.html">02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？.md.html">02 如何正确停止线程？为什么 volatile 标记位的停止方法是错误的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/03 线程是如何在 6 种状态之间转换的？.md.html">03 线程是如何在 6 种状态之间转换的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/03 线程是如何在 6 种状态之间转换的？.md.html">03 线程是如何在 6 种状态之间转换的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/04 waitnotifynotifyAll 方法的使用注意事项？.md.html">04 waitnotifynotifyAll 方法的使用注意事项？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/04 waitnotifynotifyAll 方法的使用注意事项？.md.html">04 waitnotifynotifyAll 方法的使用注意事项？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/05 有哪几种实现生产者消费者模式的方法？.md.html">05 有哪几种实现生产者消费者模式的方法？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/05 有哪几种实现生产者消费者模式的方法？.md.html">05 有哪几种实现生产者消费者模式的方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/06 一共有哪 3 类线程安全问题？.md.html">06 一共有哪 3 类线程安全问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/06 一共有哪 3 类线程安全问题？.md.html">06 一共有哪 3 类线程安全问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/07 哪些场景需要额外注意线程安全问题？.md.html">07 哪些场景需要额外注意线程安全问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/07 哪些场景需要额外注意线程安全问题？.md.html">07 哪些场景需要额外注意线程安全问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/08 为什么多线程会带来性能问题？.md.html">08 为什么多线程会带来性能问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/08 为什么多线程会带来性能问题？.md.html">08 为什么多线程会带来性能问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/09 使用线程池比手动创建线程好在哪里？.md.html">09 使用线程池比手动创建线程好在哪里？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/09 使用线程池比手动创建线程好在哪里？.md.html">09 使用线程池比手动创建线程好在哪里？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/10 线程池的各个参数的含义？.md.html">10 线程池的各个参数的含义？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/10 线程池的各个参数的含义？.md.html">10 线程池的各个参数的含义？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/11 线程池有哪 4 种拒绝策略？.md.html">11 线程池有哪 4 种拒绝策略？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/11 线程池有哪 4 种拒绝策略？.md.html">11 线程池有哪 4 种拒绝策略？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？.md.html">12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？.md.html">12 有哪 6 种常见的线程池？什么是 Java8 的 ForkJoinPool？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/13 线程池常用的阻塞队列有哪些？.md.html">13 线程池常用的阻塞队列有哪些？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/13 线程池常用的阻塞队列有哪些？.md.html">13 线程池常用的阻塞队列有哪些？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/14 为什么不应该自动创建线程池？.md.html">14 为什么不应该自动创建线程池？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/14 为什么不应该自动创建线程池？.md.html">14 为什么不应该自动创建线程池？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/15 合适的线程数量是多少？CPU 核心数和线程数的关系？.md.html">15 合适的线程数量是多少？CPU 核心数和线程数的关系？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/15 合适的线程数量是多少？CPU 核心数和线程数的关系？.md.html">15 合适的线程数量是多少？CPU 核心数和线程数的关系？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/16 如何根据实际需要，定制自己的线程池？.md.html">16 如何根据实际需要，定制自己的线程池？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/16 如何根据实际需要，定制自己的线程池？.md.html">16 如何根据实际需要，定制自己的线程池？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？.md.html">17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？.md.html">17 如何正确关闭线程池？shutdown 和 shutdownNow 的区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/18 线程池实现“线程复用”的原理？.md.html">18 线程池实现“线程复用”的原理？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/18 线程池实现“线程复用”的原理？.md.html">18 线程池实现“线程复用”的原理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/19 你知道哪几种锁？分别有什么特点？.md.html">19 你知道哪几种锁？分别有什么特点？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/19 你知道哪几种锁？分别有什么特点？.md.html">19 你知道哪几种锁？分别有什么特点？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/20 悲观锁和乐观锁的本质是什么？.md.html">20 悲观锁和乐观锁的本质是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/20 悲观锁和乐观锁的本质是什么？.md.html">20 悲观锁和乐观锁的本质是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/21 如何看到 synchronized 背后的“monitor 锁”？.md.html">21 如何看到 synchronized 背后的“monitor 锁”？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/21 如何看到 synchronized 背后的“monitor 锁”？.md.html">21 如何看到 synchronized 背后的“monitor 锁”？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/22 synchronized 和 Lock 孰优孰劣，如何选择？.md.html">22 synchronized 和 Lock 孰优孰劣，如何选择？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/22 synchronized 和 Lock 孰优孰劣，如何选择？.md.html">22 synchronized 和 Lock 孰优孰劣，如何选择？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/23 Lock 有哪几个常用方法？分别有什么用？.md.html">23 Lock 有哪几个常用方法？分别有什么用？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/23 Lock 有哪几个常用方法？分别有什么用？.md.html">23 Lock 有哪几个常用方法？分别有什么用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/24 讲一讲公平锁和非公平锁，为什么要“非公平”？.md.html">24 讲一讲公平锁和非公平锁，为什么要“非公平”？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/24 讲一讲公平锁和非公平锁，为什么要“非公平”？.md.html">24 讲一讲公平锁和非公平锁，为什么要“非公平”？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/25 读写锁 ReadWriteLock 获取锁有哪些规则？.md.html">25 读写锁 ReadWriteLock 获取锁有哪些规则？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/25 读写锁 ReadWriteLock 获取锁有哪些规则？.md.html">25 读写锁 ReadWriteLock 获取锁有哪些规则？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/26 读锁应该插队吗？什么是读写锁的升降级？.md.html">26 读锁应该插队吗？什么是读写锁的升降级？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/26 读锁应该插队吗？什么是读写锁的升降级？.md.html">26 读锁应该插队吗？什么是读写锁的升降级？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/27 什么是自旋锁？自旋的好处和后果是什么呢？.md.html">27 什么是自旋锁？自旋的好处和后果是什么呢？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/27 什么是自旋锁？自旋的好处和后果是什么呢？.md.html">27 什么是自旋锁？自旋的好处和后果是什么呢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/28 JVM 对锁进行了哪些优化？.md.html">28 JVM 对锁进行了哪些优化？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/28 JVM 对锁进行了哪些优化？.md.html">28 JVM 对锁进行了哪些优化？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/29 HashMap 为什么是线程不安全的？.md.html">29 HashMap 为什么是线程不安全的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/29 HashMap 为什么是线程不安全的？.md.html">29 HashMap 为什么是线程不安全的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/30 ConcurrentHashMap 在 Java7 和 8 有何不同？.md.html">30 ConcurrentHashMap 在 Java7 和 8 有何不同？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/30 ConcurrentHashMap 在 Java7 和 8 有何不同？.md.html">30 ConcurrentHashMap 在 Java7 和 8 有何不同？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/31 为什么 Map 桶中超过 8 个才转为红黑树？.md.html">31 为什么 Map 桶中超过 8 个才转为红黑树？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/31 为什么 Map 桶中超过 8 个才转为红黑树？.md.html">31 为什么 Map 桶中超过 8 个才转为红黑树？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别.md.html">32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别.md.html">32 同样是线程安全，ConcurrentHashMap 和 Hashtable 的区别</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/33 CopyOnWriteArrayList 有什么特点？.md.html">33 CopyOnWriteArrayList 有什么特点？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/33 CopyOnWriteArrayList 有什么特点？.md.html">33 CopyOnWriteArrayList 有什么特点？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/34 什么是阻塞队列？.md.html">34 什么是阻塞队列？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/34 什么是阻塞队列？.md.html">34 什么是阻塞队列？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？.md.html">35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？.md.html">35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/Java 并发编程 78 讲-完/36 有哪几种常见的阻塞队列？.md.html">36 有哪几种常见的阻塞队列？.md.html</a>
+                    <a class="current-tab" href="/专栏/Java 并发编程 78 讲-完/36 有哪几种常见的阻塞队列？.md.html">36 有哪几种常见的阻塞队列？</a>
 
-                    
-
-
-
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/37 阻塞和非阻塞队列的并发安全原理是什么？.md.html">37 阻塞和非阻塞队列的并发安全原理是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/37 阻塞和非阻塞队列的并发安全原理是什么？.md.html">37 阻塞和非阻塞队列的并发安全原理是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/38 如何选择适合自己的阻塞队列？.md.html">38 如何选择适合自己的阻塞队列？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/38 如何选择适合自己的阻塞队列？.md.html">38 如何选择适合自己的阻塞队列？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/39 原子类是如何利用 CAS 保证线程安全的？.md.html">39 原子类是如何利用 CAS 保证线程安全的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/39 原子类是如何利用 CAS 保证线程安全的？.md.html">39 原子类是如何利用 CAS 保证线程安全的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/40 AtomicInteger 在高并发下性能不好，如何解决？为什么？.md.html">40 AtomicInteger 在高并发下性能不好，如何解决？为什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/40 AtomicInteger 在高并发下性能不好，如何解决？为什么？.md.html">40 AtomicInteger 在高并发下性能不好，如何解决？为什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/41 原子类和 volatile 有什么异同？.md.html">41 原子类和 volatile 有什么异同？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/41 原子类和 volatile 有什么异同？.md.html">41 原子类和 volatile 有什么异同？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/42 AtomicInteger 和 synchronized 的异同点？.md.html">42 AtomicInteger 和 synchronized 的异同点？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/42 AtomicInteger 和 synchronized 的异同点？.md.html">42 AtomicInteger 和 synchronized 的异同点？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/43 Java 8 中 Adder 和 Accumulator 有什么区别？.md.html">43 Java 8 中 Adder 和 Accumulator 有什么区别？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/43 Java 8 中 Adder 和 Accumulator 有什么区别？.md.html">43 Java 8 中 Adder 和 Accumulator 有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/44 ThreadLocal 适合用在哪些实际生产的场景中？.md.html">44 ThreadLocal 适合用在哪些实际生产的场景中？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/44 ThreadLocal 适合用在哪些实际生产的场景中？.md.html">44 ThreadLocal 适合用在哪些实际生产的场景中？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？.md.html">45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？.md.html">45 ThreadLocal 是用来解决共享资源的多线程访问的问题吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？.md.html">46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？.md.html">46 多个 ThreadLocal 在 Thread 中的 threadlocals 里是怎么存储的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？.md.html">47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？.md.html">47 内存泄漏——为何每次用完 ThreadLocal 都要调用 remove()？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/48 Callable 和 Runnable 的不同？.md.html">48 Callable 和 Runnable 的不同？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/48 Callable 和 Runnable 的不同？.md.html">48 Callable 和 Runnable 的不同？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/49 Future 的主要功能是什么？.md.html">49 Future 的主要功能是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/49 Future 的主要功能是什么？.md.html">49 Future 的主要功能是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/50 使用 Future 有哪些注意点？Future 产生新的线程了吗？.md.html">50 使用 Future 有哪些注意点？Future 产生新的线程了吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/50 使用 Future 有哪些注意点？Future 产生新的线程了吗？.md.html">50 使用 Future 有哪些注意点？Future 产生新的线程了吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/51 如何利用 CompletableFuture 实现“旅游平台”问题？.md.html">51 如何利用 CompletableFuture 实现“旅游平台”问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/51 如何利用 CompletableFuture 实现“旅游平台”问题？.md.html">51 如何利用 CompletableFuture 实现“旅游平台”问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/52 信号量能被 FixedThreadPool 替代吗？.md.html">52 信号量能被 FixedThreadPool 替代吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/52 信号量能被 FixedThreadPool 替代吗？.md.html">52 信号量能被 FixedThreadPool 替代吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/53 CountDownLatch 是如何安排线程执行顺序的？.md.html">53 CountDownLatch 是如何安排线程执行顺序的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/53 CountDownLatch 是如何安排线程执行顺序的？.md.html">53 CountDownLatch 是如何安排线程执行顺序的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/54 CyclicBarrier 和 CountdownLatch 有什么异同？.md.html">54 CyclicBarrier 和 CountdownLatch 有什么异同？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/54 CyclicBarrier 和 CountdownLatch 有什么异同？.md.html">54 CyclicBarrier 和 CountdownLatch 有什么异同？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/55 Condition、object.wait() 和 notify() 的关系？.md.html">55 Condition、object.wait() 和 notify() 的关系？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/55 Condition、object.wait() 和 notify() 的关系？.md.html">55 Condition、object.wait() 和 notify() 的关系？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/56 讲一讲什么是 Java 内存模型？.md.html">56 讲一讲什么是 Java 内存模型？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/56 讲一讲什么是 Java 内存模型？.md.html">56 讲一讲什么是 Java 内存模型？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/57 什么是指令重排序？为什么要重排序？.md.html">57 什么是指令重排序？为什么要重排序？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/57 什么是指令重排序？为什么要重排序？.md.html">57 什么是指令重排序？为什么要重排序？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/58 Java 中的原子操作有哪些注意事项？.md.html">58 Java 中的原子操作有哪些注意事项？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/58 Java 中的原子操作有哪些注意事项？.md.html">58 Java 中的原子操作有哪些注意事项？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/59 什么是“内存可见性”问题？.md.html">59 什么是“内存可见性”问题？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/59 什么是“内存可见性”问题？.md.html">59 什么是“内存可见性”问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/60 主内存和工作内存的关系？.md.html">60 主内存和工作内存的关系？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/60 主内存和工作内存的关系？.md.html">60 主内存和工作内存的关系？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/61 什么是 happens-before 规则？.md.html">61 什么是 happens-before 规则？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/61 什么是 happens-before 规则？.md.html">61 什么是 happens-before 规则？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/62 volatile 的作用是什么？与 synchronized 有什么异同？.md.html">62 volatile 的作用是什么？与 synchronized 有什么异同？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/62 volatile 的作用是什么？与 synchronized 有什么异同？.md.html">62 volatile 的作用是什么？与 synchronized 有什么异同？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/63 单例模式的双重检查锁模式为什么必须加 volatile？.md.html">63 单例模式的双重检查锁模式为什么必须加 volatile？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/63 单例模式的双重检查锁模式为什么必须加 volatile？.md.html">63 单例模式的双重检查锁模式为什么必须加 volatile？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/64 你知道什么是 CAS 吗？.md.html">64 你知道什么是 CAS 吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/64 你知道什么是 CAS 吗？.md.html">64 你知道什么是 CAS 吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/65 CAS 和乐观锁的关系，什么时候会用到 CAS？.md.html">65 CAS 和乐观锁的关系，什么时候会用到 CAS？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/65 CAS 和乐观锁的关系，什么时候会用到 CAS？.md.html">65 CAS 和乐观锁的关系，什么时候会用到 CAS？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/66 CAS 有什么缺点？.md.html">66 CAS 有什么缺点？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/66 CAS 有什么缺点？.md.html">66 CAS 有什么缺点？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/67 如何写一个必然死锁的例子？.md.html">67 如何写一个必然死锁的例子？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/67 如何写一个必然死锁的例子？.md.html">67 如何写一个必然死锁的例子？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/68 发生死锁必须满足哪 4 个条件？.md.html">68 发生死锁必须满足哪 4 个条件？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/68 发生死锁必须满足哪 4 个条件？.md.html">68 发生死锁必须满足哪 4 个条件？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/69 如何用命令行和代码定位死锁？.md.html">69 如何用命令行和代码定位死锁？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/69 如何用命令行和代码定位死锁？.md.html">69 如何用命令行和代码定位死锁？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/70 有哪些解决死锁问题的策略？.md.html">70 有哪些解决死锁问题的策略？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/70 有哪些解决死锁问题的策略？.md.html">70 有哪些解决死锁问题的策略？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/71 讲一讲经典的哲学家就餐问题.md.html">71 讲一讲经典的哲学家就餐问题.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/71 讲一讲经典的哲学家就餐问题.md.html">71 讲一讲经典的哲学家就餐问题</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/72 final 的三种用法是什么？.md.html">72 final 的三种用法是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/72 final 的三种用法是什么？.md.html">72 final 的三种用法是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/73 为什么加了 final 却依然无法拥有“不变性”？.md.html">73 为什么加了 final 却依然无法拥有“不变性”？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/73 为什么加了 final 却依然无法拥有“不变性”？.md.html">73 为什么加了 final 却依然无法拥有“不变性”？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/74 为什么 String 被设计为是不可变的？.md.html">74 为什么 String 被设计为是不可变的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/74 为什么 String 被设计为是不可变的？.md.html">74 为什么 String 被设计为是不可变的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/75 为什么需要 AQS？AQS 的作用和重要性是什么？.md.html">75 为什么需要 AQS？AQS 的作用和重要性是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/75 为什么需要 AQS？AQS 的作用和重要性是什么？.md.html">75 为什么需要 AQS？AQS 的作用和重要性是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/76 AQS 的内部原理是什么样的？.md.html">76 AQS 的内部原理是什么样的？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/76 AQS 的内部原理是什么样的？.md.html">76 AQS 的内部原理是什么样的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/77 AQS 在 CountDownLatch 等类中的应用原理是什么？.md.html">77 AQS 在 CountDownLatch 等类中的应用原理是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/77 AQS 在 CountDownLatch 等类中的应用原理是什么？.md.html">77 AQS 在 CountDownLatch 等类中的应用原理是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Java 并发编程 78 讲-完/78 一份独家的 Java 并发工具图谱.md.html">78 一份独家的 Java 并发工具图谱.md.html</a>
-
-
-
+                    <a href="/专栏/Java 并发编程 78 讲-完/78 一份独家的 Java 并发工具图谱.md.html">78 一份独家的 Java 并发工具图谱</a>
                 </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>36 有哪几种常见的阻塞队列？</h1>
-
 <p>本课时我们主要讲解有哪几种常见的阻塞队列。</p>
-
 <p>BlockingQueue 接口的实现类都被放在了 J.U.C 包中，本课时将对常见的和常用的实现类进行介绍，包括 ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue、PriorityBlockingQueue，以及 DelayQueue。</p>
-
 <h3>ArrayBlockingQueue</h3>
-
 <p>让我们先从最基础的 ArrayBlockingQueue 说起。ArrayBlockingQueue 是最典型的<strong>有界队列</strong>，其内部是用数组存储元素的，利用 ReentrantLock 实现线程安全。</p>
-
 <p>我们在创建它的时候就需要指定它的容量，之后也不可以再扩容了，在构造函数中我们同样可以指定是否是公平的，代码如下：</p>
-
 <pre><code class="language-java">ArrayBlockingQueue(int capacity, boolean fair)
-
 </code></pre>
-
 <p>第一个参数是容量，第二个参数是是否公平。正如 ReentrantLock 一样，如果 ArrayBlockingQueue 被设置为非公平的，那么就存在插队的可能；如果设置为公平的，那么等待了最长时间的线程会被优先处理，其他线程不允许插队，不过这样的公平策略同时会带来一定的性能损耗，因为非公平的吞吐量通常会高于公平的情况。</p>
-
 <h3>LinkedBlockingQueue</h3>
-
 <p>正如名字所示，这是一个内部用链表实现的 BlockingQueue。如果我们不指定它的初始容量，那么它容量默认就为整型的最大值 Integer.MAX_VALUE，由于这个数非常大，我们通常不可能放入这么多的数据，所以 LinkedBlockingQueue 也被称作无界队列，代表它几乎没有界限。</p>
-
 <h3>SynchronousQueue</h3>
-
 <p><img src="assets/Cgq2xl4lhhSAZIuZAABMMZW2RVk163.png" alt="img" /></p>
-
 <p>如图所示，SynchronousQueue 最大的不同之处在于，它的容量为 0，所以没有一个地方来暂存元素，导致每次取数据都要先阻塞，直到有数据被放入；同理，每次放数据的时候也会阻塞，直到有消费者来取。</p>
-
 <p>需要注意的是，SynchronousQueue 的容量不是 1 而是 0，因为 SynchronousQueue 不需要去持有元素，它所做的就是直接传递（direct handoff）。由于每当需要传递的时候，SynchronousQueue 会把元素直接从生产者传给消费者，在此期间并不需要做存储，所以如果运用得当，它的效率是很高的。</p>
-
 <p>另外，由于它的容量为 0，所以相比于一般的阻塞队列，SynchronousQueue 的很多方法的实现是很有意思的，我们来举几个例子：</p>
-
 <p>SynchronousQueue 的 peek 方法永远返回 null，代码如下：</p>
-
 <pre><code class="language-java">public E peek() {
-
-
-
     return null;
-
-
-
 }
-
 </code></pre>
-
 <p>因为 peek 方法的含义是取出头结点，但是 SynchronousQueue 的容量是 0，所以连头结点都没有，peek 方法也就没有意义，所以始终返回 null。同理，element 始终会抛出 NoSuchElementException 异常。</p>
-
 <p>而 SynchronousQueue 的 size 方法始终返回 0，因为它内部并没有容量，代码如下：</p>
-
 <pre><code class="language-java">public int size() {
-
-
-
     return 0;
-
-
-
 }
-
 </code></pre>
-
 <p>直接 return 0，同理，isEmpty 方法始终返回 true：</p>
-
 <pre><code class="language-java">public boolean isEmpty() {
-
-
-
     return true;
-
-
-
 }
-
 </code></pre>
-
 <p>因为它始终都是空的。</p>
-
 <h3>PriorityBlockingQueue</h3>
-
 <p>前面我们所说的 ArrayBlockingQueue 和 LinkedBlockingQueue 都是采用先进先出的顺序进行排序，可是如果有的时候我们需要自定义排序怎么办呢？这时就需要使用 PriorityBlockingQueue。</p>
-
 <p>PriorityBlockingQueue 是一个支持优先级的无界阻塞队列，可以通过自定义类实现 compareTo() 方法来指定元素排序规则，或者初始化时通过构造器参数 Comparator 来指定排序规则。同时，插入队列的对象必须是可比较大小的，也就是 Comparable 的，否则会抛出 ClassCastException 异常。</p>
-
 <p>它的 take 方法在队列为空的时候会阻塞，但是正因为它是无界队列，而且会自动扩容，所以它的队列永远不会满，所以它的 put 方法永远不会阻塞，添加操作始终都会成功，也正因为如此，它的成员变量里只有一个 Condition：</p>
-
 <pre><code class="language-java">private final Condition notEmpty;
-
 </code></pre>
-
 <p>这和之前的 ArrayBlockingQueue 拥有两个 Condition（分别是 notEmpty 和 notFull）形成了鲜明的对比，我们的 PriorityBlockingQueue 不需要 notFull，因为它永远都不会满，真是“有空间就可以任性”。</p>
-
 <h3>DelayQueue</h3>
-
 <p>DelayQueue 这个队列比较特殊，具有“延迟”的功能。我们可以设定让队列中的任务延迟多久之后执行，比如 10 秒钟之后执行，这在例如“30 分钟后未付款自动取消订单”等需要延迟执行的场景中被大量使用。</p>
-
 <p>它是无界队列，放入的元素必须实现 Delayed 接口，而 Delayed 接口又继承了 Comparable 接口，所以自然就拥有了比较和排序的能力，代码如下：</p>
-
 <pre><code class="language-java">public interface Delayed extends Comparable&lt;Delayed&gt; {
-
-
-
     long getDelay(TimeUnit unit);
-
-
-
 }
-
 </code></pre>
-
 <p>可以看出这个 Delayed 接口继承自 Comparable，里面有一个需要实现的方法，就是  getDelay。这里的 getDelay 方法返回的是“还剩下多长的延迟时间才会被执行”，如果返回 0 或者负数则代表任务已过期。</p>
-
 <p>元素会根据延迟时间的长短被放到队列的不同位置，越靠近队列头代表越早过期。</p>
-
 <p>DelayQueue 内部使用了 PriorityQueue 的能力来进行排序，而不是自己从头编写，我们在工作中可以学习这种思想，对已有的功能进行复用，不但可以减少开发量，同时避免了“重复造轮子”，更重要的是，对学到的知识进行合理的运用，让知识变得更灵活，做到触类旁通。</p>
-
 <h3>总结</h3>
-
 <p>以上就是本课时的内容，我们对于 ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue、PriorityBlockingQueue 以及 DelayQueue 这些常见的和常用的阻塞队列的特点进行了讲解。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Java 并发编程 78 讲-完/35 阻塞队列包含哪些常用的方法？add、offer、put 等方法的区别？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Java 并发编程 78 讲-完/37 阻塞和非阻塞队列的并发安全原理是什么？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709970c2ca8a3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

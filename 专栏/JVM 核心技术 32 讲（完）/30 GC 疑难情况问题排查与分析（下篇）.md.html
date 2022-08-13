@@ -1,1140 +1,442 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>30 GC 疑难情况问题排查与分析（下篇）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/01 阅读此专栏的正确姿势.md.html">01 阅读此专栏的正确姿势.md.html</a>
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/01 阅读此专栏的正确姿势.md.html">01 阅读此专栏的正确姿势</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/02 环境准备：千里之行，始于足下.md.html">02 环境准备：千里之行，始于足下</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/03 常用性能指标：没有量化，就没有改进.md.html">03 常用性能指标：没有量化，就没有改进</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/04 JVM 基础知识：不积跬步，无以至千里.md.html">04 JVM 基础知识：不积跬步，无以至千里</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/05 Java 字节码技术：不积细流，无以成江河.md.html">05 Java 字节码技术：不积细流，无以成江河</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/06 Java 类加载器：山不辞土，故能成其高.md.html">06 Java 类加载器：山不辞土，故能成其高</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/07 Java 内存模型：海不辞水，故能成其深.md.html">07 Java 内存模型：海不辞水，故能成其深</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html">08 JVM 启动参数详解：博观而约取、厚积而薄发</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html">09 JDK 内置命令行工具：工欲善其事，必先利其器</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html">10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/11 JDWP 简介：十步杀一人，千里不留行.md.html">11 JDWP 简介：十步杀一人，千里不留行</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/12 JMX 与相关工具：山高月小，水落石出.md.html">12 JMX 与相关工具：山高月小，水落石出</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/13 常见的 GC 算法（GC 的背景与原理）.md.html">13 常见的 GC 算法（GC 的背景与原理）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/14 常见的 GC 算法（ParallelCMSG1）.md.html">14 常见的 GC 算法（ParallelCMSG1）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html">15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html">16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/17 GC 日志解读与分析（基础配置）.md.html">17 GC 日志解读与分析（基础配置）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md.html">18 GC 日志解读与分析（实例分析上篇）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/19 GC 日志解读与分析（实例分析中篇）.md.html">19 GC 日志解读与分析（实例分析中篇）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/20 GC 日志解读与分析（实例分析下篇）.md.html">20 GC 日志解读与分析（实例分析下篇）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/21 GC 日志解读与分析（番外篇可视化工具）.md.html">21 GC 日志解读与分析（番外篇可视化工具）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html">22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md.html">23 内存分析与相关工具上篇（内存布局与分析工具）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/24 内存分析与相关工具下篇（常见问题分析）.md.html">24 内存分析与相关工具下篇（常见问题分析）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html">25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html">26 面临复杂问题时的几个高级工具：它山之石，可以攻玉</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/27 JVM 问题排查分析上篇（调优经验）.md.html">27 JVM 问题排查分析上篇（调优经验）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/28 JVM 问题排查分析下篇（案例实战）.md.html">28 JVM 问题排查分析下篇（案例实战）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md.html">29 GC 疑难情况问题排查与分析（上篇）</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/JVM 核心技术 32 讲（完）/30 GC 疑难情况问题排查与分析（下篇）.md.html">30 GC 疑难情况问题排查与分析（下篇）</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/02 环境准备：千里之行，始于足下.md.html">02 环境准备：千里之行，始于足下.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html">31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/03 常用性能指标：没有量化，就没有改进.md.html">03 常用性能指标：没有量化，就没有改进.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html">32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/04 JVM 基础知识：不积跬步，无以至千里.md.html">04 JVM 基础知识：不积跬步，无以至千里.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/05 Java 字节码技术：不积细流，无以成江河.md.html">05 Java 字节码技术：不积细流，无以成江河.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/06 Java 类加载器：山不辞土，故能成其高.md.html">06 Java 类加载器：山不辞土，故能成其高.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/07 Java 内存模型：海不辞水，故能成其深.md.html">07 Java 内存模型：海不辞水，故能成其深.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html">08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html">09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html">10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/11 JDWP 简介：十步杀一人，千里不留行.md.html">11 JDWP 简介：十步杀一人，千里不留行.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/12 JMX 与相关工具：山高月小，水落石出.md.html">12 JMX 与相关工具：山高月小，水落石出.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/13 常见的 GC 算法（GC 的背景与原理）.md.html">13 常见的 GC 算法（GC 的背景与原理）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/14 常见的 GC 算法（ParallelCMSG1）.md.html">14 常见的 GC 算法（ParallelCMSG1）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html">15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html">16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/17 GC 日志解读与分析（基础配置）.md.html">17 GC 日志解读与分析（基础配置）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md.html">18 GC 日志解读与分析（实例分析上篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/19 GC 日志解读与分析（实例分析中篇）.md.html">19 GC 日志解读与分析（实例分析中篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/20 GC 日志解读与分析（实例分析下篇）.md.html">20 GC 日志解读与分析（实例分析下篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/21 GC 日志解读与分析（番外篇可视化工具）.md.html">21 GC 日志解读与分析（番外篇可视化工具）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html">22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md.html">23 内存分析与相关工具上篇（内存布局与分析工具）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/24 内存分析与相关工具下篇（常见问题分析）.md.html">24 内存分析与相关工具下篇（常见问题分析）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html">25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html">26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/27 JVM 问题排查分析上篇（调优经验）.md.html">27 JVM 问题排查分析上篇（调优经验）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/28 JVM 问题排查分析下篇（案例实战）.md.html">28 JVM 问题排查分析下篇（案例实战）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md.html">29 GC 疑难情况问题排查与分析（上篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    <a class="current-tab" href="/专栏/JVM 核心技术 32 讲（完）/30 GC 疑难情况问题排查与分析（下篇）.md.html">30 GC 疑难情况问题排查与分析（下篇）.md.html</a>
-
-                    
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html">31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html">32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>30 GC 疑难情况问题排查与分析（下篇）</h1>
-
 <h3>Weak、Soft 及 Phantom 引用</h3>
-
 <p>另一类影响 GC 的问题是程序中的 non-strong 引用。虽然这类引用在很多情况下可以避免出现 <a href="https://plumbr.eu/outofmemory">OutOfMemoryError</a>，但过量使用也会对 GC 造成严重的影响，反而降低系统性能。</p>
-
 <h4><strong>弱引用的缺点</strong></h4>
-
 <p>首先，弱引用（weak reference）是可以被 GC 强制回收的。当垃圾收集器发现一个弱可达对象（weakly reachable，即指向该对象的引用只剩下弱引用）时，就会将其置入相应的 ReferenceQueue 中，变成可终结的对象。之后可能会遍历这个 reference queue，并执行相应的清理。典型的示例是清除缓存中不再引用的 KEY。</p>
-
 <p>当然，在这个时候我们还可以将该对象赋值给新的强引用，在最后终结和回收前，GC 会再次确认该对象是否可以安全回收。因此，弱引用对象的回收过程是横跨多个 GC 周期的。</p>
-
 <p>实际上弱引用使用的很多。大部分缓存框架都是基于弱引用实现的，所以虽然业务代码中没有直接使用弱引用，但程序中依然会大量存在。</p>
-
 <p>其次，软引用（soft reference）比弱引用更难被垃圾收集器回收。回收软引用没有确切的时间点，由 JVM 自己决定。一般只会在即将耗尽可用内存时，才会回收软引用，以作最后手段。这意味着可能会有更频繁的 Full GC，暂停时间也比预期更长，因为老年代中的存活对象会很多。</p>
-
 <p>最后，使用虚引用（phantom reference）时，必须手动进行内存管理，以标识这些对象是否可以安全地回收。表面上看起来很正常，但实际上并不是这样。javadoc 中写道：</p>
-
 <blockquote>
-
 <p>In order to ensure that a reclaimable object remains so, the referent of a phantom reference may not be retrieved: The get method of a phantom reference always returns null.</p>
-
 <p>为了防止可回收对象的残留，虚引用对象不应该被获取：phantom reference 的 get 方法返回值永远是 null。</p>
-
 </blockquote>
-
 <p>令人惊讶的是，很多开发者忽略了下一段内容（<strong>这才是重点</strong>）：</p>
-
 <blockquote>
-
 <p>Unlike soft and weak references，phantom references are not automatically cleared by the garbage collector as they are enqueued. An object that is reachable via phantom references will remain so until all such references are cleared or themselves become unreachable.</p>
-
 <p>与软引用和弱引用不同，虚引用不会被 GC 自动清除，因为他们被存放到队列中。通过虚引用可达的对象会继续留在内存中，直到调用此引用的 clear 方法，或者引用自身变为不可达。</p>
-
 </blockquote>
-
 <p>也就是说，我们必须手动调用 <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/ref/Reference.html#clear()">clear()</a> 来清除虚引用，否则可能会造成 <a href="https://plumbr.eu/outofmemory">OutOfMemoryError</a> 而导致 JVM 挂掉。使用虚引用的理由是，对于用编程手段来跟踪某个对象何时变为不可达对象，这是唯一的常规手段。和软引用/弱引用不同的是，我们不能“复活”虚可达（phantom-reachable）对象。</p>
-
 <h4><strong>示例</strong></h4>
-
 <p>让我们看<a href="https://github.com/gvsmirnov/java-perv/blob/master/labs-8/src/main/java/ru/gvsmirnov/perv/labs/gc/WeakReferences.java">一个弱引用示例</a>，其中创建了大量的对象，并在 Minor GC 中完成回收。和前面一样，修改提升阀值。可以使用下列 JVM 参数：</p>
-
 <pre><code>-Xmx24m -XX:NewSize=16m -XX:MaxTenuringThreshold=1
-
-
-
 </code></pre>
-
 <p>此时 GC 日志如下所示：</p>
-
 <pre><code>    2.330: [GC (Allocation Failure)  20933K-&gt;8229K(22528K), 0.0033848 secs]
-
     2.335: [GC (Allocation Failure)  20517K-&gt;7813K(22528K), 0.0022426 secs]
-
     2.339: [GC (Allocation Failure)  20101K-&gt;7429K(22528K), 0.0010920 secs]
-
     2.341: [GC (Allocation Failure)  19717K-&gt;9157K(22528K), 0.0056285 secs]
-
     2.348: [GC (Allocation Failure)  21445K-&gt;8997K(22528K), 0.0041313 secs]
-
     2.354: [GC (Allocation Failure)  21285K-&gt;8581K(22528K), 0.0033737 secs]
-
     2.359: [GC (Allocation Failure)  20869K-&gt;8197K(22528K), 0.0023407 secs]
-
     2.362: [GC (Allocation Failure)  20485K-&gt;7845K(22528K), 0.0011553 secs]
-
     2.365: [GC (Allocation Failure)  20133K-&gt;9501K(22528K), 0.0060705 secs]
-
     2.371: [Full GC (Ergonomics)     9501K-&gt;2987K(22528K), 0.0171452 secs]
-
-
-
 </code></pre>
-
 <p>可以看到，Full GC 的次数很少。但如果使用弱引用来指向创建的对象，使用 JVM 参数 <code>-Dweak.refs=true</code>，则情况会发生明显变化。使用弱引用的原因很多，比如在 <code>weak hash map</code> 中将对象作为 Key 的情况。在任何情况下，使用弱引用都可能会导致以下情形：</p>
-
 <pre><code>    2.059: [Full GC (Ergonomics)  20365K-&gt;19611K(22528K), 0.0654090 secs]
-
     2.125: [Full GC (Ergonomics)  20365K-&gt;19711K(22528K), 0.0707499 secs]
-
     2.196: [Full GC (Ergonomics)  20365K-&gt;19798K(22528K), 0.0717052 secs]
-
     2.268: [Full GC (Ergonomics)  20365K-&gt;19873K(22528K), 0.0686290 secs]
-
     2.337: [Full GC (Ergonomics)  20365K-&gt;19939K(22528K), 0.0702009 secs]
-
     2.407: [Full GC (Ergonomics)  20365K-&gt;19995K(22528K), 0.0694095 secs]
-
-
-
 </code></pre>
-
 <p>可以看到，发生了多次 Full GC，比起前一节的示例，GC 时间增加了一个数量级！</p>
-
 <p>这是过早提升的另一个例子，但这次情况更加棘手：问题的根源在于弱引用。这些临死的对象，在添加弱引用之后，被提升到了老年代。但是，他们现在陷入另一次 GC 循环之中，所以需要对其做一些适当的清理。</p>
-
 <p>像之前一样，最简单的办法是增加年轻代的大小，例如指定 JVM 参数 <code>-Xmx64m -XX:NewSize=32m</code>：</p>
-
 <pre><code>    2.328: [GC (Allocation Failure)  38940K-&gt;13596K(61440K)，0.0012818 secs]
-
     2.332: [GC (Allocation Failure)  38172K-&gt;14812K(61440K)，0.0060333 secs]
-
     2.341: [GC (Allocation Failure)  39388K-&gt;13948K(61440K)，0.0029427 secs]
-
     2.347: [GC (Allocation Failure)  38524K-&gt;15228K(61440K)，0.0101199 secs]
-
     2.361: [GC (Allocation Failure)  39804K-&gt;14428K(61440K)，0.0040940 secs]
-
     2.368: [GC (Allocation Failure)  39004K-&gt;13532K(61440K)，0.0012451 secs]
-
-
-
 </code></pre>
-
 <p>这时候，对象在 Minor GC 中就被回收了。</p>
-
 <p>更坏的情况是使用软引用，例如这个<a href="https://github.com/gvsmirnov/java-perv/blob/master/labs-8/src/main/java/ru/gvsmirnov/perv/labs/gc/SoftReferences.java">软引用示例程序</a>。如果程序不是即将发生 OutOfMemoryError，软引用对象就不会被回收。在示例程序中，用软引用替代弱引用，立即出现了更多的 Full GC 事件：</p>
-
 <pre><code>    2.162: [Full GC (Ergonomics)  31561K-&gt;12865K(61440K)，0.0181392 secs]
-
     2.184: [GC (Allocation Failure)  37441K-&gt;17585K(61440K)，0.0024479 secs]
-
     2.189: [GC (Allocation Failure)  42161K-&gt;27033K(61440K)，0.0061485 secs]
-
     2.195: [Full GC (Ergonomics)  27033K-&gt;14385K(61440K)，0.0228773 secs]
-
     2.221: [GC (Allocation Failure)  38961K-&gt;20633K(61440K)，0.0030729 secs]
-
     2.227: [GC (Allocation Failure)  45209K-&gt;31609K(61440K)，0.0069772 secs]
-
     2.234: [Full GC (Ergonomics)  31609K-&gt;15905K(61440K)，0.0257689 secs]
-
-
-
 </code></pre>
-
 <p>最有趣的是<a href="https://github.com/gvsmirnov/java-perv/blob/master/labs-8/src/main/java/ru/gvsmirnov/perv/labs/gc/PhantomReferences.java">虚引用示例</a>中的虚引用，使用同样的 JVM 参数启动，其结果和弱引用示例非常相似。实际上，Full GC 暂停的次数会小得多，原因前面说过，他们有不同的终结方式。</p>
-
 <p>如果禁用虚引用清理，增加 JVM 启动参数（<code>-Dno.ref.clearing=true</code>），则可以看到：</p>
-
 <pre><code>    4.180: [Full GC (Ergonomics)  57343K-&gt;57087K(61440K)，0.0879851 secs]
-
     4.269: [Full GC (Ergonomics)  57089K-&gt;57088K(61440K)，0.0973912 secs]
-
     4.366: [Full GC (Ergonomics)  57091K-&gt;57089K(61440K)，0.0948099 secs]
-
-
-
 </code></pre>
-
 <p>主线程中很快抛出异常：</p>
-
 <pre><code>java.lang.OutOfMemoryError: Java heap space
-
-
-
 </code></pre>
-
 <p>使用虚引用时要小心谨慎，并及时清理虚可达对象。如果不清理，很可能会发生 <a href="https://plumbr.eu/outofmemory">OutOfMemoryError</a>。</p>
-
 <p>请相信我们的经验教训：处理 reference queue 的线程中如果没 catch 住异常，系统很快就会被整挂了。</p>
-
 <h4><strong>使用非强引用的影响</strong></h4>
-
 <p>建议使用 JVM 参数 <code>-XX:+PrintReferenceGC</code> 来看看各种引用对 GC 的影响。如果将此参数用于启动<a href="https://github.com/gvsmirnov/java-perv/blob/master/labs-8/src/main/java/ru/gvsmirnov/perv/labs/gc/WeakReferences.java">弱引用示例</a>，将会看到：</p>
-
 <pre><code>    2.173: [Full GC (Ergonomics)
-
             2.234: [SoftReference，0 refs，0.0000151 secs]
-
             2.234: [WeakReference，2648 refs，0.0001714 secs]
-
             2.234: [FinalReference，1 refs，0.0000037 secs]
-
             2.234: [PhantomReference，0 refs，0 refs，0.0000039 secs]
-
             2.234: [JNI Weak Reference，0.0000027 secs]
-
                 [PSYoungGen: 9216K-&gt;8676K(10752K)]
-
                 [ParOldGen: 12115K-&gt;12115K(12288K)]
-
                 21331K-&gt;20792K(23040K),
-
             [Metaspace: 3725K-&gt;3725K(1056768K)],
-
             0.0766685 secs]
-
         [Times: user=0.49 sys=0.01，real=0.08 secs]
-
     2.250: [Full GC (Ergonomics)
-
             2.307: [SoftReference，0 refs，0.0000173 secs]
-
             2.307: [WeakReference，2298 refs，0.0001535 secs]
-
             2.307: [FinalReference，3 refs，0.0000043 secs]
-
             2.307: [PhantomReference，0 refs，0 refs，0.0000042 secs]
-
             2.307: [JNI Weak Reference，0.0000029 secs]
-
                 [PSYoungGen: 9215K-&gt;8747K(10752K)]
-
                 [ParOldGen: 12115K-&gt;12115K(12288K)]
-
                 21331K-&gt;20863K(23040K),
-
             [Metaspace: 3725K-&gt;3725K(1056768K)],
-
             0.0734832 secs]
-
         [Times: user=0.52 sys=0.01，real=0.07 secs]
-
     2.323: [Full GC (Ergonomics)
-
             2.383: [SoftReference，0 refs，0.0000161 secs]
-
             2.383: [WeakReference，1981 refs，0.0001292 secs]
-
             2.383: [FinalReference，16 refs，0.0000049 secs]
-
             2.383: [PhantomReference，0 refs，0 refs，0.0000040 secs]
-
             2.383: [JNI Weak Reference，0.0000027 secs]
-
                 [PSYoungGen: 9216K-&gt;8809K(10752K)]
-
                 [ParOldGen: 12115K-&gt;12115K(12288K)]
-
                 21331K-&gt;20925K(23040K),
-
             [Metaspace: 3725K-&gt;3725K(1056768K)],
-
             0.0738414 secs]
-
         [Times: user=0.52 sys=0.01，real=0.08 secs]
-
-
-
 </code></pre>
-
 <p>只有确定 GC 对应用的吞吐量和延迟造成影响之后，才应该花心思来分析这些信息，审查这部分日志。通常情况下，每次 GC 清理的引用数量都是很少的，大部分情况下为 0。</p>
-
 <p>如果 GC 花了较多时间来清理这类引用，或者清除了很多的此类引用，就需要进一步观察和分析了。</p>
-
 <h4><strong>解决方案</strong></h4>
-
 <p>如果程序确实碰到了 <code>mis-</code>、<code>ab-</code> 等问题或者滥用 weak/soft/phantom 引用，一般都要修改程序的实现逻辑。每个系统不一样，因此很难提供通用的指导建议，但有一些常用的经验办法：</p>
-
 <ul>
-
 <li>弱引用（Weak references）：如果某个内存池的使用量增大，造成了性能问题，那么增加这个内存池的大小（可能也要增加堆内存的最大容量）。如同示例中所看到的，增加堆内存的大小，以及年轻代的大小，可以减轻症状。</li>
-
 <li>软引用（Soft references）：如果确定问题的根源是软引用，唯一的解决办法是修改程序源码，改变内部实现逻辑。</li>
-
 <li>虚引用（Phantom references）：请确保在程序中调用了虚引用的 clear 方法。编程中很容易忽略某些虚引用，或者清理的速度跟不上生产的速度，又或者清除引用队列的线程挂了，就会对 GC 造成很大压力，最终可能引起 <a href="http://www.oracle.com/technetwork/articles/javaee/index-jsp-136424.html">OutOfMemoryError</a>。</li>
-
 </ul>
-
 <h3>其他性能问题的案例</h3>
-
 <p>前面介绍了最常见的 GC 性能问题，本节介绍一些不常见、但也可能会导致系统故障的问题。</p>
-
 <h4><strong>RMI 与 GC</strong></h4>
-
 <p>如果系统提供或者消费 <a href="http://www.oracle.com/technetwork/articles/javaee/index-jsp-136424.html">RMI</a> 服务，则 JVM 会定期执行 Full GC 来确保本地未使用的对象在另一端也不占用空间。即使你的代码中没有发布 RMI 服务，但第三方或者工具库也可能会打开 RMI 终端。最常见的元凶是 JMX，如果通过 JMX 连接到远端，底层则会使用 RMI 发布数据。</p>
-
 <p>问题是有很多不必要的周期性 Full GC。查看老年代的使用情况，一般是没有内存压力，其中还存在大量的空闲区域，但 Full GC 就是被触发了，也就会暂停所有的应用线程。</p>
-
 <p>这种周期性调用 System.gc() 删除远程引用的行为，是在 sun.rmi.transport.ObjectTable 类中，通过 sun.misc.GC.requestLatency(long gcInterval) 调用的。</p>
-
 <p>对许多应用来说，根本没必要，甚至对性能有害。禁止这种周期性的 GC 行为，可以使用以下 JVM 参数：</p>
-
 <pre><code>    java -Dsun.rmi.dgc.server.gcInterval=9223372036854775807L
-
         -Dsun.rmi.dgc.client.gcInterval=9223372036854775807L
-
         com.yourcompany.YourApplication
-
-
-
 </code></pre>
-
 <p>这让 Long.MAX_VALUE 毫秒之后，才调用 <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html#gc()">System.gc()</a>，实际运行的系统可能永远都不会触发。</p>
-
 <pre><code>    // ObjectTable.class
-
     private static final long gcInterval =
-
     ((Long)AccessController.doPrivileged(
-
         new GetLongAction(&quot;sun.rmi.dgc.server.gcInterval&quot;，3600000L)
-
         )).longValue();
-
-
-
 </code></pre>
-
 <p>可以看到，默认值为 3600000L，也就是 1 小时触发一次 Full GC。</p>
-
 <p>另一种方式是指定 JVM 参数 <code>-XX:+DisableExplicitGC</code>，禁止显式地调用 System.gc()。但我们<strong>强烈反对</strong>这种方式，因为我们不清楚这么做是否埋有地雷，例如第三方库里需要显式调研。</p>
-
 <h4><strong>JVMTI tagging 与 GC</strong></h4>
-
 <p>如果在程序启动时指定了 Java Agent（<code>-javaagent</code>），Agent 就可以使用 <a href="https://docs.oracle.com/javase/7/docs/platform/jvmti/jvmti.html#Heap">JVMTI tagging</a> 标记堆中的对象。如果 tagging 标记了大量的对象，很可能会引起 GC 性能问题，导致延迟增加，以及吞吐量降低。</p>
-
 <p>问题发生在 native 代码中，<code>JvmtiTagMap::do_weak_oops</code> 在每次 GC 时，都会遍历所有标标记（tag），并执行一些比较耗时的操作。更坑的是，这种操作是串行执行的。</p>
-
 <p>如果存在大量的标记，就意味着 GC 时有很大一部分工作是单线程执行的，GC 暂停时间可能会增加一个数量级。</p>
-
 <p>检查是否因为 Java Agent 增加了 GC 暂停时间，可以使用诊断参数 <code>–XX:+TraceJVMTIObjectTagging</code>。</p>
-
 <p>启用跟踪之后，可以估算出内存中 的标记映射了多少 native 内存，以及遍历所消耗的时间。</p>
-
 <p>如果你不是 需要使用的这个 agent 的作者，那一般是搞不定这类问题的。除了提 Bug 之外你什么都做不了。如果发生了这种情况，请建议厂商清理不必要的标记。（以前我们就在生产环境里发现 APM 厂商的 Agent 偶尔会导致 JVM OOM 崩溃。）</p>
-
 <h4><strong>巨无霸对象的分配（Humongous Allocations）</strong></h4>
-
 <p>如果使用 G1 垃圾收集算法，会产生一种巨无霸对象引起的 GC 性能问题。</p>
-
 <blockquote>
-
 <p><strong>说明</strong>：在 G1 中，巨无霸对象是指所占空间超过一个小堆区（region）50% 的对象。</p>
-
 </blockquote>
-
 <p>频繁地创建巨无霸对象，无疑会造成 GC 的性能问题，看看 G1 的处理方式：</p>
-
 <ul>
-
 <li>如果某个 region 中含有巨无霸对象，则巨无霸对象后面的空间将不会被分配。如果所有巨无霸对象都超过某个比例，则未使用的空间就会引发内存碎片问题。</li>
-
 <li>G1 没有对巨无霸对象进行优化。这在 JDK 8 以前是个特别棘手的问题——在 <a href="https://bugs.openjdk.java.net/browse/JDK-8027959"><strong>Java 1.8u40</strong></a> 之前的版本中，巨无霸对象所在 region 的回收只能在 Full GC 中进行。最新版本的 Hotspot JVM，在 marking 阶段之后的 cleanup 阶段中释放巨无霸区间，所以这个问题在新版本 JVM 中的影响已大大降低。</li>
-
 </ul>
-
 <p>要监控是否存在巨无霸对象，可以打开 GC 日志，使用的命令如下：</p>
-
 <pre><code>    java -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
-
         -XX:+PrintReferenceGC -XX:+UseG1GC
-
         -XX:+PrintAdaptiveSizePolicy -Xmx128m
-
         MyClass
-
-
-
 </code></pre>
-
 <p>GC 日志中可能会发现这样的部分：</p>
-
 <pre><code>     0.106: [G1Ergonomics (Concurrent Cycles)
-
             request concurrent cycle initiation,
-
             reason: occupancy higher than threshold,
-
             occupancy: 60817408 bytes,
-
             allocation request: 1048592 bytes,
-
             threshold: 60397965 bytes (45.00 %),
-
             source: concurrent humongous allocation]
-
      0.106: [G1Ergonomics (Concurrent Cycles)
-
             request concurrent cycle initiation,
-
             reason: requested by GC cause,
-
             GC cause: G1 Humongous Allocation]
-
      0.106: [G1Ergonomics (Concurrent Cycles)
-
             initiate concurrent cycle,
-
             reason: concurrent cycle initiation requested]
-
      0.106: [GC pause (G1 Humongous Allocation)
-
             (young) (initial-mark)
-
             0.106: [G1Ergonomics (CSet Construction)
-
                 start choosing CSet,
-
                 _pending_cards: 0,
-
                 predicted base
-
                 time: 10.00 ms,
-
                 remaining time: 190.00 ms,
-
                 target pause time: 200.00 ms]
-
-
-
 </code></pre>
-
 <p>这样的日志就是证据，表明程序中确实创建了巨无霸对象。可以看到 G1 Humongous Allocation 是 GC 暂停的原因。再看前面一点的 <code>allocation request: 1048592 bytes</code>，可以发现程序试图分配一个 1048592 字节的对象，这要比巨无霸区域（2MB）的 50% 多出 16 个字节。</p>
-
 <p>第一种解决方式，是修改 region size，以使得大多数的对象不超过 50%，也就不进行巨无霸对象区域的分配。G1 的 region 大小默认值在启动时根据堆内存的大小算出。但也可以指定参数来覆盖默认设置，<code>-XX:G1HeapRegionSize=XX</code>。指定的 region size 必须在 1~32MB 之间，还必须是 2 的幂（2^10=1024=1KB，2^20=1MB，所以 region size 只能是下列值之一：1m、2m、4m、8m、16m、32m）。</p>
-
 <p>这种方式也有副作用，增加 region 的大小也就变相地减少了 region 的数量，所以需要谨慎使用，最好进行一些测试，看看是否改善了吞吐量和延迟。</p>
-
 <p>更好的使用方式是，在程序中限制对象的大小，我们可以在运行时使用内存分析工具，展示出巨无霸对象的信息，以及分配时所在的堆栈跟踪信息。</p>
-
 <h3>总结</h3>
-
 <p>Java 作为一个通用平台，运行在 JVM 上的应用程序多种多样，其启动参数也有上百个，其中有很多会影响到 GC 和性能，所以调优 GC 性能的方法也有很多种。</p>
-
 <p>但是我们也要时刻提醒自己：没有真正的银弹，能满足所有的性能调优指标。</p>
-
 <p>我们需要做的，就是了解这些可能会出现问题的各个要点，掌握常见的排查分析方法和工具。</p>
-
 <p>在碰到类似问题时知道是知其然知其所以然，深入理解 JVM/GC 的工作原理，熟练应用各种手段，观察各种现象，收集各种有用的指标数据，进行定性和定量的分析，找到瓶颈，制定解决方案，进行调优和改进，提高应用系统的性能和稳定性。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709970064f7a3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

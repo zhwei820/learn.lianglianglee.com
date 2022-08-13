@@ -12,9 +12,7 @@
         <!-- theme css & js -->
         <meta name="generator" content="Hexo 4.2.0">
     </head>
-
 <body>
-
 <div class="book-container">
     <div class="book-sidebar">
         <div class="book-brand">
@@ -27,86 +25,53 @@
             <ul class="uncollapsible">
                 <li><a href="/" class="current-tab">首页</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li><a href="../">上一级</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li>
-
-                    <a class="current-tab" href="/极客时间/Java基础36讲.md.html">Java基础36讲.md.html</a>
+                    <a class="current-tab" href="/极客时间/Java基础36讲.md.html">Java基础36讲</a>
                     
-
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲.md.html</a>
-
+                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/Linux性能优化.md.html">Linux性能优化.md.html</a>
-
+                    <a href="/极客时间/Linux性能优化.md.html">Linux性能优化</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲.md.html</a>
-
+                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/从0开始学微服务.md.html">从0开始学微服务.md.html</a>
-
+                    <a href="/极客时间/从0开始学微服务.md.html">从0开始学微服务</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/代码精进之路.md.html">代码精进之路.md.html</a>
-
+                    <a href="/极客时间/代码精进之路.md.html">代码精进之路</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲.md.html</a>
-
+                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略.md.html</a>
-
+                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议.md.html</a>
-
+                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议</a>
                 </li>
             </ul>
-
         </div>
     </div>
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
         <div class="sidebar-toggle-inner"></div>
     </div>
-
     <script>
         function add_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.add('show')
         }
-
         function remove_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.remove('show')
         }
-
         function sidebar_toggle() {
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
             let sidebar = document.querySelector('.book-sidebar')
@@ -121,8 +86,6 @@
                 content.classList.add('extend')
             }
         }
-
-
 function open_sidebar() {
     let sidebar = document.querySelector('.book-sidebar')
     let overlay = document.querySelector('.off-canvas-overlay')
@@ -135,9 +98,7 @@ function hide_canvas() {
     sidebar.classList.remove('show')
     overlay.classList.remove('show')
 }
-
     </script>
-
     <div class="off-canvas-content">
         <div class="columns">
             <div class="column col-12 col-lg-12">
@@ -217,7 +178,6 @@ jaotc --output libjava.base.so --module java.base
 </code></pre>
 <p>然后，在启动时直接指定就可以了。</p>
 <pre><code>java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
-
 </code></pre>
 <p>而且，Oracle JDK 支持分层编译和 AOT 协作使用，这两者并不是二选一的关系。如果你有兴趣，可以参考相关文档：<a href="https://openjdk.java.net/jeps/295">http://openjdk.java.net/jeps/295</a>。AOT 也不仅仅是只有这一种方式，业界早就有第三方工具（如 GCJ、Excelsior JET）提供相关功能。</p>
 <p>另外，JVM 作为一个强大的平台，不仅仅只有 Java 语言可以运行在 JVM 上，本质上合规的字节码都可以运行，Java 语言自身也为此提供了便利，我们可以看到类似 Clojure、Scala、Groovy、JRuby、Jython 等大量 JVM 语言，活跃在不同的场景。</p>
@@ -601,11 +561,9 @@ ${JAVA_HOME}/bin/javap -v StringConcat.class
 <p>看起来很不错是吧？但实际情况估计会让你大跌眼镜。一般使用 Java 6 这种历史版本，并不推荐大量使用 intern，为什么呢？魔鬼存在于细节中，被缓存的字符串是存在所谓 PermGen 里的，也就是臭名昭著的“永久代”，这个空间是很有限的，也基本不会被 FullGC 之外的垃圾收集照顾到。所以，如果使用不当，OOM 就会光顾。</p>
 <p>在后续版本中，这个缓存被放置在堆中，这样就极大避免了永久代占满的问题，甚至永久代在 JDK 8 中被 MetaSpace（元数据区）替代了。而且，默认缓存大小也在不断地扩大中，从最初的 1009，到 7u40 以后被修改为 60013。你可以使用下面的参数直接打印具体数字，可以拿自己的 JDK 立刻试验一下。</p>
 <pre><code>-XX:+PrintStringTableStatistics
-
 </code></pre>
 <p>你也可以使用下面的 JVM 参数手动调整大小，但是绝大部分情况下并不需要调整，除非你确定它的大小已经影响了操作效率。</p>
 <pre><code>-XX:StringTableSize=N
-
 </code></pre>
 <p>Intern 是一种<strong>显式地排重机制</strong>，但是它也有一定的副作用，因为需要开发者写代码时明确调用，一是不方便，每一个都显式调用是非常麻烦的；另外就是我们很难保证效率，应用开发阶段很难清楚地预计字符串的重复情况，有人认为这是一种污染代码的实践。</p>
 <p>幸好在 Oracle JDK 8u20 之后，推出了一个新的特性，也就是 G1 GC 下的字符串排重。它是通过将相同数据的字符串指向同一份数据来做到的，是 JVM 底层的改变，并不需要 Java 类库做什么修改。</p>
@@ -664,7 +622,6 @@ ${JAVA_HOME}/bin/javap -v StringConcat.class
 </code></pre>
 <p>因为反射机制使用广泛，根据社区讨论，目前，Java 9 仍然保留了兼容 Java 8 的行为，但是很有可能在未来版本，完全启用前面提到的针对 setAccessible 的限制，即只有当被反射操作的模块和指定的包对反射调用者模块 Open，才能使用 setAccessible，我们可以使用下面参数显式设置。</p>
 <pre><code>--illegal-access={ permit | warn | deny }
-
 </code></pre>
 <p>\2. 动态代理</p>
 <p>前面的问题问到了动态代理，我们一起看看，它到底是解决什么问题？</p>
@@ -794,7 +751,6 @@ java/lang/Integer.intValue:()I
 <p>首先，继续深挖缓存，Integer 的缓存范围虽然默认是 -128 到 127，但是在特别的应用场景，比如我们明确知道应用会频繁使用更大的数值，这时候应该怎么办呢？</p>
 <p>缓存上限值实际是可以根据需要调整的，JVM 提供了参数设置：</p>
 <pre><code>-XX:AutoBoxCacheMax=N
-
 </code></pre>
 <p>这些实现，都体现在<a href="http://hg.openjdk.java.net/jdk/jdk/file/26ac622a4cab/src/java.base/share/classes/java/lang/Integer.java">java.lang.Integer</a>源码之中，并实现在 IntegerCache 的静态初始化块里。</p>
 <pre><code>private static class IntegerCache {
@@ -891,11 +847,9 @@ java/lang/Integer.intValue:()I
 </ul>
 <p>我今天介绍的这些集合类，都不是线程安全的，对于 java.util.concurrent 里面的线程安全容器，我在专栏后面会去介绍。但是，并不代表这些集合完全不能支持并发编程的场景，在 Collections 工具类中，提供了一系列的 synchronized 方法，比如</p>
 <pre><code>static &lt;T&gt; List&lt;T&gt; synchronizedList(List&lt;T&gt; list)
-
 </code></pre>
 <p>我们完全可以利用类似方法来实现基本的线程安全集合：</p>
 <pre><code>List list = Collections.synchronizedList(new ArrayList());
-
 </code></pre>
 <p>它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronizd 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。</p>
 <p>另外一个经常会被考察到的问题，就是理解 Java 提供的默认排序算法，具体是什么排序方式以及设计思路等。</p>
@@ -915,7 +869,6 @@ list.add(&quot;World&quot;);
 </code></pre>
 <p>而利用新的容器静态工厂方法，一句代码就够了，并且保证了不可变性。</p>
 <pre><code>List&lt;String&gt; simpleList = List.of(&quot;Hello&quot;,&quot;world&quot;);
-
 </code></pre>
 <p>更进一步，通过各种 of 静态工厂方法创建的实例，还应用了一些我们所谓的最佳实践，比如，它是不可变的，符合我们对线程安全的需求；它因为不需要考虑扩容，所以空间上更加紧凑等。</p>
 <p>如果我们去看 of 方法的源码，你还会发现一个特别有意思的地方：我们知道 Java 已经支持所谓的可变参数（varargs），但是官方类库还是提供了一系列特定参数长度的方法，看起来似乎非常不优雅，为什么呢？这其实是为了最优的性能，JVM 在处理变长参数的时候会有明显的额外开销，如果你需要实现性能敏感的 API，也可以进行参考。</p>
@@ -1062,7 +1015,6 @@ public class LinkedHashMapSample {
 <li>具体键值对在哈希表中的位置（数组 index）取决于下面的位运算：</li>
 </ul>
 <pre><code>i = (n - 1) &amp; hash
-
 </code></pre>
 <p>仔细观察哈希值的源头，我们会发现，它并不是 key 本身的 hashCode，而是来自于 HashMap 内部的另外一个 hash 方法。注意，为什么这里需要将高位数据移位到低位进行异或运算呢？<strong>这是因为有些数据计算出的哈希值差异主要在高位，而 HashMap 里的哈希寻址是忽略容量以上的高位的，那么这种处理就可以有效避免类似情况下的哈希碰撞。</strong></p>
 <pre><code>static final int hash(Object kye) {
@@ -1425,13 +1377,11 @@ public class LinkedHashMapSample {
 <p>Selector 同样是基于底层操作系统机制，不同模式、不同版本都存在区别，例如，在最新的代码库里，相关实现如下：</p>
 <p>Linux 上依赖于 epoll（<a href="http://hg.openjdk.java.net/jdk/jdk/file/d8327f838b88/src/java.base/linux/classes/sun/nio/ch/EPollSelectorImpl.java">http://hg.openjdk.java.net/jdk/jdk/file/d8327f838b88/src/java.base/linux/classes/sun/nio/ch/EPollSelectorImpl.java</a>）。</p>
 <pre><code>Windows 上 NIO2（AIO）模式则是依赖于 iocp（http://hg.openjdk.java.net/jdk/jdk/file/d8327f838b88/src/java.base/windows/classes/sun/nio/ch/Iocp.java）。
-
 </code></pre>
 <ul>
 <li>Chartset，提供 Unicode 字符串定义，NIO 也提供了相应的编解码器等，例如，通过下面的方式进行字符串到 ByteBuffer 的转换：</li>
 </ul>
 <pre><code>Charset.defaultCharset().encode(&quot;Hello world!&quot;));
-
 </code></pre>
 <p>2.NIO 能解决什么问题？</p>
 <p>下面我通过一个典型场景，来分析为什么需要 NIO，为什么需要多路复用。设想，我们需要实现一个服务器应用，只简单要求能够同时服务多个客户端请求即可。</p>
@@ -1711,7 +1661,6 @@ throws IOException
 <p>但是请注意，Direct Buffer 创建和销毁过程中，都会比一般的堆内 Buffer 增加部分开销，所以通常都建议用于长期使用、数据较大的场景。</p>
 <p>使用 Direct Buffer，我们需要清楚它对内存和 JVM 参数的影响。首先，因为它不在堆上，所以 Xmx 之类参数，其实并不能影响 Direct Buffer 等堆外成员所使用的内存额度，我们可以使用下面参数设置大小：</p>
 <pre><code>-XX:MaxDirectMemorySize=512M
-
 </code></pre>
 <p>从参数设置和内存问题排查角度来看，这意味着我们在计算 Java 可以使用的内存大小的时候，不能只考虑堆的需要，还有 Direct Buffer 等一系列堆外因素。如果出现内存不足，堆外内存占用也是一种可能性。</p>
 <p>另外，大多数垃圾收集过程中，都不会主动收集 Direct Buffer，它的垃圾收集过程，就是基于我在专栏前面所介绍的 Cleaner（一个内部实现）和幻象引用（PhantomReference）机制，其本身不是 public 类型，内部实现了一个 Deallocator 负责销毁的逻辑。对它的销毁往往要拖到 full GC 的时候，所以使用不当很容易导致 OutOfMemoryError。</p>
@@ -1724,7 +1673,6 @@ throws IOException
 <p>\5. 跟踪和诊断 Direct Buffer 内存占用？</p>
 <p>因为通常的垃圾收集日志等记录，并不包含 Direct Buffer 等信息，所以 Direct Buffer 内存诊断也是个比较头疼的事情。幸好，在 JDK 8 之后的版本，我们可以方便地使用 Native Memory Tracking（NMT）特性来进行诊断，你可以在程序启动时加上下面参数：</p>
 <pre><code>-XX:NativeMemoryTracking={summary|detail}
-
 </code></pre>
 <p>注意，激活 NMT 通常都会导致 JVM 出现 5%~10% 的性能下降，请谨慎考虑。</p>
 <p>运行时，可以采用下面命令进行交互式对比：</p>
@@ -1818,14 +1766,12 @@ public short doSomething() {
 <p><strong>OOP 原则实践中的取舍</strong></p>
 <p>值得注意的是，现代语言的发展，很多时候并不是完全遵守前面的原则的，比如，Java 10 中引入了本地方法类型推断和 var 类型。按照，里氏替换原则，我们通常这样定义变量：</p>
 <pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
-
 </code></pre>
 <p>如果使用 var 类型，可以简化为</p>
 <pre><code>var list = new ArrayList&lt;String&gt;(); 
 </code></pre>
 <p>但是，list 实际会被推断为“ArrayList &lt; String &gt;”</p>
 <pre><code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
-
 </code></pre>
 <p>理论上，这种语法上的便利，其实是增强了程序对实现的依赖，但是微小的类型泄漏却带来了书写的便利和代码可读性的提高，所以，实践中我们还是要按照得失利弊进行选择，而不是一味得遵循原则。</p>
 <p><strong>OOP 原则在面试题目中的分析</strong></p>
@@ -1885,7 +1831,6 @@ public short doSomething() {
 <p>因为装饰器模式本质上是包装同类型实例，我们对目标对象的调用，往往会通过包装类覆盖过的方法，迂回调用被包装的实例，这就可以很自然地实现增加额外逻辑的目的，也就是所谓的“装饰”。</p>
 <p>例如，BufferedInputStream 经过包装，为输入流过程增加缓存，类似这种装饰器还可以多次嵌套，不断地增加不同层次的功能。</p>
 <pre><code>public BufferedInputStream(InputStream in)
-
 </code></pre>
 <p>我在下面的类图里，简单总结了 InputStream 的装饰模式实践。</p>
 <p><img src="assets/77ad2dc2513da8155a3781e8291fac33.png" alt="img" /></p>
@@ -2085,12 +2030,10 @@ Observed data race, former is 13097, latter is 13099
 <p>我会在下一讲，对 synchronized 和其他锁实现的更多底层细节进行深入分析。</p>
 <p>代码中使用 synchronized 非常便利，如果用来修饰静态方法，其等同于利用下面代码将方法体囊括进来：</p>
 <pre><code>synchronized (ClassName.class) {}
-
 </code></pre>
 <p>再来看看 ReentrantLock。你可能好奇什么是再入？它是表示当一个线程试图获取一个它已经获取的锁时，这个获取动作就自动成功，这是对锁获取粒度的一个概念，也就是锁的持有是以线程为单位而不是基于调用次数。Java 锁实现强调再入性是为了和 pthread 的行为进行区分。</p>
 <p>再入锁可以设置公平性（fairness），我们可在创建再入锁时选择是否是公平的。</p>
 <pre><code>ReentrantLock fairLock = new ReentrantLock(true);
-
 </code></pre>
 <p>这里所谓的公平性是指在竞争场景中，当公平性为真时，会倾向于将锁赋予等待时间最久的线程。公平性是减少线程“饥饿”（个别线程长期等待锁，但始终无法获取）情况发生的一个办法。</p>
 <p>如果使用 synchronized，我们根本<strong>无法进行</strong>公平性的选择，其永远是不公平的，这也是主流操作系统线程调度的选择。通用场景中，公平性未必有想象中的那么重要，Java 默认的调度策略很少会导致 “饥饿”发生。与此同时，若要保证公平性则会引入额外开销，自然会导致一定的吞吐量下降。所以，我建议<strong>只有</strong>当你的程序确实有公平性需要的时候，才有必要指定它。</p>
@@ -2354,7 +2297,6 @@ public ArrayBlockingQueue(int capacity, boolean fair) {
 <li>计时等待（TIMED_WAIT），其进入条件和等待状态类似，但是调用的是存在超时条件的方法，比如 wait 或 join 等方法的指定超时版本，如下面示例：</li>
 </ul>
 <pre><code>public final native void wait(long timeout) throws InterruptedException;
-
 </code></pre>
 <ul>
 <li>终止（TERMINATED），不管是意外退出还是正常执行结束，线程已经完成使命，终止运行，也有人把这个状态叫作死亡。</li>
@@ -2517,7 +2459,6 @@ waitForAConfition(...);
 <p>首先，可以使用 jps 或者系统的 ps 命令、任务管理器等工具，确定进程 ID。</p>
 <p>其次，调用 jstack 获取线程栈：</p>
 <pre><code>${JAVA_HOME}\bin\jstack your_pid
-
 </code></pre>
 <p>然后，分析得到的输出，具体片段如下：</p>
 <p><img src="assets/1fcc1a521b801a5f7428d5229525a38b.png" alt="img" /></p>
@@ -2893,7 +2834,6 @@ void put(E e) throws InterruptedException;
 <li>ArrayBlockingQueue 是最典型的的有界队列，其内部以 final 的数组保存数据，数组的大小就决定了队列的边界，所以我们在创建 ArrayBlockingQueue 时，都要指定容量，如</li>
 </ul>
 <pre><code>public ArrayBlockingQueue(int capacity, boolean fair)
-
 </code></pre>
 <ul>
 <li>LinkedBlockingQueue，容易被误解为无边界，但其实其行为和内部代码都是基于有界的逻辑实现的，只不过如果我们没有在创建队列时就指定容量，那么其容量限制就自动被设置为 Integer.MAX_VALUE，成为了无界队列。</li>
@@ -3185,7 +3125,6 @@ private volatile int value;
 </code></pre>
 <p>而类似 compareAndSet 这种返回 boolean 类型的函数，因为其返回值表现的就是成功与否，所以不需要重试。</p>
 <pre><code>public final boolean compareAndSet(int expectedValue, int newValue)
-
 </code></pre>
 <p>CAS 是 Java 并发中所谓 lock-free 机制的基础。</p>
 <h2>考点分析</h2>
@@ -3244,7 +3183,6 @@ private void acquireLock(){
 <li>一个 volatile 的整数成员表征状态，同时提供了 setState 和 getState 方法</li>
 </ul>
 <pre><code>private volatile int state;
-
 </code></pre>
 <ul>
 <li>一个先入先出（FIFO）的等待线程队列，以实现多线程间竞争和等待，这是 AQS 机制的核心之一。</li>
@@ -3415,7 +3353,6 @@ java -Xbootclasspath/p:&lt;your_dir&gt; your_App
 </ul>
 <p>首先，确认要修改的类文件已经编译好，并按照对应模块（假设是 java.base）结构存放， 然后，给模块打补丁：</p>
 <pre><code>java --patch-module java.base=your_patch yourApp
-
 </code></pre>
 <ul>
 <li>扩展类加载器被重命名为平台类加载器（Platform Class-Loader），而且 extension 机制则被移除。也就意味着，如果我们指定 java.ext.dirs 环境变量，或者 lib/ext 目录存在，JVM 将直接返回<strong>错误</strong>！建议解决办法就是将其放入 classpath 里。</li>
@@ -3629,7 +3566,6 @@ cw.visitEnd();                      // 结束类字节码生成
 <li>在<a href="http://hg.openjdk.java.net/jdk/jdk/file/9f62267e79df/src/java.base/share/classes/java/nio/Bits.java">java.nio.BIts.reserveMemory()</a> 方法中，我们能清楚的看到，System.gc() 会被调用，以清理空间，这也是为什么在大量使用 NIO 的 Direct Buffer 之类时，通常建议不要加下面的参数，毕竟是个最后的尝试，有可能避免一定的内存不足问题。</li>
 </ul>
 <pre><code>-XX:+DisableExplictGC
-
 </code></pre>
 <p>当然，也不是在任何情况下垃圾收集器都会被触发的，比如，我们去分配一个超大对象，类似一个超大数组超过堆的最大值，JVM 可以判断出垃圾收集并不能解决这个问题，所以直接抛出 OutOfMemoryError。</p>
 <p>从我前面分析的数据区的角度，除了程序计数器，其他区域都有可能会因为可能的空间不足发生 OutOfMemoryError，简单总结如下：</p>
@@ -3693,32 +3629,27 @@ cw.visitEnd();                      // 结束类字节码生成
 <li>最大堆体积</li>
 </ul>
 <pre><code>-Xmx value
-
 </code></pre>
 <ul>
 <li>初始的最小堆体积</li>
 </ul>
 <pre><code>-Xms value
-
 </code></pre>
 <ul>
 <li>老年代和新生代的比例</li>
 </ul>
 <pre><code>-XX:NewRatio=value
-
 </code></pre>
 <p>默认情况下，这个数值是 2，意味着老年代是新生代的 2 倍大；换句话说，新生代是堆大小的 1/3。</p>
 <ul>
 <li>当然，也可以不用比例的方式调整新生代的大小，直接指定下面的参数，设定具体的内存大小数值。</li>
 </ul>
 <pre><code>-XX:NewSize=value
-
 </code></pre>
 <ul>
 <li>Eden 和 Survivor 的大小是按照比例设置的，如果 SurvivorRatio 是 8，那么 Survivor 区域就是 Eden 的 1/8 大小，也就是新生代的 1/10，因为 YoungGen=Eden + 2*Survivor，JVM 参数格式是</li>
 </ul>
 <pre><code>-XX:SurvivorRatio=value
-
 </code></pre>
 <ul>
 <li>TLAB 当然也可以调整，JVM 实现了复杂的适应策略，如果你有兴趣可以参考这篇<a href="https://blogs.oracle.com/jonthecollector/the-real-thing">说明</a>。</li>
@@ -3731,11 +3662,9 @@ cw.visitEnd();                      // 结束类字节码生成
 <p>接下来我会依赖 NMT 特性对 JVM 进行分析，它所提供的详细分类信息，非常有助于理解 JVM 内部实现。</p>
 <p>首先来做些准备工作，开启 NMT 并选择 summary 模式，</p>
 <pre><code>-XX:NativeMemoryTracking=summary
-
 </code></pre>
 <p>为了方便获取和对比 NMT 输出，选择在应用退出时打印 NMT 统计信息</p>
 <pre><code>-XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
-
 </code></pre>
 <p>然后，执行一个简单的在标准输出打印 HelloWorld 的程序，就可以得到下面的输出<img src="assets/55f1c7f0550adbbcc885c97a4dd426bb.png" alt="img" /></p>
 <p>我来仔细分析一下，NMT 所表征的 JVM 本地内存使用：</p>
@@ -3744,11 +3673,9 @@ cw.visitEnd();                      // 结束类字节码生成
 <li>第二部分是 Class 内存占用，它所统计的就是 Java 类元数据所占用的空间，JVM 可以通过类似下面的参数调整其大小：</li>
 </ul>
 <pre><code>-XX:MaxMetaspaceSize=value
-
 </code></pre>
 <p>对于本例，因为 HelloWorld 没有什么用户类库，所以其内存占用主要是启动类加载器（Bootstrap）加载的核心类库。你可以使用下面的小技巧，调整启动类加载器元数据区，这主要是为了对比以加深理解，也许只有在 hack JDK 时才有实际意义。</p>
 <pre><code>-XX:InitialBootClassLoaderMetaspaceSize=30720
-
 </code></pre>
 <ul>
 <li>下面是 Thread，这里既包括 Java 线程，如程序主线程、Cleaner 线程等，也包括 GC 等本地线程。你有没有注意到，即使是一个 HelloWorld 程序，这个线程数量竟然还有 25。似乎有很多浪费，设想我们要用 Java 作为 Serverless 运行时，每个 function 是非常短暂的，如何降低线程数量呢？ 如果你充分理解了专栏讲解的内容，对 JVM 内部有了充分理解，思路就很清晰了： JDK 9 的默认 GC 是 G1，虽然它在较大堆场景表现良好，但本身就会比传统的 Parallel GC 或者 Serial GC 之类复杂太多，所以要么降低其并行线程数目，要么直接切换 GC 类型； JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT 也会变得简单，相应本地线程也会减少。 我们来对比一下，这是默认参数情况的输出：<img src="assets/97d060b306e44af3a8443f932a0a4d42.png" alt="img" /></li>
@@ -3759,9 +3686,7 @@ cw.visitEnd();                      // 结束类字节码生成
 <li>接下来是 Code 统计信息，显然这是 CodeCache 相关内存，也就是 JIT compiler 存储编译热点方法等信息的地方，JVM 提供了一系列参数可以限制其初始值和最大值等，例如：</li>
 </ul>
 <pre><code>-XX:InitialCodeCacheSize=value
-
 -XX:ReservedCodeCacheSize=value
-
 </code></pre>
 <p>你可以设置下列 JVM 参数，也可以只设置其中一个，进一步判断不同参数对 CodeCache 大小的影响。<img src="assets/945740c37433f783d2d877c67dcc1170.png" alt="img" /><img src="http://192.168.73.85:8080/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4/Java%E5%9F%BA%E7%A1%8036%E8%AE%B2/assets/82d1fbc9ca09698c01ccff18fb97c8cd.png" alt="img" /></p>
 <p>很明显，CodeCache 空间下降非常大，这是因为我们关闭了复杂的 TieredCompilation，而且还限制了其初始大小。</p>
@@ -3770,7 +3695,6 @@ cw.visitEnd();                      // 结束类字节码生成
 </ul>
 <p>使用命令：</p>
 <pre><code>-XX:+UseSerialGC
-
 </code></pre>
 <p><img src="assets/6eeee6624c7dc6be54bfce5e93064233.png" alt="img" /></p>
 <p>可见，不仅总线程数大大降低（25 → 13），而且 GC 设施本身的内存开销就少了非常多。据我所知，AWS Lambda 中 Java 运行时就是使用的 Serial GC，可以大大降低单个 function 的启动和运行开销。</p>
@@ -3791,20 +3715,17 @@ cw.visitEnd();                      // 结束类字节码生成
 <li>Serial GC，它是最古老的垃圾收集器，“Serial”体现在其收集工作是单线程的，并且在进行垃圾收集过程中，会进入臭名昭著的“Stop-The-World”状态。当然，其单线程设计也意味着精简的 GC 实现，无需维护复杂的数据结构，初始化也简单，所以一直是 Client 模式下 JVM 的默认选项。 从年代的角度，通常将其老年代实现单独称作 Serial Old，它采用了标记 - 整理（Mark-Compact）算法，区别于新生代的复制算法。 Serial GC 的对应 JVM 参数是：</li>
 </ul>
 <pre><code>-XX:+UseSerialGC
-
 </code></pre>
 <ul>
 <li>ParNew GC，很明显是个新生代 GC 实现，它实际是 Serial GC 的多线程版本，最常见的应用场景是配合老年代的 CMS GC 工作，下面是对应参数</li>
 </ul>
 <pre><code>-XX:+UseConcMarkSweepGC -XX:+UseParNewGC
-
 </code></pre>
 <ul>
 <li>CMS（Concurrent Mark Sweep） GC，基于标记 - 清除（Mark-Sweep）算法，设计目标是尽量减少停顿时间，这一点对于 Web 等反应时间敏感的应用非常重要，一直到今天，仍然有很多系统使用 CMS GC。但是，CMS 采用的标记 - 清除算法，存在着内存碎片化问题，所以难以避免在长时间运行等情况下发生 full GC，导致恶劣的停顿。另外，既然强调了并发（Concurrent），CMS 会占用更多 CPU 资源，并和用户线程争抢。</li>
 <li>Parrallel GC，在早期 JDK 8 等版本中，它是 server 模式 JVM 的默认 GC 选择，也被称作是吞吐量优先的 GC。它的算法和 Serial GC 比较相似，尽管实现要复杂的多，其特点是新生代和老年代 GC 都是并行进行的，在常见的服务器环境中更加高效。 开启选项是：</li>
 </ul>
 <pre><code>-XX:+UseParallelGC
-
 </code></pre>
 <p>另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：</p>
 <pre><code>-XX:MaxGCPauseMillis=value
@@ -3832,7 +3753,6 @@ cw.visitEnd();                      // 结束类字节码生成
 </ul>
 <p>方法区无用元数据的回收比较复杂，我简单梳理一下。还记得我对类加载器的分类吧，一般来说初始化类加载器加载的类型是不会进行类卸载（unload）的；而普通的类型的卸载，往往是要求相应自定义类加载器本身被回收，所以大量使用动态类型的场合，需要防止元数据区（或者早期的永久代）不会 OOM。在 8u40 以后的 JDK 中，下面参数已经是默认的：</p>
 <pre><code>-XX:+ClassUnloadingWithConcurrentMark
-
 </code></pre>
 <p>第二，常见的垃圾收集算法，我认为总体上有个了解，理解相应的原理和优缺点，就已经足够了，其主要分为三类：</p>
 <ul>
@@ -3849,7 +3769,6 @@ cw.visitEnd();                      // 结束类字节码生成
 <p>第二， 经过一次 Minor GC，Eden 就会空闲下来，直到再次达到 Minor GC 触发条件，这时候，另外一个 Survivor 区域则会成为 to 区域，Eden 区域的存活对象和 From 区域对象，都会被复制到 to 区域，并且存活的年龄计数会被加 1。<img src="assets/3be4ac4834e2790a8211252f2bebfd48.png" alt="img" /></p>
 <p>第三， 类似第二步的过程会发生很多次，直到有对象年龄计数达到阈值，这时候就会发生所谓的晋升（Promotion）过程，如下图所示，超过阈值的对象会被晋升到老年代。这个阈值是可以通过参数指定：</p>
 <pre><code>-XX:MaxTenuringThreshold=&lt;N&gt;
-
 </code></pre>
 <p><img src="assets/dbcb15c99b368773145b358734e10e8d.png" alt="img" /></p>
 <p>后面就是老年代 GC，具体取决于选择的 GC 选项，对应不同的算法。下面是一个简单标记 - 整理算法过程示意图，老年代中的无用对象被清除后， GC 会将对象进行整理，以防止内存碎片化。</p>
@@ -4169,20 +4088,16 @@ while (!initialized)
 <p>首先，就是最常见的 SQL 注入攻击。一个典型的场景就是 Web 系统的用户登录功能，根据用户输入的用户名和密码，我们需要去后端数据库核实信息。</p>
 <p>假设应用逻辑是，后端程序利用界面输入动态生成类似下面的 SQL，然后让 JDBC 执行。</p>
 <pre><code>Select * from use_info where username = “input_usr_name” and password = “input_pwd”
-
 </code></pre>
 <p>但是，如果我输入的 input_pwd 是类似下面的文本，</p>
 <pre><code>“ or “”=”
-
 </code></pre>
 <p>那么，拼接出的 SQL 字符串就变成了下面的条件，OR 的存在导致输入什么名字都是复合条件的。</p>
 <pre><code>Select * from use_info where username = “input_usr_name” and password = “” or “” = “”
-
 </code></pre>
 <p>这里只是举个简单的例子，它是利用了期望输入和可能输入之间的偏差。上面例子中，期望用户输入一个数值，但实际输入的则是 SQL 语句片段。类似场景可以利用注入的不同 SQL 语句，进行各种不同目的的攻击，甚至还可以加上“;delete xxx”之类语句，如果数据库权限控制不合理，攻击效果就可能是灾难性的。</p>
 <p>第二，操作系统命令注入。Java 语言提供了类似 Runtime.exec(…) 的 API，可以用来执行特定命令，假设我们构建了一个应用，以输入文本作为参数，执行下面的命令：</p>
 <pre><code>ls –la input_file_name
-
 </code></pre>
 <p>但是如果用户输入是 “input_file_name;rm –rf /*”，这就有可能出现问题了。当然，这只是个举例，Java 标准类库本身进行了非常多的改进，所以类似这种编程错误，未必可以真的完成攻击，但其反映的一类场景是真实存在的。</p>
 <p>第三，XML 注入攻击。Java 核心类库提供了全面的 XML 处理、转换等各种 API，而 XML 自身是可以包含动态内容的，例如 XPATH，如果使用不当，可能导致访问恶意内容。</p>
@@ -4221,7 +4136,6 @@ while (!initialized)
 </ul>
 <p>在应用实践中，如果对安全要求非常高，建议打开 SecurityManager，</p>
 <pre><code>-Djava.security.manager
-
 </code></pre>
 <p>请注意其开销，通常只要开启 SecurityManager，就会导致 10% ~ 15% 的性能下降，在 JDK 9 以后，这个开销有所改善。</p>
 <p>理解了基础 Java 安全机制，接下来我们来一起探讨安全漏洞（<a href="https://en.wikipedia.org/wiki/Vulnerability_(computing)">Vulnerability</a>）。</p>
@@ -4273,7 +4187,6 @@ if (a + b &lt; c) {
 <p>从语言特性来说，Java 和 JVM 提供了很多基础性的改进，相比于传统的 C、C++ 等语言，对于数组越界等处理要完善的多，原生的避免了<a href="https://en.wikipedia.org/wiki/Buffer_overflow">缓冲区溢出</a>等攻击方式，提高了软件的安全性。但这并不代表完全杜绝了问题，Java 程序可能调用本地代码，也就是 JNI 技术，错误的数值可能导致 C/C++ 层面的数据越界等问题，这是很危险的。</p>
 <p>所以，上面的条件判断，需要判断其数值范围，例如，写成类似下面结构。</p>
 <pre><code>if (a &lt; c – b)
-
 </code></pre>
 <p>再来看一个例子，请看下面的一段异常处理代码：</p>
 <pre><code>try {
@@ -4362,20 +4275,17 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 <li>利用 top 命令获取相应 pid，“-H”代表 thread 模式，你可以配合 grep 命令更精准定位。</li>
 </ul>
 <pre><code>top –H
-
 </code></pre>
 <ul>
 <li>然后转换成为 16 进制。</li>
 </ul>
 <pre><code>printf &quot;%x&quot; your_pid
-
 </code></pre>
 <ul>
 <li>最后利用 jstack 获取的线程栈，对比相应的 ID 即可。</li>
 </ul>
 <p>当然，还有更加通用的诊断方向，利用 vmstat 之类，查看上下文切换的数量，比如下面就是指定时间间隔为 1，收集 10 次。</p>
 <pre><code>vmstat -1 -10
-
 </code></pre>
 <p>输出如下：<img src="assets/abd28cb4a771365211e1a01d628213a0.png" alt="img" /></p>
 <p>如果每秒上下文（cs，<a href="https://en.wikipedia.org/wiki/Context_switch">context switch</a>）切换很高，并且比系统中断高很多（in，system <a href="https://en.wikipedia.org/wiki/Interrupt">interrupt</a>），就表明很有可能是因为不合理的多线程调度所导致。当然还需要利用<a href="https://linux.die.net/man/1/pidstat">pidstat</a>等手段，进行更加具体的定位，我就不再进一步展开了。</p>
@@ -4398,7 +4308,6 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 <p>所以，JFR/JMC 完全具备了生产系统 Profiling 的能力，目前也确实在真正大规模部署的云产品上使用过相关技术，快速地定位了问题。</p>
 <p>它的使用也非常方便，你不需要重新启动系统或者提前增加配置。例如，你可以在运行时启动 JFR 记录，并将这段时间的信息写入文件：</p>
 <pre><code>Jcmd &lt;pid&gt; JFR.start duration=120s filename=myrecording.jfr
-
 </code></pre>
 <p>然后，使用 JMC 打开“.jfr 文件”就可以进行分析了，方法、异常、线程、IO 等应有尽有，其功能非常强大。如果你想了解更多细节，可以参考相关<a href="https://blog.takipi.com/oracle-java-mission-control-the-ultimate-guide/">指南</a>。</p>
 <p>今天我从一个典型性能问题出发，从症状表现到具体的系统分析、JVM 分析，系统性地整理了常见性能分析的思路；并且在知识扩展部分，从方法论和实际操作的角度，让你将理论和实际结合，相信一定可以对你有所帮助。</p>
@@ -4473,11 +4382,9 @@ public void testMethod() {
 </code></pre>
 <p>当我们实现了具体的测试后，就可以利用下面的 Maven 命令构建。</p>
 <pre><code>mvn clean install
-
 </code></pre>
 <p>运行基准测试则与运行不同的 Java 应用没有明显区别。</p>
 <pre><code>java -jar target/benchmarks.jar
-
 </code></pre>
 <p>更加具体的上手步骤，请参考相关<a href="http://www.baeldung.com/java-microbenchmark-harness">指南</a>。JMH 处处透着浓浓的工程师味道，并没有纠结于完善的文档，而是提供了非常棒的<a href="http://hg.openjdk.java.net/code-tools/jmh/file/3769055ad883/jmh-samples/src/main/java/org/openjdk/jmh/samples">样例代码</a>，所以你需要习惯于直接从代码中学习。</p>
 <p><strong>如何保证微基准测试的正确性，有哪些坑需要规避？</strong></p>
@@ -4488,11 +4395,9 @@ public void testMethod() {
 <li>保证代码经过了足够并且合适的预热。我在<a href="http://time.geekbang.org/column/article/6845">专栏第 1 讲</a>中提到过，默认情况，在 server 模式下，JIT 会在一段代码执行 10000 次后，将其编译为本地代码，client 模式则是 1500 次以后。我们需要排除代码执行初期的噪音，保证真正采样到的统计数据符合其稳定运行状态。 通常建议使用下面的参数来判断预热工作到底是经过了多久。</li>
 </ul>
 <pre><code>-XX:+PrintCompilation
-
 </code></pre>
 <p>我这里建议考虑另外加上一个参数，否则 JVM 将默认开启后台编译，也就是在其他线程进行，可能导致输出的信息有些混淆。</p>
 <pre><code>-Xbatch
-
 </code></pre>
 <p>与此同时，也要保证预热阶段的代码路径和采集阶段的代码路径是一致的，并且可以观察 PrintCompilation 输出是否在后期运行中仍然有零星的编译语句出现。</p>
 <ul>
@@ -4531,7 +4436,6 @@ public void testMethod(MyState state, Blackhole blackhole) {
 <li>如果你希望确定方法内联（Inlining）对性能的影响，可以考虑打开下面的选项。</li>
 </ul>
 <pre><code>-XX:+PrintInlining
-
 </code></pre>
 <p>从上面的总结，可以看出来微基准测试是一个需要高度了解 Java、JVM 底层机制的技术，是个非常好的深入理解程序背后效果的工具，但是也反映了我们需要审慎对待微基准测试，不被可能的假象蒙蔽。</p>
 <p>我今天介绍的内容是相对常见并易于把握的，对于微基准测试，GC 等基层机制同样会影响其统计数据。我在前面提到，微基准测试通常希望执行时间和内存分配速率都控制在有限范围内，而在这个过程中发生 GC，很可能导致数据出现偏差，所以 Serial GC 是个值得考虑的选项。另外，JDK 11 引入了<a href="https://openjdk.java.net/jeps/318">Epsilon GC</a>，可以考虑使用这种什么也不做的 GC 方式，从最大可能性去排除相关影响。</p>
@@ -4575,17 +4479,14 @@ public void testMethod(MyState state, Blackhole blackhole) {
 <li>打印编译发生的细节。</li>
 </ul>
 <pre><code>-XX:+PrintCompilation
-
 </code></pre>
 <ul>
 <li>输出更多编译的细节。</li>
 </ul>
 <pre><code>-XX:UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:LogFile=&lt;your_file_path&gt;
-
 </code></pre>
 <p>JVM 会生成一个 xml 形式的文件，另外， LogFile 选项是可选的，不指定则会输出到</p>
 <pre><code>hotspot_pid&lt;pid&gt;.log
-
 </code></pre>
 <p>具体格式可以参考 Ben Evans 提供的<a href="https://github.com/AdoptOpenJDK/jitwatch/">JitWatch</a>工具和<a href="http://www.oracle.com/technetwork/articles/java/architect-evans-pt1-2266278.html">分析指南</a>。</p>
 <p><img src="assets/07b00499b0ca857fc3ccd51f7046d946.png" alt="img" /></p>
@@ -4593,7 +4494,6 @@ public void testMethod(MyState state, Blackhole blackhole) {
 <li>打印内联的发生，可利用下面的诊断选项，也需要明确解锁。</li>
 </ul>
 <pre><code>-XX:+PrintInlining
-
 </code></pre>
 <ul>
 <li>如何知晓 Code Cache 的使用状态呢？</li>
@@ -4605,26 +4505,21 @@ public void testMethod(MyState state, Blackhole blackhole) {
 </ul>
 <p>我曾经介绍过 JIT 的默认门限，server 模式默认 10000 次，client 是 1500 次。门限大小也存在着调优的可能，可以使用下面的参数调整；与此同时，该参数还可以变相起到降低预热时间的作用。</p>
 <pre><code>-XX:CompileThreshold=N
-
 </code></pre>
 <p>很多人可能会产生疑问，既然是热点，不是早晚会达到门限次数吗？这个还真未必，因为 JVM 会周期性的对计数的数值进行衰减操作，导致调用计数器永远不能达到门限值，除了可以利用 CompileThreshold 适当调整大小，还有一个办法就是关闭计数器衰减。</p>
 <pre><code>-XX:-UseCounterDecay
-
 </code></pre>
 <p>如果你是利用 debug 版本的 JDK，还可以利用下面的参数进行试验，但是生产版本是不支持这个选项的。</p>
 <pre><code>-XX:CounterHalfLifeTime
-
 </code></pre>
 <ul>
 <li>调整 Code Cache 大小</li>
 </ul>
 <p>我们知道 JIT 编译的代码是存储在 Code Cache 中的，需要注意的是 Code Cache 是存在大小限制的，而且不会动态调整。这意味着，如果 Code Cache 太小，可能只有一小部分代码可以被 JIT 编译，其他的代码则没有选择，只能解释执行。所以，一个潜在的调优点就是调整其大小限制。</p>
 <pre><code>-XX:ReservedCodeCacheSize=&lt;SIZE&gt;
-
 </code></pre>
 <p>当然，也可以调整其初始大小。</p>
 <pre><code>-XX:InitialCodeCacheSize=&lt;SIZE&gt;
-
 </code></pre>
 <p>注意，在相对较新版本的 Java 中，由于分层编译（Tiered-Compilation）的存在，Code Cache 的空间需求大大增加，其本身默认大小也被提高了。</p>
 <ul>
@@ -4632,7 +4527,6 @@ public void testMethod(MyState state, Blackhole blackhole) {
 </ul>
 <p>JVM 的编译器线程数目与我们选择的模式有关，选择 client 模式默认只有一个编译线程，而 server 模式则默认是两个，如果是当前最普遍的分层编译模式，则会根据 CPU 内核数目计算 C1 和 C2 的数值，你可以通过下面的参数指定的编译线程数。</p>
 <pre><code>-XX:CICompilerCount=N
-
 </code></pre>
 <p>在强劲的多处理器环境中，增大编译线程数，可能更加充分的利用 CPU 资源，让预热等过程更加快速；但是，反之也可能导致编译线程争抢过多资源，尤其是当系统非常繁忙时。例如，系统部署了多个 Java 应用实例的时候，那么减小编译线程数目，则是可以考虑的。</p>
 <p>生产实践中，也有人推荐在服务器上关闭分层编译，直接使用 server 编译器，虽然会导致稍慢的预热速度，但是可能在特定工作负载上会有微小的吞吐量提高。</p>
@@ -4641,7 +4535,6 @@ public void testMethod(MyState state, Blackhole blackhole) {
 </ul>
 <p>比如，减少进入安全点。严格说，它远远不只是发生在动态编译的时候，GC 阶段发生的更加频繁，你可以利用下面选项诊断安全点的影响。</p>
 <pre><code>-XX:+PrintSafepointStatistics ‑XX:+PrintGCApplicationStoppedTime
-
 </code></pre>
 <p>注意，在 JDK 9 之后，PrintGCApplicationStoppedTime 已经被移除了，你需要使用“-Xlog:safepoint”之类方式来指定。</p>
 <p>很多优化阶段都可能和安全点相关，例如：</p>
@@ -4650,7 +4543,6 @@ public void testMethod(MyState state, Blackhole blackhole) {
 <li>常规的锁优化阶段也可能发生，比如，偏斜锁的设计目的是为了避免无竞争时的同步开销，但是当真的发生竞争时，撤销偏斜锁会触发安全点，是很重的操作。所以，在并发场景中偏斜锁的价值其实是被质疑的，经常会明确建议关闭偏斜锁。</li>
 </ul>
 <pre><code>-XX:-UseBiasedLocking
-
 </code></pre>
 <p>主要的优化手段就介绍到这里，这些方法都是普通 Java 开发者就可以利用的。如果你想对 JVM 优化手段有更深入的了解，建议你订阅 JVM 专家郑雨迪博士的专栏。</p>
 <h2>一课一练</h2>
@@ -4938,12 +4830,10 @@ public void testMethod(MyState state, Blackhole blackhole) {
                             <a href="/极客时间/Java错误示例100讲.md.html">下一页</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
 </div>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709ba3a57eaefbdc","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
@@ -4952,11 +4842,9 @@ public void testMethod(MyState state, Blackhole blackhole) {
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-
     function gtag() {
         dataLayer.push(arguments);
     }
-
     gtag('js', new Date());
     gtag('config', 'G-NPSEEVD756');
     var path = window.location.pathname
@@ -4970,14 +4858,12 @@ public void testMethod(MyState state, Blackhole blackhole) {
     } else {
         setCookie("lastPath", path)
     }
-
     function setCookie(cname, cvalue) {
         var d = new Date();
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toGMTString();
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
     }
-
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -4987,7 +4873,5 @@ public void testMethod(MyState state, Blackhole blackhole) {
         }
         return "";
     }
-
 </script>
-
 </html>

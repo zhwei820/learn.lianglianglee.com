@@ -1,1130 +1,392 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md.html">00 开篇词  为什么大厂面试必考操作系统？.md.html</a>
-
-
+                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md.html">00 开篇词  为什么大厂面试必考操作系统？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md.html">00 课前必读  构建知识体系，可以这样做！</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html">02  程序的执行：相比 32 位，64 位的优势是什么？（上）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html">03  程序的执行：相比 32 位，64 位的优势是什么？（下）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md.html">05 (1) 加餐  练习题详解（一）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html">06  目录结构和文件管理指令：rm  -rf 指令的作用是？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md.html">07  进程、重定向和管道指令：xargs 指令的作用是？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md.html">12 (1)加餐  练习题详解（二）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html">14  用户态和内核态：用户态线程和内核态线程有什么区别？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md.html">00 课前必读  构建知识体系，可以这样做！.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html">02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md.html">16 (1)加餐  练习题详解（三）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html">03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md.html">17  进程和线程：进程的开销比线程大在了哪里？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md.html">05 (1) 加餐  练习题详解（一）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md.html">20  线程的调度：线程调度都有哪些方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html">06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md.html">07  进程、重定向和管道指令：xargs 指令的作用是？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md.html">22  进程间通信： 进程间通信都有哪些方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md.html">23 (1)加餐  练习题详解（四）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md.html">24  虚拟内存 ：一个程序最多能使用多少内存？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md.html">25  内存管理单元： 什么情况下使用大内存分页？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html">26  缓存置换算法： LRU 用什么数据结构实现更合理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md.html">12 (1)加餐  练习题详解（二）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md.html">27  内存回收上篇：如何解决内存的循环引用问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html">28  内存回收下篇：三色标记-清除算法是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html">14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md.html">28 (1)加餐  练习题详解（五）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md.html">29  Linux 下的各个目录有什么作用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md.html">16 (1)加餐  练习题详解（三）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md.html">17  进程和线程：进程的开销比线程大在了哪里？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md.html">32  HDFS 介绍：分布式文件系统是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md.html">32 (1)加餐  练习题详解（六）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html">33  互联网协议群（TCPIP）：多路复用是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md.html">20  线程的调度：线程调度都有哪些方法？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html">34  UDP 协议：UDP 和 TCP 相比快在哪里？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html">35  Linux 的 IO 模式：selectpollepoll 有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md.html">22  进程间通信： 进程间通信都有哪些方法？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md.html">36  公私钥体系和网络安全：什么是中间人攻击？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md.html">36 (1)加餐  练习题详解（七）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md.html">23 (1)加餐  练习题详解（四）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html">37  虚拟化技术介绍：VMware 和 Docker 的区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md.html">24  虚拟内存 ：一个程序最多能使用多少内存？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md.html">25  内存管理单元： 什么情况下使用大内存分页？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md.html">39  Linux 架构优秀在哪里</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html">26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md.html">40  商业操作系统：电商操作系统是不是一个噱头？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md.html">27  内存回收上篇：如何解决内存的循环引用问题？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md.html">40 (1)加餐  练习题详解（八）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html">28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md.html">41 结束语  论程序员的发展——信仰、选择和博弈</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md.html">28 (1)加餐  练习题详解（五）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md.html">29  Linux 下的各个目录有什么作用？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md.html">32  HDFS 介绍：分布式文件系统是怎么回事？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md.html">32 (1)加餐  练习题详解（六）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html">33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html">34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html">35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md.html">36  公私钥体系和网络安全：什么是中间人攻击？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md.html">36 (1)加餐  练习题详解（七）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html">37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md.html">39  Linux 架构优秀在哪里.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md.html">40  商业操作系统：电商操作系统是不是一个噱头？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md.html">40 (1)加餐  练习题详解（八）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md.html">41 结束语  论程序员的发展——信仰、选择和博弈.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>14  用户态和内核态：用户态线程和内核态线程有什么区别？</h1>
-
 <p><strong>这节课给你带来了一道非常经典的面试题目：用户态线程和内核态线程有什么区别</strong>？</p>
-
 <p>这是一个组合型的问题，由很多小问题组装而成，比如：</p>
-
 <ul>
-
 <li>用户态和内核态是什么？</li>
-
 <li>用户级线程和内核级线程是一个怎样的对应关系？</li>
-
 <li>内核响应系统调用是一个怎样的过程？</li>
-
 <li>……</li>
-
 </ul>
-
 <p>而且这个问题还关联到了我们后面要学习的多线程、I/O 模型、网络优化等。 所以这是一道很不错的面试题目，它不是简单考某个概念，而是通过让求职者比较两种东西，从而考察你对知识整体的认知和理解。</p>
-
 <p>今天就请你顺着这个问题，深入学习内核的工作机制，和我一起去理解用户态和内核态。</p>
-
 <h3>什么是用户态和内核态</h3>
-
 <p>Kernel 运行在超级权限模式（Supervisor Mode）下，所以拥有很高的权限。按照权限管理的原则，多数应用程序应该运行在最小权限下。因此，很多操作系统，将内存分成了两个区域：</p>
-
 <ul>
-
 <li>内核空间（Kernal Space），这个空间只有内核程序可以访问；</li>
-
 <li>用户空间（User Space），这部分内存专门给应用程序使用。</li>
-
 </ul>
-
 <h4>用户态和内核态</h4>
-
 <p>用户空间中的代码被限制了只能使用一个局部的内存空间，我们说这些程序在<strong>用户态（User Mode）</strong> 执行。内核空间中的代码可以访问所有内存，我们称这些程序在<strong>内核态（Kernal Mode）</strong> 执行。</p>
-
 <h4>系统调用过程</h4>
-
 <p>如果用户态程序需要执行系统调用，就需要切换到内核态执行。下面我们来讲讲这个过程的原理。</p>
-
 <p><img src="assets/CgqCHl-Sm3mAG_x-AAC5MxhOcCc621.png" alt="Lark20201023-165439.png" /></p>
-
 <p>如上图所示：内核程序执行在内核态（Kernal Mode），用户程序执行在用户态（User Mode）。当发生系统调用时，用户态的程序发起系统调用。因为系统调用中牵扯特权指令，用户态程序权限不足，因此会中断执行，也就是 Trap（Trap 是一种中断）。</p>
-
 <p>发生中断后，当前 CPU 执行的程序会中断，跳转到中断处理程序。内核程序开始执行，也就是开始处理系统调用。内核处理完成后，主动触发 Trap，这样会再次发生中断，切换回用户态工作。关于中断，我们将在“<strong>15 课时</strong>”进行详细讨论。</p>
-
 <h3>线程模型</h3>
-
 <p>上面我们学习了用户态和内核态，接下来我们从进程和线程的角度进一步思考本课时开头抛出的问题。</p>
-
 <h4>进程和线程</h4>
-
 <p>一个应用程序启动后会在内存中创建一个执行副本，这就是<strong>进程</strong>。Linux 的内核是一个 Monolithic Kernel（宏内核），因此可以看作一个进程。也就是开机的时候，磁盘的内核镜像被导入内存作为一个执行副本，成为内核进程。</p>
-
 <p>进程可以分成用户态进程和内核态进程两类。用户态进程通常是应用程序的副本，内核态进程就是内核本身的进程。如果用户态进程需要申请资源，比如内存，可以通过系统调用向内核申请。</p>
-
 <p><strong>那么用户态进程如果要执行程序，是否也要向内核申请呢</strong>？</p>
-
 <p>程序在现代操作系统中并不是以进程为单位在执行，而是以一种轻量级进程（Light Weighted Process），也称作线程（Thread）的形式执行。</p>
-
 <p>一个进程可以拥有多个线程。进程创建的时候，一般会有一个主线程随着进程创建而创建。</p>
-
 <p><img src="assets/Ciqc1F-SmgGAJVo6AAFL0OwiOWE251.png" alt="2.png" /></p>
-
 <p>如果进程想要创造更多的线程，就需要思考一件事情，这个线程创建在用户态还是内核态。</p>
-
 <p>你可能会问，难道不是用户态的进程创建用户态的线程，内核态的进程创建内核态的线程吗？</p>
-
 <p>其实不是，进程可以通过 API 创建用户态的线程，也可以通过系统调用创建内核态的线程，接下来我们说说用户态的线程和内核态的线程。</p>
-
 <h4>用户态线程</h4>
-
 <p>用户态线程也称作用户级线程（User Level Thread）。操作系统内核并不知道它的存在，它完全是在用户空间中创建。</p>
-
 <p>用户级线程有很多优势，比如。</p>
-
 <ul>
-
 <li><strong>管理开销小</strong>：创建、销毁不需要系统调用。</li>
-
 <li><strong>切换成本低</strong>：用户空间程序可以自己维护，不需要走操作系统调度。</li>
-
 </ul>
-
 <p>但是这种线程也有很多的缺点。</p>
-
 <ul>
-
 <li><strong>与内核协作成本高</strong>：比如这种线程完全是用户空间程序在管理，当它进行 I/O 的时候，无法利用到内核的优势，需要频繁进行用户态到内核态的切换。</li>
-
 <li><strong>线程间协作成本高</strong>：设想两个线程需要通信，通信需要 I/O，I/O 需要系统调用，因此用户态线程需要支付额外的系统调用成本。</li>
-
 <li><strong>无法利用多核优势</strong>：比如操作系统调度的仍然是这个线程所属的进程，所以无论每次一个进程有多少用户态的线程，都只能并发执行一个线程，因此一个进程的多个线程无法利用多核的优势。</li>
-
 <li><strong>操作系统无法针对线程调度进行优化</strong>：当一个进程的一个用户态线程阻塞（Block）了，操作系统无法及时发现和处理阻塞问题，它不会更换执行其他线程，从而造成资源浪费。</li>
-
 </ul>
-
 <h4>内核态线程</h4>
-
 <p>内核态线程也称作内核级线程（Kernel Level Thread）。这种线程执行在内核态，可以通过系统调用创造一个内核级线程。</p>
-
 <p>内核级线程有很多优势。</p>
-
 <ul>
-
 <li><strong>可以利用多核 CPU 优势</strong>：内核拥有较高权限，因此可以在多个 CPU 核心上执行内核线程。</li>
-
 <li><strong>操作系统级优化</strong>：内核中的线程操作 I/O 不需要进行系统调用；一个内核线程阻塞了，可以立即让另一个执行。</li>
-
 </ul>
-
 <p>当然内核线程也有一些缺点。</p>
-
 <ul>
-
 <li><strong>创建成本高</strong>：创建的时候需要系统调用，也就是切换到内核态。</li>
-
 <li><strong>扩展性差</strong>：由一个内核程序管理，不可能数量太多。</li>
-
 <li><strong>切换成本较高</strong>：切换的时候，也同样存在需要内核操作，需要切换内核态。</li>
-
 </ul>
-
 <h3>用户态线程和内核态线程之间的映射关系</h3>
-
 <p>线程简单理解，就是要执行一段程序。程序不会自发的执行，需要操作系统进行调度。<strong>我们思考这样一个问题，如果有一个用户态的进程，它下面有多个线程。如果这个进程想要执行下面的某一个线程，应该如何做呢</strong>？</p>
-
 <p>这时，比较常见的一种方式，就是将需要执行的程序，让一个内核线程去执行。毕竟，内核线程是真正的线程。因为它会分配到 CPU 的执行资源。</p>
-
 <p>如果一个进程所有的线程都要自己调度，相当于在进程的主线程中实现分时算法调度每一个线程，也就是所有线程都用操作系统分配给主线程的时间片段执行。这种做法，相当于操作系统调度进程的主线程；进程的主线程进行二级调度，调度自己内部的线程。</p>
-
 <p>这样操作劣势非常明显，比如无法利用多核优势，每个线程调度分配到的时间较少，而且这种线程在阻塞场景下会直接交出整个进程的执行权限。</p>
-
 <p>由此可见，<strong>用户态线程创建成本低，问题明显，不可以利用多核。内核态线程，创建成本高，可以利用多核，切换速度慢</strong>。因此通常我们会在内核中预先创建一些线程，并反复利用这些线程。这样，用户态线程和内核态线程之间就构成了下面 4 种可能的关系：</p>
-
 <h4>多对一（Many to One）</h4>
-
 <p>用户态进程中的多线程复用一个内核态线程。这样，极大地减少了创建内核态线程的成本，但是线程不可以并发。因此，这种模型现在基本上用的很少。我再多说一句，这里你可能会有疑问，比如：用户态线程怎么用内核态线程执行程序？</p>
-
 <p>程序是存储在内存中的指令，用户态线程是可以准备好程序让内核态线程执行的。后面的几种方式也是利用这样的方法。</p>
-
 <p><img src="assets/CgqCHl-SmhGAfpLmAAD_dFRlK_o009.png" alt="4.png" /></p>
-
 <h4>一对一（One to One）</h4>
-
 <p>该模型为每个用户态的线程分配一个单独的内核态线程，在这种情况下，每个用户态都需要通过系统调用创建一个绑定的内核线程，并附加在上面执行。 这种模型允许所有线程并发执行，能够充分利用多核优势，Windows NT 内核采取的就是这种模型。但是因为线程较多，对内核调度的压力会明显增加。</p>
-
 <p><img src="assets/CgqCHl-SmhyAF5x4AADdzPHEVjg818.png" alt="5.png" /></p>
-
 <h4>多对多（Many To Many）</h4>
-
 <p>这种模式下会为 n 个用户态线程分配 m 个内核态线程。m 通常可以小于 n。一种可行的策略是将 m 设置为核数。这种多对多的关系，减少了内核线程，同时也保证了多核心并发。Linux 目前采用的就是该模型。</p>
-
 <p><img src="assets/CgqCHl-Smj2AUNBFAAEUlu4ZjIY978.png" alt="6.png" /></p>
-
 <h4>两层设计（Two Level）</h4>
-
 <p>这种模型混合了多对多和一对一的特点。多数用户态线程和内核线程是 n 对 m 的关系，少量用户线程可以指定成 1 对 1 的关系。</p>
-
 <p><img src="assets/Ciqc1F-SmieAL_v4AAFMiFmCAbM160.png" alt="1.png" /></p>
-
 <p>上图所展现的是一个非常经典的设计。</p>
-
 <p>我们这节课讲解的问题、考虑到的情况以及解决方法，将为你今后解决实际工作场景中的问题打下坚实的基础。比如处理并发问题、I/O 性能瓶颈、思考数据库连接池的配置等，要想完美地解决问题，就必须掌握这些模型，了解问题的本质上才能更好地思考问题衍生出来的问题。</p>
-
 <h3>总结</h3>
-
 <p>这节课我们学习了用户态和内核态，然后我们简单学习了进程和线程的基础知识。这部分知识会在“<strong>模块四：进程和线程</strong>”中以更细粒度进行详细讲解。等你完成模块四的学习后，可以再返回来看这一节的内容，相信会有更深入的理解。</p>
-
 <p>最后，我们还讨论了用户线程和内核线程的映射关系，这是一种非常经典的设计和思考方式。关于这个场景我们讨论了 1 对 1、1 对多以及多对 1，两层模型 4 种方法。日后你在处理线程池对接；远程 RPC 调用；消息队列时，还会反复用到今天的方法。</p>
-
 <p><strong>那么通过这节课的学习，你现在是否可以来回答本节关联的面试题目？用户态线程和内核态线程的区别？</strong></p>
-
 <p>老规矩，请你先在脑海里构思下给面试官的表述，并把你的思考写在留言区，然后再来看我接下来的分析。</p>
-
 <p><strong>【解析】</strong> 用户态线程工作在用户空间，内核态线程工作在内核空间。用户态线程调度完全由进程负责，通常就是由进程的主线程负责。相当于进程主线程的延展，使用的是操作系统分配给进程主线程的时间片段。内核线程由内核维护，由操作系统调度。</p>
-
 <p>用户态线程无法跨核心，一个进程的多个用户态线程不能并发，阻塞一个用户态线程会导致进程的主线程阻塞，直接交出执行权限。这些都是用户态线程的劣势。内核线程可以独立执行，操作系统会分配时间片段。因此内核态线程更完整，也称作轻量级进程。内核态线程创建成本高，切换成本高，创建太多还会给调度算法增加压力，因此不会太多。</p>
-
 <p>实际操作中，往往结合两者优势，将用户态线程附着在内核态线程中执行。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997d696af43cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

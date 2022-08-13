@@ -1,1428 +1,580 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>17 GC 日志解读与分析（基础配置）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/01 阅读此专栏的正确姿势.md.html">01 阅读此专栏的正确姿势.md.html</a>
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/01 阅读此专栏的正确姿势.md.html">01 阅读此专栏的正确姿势</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/02 环境准备：千里之行，始于足下.md.html">02 环境准备：千里之行，始于足下</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/03 常用性能指标：没有量化，就没有改进.md.html">03 常用性能指标：没有量化，就没有改进</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/04 JVM 基础知识：不积跬步，无以至千里.md.html">04 JVM 基础知识：不积跬步，无以至千里</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/05 Java 字节码技术：不积细流，无以成江河.md.html">05 Java 字节码技术：不积细流，无以成江河</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/06 Java 类加载器：山不辞土，故能成其高.md.html">06 Java 类加载器：山不辞土，故能成其高</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/07 Java 内存模型：海不辞水，故能成其深.md.html">07 Java 内存模型：海不辞水，故能成其深</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html">08 JVM 启动参数详解：博观而约取、厚积而薄发</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html">09 JDK 内置命令行工具：工欲善其事，必先利其器</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html">10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/11 JDWP 简介：十步杀一人，千里不留行.md.html">11 JDWP 简介：十步杀一人，千里不留行</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/12 JMX 与相关工具：山高月小，水落石出.md.html">12 JMX 与相关工具：山高月小，水落石出</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/13 常见的 GC 算法（GC 的背景与原理）.md.html">13 常见的 GC 算法（GC 的背景与原理）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/14 常见的 GC 算法（ParallelCMSG1）.md.html">14 常见的 GC 算法（ParallelCMSG1）</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html">15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新</a>
+                </li>
+                <li>
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html">16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/JVM 核心技术 32 讲（完）/17 GC 日志解读与分析（基础配置）.md.html">17 GC 日志解读与分析（基础配置）</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/02 环境准备：千里之行，始于足下.md.html">02 环境准备：千里之行，始于足下.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md.html">18 GC 日志解读与分析（实例分析上篇）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/03 常用性能指标：没有量化，就没有改进.md.html">03 常用性能指标：没有量化，就没有改进.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/19 GC 日志解读与分析（实例分析中篇）.md.html">19 GC 日志解读与分析（实例分析中篇）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/04 JVM 基础知识：不积跬步，无以至千里.md.html">04 JVM 基础知识：不积跬步，无以至千里.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/20 GC 日志解读与分析（实例分析下篇）.md.html">20 GC 日志解读与分析（实例分析下篇）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/05 Java 字节码技术：不积细流，无以成江河.md.html">05 Java 字节码技术：不积细流，无以成江河.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/21 GC 日志解读与分析（番外篇可视化工具）.md.html">21 GC 日志解读与分析（番外篇可视化工具）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/06 Java 类加载器：山不辞土，故能成其高.md.html">06 Java 类加载器：山不辞土，故能成其高.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html">22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/07 Java 内存模型：海不辞水，故能成其深.md.html">07 Java 内存模型：海不辞水，故能成其深.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md.html">23 内存分析与相关工具上篇（内存布局与分析工具）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html">08 JVM 启动参数详解：博观而约取、厚积而薄发.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/24 内存分析与相关工具下篇（常见问题分析）.md.html">24 内存分析与相关工具下篇（常见问题分析）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html">09 JDK 内置命令行工具：工欲善其事，必先利其器.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html">25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html">10 JDK 内置图形界面工具：海阔凭鱼跃，天高任鸟飞.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html">26 面临复杂问题时的几个高级工具：它山之石，可以攻玉</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/11 JDWP 简介：十步杀一人，千里不留行.md.html">11 JDWP 简介：十步杀一人，千里不留行.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/27 JVM 问题排查分析上篇（调优经验）.md.html">27 JVM 问题排查分析上篇（调优经验）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/12 JMX 与相关工具：山高月小，水落石出.md.html">12 JMX 与相关工具：山高月小，水落石出.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/28 JVM 问题排查分析下篇（案例实战）.md.html">28 JVM 问题排查分析下篇（案例实战）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/13 常见的 GC 算法（GC 的背景与原理）.md.html">13 常见的 GC 算法（GC 的背景与原理）.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md.html">29 GC 疑难情况问题排查与分析（上篇）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/14 常见的 GC 算法（ParallelCMSG1）.md.html">14 常见的 GC 算法（ParallelCMSG1）.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/30 GC 疑难情况问题排查与分析（下篇）.md.html">30 GC 疑难情况问题排查与分析（下篇）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html">15 Java11 ZGC 和 Java12 Shenandoah 介绍：苟日新、日日新、又日新.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html">31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html">16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html</a>
-
-
-
+                    <a href="/专栏/JVM 核心技术 32 讲（完）/32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html">32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海</a>
                 </li>
-
-                <li>
-
-
-
-                    <a class="current-tab" href="/专栏/JVM 核心技术 32 讲（完）/17 GC 日志解读与分析（基础配置）.md.html">17 GC 日志解读与分析（基础配置）.md.html</a>
-
-                    
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md.html">18 GC 日志解读与分析（实例分析上篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/19 GC 日志解读与分析（实例分析中篇）.md.html">19 GC 日志解读与分析（实例分析中篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/20 GC 日志解读与分析（实例分析下篇）.md.html">20 GC 日志解读与分析（实例分析下篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/21 GC 日志解读与分析（番外篇可视化工具）.md.html">21 GC 日志解读与分析（番外篇可视化工具）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html">22 JVM 的线程堆栈等数据分析：操千曲而后晓声、观千剑而后识器.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/23 内存分析与相关工具上篇（内存布局与分析工具）.md.html">23 内存分析与相关工具上篇（内存布局与分析工具）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/24 内存分析与相关工具下篇（常见问题分析）.md.html">24 内存分析与相关工具下篇（常见问题分析）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html">25 FastThread 相关的工具介绍：欲穷千里目，更上一层楼.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html">26 面临复杂问题时的几个高级工具：它山之石，可以攻玉.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/27 JVM 问题排查分析上篇（调优经验）.md.html">27 JVM 问题排查分析上篇（调优经验）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/28 JVM 问题排查分析下篇（案例实战）.md.html">28 JVM 问题排查分析下篇（案例实战）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/29 GC 疑难情况问题排查与分析（上篇）.md.html">29 GC 疑难情况问题排查与分析（上篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/30 GC 疑难情况问题排查与分析（下篇）.md.html">30 GC 疑难情况问题排查与分析（下篇）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html">31 JVM 相关的常见面试问题汇总：运筹策帷帐之中，决胜于千里之外.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/JVM 核心技术 32 讲（完）/32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html">32 应对容器时代面临的挑战：长风破浪会有时、直挂云帆济沧海.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>17 GC 日志解读与分析（基础配置）</h1>
-
 <p>本章通过具体示例来演示如何输出 GC 日志，并对输出的日志信息进行解读分析，从中提取有用的信息。</p>
-
 <h3>本次演示的示例代码</h3>
-
 <p>为了演示需要，我们先来编写一段简单的 Java 代码：</p>
-
 <pre><code class="language-java">package demo.jvm0204;
-
 import java.util.Random;
-
 import java.util.concurrent.TimeUnit;
-
 import java.util.concurrent.atomic.LongAdder;
-
 /*
-
 演示 GC 日志生成与解读
-
 */
-
 public class GCLogAnalysis {
-
     private static Random random = new Random();
-
     public static void main(String[] args) {
-
         // 当前毫秒时间戳
-
         long startMillis = System.currentTimeMillis();
-
         // 持续运行毫秒数; 可根据需要进行修改
-
         long timeoutMillis = TimeUnit.SECONDS.toMillis(1);
-
         // 结束时间戳
-
         long endMillis = startMillis + timeoutMillis;
-
         LongAdder counter = new LongAdder();
-
         System.out.println(&quot;正在执行...&quot;);
-
         // 缓存一部分对象; 进入老年代
-
         int cacheSize = 2000;
-
         Object[] cachedGarbage = new Object[cacheSize];
-
         // 在此时间范围内,持续循环
-
         while (System.currentTimeMillis() &lt; endMillis) {
-
             // 生成垃圾对象
-
             Object garbage = generateGarbage(100*1024);
-
             counter.increment();
-
             int randomIndex = random.nextInt(2 * cacheSize);
-
             if (randomIndex &lt; cacheSize) {
-
                 cachedGarbage[randomIndex] = garbage;
-
             }
-
         }
-
         System.out.println(&quot;执行结束!共生成对象次数:&quot; + counter.longValue());
-
     }
-
-
-
     // 生成对象
-
     private static Object generateGarbage(int max) {
-
         int randomSize = random.nextInt(max);
-
         int type = randomSize % 4;
-
         Object result = null;
-
         switch (type) {
-
             case 0:
-
                 result = new int[randomSize];
-
                 break;
-
             case 1:
-
                 result = new byte[randomSize];
-
                 break;
-
             case 2:
-
                 result = new double[randomSize];
-
                 break;
-
             default:
-
                 StringBuilder builder = new StringBuilder();
-
                 String randomString = &quot;randomString-Anything&quot;;
-
                 while (builder.length() &lt; randomSize) {
-
                     builder.append(randomString);
-
                     builder.append(max);
-
                     builder.append(randomSize);
-
                 }
-
                 result = builder.toString();
-
                 break;
-
         }
-
         return result;
-
     }
-
 }
-
-
-
 </code></pre>
-
 <p>程序并不复杂，我们指定一个运行时间作为退出条件，时间一到自动退出循环。在 generateGarbage 方法中，我们用了随机数来生成各种类型的数组对象并返回。</p>
-
 <p>在 main 方法中，我们用一个数组来随机存放一部分生成的对象，这样可以模拟让部分对象晋升到老年代。具体的持续运行时间和缓存对象个数，各位同学可以自己进行调整。</p>
-
 <blockquote>
-
 <p>一般来说，Java 中的大对象主要就是各种各样的数组，比如开发中最常见的字符串，实际上 String 内部就是使用字符数组 char[] 来存储的。</p>
-
 </blockquote>
-
 <p>额外说一句，这个示例除了可以用来进行 GC 日志分析之外，稍微修改一下，还可以用作其他用途：</p>
-
 <ul>
-
 <li>比如让缓存的对象变多，在限制堆内存的情况下，就可以模拟“内存溢出”。</li>
-
 <li>增加运行时长，比如加到 30 分钟或者更长，我们就可以用前面介绍过的 VisualVM 等工具来实时监控和观察。</li>
-
 <li>当然，我们也可以使用全局静态变量来缓存，用来模拟“内存泄漏”，以及进行堆内存 Dump 的试验和分析。</li>
-
 <li>加大每次生成的数组的大小，可以用来模拟“大对象/巨无霸对象”（大对象/巨无霸对象主要是 G1 中的概念，比如超过 1MB 的数组，具体情况在后面的内容中再进行探讨）。</li>
-
 </ul>
-
 <h3>常用的 GC 参数</h3>
-
 <p>我们从简单到复杂，一步一步来验证前面学习的知识，学会使用，加深巩固。</p>
-
 <h4><strong>启动示例程序</strong></h4>
-
 <p>如果是在 IDEA、Eclipse 等集成开发环境中，直接在文件中点击鼠标右键，选择“Run…”即可执行。</p>
-
 <p>如果使用 JDK 命令行，则可以使用 javac 工具来编译，使用 java 命令来执行（还记得吗？JDK 8 以上版本，这两个命令可以合并成一个）：</p>
-
 <pre><code class="language-shell">$ javac demo/jvm0204/*.java
-
 $ java demo.jvm0204.GCLogAnalysis
-
 正在执行...
-
 执行结束!共生成对象次数:1423
-
-
-
 </code></pre>
-
 <p>程序执行 1 秒钟就自动结束了，因为没有指定任何启动参数，所以输出的日志内容也很简单。</p>
-
 <p>还记得我们在前面的《[JVM 启动参数详解]》章节中介绍的 GC 参数吗？</p>
-
 <p>我们依次加上这些参数来看看效果。</p>
-
 <h4><strong>输出 GC 日志详情</strong></h4>
-
 <p>然后加上启动参数 <code>-XX:+PrintGCDetails</code>，打印 GC 日志详情，再次执行示例。</p>
-
 <blockquote>
-
 <p>IDEA 等集成开发环境可以在“VM options”中指定启动参数，参考前面的内容。注意不要有多余的空格。</p>
-
 </blockquote>
-
 <pre><code class="language-shell">java -XX:+PrintGCDetails demo.jvm0204.GCLogAnalysis
-
-
-
 </code></pre>
-
 <p>执行结果摘录如下：</p>
-
 <pre><code class="language-shell">正在执行...
-
 [GC (Allocation Failure)
-
   [PSYoungGen: 65081K-&gt;10728K(76288K)]
-
   65081K-&gt;27102K(251392K), 0.0112478 secs]
-
   [Times: user=0.03 sys=0.02, real=0.01 secs]
-
 ......此处省略了多行
-
 [Full GC (Ergonomics)
-
   [PSYoungGen: 80376K-&gt;0K(872960K)]
-
   [ParOldGen: 360220K-&gt;278814K(481280K)]
-
   440597K-&gt;278814K(1354240K),
-
   [Metaspace: 3443K-&gt;3443K(1056768K)],
-
   0.0406179 secs]
-
   [Times: user=0.23 sys=0.01, real=0.04 secs]
-
 执行结束!共生成对象次数:746
-
 Heap
-
  PSYoungGen total 872960K, used 32300K [0x000000076ab00000, 0x00000007b0180000, 0x00000007c0000000)
-
   eden space 792576K, 4% used [0x000000076ab00000,0x000000076ca8b370,0x000000079b100000)
-
   from space 80384K, 0% used [0x00000007a3800000,0x00000007a3800000,0x00000007a8680000)
-
   to space 138240K, 0% used [0x000000079b100000,0x000000079b100000,0x00000007a3800000)
-
  ParOldGen total 481280K, used 278814K [0x00000006c0000000, 0x00000006dd600000, 0x000000076ab00000)
-
   object space 481280K, 57% used [0x00000006c0000000,0x00000006d1047b10,0x00000006dd600000)
-
  Metaspace used 3449K, capacity 4494K, committed 4864K, reserved 1056768K
-
   class space used 366K, capacity 386K, committed 512K, reserved 1048576K
-
-
-
 </code></pre>
-
 <p>可以看到，使用启动参数 <code>-XX:+PrintGCDetails</code>，发生 GC 时会输出相关的 GC 日志。</p>
-
 <blockquote>
-
 <p>这个参数的格式为: <code>-XX:+</code>，这是一个布尔值开关。</p>
-
 </blockquote>
-
 <p>在程序执行完成后、JVM 关闭前，还会输出各个内存池的使用情况，从最后面的输出中可以看到。</p>
-
 <p>下面我们来简单解读上面输出的堆内存信息。</p>
-
 <p><strong>Heap 堆内存使用情况</strong></p>
-
 <pre><code class="language-java">PSYoungGen total 872960K, used 32300K [0x......)
-
  eden space 792576K, 4% used [0x......)
-
  from space 80384K, 0% used [0x......)
-
  to space 138240K, 0% used [0x......)
-
-
-
 </code></pre>
-
 <p>PSYoungGen，年轻代总计 872960K，使用量 32300K，后面的方括号中是内存地址信息。</p>
-
 <ul>
-
 <li>其中 eden space 占用了 792576K，其中 4% used</li>
-
 <li>其中 from space 占用了 80384K，其中 0% used</li>
-
 <li>其中 to space 占用了 138240K，其中 0% used</li>
-
 </ul>
-
 <pre><code class="language-java">ParOldGen total 481280K, used 278814K [0x......)
-
  object space 481280K, 57% used [0x......)
-
-
-
 </code></pre>
-
 <p>ParOldGen，老年代总计 total 481280K，使用量 278814K。</p>
-
 <ul>
-
 <li>其中 object space 占用了 481280K，其中 57% used</li>
-
 </ul>
-
 <pre><code class="language-java">Metaspace used 3449K, capacity 4494K, committed 4864K, reserved 1056768K
-
  class space used 366K, capacity 386K, committed 512K, reserved 1048576K
-
-
-
 </code></pre>
-
 <p>Metaspace，元数据区总计使用了 3449K，容量是 4494K，JVM 保证可用的大小是 4864K，保留空间 1GB 左右。</p>
-
 <ul>
-
 <li>其中 class space 使用了 366K，capacity 386K</li>
-
 </ul>
-
 <h4><strong>指定 GC 日志文件</strong></h4>
-
 <p>我们在前面的基础上，加上启动参数 <code>-Xloggc:gc.demo.log</code>，再次执行。</p>
-
 <pre><code class="language-shell"># 请注意命令行启动时没有换行，此处是手工排版
-
 java -Xloggc:gc.demo.log -XX:+PrintGCDetails
-
  demo.jvm0204.GCLogAnalysis
-
-
-
 </code></pre>
-
 <blockquote>
-
 <p><strong>提示</strong>：从 JDK 8 开始，支持使用 <code>%p</code>、<code>%t</code> 等占位符来指定 GC 输出文件，分别表示进程 pid 和启动时间戳。</p>
-
 <p>例如：<code>-Xloggc:gc.%p.log</code>、<code>-Xloggc:gc-%t.log</code>。</p>
-
 </blockquote>
-
 <p>在某些情况下，将每次 JVM 执行的 GC 日志输出到不同的文件可以方便排查问题。</p>
-
 <p>如果业务访问量大，导致 GC 日志文件太大，可以开启 GC 日志轮换，分割成多个文件，可以参考：</p>
-
 <blockquote>
-
 <p><a href="https://blog.gceasy.io/2016/11/15/rotating-gc-log-files">https://blog.gceasy.io/2016/11/15/rotating-gc-log-files</a></p>
-
 </blockquote>
-
 <p>执行后在命令行输出的结果如下：</p>
-
 <pre><code class="language-shell">正在执行...
-
 执行结束!共生成对象次数:1327
-
-
-
 </code></pre>
-
 <p>GC 日志哪去了？</p>
-
 <p>查看当前工作目录，可以发现多了一个文件 gc.demo.log。 如果是 IDE 开发环境，gc.demo.log 文件可能在项目的根目录下。 当然，我们也可以指定 GC 日志文件存放的绝对路径，比如 <code>-Xloggc:/var/log/gc.demo.log</code> 等形式。</p>
-
 <p>gc.demo.log 文件的内容如下：</p>
-
 <pre><code class="language-shell">Java HotSpot(TM) 64-Bit Server VM (25.162-b12) ......
-
 Memory: 4k page，physical 16777216k(1519448k free)
-
-
-
 /proc/meminfo:
-
-
-
 CommandLine flags:
-
   -XX:InitialHeapSize=268435456 -XX:MaxHeapSize=4294967296
-
   -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
-
   -XX:+UseCompressedClassPointers -XX:+UseCompressedOops
-
   -XX:+UseParallelGC
-
 0.310: [GC (Allocation Failure)
-
   [PSYoungGen: 61807K-&gt;10732K(76288K)]
-
   61807K-&gt;22061K(251392K), 0.0094195 secs]
-
   [Times: user=0.02 sys=0.02, real=0.01 secs]
-
 0.979: [Full GC (Ergonomics)
-
   [PSYoungGen: 89055K-&gt;0K(572928K)]
-
   [ParOldGen: 280799K-&gt;254491K(434176K)]
-
   369855K-&gt;254491K(1007104K),
-
   [Metaspace: 3445K-&gt;3445K(1056768K)],
-
   0.0362652 secs]
-
   [Times: user=0.20 sys=0.01, real=0.03 secs]
-
 ...... 此处省略部分内容
-
 Heap
-
 ...... 堆内存信息格式请参考前面的日志
-
-
-
 </code></pre>
-
 <p>我们可以发现，加上 <code>-Xloggc:</code> 参数之后，GC 日志信息输出到日志文件中。</p>
-
 <p>文件里最前面是 JVM 相关信息，比如内存页面大小、物理内存大小、剩余内存等信息。</p>
-
 <p>然后是 CommandLine flags 这部分内容。在分析 GC 日志文件时，命令行参数也是一项重要的参考。因为可能你拿到了日志文件，却不知道线上的配置，日志文件中打印了这个信息，能有效减少分析排查时间。</p>
-
 <p>指定 <code>-Xloggc:</code> 参数，自动加上了 <code>-XX:+PrintGCTimeStamps</code> 配置。观察 GC 日志文件可以看到，每一行前面多了一个时间戳（如 0.310:），表示 JVM 启动后经过的时间（单位秒）。</p>
-
 <blockquote>
-
 <p>细心的同学还可以发现，JDK 8 默认使用的垃圾收集器参数：<code>-XX:+UseParallelGC</code>。</p>
-
 </blockquote>
-
 <h4><strong>打印 GC 事件发生的日期和时间</strong></h4>
-
 <p>我们在前面的基础上，加上启动参数 <code>-XX:+PrintGCDateStamps</code>，再次执行。</p>
-
 <pre><code class="language-shell">java -Xloggc:gc.demo.log -XX:+PrintGCDetails
-
  -XX:+PrintGCDateStamps demo.jvm0204.GCLogAnalysis
-
-
-
 </code></pre>
-
 <p>执行完成后，GC 日志文件中的内容摘录如下：</p>
-
 <pre><code class="language-shell">...... 省略多行
-
 CommandLine flags:
-
   -XX:InitialHeapSize=268435456 -XX:MaxHeapSize=4294967296
-
   -XX:+PrintGC -XX:+PrintGCDateStamps
-
   -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
-
   -XX:+UseCompressedClassPointers -XX:+UseCompressedOops
-
   -XX:+UseParallelGC
-
 2019-12-15T15:09:59.235-0800: 0.296:
-
   [GC (Allocation Failure)
-
     [PSYoungGen: 63844K-&gt;10323K(76288K)]
-
     63844K-&gt;20481K(251392K),
-
     0.0087896 secs]
-
   [Times: user=0.02 sys=0.02, real=0.01 secs]
-
 2019-12-15T15:09:59.889-0800: 0.951:
-
   [Full GC (Ergonomics)
-
     [PSYoungGen: 81402K-&gt;0K(577536K)]
-
     [ParOldGen: 270176K-&gt;261230K(445952K)]
-
     351579K-&gt;261230K(1023488K),
-
     [Metaspace: 3445K-&gt;3445K(1056768K)],
-
     0.0369622 secs]
-
   [Times: user=0.19 sys=0.00, real=0.04 secs]
-
 Heap
-
   .......省略内容参考前面的格式
-
-
-
 </code></pre>
-
 <p>可以看到，加上 <code>-XX:+PrintGCDateStamps</code> 参数之后，GC 日志每一行前面，都打印了 GC 发生时的具体时间。如 <code>2019-12-15T15:09:59.235-0800</code> 表示的是“东 8 区时间 2019 年 12 月 15 日 15:09:59 秒.235 毫秒”。</p>
-
 <h4><strong>指定堆内存的大小</strong></h4>
-
 <p>从前面的示例中可以看到 GC 日志文件中输出的 CommandLine flags 信息。</p>
-
 <p>即使我们没有指定堆内存，JVM在启动时也会自动算出一个默认值出来。例如：<code>-XX:InitialHeapSize=268435456 -XX:MaxHeapSize=4294967296</code> 是笔者机器上的默认值，等价于 <code>-Xms256m -Xmx4g</code> 配置。</p>
-
 <p>我们现在继续增加参数，这次加上启动参数 <code>-Xms512m -Xmx512m</code>，再次执行。</p>
-
 <pre><code class="language-shell">java -Xms512m -Xmx512m
-
  -Xloggc:gc.demo.log -XX:+PrintGCDetails
-
  -XX:+PrintGCDateStamps demo.jvm0204.GCLogAnalysis
-
-
-
 </code></pre>
-
 <p>此时输出的 GC 日志文件内容摘录如下：</p>
-
 <pre><code class="language-shell">......
-
 CommandLine flags:
-
   -XX:InitialHeapSize=536870912 -XX:MaxHeapSize=536870912
-
   -XX:+PrintGC -XX:+PrintGCDateStamps
-
   -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
-
   -XX:+UseCompressedClassPointers -XX:+UseCompressedOops
-
   -XX:+UseParallelGC
-
 2019-12-15T15:15:09.677-0800: 0.358:
-
   [GC (Allocation Failure)
-
     [PSYoungGen: 129204K-&gt;21481K(153088K)]
-
     129204K-&gt;37020K(502784K), 0.0121865 secs]
-
   [Times: user=0.03 sys=0.03, real=0.01 secs]
-
 2019-12-15T15:15:10.058-0800: 0.739:
-
   [Full GC (Ergonomics)
-
     [PSYoungGen: 20742K-&gt;0K(116736K)]
-
     [ParOldGen: 304175K-&gt;247922K(349696K)]
-
     324918K-&gt;247922K(466432K),
-
     [Metaspace: 3444K-&gt;3444K(1056768K)],
-
     0.0319225 secs]
-
   [Times: user=0.18 sys=0.01, real=0.04 secs]
-
-
-
 </code></pre>
-
 <p>此时堆内存的初始值和最大值都是 512MB。具体的参数可根据实际需要配置，我们为了演示，使用了一个较小的堆内存配置。</p>
-
 <h4><strong>指定垃圾收集器</strong></h4>
-
 <p>一般来说，使用 JDK 8 时我们可以使用以下几种垃圾收集器：</p>
-
 <pre><code class="language-shell">-XX:+UseSerialGC
-
 -XX:+UseParallelGC
-
 -XX:+UseParallelGC -XX:+UseParallelOldGC
-
 -XX:+UseConcMarkSweepGC
-
 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
-
 -XX:+UseG1GC
-
-
-
 </code></pre>
-
 <p>它们都是什么意思呢，我们再简单回顾一下：</p>
-
 <ul>
-
 <li>使用串行垃圾收集器：<code>-XX:+UseSerialGC</code></li>
-
 <li>使用并行垃圾收集器：<code>-XX:+UseParallelGC</code> 和 <code>-XX:+UseParallelGC -XX:+UseParallelOldGC</code> 是等价的，可以通过 GC 日志文件中的 flags 看出来。</li>
-
 <li>使用 CMS 垃圾收集器：<code>-XX:+UseConcMarkSweepGC</code> 和 <code>-XX:+UseParNewGC -XX:+UseConcMarkSweepGC</code> 是等价的。但如果只指定 <code>-XX:+UseParNewGC</code> 参数则老年代 GC 会使用 SerialGC。使用CMS时，命令行参数中会自动计算出年轻代、老年代的初始值和最大值，以及最大晋升阈值等信息（例如 <code>-XX:MaxNewSize=178958336 -XX:NewSize=178958336 -XX:OldSize=357912576</code>）。</li>
-
 <li>使用 G1 垃圾收集器：<code>-XX:+UseG1GC</code>。原则上不能指定 G1 垃圾收集器的年轻代大小，否则不仅是画蛇添足，更是自废武功了。因为 G1 的回收方式是小批量划定区块（region）进行，可能一次普通 GC 中既有年轻代又有老年代，可能某个区块一会是老年代，一会又变成年轻代了。</li>
-
 </ul>
-
 <blockquote>
-
 <p>如果使用不支持的 GC 组合，会怎么样呢？答案是会启动失败，报 fatal 错误，有兴趣的同学可以试一下。</p>
-
 </blockquote>
-
 <p>下一节会依次演示各种垃圾收集器的使用，并采集和分析他们产生的日志。它们的格式差距并不大，学会分析一种 GC 日志之后，就可以举一反三，对于其他类型的 GC 日志，基本上也能看懂各项信息的大概意思。</p>
-
 <h4><strong>其他参数</strong></h4>
-
 <p>JVM 里还有一些 GC 日志相关的参数，例如：</p>
-
 <ul>
-
 <li><code>-XX:+PrintGCApplicationStoppedTime</code> 可以输出每次 GC 的持续时间和程序暂停时间；</li>
-
 <li><code>-XX:+PrintReferenceGC</code> 输出 GC 清理了多少引用类型。</li>
-
 </ul>
-
 <p>这里就不再赘述，想了解配置详情的，可以回头复习前面的章节。</p>
-
 <blockquote>
-
 <p><strong>说明</strong>：大部分情况下，配置 GC 参数并不是越多越好。原则上只配置最重要的几个参数即可，其他的都保持默认值，除非你对系统的业务特征有了深入的分析和了解，才需要进行某些细微参数的调整。毕竟，古语有云：“过早优化是万恶之源”。</p>
-
 </blockquote>
-
 <h3>GC 事件的类型简介</h3>
-
 <p>一般来说，垃圾收集事件（Garbage Collection events）可以分为三种类型：</p>
-
 <ul>
-
 <li>Minor GC（小型 GC）</li>
-
 <li>Major GC（大型 GC）</li>
-
 <li>Full GC（完全 GC）</li>
-
 </ul>
-
 <p>虽然 Minor GC，Major GC 和 Full GC 这几个词汇到处都在用，但官方并没有给出标准的定义。这些术语出现在官方的各种分析工具和垃圾收集日志中，并不是很统一。官方的文档和工具之间也常常混淆，这些混淆甚至根植于标准的 JVM 工具中。</p>
-
 <blockquote>
-
 <p>MinorGC 称为“小型 GC”，还是“次要GC”更合理呢？</p>
-
 </blockquote>
-
 <p><strong>辨析</strong>：在大部分情况下，发生在年轻代的 Minor GC 次数更多，有些文章将次数更多的 GC 称为“次要 GC”明显是不太合理的。</p>
-
 <p>在这里，我们将 Minor GC 翻译为“小型 GC”，而不是“次要 GC”；将 Major GC 翻译为“大型GC”而不是“主要 GC”；Full GC 翻译为<strong>完全 GC</strong>；有时候也直接称为 Full GC。</p>
-
 <p>其实这也是因为专有名词在中英文翻译的时候，可能会有多个英语词汇对应一个中文词语，也会有一个英文词汇对应多个中文词语，要看具体情况而定。</p>
-
 <p>比如一个类似的情况：Major Version 和 Minor Version，这两个名词一般翻译为“主要版本”和“次要版本”。这当然没问题，大家都能理解，一看就知道什么意思。甚至直接翻译为“大版本号”和“小版本号”也是能讲得通的。</p>
-
 <p>本节简单介绍了这几种事件类型及其区别，下面我们来看看这些事件类型的具体细节。</p>
-
 <h4><strong>Minor GC（小型 GC）</strong></h4>
-
 <p>收集年轻代内存的 GC 事件称为 Minor GC。关于 Minor GC 事件，我们需要了解一些相关的内容：</p>
-
 <ol>
-
 <li>当 JVM 无法为新对象分配内存空间时就会触发 Minor GC（ 一般就是 Eden 区用满了）。如果对象的分配速率很快，那么 Minor GC 的次数也就会很多，频率也就会很快。</li>
-
 <li>Minor GC 事件不处理老年代，所以会把所有从老年代指向年轻代的引用都当做 GC Root。从年轻代指向老年代的引用则在标记阶段被忽略。</li>
-
 <li>与我们一般的认知相反，Minor GC 每次都会引起 STW 停顿（stop-the-world），挂起所有的应用线程。对大部分应用程序来说，Minor GC 的暂停时间可以忽略不计，因为 Eden 区里面的对象大部分都是垃圾，也不怎么复制到存活区/老年代。但如果不符合这种情况，那么很多新创建的对象就不能被 GC 清理，Minor GC 的停顿时间就会增大，就会产生比较明显的 GC 性能影响。</li>
-
 </ol>
-
 <blockquote>
-
 <p>简单定义：Minor GC 清理的是年轻代，又或者说 Minor GC 就是“年轻代 GC”（Young GC，简称 YGC）。</p>
-
 </blockquote>
-
 <h4><strong>Major GC vs. Full GC</strong></h4>
-
 <p>值得一提的是，这几个术语都没有正式的定义--无论是在 JVM 规范中还是在 GC 论文中。</p>
-
 <p>我们知道，除了 Minor GC 外，另外两种 GC 事件则是：</p>
-
 <ul>
-
 <li>Major GC（大型 GC）：清理老年代空间（Old Space）的 GC 事件。</li>
-
 <li>Full GC（完全 GC）：清理整个堆内存空间的 GC 事件，包括年轻代空间和老年代空间。</li>
-
 </ul>
-
 <p>其实 Major GC 和 Full GC 有时候并不能很好地区分。更复杂的情况是，很多 Major GC 是由 Minor GC 触发的，所以很多情况下这两者是不可分离的。</p>
-
 <p>另外，像 G1 这种垃圾收集算法，是每次找一小部分区域来进行清理，这部分区域中可能有一部分是年轻代，另一部分区域属于老年代。</p>
-
 <p>所以我们不要太纠结具体是叫 Major GC 呢还是叫 Full GC，它们一般都会造成单次较长时间的 STW 暂停。所以我们需要关注的是：某次 GC 事件，是暂停了所有线程、进而对系统造成了性能影响呢，还是与其他业务线程并发执行、暂停时间几乎可以忽略不计。</p>
-
 <p>本节内容到此就结束了，下一节我们通过实例来分析各种 GC 算法产生的日志。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/JVM 核心技术 32 讲（完）/16 Oracle GraalVM 介绍：会当凌绝顶、一览众山小.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/JVM 核心技术 32 讲（完）/18 GC 日志解读与分析（实例分析上篇）.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996fe57e1d3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

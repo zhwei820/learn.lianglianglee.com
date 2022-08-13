@@ -1,1132 +1,602 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/00 开篇词：JVM，一块难啃的骨头.md.html">00 开篇词：JVM，一块难啃的骨头.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/00 开篇词：JVM，一块难啃的骨头.md.html">00 开篇词：JVM，一块难啃的骨头</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html">01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html">01 一探究竟：为什么需要 JVM？它处在什么位置？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html">02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html">02 大厂面试题：你不得不掌握的 JVM 内存管理</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/06 深入剖析：垃圾回收你真的了解吗？（上）.md.html">06 深入剖析：垃圾回收你真的了解吗？（上）.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/06 深入剖析：垃圾回收你真的了解吗？（上）.md.html">06 深入剖析：垃圾回收你真的了解吗？（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/07 深入剖析：垃圾回收你真的了解吗？（下）.md.html">07 深入剖析：垃圾回收你真的了解吗？（下）.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/07 深入剖析：垃圾回收你真的了解吗？（下）.md.html">07 深入剖析：垃圾回收你真的了解吗？（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/09 案例实战：亿级流量高并发下如何进行估算和调优.md.html">09 案例实战：亿级流量高并发下如何进行估算和调优.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/09 案例实战：亿级流量高并发下如何进行估算和调优.md.html">09 案例实战：亿级流量高并发下如何进行估算和调优</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/深入浅出 Java 虚拟机-完/11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html</a>
+                    <a class="current-tab" href="/专栏/深入浅出 Java 虚拟机-完/11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/14 动手实践：让面试官刮目相看的堆外内存排查.md.html">14 动手实践：让面试官刮目相看的堆外内存排查.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/14 动手实践：让面试官刮目相看的堆外内存排查.md.html">14 动手实践：让面试官刮目相看的堆外内存排查</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/15 预警与解决：深入浅出 GC 监控与调优.md.html">15 预警与解决：深入浅出 GC 监控与调优.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/15 预警与解决：深入浅出 GC 监控与调优.md.html">15 预警与解决：深入浅出 GC 监控与调优</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/16 案例分析：一个高死亡率的报表系统的优化之路.md.html">16 案例分析：一个高死亡率的报表系统的优化之路.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/16 案例分析：一个高死亡率的报表系统的优化之路.md.html">16 案例分析：一个高死亡率的报表系统的优化之路</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/17 案例分析：分库分表后，我的应用崩溃了.md.html">17 案例分析：分库分表后，我的应用崩溃了.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/17 案例分析：分库分表后，我的应用崩溃了.md.html">17 案例分析：分库分表后，我的应用崩溃了</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/18 动手实践：从字节码看方法调用的底层实现.md.html">18 动手实践：从字节码看方法调用的底层实现.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/18 动手实践：从字节码看方法调用的底层实现.md.html">18 动手实践：从字节码看方法调用的底层实现</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/19 大厂面试题：不要搞混 JMM 与 JVM.md.html">19 大厂面试题：不要搞混 JMM 与 JVM.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/19 大厂面试题：不要搞混 JMM 与 JVM.md.html">19 大厂面试题：不要搞混 JMM 与 JVM</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/20 动手实践：从字节码看并发编程的底层实现.md.html">20 动手实践：从字节码看并发编程的底层实现.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/20 动手实践：从字节码看并发编程的底层实现.md.html">20 动手实践：从字节码看并发编程的底层实现</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/21 动手实践：不为人熟知的字节码指令.md.html">21 动手实践：不为人熟知的字节码指令.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/21 动手实践：不为人熟知的字节码指令.md.html">21 动手实践：不为人熟知的字节码指令</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/23 动手实践：JIT 参数配置如何影响程序运行？.md.html">23 动手实践：JIT 参数配置如何影响程序运行？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/23 动手实践：JIT 参数配置如何影响程序运行？.md.html">23 动手实践：JIT 参数配置如何影响程序运行？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/24 案例分析：大型项目如何进行性能瓶颈调优？.md.html">24 案例分析：大型项目如何进行性能瓶颈调优？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/24 案例分析：大型项目如何进行性能瓶颈调优？.md.html">24 案例分析：大型项目如何进行性能瓶颈调优？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/25 未来：JVM 的历史与展望.md.html">25 未来：JVM 的历史与展望.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/25 未来：JVM 的历史与展望.md.html">25 未来：JVM 的历史与展望</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/26 福利：常见 JVM 面试题补充.md.html">26 福利：常见 JVM 面试题补充.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/26 福利：常见 JVM 面试题补充.md.html">26 福利：常见 JVM 面试题补充</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>11 第10讲：动手实践：自己模拟 JVM 内存溢出场景</h1>
-
 <p>本课时我们主要自己模拟一个 JVM 内存溢出的场景。在模拟 JVM 内存溢出之前我们先来看下这样的几个问题。</p>
-
 <ul>
-
 <li>老年代溢出为什么那么可怕？</li>
-
 <li>元空间也有溢出？怎么优化？</li>
-
 <li>如何配置栈大小？避免栈溢出？</li>
-
 <li>进程突然死掉，没有留下任何信息时如何进行排查？</li>
-
 </ul>
-
 <p>年轻代由于有老年代的担保，一般在内存占满的时候，并没什么问题。但老年代满了就比较严重了，它没有其他的空间用来做担保，只能 OOM 了，也就是发生 Out Of Memery Error。JVM 会在这种情况下直接停止工作，是非常严重的后果。</p>
-
 <p>OOM 一般是内存泄漏引起的，表现在 GC 日志里，一般情况下就是 GC 的时间变长了，而且每次回收的效果都非常一般。GC 后，堆内存的实际占用呈上升趋势。接下来，我们将模拟三种溢出场景，同时使用我们了解的工具进行观测。</p>
-
 <p>在开始之前，请你下载并安装一个叫作 VisualVM 的工具，我们使用这个图形化的工具看一下溢出过程。</p>
-
 <p>虽然 VisualVM 工具非常好用，但一般生产环境都没有这样的条件，所以大概率使用不了。新版本 JDK 把这个工具单独抽离了出去，需要自行下载。</p>
-
 <p>这里需要注意下载安装完成之后请在插件选项中勾选 Visual GC 下载，它将可视化内存布局。</p>
-
 <h2>堆溢出模拟</h2>
-
 <p>首先，我们模拟堆溢出的情况，在模拟之前我们需要准备一份测试代码。这份代码开放了一个 HTTP 接口，当你触发它之后，将每秒钟生成 1MB 的数据。由于它和 GC Roots 的强关联性，每次都不能被回收。</p>
-
 <p>程序通过 JMX，将在每一秒创建数据之后，输出一些内存区域的占用情况。然后通过访问 http://localhost:8888 触发后，它将一直运行，直到堆溢出。</p>
-
 <pre><code>import com.sun.net.httpserver.HttpContext;
-
 import com.sun.net.httpserver.HttpExchange;
-
 import com.sun.net.httpserver.HttpServer;
-
 import java.io.OutputStream;
-
 import java.lang.management.ManagementFactory;
-
 import java.lang.management.MemoryPoolMXBean;
-
 import java.net.InetSocketAddress;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 public class OOMTest {
-
    public static final int _1MB = 1024 * 1024;
-
    static List&lt;byte[]&gt; byteList = new ArrayList&lt;&gt;();
-
    private static void oom(HttpExchange exchange) {
-
        try {
-
            String response = &quot;oom begin!&quot;;
-
            exchange.sendResponseHeaders(200, response.getBytes().length);
-
            OutputStream os = exchange.getResponseBody();
-
            os.write(response.getBytes());
-
            os.close();
-
        } catch (Exception ex) {
-
        }
-
        for (int i = 0; ; i++) {
-
            byte[] bytes = new byte[_1MB];
-
            byteList.add(bytes);
-
            System.out.println(i + &quot;MB&quot;);
-
            memPrint();
-
            try {
-
                Thread.sleep(1000);
-
            } catch (Exception e) {
-
            }
-
        }
-
    }
-
    static void memPrint() {
-
        for (MemoryPoolMXBean memoryPoolMXBean : ManagementFactory.getMemoryPoolMXBeans()) {
-
            System.out.println(memoryPoolMXBean.getName() +
-
                    &quot;  committed:&quot; + memoryPoolMXBean.getUsage().getCommitted() +
-
                    &quot;  used:&quot; + memoryPoolMXBean.getUsage().getUsed());
-
        }
-
    }
-
    private static void srv() throws Exception {
-
        HttpServer server = HttpServer.create(new InetSocketAddress(8888), 0);
-
        HttpContext context = server.createContext(&quot;/&quot;);
-
        context.setHandler(OOMTest::oom);
-
        server.start();
-
    }
-
    public static void main(String[] args) throws Exception{
-
        srv();
-
    }
-
 }
-
 </code></pre>
-
 <p>我们使用 CMS 收集器进行垃圾回收，可以看到如下的信息。</p>
-
 <p>命令：</p>
-
 <p>java -Xmx20m  -Xmn4m   -XX:+UseConcMarkSweepGC  -verbose:gc -Xlog:gc,</p>
-
 <p>gc+ref=debug,gc+heap=debug,</p>
-
 <p>gc+age=trace:file=/tmp/logs/gc_%p.log:tags,</p>
-
 <p>uptime,</p>
-
 <p>time,</p>
-
 <p>level -Xlog:safepoint:file=/tmp/logs/safepoint_%p.log:tags,</p>
-
 <p>uptime,</p>
-
 <p>time,</p>
-
 <p>level -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/logs -XX:ErrorFile=/tmp/logs/hs_error_pid%p.log -XX:-OmitStackTraceInFastThrow  OOMTest</p>
-
 <p>输出：</p>
-
 <p>[0.025s][info][gc] Using Concurrent Mark Sweep</p>
-
 <p>0MB</p>
-
 <p>CodeHeap 'non-nmethods'  committed:2555904  used:1120512</p>
-
 <p>Metaspace  committed:4980736  used:854432</p>
-
 <p>CodeHeap 'profiled nmethods'  committed:2555904  used:265728</p>
-
 <p>Compressed Class Space  committed:524288  used:96184</p>
-
 <p>Par Eden Space  committed:3407872  used:2490984</p>
-
 <p>Par Survivor Space  committed:393216  used:0</p>
-
 <p>CodeHeap 'non-profiled nmethods'  committed:2555904  used:78592</p>
-
 <p>CMS Old Gen  committed:16777216  used:0</p>
-
 <p>...省略</p>
-
 <p>[16.377s][info][gc] GC(9) Concurrent Mark 1.592ms</p>
-
 <p>[16.377s][info][gc] GC(9) Concurrent Preclean</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Preclean 0.721ms</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Abortable Preclean</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Abortable Preclean 0.006ms</p>
-
 <p>[16.378s][info][gc] GC(9) Pause Remark 17M-&gt;17M(19M) 0.344ms</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Sweep</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Sweep 0.248ms</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Reset</p>
-
 <p>[16.378s][info][gc] GC(9) Concurrent Reset 0.013ms</p>
-
 <p>17MB</p>
-
 <p>CodeHeap 'non-nmethods'  committed:2555904  used:1120512</p>
-
 <p>Metaspace  committed:4980736  used:883760</p>
-
 <p>CodeHeap 'profiled nmethods'  committed:2555904  used:422016</p>
-
 <p>Compressed Class Space  committed:524288  used:92432</p>
-
 <p>Par Eden Space  committed:3407872  used:3213392</p>
-
 <p>Par Survivor Space  committed:393216  used:0</p>
-
 <p>CodeHeap 'non-profiled nmethods'  committed:2555904  used:88064</p>
-
 <p>CMS Old Gen  committed:16777216  used:16452312</p>
-
 <p>[18.380s][info][gc] GC(10) Pause Initial Mark 18M-&gt;18M(19M) 0.187ms</p>
-
 <p>[18.380s][info][gc] GC(10) Concurrent Mark</p>
-
 <p>[18.384s][info][gc] GC(11) Pause Young (Allocation Failure) 18M-&gt;18M(19M) 0.186ms</p>
-
 <p>[18.386s][info][gc] GC(10) Concurrent Mark 5.435ms</p>
-
 <p>[18.395s][info][gc] GC(12) Pause Full (Allocation Failure) 18M-&gt;18M(19M) 10.572ms</p>
-
 <p>[18.400s][info][gc] GC(13) Pause Full (Allocation Failure) 18M-&gt;18M(19M) 5.348ms</p>
-
 <p>Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</p>
-
 <p>at OldOOM.main(OldOOM.java:20)</p>
-
 <p>最后 JVM 在一阵疯狂的 GC 日志输出后，进程停止了。在现实情况中，JVM 在停止工作之前，很多会垂死挣扎一段时间，这个时候，GC 线程会造成 CPU 飙升，但其实它已经不能工作了。</p>
-
 <p>VisualVM 的截图展示了这个溢出结果。可以看到 Eden 区刚开始还是运行平稳的，内存泄漏之后就开始疯狂回收（其实是提升），老年代内存一直增长，直到 OOM。</p>
-
 <p><img src="assets/Cgq2xl5DytGAc09TAAFdBh0n9eo313.jpg" alt="img" /></p>
-
 <p>很多参数会影响对象的分配行为，但不是非常必要，我们一般不去调整它们。为了观察这些参数的默认值，我们通常使用 -XX:+PrintFlagsFinal 参数，输出一些设置信息。</p>
-
 <p>命令：</p>
-
 <h1>java -XX:+PrintFlagsFinal 2&gt;&amp;1 | grep SurvivorRatio</h1>
-
 <p>uintx SurvivorRatio                            = 8                                         {product} {default}</p>
-
 <p>Java13 输出了几百个参数和默认值，我们通过修改一些参数来观测一些不同的行为。</p>
-
 <p><strong>NewRatio</strong> 默认值为 2，表示年轻代是老年代的 1/2。追加参数 “-XX:NewRatio=1”，可以把年轻代和老年代的空间大小调成一样大。在实践中，我们一般使用 -Xmn 来设置一个固定值。注意，这两个参数不要用在 G1 垃圾回收器中。</p>
-
 <p><strong>SurvivorRatio</strong> 默认值为 8。表示伊甸区和幸存区的比例。在上面的例子中，Eden 的内存大小为：0.8*4MB。S 分区不到 1MB，根本存不下我们的 1MB 数据。</p>
-
 <p><strong>MaxTenuringThreshold</strong>  这个值在 CMS 下默认为 6，G1 下默认为 15。这是因为 G1 存在动态阈值计算。这个值和我们前面提到的对象提升有关，如果你想要对象尽量长的时间存在于年轻代，则在 CMS 中，可以把它调整到 15。</p>
-
 <p>java -XX:+PrintFlagsFinal -XX:+UseConcMarkSweepGC 2&gt;&amp;1 | grep MaxTenuringThreshold</p>
-
 <p>java -XX:+PrintFlagsFinal -XX:+UseG1GC 2&gt;&amp;1 | grep MaxTenuringThreshold</p>
-
 <p><strong>PretenureSizeThreshold</strong> 这个参数默认值是 0，意味着所有的对象年轻代优先分配。我们把这个值调小一点，再观测 JVM 的行为。追加参数 -XX:PretenureSizeThreshold=1024，可以看到 VisualVm 中老年代的区域增长。</p>
-
 <p><strong>TargetSurvivorRatio</strong> 默认值为 50。在动态计算对象提升阈值的时候使用。计算时，会从年龄最小的对象开始累加，如果累加的对象大小大于幸存区的一半，则将当前的对象 age 作为新的阈值，年龄大于此阈值的对象直接进入老年代。工作中不建议调整这个值，如果要调，请调成比 50 大的值。</p>
-
 <p>你可以尝试着更改其他参数，比如垃圾回收器的种类，动态看一下效果。尤其注意每一项内存区域的内容变动，你会对垃圾回收器有更好的理解。</p>
-
 <p><strong>UseAdaptiveSizePolicy</strong> ，因为它和 CMS 不兼容，所以 CMS 下默认为 false，但 G1 下默认为 true。这是一个非常智能的参数，它是用来自适应调整空间大小的参数。它会在每次 GC 之后，重新计算 Eden、From、To 的大小。很多人在 Java 8 的一些配置中会见到这个参数，但其实在 CMS 和 G1 中是不需要显式设置的。</p>
-
 <p>值的注意的是，Java 8 默认垃圾回收器是 Parallel Scavenge，它的这个参数是默认开启的，有可能会发生把幸存区自动调小的可能，造成一些问题，显式的设置 SurvivorRatio 可以解决这个问题。</p>
-
 <p>下面这张截图，是切换到 G1 之后的效果。</p>
-
 <p>java -Xmx20m   -XX:+UseG1GC  -verbose:gc -Xlog:gc,gc+ref=debug,gc+heap=debug,gc+age=trace:file=/tmp/logs/gc_%p.log:tags,uptime,time,level -Xlog:safepoint:file=/tmp/logs/safepoint_%p.log:tags,uptime,time,level -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/logs -XX:ErrorFile=/tmp/logs/hs_error_pid%p.log -XX:-OmitStackTraceInFastThrow  OOMTest</p>
-
 <p><img src="assets/CgpOIF5DytKAIL4RAAE2rXZgveA253.jpg" alt="img" /></p>
-
 <p>可以通过下面这个命令调整小堆区的大小，来看一下这个过程。</p>
-
 <p>-XX:G1HeapRegionSize=<N>M</p>
-
 <h2>元空间溢出</h2>
-
 <p>堆一般都是指定大小的，但元空间不是。所以如果元空间发生内存溢出会更加严重，会造成操作系统的内存溢出。我们在使用的时候，也会给它设置一个上限 for safe。</p>
-
 <p>元空间溢出主要是由于加载的类太多，或者动态生成的类太多。下面是一段模拟代码。通过访问 http://localhost:8888 触发后，它将会发生元空间溢出。</p>
-
 <pre><code>import com.sun.net.httpserver.HttpContext;
-
 import com.sun.net.httpserver.HttpExchange;
-
 import com.sun.net.httpserver.HttpServer;
-
 import java.io.OutputStream;
-
 import java.lang.reflect.InvocationHandler;
-
 import java.lang.reflect.Method;
-
 import java.lang.reflect.Proxy;
-
 import java.net.InetSocketAddress;
-
 import java.net.URL;
-
 import java.net.URLClassLoader;
-
 import java.util.HashMap;
-
 import java.util.Map;
-
 public class MetaspaceOOMTest {
-
    public interface Facade {
-
        void m(String input);
-
    }
-
    public static class FacadeImpl implements Facade {
-
        @Override
-
        public void m(String name) {
-
        }
-
    }
-
    public static class MetaspaceFacadeInvocationHandler implements InvocationHandler {
-
        private Object impl;
-
        public MetaspaceFacadeInvocationHandler(Object impl) {
-
            this.impl = impl;
-
        }
-
        @Override
-
        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
            return method.invoke(impl, args);
-
        }
-
    }
-
    private static Map&lt;String, Facade&gt; classLeakingMap = new HashMap&lt;String, Facade&gt;();
-
    private static void oom(HttpExchange exchange) {
-
        try {
-
            String response = &quot;oom begin!&quot;;
-
            exchange.sendResponseHeaders(200, response.getBytes().length);
-
            OutputStream os = exchange.getResponseBody();
-
            os.write(response.getBytes());
-
            os.close();
-
        } catch (Exception ex) {
-
        }
-
        try {
-
            for (int i = 0; ; i++) {
-
                String jar = &quot;file:&quot; + i + &quot;.jar&quot;;
-
                URL[] urls = new URL[]{new URL(jar)};
-
                URLClassLoader newClassLoader = new URLClassLoader(urls);
-
                Facade t = (Facade) Proxy.newProxyInstance(newClassLoader,
-
                        new Class&lt;?&gt;[]{Facade.class},
-
                        new MetaspaceFacadeInvocationHandler(new FacadeImpl()));
-
                classLeakingMap.put(jar, t);
-
            }
-
        } catch (Exception e) {
-
        }
-
    }
-
    private static void srv() throws Exception {
-
        HttpServer server = HttpServer.create(new InetSocketAddress(8888), 0);
-
        HttpContext context = server.createContext(&quot;/&quot;);
-
        context.setHandler(MetaspaceOOMTest::oom);
-
        server.start();
-
    }
-
    public static void main(String[] args) throws Exception {
-
        srv();
-
    }
-
 }
-
 </code></pre>
-
 <p>这段代码将使用 Java 自带的动态代理类，不断的生成新的 class。</p>
-
 <p>java -Xmx20m  -Xmn4m   -XX:+UseG1GC  -verbose:gc -Xlog:gc,gc+ref=debug,gc+heap=debug,gc+age=trace:file=/tmp/logs/gc_%p.log:tags,uptime,time,level -Xlog:safepoint:file=/tmp/logs/safepoint_%p.log:tags,uptime,time,level -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/logs -XX:ErrorFile=/tmp/logs/hs_error_pid%p.log -XX:-OmitStackTraceInFastThrow -XX:MetaspaceSize=16M -XX:MaxMetaspaceSize=16M  MetaspaceOOMTest</p>
-
 <p>我们在启动的时候，限制 Metaspace 空间大小为 16MB。可以看到运行一小会之后，Metaspace 会发生内存溢出。</p>
-
 <p>[6.509s][info][gc] GC(28) Pause Young (Concurrent Start) (Metadata GC Threshold) 9M-&gt;9M(20M) 1.186ms</p>
-
 <p>[6.509s][info][gc] GC(30) Concurrent Cycle</p>
-
 <p>[6.534s][info][gc] GC(29) Pause Full (Metadata GC Threshold) 9M-&gt;9M(20M) 25.165ms</p>
-
 <p>[6.556s][info][gc] GC(31) Pause Full (Metadata GC Clear Soft References) 9M-&gt;9M(20M) 21.136ms</p>
-
 <p>[6.556s][info][gc] GC(30) Concurrent Cycle 46.668ms</p>
-
 <p>java.lang.OutOfMemoryError: Metaspace</p>
-
 <p>Dumping heap to /tmp/logs/java_pid36723.hprof ...</p>
-
 <p>Heap dump file created [17362313 bytes in 0.134 secs]</p>
-
 <p><img src="assets/Cgq2xl5DytKAMGfeAAE5q9rh1rM558.jpg" alt="img" /></p>
-
 <p>但假如你把堆 Metaspace 的限制给去掉，会更可怕。它占用的内存会一直增长。</p>
-
 <h2>堆外内存溢出</h2>
-
 <p>严格来说，上面的 Metaspace 也是属于堆外内存的。但是我们这里的堆外内存指的是 Java 应用程序通过直接方式从操作系统中申请的内存。所以严格来说，这里是指直接内存。</p>
-
 <p>程序将通过 ByteBuffer 的 allocateDirect 方法每 1 秒钟申请 1MB 的直接内存。不要忘了通过链接触发这个过程。</p>
-
 <p>但是，使用 VisualVM 看不到这个过程，使用 JMX 的 API 同样也看不到。关于这部分内容，我们将在堆外内存排查课时进行详细介绍。</p>
-
 <pre><code>import com.sun.net.httpserver.HttpContext;
-
 import com.sun.net.httpserver.HttpExchange;
-
 import com.sun.net.httpserver.HttpServer;
-
 import java.io.OutputStream;
-
 import java.lang.management.ManagementFactory;
-
 import java.lang.management.MemoryPoolMXBean;
-
 import java.net.InetSocketAddress;
-
 import java.nio.ByteBuffer;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 public class OffHeapOOMTest {
-
    public static final int _1MB = 1024 * 1024;
-
    static List&lt;ByteBuffer&gt; byteList = new ArrayList&lt;&gt;();
-
    private static void oom(HttpExchange exchange) {
-
        try {
-
            String response = &quot;oom begin!&quot;;
-
            exchange.sendResponseHeaders(200, response.getBytes().length);
-
            OutputStream os = exchange.getResponseBody();
-
            os.write(response.getBytes());
-
            os.close();
-
        } catch (Exception ex) {
-
        }
-
        for (int i = 0; ; i++) {
-
            ByteBuffer buffer = ByteBuffer.allocateDirect(_1MB);
-
            byteList.add(buffer);
-
            System.out.println(i + &quot;MB&quot;);
-
            memPrint();
-
            try {
-
                Thread.sleep(1000);
-
            } catch (Exception e) {
-
            }
-
        }
-
    }
-
    private static void srv() throws Exception {
-
        HttpServer server = HttpServer.create(new InetSocketAddress(8888), 0);
-
        HttpContext context = server.createContext(&quot;/&quot;);
-
        context.setHandler(OffHeapOOMTest::oom);
-
        server.start();
-
    }
-
    public static void main(String[] args) throws Exception {
-
        srv();
-
    }
-
    static void memPrint() {
-
        for (MemoryPoolMXBean memoryPoolMXBean : ManagementFactory.getMemoryPoolMXBeans()) {
-
            System.out.println(memoryPoolMXBean.getName() +
-
                    &quot;  committed:&quot; + memoryPoolMXBean.getUsage().getCommitted() +
-
                    &quot;  used:&quot; + memoryPoolMXBean.getUsage().getUsed());
-
        }
-
    }
-
 }
-
 </code></pre>
-
 <p>通过 top 或者操作系统的监控工具，能够看到内存占用的明显增长。为了限制这些危险的内存申请，如果你确定在自己的程序中用到了大量的 JNI 和 JNA 操作，要显式的设置 MaxDirectMemorySize 参数。</p>
-
 <p>以下是程序运行一段时间抛出的错误。</p>
-
 <p>Exception in thread &quot;Thread-2&quot; java.lang.OutOfMemoryError: Direct buffer memory</p>
-
 <p>at java.nio.Bits.reserveMemory(Bits.java:694)</p>
-
 <p>at java.nio.DirectByteBuffer.<init>(DirectByteBuffer.java:123)</p>
-
 <p>at java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:311)</p>
-
 <p>at OffHeapOOMTest.oom(OffHeapOOMTest.java:27)</p>
-
 <p>at com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:79)</p>
-
 <p>at sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:83)</p>
-
 <p>at com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:82)</p>
-
 <p>at sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:675)</p>
-
 <p>at com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:79)</p>
-
 <p>at sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:647)</p>
-
 <p>at sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:158)</p>
-
 <p>at sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:431)</p>
-
 <p>at sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:396)</p>
-
 <p>at java.lang.Thread.run(Thread.java:748)</p>
-
 <p>启动命令。</p>
-
 <p>java -XX:MaxDirectMemorySize=10M -Xmx10M OffHeapOOMTest</p>
-
 <h2>栈溢出</h2>
-
 <p>还记得我们的虚拟机栈么？栈溢出指的就是这里的数据太多造成的泄漏。通过 -Xss 参数可以设置它的大小。比如下面的命令就是设置栈大小为 128K。</p>
-
 <p>-Xss128K</p>
-
 <p>从这里我们也能了解到，由于每个线程都有一个虚拟机栈。线程的开销也是要占用内存的。如果系统中的线程数量过多，那么占用内存的大小也是非常可观的。</p>
-
 <p>栈溢出不会造成 JVM 进程死亡，危害“相对较小”。下面是一个简单的模拟栈溢出的代码，只需要递归调用就可以了。</p>
-
 <pre><code>public class StackOverflowTest {
-
    static int count = 0;
-
    static void a() {
-
        System.out.println(count);
-
        count++;
-
        b();
-
    }
-
    static void b() {
-
        System.out.println(count);
-
        count++;
-
        a();
-
    }
-
    public static void main(String[] args) throws Exception {
-
        a();
-
    }
-
 }
-
 </code></pre>
-
 <p>运行后，程序直接报错。</p>
-
 <p>Exception in thread &quot;main&quot; java.lang.StackOverflowError</p>
-
 <p>at java.io.PrintStream.write(PrintStream.java:526)</p>
-
 <p>at java.io.PrintStream.print(PrintStream.java:597)</p>
-
 <p>at java.io.PrintStream.println(PrintStream.java:736)</p>
-
 <p>at StackOverflowTest.a(StackOverflowTest.java:5)</p>
-
 <p>如果你的应用经常发生这种情况，可以试着调大这个值。但一般都是因为程序错误引起的，最好检查一下自己的代码。</p>
-
 <h2>进程异常退出</h2>
-
 <p>上面这几种溢出场景，都有明确的原因和报错，排查起来也是非常容易的。但是还有一类应用，死亡的时候，静悄悄的，什么都没留下。</p>
-
 <p>以下问题已经不止一个同学问了：<strong>我的 Java 进程没了，什么都没留下，直接蒸发不见了</strong></p>
-
 <p>why？是因为对象太多了么？</p>
-
 <p>这是趣味性和技巧性非常突出的一个问题。让我们执行 dmesg 命令，大概率会看到你的进程崩溃信息躺在那里。</p>
-
 <p><img src="assets/CgpOIF5DytKAL-kVAAEITZsHixY196.jpg" alt="img" /></p>
-
 <p>为了能看到发生的时间，我们习惯性加上参数 T（dmesg -T）。</p>
-
 <p>这个现象，其实和 Linux 的内存管理有关。由于 Linux 系统采用的是虚拟内存分配方式，JVM 的代码、库、堆和栈的使用都会消耗内存，但是申请出来的内存，只要没真正 access过，是不算的，因为没有真正为之分配物理页面。</p>
-
 <p>随着使用内存越用越多。第一层防护墙就是 SWAP；当 SWAP 也用的差不多了，会尝试释放 cache；当这两者资源都耗尽，杀手就出现了。oom-killer 会在系统内存耗尽的情况下跳出来，选择性的干掉一些进程以求释放一点内存。</p>
-
 <p>所以这时候我们的 Java 进程，是操作系统“主动”终结的，JVM 连发表遗言的机会都没有。这个信息，只能在操作系统日志里查找。</p>
-
 <p>要解决这种问题，首先不能太贪婪。比如一共 8GB 的机器，你把整整 7.5GB 都分配给了 JVM。当操作系统内存不足时，你的 JVM 就可能成为 oom-killer 的猎物。</p>
-
 <p>相对于被动终结，还有一种主动求死的方式。有些同学，会在程序里面做一些判断，直接调用 System.exit() 函数。</p>
-
 <p>这个函数危险得很，它将强制终止我们的应用，而且什么都不会留下。你应该扫描你的代码，确保这样的逻辑不会存在。</p>
-
 <p>再聊一种最初级最常见还经常发生的，会造成应用程序意外死亡的情况，那就是对 Java 程序错误的启动方式。</p>
-
 <p>很多同学对 Linux 不是很熟悉，使用 XShell 登陆之后，调用下面的命令进行启动。</p>
-
 <p>java com.cn.AA &amp;</p>
-
 <p>这样调用还算有点意识，在最后使用了“&amp;”号，以期望进程在后台运行。但可惜的是，很多情况下，随着 XShell Tab 页的关闭，或者等待超时，后面的 Java 进程就随着一块停止了，很让人困惑。</p>
-
 <p>正确的启动方式，就是使用 nohup 关键字，或者阻塞在其他更加长命的进程里（比如docker）。</p>
-
 <p>nohup java com.cn.AA &amp;</p>
-
 <p>进程这种静悄悄的死亡方式，通常会给我们的问题排查带来更多的困难。</p>
-
 <p>在发生问题时，要确保留下了足够的证据，来支持接下来的分析。不能喊一句“出事啦”，然后就陷入无从下手的尴尬境地。</p>
-
 <p>通常，我们在关闭服务的时候，会使用“kill -15”，而不是“kill -9”，以便让服务在临死之前喘口气。信号9和15的区别，是面试经常问的一个问题，也是一种非常有效的手段。</p>
-
 <h2>小结</h2>
-
 <p>本课时我们简单模拟了堆、元空间、栈的溢出。并使用 VisualVM 观察了这个过程。</p>
-
 <p>接下来，我们了解到进程静悄悄消失的三种情况。如果你的应用也这样消失过，试着这样找找它。这三种情况也是一个故障排查流程中要考虑的环节，属于非常重要的边缘检查点。相信聪明的你，会将这些情况揉进自己的面试体系去，真正成为自己的实战经验。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/深入浅出 Java 虚拟机-完/10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/深入浅出 Java 虚拟机-完/12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997a5d3fa53cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

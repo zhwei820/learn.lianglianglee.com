@@ -1,411 +1,244 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>25  远程通信：通信协议设计以及编解码的实现.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/00 学好 Netty，是你修炼 Java 内功的必经之路.md.html">00 学好 Netty，是你修炼 Java 内功的必经之路.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/00 学好 Netty，是你修炼 Java 内功的必经之路.md.html">00 学好 Netty，是你修炼 Java 内功的必经之路</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/01  初识 Netty：为什么 Netty 这么流行？.md.html">01  初识 Netty：为什么 Netty 这么流行？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/01  初识 Netty：为什么 Netty 这么流行？.md.html">01  初识 Netty：为什么 Netty 这么流行？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/02  纵览全局：把握 Netty 整体架构脉络.md.html">02  纵览全局：把握 Netty 整体架构脉络.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/02  纵览全局：把握 Netty 整体架构脉络.md.html">02  纵览全局：把握 Netty 整体架构脉络</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/03  引导器作用：客户端和服务端启动都要做些什么？.md.html">03  引导器作用：客户端和服务端启动都要做些什么？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/03  引导器作用：客户端和服务端启动都要做些什么？.md.html">03  引导器作用：客户端和服务端启动都要做些什么？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/04 事件调度层：为什么 EventLoop 是 Netty 的精髓？.md.html">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/04 事件调度层：为什么 EventLoop 是 Netty 的精髓？.md.html">04 事件调度层：为什么 EventLoop 是 Netty 的精髓？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/05  服务编排层：Pipeline 如何协调各类 Handler ？.md.html">05  服务编排层：Pipeline 如何协调各类 Handler ？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/05  服务编排层：Pipeline 如何协调各类 Handler ？.md.html">05  服务编排层：Pipeline 如何协调各类 Handler ？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/06  粘包拆包问题：如何获取一个完整的网络包？.md.html">06  粘包拆包问题：如何获取一个完整的网络包？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/06  粘包拆包问题：如何获取一个完整的网络包？.md.html">06  粘包拆包问题：如何获取一个完整的网络包？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/07  接头暗语：如何利用 Netty 实现自定义协议通信？.md.html">07  接头暗语：如何利用 Netty 实现自定义协议通信？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/07  接头暗语：如何利用 Netty 实现自定义协议通信？.md.html">07  接头暗语：如何利用 Netty 实现自定义协议通信？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/08  开箱即用：Netty 支持哪些常用的解码器？.md.html">08  开箱即用：Netty 支持哪些常用的解码器？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/08  开箱即用：Netty 支持哪些常用的解码器？.md.html">08  开箱即用：Netty 支持哪些常用的解码器？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/09  数据传输：writeAndFlush 处理流程剖析.md.html">09  数据传输：writeAndFlush 处理流程剖析.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/09  数据传输：writeAndFlush 处理流程剖析.md.html">09  数据传输：writeAndFlush 处理流程剖析</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/10  双刃剑：合理管理 Netty 堆外内存.md.html">10  双刃剑：合理管理 Netty 堆外内存.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/10  双刃剑：合理管理 Netty 堆外内存.md.html">10  双刃剑：合理管理 Netty 堆外内存</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/11  另起炉灶：Netty 数据传输载体 ByteBuf 详解.md.html">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/11  另起炉灶：Netty 数据传输载体 ByteBuf 详解.md.html">11  另起炉灶：Netty 数据传输载体 ByteBuf 详解</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/12  他山之石：高性能内存分配器 jemalloc 基本原理.md.html">12  他山之石：高性能内存分配器 jemalloc 基本原理.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/12  他山之石：高性能内存分配器 jemalloc 基本原理.md.html">12  他山之石：高性能内存分配器 jemalloc 基本原理</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/13  举一反三：Netty 高性能内存管理设计（上）.md.html">13  举一反三：Netty 高性能内存管理设计（上）.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/13  举一反三：Netty 高性能内存管理设计（上）.md.html">13  举一反三：Netty 高性能内存管理设计（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/14  举一反三：Netty 高性能内存管理设计（下）.md.html">14  举一反三：Netty 高性能内存管理设计（下）.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/14  举一反三：Netty 高性能内存管理设计（下）.md.html">14  举一反三：Netty 高性能内存管理设计（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/15  轻量级对象回收站：Recycler 对象池技术解析.md.html">15  轻量级对象回收站：Recycler 对象池技术解析.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/15  轻量级对象回收站：Recycler 对象池技术解析.md.html">15  轻量级对象回收站：Recycler 对象池技术解析</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/16  IO 加速：与众不同的 Netty 零拷贝技术.md.html">16  IO 加速：与众不同的 Netty 零拷贝技术.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/16  IO 加速：与众不同的 Netty 零拷贝技术.md.html">16  IO 加速：与众不同的 Netty 零拷贝技术</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/17  源码篇：从 Linux 出发深入剖析服务端启动流程.md.html">17  源码篇：从 Linux 出发深入剖析服务端启动流程.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/17  源码篇：从 Linux 出发深入剖析服务端启动流程.md.html">17  源码篇：从 Linux 出发深入剖析服务端启动流程</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/18  源码篇：解密 Netty Reactor 线程模型.md.html">18  源码篇：解密 Netty Reactor 线程模型.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/18  源码篇：解密 Netty Reactor 线程模型.md.html">18  源码篇：解密 Netty Reactor 线程模型</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/19  源码篇：一个网络请求在 Netty 中的旅程.md.html">19  源码篇：一个网络请求在 Netty 中的旅程.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/19  源码篇：一个网络请求在 Netty 中的旅程.md.html">19  源码篇：一个网络请求在 Netty 中的旅程</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？.md.html">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？.md.html">20  技巧篇：Netty 的 FastThreadLocal 究竟比 ThreadLocal 快在哪儿？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer.md.html">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer.md.html">21  技巧篇：延迟任务处理神器之时间轮 HashedWheelTimer</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/22  技巧篇：高性能无锁队列 Mpsc Queue.md.html">22  技巧篇：高性能无锁队列 Mpsc Queue.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/22  技巧篇：高性能无锁队列 Mpsc Queue.md.html">22  技巧篇：高性能无锁队列 Mpsc Queue</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/23  架构设计：如何实现一个高性能分布式 RPC 框架.md.html">23  架构设计：如何实现一个高性能分布式 RPC 框架.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/23  架构设计：如何实现一个高性能分布式 RPC 框架.md.html">23  架构设计：如何实现一个高性能分布式 RPC 框架</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/24  服务发布与订阅：搭建生产者和消费者的基础框架.md.html">24  服务发布与订阅：搭建生产者和消费者的基础框架.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/24  服务发布与订阅：搭建生产者和消费者的基础框架.md.html">24  服务发布与订阅：搭建生产者和消费者的基础框架</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/Netty 核心原理剖析与 RPC 实践-完/25  远程通信：通信协议设计以及编解码的实现.md.html">25  远程通信：通信协议设计以及编解码的实现.md.html</a>
+                    <a class="current-tab" href="/专栏/Netty 核心原理剖析与 RPC 实践-完/25  远程通信：通信协议设计以及编解码的实现.md.html">25  远程通信：通信协议设计以及编解码的实现</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/26  服务治理：服务发现与负载均衡机制的实现.md.html">26  服务治理：服务发现与负载均衡机制的实现.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/26  服务治理：服务发现与负载均衡机制的实现.md.html">26  服务治理：服务发现与负载均衡机制的实现</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/27  动态代理：为用户屏蔽 RPC 调用的底层细节.md.html">27  动态代理：为用户屏蔽 RPC 调用的底层细节.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/27  动态代理：为用户屏蔽 RPC 调用的底层细节.md.html">27  动态代理：为用户屏蔽 RPC 调用的底层细节</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/28  实战总结：RPC 实战总结与进阶延伸.md.html">28  实战总结：RPC 实战总结与进阶延伸.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/28  实战总结：RPC 实战总结与进阶延伸.md.html">28  实战总结：RPC 实战总结与进阶延伸</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/29  编程思想：Netty 中应用了哪些设计模式？.md.html">29  编程思想：Netty 中应用了哪些设计模式？.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/29  编程思想：Netty 中应用了哪些设计模式？.md.html">29  编程思想：Netty 中应用了哪些设计模式？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/30  实践总结：Netty 在项目开发中的一些最佳实践.md.html">30  实践总结：Netty 在项目开发中的一些最佳实践.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/30  实践总结：Netty 在项目开发中的一些最佳实践.md.html">30  实践总结：Netty 在项目开发中的一些最佳实践</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/31 结束语  技术成长之路：如何打造自己的技术体系.md.html">31 结束语  技术成长之路：如何打造自己的技术体系.md.html</a>
+                    <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/31 结束语  技术成长之路：如何打造自己的技术体系.md.html">31 结束语  技术成长之路：如何打造自己的技术体系</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>25  远程通信：通信协议设计以及编解码的实现</h1>
-
 <p>上节课我们搭建了服务提供者和服务消费者的基本框架，现在我们可以建立两个模块之间的通信机制了。本节课我们通过向 ChannelPipeline 添加自定义的业务处理器，来完成 RPC 框架的远程通信机制。需要实现的主要功能如下：</p>
-
 <ul>
-
 <li>服务消费者实现协议编码，向服务提供者发送调用数据。</li>
-
 <li>服务提供者收到数据后解码，然后向服务消费者发送响应数据，暂时忽略 RPC 请求是如何被调用的。</li>
-
 <li>服务消费者收到响应数据后成功返回。</li>
-
 </ul>
-
 <blockquote>
-
 <p>源码参考地址：<a href="https://github.com/wangyapu/mini-rpc">mini-rpc</a></p>
-
 </blockquote>
-
 <h3>RPC 通信方案设计</h3>
-
 <p>结合本节课的目标，接下来我们对 RPC 请求调用和结果响应两个过程分别进行详细拆解分析。首先看下 RPC 请求调用的过程，如下图所示。</p>
-
 <p><img src="assets/Cip5yF_1MaqAfz8pAAYSNNmMolY852.png" alt="Drawing 0.png" /></p>
-
 <p>RPC 请求的过程对于服务消费者来说是出站操作，对于服务提供者来说是入站操作。数据发送前，服务消费者将 RPC 请求信息封装成 MiniRpcProtocol 对象，然后通过编码器 MiniRpcEncoder 进行二进制编码，最后直接向发送至远端即可。服务提供者收到请求数据后，将二进制数据交给解码器 MiniRpcDecoder，解码后再次生成 MiniRpcProtocol 对象，然后传递给 RpcRequestHandler 执行真正的 RPC 请求调用。</p>
-
 <p>我们暂时忽略 RpcRequestHandler 是如何执行 RPC 请求调用的，接下来我们继续分析 RpcRequestHandler 处理成功后是如何向服务消费者返回响应结果的，如下图所示：</p>
-
 <p><img src="assets/CgqCHl_1MbKAZCUWAAX6xAhFw5k042.png" alt="Drawing 1.png" /></p>
-
 <p>与 RPC 请求过程相反，是由服务提供者将响应结果封装成 MiniRpcProtocol 对象，然后通过 MiniRpcEncoder 编码发送给服务消费者。服务消费者对响应结果进行解码，因为 RPC 请求是高并发的，所以需要 RpcRequestHandler 根据响应结果找到对应的请求，最后将响应结果返回。</p>
-
 <p>综合 RPC 请求调用和结果响应的处理过程来看，编码器 MiniRpcEncoder、解码器 MiniRpcDecoder 以及通信协议对象 MiniRpcProtocol 都可以设计成复用的，最终服务消费者和服务提供者的 ChannelPipeline 结构如下图所示。</p>
-
 <p><img src="assets/CgqCHl_1MbmAeZgjAAd9EAWpmuE609.png" alt="Drawing 2.png" /></p>
-
 <p>由此可见，在实现 Netty 网络通信模块时，先画图分析 ChannelHandler 的处理流程是非常有帮助的。</p>
-
 <h3>自定义 RPC 通信协议</h3>
-
 <p>协议是服务消费者和服务提供者之间通信的基础，主流的 RPC 框架都会自定义通信协议，相比于 HTTP、HTTPS、JSON 等通用的协议，自定义协议可以实现更好的性能、扩展性以及安全性。在《接头暗语：利用 Netty 如何实现自定义协议通信》课程中，我们学习了设计一个完备的通信协议需要考虑哪些因素，同时结合 RPC 请求调用与结果响应的场景，我们设计了一个简易版的 RPC 自定义协议，如下所示：</p>
-
 <pre><code>+---------------------------------------------------------------+
 | 魔数 2byte | 协议版本号 1byte | 序列化算法 1byte | 报文类型 1byte  |
 +---------------------------------------------------------------+
@@ -413,11 +246,8 @@ function hide_canvas() {
 +---------------------------------------------------------------+
 |                   数据内容 （长度不定）                          |
 +---------------------------------------------------------------+
-
 </code></pre>
-
 <p>我们把协议分为协议头 Header 和协议体 Body 两个部分。协议头 Header 包含魔数、协议版本号、序列化算法、报文类型、状态、消息 ID、数据长度，协议体 Body 只包含数据内容部分，数据内容的长度是不固定的。RPC 请求和响应都可以使用该协议进行通信，对应协议实体类的定义如下所示：</p>
-
 <pre><code>@Data
 public class MiniRpcProtocol&lt;T&gt; implements Serializable {
     private MsgHeader header; // 协议头
@@ -433,11 +263,8 @@ public class MsgHeader implements Serializable {
     private long requestId; // 消息 ID
     private int msgLen; // 数据长度
 }
-
 </code></pre>
-
 <p>在 RPC 请求调用的场景下，MiniRpcProtocol 中泛型 T 对应的 MiniRpcRequest 类型，MiniRpcRequest 主要包含 RPC 远程调用需要的必要参数，定义如下所示。</p>
-
 <pre><code>@Data
 public class MiniRpcRequest implements Serializable {
     private String serviceVersion; // 服务版本
@@ -446,36 +273,24 @@ public class MiniRpcRequest implements Serializable {
     private Object[] params; // 方法参数列表
     private Class&lt;?&gt;[] parameterTypes; // 方法参数类型列表
 }
-
 </code></pre>
-
 <p>在 RPC 结果响应的场景下，MiniRpcProtocol 中泛型 T 对应的 MiniRpcResponse 类型，MiniRpcResponse 实体类的定义如下所示。此外，响应结果是否成功可以使用 MsgHeader 中的 status 字段表示，0 表示成功，非 0 表示失败。MiniRpcResponse 中 data 表示成功状态下返回的 RPC 请求结果，message 表示 RPC 请求调用失败的错误信息。</p>
-
 <pre><code>@Data
 public class MiniRpcResponse implements Serializable {
     private Object data; // 请求结果
     private String message; // 错误信息
 }
-
 </code></pre>
-
 <p>设计完 RPC 自定义协议之后，我们接下来再来解决 MiniRpcRequest 和 MiniRpcResponse 如何进行编码的问题。</p>
-
 <h3>序列化选型</h3>
-
 <p>MiniRpcRequest 和 MiniRpcResponse 实体类表示的协议体内容都是不确定具体长度的，所以我们一般会选用通用且高效的序列化算法将其转换成二进制数据，这样可以有效减少网络传输的带宽，提升 RPC 框架的整体性能。目前比较常用的序列化算法包括 Json、Kryo、Hessian、Protobuf 等，这些第三方序列化算法都比 Java 原生的序列化操作都更加高效。</p>
-
 <p>首先我们定义了一个通用的序列化接口 RpcSerialization，所有序列化算法扩展都必须实现该接口，RpcSerialization 接口分别提供了序列化 serialize() 和反序列化 deserialize() 方法，如下所示：</p>
-
 <pre><code>public interface RpcSerialization {
     &lt;T&gt; byte[] serialize(T obj) throws IOException;
     &lt;T&gt; T deserialize(byte[] data, Class&lt;T&gt; clz) throws IOException;
 }
-
 </code></pre>
-
 <p>接下来我们为 RpcSerialization 提供了 HessianSerialization 和 JsonSerialization 两种类型的实现类。以 HessianSerialization 为例，实现逻辑如下：</p>
-
 <pre><code>@Component
 @Slf4j
 public class HessianSerialization implements RpcSerialization {
@@ -512,11 +327,8 @@ public class HessianSerialization implements RpcSerialization {
         return result;
     }
 }
-
 </code></pre>
-
 <p>为了能够支持不同序列化算法，我们采用工厂模式来实现不同序列化算法之间的切换，使用相同的序列化接口指向不同的序列化算法。对于使用者来说只需要知道序列化算法的类型即可，不用关心底层序列化是如何实现的。具体实现如下：</p>
-
 <pre><code>public class SerializationFactory {
     public static RpcSerialization getRpcSerialization(byte serializationType) {
         SerializationTypeEnum typeEnum = SerializationTypeEnum.findByType(serializationType);
@@ -530,17 +342,11 @@ public class HessianSerialization implements RpcSerialization {
         }
     }
 }
-
 </code></pre>
-
 <p>有了以上基础知识的储备，接下来我们就可以开始实现自定义的处理器了。</p>
-
 <h3>协议编码实现</h3>
-
 <p>在《接头暗语：利用 Netty 如何实现自定义协议通信》课程中，我们同样介绍了如何使用 Netty 实现自定义的通信协议。Netty 提供了两个最为常用的编解码抽象基类 MessageToByteEncoder 和 ByteToMessageDecoder，帮助我们很方便地扩展实现自定义协议。</p>
-
 <p>我们接下来要完成的编码器 MiniRpcEncoder 需要继承 MessageToByteEncoder，并重写 encode() 方法，具体实现如下所示：</p>
-
 <pre><code>public class MiniRpcEncoder extends MessageToByteEncoder&lt;MiniRpcProtocol&lt;Object&gt;&gt; {
     @Override
     protected void encode(ChannelHandlerContext ctx, MiniRpcProtocol&lt;Object&gt; msg, ByteBuf byteBuf) throws Exception {
@@ -557,15 +363,10 @@ public class HessianSerialization implements RpcSerialization {
         byteBuf.writeBytes(data);
     }
 }
-
 </code></pre>
-
 <p>编码逻辑比较简单，在服务消费者或者服务提供者调用 writeAndFlush() 将数据写给对方前，都已经封装成 MiniRpcRequest 或者 MiniRpcResponse，所以可以采用 MiniRpcProtocol<code>&lt;Object&gt;</code> 作为 MiniRpcEncoder 编码器能够支持的编码类型。</p>
-
 <h3>协议解码实现</h3>
-
 <p>解码器 MiniRpcDecoder 需要继承 ByteToMessageDecoder，并重写 decode() 方法，具体实现如下所示：</p>
-
 <pre><code>public class MiniRpcDecoder extends ByteToMessageDecoder {
     @Override
     public final void decode(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out) throws Exception {
@@ -625,25 +426,15 @@ public class HessianSerialization implements RpcSerialization {
         }
     }
 }
-
 </code></pre>
-
 <p>解码器 MiniRpcDecoder 相比于编码器 MiniRpcEncoder 要复杂很多，MiniRpcDecoder 的目标是将字节流数据解码为消息对象，并传递给下一个 Inbound 处理器。整个 MiniRpcDecoder 解码过程有几个要点要特别注意：</p>
-
 <ul>
-
 <li>只有当 ByteBuf 中内容大于协议头 Header 的固定的 18 字节时，才开始读取数据。</li>
-
 <li>即使已经可以完整读取出协议头 Header，但是协议体 Body 有可能还未就绪。所以在刚开始读取数据时，需要使用 markReaderIndex() 方法标记读指针位置，当 ByteBuf 中可读字节长度小于协议体 Body 的长度时，再使用 resetReaderIndex() 还原读指针位置，说明现在 ByteBuf 中可读字节还不够一个完整的数据包。</li>
-
 <li>根据不同的报文类型 MsgType，需要反序列化出不同的协议体对象。在 RPC 请求调用的场景下，服务提供者需要将协议体内容反序列化成 MiniRpcRequest 对象；在 RPC 结果响应的场景下，服务消费者需要将协议体内容反序列化成 MiniRpcResponse 对象。</li>
-
 </ul>
-
 <h3>请求处理与响应</h3>
-
 <p>在 RPC 请求调用的场景下，服务提供者的 MiniRpcDecoder 编码器将二进制数据解码成 MiniRpcProtocol<code>&lt;MiniRpcRequest&gt;</code> 对象后，再传递给 RpcRequestHandler 执行 RPC 请求调用。RpcRequestHandler 也是一个 Inbound 处理器，它并不需要承担解码工作，所以 RpcRequestHandler 直接继承 SimpleChannelInboundHandler 即可，然后重写 channelRead0() 方法，具体实现如下：</p>
-
 <pre><code>@Slf4j
 public class RpcRequestHandler extends SimpleChannelInboundHandler&lt;MiniRpcProtocol&lt;MiniRpcRequest&gt;&gt; {
     private final Map&lt;String, Object&gt; rpcServiceMap;
@@ -672,13 +463,9 @@ public class RpcRequestHandler extends SimpleChannelInboundHandler&lt;MiniRpcPro
         });
     }
 }
-
 </code></pre>
-
 <p>因为 RPC 请求调用是比较耗时的，所以比较推荐的做法是将 RPC 请求提交到自定义的业务线程池中执行。其中 handle() 方法是真正执行 RPC 调用的地方，你可以先留一个空的实现，在之后动态代理的课程中我们再完成它。根据 handle() 的执行情况，MiniRpcProtocol<code>&lt;MiniRpcResponse&gt;</code> 最终会被设置成功或者失败的状态，以及相应的请求结果或者错误信息，最终通过 writeAndFlush() 方法将数据写回服务消费者。</p>
-
 <p>上文中我们已经分析了服务消费者入站操作，首先要经过 MiniRpcDecoder 解码器，根据报文类型 msgType 解码出 MiniRpcProtocol<code>&lt;MiniRpcResponse&gt;</code> 响应结果，然后传递给 RpcResponseHandler 处理器，RpcResponseHandler 负责响应不同线程的请求结果，具体实现如下：</p>
-
 <pre><code>public class RpcResponseHandler extends SimpleChannelInboundHandler&lt;MiniRpcProtocol&lt;MiniRpcResponse&gt;&gt; {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MiniRpcProtocol&lt;MiniRpcResponse&gt; msg) {
@@ -700,128 +487,69 @@ public class MiniRpcFuture&lt;T&gt; {
         this.timeout = timeout;
     }
 }
-
 </code></pre>
-
 <p>服务消费者在发起调用时，维护了请求 requestId 和 MiniRpcFuture<code>&lt;MiniRpcResponse&gt;</code> 的映射关系，RpcResponseHandler 会根据请求的 requestId 找到对应发起调用的 MiniRpcFuture，然后为 MiniRpcFuture 设置响应结果。</p>
-
 <p>我们采用 Netty 提供的 Promise 工具来实现 RPC 请求的同步等待，Promise 基于 JDK 的 Future 扩展了更多新的特性，帮助我们更好地以同步的方式进行异步编程。Promise 模式本质是一种异步编程模型，我们可以先拿到一个查看任务执行结果的凭证，不必等待任务执行完毕，当我们需要获取任务执行结果时，再使用凭证提供的相关接口进行获取。</p>
-
 <p>至此，RPC 框架的通信模块我们已经实现完了。自定义协议、编解码、序列化/反序列化都是实现远程通信的必备基础知识，我们务必要熟练掌握。此外在《架构设计：如何实现一个高性能分布式 RPC 框架》课程中，我们介绍了 RPC 调用的多种方式，快开动你的大脑，想想其他方式应当如何实现呢？</p>
-
 <h3>总结</h3>
-
 <p>本节课我们通过 RPC 自定义协议的设计与实现，加深了对 Netty 自定义处理器 ChannelHandler 的理解。ChannelPipeline 和 ChannelHandler 是我们在项目开发过程中打交道最多的组件，在设计之初一定要梳理清楚 Inbound 和 Outbound 处理的传递顺序，以及数据模型之间是如何转换的。</p>
-
 <p>留两个课后任务：</p>
-
 <ol>
-
 <li>Protobuf 序列化算法也是我们必备的技能，在本课程中并未实现，需要你按照接口规范进行扩展。</li>
-
 <li>如果希望对协议体的内容进行压缩，那么 RPC 自定义协议应该如何改进呢？编解码器又该如何实现呢？</li>
-
 </ol>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/24  服务发布与订阅：搭建生产者和消费者的基础框架.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Netty 核心原理剖析与 RPC 实践-完/26  服务治理：服务发现与负载均衡机制的实现.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709973797a603d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

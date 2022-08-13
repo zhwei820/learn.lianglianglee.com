@@ -1,1044 +1,354 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>26  负载均衡：怎样提升系统的横向扩展能力？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/00 开篇词  为什么你要学习高并发系统设计？.md.html">00 开篇词  为什么你要学习高并发系统设计？.md.html</a>
-
-
+                    <a href="/专栏/高并发系统设计40问/00 开篇词  为什么你要学习高并发系统设计？.md.html">00 开篇词  为什么你要学习高并发系统设计？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/01  高并发系统：它的通用设计方法是什么？.md.html">01  高并发系统：它的通用设计方法是什么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/02  架构分层：我们为什么一定要这么做？.md.html">02  架构分层：我们为什么一定要这么做？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/03  系统设计目标（一）：如何提升系统性能？.md.html">03  系统设计目标（一）：如何提升系统性能？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/04  系统设计目标（二）：系统怎样做到高可用？.md.html">04  系统设计目标（二）：系统怎样做到高可用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/05  系统设计目标（三）：如何让系统易于扩展？.md.html">05  系统设计目标（三）：如何让系统易于扩展？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html">06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html">07  池化技术：如何减少频繁创建数据库连接的性能损耗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html">08  数据库优化方案（一）：查询请求增加时，如何做主从分离？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html">09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/10  发号器：如何保证分库分表后ID的全局唯一性？.md.html">10  发号器：如何保证分库分表后ID的全局唯一性？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html">11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html">12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html">13  缓存的使用姿势（一）：如何选择缓存的读写策略？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html">14  缓存的使用姿势（二）：缓存如何做到高可用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html">15  缓存的使用姿势（三）：缓存穿透了怎么办？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/16  CDN：静态资源如何加速？.md.html">16  CDN：静态资源如何加速？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html">17  消息队列：秒杀时如何处理每秒上万次的下单请求？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/18  消息投递：如何保证消息仅仅被消费一次？.md.html">18  消息投递：如何保证消息仅仅被消费一次？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/19  消息队列：如何降低消息队列系统中消息的延迟？.md.html">19  消息队列：如何降低消息队列系统中消息的延迟？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html">20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html">21  系统架构：每秒1万次请求的系统要做服务化拆分吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/22  微服务架构：微服务化后，系统架构要如何改造？.md.html">22  微服务架构：微服务化后，系统架构要如何改造？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html">23  RPC框架：10万QPS下如何实现毫秒级的服务调用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/24  注册中心：分布式系统如何寻址？.md.html">24  注册中心：分布式系统如何寻址？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html">25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/高并发系统设计40问/26  负载均衡：怎样提升系统的横向扩展能力？.md.html">26  负载均衡：怎样提升系统的横向扩展能力？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/01  高并发系统：它的通用设计方法是什么？.md.html">01  高并发系统：它的通用设计方法是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/27  API网关：系统的门面要如何做呢？.md.html">27  API网关：系统的门面要如何做呢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/02  架构分层：我们为什么一定要这么做？.md.html">02  架构分层：我们为什么一定要这么做？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/28  多机房部署：跨地域的分布式系统如何做？.md.html">28  多机房部署：跨地域的分布式系统如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/03  系统设计目标（一）：如何提升系统性能？.md.html">03  系统设计目标（一）：如何提升系统性能？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html">29  Service Mesh：如何屏蔽服务化系统的服务治理细节？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/04  系统设计目标（二）：系统怎样做到高可用？.md.html">04  系统设计目标（二）：系统怎样做到高可用？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/30  给系统加上眼睛：服务端监控要怎么做？.md.html">30  给系统加上眼睛：服务端监控要怎么做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/05  系统设计目标（三）：如何让系统易于扩展？.md.html">05  系统设计目标（三）：如何让系统易于扩展？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/31  应用性能管理：用户的使用体验应该如何监控？.md.html">31  应用性能管理：用户的使用体验应该如何监控？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html">06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/32  压力测试：怎样设计全链路压力测试平台？.md.html">32  压力测试：怎样设计全链路压力测试平台？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html">07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/33  配置管理：成千上万的配置项要如何管理？.md.html">33  配置管理：成千上万的配置项要如何管理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html">08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html">34  降级熔断：如何屏蔽非核心系统故障的影响？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html">09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/35  流量控制：高并发系统中我们如何操纵流量？.md.html">35  流量控制：高并发系统中我们如何操纵流量？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/10  发号器：如何保证分库分表后ID的全局唯一性？.md.html">10  发号器：如何保证分库分表后ID的全局唯一性？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/36  面试现场第三期：你要如何准备一场技术面试呢？.md.html">36  面试现场第三期：你要如何准备一场技术面试呢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html">11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html">37  计数系统设计（一）：面对海量数据的计数器要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html">12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html">38  计数系统设计（二）：50万QPS下如何设计未读数系统？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html">13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html">39  信息流设计（一）：通用信息流系统的推模式要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html">14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html">40  信息流设计（二）：通用信息流系统的拉模式要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html">15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/加餐  数据的迁移应该如何做？.md.html">加餐  数据的迁移应该如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/16  CDN：静态资源如何加速？.md.html">16  CDN：静态资源如何加速？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/期中测试  10道高并发系统设计题目自测.md.html">期中测试  10道高并发系统设计题目自测</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html">17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/用户故事  从“心”出发，我还有无数个可能.md.html">用户故事  从“心”出发，我还有无数个可能</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/18  消息投递：如何保证消息仅仅被消费一次？.md.html">18  消息投递：如何保证消息仅仅被消费一次？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/结束语  学不可以已.md.html">结束语  学不可以已</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/19  消息队列：如何降低消息队列系统中消息的延迟？.md.html">19  消息队列：如何降低消息队列系统中消息的延迟？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html">20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html">21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/22  微服务架构：微服务化后，系统架构要如何改造？.md.html">22  微服务架构：微服务化后，系统架构要如何改造？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html">23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/24  注册中心：分布式系统如何寻址？.md.html">24  注册中心：分布式系统如何寻址？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html">25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    <a class="current-tab" href="/专栏/高并发系统设计40问/26  负载均衡：怎样提升系统的横向扩展能力？.md.html">26  负载均衡：怎样提升系统的横向扩展能力？.md.html</a>
-
-                    
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/27  API网关：系统的门面要如何做呢？.md.html">27  API网关：系统的门面要如何做呢？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/28  多机房部署：跨地域的分布式系统如何做？.md.html">28  多机房部署：跨地域的分布式系统如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html">29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/30  给系统加上眼睛：服务端监控要怎么做？.md.html">30  给系统加上眼睛：服务端监控要怎么做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/31  应用性能管理：用户的使用体验应该如何监控？.md.html">31  应用性能管理：用户的使用体验应该如何监控？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/32  压力测试：怎样设计全链路压力测试平台？.md.html">32  压力测试：怎样设计全链路压力测试平台？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/33  配置管理：成千上万的配置项要如何管理？.md.html">33  配置管理：成千上万的配置项要如何管理？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html">34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/35  流量控制：高并发系统中我们如何操纵流量？.md.html">35  流量控制：高并发系统中我们如何操纵流量？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/36  面试现场第三期：你要如何准备一场技术面试呢？.md.html">36  面试现场第三期：你要如何准备一场技术面试呢？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html">37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html">38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html">39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html">40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/加餐  数据的迁移应该如何做？.md.html">加餐  数据的迁移应该如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/期中测试  10道高并发系统设计题目自测.md.html">期中测试  10道高并发系统设计题目自测.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/用户故事  从“心”出发，我还有无数个可能.md.html">用户故事  从“心”出发，我还有无数个可能.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/结束语  学不可以已.md.html">结束语  学不可以已.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>26  负载均衡：怎样提升系统的横向扩展能力？</h1>
-
 <p>你好，我是唐扬。</p>
-
 <p>在基础篇中，我提到了高并发系统设计的三个通用方法：缓存、异步和横向扩展，到目前为止，你接触到了缓存的使用姿势，也了解了，如何使用消息队列异步处理业务逻辑，那么本节课，我将带你了解一下，如何提升系统的横向扩展能力。</p>
-
 <p>在之前的课程中，我也提到过提升系统横向扩展能力的一些案例。比如，08 讲提到，可以通过部署多个从库的方式，来提升数据库的扩展能力，从而提升数据库的查询性能，那么就需要借助组件，将查询数据库的请求，按照一些既定的策略分配到多个从库上，这是负载均衡服务器所起的作用，而我们一般使用 DNS 服务器来承担这个角色。</p>
-
 <p>不过在实际的工作中，你经常使用的负载均衡的组件应该算是 Nginx，它的作用是承接前端的 HTTP 请求，然后将它们按照多种策略，分发给后端的多个业务服务器上。这样，我们可以随时通过扩容业务服务器的方式，来抵挡突发的流量高峰。与 DNS 不同的是，Nginx 可以在域名和请求 URL 地址的层面做更细致的流量分配，也提供更复杂的负载均衡策略。</p>
-
 <p>你可能会想到，在微服务架构中，我们也会启动多个服务节点，来承接从用户端到应用服务器的请求，自然会需要一个负载均衡服务器，作为流量的入口，实现流量的分发。那么在微服务架构中，如何使用负载均衡服务器呢？</p>
-
 <p>在回答这些问题之前，我先带你了解一下，常见的负载均衡服务器都有哪几类，因为这样，你就可以依据不同类型负载均衡服务器的特点做选择了。</p>
-
 <h2>负载均衡服务器的种类</h2>
-
 <p>**负载均衡的含义是：**将负载（访问的请求）“均衡”地分配到多个处理节点上。这样可以减少单个处理节点的请求量，提升整体系统的性能。</p>
-
 <p>同时，负载均衡服务器作为流量入口，可以对请求方屏蔽服务节点的部署细节，实现对于业务方无感知的扩容。它就像交通警察，不断地疏散交通，将汽车引入合适的道路上。</p>
-
 <p>**而在我看来，**负载均衡服务大体上可以分为两大类：一类是代理类的负载均衡服务；另一类是客户端负载均衡服务。</p>
-
 <p>代理类的负载均衡服务，以单独的服务方式部署，所有的请求都要先经过负载均衡服务，在负载均衡服务中，选出一个合适的服务节点后，再由负载均衡服务，调用这个服务节点来实现流量的分发。</p>
-
 <p><img src="assets/7a76b0b7c6e3fc4b60cfcda8dbd93dc9.jpg" alt="img" /></p>
-
 <p>由于这类服务需要承担全量的请求，所以对于性能的要求极高。代理类的负载均衡服务有很多开源实现，比较著名的有 LVS，Nginx 等等。LVS 在 OSI 网络模型中的第四层，传输层工作，所以 LVS 又可以称为四层负载；而 Nginx 运行在 OSI 网络模型中的第七层，应用层，所以又可以称它为七层负载（你可以回顾一下02 讲的内容）。</p>
-
 <p>在项目的架构中，我们一般会同时部署 LVS 和 Nginx 来做 HTTP 应用服务的负载均衡。也就是说，在入口处部署 LVS，将流量分发到多个 Nginx 服务器上，再由 Nginx 服务器分发到应用服务器上，<strong>为什么这么做呢？</strong></p>
-
 <p>主要和 LVS 和 Nginx 的特点有关，LVS 是在网络栈的四层做请求包的转发，请求包转发之后，由客户端和后端服务直接建立连接，后续的响应包不会再经过 LVS 服务器，所以相比 Nginx，性能会更高，也能够承担更高的并发。</p>
-
 <p>可 LVS 缺陷是工作在四层，而请求的 URL 是七层的概念，不能针对 URL 做更细致地请求分发，而且 LVS 也没有提供探测后端服务是否存活的机制；而 Nginx 虽然比 LVS 的性能差很多，但也可以承担每秒几万次的请求，并且它在配置上更加灵活，还可以感知后端服务是否出现问题。</p>
-
 <p>因此，LVS 适合在入口处，承担大流量的请求分发，而 Nginx 要部署在业务服务器之前做更细维度的请求分发。**我给你的建议是，**如果你的 QPS 在十万以内，那么可以考虑不引入 LVS 而直接使用 Nginx 作为唯一的负载均衡服务器，这样少维护一个组件，也会减少系统的维护成本。</p>
-
 <p>不过这两个负载均衡服务适用于普通的 Web 服务，对于微服务架构来说，它们是不合适的。因为微服务架构中的服务节点存储在注册中心里，使用 LVS 就很难和注册中心交互，获取全量的服务节点列表。另外，一般微服务架构中，使用的是 RPC 协议而不是 HTTP 协议，所以 Nginx 也不能满足要求。</p>
-
 <p><strong>所以，我们会使用另一类的负载均衡服务，客户端负载均衡服务，也就是把负载均衡的服务内嵌在 RPC 客户端中。</strong></p>
-
 <p>它一般和客户端应用，部署在一个进程中，提供多种选择节点的策略，最终为客户端应用提供一个最佳的，可用的服务端节点。这类服务一般会结合注册中心来使用，注册中心提供服务节点的完整列表，客户端拿到列表之后使用负载均衡服务的策略选取一个合适的节点，然后将请求发到这个节点上。</p>
-
 <p><img src="assets/539f9fd7196c3c0b17eba55584d4c6c1.jpg" alt="img" /></p>
-
 <p>了解负载均衡服务的分类，是你学习负载均衡服务的第一步，接下来，你需要掌握负载均衡策略，这样一来，你在实际工作中，配置负载均衡服务的时候，可以对原理有更深刻的了解。</p>
-
 <h2>常见的负载均衡策略有哪些</h2>
-
 <p>负载均衡策略从大体上来看可以分为两类：</p>
-
 <p>一类是静态策略，也就是说负载均衡服务器在选择服务节点时，不会参考后端服务的实际运行的状态。</p>
-
 <p>一类是动态策略，也就是说负载均衡服务器会依据后端服务的一些负载特性，来决定要选择哪一个服务节点。</p>
-
 <p>常见的静态策略有几种，其中使用最广泛的是**轮询的策略（RoundRobin，RR），**这种策略会记录上次请求后端服务的地址或者序号，然后在请求时，按照服务列表的顺序，请求下一个后端服务节点。伪代码如下：</p>
-
-<pre><code>AtomicInteger lastCounter = getLastCounter();// 获取上次请求的服务节点的序号 
-
-
-
+<pre><code>AtomicInteger lastCounter = getLastCounter();// 获取上次请求的服务节点的序号
 List&lt;String&gt; serverList = getServerList(); // 获取服务列表
-
-
-
 int currentIndex = lastCounter.addAndGet(); // 增加序列号
-
-
-
 if(currentIndex &gt;= serverList.size()) {
-
-
-
   currentIndex = 0;
-
-
-
 }
-
-
-
 setLastCounter(currentIndex);
-
-
-
 return serverList.get(currentIndex);
-
 </code></pre>
-
 <p>它其实是一种通用的策略，基本上，大部分的负载均衡服务器都支持。轮询的策略可以做到将请求尽量平均地分配到所有服务节点上，但是，它没有考虑服务节点的具体配置情况。比如，你有三个服务节点，其中一个服务节点的配置是 8 核 8G，另外两个节点的配置是 4 核 4G，那么如果使用轮询的方式来平均分配请求的话，8 核 8G 的节点分到的请求数量和 4 核 4G 的一样多，就不能发挥性能上的优势了</p>
-
 <p>所以，我们考虑给节点加上权重值，比如给 8 核 8G 的机器配置权重为 2，那么就会给它分配双倍的流量，<strong>这种策略就是带有权重的轮询策略。</strong></p>
-
 <p>除了这两种策略之外，目前开源的负载均衡服务还提供了很多静态策略：</p>
-
 <p>Nginx 提供了 ip_hash 和 url_hash 算法；</p>
-
 <p>LVS 提供了按照请求的源地址，和目的地址做 hash 的策略；</p>
-
 <p>Dubbo 也提供了随机选取策略，以及一致性 hash 的策略。</p>
-
 <p>**但是在我看来，**轮询和带有权重的轮询策略，能够将请求尽量平均地分配到后端服务节点上，也就能够做到对于负载的均衡分配，在没有更好的动态策略之前，应该优先使用这两种策略，比如 Nginx 就会优先使用轮询的策略。</p>
-
 <p>而目前开源的负载均衡服务中，也会提供一些动态策略，我强调一下它们的原理。</p>
-
 <p>在负载均衡服务器上会收集对后端服务的调用信息，比如从负载均衡端到后端服务的活跃连接数，或者是调用的响应时间，然后从中选择连接数最少的服务，或者响应时间最短的后端服务。<strong>我举几个具体的例子：</strong></p>
-
 <p>Dubbo 提供的 LeastAcive 策略，就是优先选择活跃连接数最少的服务；</p>
-
 <p>Spring Cloud 全家桶中的 Ribbon 提供了 WeightedResponseTimeRule 是使用响应时间，给每个服务节点计算一个权重，然后依据这个权重，来给调用方分配服务节点。</p>
-
 <p><strong>这些策略的思考点</strong>是从调用方的角度出发，选择负载最小、资源最空闲的服务来调用，以期望能得到更高的服务调用性能，也就能最大化地使用服务器的空闲资源，请求也会响应地更迅速，**所以，我建议你，**在实际开发中，优先考虑使用动态的策略。</p>
-
 <p>到目前为止，你已经可以根据上面的分析，选择适合自己的负载均衡策略，并选择一个最优的服务节点，**那么问题来了：**你怎么保证选择出来的这个节点，一定是一个可以正常服务的节点呢？如果你采用的是轮询的策略，选择出来的，是一个故障节点又要怎么办呢？所以，为了降低请求被分配到一个故障节点的几率，有些负载均衡服务器，还提供了对服务节点的故障检测功能。</p>
-
 <h2>如何检测节点是否故障</h2>
-
 <p>24 讲中，我带你了解到，在微服务化架构中，服务节点会定期地向注册中心发送心跳包，这样注册中心就能够知晓服务节点是否故障，也就可以确认传递给负载均衡服务的节点，一定是可用的。</p>
-
 <p>但对于 Nginx 来说，<strong>我们要如何保证配置的服务节点是可用的呢？</strong></p>
-
 <p>这就要感谢淘宝开源的 Nginx 模块nginx_upstream_check_module了，这个模块可以让 Nginx 定期地探测后端服务的一个指定的接口，然后根据返回的状态码，来判断服务是否还存活。当探测不存活的次数达到一定阈值时，就自动将这个后端服务从负载均衡服务器中摘除。<strong>它的配置样例如下：</strong></p>
-
 <pre><code>upstream server {
-
-
-
         server 192.168.1.1:8080;
-
-
-
         server 192.168.1.2:8080;
-
-
-
         check interval=3000 rise=2 fall=5 timeout=1000 type=http default_down=true;// 检测间隔为 3 秒，检测超时时间是 1 秒，使用 http 协议。如果连续失败次数达到 5 次就认为服务不可用；如果连续连续成功次数达到 2 次，则认为服务可用。后端服务刚启动时状态是不可用的
-
-
-
         check_http_send &quot;GET /health_check HTTP/1.0\r\n\r\n&quot;; // 检测 URL
-
-
-
         check_http_expect_alive http_2xx; // 检测返回状态码为 200 时认为检测成功
-
-
-
 }
-
 </code></pre>
-
 <p>Nginx 按照上面的方式配置之后，你的业务服务器也要实现一个“/health_check”的接口，在这个接口中返回的 HTTP 状态码，这个返回的状态码可以存储在配置中心中，这样在变更状态码时，就不需要重启服务了（配置中心在第 33 节课中会讲到）。</p>
-
 <p>节点检测的功能，还能够帮助我们实现 Web 服务的优雅关闭。在 24 讲中介绍注册中心时，我曾经提到，服务的优雅关闭需要先切除流量再关闭服务，使用了注册中心之后，就可以先从注册中心中摘除节点，再重启服务，以便达到优雅关闭的目的。那么 Web 服务要如何实现优雅关闭呢？接下来，我来给你了解一下，有了节点检测功能之后，服务是如何启动和关闭的。</p>
-
 <p>**在服务刚刚启动时，**可以初始化默认的 HTTP 状态码是 500，这样 Nginx 就不会很快将这个服务节点标记为可用，也就可以等待服务中，依赖的资源初始化完成，避免服务初始启动时的波动。</p>
-
 <p>**在完全初始化之后，**再将 HTTP 状态码变更为 200，Nginx 经过两次探测后，就会标记服务为可用。在服务关闭时，也应该先将 HTTP 状态码变更为 500，等待 Nginx 探测将服务标记为不可用后，前端的流量也就不会继续发往这个服务节点。在等待服务正在处理的请求全部处理完毕之后，再对服务做重启，可以避免直接重启导致正在处理的请求失败的问题。<strong>这是启动和关闭线上 Web 服务时的标准姿势，你可以在项目中参考使用。</strong></p>
-
 <h2>课程小结</h2>
-
 <p>本节课，我带你了解了与负载均衡服务相关的一些知识点，以及在实际工作中的运用技巧。我想强调几个重点：</p>
-
 <p>网站负载均衡服务的部	署，是以 LVS 承接入口流量，在应用服务器之前，部署 Nginx 做细化的流量分发，和故障节点检测。当然，如果你的网站的并发不高，也可以考虑不引入 LVS。</p>
-
 <p>负载均衡的策略可以优先选择动态策略，保证请求发送到性能最优的节点上；如果没有合适的动态策略，那么可以选择轮询的策略，让请求平均分配到所有的服务节点上。</p>
-
 <p>Nginx 可以引入 nginx_upstream_check_module，对后端服务做定期的存活检测，后端的服务节点在重启时，也要秉承着“先切流量后重启”的原则，尽量减少节点重启对于整体系统的影响。</p>
-
 <p>你可能会认为，像 Nginx、LVS 应该是运维所关心的组件，作为开发人员不用操心维护。**不过通过今天的学习你应该可以看到：**负载均衡服务是提升系统扩展性，和性能的重要组件，在高并发系统设计中，它发挥的作用是无法替代的。理解它的原理，掌握使用它的正确姿势，应该是每一个后端开发同学的必修课。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/高并发系统设计40问/25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/高并发系统设计40问/27  API网关：系统的门面要如何做呢？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997f46b91e8b66","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

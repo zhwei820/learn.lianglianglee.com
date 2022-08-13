@@ -1,885 +1,485 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>18 动手实践：从字节码看方法调用的底层实现.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/00 开篇词：JVM，一块难啃的骨头.md.html">00 开篇词：JVM，一块难啃的骨头.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/00 开篇词：JVM，一块难啃的骨头.md.html">00 开篇词：JVM，一块难啃的骨头</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html">01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/01 一探究竟：为什么需要 JVM？它处在什么位置？.md.html">01 一探究竟：为什么需要 JVM？它处在什么位置？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html">02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/02 大厂面试题：你不得不掌握的 JVM 内存管理.md.html">02 大厂面试题：你不得不掌握的 JVM 内存管理</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制.md.html">03 大厂面试题：从覆盖 JDK 的类开始掌握类的加载机制</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的.md.html">04 动手实践：从栈帧看字节码是如何在 JVM 中进行流转的</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/05 大厂面试题：得心应手应对 OOM 的疑难杂症.md.html">05 大厂面试题：得心应手应对 OOM 的疑难杂症</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/06 深入剖析：垃圾回收你真的了解吗？（上）.md.html">06 深入剖析：垃圾回收你真的了解吗？（上）.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/06 深入剖析：垃圾回收你真的了解吗？（上）.md.html">06 深入剖析：垃圾回收你真的了解吗？（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/07 深入剖析：垃圾回收你真的了解吗？（下）.md.html">07 深入剖析：垃圾回收你真的了解吗？（下）.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/07 深入剖析：垃圾回收你真的了解吗？（下）.md.html">07 深入剖析：垃圾回收你真的了解吗？（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？.md.html">08 大厂面试题：有了 G1 还需要其他垃圾回收器吗？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/09 案例实战：亿级流量高并发下如何进行估算和调优.md.html">09 案例实战：亿级流量高并发下如何进行估算和调优.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/09 案例实战：亿级流量高并发下如何进行估算和调优.md.html">09 案例实战：亿级流量高并发下如何进行估算和调优</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决.md.html">10 第09讲：案例实战：面对突如其来的 GC 问题如何下手解决</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/11 第10讲：动手实践：自己模拟 JVM 内存溢出场景.md.html">11 第10讲：动手实践：自己模拟 JVM 内存溢出场景</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏.md.html">12 第11讲：动手实践：遇到问题不要慌，轻松搞定内存泄漏</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/13 工具进阶：如何利用 MAT 找到问题发生的根本原因.md.html">13 工具进阶：如何利用 MAT 找到问题发生的根本原因</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/14 动手实践：让面试官刮目相看的堆外内存排查.md.html">14 动手实践：让面试官刮目相看的堆外内存排查.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/14 动手实践：让面试官刮目相看的堆外内存排查.md.html">14 动手实践：让面试官刮目相看的堆外内存排查</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/15 预警与解决：深入浅出 GC 监控与调优.md.html">15 预警与解决：深入浅出 GC 监控与调优.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/15 预警与解决：深入浅出 GC 监控与调优.md.html">15 预警与解决：深入浅出 GC 监控与调优</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/16 案例分析：一个高死亡率的报表系统的优化之路.md.html">16 案例分析：一个高死亡率的报表系统的优化之路.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/16 案例分析：一个高死亡率的报表系统的优化之路.md.html">16 案例分析：一个高死亡率的报表系统的优化之路</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/17 案例分析：分库分表后，我的应用崩溃了.md.html">17 案例分析：分库分表后，我的应用崩溃了.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/17 案例分析：分库分表后，我的应用崩溃了.md.html">17 案例分析：分库分表后，我的应用崩溃了</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/深入浅出 Java 虚拟机-完/18 动手实践：从字节码看方法调用的底层实现.md.html">18 动手实践：从字节码看方法调用的底层实现.md.html</a>
+                    <a class="current-tab" href="/专栏/深入浅出 Java 虚拟机-完/18 动手实践：从字节码看方法调用的底层实现.md.html">18 动手实践：从字节码看方法调用的底层实现</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/19 大厂面试题：不要搞混 JMM 与 JVM.md.html">19 大厂面试题：不要搞混 JMM 与 JVM.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/19 大厂面试题：不要搞混 JMM 与 JVM.md.html">19 大厂面试题：不要搞混 JMM 与 JVM</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/20 动手实践：从字节码看并发编程的底层实现.md.html">20 动手实践：从字节码看并发编程的底层实现.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/20 动手实践：从字节码看并发编程的底层实现.md.html">20 动手实践：从字节码看并发编程的底层实现</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/21 动手实践：不为人熟知的字节码指令.md.html">21 动手实践：不为人熟知的字节码指令.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/21 动手实践：不为人熟知的字节码指令.md.html">21 动手实践：不为人熟知的字节码指令</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/22 深入剖析：如何使用 Java Agent 技术对字节码进行修改.md.html">22 深入剖析：如何使用 Java Agent 技术对字节码进行修改</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/23 动手实践：JIT 参数配置如何影响程序运行？.md.html">23 动手实践：JIT 参数配置如何影响程序运行？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/23 动手实践：JIT 参数配置如何影响程序运行？.md.html">23 动手实践：JIT 参数配置如何影响程序运行？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/24 案例分析：大型项目如何进行性能瓶颈调优？.md.html">24 案例分析：大型项目如何进行性能瓶颈调优？.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/24 案例分析：大型项目如何进行性能瓶颈调优？.md.html">24 案例分析：大型项目如何进行性能瓶颈调优？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/25 未来：JVM 的历史与展望.md.html">25 未来：JVM 的历史与展望.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/25 未来：JVM 的历史与展望.md.html">25 未来：JVM 的历史与展望</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入浅出 Java 虚拟机-完/26 福利：常见 JVM 面试题补充.md.html">26 福利：常见 JVM 面试题补充.md.html</a>
+                    <a href="/专栏/深入浅出 Java 虚拟机-完/26 福利：常见 JVM 面试题补充.md.html">26 福利：常见 JVM 面试题补充</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>18 动手实践：从字节码看方法调用的底层实现</h1>
-
 <p>本课时我们主要分析从字节码看方法调用的底层实现。</p>
-
 <h2>字节码结构</h2>
-
 <h3>基本结构</h3>
-
 <p>在开始之前，我们先简要地介绍一下 class 文件的内容，这个结构和我们前面使用的 jclasslib 是一样的。关于 class 文件结构的资料已经非常多了（<a href="https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html">点击这里可查看官网详细介绍</a>），这里不再展开讲解了，大体介绍如下。</p>
-
 <p><img src="assets/Cgq2xl5h7KeAAJqIAAC_nqBW9x8213.jpg" alt="img" /></p>
-
 <p>**magic：**魔数，用于标识当前 class 的文件格式，JVM 可据此判断该文件是否可以被解析，目前固定为 0xCAFEBABE。</p>
-
 <p>**major_version：**主版本号。</p>
-
 <p>**minor_version：**副版本号，这两个版本号用来标识编译时的 JDK 版本，常见的一个异常比如 Unsupported major.minor version 52.0 就是因为运行时的 JDK 版本低于编译时的 JDK 版本（52 是 Java 8 的主版本号）。</p>
-
 <p><strong>constant_pool_count</strong>：常量池计数器，等于常量池中的成员数加 1。</p>
-
 <p><strong>constant_pool</strong>：常量池，是一种表结构，包含 class 文件结构和子结构中引用的所有字符串常量，类或者接口名，字段名和其他常量。</p>
-
 <p><strong>access_flags</strong>：表示某个类或者接口的访问权限和属性。</p>
-
 <p><strong>this_class</strong>：类索引，该值必须是对常量池中某个常量的一个有效索引值，该索引处的成员必须是一个 CONSTANT_Class_info 类型的结构体，表示这个 class 文件所定义的类和接口。</p>
-
 <p><strong>super_class</strong>：父类索引。</p>
-
 <p><strong>interfaces_count</strong>：接口计数器，表示当前类或者接口直接继承接口的数量。</p>
-
 <p><strong>interfaces</strong>：接口表，是一个表结构，成员同 this_class，是对常量池中 CONSTANT_Class_info 类型的一个有效索引值。</p>
-
 <p><strong>fields_count</strong>：字段计数器，当前 class 文件所有字段的数量。</p>
-
 <p><strong>fields</strong>：字段表，是一个表结构，表中每个成员必须是 filed_info 数据结构，用于表示当前类或者接口的某个字段的完整描述，但它不包含从父类或者父接口继承的字段。</p>
-
 <p><strong>methods_count</strong>：方法计数器，表示当前类方法表的成员个数。</p>
-
 <p><strong>methods</strong>：方法表，是一个表结构，表中每个成员必须是 method_info 数据结构，用于表示当前类或者接口的某个方法的完整描述。</p>
-
 <p><strong>attributes_count</strong>：属性计数器，表示当前 class 文件 attributes 属性表的成员个数。</p>
-
 <p><strong>attributes</strong>：属性表，是一个表结构，表中每个成员必须是 attribute_info 数据结构，这里的属性是对 class 文件本身，方法或者字段的补充描述，比如 SourceFile 属性用于表示 class 文件的源代码文件名。</p>
-
 <p><img src="assets/CgpOIF5h7KeAKhUAAAFE99wUPW0675.jpg" alt="img" /></p>
-
 <p>当然，class 文件结构的细节是非常多的，如上图，展示了一个简单方法的字节码描述，可以看到真正的执行指令在整个文件结构中的位置。</p>
-
 <h3>实际观测</h3>
-
 <p>为了避免枯燥的二进制对比分析，直接定位到真正的数据结构，这里介绍一个小工具，使用这种方式学习字节码会节省很多时间。这个工具就是 <a href="https://wiki.openjdk.java.net/display/CodeTools/asmtools">asmtools</a>，为了方便使用，我已经编译了一个 jar 包，放在了仓库里。</p>
-
 <p>执行下面的命令，将看到类的 JCOD 语法结果。</p>
-
 <pre><code>java -jar asmtools-7.0.jar jdec LambdaDemo.class
-
 </code></pre>
-
 <p>输出的结果类似于下面的结构，它与我们上面介绍的字节码组成是一一对应的，对照官网或者资料去学习，速度飞快。若想要细挖字节码，一定要掌握好它。</p>
-
 <pre><code>class LambdaDemo {
-
   0xCAFEBABE;
-
   0; // minor version
-
   52; // version
-
   [] { // Constant Pool
-
     ; // first element is empty
-
     Method #8 #25; // #1
-
     InvokeDynamic 0s #30; // #2
-
     InterfaceMethod #31 #32; // #3
-
     Field #33 #34; // #4
-
     String #35; // #5
-
     Method #36 #37; // #6
-
     class #38; // #7
-
     class #39; // #8
-
     Utf8 &quot;&lt;init&gt;&quot;; // #9
-
     Utf8 &quot;()V&quot;; // #10
-
     Utf8 &quot;Code&quot;; // #11
-
 </code></pre>
-
 <p>了解了类的文件组织方式，下面我们来看一下，类文件在加载到内存中以后，是一个怎样的表现形式。</p>
-
 <h2>内存表示</h2>
-
 <p>准备以下代码，使用 <strong>javac -g InvokeDemo.java</strong> 进行编译，然后使用 java 命令执行。程序将阻塞在 sleep 函数上，我们来看一下它的内存分布：</p>
-
 <pre><code>interface I {
-
     default void infMethod() { }
     void inf();
-
 }
 abstract class Abs {
-
     abstract void abs();
-
 }
 public class InvokeDemo extends Abs implements I {
-
     static void staticMethod() { }
     private void privateMethod() { }
     public void publicMethod() { }
     @Override
-
     public void inf() { }
     @Override
-
     void abs() { }
     public static void main(String[] args) throws Exception{
-
         InvokeDemo demo = new InvokeDemo();
         InvokeDemo.staticMethod();
-
         demo.abs();
-
         ((Abs) demo).abs();
-
         demo.inf();
-
         ((I) demo).inf();
-
         demo.privateMethod();
-
         demo.publicMethod();
-
         demo.infMethod();
-
         ((I) demo).infMethod();
-
         Thread.sleep(Integer.MAX_VAL
-
 </code></pre>
-
 <p>为了更加明显的看到这个过程，下面介绍一个 jhsdb 工具，这是在 Java 9 之后 JDK 先加入的调试工具，我们可以在命令行中使用 <strong>jhsdb hsdb</strong> 来启动它。注意，要加载相应的进程时，必须确保是同一个版本的应用进程，否则会产生报错。</p>
-
 <p><img src="assets/Cgq2xl5h7KeAVTC2AACpnNi6GE0282.jpg" alt="img" /></p>
-
 <p>attach 启动 Java 进程后，可以在 <strong>Class Browser</strong> 菜单中查看加载的所有类信息。我们在搜索框中输入 <strong>InvokeDemo</strong>，找到要查看的类。</p>
-
 <p><img src="assets/CgpOIF5h7KeAQIsAAACaFyeUVPI476.jpg" alt="img" /></p>
-
 <p><strong>@</strong> 符号后面的，就是具体的内存地址，我们可以复制一个，然后在 <strong>Inspector</strong> 视图中查看具体的属性，可以<strong>大体</strong>认为这就是类在方法区的具体存储。</p>
-
 <p><img src="assets/Cgq2xl5h7KiAWuv-AAGcKB6dCE4406.jpg" alt="img" /></p>
-
 <p>在 Inspector 视图中，我们找到方法相关的属性 <strong>_methods</strong>，可惜它无法点开，也无法查看。</p>
-
 <p><img src="assets/Cgq2xl5h7KiALPruAAD5Er51lCo505.jpg" alt="img" /></p>
-
 <p>接下来使用命令行来检查这个数组里面的值。打开菜单中的 Console，然后输入 examine 命令，可以看到这个数组里的内容，对应的地址就是 Class 视图中的方法地址。</p>
-
 <pre><code>examine 0x000000010e650570/10
-
 </code></pre>
-
 <p><img src="assets/Cgq2xl5h7KiARdERAAGRPMESLnI388.jpg" alt="img" /></p>
-
 <p>我们可以在 Inspect 视图中看到方法所对应的内存信息，这确实是一个 Method 方法的表示。</p>
-
 <p><img src="assets/CgpOIF5h7KiAHHFPAAGXAWSStVA060.jpg" alt="img" /></p>
-
 <p>相比较起来，对象就简单了，它只需要保存一个到达 Class 对象的指针即可。我们需要先从对象视图中进入，然后找到它，一步步进入 Inspect 视图。</p>
-
 <p><img src="assets/Cgq2xl5h7KmAY-DPAAE7J_7eC4A001.jpg" alt="img" /></p>
-
 <p>由以上的这些分析，可以得出下面这张图。执行引擎想要运行某个对象的方法，需要先在栈上找到这个对象的引用，然后再通过对象的指针，找到相应的方法字节码。</p>
-
 <p><img src="assets/CgpOIF5h7KmAO0npAABUB89jbXE399.jpg" alt="img" /></p>
-
 <h2>方法调用指令</h2>
-
 <p>关于方法的调用，Java 共提供了 5 个指令，来调用不同类型的函数：</p>
-
 <ul>
-
 <li><strong>invokestatic</strong>  用来调用静态方法；</li>
-
 <li><strong>invokevirtual</strong>  用于调用非私有实例方法，比如 public 和 protected，大多数方法调用属于这一种；</li>
-
 <li><strong>invokeinterface</strong> 和上面这条指令类似，不过作用于接口类；</li>
-
 <li><strong>invokespecial</strong> 用于调用私有实例方法、构造器及 super 关键字等；</li>
-
 <li><strong>invokedynamic</strong> 用于调用动态方法。</li>
-
 </ul>
-
 <p>我们依然使用上面的代码片段来看一下前四个指令的使用场景。代码中包含一个接口 **I、**一个抽象类 **Abs、**一个实现和继承了两者类的 <strong>InvokeDemo</strong>。</p>
-
 <p>回想一下，第 03 课时讲到的类加载机制，在 class 文件被加载到方法区以后，就完成了从符号引用到具体地址的转换过程。</p>
-
 <p>我们可以看一下编译后的 main 方法字节码，尤其需要注意的是对于接口方法的调用。使用实例对象直接调用，和强制转化成接口调用，所调用的字节码指令分别是 <strong>invokevirtual</strong> 和 <strong>invokeinterface</strong>，它们是有所不同的。</p>
-
 <pre><code>public static void main(java.lang.String[]);
-
     descriptor: ([Ljava/lang/String;)V
-
     flags: ACC_PUBLIC, ACC_STATIC
-
     Code:
-
       stack=2, locals=2, args_size=1
-
          0: new           #2                  // class InvokeDemo
-
          3: dup
-
          4: invokespecial #3                  // Method &quot;&lt;init&gt;&quot;:()V
-
          7: astore_1
-
          8: invokestatic  #4                  // Method staticMethod:()V
-
         11: aload_1
-
         12: invokevirtual #5                  // Method abs:()V
-
         15: aload_1
-
         16: invokevirtual #6                  // Method Abs.abs:()V
-
         19: aload_1
-
         20: invokevirtual #7                  // Method inf:()V
-
         23: aload_1
-
         24: invokeinterface #8,  1            // InterfaceMethod I.inf:()V
-
         29: aload_1
-
         30: invokespecial #9                  // Method privateMethod:()V
-
         33: aload_1
-
         34: invokevirtual #10                 // Method publicMethod:()V
-
         37: aload_1
-
         38: invokevirtual #11                 // Method infMethod:()V
-
         41: aload_1
-
         42: invokeinterface #12,  1           // InterfaceMethod I.infMethod:()V
-
         47: return
-
 </code></pre>
-
 <p>另外还有一点，和我们想象中的不同，大多数普通方法调用，使用的是 <strong>invokevirtual</strong> 指令，它其实和 <strong>invokeinterface</strong> 是一类的，都属于虚方法调用。很多时候，JVM 需要根据调用者的动态类型，来确定调用的目标方法，这就是动态绑定的过程。</p>
-
 <p>invokevirtual 指令有多态查找的机制，该指令运行时，解析过程如下：</p>
-
 <ul>
-
 <li>找到操作数栈顶的第一个元素所指向的对象实际类型，记做 c；</li>
-
 <li>如果在类型 c 中找到与常量中的描述符和简单名称都相符的方法，则进行访问权限校验，如果通过则返回这个方法直接引用，查找过程结束，不通过则返回 java.lang.IllegalAccessError；</li>
-
 <li>否则，按照继承关系从下往上依次对 c 的各个父类进行第二步的搜索和验证过程；</li>
-
 <li>如果始终没找到合适的方法，则抛出 java.lang.AbstractMethodError 异常，这就是 Java 语言中方法重写的本质。</li>
-
 </ul>
-
 <p>相对比，<strong>invokestatic</strong> 指令加上 <strong>invokespecial</strong> 指令，就属于静态绑定过程。</p>
-
 <p>所以<strong>静态绑定</strong>，指的是能够直接识别目标方法的情况，而<strong>动态绑定</strong>指的是需要在运行过程中根据调用者的类型来确定目标方法的情况。</p>
-
 <p>可以想象，相对于静态绑定的方法调用来说，动态绑定的调用会更加耗时一些。由于方法的调用非常的频繁，JVM 对动态调用的代码进行了比较多的优化，比如使用方法表来加快对具体方法的寻址，以及使用更快的缓冲区来直接寻址（ 内联缓存）。</p>
-
 <h2>invokedynamic</h2>
-
 <p>有时候在写一些 Python 脚本或者JS 脚本时，特别羡慕这些动态语言。如果把查找目标方法的决定权，从虚拟机转嫁给用户代码，我们就会有更高的自由度。</p>
-
 <p>之所以单独把 invokedynamic 抽离出来介绍，是因为它比较复杂。和反射类似，它用于一些动态的调用场景，但它和反射有着本质的不同，效率也比反射要高得多。</p>
-
 <p>这个指令通常在 Lambda 语法中出现，我们来看一下一小段代码：</p>
-
 <pre><code>public class LambdaDemo {
-
     public static void main(String[] args) {
-
         Runnable r = () -&gt; System.out.println(&quot;Hello Lambda&quot;);
-
         r.run();
-
     }
-
 }
-
 </code></pre>
-
 <p>使用 javap -p -v 命令可以在 main 方法中看到 invokedynamic 指令：</p>
-
 <pre><code>public static void main(java.lang.String[]);
-
     descriptor: ([Ljava/lang/String;)V
-
     flags: ACC_PUBLIC, ACC_STATIC
-
     Code:
-
       stack=1, locals=2, args_size=1
-
          0: invokedynamic #2,  0              // InvokeDynamic #0:run:()Ljava/lang/Runnable;
-
          5: astore_1
-
          6: aload_1
-
          7: invokeinterface #3,  1            // InterfaceMethod java/lang/Runnable.run:()V
-
         12: return
-
 </code></pre>
-
 <p>另外，我们在 javap 的输出中找到了一些奇怪的东西：</p>
-
 <pre><code>BootstrapMethods:
-
   0: #27 invokestatic java/lang/invoke/LambdaMetafactory.metafactory:
-
   (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang
-
   /invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/
-
   MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
-
     Method arguments:
-
       #28 ()V
-
       #29 invokestatic LambdaDemo.lambda$main$0:()V
-
       #28 ()V
-
 </code></pre>
-
 <p>BootstrapMethods 属性在 Java 1.7 以后才有，位于类文件的属性列表中，这个属性用于保存 invokedynamic 指令引用的引导方法限定符。</p>
-
 <p>和上面介绍的四个指令不同，invokedynamic 并没有确切的接受对象，取而代之的，是一个叫 <strong>CallSite</strong> 的对象。</p>
-
 <pre><code>static CallSite bootstrap(MethodHandles.Lookup caller, String name, MethodType type);
-
 </code></pre>
-
 <p>其实，invokedynamic 指令的底层，是使用<strong>方法句柄</strong>（MethodHandle）来实现的。方法句柄是一个能够被执行的引用，它可以指向静态方法和实例方法，以及虚构的 get 和 set 方法，从 IDE 中可以看到这些函数。</p>
-
 <p><img src="assets/Cgq2xl5h7KmAKs5YAADn6hIT-L8728.jpg" alt="img" /></p>
-
 <p><strong>句柄类型</strong>（MethodType）是我们对方法的具体描述，配合方法名称，能够定位到一类函数。访问方法句柄和调用原来的指令基本一致，但它的调用异常，包括一些权限检查，在运行时才能被发现。</p>
-
 <p>下面这段代码，可以完成一些动态语言的特性，通过方法名称和传入的对象主体，进行不同的调用，而 Bike 和 Man 类，可以没有任何关系。</p>
-
 <pre><code>import java.lang.invoke.MethodHandle;
-
 import java.lang.invoke.MethodHandles;
-
 import java.lang.invoke.MethodType;
 public class MethodHandleDemo {
-
     static class Bike {
-
         String sound() {
-
             return &quot;ding ding&quot;;
-
         }
-
     }
     static class Animal {
-
         String sound() {
-
             return &quot;wow wow&quot;;
-
         }
-
     }
-
     static class Man extends Animal {
-
         @Override
-
         String sound() {
-
             return &quot;hou hou&quot;;
-
         }
-
     }
-
     String sound(Object o) throws Throwable {
-
         MethodHandles.Lookup lookup = MethodHandles.lookup();
-
         MethodType methodType = MethodType.methodType(String.class);
-
         MethodHandle methodHandle = lookup.findVirtual(o.getClass(), &quot;sound&quot;, methodType);
         String obj = (String) methodHandle.invoke(o);
-
         return obj;
-
     }
     public static void main(String[] args) throws Throwable {
-
         String str = new MethodHandleDemo().sound(new Bike());
-
         System.out.println(str);
-
         str = new MethodHandleDemo().sound(new Animal());
-
         System.out.println(str);
-
         str = new MethodHandleDemo().sound(new Man());
-
         System.out.println(str);
-
 </code></pre>
-
 <p>可以看到 Lambda 语言实际上是通过方法句柄来完成的，在调用链上自然也多了一些调用步骤，那么在性能上，是否就意味着 Lambda 性能低呢？对于大部分“非捕获”的 Lambda 表达式来说，JIT 编译器的逃逸分析能够优化这部分差异，性能和传统方式无异；但对于“捕获型”的表达式来说，则需要通过方法句柄，不断地生成适配器，性能自然就低了很多（不过和便捷性相比，一丁点性能损失是可接受的）。</p>
-
 <p>除了 Lambda 表达式，我们还没有其他的方式来产生 invokedynamic 指令。但可以使用一些外部的字节码修改工具，比如 ASM，来生成一些带有这个指令的字节码，这通常能够完成一些非常酷的功能，比如完成一门弱类型检查的 JVM-Base 语言。</p>
-
 <h2>小结</h2>
-
 <p>本课时从 Java 字节码的顶层结构介绍开始，通过一个实际代码，了解了类加载以后，在 JVM 内存里的表现形式，并学习了 jhsdb 对 Java 进程的观测方式。</p>
-
 <p>接下来，我们分析了 invokestatic、invokevirtual、invokeinterface、invokespecial 这四个字节码指令的使用场景，并从字节码中看到了这些区别。</p>
-
 <p>最后，了解了 Java 7 之后的 invokedynamic 指令，它实际上是通过方法句柄来实现的。和我们关系最大的就是 Lambda 语法，了解了这些原理，可以忽略那些对 Lambda 性能高低的争论，要尽量写一些“非捕获”的 Lambda 表达式。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/深入浅出 Java 虚拟机-完/17 案例分析：分库分表后，我的应用崩溃了.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/深入浅出 Java 虚拟机-完/19 大厂面试题：不要搞混 JMM 与 JVM.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997a6d7c5a3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

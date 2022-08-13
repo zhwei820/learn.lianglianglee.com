@@ -1,1246 +1,433 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>14  探究 MyBatis 结果集映射机制背后的秘密（上）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈.md.html">00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈.md.html</a>
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈.md.html">00 开篇词  领略 MyBatis 设计思维，突破持久化技术瓶颈</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/01  常见持久层框架赏析，到底是什么让你选择 MyBatis？.md.html">01  常见持久层框架赏析，到底是什么让你选择 MyBatis？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis.md.html">02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/03  MyBatis 源码环境搭建及整体架构解析.md.html">03  MyBatis 源码环境搭建及整体架构解析</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/04  MyBatis 反射工具箱：带你领略不一样的反射设计思路.md.html">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”.md.html">05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/06  日志框架千千万，MyBatis 都能兼容的秘密是什么？.md.html">06  日志框架千千万，MyBatis 都能兼容的秘密是什么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/07  深入数据源和事务，把握持久化框架的两个关键命脉.md.html">07  深入数据源和事务，把握持久化框架的两个关键命脉</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/08  Mapper 文件与 Java 接口的优雅映射之道.md.html">08  Mapper 文件与 Java 接口的优雅映射之道</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/09  基于 MyBatis 缓存分析装饰器模式的最佳实践.md.html">09  基于 MyBatis 缓存分析装饰器模式的最佳实践</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）.md.html">10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）.md.html">11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/12  深入分析动态 SQL 语句解析全流程（上）.md.html">12  深入分析动态 SQL 语句解析全流程（上）</a>
+                </li>
+                <li>
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/13  深入分析动态 SQL 语句解析全流程（下）.md.html">13  深入分析动态 SQL 语句解析全流程（下）</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/深入剖析 MyBatis 核心原理-完/14  探究 MyBatis 结果集映射机制背后的秘密（上）.md.html">14  探究 MyBatis 结果集映射机制背后的秘密（上）</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/01  常见持久层框架赏析，到底是什么让你选择 MyBatis？.md.html">01  常见持久层框架赏析，到底是什么让你选择 MyBatis？.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/15  探究 MyBatis 结果集映射机制背后的秘密（下）.md.html">15  探究 MyBatis 结果集映射机制背后的秘密（下）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis.md.html">02  订单系统持久层示例分析，20 分钟带你快速上手 MyBatis.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者.md.html">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/03  MyBatis 源码环境搭建及整体架构解析.md.html">03  MyBatis 源码环境搭建及整体架构解析.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/17  Executor 才是执行 SQL 语句的幕后推手（上）.md.html">17  Executor 才是执行 SQL 语句的幕后推手（上）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/04  MyBatis 反射工具箱：带你领略不一样的反射设计思路.md.html">04  MyBatis 反射工具箱：带你领略不一样的反射设计思路.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/18  Executor 才是执行 SQL 语句的幕后推手（下）.md.html">18  Executor 才是执行 SQL 语句的幕后推手（下）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”.md.html">05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/19  深入 MyBatis 内核与业务逻辑的桥梁——接口层.md.html">19  深入 MyBatis 内核与业务逻辑的桥梁——接口层</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/06  日志框架千千万，MyBatis 都能兼容的秘密是什么？.md.html">06  日志框架千千万，MyBatis 都能兼容的秘密是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/20  插件体系让 MyBatis 世界更加精彩.md.html">20  插件体系让 MyBatis 世界更加精彩</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/07  深入数据源和事务，把握持久化框架的两个关键命脉.md.html">07  深入数据源和事务，把握持久化框架的两个关键命脉.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/21  深挖 MyBatis 与 Spring 集成底层原理.md.html">21  深挖 MyBatis 与 Spring 集成底层原理</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/08  Mapper 文件与 Java 接口的优雅映射之道.md.html">08  Mapper 文件与 Java 接口的优雅映射之道.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/22  基于 MyBatis 的衍生框架一览.md.html">22  基于 MyBatis 的衍生框架一览</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/09  基于 MyBatis 缓存分析装饰器模式的最佳实践.md.html">09  基于 MyBatis 缓存分析装饰器模式的最佳实践.md.html</a>
-
-
-
+                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升.md.html">23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）.md.html">10  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（上）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）.md.html">11  鸟瞰 MyBatis 初始化，把握 MyBatis 启动流程脉络（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/12  深入分析动态 SQL 语句解析全流程（上）.md.html">12  深入分析动态 SQL 语句解析全流程（上）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/13  深入分析动态 SQL 语句解析全流程（下）.md.html">13  深入分析动态 SQL 语句解析全流程（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    <a class="current-tab" href="/专栏/深入剖析 MyBatis 核心原理-完/14  探究 MyBatis 结果集映射机制背后的秘密（上）.md.html">14  探究 MyBatis 结果集映射机制背后的秘密（上）.md.html</a>
-
-                    
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/15  探究 MyBatis 结果集映射机制背后的秘密（下）.md.html">15  探究 MyBatis 结果集映射机制背后的秘密（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者.md.html">16  StatementHandler：参数绑定、SQL 执行和结果映射的奠基者.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/17  Executor 才是执行 SQL 语句的幕后推手（上）.md.html">17  Executor 才是执行 SQL 语句的幕后推手（上）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/18  Executor 才是执行 SQL 语句的幕后推手（下）.md.html">18  Executor 才是执行 SQL 语句的幕后推手（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/19  深入 MyBatis 内核与业务逻辑的桥梁——接口层.md.html">19  深入 MyBatis 内核与业务逻辑的桥梁——接口层.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/20  插件体系让 MyBatis 世界更加精彩.md.html">20  插件体系让 MyBatis 世界更加精彩.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/21  深挖 MyBatis 与 Spring 集成底层原理.md.html">21  深挖 MyBatis 与 Spring 集成底层原理.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/22  基于 MyBatis 的衍生框架一览.md.html">22  基于 MyBatis 的衍生框架一览.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/深入剖析 MyBatis 核心原理-完/23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升.md.html">23 结束语  会使用只能默默“搬砖”，懂原理才能快速晋升.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>14  探究 MyBatis 结果集映射机制背后的秘密（上）</h1>
-
 <p>在前面介绍 MyBatis 解析 Mapper.xml 映射文件的过程中，我们看到 <code>&lt;resultMap&gt;</code> 标签会被解析成 ResultMap 对象，其中定义了 ResultSet 与 Java 对象的映射规则，简单来说，也就是<strong>一行数据记录如何映射成一个 Java 对象</strong>，这种映射机制是 MyBatis 作为 ORM 框架的核心功能之一。</p>
-
 <p>ResultMap 只是定义了一个静态的映射规则，那在运行时，MyBatis 是如何根据映射规则将 ResultSet 映射成 Java 对象的呢？当 MyBatis 执行完一条 select 语句，<strong>拿到 ResultSet 结果集之后，会将其交给关联的 ResultSetHandler 进行后续的映射处理</strong>。</p>
-
 <p>ResultSetHandler 是一个接口，其中定义了三个方法，分别用来处理不同的查询返回值：</p>
-
 <pre><code>public interface ResultSetHandler {
-
-
-
     // 将ResultSet映射成Java对象
-
-
-
     &lt;E&gt; List&lt;E&gt; handleResultSets(Statement stmt) throws SQLException;
-
-
-
     // 将ResultSet映射成游标对象
-
-
-
     &lt;E&gt; Cursor&lt;E&gt; handleCursorResultSets(Statement stmt) throws SQLException;
-
-
-
     // 处理存储过程的输出参数
-
-
-
     void handleOutputParameters(CallableStatement cs) throws SQLException;
-
-
-
 }
-
 </code></pre>
-
 <p><strong>在 MyBatis 中只提供了一个 ResultSetHandler 接口实现，即 DefaultResultSetHandler</strong>。下面我们就以 DefaultResultSetHandler 为中心，介绍 MyBatis 中 ResultSet 映射的核心流程。</p>
-
 <h3>结果集处理入口</h3>
-
 <p>你如果有 JDBC 编程经验的话，应该知道在数据库中执行一条 Select 语句通常只能拿到一个 ResultSet，但这只是我们最常用的一种查询数据库的方式，其实数据库还支持同时返回多个 ResultSet 的场景，例如在存储过程中执行多条 Select 语句。MyBatis 作为一个通用的持久化框架，不仅要支持常用的基础功能，还要对其他使用场景进行全面的支持。</p>
-
 <p><strong>DefaultResultSetHandler 实现的 handleResultSets() 方法支持多个 ResultSet 的处理</strong>（单 ResultSet 的处理只是其中的特例），相关的代码片段如下：</p>
-
 <pre><code>public List&lt;Object&gt; handleResultSets(Statement stmt) throws SQLException {
-
-
-
     // 用于记录每个ResultSet映射出来的Java对象
-
-
-
     final List&lt;Object&gt; multipleResults = new ArrayList&lt;&gt;();
-
-
-
     int resultSetCount = 0;
-
-
-
     // 从Statement中获取第一个ResultSet，其中对不同的数据库有兼容处理逻辑,
-
-
-
     // 这里拿到的ResultSet会被封装成ResultSetWrapper对象返回
-
-
-
     ResultSetWrapper rsw = getFirstResultSet(stmt);
-
-
-
     // 获取这条SQL语句关联的全部ResultMap规则。如果一条SQL语句能够产生多个ResultSet，
-
-
-
     // 那么在编写Mapper.xml映射文件的时候，我们可以在SQL标签的resultMap属性中配置多个
-
-
-
     // &lt;resultMap&gt;标签的id，它们之间通过&quot;,&quot;分隔，实现对多个结果集的映射
-
-
-
     List&lt;ResultMap&gt; resultMaps = mappedStatement.getResultMaps();
-
-
-
     int resultMapCount = resultMaps.size();
-
-
-
     validateResultMapsCount(rsw, resultMapCount);
-
-
-
     while (rsw != null &amp;&amp; resultMapCount &gt; resultSetCount) { // 遍历ResultMap集合
-
-
-
         ResultMap resultMap = resultMaps.get(resultSetCount);
-
-
-
         // 根据ResultMap中定义的映射规则处理ResultSet，并将映射得到的Java对象添加到
-
-
-
         // multipleResults集合中保存
-
-
-
         handleResultSet(rsw, resultMap, multipleResults, null);
-
-
-
         // 获取下一个ResultSet
-
-
-
         rsw = getNextResultSet(stmt);
-
-
-
         // 清理nestedResultObjects集合，这个集合是用来存储中间数据的
-
-
-
         cleanUpAfterHandlingResultSet();
-
-
-
         resultSetCount++; // 递增ResultSet编号
-
-
-
     }
-
-
-
     // 下面这段逻辑是根据ResultSet的名称处理嵌套映射，你可以暂时不关注这段代码，
-
-
-
     // 嵌套映射会在后面详细介绍
-
-
-
-    ... 
-
-
-
+    ...
     // 返回全部映射得到的Java对象
-
-
-
     return collapseSingleResultList(multipleResults);
-
-
-
 }
-
 </code></pre>
-
 <p>这里我们先来看一下遍历多结果集时使用到的 getFirstResultSet() 方法和 getNextResultSet() 方法，这两个方法底层都是依赖 java.sql.Statement 的 getMoreResults() 方法和 getUpdateCount() 方法检测是否存在后续的 ResultSet 对象，检测成功之后，会通过 getResultSet() 方法获取下一个 ResultSet 对象。</p>
-
 <p><strong>这里获取到的 ResultSet 对象，会被包装成 ResultSetWrapper 对象返回。</strong></p>
-
 <p>ResultSetWrapper 主要用于封装 ResultSet 的一些元数据，其中记录了 ResultSet 中每列的名称、对应的 Java 类型、JdbcType 类型以及每列对应的 TypeHandler。</p>
-
 <p>另外，ResultSetWrapper 可以将底层 ResultSet 的列与一个 ResultMap 映射的列进行交集，得到参与映射的列和未被映射的列，分别记录到 mappedColumnNamesMap 集合和 unMappedColumnNamesMap 集合中。这两个集合都是 Map<code>&lt;String, List&lt;String&gt;&gt;</code> 类型，其中最外层的 Key 是 ResultMap 的 id，Value 分别是参与映射的列名集合和未被映射的列名集合。</p>
-
 <p>除了记录上述元数据以外，ResultSetWrapper 还封装了一套查询上述元数据的方法，例如，我们可以通过 getMappedColumnNames() 方法查询一个 ResultMap 映射了当前 ResultSet 的哪些列，还可以通过 getJdbcType()、getTypeHandler() 等方法查询指定列对应的 JdbcType、TypeHandler 等。</p>
-
 <h3>简单映射</h3>
-
 <p>了解了处理 ResultSet 的入口逻辑之后，下面我们继续来深入了解一下 DefaultResultSetHandler 是如何处理单个结果集的，这部分逻辑的入口是 handleResultSet() 方法，其中会根据第四个参数，也就是 parentMapping，判断当前要处理的 ResultSet 是嵌套映射，还是外层映射。</p>
-
 <p>无论是处理外层映射还是嵌套映射，<strong>都会依赖 handleRowValues() 方法完成结果集的处理</strong>（通过方法名也可以看出，handleRowValues() 方法是处理多行记录的，也就是一个结果集）。</p>
-
 <p>至于 handleRowValues() 方法，其中会通过 handleRowValuesForNestedResultMap() 方法处理包含嵌套映射的 ResultMap，通过 handleRowValuesForSimpleResultMap() 方法处理不包含嵌套映射的简单 ResultMap，如下所示：</p>
-
 <pre><code>public void handleRowValues(ResultSetWrapper rsw, ResultMap resultMap, ResultHandler&lt;?&gt; resultHandler, RowBounds rowBounds, ResultMapping parentMapping) throws SQLException {
-
-
-
     if (resultMap.hasNestedResultMaps()) { // 包含嵌套映射的处理流程
-
-
-
         ensureNoRowBounds();
-
-
-
         checkResultHandler();
-
-
-
         handleRowValuesForNestedResultMap(rsw, resultMap, resultHandler, rowBounds, parentMapping);
-
-
-
     } else { // 简单映射的处理
-
-
-
         handleRowValuesForSimpleResultMap(rsw, resultMap, resultHandler, rowBounds, parentMapping);
-
-
-
     }
-
-
-
 }
-
 </code></pre>
-
 <p>这里我们重点来看 handleRowValuesForSimpleResultMap() 方法如何映射一个 ResultSet 的，该方法的核心步骤可总结为如下。</p>
-
 <ol>
-
 <li>执行 skipRows() 方法跳过多余的记录，定位到指定的行。</li>
-
 <li>通过 shouldProcessMoreRows() 方法，检测是否还有需要映射的数据记录。</li>
-
 <li>如果存在需要映射的记录，则先通过 resolveDiscriminatedResultMap() 方法处理映射中用到的 Discriminator，决定此次映射实际使用的 ResultMap。</li>
-
 <li>通过 getRowValue() 方法对 ResultSet 中的一行记录进行映射，映射规则使用的就是步骤 3 中确定的 ResultMap。</li>
-
 <li>执行 storeObject() 方法记录步骤 4 中返回的、映射好的 Java 对象。</li>
-
 </ol>
-
 <p>在开始详细介绍上述映射流程中的每一步之前，我们先来看一下贯穿整个映射过程的两个辅助对象——<strong>DefaultResultHandler 和 DefaultResultContext</strong>。</p>
-
 <p>在 DefaultResultSetHandler 中维护了一个 resultHandler 字段（ResultHandler 接口类型）指向一个 DefaultResultHandler 对象，其核心作用是存储多个结果集映射得到的 Java 对象。</p>
-
 <p>ResultHandler 接口有两个默认实现，如下图所示：</p>
-
 <p><img src="assets/CioPOWBImeaAdnRHAAEZqfOie0w629.png" alt="图片1.png" /></p>
-
 <p>ResultHandler 接口继承图</p>
-
 <p>DefaultResultHandler 实现的底层使用 ArrayList<code>&lt;Object&gt;</code> 存储映射得到的 Java 对象，DefaultMapResultHandler 实现的底层使用 Map<code>&lt;K, V&gt;</code> 存储映射得到的 Java 对象，其中 Key 是从结果对象中获取的指定属性的值，Value 就是映射得到的 Java 对象。</p>
-
 <p>至于 DefaultResultContext 对象，它的生命周期与一个 ResultSet 相同，每从 ResultSet 映射得到一个 Java 对象都会暂存到 DefaultResultContext 中的 resultObject 字段，等待后续使用，同时 DefaultResultContext 还可以计算从一个 ResultSet 映射出来的对象个数（依靠 resultCount 字段统计）。</p>
-
 <p>了解了 handleRowValuesForSimpleResultMap() 方法的核心步骤以及全部贯穿整个映射流程的辅助对象之后，下面我们开始深入每个步骤进行详细分析。</p>
-
 <h4>1. ResultSet 的预处理</h4>
-
 <p>有 MyBatis 使用经验的同学可能知道，我们可以通过 RowBounds 指定 offset、limit 参数实现分页的效果。<strong>这里的 skipRows() 方法就会根据 RowBounds 移动 ResultSet 的指针到指定的数据行，这样后续的映射操作就可以从这一行开始</strong>。</p>
-
 <p>skipRows() 方法会检查 ResultSet 的属性，如果是 TYPE_FORWARD_ONLY 类型，则只能通过循环 + ResultSet.next() 方法（指针的逐行前移）定位到指定的数据行；反之，可以通过 ResultSet.absolute() 方法直接移动指针。</p>
-
 <p>处理 RowBounds 的另一个方法是 shouldProcessMoreRows() 方法，其中会检查当前已经映射的行是否达到了 RowBounds.limit 字段指定的行数上限，如果达到，则返回 false，停止后续操作。当然，控制是否进行后续映射操作的条件还有 ResultSet.next() 方法（即结果集中是否还有数据）。</p>
-
 <p>通过上述分析我们可以看出，通过 RowBounds 实现的分页功能实际上还是会将全部数据加载到 ResultSet 中，而不是只加载指定范围的数据，所以我们可以认为 RowBounds 实现的是一种“假分页”。这种“假分页”在数据量大的时候，性能就会很差，在处理大数据量分页时，建议通过 SQL 语句 where 条件 + limit 的方式实现分页。</p>
-
 <h4>2. 确定 ResultMap</h4>
-
 <p>在完成 ResultSet 的预处理之后，接下来会<strong>通过 resolveDiscriminatedResultMap() 方法处理 <discriminator> 标签，确定此次映射操作最终使用的 ResultMap 对象</strong>。</p>
-
 <p>为了更加方便和完整地描述 resolveDiscriminatedResultMap() 方法的核心流程，这里我们结合一个简单示例进行分析，比如，现在有一个 ResultSet 包含 id、name、classify、subClassify 四列，并且由 animalMap 来映射该 ResultSet，具体如下图所示：</p>
-
 <p><img src="assets/CioPOWBINOWAMLKdAAg_Jy5Lhxg738.png" alt="Drawing 1.png" /></p>
-
 <p>&lt; discriminator&gt;处理示例图</p>
-
 <p>通过 resolveDiscriminatedResultMap() 方法确定 ResultMap 的流程大致是这样的：</p>
-
 <ul>
-
 <li>首先按照 animalMap 这个 ResultMap 映射这行记录，该行记录中的 classify 列值为 mammalia，根据其中定义的 <code>&lt;discriminator&gt;</code> 标签的配置，会选择使用 mammaliaMap 这个 ResultMap 对当前这条记录进行映射；</li>
-
 <li>接下来看 mammaliaMap 这个 ResultMap，其中的 <code>&lt;discriminator&gt;</code> 标签检查的是 subClassify 的列值，当前记录的 subClassify 列值为 human，所以会选择 humanMap 这个 ResultMap 映射当前这条记录，得到一个 Human 对象。</li>
-
 </ul>
-
 <p>了解了上述基本流程之后，下面我们来看 resolveDiscriminatedResultMap() 方法的具体实现：</p>
-
 <pre><code>public ResultMap resolveDiscriminatedResultMap(ResultSet rs, ResultMap resultMap, String columnPrefix) throws SQLException {
-
-
-
     // 用于维护处理过的ResultMap唯一标识
-
-
-
     Set&lt;String&gt; pastDiscriminators = new HashSet&lt;&gt;();
-
-
-
     // 获取ResultMap中的Discriminator对象，这是通过&lt;resultMap&gt;标签中的&lt;discriminator&gt;标签解析得到的
-
-
-
     Discriminator discriminator = resultMap.getDiscriminator();
-
-
-
     while (discriminator != null) {
-
-
-
         // 获取当前待映射的记录中Discriminator要检测的列的值
-
-
-
         final Object value = getDiscriminatorValue(rs, discriminator, columnPrefix);
-
-
-
         // 根据上述列值确定要使用的ResultMap的唯一标识
-
-
-
         final String discriminatedMapId = discriminator.getMapIdFor(String.valueOf(value));
-
-
-
         if (configuration.hasResultMap(discriminatedMapId)) {
-
-
-
             // 从全局配置对象Configuration中获取ResultMap对象
-
-
-
             resultMap = configuration.getResultMap(discriminatedMapId);
-
-
-
             // 记录当前Discriminator对象
-
-
-
             Discriminator lastDiscriminator = discriminator;
-
-
-
             // 获取ResultMap对象中的Discriminator
-
-
-
             discriminator = resultMap.getDiscriminator();
-
-
-
             // 检测Discriminator是否出现了环形引用
-
-
-
             if (discriminator == lastDiscriminator || !pastDiscriminators.add(discriminatedMapId)) {
-
-
-
                 break;
-
-
-
             }
-
-
-
         } else {
-
-
-
             break;
-
-
-
         }
-
-
-
     }
-
-
-
     // 返回最终要使用的ResultMap
-
-
-
     return resultMap;
-
-
-
 }
-
 </code></pre>
-
 <h4>3. 创建映射结果对象</h4>
-
 <p>经过 resolveDiscriminatedResultMap() 方法解析，我们最终确定了当前记录使用哪个 ResultMap 进行映射。</p>
-
 <p>接下来要做的就是<strong>按照 ResultMap 规则进行各个列的映射，得到最终的 Java 对象</strong>，这部分逻辑是在下面要介绍的 getRowValue() 方法完成的，其核心步骤如下：</p>
-
 <ul>
-
 <li>首先根据 ResultMap 的 type 属性值创建映射的结果对象；</li>
-
 <li>然后根据 ResultMap 的配置以及全局信息，决定是否自动映射 ResultMap 中未明确映射的列；</li>
-
 <li>接着根据 ResultMap 映射规则，将 ResultSet 中的列值与结果对象中的属性值进行映射；</li>
-
 <li>最后返回映射的结果对象，如果没有映射任何属性，则需要根据全局配置决定如何返回这个结果值，这里不同场景和配置，可能返回完整的结果对象、空结果对象或是 null。</li>
-
 </ul>
-
 <p>下面是 getRowValue() 方法的核心实现：</p>
-
 <pre><code>private Object getRowValue(ResultSetWrapper rsw, ResultMap resultMap, String columnPrefix) throws SQLException {
-
-
-
     final ResultLoaderMap lazyLoader = new ResultLoaderMap();
-
-
-
     // 根据ResultMap的type属性值创建映射的结果对象
-
-
-
     Object rowValue = createResultObject(rsw, resultMap, lazyLoader, columnPrefix);
-
-
-
     if (rowValue != null &amp;&amp; !hasTypeHandlerForResultObject(rsw, resultMap.getType())) {
-
-
-
         final MetaObject metaObject = configuration.newMetaObject(rowValue);
-
-
-
         boolean foundValues = this.useConstructorMappings;
-
-
-
         // 根据ResultMap的配置以及全局信息，决定是否自动映射ResultMap中未明确映射的列
-
-
-
         if (shouldApplyAutomaticMappings(resultMap, false)) {
-
-
-
             foundValues = applyAutomaticMappings(rsw, resultMap, metaObject, columnPrefix) || foundValues;
-
-
-
         }
-
-
-
         // 根据ResultMap映射规则，将ResultSet中的列值与结果对象中的属性值进行映射
-
-
-
         foundValues = applyPropertyMappings(rsw, resultMap, metaObject, lazyLoader, columnPrefix) || foundValues;
-
-
-
         // 如果没有映射任何属性，需要根据全局配置决定如何返回这个结果值，
-
-
-
         // 这里不同场景和配置，可能返回完整的结果对象、空结果对象或是null
-
-
-
         foundValues = lazyLoader.size() &gt; 0 || foundValues;
-
-
-
         rowValue = foundValues || configuration.isReturnInstanceForEmptyRow() ? rowValue : null;
-
-
-
     }
-
-
-
     return rowValue;
-
-
-
 }
-
 </code></pre>
-
 <p>可以看到这里的第一步，也就是创建映射的结果对象，这部分逻辑位于 createResultObject() 方法中。这个方法中有两个关键步骤：一个是调用另一个 createResultObject() 重载方法来创建结果对象，另一个是通过 ProxyFactory 创建代理对象来处理延迟加载的属性。</p>
-
 <p>由于我们重点分析的是简单 ResultSet 的映射流程，所以接下来我们重点看 createResultObject() 重载方法是如何创建映射结果对象的。</p>
-
 <p>首先进行一些准备工作：获取 ResultMap 中 type 属性指定的结果对象的类型，并创建该类型对应的 MetaClass 对象；获取 ResultMap 中配置的 <code>&lt;constructor&gt;</code> 标签信息（也就是对应的 ResultMapping 对象集合），如果该信息不为空，则可以确定结果类型中的唯一构造函数。</p>
-
 <p>然后再根据四种不同的场景，使用不同的方式创建结果对象，下面就是这四种场景的核心逻辑。</p>
-
 <ul>
-
 <li>场景一，ResultSet 中只有一列，并且能够找到一个 TypeHandler 完成该列到目标结果类型的映射，此时可以直接读取 ResultSet 中的列值并通过 TypeHandler 转换得到结果对象。这部分逻辑是在 createPrimitiveResultObject() 方法中实现的，该场景多用于 Java 原始类型的处理。</li>
-
 <li>场景二，如果 ResultMap 中配置了 <code>&lt;constructor&gt;</code> 标签，就会先解析 <code>&lt;constructor&gt;</code> 标签中指定的构造方法参数的类型，并从待映射的数据行中获取对应的实参值，然后通过反射方式调用对应的构造方法来创建结果对象。这部分逻辑在 createParameterizedResultObject() 方法中实现。</li>
-
 <li>场景三，如果不满足上述两个场景，则尝试查找默认构造方法来创建结果对象，这里使用前面介绍的 ObjectFactory.create() 方法实现，底层原理还是 Java 的反射机制。</li>
-
 <li>场景四，最后会检测是否已经开启了自动映射功能，如果开启了，会尝试查找合适的构造方法创建结果对象。这里首先会查找 @AutomapConstructor 注解标注的构造方法，查找失败之后，则会尝试查找每个参数都有 TypeHandler 能与 ResultSet 列进行映射的构造方法，确定要使用的构造方法之后，也是通过 ObjectFactory 完成对象创建的。这部分逻辑在 createByConstructorSignature() 方法中实现。</li>
-
 </ul>
-
 <h4>4. 自动映射</h4>
-
 <p>创建完结果对象之后，下面就可以开始映射各个字段了。</p>
-
 <p>在简单映射流程中，会先通过 shouldApplyAutomaticMappings() 方法<strong>检测是否开启了自动映射</strong>，主要检测以下两个地方。</p>
-
 <ul>
-
 <li>检测当前使用的 ResultMap 是否配置了 autoMapping 属性，如果是，则直接根据该 autoMapping 属性的值决定是否开启自动映射功能。</li>
-
 <li>检测 mybatis-config.xml 的 <code>&lt;settings&gt;</code> 标签中配置的 autoMappingBehavior 值，决定是否开启自动映射功能。autoMappingBehavior 指定 MyBatis 框架如何进行自动映射，该属性有三个可选值：①NONE，表示完全关闭自动映射功能；②PARTIAL，表示只会自动映射没有定义嵌套映射的 ResultMap；③FULL，表示完全打开自动映射功能，这里会自动映射所有 ResultMap。autoMappingBehavior 的默认值是 PARTIAL。</li>
-
 </ul>
-
 <p>当确定当前 ResultMap 需要进行自动映射的时候，会通过 applyAutomaticMappings() 方法进行自动映射，其中的核心逻辑大致可描述为如下。</p>
-
 <ul>
-
 <li>首先，从 ResultSetWrapper 中获取所有未映射的列名，然后逐个处理每个列名。通过列名获取对应的属性名称，这里会将列名转换为小写并截掉指定的前缀，得到相应的属性名称。</li>
-
 <li>然后，检测结果对象中是否有上面得到的属性。如果属性不存在，则通过全局配置的 AutoMappingUnknownColumnBehavior 进行处理。如果属性存在，则检测该属性是否有合适的 TypeHandler；如果不存在合适的 TypeHandler，依旧是通过全局配置的 AutoMappingUnknownColumnBehavior 进行处理。</li>
-
 <li>经过上述检测之后，就可以创建 UnMappedColumnAutoMapping 对象将该列与对应的属性进行关联。在 UnMappedColumnAutoMapping 中记录了列名、属性名以及相关的 TypeHandler。</li>
-
 <li>最后，遍历上面得到 UnMappedColumnAutoMapping 集合，通过其中的 TypeHandler 读取列值并转换成相应的 Java 类型，再通过 MetaObject 设置到相应属性中。</li>
-
 </ul>
-
 <p>这样就完成了自动映射的功能。</p>
-
 <h4>5. 正常映射</h4>
-
 <p>完成自动映射之后，MyBatis 会<strong>执行 applyPropertyMappings() 方法处理 ResultMap 中明确要映射的列</strong>，applyPropertyMappings() 方法的核心流程如下所示。</p>
-
 <ul>
-
 <li>首先从 ResultSetWrapper 中明确需要映射的列名集合，以及 ResultMap 中定义的 ResultMapping 对象集合。</li>
-
 <li>遍历全部 ResultMapping 集合，针对每个 ResultMapping 对象为 column 属性值添加指定的前缀，得到最终的列名，然后执行 getPropertyMappingValue() 方法完成映射，得到对应的属性值。</li>
-
 <li>如果成功获取到了属性值，则通过结果对象关联的 MetaObject 对象设置到对应属性中。</li>
-
 </ul>
-
 <p>在 getPropertyMappingValue() 方法中，主要处理了三种场景的映射：</p>
-
 <ul>
-
 <li>第一种是基本类型的映射，这种场景直接可以通过 TypeHandler 从 ResultSet 中读取列值，并在转化之后返回；</li>
-
 <li>第二种和第三种场景分别是嵌套映射和多结果集的映射，这两个逻辑相对复杂，在下一讲我们再详细介绍。</li>
-
 </ul>
-
 <h4>6. 存储对象</h4>
-
 <p>通过上述 5 个步骤，我们已经完成简单映射的处理，得到了一个完整的结果对象。接下来，我们就要<strong>通过 storeObject() 方法把这个结果对象保存到合适的位置</strong>。</p>
-
 <p>这里处理的简单映射，如果是一个嵌套映射中的子映射，那么我们就需要将结果对象保存到外层对象的属性中；如果是一个普通映射或是外层映射的结果对象，那么我们就需要将结果对象保存到 ResultHandler 中。</p>
-
 <p>明确了结果对象的存储位置之后，我们来看 storeObject() 方法的具体实现：</p>
-
 <pre><code>private void storeObject(...) throws SQLException {
-
-
-
     if (parentMapping != null) {
-
-
-
         // 嵌套查询或嵌套映射的场景，此时需要将结果对象保存到外层对象对应的属性中
-
-
-
         linkToParents(rs, parentMapping, rowValue);
-
-
-
     } else {
-
-
-
         // 普通映射(没有嵌套映射)或是嵌套映射中的外层映射的场景，此时需要将结果对象保存到ResultHandler中
-
-
-
         callResultHandler(resultHandler, resultContext, rowValue);
-
-
-
     }
-
-
-
 }
-
 </code></pre>
-
 <h3>总结</h3>
-
 <p>这一讲我们重点介绍了结果集映射，这是 MyBatis 的核心实现之一。</p>
-
 <p>首先我们介绍了 ResultSetHandler 接口以及 DefaultResultSetHandler 这个默认实现，并讲解了单个结果集映射的入口：handleResultSet() 方法。</p>
-
 <p>接下来，我们继续深入，详细分析了 handleRowValuesForSimpleResultMap() 方法实现简单映射的核心步骤，其中涉及预处理 ResultSet、查找并确定 ResultMap、创建并填充映射结果对象、自动映射、正常映射、存储映射结果对象这六大核心步骤。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/深入剖析 MyBatis 核心原理-完/13  深入分析动态 SQL 语句解析全流程（下）.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/深入剖析 MyBatis 核心原理-完/15  探究 MyBatis 结果集映射机制背后的秘密（下）.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709979bc9b6c3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

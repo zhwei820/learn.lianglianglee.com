@@ -1,1016 +1,353 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>19  消息队列：如何降低消息队列系统中消息的延迟？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/00 开篇词  为什么你要学习高并发系统设计？.md.html">00 开篇词  为什么你要学习高并发系统设计？.md.html</a>
-
-
+                    <a href="/专栏/高并发系统设计40问/00 开篇词  为什么你要学习高并发系统设计？.md.html">00 开篇词  为什么你要学习高并发系统设计？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/01  高并发系统：它的通用设计方法是什么？.md.html">01  高并发系统：它的通用设计方法是什么？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/02  架构分层：我们为什么一定要这么做？.md.html">02  架构分层：我们为什么一定要这么做？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/03  系统设计目标（一）：如何提升系统性能？.md.html">03  系统设计目标（一）：如何提升系统性能？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/04  系统设计目标（二）：系统怎样做到高可用？.md.html">04  系统设计目标（二）：系统怎样做到高可用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/05  系统设计目标（三）：如何让系统易于扩展？.md.html">05  系统设计目标（三）：如何让系统易于扩展？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html">06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html">07  池化技术：如何减少频繁创建数据库连接的性能损耗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html">08  数据库优化方案（一）：查询请求增加时，如何做主从分离？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html">09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/10  发号器：如何保证分库分表后ID的全局唯一性？.md.html">10  发号器：如何保证分库分表后ID的全局唯一性？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html">11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html">12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html">13  缓存的使用姿势（一）：如何选择缓存的读写策略？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html">14  缓存的使用姿势（二）：缓存如何做到高可用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html">15  缓存的使用姿势（三）：缓存穿透了怎么办？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/16  CDN：静态资源如何加速？.md.html">16  CDN：静态资源如何加速？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html">17  消息队列：秒杀时如何处理每秒上万次的下单请求？</a>
+                </li>
+                <li>
+                    <a href="/专栏/高并发系统设计40问/18  消息投递：如何保证消息仅仅被消费一次？.md.html">18  消息投递：如何保证消息仅仅被消费一次？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/高并发系统设计40问/19  消息队列：如何降低消息队列系统中消息的延迟？.md.html">19  消息队列：如何降低消息队列系统中消息的延迟？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/01  高并发系统：它的通用设计方法是什么？.md.html">01  高并发系统：它的通用设计方法是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html">20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/02  架构分层：我们为什么一定要这么做？.md.html">02  架构分层：我们为什么一定要这么做？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html">21  系统架构：每秒1万次请求的系统要做服务化拆分吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/03  系统设计目标（一）：如何提升系统性能？.md.html">03  系统设计目标（一）：如何提升系统性能？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/22  微服务架构：微服务化后，系统架构要如何改造？.md.html">22  微服务架构：微服务化后，系统架构要如何改造？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/04  系统设计目标（二）：系统怎样做到高可用？.md.html">04  系统设计目标（二）：系统怎样做到高可用？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html">23  RPC框架：10万QPS下如何实现毫秒级的服务调用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/05  系统设计目标（三）：如何让系统易于扩展？.md.html">05  系统设计目标（三）：如何让系统易于扩展？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/24  注册中心：分布式系统如何寻址？.md.html">24  注册中心：分布式系统如何寻址？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html">06  面试现场第一期：当问到组件实现原理时，面试官是在刁难你吗？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html">25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html">07  池化技术：如何减少频繁创建数据库连接的性能损耗？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/26  负载均衡：怎样提升系统的横向扩展能力？.md.html">26  负载均衡：怎样提升系统的横向扩展能力？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html">08  数据库优化方案（一）：查询请求增加时，如何做主从分离？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/27  API网关：系统的门面要如何做呢？.md.html">27  API网关：系统的门面要如何做呢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html">09  数据库优化方案（二）：写入数据量增加时，如何实现分库分表？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/28  多机房部署：跨地域的分布式系统如何做？.md.html">28  多机房部署：跨地域的分布式系统如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/10  发号器：如何保证分库分表后ID的全局唯一性？.md.html">10  发号器：如何保证分库分表后ID的全局唯一性？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html">29  Service Mesh：如何屏蔽服务化系统的服务治理细节？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html">11  NoSQL：在高并发场景下，数据库和NoSQL如何做到互补？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/30  给系统加上眼睛：服务端监控要怎么做？.md.html">30  给系统加上眼睛：服务端监控要怎么做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html">12  缓存：数据库成为瓶颈后，动态数据的查询要如何加速？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/31  应用性能管理：用户的使用体验应该如何监控？.md.html">31  应用性能管理：用户的使用体验应该如何监控？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html">13  缓存的使用姿势（一）：如何选择缓存的读写策略？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/32  压力测试：怎样设计全链路压力测试平台？.md.html">32  压力测试：怎样设计全链路压力测试平台？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html">14  缓存的使用姿势（二）：缓存如何做到高可用？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/33  配置管理：成千上万的配置项要如何管理？.md.html">33  配置管理：成千上万的配置项要如何管理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html">15  缓存的使用姿势（三）：缓存穿透了怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html">34  降级熔断：如何屏蔽非核心系统故障的影响？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/16  CDN：静态资源如何加速？.md.html">16  CDN：静态资源如何加速？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/35  流量控制：高并发系统中我们如何操纵流量？.md.html">35  流量控制：高并发系统中我们如何操纵流量？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html">17  消息队列：秒杀时如何处理每秒上万次的下单请求？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/36  面试现场第三期：你要如何准备一场技术面试呢？.md.html">36  面试现场第三期：你要如何准备一场技术面试呢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/18  消息投递：如何保证消息仅仅被消费一次？.md.html">18  消息投递：如何保证消息仅仅被消费一次？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html">37  计数系统设计（一）：面对海量数据的计数器要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/高并发系统设计40问/19  消息队列：如何降低消息队列系统中消息的延迟？.md.html">19  消息队列：如何降低消息队列系统中消息的延迟？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/高并发系统设计40问/38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html">38  计数系统设计（二）：50万QPS下如何设计未读数系统？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html">20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html">39  信息流设计（一）：通用信息流系统的推模式要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html">21  系统架构：每秒1万次请求的系统要做服务化拆分吗？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html">40  信息流设计（二）：通用信息流系统的拉模式要如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/22  微服务架构：微服务化后，系统架构要如何改造？.md.html">22  微服务架构：微服务化后，系统架构要如何改造？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/加餐  数据的迁移应该如何做？.md.html">加餐  数据的迁移应该如何做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html">23  RPC框架：10万QPS下如何实现毫秒级的服务调用？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/期中测试  10道高并发系统设计题目自测.md.html">期中测试  10道高并发系统设计题目自测</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/24  注册中心：分布式系统如何寻址？.md.html">24  注册中心：分布式系统如何寻址？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/用户故事  从“心”出发，我还有无数个可能.md.html">用户故事  从“心”出发，我还有无数个可能</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html">25  分布式Trace：横跨几十个分布式组件的慢请求要如何排查？.md.html</a>
-
-
-
+                    <a href="/专栏/高并发系统设计40问/结束语  学不可以已.md.html">结束语  学不可以已</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/26  负载均衡：怎样提升系统的横向扩展能力？.md.html">26  负载均衡：怎样提升系统的横向扩展能力？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/27  API网关：系统的门面要如何做呢？.md.html">27  API网关：系统的门面要如何做呢？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/28  多机房部署：跨地域的分布式系统如何做？.md.html">28  多机房部署：跨地域的分布式系统如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html">29  Service Mesh：如何屏蔽服务化系统的服务治理细节？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/30  给系统加上眼睛：服务端监控要怎么做？.md.html">30  给系统加上眼睛：服务端监控要怎么做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/31  应用性能管理：用户的使用体验应该如何监控？.md.html">31  应用性能管理：用户的使用体验应该如何监控？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/32  压力测试：怎样设计全链路压力测试平台？.md.html">32  压力测试：怎样设计全链路压力测试平台？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/33  配置管理：成千上万的配置项要如何管理？.md.html">33  配置管理：成千上万的配置项要如何管理？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html">34  降级熔断：如何屏蔽非核心系统故障的影响？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/35  流量控制：高并发系统中我们如何操纵流量？.md.html">35  流量控制：高并发系统中我们如何操纵流量？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/36  面试现场第三期：你要如何准备一场技术面试呢？.md.html">36  面试现场第三期：你要如何准备一场技术面试呢？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html">37  计数系统设计（一）：面对海量数据的计数器要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html">38  计数系统设计（二）：50万QPS下如何设计未读数系统？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html">39  信息流设计（一）：通用信息流系统的推模式要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html">40  信息流设计（二）：通用信息流系统的拉模式要如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/加餐  数据的迁移应该如何做？.md.html">加餐  数据的迁移应该如何做？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/期中测试  10道高并发系统设计题目自测.md.html">期中测试  10道高并发系统设计题目自测.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/用户故事  从“心”出发，我还有无数个可能.md.html">用户故事  从“心”出发，我还有无数个可能.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/高并发系统设计40问/结束语  学不可以已.md.html">结束语  学不可以已.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>19  消息队列：如何降低消息队列系统中消息的延迟？</h1>
-
 <p>你好，我是唐扬。</p>
-
 <p>学完前面两节课之后，相信你对在垂直电商项目中，如何使用消息队列应对秒杀时的峰值流量已经有所了解。当然了，你也应该知道要如何做，才能保证消息不会丢失，尽量避免消息重复带来的影响。**那么我想让你思考一下：**除了这些内容，你在使用消息队列时还需要关注哪些点呢？</p>
-
 <p>**先来看一个场景：**在你的垂直电商项目中，你会在用户下单支付之后，向消息队列里面发送一条消息，队列处理程序消费了消息后，会增加用户的积分，或者给用户发送优惠券。那么用户在下单之后，等待几分钟或者十几分钟拿到积分和优惠券是可以接受的，但是一旦消息队列出现大量堆积，用户消费完成后几小时还拿到优惠券，那就会有用户投诉了。</p>
-
 <p>这时，你要关注的就是消息队列中，消息的延迟了，这其实是消费性能的问题，那么你要如何提升消费性能，保证更短的消息延迟呢？**在我看来，**你首先需要掌握如何来监控消息的延迟，因为有了数据之后，你才可以知道目前的延迟数据是否满足要求，也可以评估优化之后的效果。然后，你要掌握使用消息队列的正确姿势，以及关注消息队列本身是如何保证消息尽快被存储和投递的。</p>
-
 <p>接下来，我们先来看看第一点：如何监控消息延迟。</p>
-
 <h2>如何监控消息延迟</h2>
-
 <p>在我看来，监控消息的延迟有两种方式：</p>
-
 <p>使用消息队列提供的工具，通过监控消息的堆积来完成；</p>
-
 <p>通过生成监控消息的方式来监控消息的延迟情况。</p>
-
 <p>接下来，我带你实际了解一下。</p>
-
 <p>假设在开篇的场景之下，电商系统中的消息队列已经堆积了大量的消息，那么你要想监控消息的堆积情况，首先需要从原理上了解，在消息队列中消费者的消费进度是多少，因为这样才方便计算当前的消费延迟是多少。比方说，生产者向队列中一共生产了 1000 条消息，某一个消费者消费进度是 900 条，那么这个消费者的消费延迟就是 100 条消息。</p>
-
 <p><strong>在 Kafka 中，消费者的消费进度在不同的版本上是不同的。</strong></p>
-
 <p>在 Kafka0.9 之前的版本中，消费进度是存储在 ZooKeeper 中的，消费者在消费消息的时候，先要从 ZooKeeper 中获取最新的消费进度，再从这个进度的基础上消费后面的消息。</p>
-
 <p>在 Kafka0.9 版本之后，消费进度被迁入到 Kakfa 的一个专门的 topic 叫“__consumer_offsets”里面。所以，如果你了解 kafka 的原理，你可以依据不同的版本，从不同的位置，获取到这个消费进度的信息。</p>
-
 <p>当然，作为一个成熟的组件，Kafka 也提供了一些工具来获取这个消费进度的信息，帮助你实现自己的监控，这个工具主要有两个：</p>
-
 <p><strong>首先，Kafka 提供了工具叫做“kafka-consumer-groups.sh”</strong>（它在 Kafka 安装包的 bin 目录下）。</p>
-
 <p>为了帮助你理解，我简单地搭建了一个 Kafka 节点，并且写入和消费了一些信息，然后我来使用命令看看消息累积情况，具体的命令如下：</p>
-
 <pre><code>./bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group test-consumer-group
-
 </code></pre>
-
 <p>结果如下：</p>
-
 <p><img src="assets/404811b07db8edb4c1bb9f1cfc0bc94b.jpg" alt="img" /></p>
-
 <p>图中的前两列是队列的基本信息，包括话题名和分区名；</p>
-
 <p>第三列是当前消费者的消费进度；</p>
-
 <p>第四列是当前生产消息的总数；</p>
-
 <p>第五列就是消费消息的堆积数（也就是第四列与第三列的差值）。</p>
-
 <p>通过这个命令你可以很方便地了解消费者的消费情况。</p>
-
 <p><strong>其次，第二个工具是 JMX。</strong></p>
-
 <p>Kafka 通过 JMX 暴露了消息堆积的数据，我在本地启动了一个 console consumer，然后使用 jconsole 连接这个 consumer，你就可以看到这个 consumer 的堆积数据了（就是下图中红框里的数据）。这些数据你可以写代码来获取，这样也可以方便地输出到监控系统中，<strong>我比较推荐这种方式。</strong></p>
-
 <p><img src="assets/3384d3fcb52f98815fac667e5b543e2c.jpg" alt="img" /></p>
-
 <p>除了使用消息队列提供的工具以外，你还可以通过生成监控消息的方式，来监控消息的延迟。<strong>具体怎么做呢？</strong></p>
-
 <p>你先定义一种特殊的消息，然后启动一个监控程序，将这个消息定时地循环写入到消息队列中，消息的内容可以是生成消息的时间戳，并且也会作为队列的消费者消费数据。业务处理程序消费到这个消息时直接丢弃掉，而监控程序在消费到这个消息时，就可以和这个消息的生成时间做比较，如果时间差达到某一个阈值就可以向我们报警。</p>
-
 <p><img src="assets/34820c0b27e66af37fda116a1a98347f.jpg" alt="img" /></p>
-
 <p>这两种方式都可以监控消息的消费延迟情况，**而从我的经验出来，我比较推荐两种方式结合来使用。**比如在我的实际项目中，我会优先在监控程序中获取 JMX 中的队列堆积数据，做到 dashboard 报表中，同时也会启动探测进程，确认消息的延迟情况是怎样的。</p>
-
 <p>在我看来，消息的堆积是对于消息队列的基础监控，这是你无论如何都要做的。但是，了解了消息的堆积情况，并不能很直观地了解消息消费的延迟，你也只能利用经验来确定堆积的消息量到了多少才会影响到用户的体验；而第二种方式对于消费延迟的监控则更加直观，而且从时间的维度来做监控也比较容易确定报警阈值。</p>
-
 <p>了解了消息延迟的监控方式之后，我们再来看看如何提升消息的写入和消费性能，这样才会让异步的消息得到尽快的处理。</p>
-
 <h2>减少消息延迟的正确姿势</h2>
-
 <p>想要减少消息的处理延迟，我们需要在<strong>消费端和消息队列</strong>两个层面来完成。</p>
-
 <p>在消费端，我们的目标是提升消费者的消息处理能力，你能做的是：</p>
-
 <p>优化消费代码提升性能；</p>
-
 <p>增加消费者的数量（这个方式比较简单）。</p>
-
 <p>不过，第二种方式会受限于消息队列的实现。比如说，如果消息队列使用的是 Kafka 就无法通过增加消费者数量的方式，来提升消息处理能力。</p>
-
 <p>因为在 Kafka 中，一个 Topic（话题）可以配置多个 Partition（分区），数据会被平均或者按照生产者指定的方式，写入到多个分区中，那么在消费的时候，Kafka 约定一个分区只能被一个消费者消费，为什么要这么设计呢？在我看来，如果有多个 consumer（消费者）可以消费一个分区的数据，那么在操作这个消费进度的时候就需要加锁，可能会对性能有一定的影响。</p>
-
 <p>所以说，话题的分区数量决定了消费的并行度，增加多余的消费者也是没有用处的，那么你可以通过增加分区来提高消费者的处理能力。</p>
-
 <p><img src="assets/cdd960f49f982f8b96ab466d7e4b2739.jpg" alt="img" /></p>
-
 <p>那么，如何在不增加分区的前提下提升消费能力呢？</p>
-
 <p>既然不能增加 consumer，那么你可以在一个 consumer 中提升处理消息的并行度，所以可以考虑使用多线程的方式来增加处理能力：你可以预先创建一个或者多个线程池，在接收到消息之后，把消息丢到线程池中来异步地处理，这样，原本串行的消费消息的流程就变成了并行的消费，可以提高消息消费的吞吐量，在并行处理的前提下，我们就可以在一次和消息队列的交互中多拉取几条数据，然后分配给多个线程来处理。</p>
-
 <p><img src="assets/2c0eefd526eed3a1fe4df89f068daf79.jpg" alt="img" /></p>
-
 <p>另外，你在消费队列中数据的时候还需要注意消费线程空转的问题。</p>
-
 <p>**我是最初在测试自己写的一个消息中间件的时候发现的。**当时，我发现运行消费客户端的进程会偶发地出现 CPU 跑满的情况，于是打印了 JVM 线程堆栈，找到了那个跑满 CPU 的线程。这个时候才发现，原来是消息队列中，有一段时间没有新的消息，于是消费客户端拉取不到新的消息就会不间断地轮询拉取消息，这个线程就把 CPU 跑满了。</p>
-
 <p>所以，你在写消费客户端的时候要考虑这种场景，拉取不到消息可以等待一段时间再来拉取，等待的时间不宜过长，否则会增加消息的延迟。我一般建议固定的 10ms~100ms，也可以按照一定步长递增，比如第一次拉取不到消息等待 10ms，第二次 20ms，最长可以到 100ms，直到拉取到消息再回到 10ms。</p>
-
 <p>说完了消费端的做法之后，<strong>再来说说消息队列本身在读取性能优化方面做了哪些事情。</strong></p>
-
 <p>我曾经也做过一个消息中间件，在最初设计中间件的时候，我主要从两方面考虑读取性能问题：</p>
-
 <p>消息的存储；</p>
-
 <p>零拷贝技术。</p>
-
 <p>**针对第一点，**我最初在设计的时候为了实现简单，使用了普通的数据库来存储消息，但是受限于数据库的性能瓶颈，读取 QPS 只能到 2000，后面我重构了存储模块，使用本地磁盘作为存储介质。Page Cache 的存在就可以提升消息的读取速度，即使要读取磁盘中的数据，由于消息的读取是顺序的，并且不需要跨网络读取数据，所以读取消息的 QPS 提升了一个数量级。</p>
-
 <p>**另外一个优化点是零拷贝技术，**说是零拷贝，其实，我们不可能消灭数据的拷贝，只是尽量减少拷贝的次数。在读取消息队列的数据的时候，其实就是把磁盘中的数据通过网络发送给消费客户端，在实现上会有四次数据拷贝的步骤：</p>
-
 <p>\1. 数据从磁盘拷贝到内核缓冲区；</p>
-
 <p>\2. 系统调用将内核缓存区的数据拷贝到用户缓冲区；</p>
-
 <p>\3. 用户缓冲区的数据被写入到 Socket 缓冲区中；</p>
-
 <p>\4. 操作系统再将 Socket 缓冲区的数据拷贝到网卡的缓冲区中。</p>
-
 <p><img src="assets/52c74ecac57e7a437442860029476d8f.jpg" alt="img" /></p>
-
 <p>操作系统提供了 Sendfile 函数，可以减少数据被拷贝的次数。使用了 Sendfile 之后，在内核缓冲区的数据不会被拷贝到用户缓冲区，而是直接被拷贝到 Socket 缓冲区，节省了一次拷贝的过程，提升了消息发送的性能。高级语言中对于 Sendfile 函数有封装，比如说在 Java 里面的 java.nio.channels.FileChannel 类就提供了 transferTo 方法提供了 Sendfile 的功能。</p>
-
 <p><img src="assets/e38d36c7f077c6ce5b0b276efb8d4eed.jpg" alt="img" /></p>
-
 <h2>课程小结</h2>
-
 <p>本节课我带你了解了，如何提升消息队列的性能来降低消息消费的延迟，这里我想让你明确的重点是：</p>
-
 <p>我们可以使用消息队列提供的工具，或者通过发送监控消息的方式，来监控消息的延迟情况；</p>
-
 <p>横向扩展消费者是提升消费处理能力的重要方式；</p>
-
 <p>选择高性能的数据存储方式，配合零拷贝技术，可以提升消息的消费性能。</p>
-
 <p>其实，队列是一种常用的组件，只要涉及到队列，任务的堆积就是一个不可忽视的问题，<strong>我遇到过的很多故障都是源于此。</strong></p>
-
 <p>比如说，前一段时间处理的一个故障，前期只是因为数据库性能衰减有少量的慢请求，结果这些慢请求占满了 Tomcat 线程池，导致整体服务的不可用。如果我们能对 Tomcat 线程池的任务堆积情况有实时地监控，或者说对线程池有一些保护策略，比方说线程全部使用之后丢弃请求，也许就会避免故障的发生。在此，我希望你在实际的工作中能够引以为戒，只要有队列就要监控它的堆积情况，把问题消灭在萌芽之中。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/高并发系统设计40问/18  消息投递：如何保证消息仅仅被消费一次？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/高并发系统设计40问/20  面试现场第二期：当问到项目经历时，面试官究竟想要了解什么？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997f35cc258b66","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

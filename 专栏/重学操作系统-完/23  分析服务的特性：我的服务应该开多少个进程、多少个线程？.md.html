@@ -1,1142 +1,398 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md.html">00 开篇词  为什么大厂面试必考操作系统？.md.html</a>
-
-
+                    <a href="/专栏/重学操作系统-完/00 开篇词  为什么大厂面试必考操作系统？.md.html">00 开篇词  为什么大厂面试必考操作系统？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md.html">00 课前必读  构建知识体系，可以这样做！</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html">02  程序的执行：相比 32 位，64 位的优势是什么？（上）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html">03  程序的执行：相比 32 位，64 位的优势是什么？（下）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md.html">05 (1) 加餐  练习题详解（一）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html">06  目录结构和文件管理指令：rm  -rf 指令的作用是？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md.html">07  进程、重定向和管道指令：xargs 指令的作用是？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md.html">12 (1)加餐  练习题详解（二）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html">14  用户态和内核态：用户态线程和内核态线程有什么区别？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md.html">16 (1)加餐  练习题详解（三）</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md.html">17  进程和线程：进程的开销比线程大在了哪里？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md.html">20  线程的调度：线程调度都有哪些方法？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？</a>
+                </li>
+                <li>
+                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md.html">22  进程间通信： 进程间通信都有哪些方法？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/00 课前必读  构建知识体系，可以这样做！.md.html">00 课前必读  构建知识体系，可以这样做！.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md.html">23 (1)加餐  练习题详解（四）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html">01  计算机是什么：“如何把程序写好”这个问题是可计算的吗？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md.html">24  虚拟内存 ：一个程序最多能使用多少内存？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html">02  程序的执行：相比 32 位，64 位的优势是什么？（上）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md.html">25  内存管理单元： 什么情况下使用大内存分页？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html">03  程序的执行：相比 32 位，64 位的优势是什么？（下）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html">26  缓存置换算法： LRU 用什么数据结构实现更合理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html">04  构造复杂的程序：将一个递归函数转成非递归函数的通用方法.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md.html">27  内存回收上篇：如何解决内存的循环引用问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html">05  存储器分级：L1 Cache 比内存和 SSD 快多少倍？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html">28  内存回收下篇：三色标记-清除算法是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/05 (1) 加餐  练习题详解（一）.md.html">05 (1) 加餐  练习题详解（一）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md.html">28 (1)加餐  练习题详解（五）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html">06  目录结构和文件管理指令：rm  -rf 指令的作用是？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md.html">29  Linux 下的各个目录有什么作用？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/07  进程、重定向和管道指令：xargs 指令的作用是？.md.html">07  进程、重定向和管道指令：xargs 指令的作用是？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html">08  用户和权限管理指令： 请简述 Linux 权限划分的原则？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html">09  Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md.html">32  HDFS 介绍：分布式文件系统是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html">10  软件的安装： 编译安装和包管理器安装有什么优势和劣势？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md.html">32 (1)加餐  练习题详解（六）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html">11  高级技巧之日志分析：利用 Linux 指令分析 Web 日志.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html">33  互联网协议群（TCPIP）：多路复用是怎么回事？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html">12  高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html">34  UDP 协议：UDP 和 TCP 相比快在哪里？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/12 (1)加餐  练习题详解（二）.md.html">12 (1)加餐  练习题详解（二）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html">35  Linux 的 IO 模式：selectpollepoll 有什么区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html">13  操作系统内核：Linux 内核和 Windows 内核有什么区别？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md.html">36  公私钥体系和网络安全：什么是中间人攻击？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html">14  用户态和内核态：用户态线程和内核态线程有什么区别？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md.html">36 (1)加餐  练习题详解（七）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html">15  中断和中断向量：Javajs 等语言为什么可以捕获到键盘输入？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html">37  虚拟化技术介绍：VMware 和 Docker 的区别？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html">16  WinMacUnixLinux 的区别和联系：为什么 Debian 漏洞排名第一还这么多人用？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/16 (1)加餐  练习题详解（三）.md.html">16 (1)加餐  练习题详解（三）.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md.html">39  Linux 架构优秀在哪里</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/17  进程和线程：进程的开销比线程大在了哪里？.md.html">17  进程和线程：进程的开销比线程大在了哪里？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md.html">40  商业操作系统：电商操作系统是不是一个噱头？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html">18  锁、信号量和分布式锁：如何控制同一时间只有 2 个线程运行？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md.html">40 (1)加餐  练习题详解（八）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html">19  乐观锁、区块链：除了上锁还有哪些并发控制方法？.md.html</a>
-
-
-
+                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md.html">41 结束语  论程序员的发展——信仰、选择和博弈</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/20  线程的调度：线程调度都有哪些方法？.md.html">20  线程的调度：线程调度都有哪些方法？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html">21  哲学家就餐问题：什么情况下会触发饥饿和死锁？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md.html">22  进程间通信： 进程间通信都有哪些方法？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    <a class="current-tab" href="/专栏/重学操作系统-完/23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html">23  分析服务的特性：我的服务应该开多少个进程、多少个线程？.md.html</a>
-
-                    
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md.html">23 (1)加餐  练习题详解（四）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/24  虚拟内存 ：一个程序最多能使用多少内存？.md.html">24  虚拟内存 ：一个程序最多能使用多少内存？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/25  内存管理单元： 什么情况下使用大内存分页？.md.html">25  内存管理单元： 什么情况下使用大内存分页？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html">26  缓存置换算法： LRU 用什么数据结构实现更合理？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/27  内存回收上篇：如何解决内存的循环引用问题？.md.html">27  内存回收上篇：如何解决内存的循环引用问题？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html">28  内存回收下篇：三色标记-清除算法是怎么回事？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/28 (1)加餐  练习题详解（五）.md.html">28 (1)加餐  练习题详解（五）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/29  Linux 下的各个目录有什么作用？.md.html">29  Linux 下的各个目录有什么作用？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html">30  文件系统的底层实现：FAT、NTFS 和 Ext3 有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html">31  数据库文件系统实例：MySQL 中 B 树和 B+ 树有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/32  HDFS 介绍：分布式文件系统是怎么回事？.md.html">32  HDFS 介绍：分布式文件系统是怎么回事？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/32 (1)加餐  练习题详解（六）.md.html">32 (1)加餐  练习题详解（六）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html">33  互联网协议群（TCPIP）：多路复用是怎么回事？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html">34  UDP 协议：UDP 和 TCP 相比快在哪里？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html">35  Linux 的 IO 模式：selectpollepoll 有什么区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/36  公私钥体系和网络安全：什么是中间人攻击？.md.html">36  公私钥体系和网络安全：什么是中间人攻击？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/36 (1)加餐  练习题详解（七）.md.html">36 (1)加餐  练习题详解（七）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html">37  虚拟化技术介绍：VMware 和 Docker 的区别？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html">38  容器编排技术：如何利用 K8s 和 Docker Swarm 管理微服务？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/39  Linux 架构优秀在哪里.md.html">39  Linux 架构优秀在哪里.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/40  商业操作系统：电商操作系统是不是一个噱头？.md.html">40  商业操作系统：电商操作系统是不是一个噱头？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/40 (1)加餐  练习题详解（八）.md.html">40 (1)加餐  练习题详解（八）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/重学操作系统-完/41 结束语  论程序员的发展——信仰、选择和博弈.md.html">41 结束语  论程序员的发展——信仰、选择和博弈.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>23  分析服务的特性：我的服务应该开多少个进程、多少个线程？</h1>
-
 <p>在平时工作中，你应该经常会遇到自己设计的服务即将上线，这就需要从整体评估各项指标，比如应该开多少个容器、需要多少 CPU 呢？另一方面，应该开多少个线程、多少个进程呢？——如果结合服务特性、目标并发量、目标吞吐量、用户可以承受的延迟等分析，又应该如何调整各种参数？</p>
-
 <p>资源分配多了，CPU、内存等资源会产生资源闲置浪费。资源给少了，则服务不能正常工作，甚至雪崩。因此这里就产生了一个性价比问题——这一讲，就以“<strong>我的服务应该开多少个进程、多少个线程</strong>”为引，我们一起讨论如何更好地利用系统的资源。</p>
-
 <h3>计算密集型和 I/O 密集型</h3>
-
 <p>通常我们会遇到两种任务，一种是计算、一种是 I/O。</p>
-
 <p><strong>计算</strong>，就是利用 CPU 处理算数运算。比如深度神经网络（Deep Neural Networks），需要大量的计算来计算神经元的激活和传播。再比如，根据营销规则计算订单价格，虽然每一个订单只需要少量的计算，但是在并发高的时候，所有订单累计加起来就需要大量计算。如果一个应用的主要开销在计算上，我们称为<strong>计算密集型</strong>。</p>
-
 <p>再看看 <strong>I/O 密集型</strong>，I/O 本质是对设备的读写。读取键盘的输入是 I/O，读取磁盘（SSD）的数据是 I/O。通常 CPU 在设备 I/O 的过程中会去做其他的事情，当 I/O 完成，设备会给 CPU 一个中断，告诉 CPU 响应 I/O 的结果。比如说从硬盘读取数据完成了，那么硬盘给 CPU 一个中断。如果操作对 I/O 的依赖强，比如频繁的文件操作（写日志、读写数据库等），可以看作<strong>I/O 密集型</strong>。</p>
-
 <p>你可能会有一个疑问，<strong>读取硬盘数据到内存中这个过程，CPU 需不需要一个个字节处理</strong>？</p>
-
 <p>通常是不用的，因为在今天的计算机中有一个叫作 Direct Memory Access（DMA）的模块，这个模块允许硬件设备直接通过 DMA 写内存，而不需要通过 CPU（占用 CPU 资源）。</p>
-
 <p><img src="assets/Ciqc1F--MyKAQSfQAABs29xFyFQ392.png" alt="5.png" /></p>
-
 <p>很多情况下我们没法使用 DMA，比如说你想把一个数组拷贝到另一个数组内，执行的 memcpy 函数内部实现就是一个个 byte 拷贝，这种情况也是一种<strong>CPU 密集的操作</strong>。</p>
-
 <p>可见，区分是计算密集型还是 I/O 密集型这件事比较复杂。按说查询数据库是一件 I/O 密集型的事情，但是如果存储设备足够好，比如用了最好的固态硬盘阵列，I/O 速度很快，反而瓶颈会在计算上（对缓存的搜索耗时成为主要部分）。因此，需要一些可衡量指标，来帮助我们确认应用的特性。</p>
-
 <h3>衡量 CPU 的工作情况的指标</h3>
-
 <p>我们先来看一下 CPU 关联的指标。如下图所示：CPU 有 2 种状态，忙碌和空闲。此外，CPU 的时间还有一种被偷走的情况。</p>
-
 <p><img src="assets/Ciqc1F--MyyAGUJkAACsJU_MgVg506.png" alt="7.png" /></p>
-
 <p>忙碌就是 CPU 在执行有意义的程序，空闲就是 CPU 在执行让 CPU 空闲（空转）的指令。通常让 CPU 空转的指令能耗更低，因此让 CPU 闲置时，我们会使用特别的指令，最终效果和让 CPU 计算是一样的，都可以把 CPU 执行时间填满，只不过这类型指令能耗低一些而已。除了忙碌和空闲，CPU 的时间有可能被宿主偷走，比如一台宿主机器上有 10 个虚拟机，宿主可以偷走给任何一台虚拟机的时间。</p>
-
 <p>如上图所示，CPU 忙碌有 3 种情况：</p>
-
 <ol>
-
 <li>执行用户空间程序；</li>
-
 <li>执行内核空间程序；</li>
-
 <li>执行中断程序。</li>
-
 </ol>
-
 <p>CPU 空闲有 2 种情况。</p>
-
 <ol>
-
 <li>CPU 无事可做，执行空闲指令（注意，不能让 CPU 停止工作，而是执行能耗更低的空闲指令）。</li>
-
 <li>CPU 因为需要等待 I/O 而空闲，比如在等待磁盘回传数据的中断，这种我们称为 I/O Wait。</li>
-
 </ol>
-
 <p>下图是我们执行 top 指令看到目前机器状态的快照，接下来我们仔细研究一下这些指标的含义：</p>
-
 <p><img src="assets/CgqCHl--MzuAVvG-AAMVu_JwSyA231.png" alt="2.png" /></p>
-
 <p>如上图所示，你可以细看下 <strong>%CPU(s)</strong> 开头那一行（第 3 行）：</p>
-
 <ol>
-
 <li>us（user），即用户空间 CPU 使用占比。</li>
-
 <li>sy（system），即内核空间 CPU 使用占比。</li>
-
 <li>ni（nice），nice 是 Unix 系操作系统控制进程优先级用的。-19 是最高优先级， 20 是最低优先级。这里代表了调整过优先级的进程的 CPU 使用占比。</li>
-
 <li>id（idle），闲置的 CPU 占比。</li>
-
 <li>wa（I/O Wait），I/O Wait 闲置的 CPU 占比。</li>
-
 <li>hi（hardware interrupts），响应硬件中断 CPU 使用占比。</li>
-
 <li>si（software interrrupts），响应软件中断 CPU 使用占比。</li>
-
 <li>st（stolen），如果当前机器是虚拟机，这个指标代表了宿主偷走的 CPU 时间占比。对于一个宿主多个虚拟机的情况，宿主可以偷走任何一台虚拟机的 CPU 时间。</li>
-
 </ol>
-
 <p>上面我们用 top 看的是一个平均情况，如果想看所有 CPU 的情况可以 top 之后，按一下<code>1</code>键。结果如下图所示：</p>
-
 <p><img src="assets/Ciqc1F--M0uAGZ1pAAmKNbPhB9A282.png" alt="3.png" /></p>
-
 <p>当然，对性能而言，CPU 数量也是一个重要因素。可以看到我这台虚拟机一共有 16 个核心。</p>
-
 <h3>负载指标</h3>
-
 <p>上面的指标非常多，在排查问题的时候，需要综合分析。其实还有一些更简单的指标，比如上图中 top 指令返回有一项叫作<code>load average</code>——平均负载。 负载可以理解成某个时刻正在排队执行的进程数除以 CPU 核数。平均负载需要多次采样求平均值。 如果这个值大于<code>1</code>，说明 CPU 相当忙碌。因此如果你想发现问题，可以先检查这个指标。</p>
-
 <p>具体来说，如果平均负载很高，CPU 的 I/O Wait 也很高， 那么就说明 CPU 因为需要大量等待 I/O 无法处理完成工作。产生这个现象的原因可能是：线上服务器打日志太频繁，读写数据库、网络太频繁。你可以考虑进行批量读写优化。</p>
-
 <p>到这里，你可能会有一个疑问：为什么批量更快呢？我们知道一次写入 1M 的数据，就比写一百万次一个 byte 快。因为前者可以充分利用 CPU 的缓存、复用发起写操作程序的连接和缓冲区等。</p>
-
 <p>如果想看更多<code>load average</code>，你可以看<code>/proc/loadavg</code>文件。</p>
-
 <h3>通信量（Traffic）</h3>
-
 <p>如果怀疑瓶颈发生在网络层面，或者想知道当前网络状况。可以查看<code>/proc/net/dev</code>，下图是在我的虚拟机上的查询结果：</p>
-
 <p><img src="assets/CgqCHl--M1aALjSiAALKG4QzX18230.png" alt="4.png" /></p>
-
 <p>我们来一起看一下上图中的指标。表头分成了 3 段：</p>
-
 <ul>
-
 <li>Interface（网络接口），可以理解成网卡</li>
-
 <li>Receive：接收的数据</li>
-
 <li>Transmit：发送的数据</li>
-
 </ul>
-
 <p>然后再来看具体的一些参数：</p>
-
 <ul>
-
 <li>byte 是字节数</li>
-
 <li>package 是封包数</li>
-
 <li>erros 是错误数</li>
-
 <li>drop 是主动丢弃的封包，比如说时间窗口超时了</li>
-
 <li>fifo: FIFO 缓冲区错误（<strong>如果想了解更多可以关注我即将推出的《计算机网络》专栏</strong>）</li>
-
 <li>frame: 底层网络发生了帧错误，代表数据出错了</li>
-
 </ul>
-
 <p>如果你怀疑自己系统的网络有故障，可以查一下通信量部分的参数，相信会有一定的收获。</p>
-
 <h3>衡量磁盘工作情况</h3>
-
 <p>有时候 I/O 太频繁导致磁盘负载成为瓶颈，这个时候可以用<code>iotop</code>指令看一下磁盘的情况，如图所示：</p>
-
 <p><img src="assets/CgqCHl--M2OAJezyAAkRwbdJVmk356.png" alt="1.png" /></p>
-
 <p>上图中是磁盘当前的读写速度以及排行较靠前的进程情况。</p>
-
 <p>另外，如果磁盘空间不足，可以用<code>df</code>指令：</p>
-
 <p><img src="assets/CgqCHl--M22AY0VPAAaPk8du-CY254.png" alt="6.png" /></p>
-
 <p>其实 df 是按照挂载的文件系统计算空间。图中每一个条目都是一个文件系统。有的文件系统直接挂在了一个磁盘上，比如图中的<code>/dev/sda5</code>挂在了<code>/</code>上，因此这样可以看到各个磁盘的使用情况。</p>
-
 <p>如果想知道更细粒度的磁盘 I/O 情况，可以查看<code>/proc/diskstats</code>文件。 这里有 20 多个指标我就不细讲了，如果你将来怀疑自己系统的 I/O 有问题，可以查看这个文件，并阅读相关手册。</p>
-
 <h3>监控平台</h3>
-
 <p>Linux 中有很多指令可以查看服务器当前的状态，有 CPU、I/O、通信、Nginx 等维度。如果去记忆每个指令自己搭建监控平台，会非常复杂。这里你可以用市面上别人写好的开源系统帮助你收集这些资料。 比如 Taobao System Activity Report（tsar）就是一款非常好用的工具。它集成了大量诸如上面我们使用的工具，并且帮助你定时收集服务器情况，还能记录成日志。你可以用 logstash 等工具，及时将日志收集到监控、分析服务中，比如用 ELK 技术栈。</p>
-
 <h3>决定进程/线程数量</h3>
-
 <p>最后我们讲讲如何决定线程、进程数量。 上面观察指标是我们必须做的一件事情，通过观察上面的指标，可以对我们开发的应用有一个基本的认识。</p>
-
 <p>下面请你思考一个问题：<strong>如果线程或进程数量 = CPU 核数，是不是一个好的选择</strong>？</p>
-
 <p>有的应用不提供线程，比如 PHP 和 Node.js。</p>
-
 <p>Node.js 内部有一个事件循环模型，这个模型可以理解成协程（Coroutine），相当于大量的协程复用一个进程，可以达到比线程池更高的效率（减少了线程切换）。PHP 模型相对则差得多。Java 是一个多线程的模型，线程和内核线程对应比 1：1；Go 有轻量级线程，多个轻量级线程复用一个内核级线程。</p>
-
 <p>以 Node.js 为例，如果现在是 8 个核心，那么开 8 个 Node 进程，是不是就是最有效利用 CPU 的方案呢？ 乍一看——8 个核、8 个进程，每个进程都可以使用 1 个核，CPU 利用率很高——其实不然。 你不要忘记，CPU 中会有一部分闲置时间是 I/O Wait，这个时候 CPU 什么也不做，主要时间用于等待 I/O。</p>
-
 <p>假设我们应用执行的期间只用 50% CPU 的执行时间，其他 50% 是 I/O Wait。那么 1 个 CPU 同时就可以执行两个进程/线程。</p>
-
 <p>我们考虑一个更一般的模型，如果你的应用平均 I/O 时间占比是 P，假设现在内存中有 n 个这样的线程，那么 CPU 的利用率是多少呢？</p>
-
 <p>假设我们观察到一个应用 （进程），I/O 时间占比是 P，那么可以认为这个进程等待 I/O 的概率是 P。那么如果有 n 个这样的线程，n 个线程都在等待 I/O 的概率是Pn。而满负荷下，CPU 的利用率就是 CPU 不能空转——也就是不能所有进程都在等待 I/O。因此 CPU 利用率 = 1 -Pn。</p>
-
 <p>理论上，如果 P = 50%，两个这样的进程可以达到满负荷。 但是从实际出发，何时运行线程是一个分时的调度行为，实际的 CPU 利用率还要看开了多少个这样的线程，如果是 2 个，那么还是会有一部分闲置资源。</p>
-
 <p>因此在实际工作中，开的线程、进程数往往是超过 CPU 核数的。<strong>你可能会问，具体是多少最好呢</strong>？——这里没有具体的算法，要以实际情况为准。比如：你先以 CPU 核数 3 倍的线程数开始，然后进行模拟真实线上压力的测试，分析压测的结果。</p>
-
 <ul>
-
 <li>如果发现整个过程中，瓶颈在 CPU，比如<code>load average</code>很高，那么可以考虑优化 I/O Wait，让 CPU 有更多时间计算。</li>
-
 <li>当然，如果 I/O Wait 优化不动了，算法都最优了，就是磁盘读写速度很高达到瓶颈，可以考虑延迟写、延迟读等等技术，或者优化减少读写。</li>
-
 <li>如果发现 idle 很高，CPU 大面积闲置，就可以考虑增加线程。</li>
-
 </ul>
-
 <h3>总结</h3>
-
 <p><strong>那么通过这节课的学习，你现在可以尝试来回答本节关联的面试题目：我的服务应该开多少个进程、多少个线程？</strong></p>
-
 <p><strong>【解析】</strong> 计算密集型一般接近核数，如果负载很高，建议留一个内核专门给操作系统。I/O 密集型一般都会开大于核数的线程和进程。 但是无论哪种模型，都需要实地压测，以压测结果分析为准；另一方面，还需要做好监控，观察服务在不同并发场景的情况，避免资源耗尽。</p>
-
 <p>然后具体语言的特性也要考虑，Node.js 每个进程内部实现了大量类似协程的执行单元，因此 Node.js 即便在 I/O 密集型场景下也可以考虑长期使用核数 -1 的进程模型。而 Java 是多线程模型，线程池通常要大于核数才能充分利用 CPU 资源。</p>
-
 <p>所以核心就一句，眼见为实，上线前要进行压力测试。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/重学操作系统-完/22  进程间通信： 进程间通信都有哪些方法？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/重学操作系统-完/23 (1)加餐  练习题详解（四）.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997d81edf43cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

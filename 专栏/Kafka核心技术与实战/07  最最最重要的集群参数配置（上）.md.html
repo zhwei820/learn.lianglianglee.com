@@ -1,986 +1,338 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>07  最最最重要的集群参数配置（上）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/00 开篇词  为什么要学习Kafka？.md.html">00 开篇词  为什么要学习Kafka？.md.html</a>
-
-
+                    <a href="/专栏/Kafka核心技术与实战/00 开篇词  为什么要学习Kafka？.md.html">00 开篇词  为什么要学习Kafka？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/01  消息引擎系统ABC.md.html">01  消息引擎系统ABC</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/02  一篇文章带你快速搞定Kafka术语.md.html">02  一篇文章带你快速搞定Kafka术语</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/03  Kafka只是消息引擎系统吗？.md.html">03  Kafka只是消息引擎系统吗？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/04  我应该选择哪种Kafka？.md.html">04  我应该选择哪种Kafka？</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/05  聊聊Kafka的版本号.md.html">05  聊聊Kafka的版本号</a>
+                </li>
+                <li>
+                    <a href="/专栏/Kafka核心技术与实战/06  Kafka线上集群部署方案怎么做？.md.html">06  Kafka线上集群部署方案怎么做？</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/Kafka核心技术与实战/07  最最最重要的集群参数配置（上）.md.html">07  最最最重要的集群参数配置（上）</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/01  消息引擎系统ABC.md.html">01  消息引擎系统ABC.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/08  最最最重要的集群参数配置（下）.md.html">08  最最最重要的集群参数配置（下）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/02  一篇文章带你快速搞定Kafka术语.md.html">02  一篇文章带你快速搞定Kafka术语.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/09  生产者消息分区机制原理剖析.md.html">09  生产者消息分区机制原理剖析</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/03  Kafka只是消息引擎系统吗？.md.html">03  Kafka只是消息引擎系统吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/10  生产者压缩算法面面观.md.html">10  生产者压缩算法面面观</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/04  我应该选择哪种Kafka？.md.html">04  我应该选择哪种Kafka？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/11  无消息丢失配置怎么实现？.md.html">11  无消息丢失配置怎么实现？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/05  聊聊Kafka的版本号.md.html">05  聊聊Kafka的版本号.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/12  客户端都有哪些不常见但是很高级的功能？.md.html">12  客户端都有哪些不常见但是很高级的功能？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/06  Kafka线上集群部署方案怎么做？.md.html">06  Kafka线上集群部署方案怎么做？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/13  Java生产者是如何管理TCP连接的？.md.html">13  Java生产者是如何管理TCP连接的？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/Kafka核心技术与实战/07  最最最重要的集群参数配置（上）.md.html">07  最最最重要的集群参数配置（上）.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/14  幂等生产者和事务生产者是一回事吗？.md.html">14  幂等生产者和事务生产者是一回事吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/08  最最最重要的集群参数配置（下）.md.html">08  最最最重要的集群参数配置（下）.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/15  消费者组到底是什么？.md.html">15  消费者组到底是什么？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/09  生产者消息分区机制原理剖析.md.html">09  生产者消息分区机制原理剖析.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/16  揭开神秘的“位移主题”面纱.md.html">16  揭开神秘的“位移主题”面纱</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/10  生产者压缩算法面面观.md.html">10  生产者压缩算法面面观.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/17  消费者组重平衡能避免吗？.md.html">17  消费者组重平衡能避免吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/11  无消息丢失配置怎么实现？.md.html">11  无消息丢失配置怎么实现？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/18  Kafka中位移提交那些事儿.md.html">18  Kafka中位移提交那些事儿</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/12  客户端都有哪些不常见但是很高级的功能？.md.html">12  客户端都有哪些不常见但是很高级的功能？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/19  CommitFailedException异常怎么处理？.md.html">19  CommitFailedException异常怎么处理？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/13  Java生产者是如何管理TCP连接的？.md.html">13  Java生产者是如何管理TCP连接的？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/20  多线程开发消费者实例.md.html">20  多线程开发消费者实例</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/14  幂等生产者和事务生产者是一回事吗？.md.html">14  幂等生产者和事务生产者是一回事吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/21  Java 消费者是如何管理TCP连接的.md.html">21  Java 消费者是如何管理TCP连接的</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/15  消费者组到底是什么？.md.html">15  消费者组到底是什么？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/22  消费者组消费进度监控都怎么实现？.md.html">22  消费者组消费进度监控都怎么实现？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/16  揭开神秘的“位移主题”面纱.md.html">16  揭开神秘的“位移主题”面纱.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/23  Kafka副本机制详解.md.html">23  Kafka副本机制详解</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/17  消费者组重平衡能避免吗？.md.html">17  消费者组重平衡能避免吗？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/24  请求是怎么被处理的？.md.html">24  请求是怎么被处理的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/18  Kafka中位移提交那些事儿.md.html">18  Kafka中位移提交那些事儿.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/25  消费者组重平衡全流程解析.md.html">25  消费者组重平衡全流程解析</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/19  CommitFailedException异常怎么处理？.md.html">19  CommitFailedException异常怎么处理？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/26  你一定不能错过的Kafka控制器.md.html">26  你一定不能错过的Kafka控制器</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/20  多线程开发消费者实例.md.html">20  多线程开发消费者实例.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/27  关于高水位和Leader Epoch的讨论.md.html">27  关于高水位和Leader Epoch的讨论</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/21  Java 消费者是如何管理TCP连接的.md.html">21  Java 消费者是如何管理TCP连接的.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/28  主题管理知多少.md.html">28  主题管理知多少</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/22  消费者组消费进度监控都怎么实现？.md.html">22  消费者组消费进度监控都怎么实现？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/29  Kafka动态配置了解下？.md.html">29  Kafka动态配置了解下？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/23  Kafka副本机制详解.md.html">23  Kafka副本机制详解.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/30  怎么重设消费者组位移？.md.html">30  怎么重设消费者组位移？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/24  请求是怎么被处理的？.md.html">24  请求是怎么被处理的？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/31  常见工具脚本大汇总.md.html">31  常见工具脚本大汇总</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/25  消费者组重平衡全流程解析.md.html">25  消费者组重平衡全流程解析.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/32  KafkaAdminClient：Kafka的运维利器.md.html">32  KafkaAdminClient：Kafka的运维利器</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/26  你一定不能错过的Kafka控制器.md.html">26  你一定不能错过的Kafka控制器.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/33  Kafka认证机制用哪家？.md.html">33  Kafka认证机制用哪家？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/27  关于高水位和Leader Epoch的讨论.md.html">27  关于高水位和Leader Epoch的讨论.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/34  云环境下的授权该怎么做？.md.html">34  云环境下的授权该怎么做？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/28  主题管理知多少.md.html">28  主题管理知多少.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/35  跨集群备份解决方案MirrorMaker.md.html">35  跨集群备份解决方案MirrorMaker</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/29  Kafka动态配置了解下？.md.html">29  Kafka动态配置了解下？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/36  你应该怎么监控Kafka？.md.html">36  你应该怎么监控Kafka？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/30  怎么重设消费者组位移？.md.html">30  怎么重设消费者组位移？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/37  主流的Kafka监控框架.md.html">37  主流的Kafka监控框架</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/31  常见工具脚本大汇总.md.html">31  常见工具脚本大汇总.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/38  调优Kafka，你做到了吗？.md.html">38  调优Kafka，你做到了吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/32  KafkaAdminClient：Kafka的运维利器.md.html">32  KafkaAdminClient：Kafka的运维利器.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/39  从0搭建基于Kafka的企业级实时日志流处理平台.md.html">39  从0搭建基于Kafka的企业级实时日志流处理平台</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/33  Kafka认证机制用哪家？.md.html">33  Kafka认证机制用哪家？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/40  Kafka Streams与其他流处理平台的差异在哪里？.md.html">40  Kafka Streams与其他流处理平台的差异在哪里？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/34  云环境下的授权该怎么做？.md.html">34  云环境下的授权该怎么做？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/41  Kafka Streams DSL开发实例.md.html">41  Kafka Streams DSL开发实例</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/35  跨集群备份解决方案MirrorMaker.md.html">35  跨集群备份解决方案MirrorMaker.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/42  Kafka Streams在金融领域的应用.md.html">42  Kafka Streams在金融领域的应用</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/36  你应该怎么监控Kafka？.md.html">36  你应该怎么监控Kafka？.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/加餐  搭建开发环境、阅读源码方法、经典学习资料大揭秘.md.html">加餐  搭建开发环境、阅读源码方法、经典学习资料大揭秘</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/37  主流的Kafka监控框架.md.html">37  主流的Kafka监控框架.md.html</a>
-
-
-
+                    <a href="/专栏/Kafka核心技术与实战/结束语  以梦为马，莫负韶华！.md.html">结束语  以梦为马，莫负韶华！</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/38  调优Kafka，你做到了吗？.md.html">38  调优Kafka，你做到了吗？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/39  从0搭建基于Kafka的企业级实时日志流处理平台.md.html">39  从0搭建基于Kafka的企业级实时日志流处理平台.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/40  Kafka Streams与其他流处理平台的差异在哪里？.md.html">40  Kafka Streams与其他流处理平台的差异在哪里？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/41  Kafka Streams DSL开发实例.md.html">41  Kafka Streams DSL开发实例.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/42  Kafka Streams在金融领域的应用.md.html">42  Kafka Streams在金融领域的应用.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/加餐  搭建开发环境、阅读源码方法、经典学习资料大揭秘.md.html">加餐  搭建开发环境、阅读源码方法、经典学习资料大揭秘.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/Kafka核心技术与实战/结束语  以梦为马，莫负韶华！.md.html">结束语  以梦为马，莫负韶华！.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>07  最最最重要的集群参数配置（上）</h1>
-
 <p>你好，我是胡夕。今天我想和你聊聊最最最重要的 Kafka 集群配置。我这里用了 3 个“最”字并非哗众取宠，而是因为有些配置的重要性并未体现在官方文档中，并且从实际表现看，很多参数对系统的影响要比从文档上看更加明显，因此很有必要集中讨论一下。</p>
-
 <p>我希望通过两期内容把这些重要的配置讲清楚。严格来说这些配置并不单单指 Kafka 服务器端的配置，其中既有 Broker 端参数，也有主题（后面我用我们更熟悉的 Topic 表示）级别的参数、JVM 端参数和操作系统级别的参数。下面我先从 Broker 端参数说起。</p>
-
 <h2>Broker 端参数</h2>
-
 <p>目前 Kafka Broker 提供了近 200 个参数，这其中绝大部分参数都不用你亲自过问。当谈及这些参数的用法时，网上的文章多是罗列出一些常见的参数然后一个一个地给出它们的定义，事实上我以前写文章时也是这么做的。不过今天我打算换个方法，按照大的用途类别一组一组地介绍它们，希望可以更有针对性，也更方便你记忆。</p>
-
 <p>首先 Broker 是需要配置存储信息的，即 Broker 使用哪些磁盘。那么针对存储信息的重要参数有以下这么几个：</p>
-
 <ul>
-
 <li><code>log.dirs</code>：这是非常重要的参数，指定了 Broker 需要使用的若干个文件目录路径。要知道这个参数是没有默认值的，这说明什么？这说明它必须由你亲自指定。</li>
-
 <li><code>log.dir</code>：注意这是 dir，结尾没有 s，说明它只能表示单个路径，它是补充上一个参数用的。</li>
-
 </ul>
-
 <p>这两个参数应该怎么设置呢？很简单，你只要设置<code>log.dirs</code>，即第一个参数就好了，不要设置<code>log.dir</code>。而且更重要的是，在线上生产环境中一定要为<code>log.dirs</code>配置多个路径，具体格式是一个 CSV 格式，也就是用逗号分隔的多个路径，比如<code>/home/kafka1,/home/kafka2,/home/kafka3</code>这样。如果有条件的话你最好保证这些目录挂载到不同的物理磁盘上。这样做有两个好处：</p>
-
 <ul>
-
 <li>提升读写性能：比起单块磁盘，多块物理磁盘同时读写数据有更高的吞吐量。</li>
-
 <li>能够实现故障转移：即 Failover。这是 Kafka 1.1 版本新引入的强大功能。要知道在以前，只要 Kafka Broker 使用的任何一块磁盘挂掉了，整个 Broker 进程都会关闭。但是自 1.1 开始，这种情况被修正了，坏掉的磁盘上的数据会自动地转移到其他正常的磁盘上，而且 Broker 还能正常工作。还记得上一期我们关于 Kafka 是否需要使用 RAID 的讨论吗？这个改进正是我们舍弃 RAID 方案的基础：没有这种 Failover 的话，我们只能依靠 RAID 来提供保障。</li>
-
 </ul>
-
 <p>下面说说与 ZooKeeper 相关的设置。首先 ZooKeeper 是做什么的呢？它是一个分布式协调框架，负责协调管理并保存 Kafka 集群的所有元数据信息，比如集群都有哪些 Broker 在运行、创建了哪些 Topic，每个 Topic 都有多少分区以及这些分区的 Leader 副本都在哪些机器上等信息。</p>
-
 <p>Kafka 与 ZooKeeper 相关的最重要的参数当属<code>zookeeper.connect</code>。这也是一个 CSV 格式的参数，比如我可以指定它的值为<code>zk1:2181,zk2:2181,zk3:2181</code>。2181 是 ZooKeeper 的默认端口。</p>
-
 <p>现在问题来了，如果我让多个 Kafka 集群使用同一套 ZooKeeper 集群，那么这个参数应该怎么设置呢？这时候 chroot 就派上用场了。这个 chroot 是 ZooKeeper 的概念，类似于别名。</p>
-
 <p>如果你有两套 Kafka 集群，假设分别叫它们 kafka1 和 kafka2，那么两套集群的<code>zookeeper.connect</code>参数可以这样指定：<code>zk1:2181,zk2:2181,zk3:2181/kafka1</code>和<code>zk1:2181,zk2:2181,zk3:2181/kafka2</code>。切记 chroot 只需要写一次，而且是加到最后的。我经常碰到有人这样指定：<code>zk1:2181/kafka1,zk2:2181/kafka2,zk3:2181/kafka3</code>，这样的格式是不对的。</p>
-
 <p>第三组参数是与 Broker 连接相关的，即客户端程序或其他 Broker 如何与该 Broker 进行通信的设置。有以下三个参数：</p>
-
 <ul>
-
 <li><code>listeners</code>：学名叫监听器，其实就是告诉外部连接者要通过什么协议访问指定主机名和端口开放的 Kafka 服务。</li>
-
 <li><code>advertised.listeners</code>：和 listeners 相比多了个 advertised。Advertised 的含义表示宣称的、公布的，就是说这组监听器是 Broker 用于对外发布的。</li>
-
 <li><code>host.name/port</code>：列出这两个参数就是想说你把它们忘掉吧，压根不要为它们指定值，毕竟都是过期的参数了。</li>
-
 </ul>
-
 <p>我们具体说说监听器的概念，从构成上来说，它是若干个逗号分隔的三元组，每个三元组的格式为<code>&lt;协议名称，主机名，端口号&gt;</code>。这里的协议名称可能是标准的名字，比如 PLAINTEXT 表示明文传输、SSL 表示使用 SSL 或 TLS 加密传输等；也可能是你自己定义的协议名字，比如<code>CONTROLLER: //localhost:9092</code>。</p>
-
 <p>一旦你自己定义了协议名称，你必须还要指定<code>listener.security.protocol.map</code>参数告诉这个协议底层使用了哪种安全协议，比如指定<code>listener.security.protocol.map=CONTROLLER:PLAINTEXT表示CONTROLLER</code>这个自定义协议底层使用明文不加密传输数据。</p>
-
 <p>至于三元组中的主机名和端口号则比较直观，不需要做过多解释。不过有个事情你还是要注意一下，经常有人会问主机名这个设置中我到底使用 IP 地址还是主机名。<strong>这里我给出统一的建议：最好全部使用主机名，即 Broker 端和 Client 端应用配置中全部填写主机名。</strong> Broker 源代码中也使用的是主机名，如果你在某些地方使用了 IP 地址进行连接，可能会发生无法连接的问题。</p>
-
 <p>第四组参数是关于 Topic 管理的。我来讲讲下面这三个参数：</p>
-
 <ul>
-
 <li><code>auto.create.topics.enable</code>：是否允许自动创建 Topic。</li>
-
 <li><code>unclean.leader.election.enable</code>：是否允许 Unclean Leader 选举。</li>
-
 <li><code>auto.leader.rebalance.enable</code>：是否允许定期进行 Leader 选举。</li>
-
 </ul>
-
 <p>我还是一个个说。</p>
-
 <p><code>auto.create.topics.enable</code>参数我建议最好设置成 false，即不允许自动创建 Topic。在我们的线上环境里面有很多名字稀奇古怪的 Topic，我想大概都是因为该参数被设置成了 true 的缘故。</p>
-
 <p>你可能有这样的经历，要为名为 test 的 Topic 发送事件，但是不小心拼写错误了，把 test 写成了 tst，之后启动了生产者程序。恭喜你，一个名为 tst 的 Topic 就被自动创建了。</p>
-
 <p>所以我一直相信好的运维应该防止这种情形的发生，特别是对于那些大公司而言，每个部门被分配的 Topic 应该由运维严格把控，决不能允许自行创建任何 Topic。</p>
-
 <p>第二个参数<code>unclean.leader.election.enable</code>是关闭 Unclean Leader 选举的。何谓 Unclean？还记得 Kafka 有多个副本这件事吗？每个分区都有多个副本来提供高可用。在这些副本中只能有一个副本对外提供服务，即所谓的 Leader 副本。</p>
-
 <p>那么问题来了，这些副本都有资格竞争 Leader 吗？显然不是，只有保存数据比较多的那些副本才有资格竞选，那些落后进度太多的副本没资格做这件事。</p>
-
 <p>好了，现在出现这种情况了：假设那些保存数据比较多的副本都挂了怎么办？我们还要不要进行 Leader 选举了？此时这个参数就派上用场了。</p>
-
 <p>如果设置成 false，那么就坚持之前的原则，坚决不能让那些落后太多的副本竞选 Leader。这样做的后果是这个分区就不可用了，因为没有 Leader 了。反之如果是 true，那么 Kafka 允许你从那些“跑得慢”的副本中选一个出来当 Leader。这样做的后果是数据有可能就丢失了，因为这些副本保存的数据本来就不全，当了 Leader 之后它本人就变得膨胀了，认为自己的数据才是权威的。</p>
-
 <p>这个参数在最新版的 Kafka 中默认就是 false，本来不需要我特意提的，但是比较搞笑的是社区对这个参数的默认值来来回回改了好几版了，鉴于我不知道你用的是哪个版本的 Kafka，所以建议你还是显式地把它设置成 false 吧。</p>
-
 <p>第三个参数<code>auto.leader.rebalance.enable</code>的影响貌似没什么人提，但其实对生产环境影响非常大。设置它的值为 true 表示允许 Kafka 定期地对一些 Topic 分区进行 Leader 重选举，当然这个重选举不是无脑进行的，它要满足一定的条件才会发生。严格来说它与上一个参数中 Leader 选举的最大不同在于，它不是选 Leader，而是换 Leader！比如 Leader A 一直表现得很好，但若<code>auto.leader.rebalance.enable=true</code>，那么有可能一段时间后 Leader A 就要被强行卸任换成 Leader B。</p>
-
 <p>你要知道换一次 Leader 代价很高的，原本向 A 发送请求的所有客户端都要切换成向 B 发送请求，而且这种换 Leader 本质上没有任何性能收益，因此我建议你在生产环境中把这个参数设置成 false。</p>
-
 <p>最后一组参数是数据留存方面的，即：</p>
-
 <ul>
-
 <li><code>log.retention.{hour|minutes|ms}</code>：这是个“三兄弟”，都是控制一条消息数据被保存多长时间。从优先级上来说 ms 设置最高、minutes 次之、hour 最低。</li>
-
 <li><code>log.retention.bytes</code>：这是指定 Broker 为消息保存的总磁盘容量大小。</li>
-
 <li><code>message.max.bytes</code>：控制 Broker 能够接收的最大消息大小。</li>
-
 </ul>
-
 <p>先说这个“三兄弟”，虽然 ms 设置有最高的优先级，但是通常情况下我们还是设置 hour 级别的多一些，比如<code>log.retention.hour=168</code>表示默认保存 7 天的数据，自动删除 7 天前的数据。很多公司把 Kafka 当做存储来使用，那么这个值就要相应地调大。</p>
-
 <p>其次是这个<code>log.retention.bytes</code>。这个值默认是 -1，表明你想在这台 Broker 上保存多少数据都可以，至少在容量方面 Broker 绝对为你开绿灯，不会做任何阻拦。这个参数真正发挥作用的场景其实是在云上构建多租户的 Kafka 集群：设想你要做一个云上的 Kafka 服务，每个租户只能使用 100GB 的磁盘空间，为了避免有个“恶意”租户使用过多的磁盘空间，设置这个参数就显得至关重要了。</p>
-
 <p>最后说说<code>message.max.bytes</code>。实际上今天我和你说的重要参数都是指那些不能使用默认值的参数，这个参数也是一样，默认的 1000012 太少了，还不到 1MB。实际场景中突破 1MB 的消息都是屡见不鲜的，因此在线上环境中设置一个比较大的值还是比较保险的做法。毕竟它只是一个标尺而已，仅仅衡量 Broker 能够处理的最大消息大小，即使设置大一点也不会耗费什么磁盘空间的。</p>
-
 <h2>小结</h2>
-
 <p>再次强调一下，今天我和你分享的所有参数都是那些要修改默认值的参数，因为它们的默认值不适合一般的生产环境。当然，我并不是说其他 100 多个参数就不重要。事实上，在专栏的后面我们还会陆续提到其他的一些参数，特别是那些和性能息息相关的参数。所以今天我提到的所有参数，我希望作为一个最佳实践给到你，可以有的放矢地帮助你规划和调整你的 Kafka 生产环境。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Kafka核心技术与实战/06  Kafka线上集群部署方案怎么做？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Kafka核心技术与实战/08  最最最重要的集群参数配置（下）.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709971daefe63d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

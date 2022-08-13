@@ -12,9 +12,7 @@
         <!-- theme css & js -->
         <meta name="generator" content="Hexo 4.2.0">
     </head>
-
 <body>
-
 <div class="book-container">
     <div class="book-sidebar">
         <div class="book-brand">
@@ -27,86 +25,53 @@
             <ul class="uncollapsible">
                 <li><a href="/" class="current-tab">首页</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li><a href="../">上一级</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li>
-
-                    
-                    <a href="/极客时间/Java基础36讲.md.html">Java基础36讲.md.html</a>
-
+                    <a href="/极客时间/Java基础36讲.md.html">Java基础36讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲.md.html</a>
-
+                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/Linux性能优化.md.html">Linux性能优化.md.html</a>
-
+                    <a href="/极客时间/Linux性能优化.md.html">Linux性能优化</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲.md.html</a>
-
+                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲</a>
                 </li>
                 <li>
-
-                    <a class="current-tab" href="/极客时间/从0开始学微服务.md.html">从0开始学微服务.md.html</a>
+                    <a class="current-tab" href="/极客时间/从0开始学微服务.md.html">从0开始学微服务</a>
                     
-
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/代码精进之路.md.html">代码精进之路.md.html</a>
-
+                    <a href="/极客时间/代码精进之路.md.html">代码精进之路</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲.md.html</a>
-
+                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略.md.html</a>
-
+                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议.md.html</a>
-
+                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议</a>
                 </li>
             </ul>
-
         </div>
     </div>
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
         <div class="sidebar-toggle-inner"></div>
     </div>
-
     <script>
         function add_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.add('show')
         }
-
         function remove_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.remove('show')
         }
-
         function sidebar_toggle() {
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
             let sidebar = document.querySelector('.book-sidebar')
@@ -121,8 +86,6 @@
                 content.classList.add('extend')
             }
         }
-
-
 function open_sidebar() {
     let sidebar = document.querySelector('.book-sidebar')
     let overlay = document.querySelector('.off-canvas-overlay')
@@ -135,9 +98,7 @@ function hide_canvas() {
     sidebar.classList.remove('show')
     overlay.classList.remove('show')
 }
-
     </script>
-
     <div class="off-canvas-content">
         <div class="columns">
             <div class="column col-12 col-lg-12">
@@ -940,7 +901,6 @@ message HelloReply {
 <p>其中“dubbo:service”开头的配置项声明了服务提供者要发布的接口，“dubbo:protocol”开头的配置项声明了服务提供者要发布的接口的协议以及端口号。</p>
 <p>Dubbo 会把以上配置项解析成下面的 URL 格式：</p>
 <pre><code>dubbo://host-ip:20880/com.alibaba.dubbo.demo.DemoService
-
 </code></pre>
 <p>然后基于<a href="https://dubbo.incubator.apache.org/zh-cn/docs/dev/SPI.html">扩展点自适应机制</a>，通过 URL 的“dubbo://”协议头识别，就会调用 DubboProtocol 的 export() 方法，打开服务端口 20880，就可以把服务 demoService 暴露到 20880 端口了。</p>
 <p>再来看下服务引用的过程，下面这段代码是服务消费者的 XML 配置。</p>
@@ -959,18 +919,15 @@ message HelloReply {
 </code></pre>
 <p>其中“dubbo:reference”开头的配置项声明了服务消费者要引用的服务，Dubbo 会把以上配置项解析成下面的 URL 格式：</p>
 <pre><code>dubbo://com.alibaba.dubbo.demo.DemoService
-
 </code></pre>
 <p>然后基于扩展点自适应机制，通过 URL 的“dubbo://”协议头识别，就会调用 DubboProtocol 的 refer() 方法，得到服务 demoService 引用，完成服务引用过程。</p>
 <h2>服务注册与发现</h2>
 <p>先来看下服务提供者注册服务的过程，继续以前面服务提供者的 XML 配置为例，其中“dubbo://registry”开头的配置项声明了注册中心的地址，Dubbo 会把以上配置项解析成下面的 URL 格式：</p>
 <pre><code>registry://multicast://224.5.6.7:1234/com.alibaba.dubbo.registry.RegistryService?export=URL.encode(&quot;dubbo://host-ip:20880/com.alibaba.dubbo.demo.DemoService&quot;)
-
 </code></pre>
 <p>然后基于扩展点自适应机制，通过 URL 的“registry://”协议头识别，就会调用 RegistryProtocol 的 export() 方法，将 export 参数中的提供者 URL，注册到注册中心。</p>
 <p>再来看下服务消费者发现服务的过程，同样以前面服务消费者的 XML 配置为例，其中“dubbo://registry”开头的配置项声明了注册中心的地址，跟服务注册的原理类似，Dubbo 也会把以上配置项解析成下面的 URL 格式：</p>
 <pre><code>registry://multicast://224.5.6.7:1234/com.alibaba.dubbo.registry.RegistryService?refer=URL.encode(&quot;consummer://host-ip/com.alibaba.dubbo.demo.DemoService&quot;)
-
 </code></pre>
 <p>然后基于扩展点自适应机制，通过 URL 的“registry://”协议头识别，就会调用 RegistryProtocol 的 refer() 方法，基于 refer 参数中的条件，查询服务 demoService 的地址。</p>
 <h2>服务调用</h2>
@@ -984,11 +941,9 @@ message HelloReply {
 <p>其中前两个问题客户端和服务端如何建立连接和服务端如何处理请求是通信框架要解决的问题，Dubbo 支持多种通信框架，比如 Netty 4，需要在服务端和客户端的 XML 配置中添加下面的配置项。</p>
 <p>服务端：</p>
 <pre><code>&lt;dubbo:protocol server=&quot;netty4&quot; /&gt;
-
 </code></pre>
 <p>客户端：</p>
 <pre><code>&lt;dubbo:consumer client=&quot;netty4&quot; /&gt;
-
 </code></pre>
 <p>这样基于扩展点自适应机制，客户端和服务端之间的调用会通过 Netty 4 框架来建立连接，并且服务端采用 NIO 方式来处理客户端的请求。</p>
 <p>再来看下 Dubbo 的数据传输采用什么协议。Dubbo 不仅支持私有的 Dubbo 协议，还支持其他协议比如 Hessian、RMI、HTTP、Web Service、Thrift 等。下面这张图描述了私有 Dubbo 协议的协议头约定。</p>
@@ -996,7 +951,6 @@ message HelloReply {
 <p>至于数据序列化和反序列方面，Dubbo 同样也支持多种序列化格式，比如 Dubbo、Hession 2.0、JSON、Java、Kryo 以及 FST 等，可以通过在 XML 配置中添加下面的配置项。</p>
 <p>例如：</p>
 <pre><code>&lt;dubbo:protocol name=&quot;dubbo&quot; serialization=&quot;kryo&quot;/&gt;
-
 </code></pre>
 <h2>服务监控</h2>
 <p>服务监控主要包括四个流程：数据采集、数据传输、数据处理和数据展示，其中服务框架的作用是进行埋点数据采集，然后上报给监控系统。</p>
@@ -1493,7 +1447,6 @@ width=500&amp;height=300&amp;from=-24h
 <p>这个 HTTP 请求意思是查询 key“servers.www01.cpuUsage”在过去 24 小时的数据，并且要求返回 500*300 大小的数据图。</p>
 <p>除此之外，Graphite-Web 还支持丰富的函数，比如：</p>
 <pre><code>target=sumSeries(products.*.salesPerMinute)
-
 </code></pre>
 <p>代表了查询匹配规则“products.*.salesPerMinute”的所有 key 的数据之和。</p>
 <h2>TICK</h2>
@@ -1502,11 +1455,9 @@ width=500&amp;height=300&amp;from=-24h
 <p>从这张图可以看出，其中 Telegraf 负责数据收集，InfluxDB 负责数据存储，Chronograf 负责数据展示，Kapacitor 负责数据告警。</p>
 <p>这里面，InfluxDB 对写入的数据格式要求如下。</p>
 <pre><code>&lt;measurement&gt;[,&lt;tag-key&gt;=&lt;tag-value&gt;...] &lt;field-key&gt;=&lt;field-value&gt;[,&lt;field2-key&gt;=&lt;field2-value&gt;...] [unix-nano-timestamp]
-
 </code></pre>
 <p>下面我用一个具体示例来说明它的格式。</p>
 <pre><code>cpu,host=serverA,region=us_west value=0.64 1434067467100293230
-
 </code></pre>
 <p>其中，“cpu,host=serverA,region=us_west value=0.64 1434067467100293230”代表了 host 为 serverA、region 为 us_west 的服务器 CPU 的值是 0.64，时间戳是 1434067467100293230，时间精确到 nano。</p>
 <h2>Prometheus</h2>
@@ -1529,11 +1480,9 @@ width=500&amp;height=300&amp;from=-24h
 </ul>
 <p>Prometheus 存储数据也是用的时间序列数据库，格式如下。</p>
 <pre><code>&lt;metric name&gt;{&lt;label name&gt;=&lt;label value&gt;, …}
-
 </code></pre>
 <p>比如下面这段代码代表了位于集群 cluster 1 上，节点 IP 为 1.1.1.1，端口为 80，访问路径为“/a”的 http 请求的总数为 100。</p>
 <pre><code>http_requests_total{instance=&quot;1.1.1.1:80&quot;,job=&quot;cluster1&quot;,location=&quot;/a&quot;} 100
-
 </code></pre>
 <p>讲到这里，四种监控系统的解决方案都已经介绍完了，接下来我们对比一下这四种方案，看看如何选型。</p>
 <h2>选型对比</h2>
@@ -1548,19 +1497,16 @@ width=500&amp;height=300&amp;from=-24h
 <li>Graphite 通过 Graphite-Web 支持正则表达式匹配、sumSeries 求和、alias 给监控项重新命名等函数功能，同时还支持这些功能的组合，比如下面这个表达式的意思是，要查询所有匹配路径“stats.open.profile.*.API._comments_flow”的监控项之和，并且把监控项重命名为 Total QPS。</li>
 </ul>
 <pre><code>alias(sumSeries(stats.openapi.profile.*.API._comments_flow.total_count,&quot;Total QPS&quot;)
-
 </code></pre>
 <ul>
 <li>InfluxDB 通过类似 SQL 语言的 InfluxQL，能对监控数据进行复杂操作，比如查询一分钟 CPU 的使用率，用 InfluxDB 实现的示例是：</li>
 </ul>
 <pre><code>SELECT 100 - usage_idel FROM &quot;autogen&quot;.&quot;cpu&quot; WHERE time &gt; now() - 1m and &quot;cpu&quot;='cpu0'
-
 </code></pre>
 <ul>
 <li>Prometheus 通过私有的 PromQL 查询语言，如果要和上面 InfluxDB 实现同样的功能，PromQL 语句如下，看起来更加简洁。</li>
 </ul>
 <pre><code>100 - (node_cpu{job=&quot;node&quot;,mode=&quot;idle&quot;}[1m]) 
-
 </code></pre>
 <p><strong>4. 数据展示</strong></p>
 <p>Graphite、TICK 和 Prometheus 自带的展示功能都比较弱，界面也不好看，不过好在它们都支持<a href="https://grafana.com/">Grafana</a>来做数据展示。Grafana 是一个开源的仪表盘工具，它支持多种数据源比如 Graphite、InfluxDB、Prometheus 以及 Elasticsearch 等。ELK 采用了 Kibana 做数据展示，Kibana 包含的数据展示功能比较强大，但只支持 Elasticsearch，而且界面展示 UI 效果不如 Grafana 美观。</p>
@@ -1639,7 +1585,6 @@ width=500&amp;height=300&amp;from=-24h
 </code></pre>
 <p>然后假如你想收集每一次 HTTP 调用的信息，你就可以使用 Brave 在 Apache Httpclient 基础上封装的 httpClient，它会记录每一次 HTTP 调用的信息，并上报给 OpenZipkin。</p>
 <pre><code>httpclient =TracingHttpClientBuilder.create(tracing).build();
-
 </code></pre>
 <p>而 Pinpoint 是通过字节码注入的方式来实现拦截服务调用，从而收集 trace 信息的，所以不需要代码做任何改动。Java 字节码注入的大致原理你可以参考下图。</p>
 <p><img src="assets/4a27448c52515020c1f687e8e3567875.png" alt="img" />（图片来源：<a href="https://naver.github.io/pinpoint/1.7.3/images/td_figure3.png">http://naver.github.io/pinpoint/1.7.3/images/td_figure3.png</a>）</p>
@@ -1780,45 +1725,37 @@ width=500&amp;height=300&amp;from=-24h
 <p><strong>1. 条件路由</strong></p>
 <p>条件路由是基于条件表达式的路由规则，以下面的条件路由为例，我来给你详细讲解下它的用法。</p>
 <pre><code>condition://0.0.0.0/dubbo.test.interfaces.TestService?category=routers&amp;dynamic=true&amp;priority=2&amp;enabled=true&amp;rule=&quot; + URL.encode(&quot; host = 10.20.153.10=&gt; host = 10.20.153.11&quot;)
-
 </code></pre>
 <p>这里面“condition://”代表了这是一段用条件表达式编写的路由规则，具体的规则是</p>
 <pre><code>host = 10.20.153.10 =&gt; host = 10.20.153.11
-
 </code></pre>
 <p>分隔符“=&gt;”前面是服务消费者的匹配条件，后面是服务提供者的过滤条件。当服务消费者节点满足匹配条件时，就对该服务消费者执行后面的过滤规则。那么上面这段表达式表达的意义就是 IP 为“10.20.153.10”的服务消费者都调用 IP 为“10.20.153.11”的服务提供者节点。</p>
 <p>如果服务消费者的匹配条件为空，就表示对所有的服务消费者应用，就像下面的表达式一样。</p>
 <pre><code>=&gt; host ！= 10.20.153.11
-
 </code></pre>
 <p>如果服务提供者的过滤条件为空，就表示禁止服务消费者访问，就像下面的表达式一样。</p>
 <pre><code>host = 10.20.153.10=&gt;
-
 </code></pre>
 <p>下面我举一些 Dubbo 框架中的条件路由，来给你讲解下条件路由的具体应用场景。</p>
 <ul>
 <li>排除某个服务节点</li>
 </ul>
 <pre><code>=&gt; host != 172.22.3.91
-
 </code></pre>
 <p>一旦这条路由规则被应用到线上，所有的服务消费者都不会访问 IP 为 172.22.3.91 的服务节点，这种路由规则一般应用在线上流量排除预发布机以及摘除某个故障节点的场景。</p>
 <ul>
 <li>白名单和黑名单功能</li>
 </ul>
 <pre><code>host != 10.20.153.10,10.20.153.11 =&gt;
-
 </code></pre>
 <p>这条路由规则意思是除了 IP 为 10.20.153.10 和 10.20.153.11 的服务消费者可以发起服务调用以外，其他服务消费者都不可以，主要用于白名单访问逻辑，比如某个后台服务只允许特定的几台机器才可以访问，这样的话可以机器控制访问权限。</p>
 <pre><code>host = 10.20.153.10,10.20.153.11 =&gt;
-
 </code></pre>
 <p>同理，这条路由规则意思是除了 IP 为 10.20.153.10 和 10.20.153.11 的服务消费者不能发起服务调用以外，其他服务消费者都可以，也就是实现了黑名单功能，比如线上经常会遇到某些调用方不管是出于有意还是无意的不合理调用，影响了服务的稳定性，这时候可以通过黑名单功能暂时予以封杀。</p>
 <ul>
 <li>机房隔离</li>
 </ul>
 <pre><code>host = 172.22.3.* =&gt; host = 172.22.3.*
-
 </code></pre>
 <p>这条路由规则意思是 IP 网段为 172.22.3.* 的服务消费者，才可以访问同网段的服务节点，这种规则一般应用于服务部署在多个 IDC，理论上同一个 IDC 内的调用性能要比跨 IDC 调用性能要好，应用这个规则是为了实现同 IDC 就近访问。</p>
 <ul>
@@ -1831,7 +1768,6 @@ method != find*,list*,get*,is* =&gt; host = 172.22.3.97,172.22.3.98
 <p><strong>2. 脚本路由</strong></p>
 <p>脚本路由是基于脚本语言的路由规则，常用的脚本语言比如 JavaScript、Groovy、JRuby 等。以下面的脚本路由规则为例，我来给你详细讲解它的用法。</p>
 <pre><code>&quot;script://0.0.0.0/com.foo.BarService?category=routers&amp;dynamic=false&amp;rule=&quot; + URL.encode(&quot;（function route(invokers) { ... } (invokers)）&quot;)
-
 </code></pre>
 <p>这里面“script://”就代表了这是一段脚本语言编写的路由规则，具体规则定义在脚本语言的 route 方法实现里，比如下面这段用 JavaScript 编写的 route() 方法表达的意思是，只有 IP 为 10.20.153.10 的服务消费者可以发起服务调用。</p>
 <pre><code>function route(invokers){
@@ -1943,11 +1879,9 @@ method != find*,list*,get*,is* =&gt; host = 172.22.3.97,172.22.3.98
 <p>Hystrix 的断路器也包含三种状态：关闭、打开、半打开。Hystrix 会把每一次服务调用都用 HystrixCommand 封装起来，它会实时记录每一次服务调用的状态，包括成功、失败、超时还是被线程拒绝。当一段时间内服务调用的失败率高于设定的阈值后，Hystrix 的断路器就会进入进入打开状态，新的服务调用就会直接返回，不会向服务提供者发起调用。再等待设定的时间间隔后，Hystrix 的断路器又会进入半打开状态，新的服务调用又可以重新发给服务提供者了；如果一段时间内服务调用的失败率依然高于设定的阈值的话，断路器会重新进入打开状态，否则的话，断路器会被重置为关闭状态。</p>
 <p>其中决定断路器是否打开的失败率阈值可以通过下面这个参数来设定：</p>
 <pre><code>HystrixCommandProperties.circuitBreakerErrorThresholdPercentage()
-
 </code></pre>
 <p>而决定断路器何时进入半打开的状态的时间间隔可以通过下面这个参数来设定：</p>
 <pre><code>HystrixCommandProperties.circuitBreakerSleepWindowInMilliseconds()
-
 </code></pre>
 <p>断路器实现的关键就在于如何计算一段时间内服务调用的失败率，那么 Hystrix 是如何做的呢？</p>
 <p>答案就是下图所示的滑动窗口算法，下面我来解释一下具体原理。</p>
@@ -2008,22 +1942,18 @@ hystrix.command.inventory-by-productcode.circuitBreaker.errorThresholdPercentage
 <p><strong>2. 配置注册</strong></p>
 <p>配置中心对外提供接口 /config/service?action=register 来完成配置注册功能，需要传递的参数包括配置对应的分组 Group，以及对应的 Key、Value 值。比如调用下面接口请求就会向配置项 global.property 中添加 Key 为 reload.locations、Value 为 /data1/confs/system/reload.properties 的配置。</p>
 <pre><code>curl &quot;http://ip:port/config/service?action=register&quot; -d &quot;group=global.property&amp;key=reload.locations&amp;value=/data1/confs/system/reload.properties&quot;
-
 </code></pre>
 <p><strong>3. 配置反注册</strong></p>
 <p>配置中心对外提供接口 config/service?action=unregister 来完成配置反注册功能，需要传递的参数包括配置对象的分组 Group，以及对应的 Key。比如调用下面的接口请求就会从配置项 global.property 中把 Key 为 reload.locations 的配置删除。</p>
 <pre><code>curl &quot;http://ip:port/config/service?action=unregister&quot;-d &quot;group=global.property&amp;key=reload.locations&quot;
-
 </code></pre>
 <p><strong>4. 配置查看</strong></p>
 <p>配置中心对外提供接口 config/service?action=lookup 来完成配置查看功能，需要传递的参数包括配置对象的分组 Group，以及对应的 Key。比如调用下面的接口请求就会返回配置项 global.property 中 Key 为 reload.locations 的配置值。</p>
 <pre><code>curl &quot;http://ip:port/config/service?action=lookup&amp;group=global.property&amp;key=reload.locations&quot;
-
 </code></pre>
 <p><strong>5. 配置变更订阅</strong></p>
 <p>配置中心对外提供接口 config/service?action=getSign 来完成配置变更订阅接口，客户端本地会保存一个配置对象的分组 Group 的 sign 值，同时每隔一段时间去配置中心拉取该 Group 的 sign 值，与本地保存的 sign 值做对比。一旦配置中心中的 sign 值与本地的 sign 值不同，客户端就会从配置中心拉取最新的配置信息。比如调用下面的接口请求就会返回配置项 global.property 中 Key 为 reload.locations 的配置值。</p>
 <pre><code>curl &quot;http://ip:port/config/service？action=getSign&amp;group=global.property&quot;
-
 </code></pre>
 <p>讲到这里，你应该对配置中心的作用有所了解了，它可以便于我们管理服务的配置信息，并且如果要修改配置信息的话，只需要同配置中心交互就可以了，应用程序会通过订阅配置中心的配置，自动完成配置更新。那么实际业务中，有哪些场景应用配置中心比较合适呢？下面我就结合自己的经验，列举几个配置中心的典型应用场景，希望能给你一些启发。</p>
 <ul>
@@ -2397,7 +2327,6 @@ WORKDIR /data1/weibo/bin
 <li>如何从线上生产环境中摘除两个节点。这就需要接入线上的容器管理平台，比如微博的容器管理平台 DCP 就提供了类似下面的 API，能够从线上生产环境中摘除某个节点，然后部署最新的业务代码。</li>
 </ul>
 <pre><code>curl -s http://raptor.api.weibo.com/extension/v1/preview/run/ -d action=503&amp;ip=11.75.21.155&amp;service_pool=openapi_friendship-yf-docker&amp;user=weibo_rd_user
-
 </code></pre>
 <ul>
 <li>如何观察服务是否正常。由于这两个节点上运行的代码是最新的代码，在引入线上流量后可能会出现内存泄露等在集成测试阶段无法发现的问题，所以这个阶段这两个节点上运行最新代码后的状态必须与线上其他节点一致。实际观察时，主要有两个手段，一个是观察节点本身的状态，如 CPU、内存、I/O、网卡等，一个是观察业务运行产生的 warn、error 的日志量的大小，尤其是 error 日志量有异常时，往往就说明最新的代码可能存在异常，需要处理后才能发布到线上。</li>
@@ -2790,7 +2719,7 @@ spec:
 <hr />
 <p>扩展阅读：</p>
 <ul>
-<li>Envoy 对外提供统一 API 的详细作用：<a href="https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md.html">https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md.html</a></li>
+<li>Envoy 对外提供统一 API 的详细作用：<a href="https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW.md.html">https://github.com/envoyproxy/data-plane-api/blob/master/API_OVERVIEW</a></li>
 <li>授权策略：<a href="https://istio.io/docs/concepts/security/#authentication-policies">https://istio.io/docs/concepts/security/#authentication-policies</a></li>
 <li>安全命名信息：<a href="https://istio.io/docs/concepts/security/#secure-naming">https://istio.io/docs/concepts/security/#secure-naming</a></li>
 <li>双向 TLS 认证：<a href="https://istio.io/docs/tasks/security/mtls-migration/">https://istio.io/docs/tasks/security/mtls-migration/</a> .</li>
@@ -2897,12 +2826,10 @@ spec:
                             <a href="/极客时间/代码精进之路.md.html">下一页</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709ba3b51da7fbdc","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
@@ -2911,11 +2838,9 @@ spec:
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-
     function gtag() {
         dataLayer.push(arguments);
     }
-
     gtag('js', new Date());
     gtag('config', 'G-NPSEEVD756');
     var path = window.location.pathname
@@ -2929,14 +2854,12 @@ spec:
     } else {
         setCookie("lastPath", path)
     }
-
     function setCookie(cname, cvalue) {
         var d = new Date();
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toGMTString();
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
     }
-
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -2946,7 +2869,5 @@ spec:
         }
         return "";
     }
-
 </script>
-
 </html>

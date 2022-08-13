@@ -1,1117 +1,618 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力.md.html">00 开篇词  深入掌握 Dubbo 原理与实现，提升你的职场竞争力</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/01  Dubbo 源码环境搭建：千里之行，始于足下.md.html">01  Dubbo 源码环境搭建：千里之行，始于足下.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/01  Dubbo 源码环境搭建：千里之行，始于足下.md.html">01  Dubbo 源码环境搭建：千里之行，始于足下</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo.md.html">02 Dubbo 的配置总线：抓住 URL，就理解了半个 Dubbo</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/03  Dubbo SPI 精析，接口实现两极反转（上）.md.html">03  Dubbo SPI 精析，接口实现两极反转（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/03  Dubbo SPI 精析，接口实现两极反转（上）.md.html">03  Dubbo SPI 精析，接口实现两极反转（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/04  Dubbo SPI 精析，接口实现两极反转（下）.md.html">04  Dubbo SPI 精析，接口实现两极反转（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/04  Dubbo SPI 精析，接口实现两极反转（下）.md.html">04  Dubbo SPI 精析，接口实现两极反转（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/05  海量定时任务，一个时间轮搞定.md.html">05  海量定时任务，一个时间轮搞定.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/05  海量定时任务，一个时间轮搞定.md.html">05  海量定时任务，一个时间轮搞定</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）.md.html">06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）.md.html">07  ZooKeeper 与 Curator，求你别用 ZkClient 了（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/08  代理模式与常见实现.md.html">08  代理模式与常见实现.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/08  代理模式与常见实现.md.html">08  代理模式与常见实现</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/09  Netty 入门，用它做网络编程都说好（上）.md.html">09  Netty 入门，用它做网络编程都说好（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/09  Netty 入门，用它做网络编程都说好（上）.md.html">09  Netty 入门，用它做网络编程都说好（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/10  Netty 入门，用它做网络编程都说好（下）.md.html">10  Netty 入门，用它做网络编程都说好（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/10  Netty 入门，用它做网络编程都说好（下）.md.html">10  Netty 入门，用它做网络编程都说好（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/11  简易版 RPC 框架实现（上）.md.html">11  简易版 RPC 框架实现（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/11  简易版 RPC 框架实现（上）.md.html">11  简易版 RPC 框架实现（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/12  简易版 RPC 框架实现（下）.md.html">12  简易版 RPC 框架实现（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/12  简易版 RPC 框架实现（下）.md.html">12  简易版 RPC 框架实现（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/13  本地缓存：降低 ZooKeeper 压力的一个常用手段.md.html">13  本地缓存：降低 ZooKeeper 压力的一个常用手段</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/14  重试机制是网络操作的基本保证.md.html">14  重试机制是网络操作的基本保证.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/14  重试机制是网络操作的基本保证.md.html">14  重试机制是网络操作的基本保证</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/15  ZooKeeper 注册中心实现，官方推荐注册中心实践.md.html">15  ZooKeeper 注册中心实现，官方推荐注册中心实践</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/16  Dubbo Serialize 层：多种序列化算法，总有一款适合你.md.html">16  Dubbo Serialize 层：多种序列化算法，总有一款适合你</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？.md.html">17  Dubbo Remoting 层核心接口分析：这居然是一套兼容所有 NIO 框架的设计？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工.md.html">18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/19  Transporter 层核心实现：编解码与线程模型一文打尽（上）.md.html">19  Transporter 层核心实现：编解码与线程模型一文打尽（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/20  Transporter 层核心实现：编解码与线程模型一文打尽（下）.md.html">20  Transporter 层核心实现：编解码与线程模型一文打尽（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）.md.html">21  Exchange 层剖析：彻底搞懂 Request-Response 模型（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）.md.html">22  Exchange 层剖析：彻底搞懂 Request-Response 模型（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/23  核心接口介绍，RPC 层骨架梳理.md.html">23  核心接口介绍，RPC 层骨架梳理.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/23  核心接口介绍，RPC 层骨架梳理.md.html">23  核心接口介绍，RPC 层骨架梳理</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）.md.html">24  从 Protocol 起手，看服务暴露和服务引用的全流程（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）.md.html">25  从 Protocol 起手，看服务暴露和服务引用的全流程（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）.md.html">26  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）.md.html">27  加餐：直击 Dubbo “心脏”，带你一起探秘 Invoker（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/28  复杂问题简单化，代理帮你隐藏了多少底层细节？.md.html">28  复杂问题简单化，代理帮你隐藏了多少底层细节？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单.md.html">29  加餐：HTTP 协议 + JSON-RPC，Dubbo 跨语言就是如此简单</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/30  Filter 接口，扩展 Dubbo 框架的常用手段指北.md.html">30  Filter 接口，扩展 Dubbo 框架的常用手段指北</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/31  加餐：深潜 Directory 实现，探秘服务目录玄机.md.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/31  加餐：深潜 Directory 实现，探秘服务目录玄机.md.html">31  加餐：深潜 Directory 实现，探秘服务目录玄机</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/32  路由机制：请求到底怎么走，它说了算（上）.md.html">32  路由机制：请求到底怎么走，它说了算（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/32  路由机制：请求到底怎么走，它说了算（上）.md.html">32  路由机制：请求到底怎么走，它说了算（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/33  路由机制：请求到底怎么走，它说了算（下）.md.html">33  路由机制：请求到底怎么走，它说了算（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/33  路由机制：请求到底怎么走，它说了算（下）.md.html">33  路由机制：请求到底怎么走，它说了算（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/34  加餐：初探 Dubbo 动态配置的那些事儿.md.html">34  加餐：初探 Dubbo 动态配置的那些事儿.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/34  加餐：初探 Dubbo 动态配置的那些事儿.md.html">34  加餐：初探 Dubbo 动态配置的那些事儿</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）.md.html">35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）.md.html">36  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/37  集群容错：一个好汉三个帮（上）.md.html">37  集群容错：一个好汉三个帮（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/37  集群容错：一个好汉三个帮（上）.md.html">37  集群容错：一个好汉三个帮（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/38  集群容错：一个好汉三个帮（下）.md.html">38  集群容错：一个好汉三个帮（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/38  集群容错：一个好汉三个帮（下）.md.html">38  集群容错：一个好汉三个帮（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/39  加餐：多个返回值不用怕，Merger 合并器来帮忙.md.html">39  加餐：多个返回值不用怕，Merger 合并器来帮忙</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/40  加餐：模拟远程调用，Mock 机制帮你搞定.md.html">40  加餐：模拟远程调用，Mock 机制帮你搞定.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/40  加餐：模拟远程调用，Mock 机制帮你搞定.md.html">40  加餐：模拟远程调用，Mock 机制帮你搞定</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/41  加餐：一键通关服务发布全流程.md.html">41  加餐：一键通关服务发布全流程.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/41  加餐：一键通关服务发布全流程.md.html">41  加餐：一键通关服务发布全流程</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/42  加餐：服务引用流程全解析.md.html">42  加餐：服务引用流程全解析.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/42  加餐：服务引用流程全解析.md.html">42  加餐：服务引用流程全解析</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/43  服务自省设计方案：新版本新方案.md.html">43  服务自省设计方案：新版本新方案.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/43  服务自省设计方案：新版本新方案.md.html">43  服务自省设计方案：新版本新方案</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html">44  元数据方案深度剖析，如何避免注册中心数据量膨胀？</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/Dubbo源码解读与实战-完/45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html">45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html</a>
+                    <a class="current-tab" href="/专栏/Dubbo源码解读与实战-完/45  加餐：深入服务自省方案中的服务发布订阅（上）.md.html">45  加餐：深入服务自省方案中的服务发布订阅（上）</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html">46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html">46  加餐：深入服务自省方案中的服务发布订阅（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）.md.html">47  配置中心设计与实现：集中化配置 and 本地化配置，我都要（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）.md.html">48  配置中心设计与实现：集中化配置 and 本地化配置，我都要（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Dubbo源码解读与实战-完/49 结束语  认真学习，缩小差距.md.html">49 结束语  认真学习，缩小差距.md.html</a>
+                    <a href="/专栏/Dubbo源码解读与实战-完/49 结束语  认真学习，缩小差距.md.html">49 结束语  认真学习，缩小差距</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>45  加餐：深入服务自省方案中的服务发布订阅（上）</h1>
-
 <p>在前面[第 43 课时]中介绍 Dubbo 的服务自省方案时，我们可以看到除了需要元数据方案的支持之外，还需要服务发布订阅功能的支持，这样才能构成完整的服务自省架构。</p>
-
 <p>本课时我们就来讲解一下 Dubbo 中服务实例的发布与订阅功能的具体实现：首先说明 ServiceDiscovery 接口的核心定义，然后再重点介绍以 ZooKeeper 为注册中心的 ZookeeperServiceDiscovery 实现，这其中还会涉及相关事件监听的实现。</p>
-
 <h3>ServiceDiscovery 接口</h3>
-
 <p><strong>ServiceDiscovery 主要封装了针对 ServiceInstance 的发布和订阅操作</strong>，你可以暂时将其理解成一个 ServiceInstance 的注册中心。ServiceDiscovery 接口的定义如下所示：</p>
-
 <pre><code>@SPI(&quot;zookeeper&quot;)
-
 public interface ServiceDiscovery extends Prioritized {
-
     // 初始化当前ServiceDiscovery实例，传入的是注册中心的URL
-
     void initialize(URL registryURL) throws Exception;
-
     // 销毁当前ServiceDiscovery实例
-
     void destroy() throws Exception;
-
     // 发布传入的ServiceInstance实例
-
     void register(ServiceInstance serviceInstance) throws RuntimeException;
-
     // 更新传入的ServiceInstance实例
-
     void update(ServiceInstance serviceInstance) throws RuntimeException;
-
     // 注销传入的ServiceInstance实例
-
     void unregister(ServiceInstance serviceInstance) throws RuntimeException;
-
     // 查询全部Service Name
-
     Set&lt;String&gt; getServices();
-
     // 分页查询时默认每页的条数
-
     default int getDefaultPageSize() {
-
         return 100;
-
     }
-
     // 根据ServiceName分页查询ServiceInstance
-
     default List&lt;ServiceInstance&gt; getInstances(String serviceName) throws NullPointerException {
-
         List&lt;ServiceInstance&gt; allInstances = new LinkedList&lt;&gt;();
-
         int offset = 0;
-
         int pageSize = getDefaultPageSize();
-
         // 分页查询ServiceInstance
-
         Page&lt;ServiceInstance&gt; page = getInstances(serviceName, offset, pageSize);
-
         allInstances.addAll(page.getData());
-
         while (page.hasNext()) {
-
             offset += page.getDataSize();
-
             page = getInstances(serviceName, offset, pageSize);
-
             allInstances.addAll(page.getData());
-
         }
-
         return unmodifiableList(allInstances);
-
     }
-
     default Page&lt;ServiceInstance&gt; getInstances(String serviceName, int offset, int pageSize) throws NullPointerException,
-
             IllegalArgumentException {
-
         return getInstances(serviceName, offset, pageSize, false);
-
     }
-
     default Page&lt;ServiceInstance&gt; getInstances(String serviceName, int offset, int pageSize, boolean healthyOnly) throws
-
             NullPointerException, IllegalArgumentException, UnsupportedOperationException {
-
         throw new UnsupportedOperationException(&quot;Current implementation does not support pagination query method.&quot;);
-
     }
-
     default Map&lt;String, Page&lt;ServiceInstance&gt;&gt; getInstances(Iterable&lt;String&gt; serviceNames, int offset, int requestSize) throws
-
             NullPointerException, IllegalArgumentException {
-
         Map&lt;String, Page&lt;ServiceInstance&gt;&gt; instances = new LinkedHashMap&lt;&gt;();
-
         for (String serviceName : serviceNames) {
-
             instances.put(serviceName, getInstances(serviceName, offset, requestSize));
-
         }
-
         return unmodifiableMap(instances);
-
     }
-
     // 添加ServiceInstance监听器
-
     default void addServiceInstancesChangedListener(ServiceInstancesChangedListener listener)
-
             throws NullPointerException, IllegalArgumentException {
-
     }
-
     // 触发ServiceInstancesChangedEvent事件
-
     default void dispatchServiceInstancesChangedEvent(String serviceName) {
-
         dispatchServiceInstancesChangedEvent(serviceName, getInstances(serviceName));
-
     }
-
     default void dispatchServiceInstancesChangedEvent(String serviceName, String... otherServiceNames) {
-
         dispatchServiceInstancesChangedEvent(serviceName, getInstances(serviceName));
-
         if (otherServiceNames != null) {
-
             Stream.of(otherServiceNames)
-
                     .filter(StringUtils::isNotEmpty)
-
                     .forEach(this::dispatchServiceInstancesChangedEvent);
-
         }
-
     }
-
     default void dispatchServiceInstancesChangedEvent(String serviceName, Collection&lt;ServiceInstance&gt; serviceInstances) {
-
         dispatchServiceInstancesChangedEvent(new ServiceInstancesChangedEvent(serviceName, serviceInstances));
-
     }
-
     default void dispatchServiceInstancesChangedEvent(ServiceInstancesChangedEvent event) {
-
         getDefaultExtension().dispatch(event);
-
     }
-
 }
-
 </code></pre>
-
 <p>ServiceDiscovery 接口被 @SPI 注解修饰，是一个扩展点，针对不同的注册中心，有不同的 ServiceDiscovery 实现，如下图所示：</p>
-
 <p><img src="assets/Ciqc1F_q45aAGn14AAEh58Guyew441.png" alt="Lark20201229-160604.png" /></p>
-
 <p>ServiceDiscovery 继承关系图</p>
-
 <p>在 Dubbo 创建 ServiceDiscovery 对象的时候，会通过 ServiceDiscoveryFactory 工厂类进行创建。ServiceDiscoveryFactory 接口也是一个扩展接口，Dubbo 只提供了一个默认实现—— DefaultServiceDiscoveryFactory，其继承关系如下图所示：</p>
-
 <p><img src="assets/CgpVE1_q4_iAZ8ARAAEu4mMS65Y213.png" alt="Lark20201229-160606.png" /></p>
-
 <p>ServiceDiscoveryFactory 继承关系图</p>
-
 <p>在 AbstractServiceDiscoveryFactory 中维护了一个 ConcurrentMap&lt;String, ServiceDiscovery&gt; 类型的集合（discoveries 字段）来缓存 ServiceDiscovery 对象，并提供了一个 createDiscovery() 抽象方法来创建 ServiceDiscovery 实例。</p>
-
 <pre><code>public ServiceDiscovery getServiceDiscovery(URL registryURL) {
-
     String key = registryURL.toServiceStringWithoutResolving();
-
     return discoveries.computeIfAbsent(key, k -&gt; createDiscovery(registryURL));
-
 }
-
 </code></pre>
-
 <p>在 DefaultServiceDiscoveryFactory 中会实现 createDiscovery() 方法，使用 Dubbo SPI 机制获取对应的 ServiceDiscovery 对象，具体实现如下：</p>
-
 <pre><code>protected ServiceDiscovery createDiscovery(URL registryURL) {
-
     String protocol = registryURL.getProtocol();
-
     ExtensionLoader&lt;ServiceDiscovery&gt; loader = getExtensionLoader(ServiceDiscovery.class);
-
     return loader.getExtension(protocol);
-
 }
-
 </code></pre>
-
 <h3>ZookeeperServiceDiscovery 实现分析</h3>
-
 <p>Dubbo 提供了多个 ServiceDiscovery 用来接入多种注册中心，下面我们以 ZookeeperServiceDiscovery 为例介绍 Dubbo 是如何接入 ZooKeeper 作为注册中心，实现服务实例发布和订阅的。</p>
-
 <p><strong>在 ZookeeperServiceDiscovery 中封装了一个 Apache Curator 中的 ServiceDiscovery 对象来实现与 ZooKeeper 的交互</strong>。在 initialize() 方法中会初始化 CuratorFramework 以及 Curator ServiceDiscovery 对象，如下所示：</p>
-
 <pre><code> public void initialize(URL registryURL) throws Exception {
-
     ... // 省略初始化EventDispatcher的相关逻辑
-
     // 初始化CuratorFramework
-
     this.curatorFramework = buildCuratorFramework(registryURL);
-
     // 确定rootPath，默认是&quot;/services&quot;
-
     this.rootPath = ROOT_PATH.getParameterValue(registryURL);
-
     // 初始化Curator ServiceDiscovery并启动
-
     this.serviceDiscovery = buildServiceDiscovery(curatorFramework, rootPath);
-
     this.serviceDiscovery.start();
-
 }
-
 </code></pre>
-
 <p>在 ZookeeperServiceDiscovery 中的方法基本都是调用 Curator ServiceDiscovery 对象的相应方法实现，例如，register()、update() 、unregister() 方法都会调用 Curator ServiceDiscovery 对象的相应方法完成 ServiceInstance 的添加、更新和删除。这里我们以 register() 方法为例：</p>
-
 <pre><code>public void register(ServiceInstance serviceInstance) throws RuntimeException {
-
     doInServiceRegistry(serviceDiscovery -&gt; {
-
         serviceDiscovery.registerService(build(serviceInstance));
-
     });
-
 }
-
 // 在build()方法中会将Dubbo中的ServiceInstance对象转换成Curator中的ServiceInstance对象
-
 public static org.apache.curator.x.discovery.ServiceInstance&lt;ZookeeperInstance&gt; build(ServiceInstance serviceInstance) {
-
     ServiceInstanceBuilder builder = null;
-
     // 获取Service Name
-
     String serviceName = serviceInstance.getServiceName();
-
     String host = serviceInstance.getHost();
-
     int port = serviceInstance.getPort();
-
     // 获取元数据
-
     Map&lt;String, String&gt; metadata = serviceInstance.getMetadata();
-
     // 生成的id格式是&quot;host:ip&quot;
-
     String id = generateId(host, port);
-
     // ZookeeperInstance是Curator ServiceInstance的payload
-
     ZookeeperInstance zookeeperInstance = new ZookeeperInstance(null, serviceName, metadata);
-
     builder = builder().id(id).name(serviceName).address(host).port(port)
-
             .payload(zookeeperInstance);
-
     return builder.build();
-
 }
-
 </code></pre>
-
 <p>除了上述服务实例发布的功能之外，在服务实例订阅的时候，还会用到 ZookeeperServiceDiscovery 查询服务实例的信息，这些方法都是直接依赖 Apache Curator 实现的，例如，getServices() 方法会调用 Curator ServiceDiscovery 的 queryForNames() 方法查询 Service Name，getInstances() 方法会通过 Curator ServiceDiscovery 的 queryForInstances() 方法查询 Service Instance。</p>
-
 <h3>EventListener 接口</h3>
-
 <p>ZookeeperServiceDiscovery 除了实现了 ServiceDiscovery 接口之外，还实现了 EventListener 接口，如下图所示：</p>
-
 <p><img src="assets/Cip5yF_petCAV9sXAAB9u4EYOqk073.png" alt="Drawing 2.png" /></p>
-
 <p>ZookeeperServiceDiscovery 继承关系图</p>
-
 <p>也就是说，<strong>ZookeeperServiceDiscovery 本身也是 EventListener 实现，可以作为 EventListener 监听某些事件</strong>。下面我们先来看 Dubbo 中 EventListener 接口的定义，其中关注三个方法：onEvent() 方法、getPriority() 方法和 findEventType() 工具方法。</p>
-
 <pre><code>@SPI
-
 @FunctionalInterface
-
 public interface EventListener&lt;E extends Event&gt; extends java.util.EventListener, Prioritized {
-
     // 当发生该EventListener对象关注的事件时，该EventListener的onEvent()方法会被调用
-
-    void onEvent(E event); 
-
+    void onEvent(E event);
     // 当前EventListener对象被调用的优先级
-
-    default int getPriority() { 
-
+    default int getPriority() {
         return MIN_PRIORITY;
-
     }
-
     // 获取传入的EventListener对象监听何种Event事件
-
     static Class&lt;? extends Event&gt; findEventType(EventListener&lt;?&gt; listener) {
-
         return findEventType(listener.getClass());
-
     }
     static Class&lt;? extends Event&gt; findEventType(Class&lt;?&gt; listenerClass) {
-
         Class&lt;? extends Event&gt; eventType = null;
-
         // 检测传入listenerClass是否为Dubbo的EventListener接口实现
-
         if (listenerClass != null &amp;&amp; EventListener.class.isAssignableFrom(listenerClass)) {
-
             eventType = findParameterizedTypes(listenerClass)
-
                     .stream()
-
                     .map(EventListener::findEventType) // 获取listenerClass中定义的Event泛型
-
                     .filter(Objects::nonNull)
-
                     .findAny()
-
                     // 获取listenerClass父类中定义的Event泛型
-
                     .orElse((Class) findEventType(listenerClass.getSuperclass()));
-
         }
-
         return eventType;
-
     }
-
     ... // findEventType()方法用来过滤传入的parameterizedType是否为Event或Event子类(这里省略该方法的实现)
-
 }
-
 </code></pre>
-
 <p>Dubbo 中有很多 EventListener 接口的实现，如下图所示：</p>
-
 <p><img src="assets/Cip5yF_petmAI2w9AAC5QQrgGjY394.png" alt="Drawing 3.png" /></p>
-
 <p>EventListener 继承关系图</p>
-
 <p>我们先来重点关注 ZookeeperServiceDiscovery 这个实现，在其 onEvent() 方法（以及 addServiceInstancesChangedListener() 方法）中会调用 registerServiceWatcher() 方法重新注册：</p>
-
 <pre><code>public void onEvent(ServiceInstancesChangedEvent event) {
-
     // 发生ServiceInstancesChangedEvent事件的Service Name
-
     String serviceName = event.getServiceName();
-
     // 重新注册监听器
-
     registerServiceWatcher(serviceName);
-
 }
-
 protected void registerServiceWatcher(String serviceName) {
-
     // 构造要监听的path
-
     String path = buildServicePath(serviceName);
-
     // 创建监听器ZookeeperServiceDiscoveryChangeWatcher并记录到watcherCaches缓存中
-
     CuratorWatcher watcher = watcherCaches.computeIfAbsent(path, key -&gt;
-
             new ZookeeperServiceDiscoveryChangeWatcher(this, serviceName));
-
     // 在path上添加上面构造的ZookeeperServiceDiscoveryChangeWatcher监听器，
-
     // 来监听子节点的变化
-
     curatorFramework.getChildren().usingWatcher(watcher).forPath(path);
-
 }
-
 </code></pre>
-
 <p><strong>ZookeeperServiceDiscoveryChangeWatcher 是 ZookeeperServiceDiscovery 配套的 CuratorWatcher 实现</strong>，其中 process() 方法实现会关注 NodeChildrenChanged 事件和 NodeDataChanged 事件，并调用关联的 ZookeeperServiceDiscovery 对象的 dispatchServiceInstancesChangedEvent() 方法，具体实现如下：</p>
-
 <pre><code>public void process(WatchedEvent event) throws Exception {
-
     // 获取监听到的事件类型
-
     Watcher.Event.EventType eventType = event.getType();
-
     // 这里只关注NodeChildrenChanged和NodeDataChanged两种事件类型
-
     if (NodeChildrenChanged.equals(eventType) || NodeDataChanged.equals(eventType)) {
-
         // 调用dispatchServiceInstancesChangedEvent()方法，分发ServiceInstancesChangedEvent事件
-
         zookeeperServiceDiscovery.dispatchServiceInstancesChangedEvent(serviceName);
-
     }
-
 }
-
 </code></pre>
-
 <p>通过上面的分析我们可以知道，ZookeeperServiceDiscoveryChangeWatcher 的核心就是将 ZooKeeper 中的事件转换成了 Dubbo 内部的 ServiceInstancesChangedEvent 事件。</p>
-
 <h3>EventDispatcher 接口</h3>
-
 <p>通过上面对 ZookeeperServiceDiscovery 实现的分析我们知道，它并没有对 dispatchServiceInstancesChangedEvent() 方法进行覆盖，那么在 ZookeeperServiceDiscoveryChangeWatcher 中调用的 dispatchServiceInstancesChangedEvent() 方法就是 ServiceDiscovery 接口中的默认实现。在该默认实现中，会通过 Dubbo SPI 获取 EventDispatcher 的默认实现，并分发 ServiceInstancesChangedEvent 事件，具体实现如下：</p>
-
 <pre><code>default void dispatchServiceInstancesChangedEvent(ServiceInstancesChangedEvent event) {
-
         EventDispatcher.getDefaultExtension().dispatch(event);
-
 }
-
 </code></pre>
-
 <p>下面我们来看 EventDispatcher 接口的具体定义：</p>
-
 <pre><code>@SPI(&quot;direct&quot;)
-
 public interface EventDispatcher extends Listenable&lt;EventListener&lt;?&gt;&gt; {
-
     // 该线程池用于串行调用被触发的EventListener，也就是direct模式
-
     Executor DIRECT_EXECUTOR = Runnable::run;
-
     // 将被触发的事件分发给相应的EventListener对象
-
     void dispatch(Event event);
-
     // 获取direct模式中使用的线程池
-
     default Executor getExecutor() {
-
         return DIRECT_EXECUTOR;
-
     }
-
     // 工具方法，用于获取EventDispatcher接口的默认实现
-
     static EventDispatcher getDefaultExtension() {
-
         return ExtensionLoader.getExtensionLoader(EventDispatcher.class).getDefaultExtension();
-
     }
-
 }
-
 </code></pre>
-
 <p>EventDispatcher 接口被 @SPI 注解修饰，是一个扩展点，Dubbo 提供了两个具体实现——ParallelEventDispatcher 和 DirectEventDispatcher，如下图所示：</p>
-
 <p><img src="assets/Cip5yF_pew-AdtkyAAB-Epfg96E814.png" alt="Drawing 4.png" /></p>
-
 <p>EventDispatcher 继承关系图</p>
-
 <p>在 AbstractEventDispatcher 中维护了两个核心字段。</p>
-
 <ul>
-
 <li>listenersCache（ConcurrentMap&lt;Class&lt;? extends Event&gt;, List&gt; 类型）：用于记录监听各类型事件的 EventListener 集合。在 AbstractEventDispatcher 初始化时，会加载全部 EventListener 实现并调用 addEventListener() 方法添加到 listenersCache 集合中。</li>
-
 <li>executor（Executor 类型）：该线程池在 AbstractEventDispatcher 的构造函数中初始化。在 AbstractEventDispatcher 收到相应事件时，由该线程池来触发对应的 EventListener 集合。</li>
-
 </ul>
-
 <p>AbstractEventDispatcher 中的 addEventListener()、removeEventListener()、getAllEventListeners() 方法都是通过操作 listenersCache 集合实现的，具体实现比较简单，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo">源码</a>进行学习。</p>
-
 <p>AbstractEventDispatcher 中另一个要关注的方法是 dispatch() 方法，该方法<strong>会从 listenersCache 集合中过滤出符合条件的 EventListener 对象，并按照串行或是并行模式进行通知</strong>，具体实现如下：</p>
-
 <pre><code>public void dispatch(Event event) {
-
     // 获取通知EventListener的线程池，默认为串行模式，也就是direct实现
-
     Executor executor = getExecutor();
-
     executor.execute(() -&gt; {
-
         sortedListeners(entry -&gt; entry.getKey().isAssignableFrom(event.getClass()))
-
                 .forEach(listener -&gt; {
-
                     if (listener instanceof ConditionalEventListener) { // 针对ConditionalEventListener的特殊处理
-
                         ConditionalEventListener predicateEventListener = (ConditionalEventListener) listener;
-
                         if (!predicateEventListener.accept(event)) {
-
                             return;
-
                         }
-
                     }
-
                     // 通知EventListener
-
                     listener.onEvent(event);
-
                 });
-
     });
-
 }
-
 // 这里的sortedListeners方法会对listenerCache进行过滤和排序
-
 protected Stream&lt;EventListener&gt; sortedListeners(Predicate&lt;Map.Entry&lt;Class&lt;? extends Event&gt;, List&lt;EventListener&gt;&gt;&gt; predicate) {
-
     return listenersCache
-
             .entrySet()
-
             .stream()
-
             .filter(predicate)
-
             .map(Map.Entry::getValue)
-
             .flatMap(Collection::stream)
-
             .sorted();
-
 }
-
 </code></pre>
-
 <p>AbstractEventDispatcher 已经实现了 EventDispatcher 分发 Event 事件、通知 EventListener 的核心逻辑，然后在 ParallelEventDispatcher 和 DirectEventDispatcher 确定是并行通知模式还是串行通知模式即可。</p>
-
 <p>在 ParallelEventDispatcher 中通知 EventListener 的线程池是 ForkJoinPool，也就是并行模式；在 DirectEventDispatcher 中使用的是 EventDispatcher.DIRECT_EXECUTOR 线程池，也就是串行模式。这两个 EventDispatcher 的具体实现比较简单，这里就不再展示。</p>
-
 <p>我们回到 ZookeeperServiceDiscovery，在其构造方法中会获取默认的 EventDispatcher 实现对象，并调用 addEventListener() 方法将 ZookeeperServiceDiscovery 对象添加到 listenersCache 集合中监听 ServiceInstancesChangedEvent 事件。ZookeeperServiceDiscovery 直接继承了 ServiceDiscovery 接口中 dispatchServiceInstancesChangedEvent() 方法的默认实现，并没有进行覆盖，在该方法中，会获取默认的 EventDispatcher 实现并调用 dispatch() 方法分发 ServiceInstancesChangedEvent 事件。</p>
-
 <h3>总结</h3>
-
 <p>在本课时，我们重点介绍了 Dubbo 服务自省方案中服务实例发布和订阅的基础。</p>
-
 <p>首先，我们说明了 ServiceDiscovery 接口的核心定义，其中定义了服务实例发布和订阅的核心方法。接下来我们分析了以 ZooKeeper 作为注册中心的 ZookeeperServiceDiscovery 实现，其中还讲解了在 ZookeeperServiceDiscovery 上添加监听器的相关实现以及 ZookeeperServiceDiscovery 处理 ServiceInstancesChangedEvent 事件的机制。</p>
-
 <p>下一课时，我们将继续介绍 Dubbo 服务自省方案中的服务实例发布以及订阅实现，记得按时来听课。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Dubbo源码解读与实战-完/44  元数据方案深度剖析，如何避免注册中心数据量膨胀？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Dubbo源码解读与实战-完/46  加餐：深入服务自省方案中的服务发布订阅（下）.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996f80ab4c3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

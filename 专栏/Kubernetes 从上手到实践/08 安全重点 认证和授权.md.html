@@ -1,1379 +1,723 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>08 安全重点 认证和授权.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/01  开篇： Kubernetes 是什么以及为什么需要它.md.html">01  开篇： Kubernetes 是什么以及为什么需要它.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/01  开篇： Kubernetes 是什么以及为什么需要它.md.html">01  开篇： Kubernetes 是什么以及为什么需要它</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/02 初步认识：Kubernetes 基础概念.md.html">02 初步认识：Kubernetes 基础概念.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/02 初步认识：Kubernetes 基础概念.md.html">02 初步认识：Kubernetes 基础概念</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/03 宏观认识：整体架构.md.html">03 宏观认识：整体架构.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/03 宏观认识：整体架构.md.html">03 宏观认识：整体架构</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/04 搭建 Kubernetes 集群 - 本地快速搭建.md.html">04 搭建 Kubernetes 集群 - 本地快速搭建.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/04 搭建 Kubernetes 集群 - 本地快速搭建.md.html">04 搭建 Kubernetes 集群 - 本地快速搭建</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/05 动手实践：搭建一个 Kubernetes 集群 - 生产可用.md.html">05 动手实践：搭建一个 Kubernetes 集群 - 生产可用.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/05 动手实践：搭建一个 Kubernetes 集群 - 生产可用.md.html">05 动手实践：搭建一个 Kubernetes 集群 - 生产可用</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/06 集群管理：初识 kubectl.md.html">06 集群管理：初识 kubectl.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/06 集群管理：初识 kubectl.md.html">06 集群管理：初识 kubectl</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/07 集群管理：以 Redis 为例-部署及访问.md.html">07 集群管理：以 Redis 为例-部署及访问.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/07 集群管理：以 Redis 为例-部署及访问.md.html">07 集群管理：以 Redis 为例-部署及访问</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/Kubernetes 从上手到实践/08 安全重点 认证和授权.md.html">08 安全重点 认证和授权.md.html</a>
+                    <a class="current-tab" href="/专栏/Kubernetes 从上手到实践/08 安全重点 认证和授权.md.html">08 安全重点 认证和授权</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/09 应用发布：部署实际项目.md.html">09 应用发布：部署实际项目.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/09 应用发布：部署实际项目.md.html">09 应用发布：部署实际项目</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/10 应用管理：初识 Helm.md.html">10 应用管理：初识 Helm.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/10 应用管理：初识 Helm.md.html">10 应用管理：初识 Helm</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/11 部署实践：以 Helm 部署项目.md.html">11 部署实践：以 Helm 部署项目.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/11 部署实践：以 Helm 部署项目.md.html">11 部署实践：以 Helm 部署项目</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/12 庖丁解牛：kube-apiserver.md.html">12 庖丁解牛：kube-apiserver.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/12 庖丁解牛：kube-apiserver.md.html">12 庖丁解牛：kube-apiserver</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/13 庖丁解牛：etcd.md.html">13 庖丁解牛：etcd.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/13 庖丁解牛：etcd.md.html">13 庖丁解牛：etcd</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/14 庖丁解牛：controller-manager.md.html">14 庖丁解牛：controller-manager.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/14 庖丁解牛：controller-manager.md.html">14 庖丁解牛：controller-manager</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/15 庖丁解牛：kube-scheduler.md.html">15 庖丁解牛：kube-scheduler.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/15 庖丁解牛：kube-scheduler.md.html">15 庖丁解牛：kube-scheduler</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/16 庖丁解牛：kubelet.md.html">16 庖丁解牛：kubelet.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/16 庖丁解牛：kubelet.md.html">16 庖丁解牛：kubelet</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/17 庖丁解牛：kube-proxy.md.html">17 庖丁解牛：kube-proxy.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/17 庖丁解牛：kube-proxy.md.html">17 庖丁解牛：kube-proxy</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/18  庖丁解牛：Container Runtime （Docker）.md.html">18  庖丁解牛：Container Runtime （Docker）.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/18  庖丁解牛：Container Runtime （Docker）.md.html">18  庖丁解牛：Container Runtime （Docker）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/19 Troubleshoot.md.html">19 Troubleshoot.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/19 Troubleshoot.md.html">19 Troubleshoot</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/20 扩展增强：Dashboard.md.html">20 扩展增强：Dashboard.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/20 扩展增强：Dashboard.md.html">20 扩展增强：Dashboard</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/21 扩展增强：CoreDNS.md.html">21 扩展增强：CoreDNS.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/21 扩展增强：CoreDNS.md.html">21 扩展增强：CoreDNS</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/22 服务增强：Ingress.md.html">22 服务增强：Ingress.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/22 服务增强：Ingress.md.html">22 服务增强：Ingress</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/23 监控实践：对 K8S 集群进行监控.md.html">23 监控实践：对 K8S 集群进行监控.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/23 监控实践：对 K8S 集群进行监控.md.html">23 监控实践：对 K8S 集群进行监控</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/Kubernetes 从上手到实践/24 总结.md.html">24 总结.md.html</a>
+                    <a href="/专栏/Kubernetes 从上手到实践/24 总结.md.html">24 总结</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>08 安全重点 认证和授权</h1>
-
 <p>本节我们将开始学习将 K8S 应用于生产环境中至关重要的一环，权限控制。当然，不仅是 K8S 对于任何应用于生产环境中的系统，权限管理或者说访问控制都是很重要的。</p>
-
 <h2>整体概览</h2>
-
 <p>通过前面的学习，我们已经知道 K8S 中几乎所有的操作都需要经过 <code>kube-apiserver</code> 处理，所以为了安全起见，K8S 为它提供了三类安全访问的措施。分别是：用于识别用户身份的认证（Authentication），用于控制用户对资源访问的授权（Authorization）以及用于资源管理方面的准入控制（Admission Control）。</p>
-
 <p>下面的图基本展示了这一过程。来自客户端的请求分别经过认证，授权，准入控制之后，才能真正执行。</p>
-
 <p>当然，这里说<strong>基本展示</strong>是因为我们可以直接通过 <code>kubectl proxy</code> 的方式直接通过 HTTP 请求访问 <code>kube-apiserver</code> 而无需任何认证过程。</p>
-
 <p>另外，也可通过在 <code>kube-apiserver</code> 所启动的机器上，直接访问启动时 <code>--insecure-port</code> 参数配置的端口进行绕过认证和授权，默认是 8080。为了避免安全问题，也可将此参数设置为 0 以规避问题。注意：这个参数和 <code>--insecure-bind-address</code> 都已过期，并将在未来的版本移除。</p>
-
 <pre><code>+-----------------------------------------------------------------------------------------------------------+
-
 |                                                                                                           |
-
 |               +---------------------------------------------------------------------------+    +--------+ |
-
 |               |                                                                           |    |        | |
-
 | +--------+    |   +------------------+   +----------------+   +--------------+   +------+ |    |        | |
-
 | |        |    |   |                  |   |                |   | Admission    |   |      | |    |        | |
-
 | | Client +------&gt; | Authentication   +-&gt; | Authorization  +-&gt; | Control      +-&gt; |Logic | +--&gt; | Others | |
-
 | |        |    |   |                  |   |                |   |              |   |      | |    |        | |
-
 | +--------+    |   +------------------+   +----------------+   +--------------+   +------+ |    |        | |
-
 |               |                                                                           |    |        | |
-
 |               |                                                                           |    |        | |
-
 |               |                          Kube-apiserver                                   |    |        | |
-
 |               +---------------------------------------------------------------------------+    +--------+ |
-
 |                                                                                                           |
-
 +-----------------------------------------------------------------------------------------------------------+
-
 </code></pre>
-
 <h2>认证（Authentication）</h2>
-
 <p>认证，无非是判断当前发起请求的用户身份是否正确。例如，我们通常登录服务器时候需要输入用户名和密码，或者 SSH Keys 之类的。</p>
-
 <p>在讲认证前，我们应该先理一下 K8S 中的用户。</p>
-
 <p>K8S 中有两类用户，一般用户及 <code>Service Account</code>。</p>
-
 <ul>
-
 <li>一般用户：一般用户只能通过外部服务进行管理，由管理员进行私钥分发。这也意味着 K8S 中并没有任何表示一般用户的对象，所以一般用户是无法通过 API 直接添加到集群的。</li>
-
 <li><code>Service Account</code>：由 K8S API 管理的用户，与特定的 <code>NameSpace</code>（命名空间）绑定。由 <code>API Server</code> 自动创建或者通过 API 手动进行创建。 同时，它会自动挂载到 <code>Pod</code> 中容器的 <code>/var/run/secrets/kubernetes.io/serviceaccount/</code> 目录中，其中会包含 <code>NameSpace</code> <code>token</code> 等信息，并允许集群内进程与 <code>API Server</code> 进行交互。</li>
-
 </ul>
-
 <p>对集群操作的 API 都是与用户相关联的，或者被视为匿名请求。匿名请求可通过 <code>kube-apiserver</code> 的 <code>--anonymous-auth</code> 参数进行控制，默认是开启的，匿名用户默认的用户名为 <code>system:anonymous</code>，所属组为 <code>system:unauthenticated</code>。</p>
-
 <p>理完 K8S 中的用户，我们来看下 K8S 中的认证机制。</p>
-
 <p>K8S 支持以下认证机制：</p>
-
 <ul>
-
 <li>X509 客户端证书：这个认证机制我们并不陌生，我们前面搭建集群时，虽然没有指定配置文件，但 <code>kubeadm</code> 已经添加了默认参数 <code>--client-ca-file=/etc/kubernetes/pki/ca.crt</code> 而在进行认证时，将会使用客户端证书 subject 的 <code>CN</code> 域（Common Name）用作用户名，<code>O</code> 域（Organization）用作组名。</li>
-
 <li>引导 Token：这个我们也不会陌生，前面我们搭建集群时，当集群通过 <code>kubeadm init</code> 初始化完成后，将会展示一行提示，其中便携带着引导 Token。如果不使用 <code>kubeadm</code> 时，需要设置 <code>--enable-bootstrap-token-auth=true</code>。</li>
-
 <li>静态 Token 文件：启动 <code>Kube-apiserver</code> 时，设置 <code>--token-auth-file=SOMEFILE</code> 并在请求时，加上 <code>Authorization: Bearer TOKEN</code> 的请求头即可。</li>
-
 <li>静态密码文件：与静态 Token 文件类似，设置 <code>--basic-auth-file=SOMEFILE</code> 并在请求时，加上 <code>Authorization: Basic BASE64ENCODED(USER:PASSWORD)</code> 的头即可。</li>
-
 <li>Service Account Token：这是默认启用的机制，关于 <code>Service Account</code> 前面也已经介绍过了，不再赘述。</li>
-
 <li>OpenID：其实是提供了 <a href="https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html">OAuth2</a> 的认证支持，像 Azure 或 Google 这类云厂商都提供了相关支持。</li>
-
 <li>认证代理：主要是配合身份验证代理进行使用，比如提供一个通用的授权网关供用户使用。</li>
-
 <li>Webhook：提供 Webhook 配合一个远端服务器使用。</li>
-
 </ul>
-
 <p>可选择同时开启多个认证机制。比如当我们使用 <code>kubeadm</code> 创建集群时，默认便会开启 X509 客户端证书和引导 Token 等认证机制。</p>
-
 <h2>授权（Authorization）</h2>
-
 <p>授权，也就是在验证当前发起请求的用户是否有相关的权限。例如，我们在 Linux 系统中常见的文件夹权限之类的。</p>
-
 <p>授权是以认证的结果为基础的，授权机制检查用户通过认证后的请求中所包含的属性来进行判断。</p>
-
 <p>K8S 支持多种授权机制，用户想要正确操作资源，则必须获得授权，所以 K8S 默认情况下的权限都是拒绝。当某种授权机制通过或者拒绝后，便会立即返回，不再去请求其他的授权机制；当所有授权机制都未通过时便会返回 403 错误了。</p>
-
 <p>K8S 支持以下授权机制：</p>
-
 <ul>
-
 <li>ABAC(Attribute-Based Access Control)：基于属性的访问控制，在使用时需要先配置 <code>--authorization-mode=ABAC</code> 和 <code>--authorization-policy-file=SOME_FILENAME</code> 。ABAC 本身设计是非常好的，但是在 K8S 中使用却有点过于繁琐，这里不再赘述。</li>
-
 <li>RBAC(Role-based access control)：基于角色的访问控制，自 K8S 1.6 开始 beta，1.8 进入稳定版，已被大量使用。而当我们使用 <code>kubeadm</code> 安装集群的时候，默认将会添加 <code>--authorization-mode=Node,RBAC</code> 的参数，表示同时开启 <code>Node</code> 和 <code>RBAC</code> 授权机制。当然，如果你对 <a href="https://www.mongodb.com/cn">MongoDB</a> 有所了解或者比较熟悉的话，这部分的内容就会很容易理解，因为 MongoDB 的权限控制也使用了 <code>RBAC</code> （Role-based access control）。</li>
-
 <li>Node：这是一种特殊用途的授权机制，专门用于对 <code>kubelet</code> 发出的 API 请求做授权验证。</li>
-
 <li>Webhook：使用外部的 Server 通过 API 进行授权校验，需要在启动时候增加 <code>--authorization-webhook-config-file=SOME_FILENAME</code> 以及 <code>--authorization-mode=Webhook</code></li>
-
 <li>AlwaysAllow：默认配置，允许全部。</li>
-
 <li>AlwaysDeny：通常用于测试，禁止全部。</li>
-
 </ul>
-
 <h2>角色（Role）</h2>
-
 <p>上面提到了 <code>RBAC</code>，为了能更好的理解，我们需要先认识下 K8S 中的角色。K8S 中的角色从类别上主要有两类，<code>Role</code> 和 <code>ClusterRole</code>。</p>
-
 <ul>
-
 <li><code>Role</code>：可以当作是一组权限的集合，但被限制在某个 <code>Namespace</code> 内（K8S 的 <code>Namespace</code>）。</li>
-
 <li><code>ClusterRole</code>：对于集群级别的资源是不被 <code>Namespace</code> 所限制的，并且还有一些非资源类的请求，所以便产生了它。</li>
-
 </ul>
-
 <p>当已经了解到角色后，剩下给用户授权也就只是需要做一次绑定即可。在 K8S 中将这一过程称之为 binding，即 <code>rolebinding</code> 和 <code>clusterrolebinding</code>。 我们来看下集群刚初始化后的情况：</p>
-
 <pre><code>➜  ~ kubectl get roles --all-namespaces=true
-
 NAMESPACE     NAME                                             AGE
-
 kube-public   kubeadm:bootstrap-signer-clusterinfo             1h
-
 kube-public   system:controller:bootstrap-signer               1h
-
 kube-system   extension-apiserver-authentication-reader        1h
-
 kube-system   kube-proxy                                       1h
-
 kube-system   kubeadm:kubelet-config-1.12                      1h
-
 kube-system   kubeadm:nodes-kubeadm-config                     1h
-
 kube-system   system::leader-locking-kube-controller-manager   1h
-
 kube-system   system::leader-locking-kube-scheduler            1h
-
 kube-system   system:controller:bootstrap-signer               1h
-
 kube-system   system:controller:cloud-provider                 1h
-
 kube-system   system:controller:token-cleaner                  1h
-
 ➜  ~ kubectl get rolebindings --all-namespaces=true
-
 NAMESPACE     NAME                                             AGE
-
 kube-public   kubeadm:bootstrap-signer-clusterinfo             1h
-
 kube-public   system:controller:bootstrap-signer               1h
-
 kube-system   kube-proxy                                       1h
-
 kube-system   kubeadm:kubelet-config-1.12                      1h
-
 kube-system   kubeadm:nodes-kubeadm-config                     1h
-
 kube-system   system::leader-locking-kube-controller-manager   1h
-
 kube-system   system::leader-locking-kube-scheduler            1h
-
 kube-system   system:controller:bootstrap-signer               1h
-
 kube-system   system:controller:cloud-provider                 1h
-
 kube-system   system:controller:token-cleaner                  1h
-
 </code></pre>
-
 <p>可以看到默认已经存在了一些 <code>role</code> 和 <code>rolebindings</code>。 对于这部分暂且不做过多说明，我们来看下对于集群全局有效的 <code>ClusterRole</code> 。</p>
-
 <pre><code>➜  ~ kubectl get clusterroles
-
 NAME                                                                   AGE
-
 admin                                                                  1h
-
 cluster-admin                                                          1h
-
 edit                                                                   1h
-
 flannel                                                                1h
-
 system:aggregate-to-admin                                              1h
-
 system:aggregate-to-edit                                               1h
-
 system:aggregate-to-view                                               1h
-
 system:auth-delegator                                                  1h
-
 system:aws-cloud-provider                                              1h
-
 system:basic-user                                                      1h
-
 system:certificates.k8s.io:certificatesigningrequests:nodeclient       1h
-
 system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   1h
-
 system:controller:attachdetach-controller                              1h
-
 system:controller:certificate-controller                               1h
-
 system:controller:clusterrole-aggregation-controller                   1h
-
 system:controller:cronjob-controller                                   1h
-
 system:controller:daemon-set-controller                                1h
-
 system:controller:deployment-controller                                1h
-
 system:controller:disruption-controller                                1h
-
 system:controller:endpoint-controller                                  1h
-
 system:controller:expand-controller                                    1h
-
 system:controller:generic-garbage-collector                            1h
-
 system:controller:horizontal-pod-autoscaler                            1h
-
 system:controller:job-controller                                       1h
-
 system:controller:namespace-controller                                 1h
-
 system:controller:node-controller                                      1h
-
 system:controller:persistent-volume-binder                             1h
-
 system:controller:pod-garbage-collector                                1h
-
 system:controller:pv-protection-controller                             1h
-
 system:controller:pvc-protection-controller                            1h
-
 system:controller:replicaset-controller                                1h
-
 system:controller:replication-controller                               1h
-
 system:controller:resourcequota-controller                             1h
-
 system:controller:route-controller                                     1h
-
 system:controller:service-account-controller                           1h
-
 system:controller:service-controller                                   1h
-
 system:controller:statefulset-controller                               1h
-
 system:controller:ttl-controller                                       1h
-
 system:coredns                                                         1h
-
 system:csi-external-attacher                                           1h
-
 system:csi-external-provisioner                                        1h
-
 system:discovery                                                       1h
-
 system:heapster                                                        1h
-
 system:kube-aggregator                                                 1h
-
 system:kube-controller-manager                                         1h
-
 system:kube-dns                                                        1h
-
 system:kube-scheduler                                                  1h
-
 system:kubelet-api-admin                                               1h
-
 system:node                                                            1h
-
 system:node-bootstrapper                                               1h
-
 system:node-problem-detector                                           1h
-
 system:node-proxier                                                    1h
-
 system:persistent-volume-provisioner                                   1h
-
 system:volume-scheduler                                                1h
-
 view                                                                   1h
-
 ➜  ~ kubectl get clusterrolebindings
-
 NAME                                                   AGE
-
 cluster-admin                                          1h
-
 flannel                                                1h
-
 kubeadm:kubelet-bootstrap                              1h
-
 kubeadm:node-autoapprove-bootstrap                     1h
-
 kubeadm:node-autoapprove-certificate-rotation          1h
-
 kubeadm:node-proxier                                   1h
-
 system:aws-cloud-provider                              1h
-
 system:basic-user                                      1h
-
 system:controller:attachdetach-controller              1h
-
 system:controller:certificate-controller               1h
-
 system:controller:clusterrole-aggregation-controller   1h
-
 system:controller:cronjob-controller                   1h
-
 system:controller:daemon-set-controller                1h
-
 system:controller:deployment-controller                1h
-
 system:controller:disruption-controller                1h
-
 system:controller:endpoint-controller                  1h
-
 system:controller:expand-controller                    1h
-
 system:controller:generic-garbage-collector            1h
-
 system:controller:horizontal-pod-autoscaler            1h
-
 system:controller:job-controller                       1h
-
 system:controller:namespace-controller                 1h
-
 system:controller:node-controller                      1h
-
 system:controller:persistent-volume-binder             1h
-
 system:controller:pod-garbage-collector                1h
-
 system:controller:pv-protection-controller             1h
-
 system:controller:pvc-protection-controller            1h
-
 system:controller:replicaset-controller                1h
-
 system:controller:replication-controller               1h
-
 system:controller:resourcequota-controller             1h
-
 system:controller:route-controller                     1h
-
 system:controller:service-account-controller           1h
-
 system:controller:service-controller                   1h
-
 system:controller:statefulset-controller               1h
-
 system:controller:ttl-controller                       1h
-
 system:coredns                                         1h
-
 system:discovery                                       1h
-
 system:kube-controller-manager                         1h
-
 system:kube-dns                                        1h
-
 system:kube-scheduler                                  1h
-
 system:node                                            1h
-
 system:node-proxier                                    1h
-
 system:volume-scheduler                                1h
-
 </code></pre>
-
 <p>可以看到 K8S 中默认已经有很多的 <code>ClusterRole</code> 和 <code>clusterrolebindings</code> 了，我们选择其中一个做下探究。</p>
-
 <h2>查看用户权限</h2>
-
 <p>我们一直都在使用 <code>kubectl</code> 对集群进行操作，那么当前用户是什么权限呢？ 对应于 <code>RBAC</code> 中又是什么情况呢？</p>
-
 <pre><code>➜  ~ kubectl config current-context   # 获取当前上下文
-
 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ce7f9eee9fee2e9f8e9ffa1ede8e1e5e2cce7f9eee9fee2e9f8e9ff">[email&#160;protected]</a>  # 名为 kubernetes-admin 的用户，在名为 kubernetes 的 cluster 上
-
 ➜  ~ kubectl config view users -o yaml  # 查看 user 配置，以下省略了部分内容
-
 apiVersion: v1
-
-clusters:                                   
-
-- cluster:                            
-
+clusters:
+- cluster:
     ...
-
-contexts:                    
-
-- context:  
-
+contexts:
+- context:
     cluster: kubernetes
-
     user: kubernetes-admin
-
   name: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dec0d7d0c7dbd0c1d0c698d4d1d8dcdbf5dec0d7d0c7dbd0c1d0c6">[email&#160;protected]</a>
-
 current-context: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0abb5a2a5b2aea5b4a5b3eda1a4ada9ae80abb5a2a5b2aea5b4a5b3">[email&#160;protected]</a>
-
 kind: Config
-
 preferences: {}
-
 users:
-
 - name: kubernetes-admin
-
   user:
-
     client-certificate-data: REDACTED
-
     client-key-data: REDACTED
-
 </code></pre>
-
 <p><code>client-certificate-data</code> 的部分默认是不显示的，而它的<strong>内容实际是通过 base64 加密后的证书内容</strong>。我们可以通过通过以下方式进行查看</p>
-
-<pre><code>➜  ~ kubectl config view users --raw -o jsonpath='{ .users[?(@.name == &quot;kubernetes-admin&quot;)].user.client-certificate-data}' |base64 -d  
-
+<pre><code>➜  ~ kubectl config view users --raw -o jsonpath='{ .users[?(@.name == &quot;kubernetes-admin&quot;)].user.client-certificate-data}' |base64 -d
 -----BEGIN CERTIFICATE-----
-
 MIIC8jCCAdqgAwIBAgIIGuC27C9B8LIwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
-
 ...
-
 kae1A/d4D5Cm5Qt7M5gr3SxqE5t+O7DP0YhuEPlfY7RzYDksYa8=
-
 -----END CERTIFICATE-----
-
 ➜  ~ kubectl config view users --raw -o jsonpath='{ .users[?(@.name == &quot;kubernetes-admin&quot;)].user.client-certificate-data}' |base64 -d |openssl x509 -text -noout  # 限于篇幅 省略部分输出
-
 Certificate:
-
     Data:
-
         Version: 3 (0x2)
-
         Serial Number: 1936748965290700978 (0x1ae0b6ec2f41f0b2)
-
     Signature Algorithm: sha256WithRSAEncryption
-
         Issuer: CN=kubernetes
-
         Subject: O=system:masters, CN=kubernetes-admin
-
         ...
-
 </code></pre>
-
 <p>根据前面认证部分的内容，我们知道当前的用户是 <code>kubernetes-admin</code> （CN 域），所属组是 <code>system:masters</code> （O 域） 。</p>
-
 <p>我们看下 <code>clusterrolebindings</code> 中的 <code>cluster-admin</code> 。</p>
-
-<pre><code>➜  ~ kubectl get clusterrolebindings  cluster-admin  -o yaml                         
-
+<pre><code>➜  ~ kubectl get clusterrolebindings  cluster-admin  -o yaml
 apiVersion: rbac.authorization.k8s.io/v1
-
 kind: ClusterRoleBinding
-
 metadata:
-
   annotations:
-
     rbac.authorization.kubernetes.io/autoupdate: &quot;true&quot;
-
   ...
-
   labels:
-
     kubernetes.io/bootstrapping: rbac-defaults
-
   name: cluster-admin
-
   resourceVersion: &quot;116&quot;
-
   selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/cluster-admin
-
   uid: 71c550f1-e0e4-11e8-866a-fa163e938a99
-
 roleRef:
-
   apiGroup: rbac.authorization.k8s.io
-
   kind: ClusterRole
-
   name: cluster-admin
-
 subjects:
-
 - apiGroup: rbac.authorization.k8s.io
-
   kind: Group
-
   name: system:masters
-
 </code></pre>
-
 <p>重点内容在 <code>roleRef</code> 和 <code>subjects</code> 中，名为 <code>cluster-admin</code> 的 <code>ClusterRole</code> 与名为 <code>system:masters</code> 的 <code>Group</code> 相绑定。我们继续探究下它们所代表的含义。</p>
-
 <p>先看看这个 <code>ClusterRole</code> 的实际内容：</p>
-
 <pre><code>➜  ~ kubectl get clusterrole cluster-admin -o yaml
-
 apiVersion: rbac.authorization.k8s.io/v1
-
 kind: ClusterRole
-
 metadata:
-
   annotations:
-
     rbac.authorization.kubernetes.io/autoupdate: &quot;true&quot;
-
   ...
-
   labels:
-
     kubernetes.io/bootstrapping: rbac-defaults
-
   name: cluster-admin
-
   resourceVersion: &quot;58&quot;
-
   selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/cluster-admin
-
   uid: 71307108-e0e4-11e8-866a-fa163e938a99
-
 rules:
-
 - apiGroups:
-
   - '*'
-
   resources:
-
   - '*'
-
   verbs:
-
   - '*'
-
 - nonResourceURLs:
-
   - '*'
-
   verbs:
-
   - '*'
-
 </code></pre>
-
 <p><code>rules</code> 中定义了它所能操作的资源及对应动作，<code>*</code> 是通配符。</p>
-
 <p>到这里，我们就可以得出结论了，当前用户 <code>kubernetes-admin</code> 属于 <code>system:masters</code> 组，而这个组与 <code>cluster-admin</code> 这个 <code>ClusterRole</code> 所绑定，所以用户也就继承了其权限。具备了对多种资源和 API 的相关操作权限。</p>
-
 <h2>实践：创建权限可控的用户</h2>
-
 <p>前面是通过实际用户来反推它所具备的权限，接下来我们开始实践的部分，创建用户并为它进行授权。</p>
-
 <p>我们要创建的用户名为 <code>backend</code> 所属组为 <code>dev</code>。</p>
-
 <h3>创建 NameSpace</h3>
-
 <p>为了演示，这里创建一个新的 <code>NameSpace</code> ，名为 <code>work</code>。</p>
-
 <pre><code>➜  ~ kubectl create namespace work
-
 namespace/work created
-
 ➜  ~ kubectl get ns work
-
 NAME   STATUS   AGE
-
 work   Active   14s
-
 </code></pre>
-
 <h3>创建用户</h3>
-
 <h4>创建私钥</h4>
-
 <pre><code>➜  ~ mkdir work
-
 ➜  ~ cd work
-
 ➜  work openssl genrsa -out backend.key 2048
-
 Generating RSA private key, 2048 bit long modulus
-
-..........................................+++                            
-
-........................+++                   
-
-e is 65537 (0x10001)            
-
-➜  work ls                                       
-
-backend.key 
+..........................................+++
+........................+++
+e is 65537 (0x10001)
+➜  work ls
+backend.key
 ➜  work cat backend.key                                              
-
------BEGIN RSA PRIVATE KEY-----                                          
-
+-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEAzk7blZthwSzachPxrk6pHsuaImTVh6Iw8mNDmtn6sqOqBfZS
-
 ...
-
 bNKDWDk8HZREugaOAwjt7xaWOlr9SPCCoXrWoaA1z2215IC4qSA2Nw==
-
 -----END RSA PRIVATE KEY-----
-
 </code></pre>
-
 <h4>使用私钥生成证书请求。前面已经讲过关于认证的部分，在这里需要指定 <code>subject</code> 信息，传递用户名和组名</h4>
-
 <pre><code>➜  work openssl req -new -key backend.key -out backend.csr -subj &quot;/CN=backend/O=dev&quot;
-
 ➜  work ls
-
 backend.csr  backend.key
-
 ➜  work cat backend.csr
-
 -----BEGIN CERTIFICATE REQUEST-----
-
 MIICZTCCAU0CAQAwIDEQMA4GA1UEAwwHYmFja2VuZDEMMAoGA1UECgwDZGV2MIIB
-
 ...
-
 lpoSVlNA0trJoiEiZjUqMfXX6ogBhQC4aeRfmbXkW2ZCNxsIm3PDk1Y=
-
 -----END CERTIFICATE REQUEST-----
-
 </code></pre>
-
 <h4>使用 CA 进行签名。K8S 默认的证书目录为 <code>/etc/kubernetes/pki</code>。</h4>
-
 <pre><code>➜  work openssl x509 -req -in backend.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out backend.crt -days 365
-
 Signature ok
-
 subject=/CN=backend/O=dev
-
 Getting CA Private Key
-
 ➜  work ls
-
 backend.crt  backend.csr  backend.key
-
 </code></pre>
-
 <p>查看生成的证书文件</p>
-
 <pre><code>➜  work openssl x509 -in backend.crt -text -noout
-
 Certificate:
-
     Data:
-
         Version: 1 (0x0)
-
         Serial Number:
-
             d9:7f:62:f7:38:66:2a:7b
-
     Signature Algorithm: sha256WithRSAEncryption
-
         Issuer: CN=kubernetes
-
         Subject: CN=backend, O=dev
-
         ...
-
 </code></pre>
-
 <p>可以看到 <code>CN</code> 域和 <code>O</code> 域已经正确设置</p>
-
 <h4>添加 context</h4>
-
 <pre><code>➜  work kubectl config set-credentials backend --client-certificate=/root/work/backend.crt  --client-key=/root/work/backend.key
-
 User &quot;backend&quot; set.
-
 ➜  work kubectl config set-context backend-context --cluster=kubernetes --namespace=work --user=backend
-
 Context &quot;backend-context&quot; created.
-
 </code></pre>
-
 <h4>使用新用户测试访问</h4>
-
 <pre><code>➜  work kubectl --context=backend-context get pods
-
 Error from server (Forbidden): pods is forbidden: User &quot;backend&quot; cannot list resource &quot;pods&quot; in API group &quot;&quot; in the namespace &quot;work&quot;
-
 # 可能看得不够清楚，我们添加 `-v` 参数来显示详情
-
 ➜  work kubectl --context=backend-context get pods -n work -v 5
-
 I1109 05:35:11.870639   18626 helpers.go:201] server response object: [{
-
   &quot;kind&quot;: &quot;Status&quot;,
-
   &quot;apiVersion&quot;: &quot;v1&quot;,
-
   &quot;metadata&quot;: {},
-
   &quot;status&quot;: &quot;Failure&quot;,
-
   &quot;message&quot;: &quot;pods is forbidden: User \&quot;backend\&quot; cannot list resource \&quot;pods\&quot; in API group \&quot;\&quot; in the namespace \&quot;work\&quot;&quot;,
-
   &quot;reason&quot;: &quot;Forbidden&quot;,
-
   &quot;details&quot;: {
-
     &quot;kind&quot;: &quot;pods&quot;
-
   },
-
   &quot;code&quot;: 403
-
 }]
-
 F1109 05:35:11.870688   18626 helpers.go:119] Error from server (Forbidden): pods is forbidden: User &quot;backend&quot; cannot list resource &quot;pods&quot; in API group &quot;&quot; in the namespace &quot;work&quot;
-
 </code></pre>
-
 <p>可以看到已经使用了新的 <code>backend</code> 用户，并且默认的 <code>Namespace</code> 设置成了 <code>work</code>。</p>
-
 <h4>创建 Role</h4>
-
 <p>我们想要让这个用户只具备查看 <code>Pod</code> 的权限。先来创建一个配置文件。</p>
-
-<pre><code>➜  work cat &lt;&lt;EOF &gt; backend-role.yaml 
-
+<pre><code>➜  work cat &lt;&lt;EOF &gt; backend-role.yaml
 kind: Role
-
 apiVersion: rbac.authorization.k8s.io/v1
-
 metadata:
-
   namespace: work
-
   name: backend-role
-
 rules:
-
 - apiGroups: [&quot;&quot;]
-
   resources: [&quot;pods&quot;]
-
   verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]
-
 EOF
-
 </code></pre>
-
 <p>创建并查看已生成的 <code>Role</code>。</p>
-
-<pre><code>➜  work kubectl create -f backend-role.yaml 
-
+<pre><code>➜  work kubectl create -f backend-role.yaml
 role.rbac.authorization.k8s.io/backend-role created
-
 ➜  work kubectl get roles  -n work -o yaml
-
 apiVersion: v1
-
 items:
-
 - apiVersion: rbac.authorization.k8s.io/v1
-
   kind: Role
-
   metadata:
-
     ...
-
     name: backend-role
-
     namespace: work
-
     selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/work/roles/backend-role
-
   rules:
-
   - apiGroups:
-
     - &quot;&quot;
-
     resources:
-
     - pods
-
     verbs:
-
     - get
-
     - list
-
     - watch
-
 kind: List
-
 metadata:
-
   resourceVersion: &quot;&quot;
-
   selfLink: &quot;&quot;
-
 </code></pre>
-
 <h4>创建 Rolebinding</h4>
-
 <p>先创建一个配置文件。</p>
-
 <pre><code>➜  work cat &lt;&lt;EOF &gt; backend-rolebind.yaml
-
 kind: RoleBinding
-
 apiVersion: rbac.authorization.k8s.io/v1
-
 metadata:
-
-  name: backend-rolebinding          
-
+  name: backend-rolebinding
   namespace: work
-
-subjects:      
-
+subjects:
 - kind: User
-
   name: backend
-
-  apiGroup: &quot;&quot;     
-
-roleRef:    
-
-  kind: Role 
-
-  name: backend-role
-
   apiGroup: &quot;&quot;
-
+roleRef:
+  kind: Role
+  name: backend-role
+  apiGroup: &quot;&quot;
 EOF
-
 </code></pre>
-
 <p>创建并查看已生成的 Rolebinding 。</p>
-
 <pre><code>➜  work kubectl create -f backend-rolebind.yaml
-
 rolebinding.rbac.authorization.k8s.io/backend-rolebinding created
-
 ➜  work kubectl get rolebinding -o yaml -n work
-
 apiVersion: v1
-
 items:
-
 - apiVersion: rbac.authorization.k8s.io/v1
-
   kind: RoleBinding
-
   metadata:
-
     name: backend-rolebinding
-
     namespace: work
-
     ...
-
   roleRef:
-
     apiGroup: rbac.authorization.k8s.io
-
     kind: Role
-
     name: backend-role
-
   subjects:
-
   - apiGroup: rbac.authorization.k8s.io
-
     kind: User
-
     name: backend
-
 kind: List
-
 metadata:
-
   resourceVersion: &quot;&quot;
-
   selfLink: &quot;&quot;
-
 </code></pre>
-
 <h4>测试用户权限</h4>
-
 <pre><code>➜  work kubectl --context=backend-context get pods -n work
-
 No resources found.
-
 ➜  work kubectl --context=backend-context get ns
-
 Error from server (Forbidden): namespaces is forbidden: User &quot;backend&quot; cannot list resource &quot;namespaces&quot; in API group &quot;&quot; at the cluster scope
-
 ➜  work kubectl --context=backend-context get deploy -n work
-
 Error from server (Forbidden): deployments.extensions is forbidden: User &quot;backend&quot; cannot list resource &quot;deployments&quot; in API group &quot;extensions&quot; in the namespace &quot;work&quot;
-
 </code></pre>
-
 <p>可以看到用户已经具备查看 <code>Pod</code> 的权限，但并不能查看 <code>Namespace</code> 或者 <code>deployment</code> 等其他资源。当然，K8S 也内置了一种很方便的调试机制。</p>
-
 <pre><code>➜  work kubectl auth can-i list pods -n work --as=&quot;backend&quot;
-
 yes
-
 ➜  work kubectl auth can-i list deploy -n work --as=&quot;backend&quot;
-
 no - no RBAC policy matched
-
 </code></pre>
-
 <p><code>--as</code> 是一种建立在 K8S 认证机制之上的机制，可以便于系统管理员验证授权情况，或进行调试。</p>
-
 <p>你也可以仿照 <code>~/.kube/config</code> 文件的内容，将当前生成的证书及私钥文件等写入到配置文件中，通过指定 <code>KUBECONFIG</code> 的环境变量，或者给 <code>kubectl</code> 传递 <code>--kubeconfig</code> 参数来使用。</p>
-
 <h2>总结</h2>
-
 <p>本节中，我们学习了 K8S 的认证及授权逻辑，K8S 支持多种认证及授权模式，可按需使用。通过 X509 客户端证书认证的方式使用比较方便也比较推荐，在客户端证书的 <code>CN</code> 域和 <code>O</code> 域可以指定用户名和所属组名。</p>
-
 <p>RBAC 的授权模式现在使用最多，可以通过对 <code>Role</code> 和 <code>subjects</code> (可以是用户或组) 进行绑定，以达到授权的目的。</p>
-
 <p>最后，我们实际新创建了一个用户，并对其授予了预期的权限。在此过程中也涉及到了 <code>openssl</code> 客户端的常规操作，在之后也会常常用到。</p>
-
 <p>下节，我们将开始部署实际的项目到 K8S 中，逐步掌握生成环境中对 K8S 的使用实践。</p>
-
 <p>PS: 也许你会觉得切换 <code>Namespace</code> 之类的操作很繁琐，有一个项目：<a href="https://github.com/ahmetb/kubectx">kubectx</a> 可帮你简化这些步骤，推荐尝试。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/Kubernetes 从上手到实践/07 集群管理：以 Redis 为例-部署及访问.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/Kubernetes 从上手到实践/09 应用发布：部署实际项目.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"7099723aa9bc3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

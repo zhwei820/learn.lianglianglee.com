@@ -12,9 +12,7 @@
         <!-- theme css & js -->
         <meta name="generator" content="Hexo 4.2.0">
     </head>
-
 <body>
-
 <div class="book-container">
     <div class="book-sidebar">
         <div class="book-brand">
@@ -27,86 +25,53 @@
             <ul class="uncollapsible">
                 <li><a href="/" class="current-tab">首页</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li><a href="../">上一级</a></li>
             </ul>
-
             <ul class="uncollapsible">
                 <li>
-
-                    
-                    <a href="/极客时间/Java基础36讲.md.html">Java基础36讲.md.html</a>
-
+                    <a href="/极客时间/Java基础36讲.md.html">Java基础36讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲.md.html</a>
-
+                    <a href="/极客时间/Java错误示例100讲.md.html">Java错误示例100讲</a>
                 </li>
                 <li>
-
-                    <a class="current-tab" href="/极客时间/Linux性能优化.md.html">Linux性能优化.md.html</a>
+                    <a class="current-tab" href="/极客时间/Linux性能优化.md.html">Linux性能优化</a>
                     
-
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲.md.html</a>
-
+                    <a href="/极客时间/MySQL实战45讲.md.html">MySQL实战45讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/从0开始学微服务.md.html">从0开始学微服务.md.html</a>
-
+                    <a href="/极客时间/从0开始学微服务.md.html">从0开始学微服务</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/代码精进之路.md.html">代码精进之路.md.html</a>
-
+                    <a href="/极客时间/代码精进之路.md.html">代码精进之路</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲.md.html</a>
-
+                    <a href="/极客时间/持续交付36讲.md.html">持续交付36讲</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略.md.html</a>
-
+                    <a href="/极客时间/程序员进阶攻略.md.html">程序员进阶攻略</a>
                 </li>
                 <li>
-
-                    
-                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议.md.html</a>
-
+                    <a href="/极客时间/趣谈网络协议.md.html">趣谈网络协议</a>
                 </li>
             </ul>
-
         </div>
     </div>
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
         <div class="sidebar-toggle-inner"></div>
     </div>
-
     <script>
         function add_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.add('show')
         }
-
         function remove_inner() {
             let inner = document.querySelector('.sidebar-toggle-inner')
             inner.classList.remove('show')
         }
-
         function sidebar_toggle() {
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
             let sidebar = document.querySelector('.book-sidebar')
@@ -121,8 +86,6 @@
                 content.classList.add('extend')
             }
         }
-
-
 function open_sidebar() {
     let sidebar = document.querySelector('.book-sidebar')
     let overlay = document.querySelector('.off-canvas-overlay')
@@ -135,9 +98,7 @@ function hide_canvas() {
     sidebar.classList.remove('show')
     overlay.classList.remove('show')
 }
-
     </script>
-
     <div class="off-canvas-content">
         <div class="columns">
             <div class="column col-12 col-lg-12">
@@ -351,7 +312,6 @@ $ grep 'model name' /proc/cpuinfo | wc -l
 <h3>场景一：CPU 密集型进程</h3>
 <p>首先，我们在第一个终端运行 stress 命令，模拟一个 CPU 使用率 100% 的场景：</p>
 <pre><code>$ stress --cpu 1 --timeout 600
-
 </code></pre>
 <p>接着，在第二个终端运行 uptime 查看平均负载的变化情况：</p>
 <pre><code># -d 参数表示高亮显示变化的区域
@@ -378,7 +338,6 @@ $ pidstat -u 5 1
 <h3>场景二：I/O 密集型进程</h3>
 <p>首先还是运行 stress 命令，但这次模拟 I/O 压力，即不停地执行 sync：</p>
 <pre><code>$ stress -i 1 --timeout 600
-
 </code></pre>
 <p>还是在第二个终端运行 uptime 查看平均负载的变化情况：</p>
 <pre><code>$ watch -d uptime
@@ -409,7 +368,6 @@ Linux 4.15.0 (ubuntu)     09/22/18     _x86_64_    (2 CPU)
 <p>当系统中运行进程超出 CPU 运行能力时，就会出现等待 CPU 的进程。</p>
 <p>比如，我们还是使用 stress，但这次模拟的是 8 个进程：</p>
 <pre><code>$ stress -c 8 --timeout 600
-
 </code></pre>
 <p>由于系统只有 2 个 CPU，明显比 8 个进程要少得多，因而，系统的 CPU 处于严重过载状态，平均负载高达 7.97：</p>
 <pre><code>$ uptime
@@ -823,7 +781,6 @@ Time per request:       859.942 [ms] (mean)
 <p>这次，我们在第二个终端，将测试的请求总数增加到 10000。这样当你在第一个终端使用性能分析工具时， Nginx 的压力还是继续。</p>
 <p>继续在第二个终端，运行 ab 命令：</p>
 <pre><code>$ ab -c 10 -n 10000 http://10.240.0.5:10000/
-
 </code></pre>
 <p>接着，回到第一个终端运行 top 命令，并按下数字 1 ，切换到每个 CPU 的使用率：</p>
 <pre><code>$ top
@@ -945,7 +902,6 @@ Time per request:       1138.229 [ms] (mean)
 <p>这次，我们在第二个终端，将测试的并发请求数改成 5，同时把请求时长设置为 10 分钟（-t 600）。这样，当你在第一个终端使用性能分析工具时， Nginx 的压力还是继续的。</p>
 <p>继续在第二个终端运行 ab 命令：</p>
 <pre><code>$ ab -c 5 -t 600 http://192.168.0.10:10000/
-
 </code></pre>
 <p>然后，我们在第一个终端运行 top 命令，观察系统的 CPU 使用情况：</p>
 <pre><code>$ top
@@ -1108,7 +1064,6 @@ $ perf report
 <p>这时，你就得继续排查，为什么被调用的命令，会导致 CPU 使用率升高或 I/O 升高等问题。这些复杂场景的案例，我会在后面的综合实战里详细分析。</p>
 <p>最后，在案例结束时，不要忘了清理环境，执行下面的 Docker 命令，停止案例中用到的 Nginx 进程：</p>
 <pre><code>$ docker rm -f nginx phpfpm
-
 </code></pre>
 <h2>execsnoop</h2>
 <p>在这个案例中，我们使用了 top、pidstat、pstree 等工具分析了系统 CPU 使用率高的问题，并发现 CPU 升高是短时进程 stress 导致的，但是整个分析过程还是比较复杂的。对于这类问题，有没有更好的方法监控呢？</p>
@@ -1196,7 +1151,6 @@ stress           30407  30405    0 /usr/local/bin/stress -t 1 -d 1
 <h3>操作和分析</h3>
 <p>安装完成后，我们首先执行下面的命令运行案例应用：</p>
 <pre><code>$ docker run --privileged --name=app -itd feisky/app:iowait
-
 </code></pre>
 <p>然后，输入 ps 命令，确认案例应用已正常启动。如果一切正常，你应该可以看到如下所示的输出：</p>
 <pre><code>$ ps aux | grep /app
@@ -1363,7 +1317,6 @@ $ perf report
 <p>看来，罪魁祸首是 app 内部进行了磁盘的直接 I/O 啊！</p>
 <p>下面的问题就容易解决了。我们接下来应该从代码层面分析，究竟是哪里出现了直接读请求。查看源码文件 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app.c">app.c</a>，你会发现它果然使用了 O_DIRECT 选项打开磁盘，于是绕过了系统缓存，直接对磁盘进行读写。</p>
 <pre><code>open(disk, O_RDONLY|O_DIRECT|O_LARGEFILE, 0755)
-
 </code></pre>
 <p>直接读写磁盘，对 I/O 敏感型应用（比如数据库系统）是很友好的，因为你可以在应用中，直接控制磁盘的读写。但在大部分情况下，我们最好还是通过系统缓存来优化磁盘 I/O，换句话说，删除 O_DIRECT 这个选项就是了。</p>
 <p><a href="https://github.com/feiskyer/linux-perf-examples/blob/master/high-iowait-process/app-fix1.c">app-fix1.c</a> 就是修改后的文件，我也打包成了一个镜像文件，运行下面的命令，你就可以启动它了：</p>
@@ -1922,11 +1875,9 @@ $ stress-ng -i 1 --hdd 1 --timeout 600
 <p>回忆一下我们学过的进程状态，你应该记得，等待 CPU 的进程已经在 CPU 的就绪队列中，处于运行状态；而等待 I/O 的进程则处于不可中断状态。</p>
 <p>另外，不同版本的 sysbench 运行参数也不是完全一样的。比如，在案例 Ubuntu 18.04 中，运行 sysbench 的格式为：</p>
 <pre><code>$ sysbench --threads=10 --max-time=300 threads run
-
 </code></pre>
 <p>而在 Ubuntu 16.04 中，运行格式则为（感谢 Haku 留言分享的执行命令）：</p>
 <pre><code>$ sysbench --num-threads=10 --max-time=300 --test=threads run
-
 </code></pre>
 <h2>问题 4：无法模拟出 I/O 性能瓶颈，以及 I/O 压力过大的问题</h2>
 <p><img src="assets/9e235aca4e92b68e84dba03881c591d8.png" alt="img" /></p>
@@ -1946,7 +1897,6 @@ $ stress-ng -i 1 --hdd 1 --timeout 600
 </ul>
 <p>你可以点击 <a href="https://github.com/feiskyer/linux-perf-examples/tree/master/high-iowait-process">Github</a> 查看它的源码，使用方法我写在了这里：</p>
 <pre><code>$ docker run --privileged --name=app -itd feisky/app:iowait /app -d /dev/sdb -s 67108864 -c 20
-
 </code></pre>
 <p>案例运行后，你可以执行 docker logs 查看它的日志。正常情况下，你可以看到下面的输出：</p>
 <pre><code>$ docker logs app
@@ -1976,7 +1926,6 @@ pling period of length delay.  The process and memory reports are instantaneous 
 <p>这也是留言比较多的一个问题，在 CentOS 系统中，使用 perf 工具看不到函数名，只能看到一些 16 进制格式的函数地址。</p>
 <p>其实，只要你观察一下 perf 界面最下面的那一行，就会发现一个警告信息：</p>
 <pre><code>Failed to open /opt/bitnami/php/lib/php/extensions/opcache.so, continuing without symbols
-
 </code></pre>
 <p>这说明，perf 找不到待分析进程依赖的库。当然，实际上这个案例中有很多依赖库都找不到，只不过，perf 工具本身只在最后一行显示警告信息，所以你只能看到这一条警告。</p>
 <p>这个问题，其实也是在分析 Docker 容器应用时，我们经常碰到的一个问题，因为容器应用依赖的库都在镜像里面。</p>
@@ -2015,11 +1964,9 @@ $ perf_4.9 report
 <p>首先是 perf 工具的版本问题。在最后一步中，我们运行的工具是容器内部安装的版本 perf_4.9，而不是普通的 perf 命令。这是因为， perf 命令实际上是一个软连接，会跟内核的版本进行匹配，但镜像里安装的 perf 版本跟虚拟机的内核版本有可能并不一致。</p>
 <p>另外，php-fpm 镜像是基于 Debian 系统的，所以安装 perf 工具的命令，跟 Ubuntu 也并不完全一样。比如， Ubuntu 上的安装方法是下面这样：</p>
 <pre><code>$ apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)）
-
 </code></pre>
 <p>而在 php-fpm 容器里，你应该执行下面的命令来安装 perf：</p>
 <pre><code>$ apt-get install -y linux-perf
-
 </code></pre>
 <p>当你按照前面这几种方法操作后，你就可以在容器内部看到 sqrt 的堆栈：</p>
 <p><img src="assets/76f8d0f36210001e750b0a82026dedaf.png" alt="img" /></p>
@@ -2079,7 +2026,6 @@ $ perf_4.9 report
 <p>threshold 的默认值为 0.5%，也就是说，事件比例超过 0.5% 时，调用栈才能被显示。再观察我们案例应用 app 的事件比例，只有 0.34%，低于 0.5%，所以看不到 app 的调用栈就很正常了。</p>
 <p>这种情况下，你只需要给 perf report 设置一个小于 0.34% 的阈值，就可以显示我们想看到的调用图了。比如执行下面的命令：</p>
 <pre><code>$ perf report -g graph,0.3
-
 </code></pre>
 <p>你就可以得到下面这个新的输出界面，展开 app 后，就可以看到它的调用栈了。</p>
 <p><img src="assets/b34f95617d13088671f4d9c2b9134693.png" alt="img" /></p>
@@ -2190,7 +2136,6 @@ $ perf_4.9 report
 <p>oom_adj 的范围是 [-17, 15]，数值越大，表示进程越容易被 OOM 杀死；数值越小，表示进程越不容易被 OOM 杀死，其中 -17 表示禁止 OOM。</p>
 <p>比如用下面的命令，你就可以把 sshd 进程的 oom_adj 调小为 -16，这样， sshd 进程就不容易被 OOM 杀死。</p>
 <pre><code>echo -16 &gt; /proc/$(pidof sshd)/oom_adj
-
 </code></pre>
 <h2>如何查看内存使用情况</h2>
 <p>通过了解内存空间的分布，以及内存的分配和回收，我想你对内存的工作原理应该有了大概的认识。当然，系统的实际工作原理更加复杂，也会涉及其他一些机制，这里我只讲了最主要的原理。掌握了这些，你可以对内存的运作有一条主线认识，不至于脑海里只有术语名词的堆砌。</p>
@@ -2339,7 +2284,6 @@ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
 <p>正常情况下，空闲系统中，你应该看到的是，这几个值在多次结果中一直保持不变。</p>
 <p>接下来，到第二个终端执行 dd 命令，通过读取随机设备，生成一个 500MB 大小的文件：</p>
 <pre><code>$ dd if=/dev/urandom of=/tmp/file bs=1M count=500
-
 </code></pre>
 <p>然后再回到第一个终端，观察 Buffer 和 Cache 的变化情况：</p>
 <pre><code>procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
@@ -2474,7 +2418,6 @@ sudo apt-get install -y bcc-tools libbcc-examples linux-headers-$(uname -r)
 </blockquote>
 <p>操作完这些步骤，bcc 提供的所有工具就都安装到 /usr/share/bcc/tools 这个目录中了。不过这里提醒你，bcc 软件包默认不会把这些工具配置到系统的 PATH 路径中，所以你得自己手动配置：</p>
 <pre><code>$ export PATH=$PATH:/usr/share/bcc/tools
-
 </code></pre>
 <p>配置完，你就可以运行 cachestat 和 cachetop 命令了。比如，下面就是一个 cachestat 的运行界面，它以 1 秒的时间间隔，输出了 3 组缓存统计数据：</p>
 <pre><code>$ cachestat 1 3
@@ -2608,7 +2551,6 @@ $ cachetop 5
 </code></pre>
 <p>接着，再到第二个终端，执行下面的命令运行案例：</p>
 <pre><code>$ docker run --privileged --name=app -itd feisky/app:io-direct
-
 </code></pre>
 <p>案例运行后，我们还需要运行下面这个命令，来确认案例已经正常启动。如果一切正常，你应该可以看到类似下面的输出：</p>
 <pre><code>$ docker logs app
@@ -2740,7 +2682,6 @@ sudo apt-get install -y bcc-tools libbcc-examples linux-headers-$(uname -r)
 <p>如果安装过程中有什么问题，同样鼓励你先自己搜索解决，解决不了的，可以在留言区向我提问。如果你以前已经安装过了，就可以忽略这一点了。</p>
 <p>安装完成后，再执行下面的命令来运行案例：</p>
 <pre><code>$ docker run --name=app -itd feisky/app:mem-leak
-
 </code></pre>
 <p>案例成功运行后，你需要输入下面的命令，确认案例应用已经正常启动。如果一切正常，你应该可以看到下面这个界面：</p>
 <pre><code>$ docker logs app
@@ -3140,11 +3081,9 @@ polkitd 1004 44 kB
 <p>这也说明了一点，虽然缓存属于可回收内存，但在类似大文件拷贝这类场景下，系统还是会用 Swap 机制来回收匿名内存，而不仅仅是回收占用绝大部分内存的文件页。</p>
 <p>最后，如果你在一开始配置了 Swap，不要忘记在案例结束后关闭。你可以运行下面的命令，关闭 Swap：</p>
 <pre><code>$ swapoff -a
-
 </code></pre>
 <p>实际上，关闭 Swap 后再重新打开，也是一种常用的 Swap 空间清理方法，比如：</p>
 <pre><code>$ swapoff -a &amp;&amp; swapon -a 
-
 </code></pre>
 <h2>小结</h2>
 <p>在内存资源紧张时，Linux 会通过 Swap ，把不常访问的匿名页换出到磁盘中，下次访问的时候再从磁盘换入到内存中来。你可以设置 /proc/sys/vm/min_free_kbytes，来调整系统定期回收内存的阈值；也可以设置 /proc/sys/vm/swappiness，来调整文件页和匿名页的回收倾向。</p>
@@ -3547,7 +3486,6 @@ Minimum / Average / Maximum Object : 0.01K / 0.20K / 22.88K
 <h2>思考</h2>
 <p>最后，给你留一个思考题。在实际工作中，我们经常会根据文件名字，查找它所在路径，比如：</p>
 <pre><code>$ find / -name file-name
-
 </code></pre>
 <p>今天的问题就是，这个命令，会不会导致系统的缓存升高呢？如果有影响，又会导致哪种类型的缓存升高呢？你可以结合今天内容，自己先去操作和分析，看看观察到的结果跟你分析的是否一样。</p>
 <p>欢迎在留言区和我讨论，也欢迎把这篇文章分享给你的同事、朋友。我们一起在实战中演练，在交流中进步。</p>
@@ -3735,7 +3673,6 @@ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:       0.00 B/s
 <h2>案例分析</h2>
 <p>首先，我们在终端中执行下面的命令，运行今天的目标应用：</p>
 <pre><code>$ docker run -v /tmp:/tmp --name=app -itd feisky/logapp 
-
 </code></pre>
 <p>然后，在终端中运行 ps 命令，确认案例应用正常启动。如果操作无误，你应该可以在 ps 的输出中，看到一个 app.py 的进程：</p>
 <pre><code>$ ps -ef | grep /app.py 
@@ -3854,7 +3791,6 @@ signal.signal(signal.SIGUSR2, set_logging_warning)
 <p>根据源码中的日志调用 logger. info(message) ，我们知道，它的日志是 INFO 级，这也正是它的默认级别。那么，只要把默认级别调高到 WARNING 级，日志问题应该就解决了。</p>
 <p>接下来，我们就来检查一下，刚刚的分析对不对。在终端中运行下面的 kill 命令，给进程 18940 发送 SIGUSR2 信号：</p>
 <pre><code>$ kill -SIGUSR2 18940 
-
 </code></pre>
 <p>然后，再执行 top 和 iostat 观察一下：</p>
 <pre><code>$ top 
@@ -3870,7 +3806,6 @@ sda              0.00    0.00      0.00      0.00     0.00     0.00   0.00   0.0
 <p>到这里，我们不仅定位了狂打日志的应用程序，并通过调高日志级别的方法，完美解决了 I/O 的性能瓶颈。</p>
 <p>案例最后，当然不要忘了运行下面的命令，停止案例应用：</p>
 <pre><code>$ docker rm -f app 
-
 </code></pre>
 <h2>小结</h2>
 <p>日志，是了解应用程序内部运行情况，最常用、也最有效的工具。无论是操作系统，还是应用程序，都会记录大量的运行日志，以便事后查看历史记录。这些日志一般按照不同级别来开启，比如，开发环境通常打开调试级别的日志，而线上环境则只记录警告和错误日志。</p>
@@ -3909,7 +3844,6 @@ sda              0.00    0.00      0.00      0.00     0.00     0.00   0.00   0.0
 <h2><strong>案例分析</strong></h2>
 <p>首先，我们在第一个终端中执行下面的命令，运行本次案例要分析的目标应用：</p>
 <pre><code>$ docker run --name=app -p 10000:80 -itd feisky/word-pop 
-
 </code></pre>
 <p>然后，在第二个终端中运行 curl 命令，访问 <a href="http://192.168.0.10:1000/">http://192.168.0.10:1000/</a>，确认案例正常启动。你应该可以在 curl 的输出界面里，看到一个 hello world 的输出：</p>
 <pre><code>$ curl http://192.168.0.10:10000/ 
@@ -3917,7 +3851,6 @@ hello world
 </code></pre>
 <p>接下来，在第二个终端中，访问案例应用的单词热度接口，也就是 <a href="http://192.168.0.10:1000/popularity/word">http://192.168.0.10:1000/popularity/word</a>。</p>
 <pre><code>$ curl http://192.168.0.10:1000/popularity/word 
-
 </code></pre>
 <p>稍等一会儿，你会发现，这个接口居然这么长时间都没响应，究竟是怎么回事呢？我们先回到终端一来分析一下。</p>
 <p>我们试试在第一个终端里，随便执行一个命令，比如执行 df 命令，查看一下文件系统的使用情况。奇怪的是，这么简单的命令，居然也要等好久才有输出。</p>
@@ -3931,7 +3864,6 @@ tmpfs             816932    1188    815744   1% /run
 <p>这里的思路其实跟上一个案例比较类似，我们可以先用 top 来观察 CPU 和内存的使用情况，然后再用 iostat 来观察磁盘的 I/O 情况。</p>
 <p>为了避免分析过程中 curl 请求突然结束，我们回到终端二，按 Ctrl+C 停止刚才的应用程序；然后，把 curl 命令放到一个循环里执行；这次我们还要加一个 time 命令，观察每次的执行时间：</p>
 <pre><code>$ while true; do time curl http://192.168.0.10:10000/popularity/word; sleep 1; done 
-
 </code></pre>
 <p>继续回到终端一来分析性能。我们在终端一中运行 top 命令，观察 CPU 和内存的使用情况：</p>
 <pre><code>$ top 
@@ -3985,7 +3917,6 @@ stat(&quot;/usr/local/lib/python3.7/importlib/_bootstrap.py&quot;, {st_mode=S_IF
 <p>从 strace 中，你可以看到大量的 stat 系统调用，并且大都为 python 的文件，但是，请注意，这里并没有任何 write 系统调用。</p>
 <p>由于 strace 的输出比较多，我们可以用 grep ，来过滤一下 write，比如：</p>
 <pre><code>$ strace -p 12280 2&gt;&amp;1 | grep write 
-
 </code></pre>
 <p>遗憾的是，这里仍然没有任何输出。</p>
 <p>难道此时已经没有性能问题了吗？重新执行刚才的 top 和 iostat 命令，你会不幸地发现，性能问题仍然存在。</p>
@@ -4189,7 +4120,6 @@ Got data: () in 15.364538192749023 sec
 <p>不过别急，在具体分析前，为了避免在分析过程中客户端的请求结束，我们把 curl 命令放到一个循环里执行。同时，为了避免给系统过大压力，我们设置在每次查询后，都先等待 5 秒，然后再开始新的请求。</p>
 <p>所以，你可以在终端二中，继续执行下面的命令：</p>
 <pre><code>$ while true; do curl http://192.168.0.10:10000/products/geektime; sleep 5; done
-
 </code></pre>
 <p>接下来，重新回到终端一中，分析接口响应速度慢的原因。不过，重回终端一后，你会发现系统响应也明显变慢了，随便执行一个命令，都得停顿一会儿才能看到输出。</p>
 <p>这跟上一节的现象很类似，看来，我们还是得观察一下系统的资源使用情况，比如 CPU、内存和磁盘 I/O 等的情况。</p>
@@ -4238,7 +4168,6 @@ $ pidstat -d 1
 </code></pre>
 <p>观察一会，你会发现，线程 28014 正在读取大量数据，且读取文件的描述符编号为 38。这儿的 38 又对应着哪个文件呢？我们可以执行下面的 lsof 命令，并且指定线程号 28014 ，具体查看这个可疑线程和可疑文件：</p>
 <pre><code>$ lsof -p 28014
-
 </code></pre>
 <p>奇怪的是，lsof 并没有给出任何输出。实际上，如果你查看 lsof 命令的返回值，就会发现，这个命令的执行失败了。</p>
 <p>我们知道，在 SHELL 中，特殊标量 $? 表示上一条命令退出时的返回值。查看这个特殊标量，你会发现它的返回值是 1。可是别忘了，在 Linux 中，返回值为 0 ，才表示命令执行成功。返回值为 1，显然表明执行失败。</p>
@@ -4297,9 +4226,7 @@ db.opt    products.MYD  products.MYI  products.frm
 <p>既然已经找出了数据库和表，接下来要做的，就是弄清楚数据库中正在执行什么样的 SQL 了。我们继续在终端一中，运行下面的 docker exec 命令，进入 MySQL 的命令行界面：</p>
 <pre><code>$ docker exec -i -t mysql mysql
 ...
-
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
 mysql&gt;
 </code></pre>
 <p>下一步你应该可以想到，那就是在 MySQL 命令行界面中，执行 show processlist 命令，来查看当前正在执行的 SQL 语句。</p>
@@ -4385,7 +4312,6 @@ Got data: ()in 0.003951072692871094 sec
 <p>首先，我们在终端二中停止 curl 命令，然后回到终端一中，执行下面的命令删除索引：</p>
 <pre><code># 删除索引
 $ docker exec -i -t mysql mysql
-
 mysql&gt; use test;
 mysql&gt; DROP INDEX products_index ON products;
 </code></pre>
@@ -4492,7 +4418,6 @@ $ curl http://192.168.0.10:10000/init/5000
 <p>到底出了什么问题呢？我们还是要用前面学过的性能工具和原理，来找到这个瓶颈。</p>
 <p>不过别急，同样为了避免分析过程中客户端的请求结束，在进行性能分析前，我们先要把 curl 命令放到一个循环里来执行。你可以在终端二中，继续执行下面的命令：</p>
 <pre><code>$ while true; do curl http://192.168.0.10:10000/get_cache; done
-
 </code></pre>
 <p>接下来，再重新回到终端一，查找接口响应慢的“病因”。</p>
 <p>最近几个案例的现象都是响应很慢，这种情况下，我们自然先会怀疑，是不是系统资源出现了瓶颈。所以，先观察 CPU、内存和磁盘 I/O 等的使用情况肯定不会错。</p>
@@ -4638,7 +4563,6 @@ OK
 </code></pre>
 <p>改完后，切换到终端二中查看，你会发现，现在的请求时间，已经缩短到了 0.9s：</p>
 <pre><code>{..., &quot;elapsed_seconds&quot;:0.9368953704833984,&quot;type&quot;:&quot;good&quot;}
-
 </code></pre>
 <p>而第二个问题，就要查看应用的源码了。点击 <a href="https://github.com/feiskyer/linux-perf-examples/blob/master/redis-slow/app.py">Github</a> ，你就可以查看案例应用的源代码：</p>
 <pre><code>def get_cache(type_name):
@@ -4660,7 +4584,6 @@ OK
 <p>你可以发现，解决第二个问题后，新接口的性能又有了进一步的提升，从刚才的 0.9s ，再次缩短成了不到 0.2s。</p>
 <p>当然，案例最后，不要忘记清理案例应用。你可以切换到终端一中，执行下面的命令进行清理：</p>
 <pre><code>$ docker rm -f app redis
-
 </code></pre>
 <h2>小结</h2>
 <p>今天我带你一起分析了一个 Redis 缓存的案例。</p>
@@ -5107,7 +5030,6 @@ eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500
       RX errors 0 dropped 0 overruns 0 frame 0
       TX packets 32637401 bytes 4815573306 (4.8 GB)
       TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
-
 $ ip -s addr show dev eth0
 2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
   link/ether 78:0d:3a:07:cf:3a brd ff:ff:ff:ff:ff:ff
@@ -5489,7 +5411,6 @@ $ yum install -y httpd-tools
 </code></pre>
 <p>接下来，在目标机器上，使用 Docker 启动一个 Nginx 服务，然后用 ab 来测试它的性能。首先，在目标机器上运行下面的命令：</p>
 <pre><code>$ docker run -p 80:80 -itd nginx
-
 </code></pre>
 <p>而在另一台机器上，运行 ab 命令，测试 Nginx 的性能：</p>
 <pre><code># -c 表示并发请求数为 1000，-n 表示总的请求数为 10000
@@ -5578,7 +5499,6 @@ end
 </code></pre>
 <p>而在执行测试时，通过 -s 选项，执行脚本的路径：</p>
 <pre><code>$ wrk -c 1000 -t 2 -s auth.lua http://192.168.0.30/
-
 </code></pre>
 <p>wrk 需要你用 Lua 脚本，来构造请求负载。这对于大部分场景来说，可能已经足够了 。不过，它的缺点也正是，所有东西都需要代码来构造，并且工具本身不提供 GUI 环境。</p>
 <p>像 Jmeter 或者 LoadRunner（商业产品），则针对复杂场景提供了脚本录制、回放、GUI 等更丰富的功能，使用起来也更加方便。</p>
@@ -5752,7 +5672,6 @@ round-trip min/avg/max/stddev = 31.116/31.163/31.245/0.058 ms
 <p>从这次的输出可以看到，nslookup 连接环回地址（127.0.0.1 和 ::1）的 53 端口失败。这里就有问题了，为什么会去连接环回地址，而不是我们的先前看到的 114.114.114.114 呢？</p>
 <p>你可能已经想到了症结所在——有可能是因为容器中没有配置 DNS 服务器。那我们就执行下面的命令确认一下：</p>
 <pre><code>/# cat /etc/resolv.conf
-
 </code></pre>
 <p>果然，这个命令没有任何输出，说明容器里的确没有配置 DNS 服务器。到这一步，很自然的，我们就知道了解决方法。在 /etc/resolv.conf 文件中，配置上 DNS 服务器就可以了。</p>
 <p>你可以执行下面的命令，在配置好 DNS 服务器后，重新执行 nslookup 命令。自然，我们现在发现，这次可以正常解析了：</p>
@@ -5967,7 +5886,6 @@ sys	0m0.003s
 <p>到这里，再往后该怎么分析呢？其实，这时候就可以用 tcpdump 抓包，查看 ping 在收发哪些网络包。</p>
 <p>我们再打开另一个终端（终端二），SSH 登录案例机器后，执行下面的命令：</p>
 <pre><code>$ tcpdump -nn udp port 53 or host 35.190.27.188
-
 </code></pre>
 <p>当然，你可以直接用 tcpdump 不加任何参数来抓包，但那样的话，就可能抓取到很多不相干的包。由于我们已经执行过 ping 命令，知道了 geekbang.org 的 IP 地址是 35.190.27.188，也知道 ping 命令会执行 DNS 查询。所以，上面这条命令，就是基于这个规则进行过滤。</p>
 <p>我来具体解释一下这条命令。</p>
@@ -6028,7 +5946,6 @@ rtt min/avg/max/mdev = 32.879/35.160/39.030/2.755 ms
 <p>到这里， 我就带你一起使用 tcpdump ，解决了一个最常见的 ping 工作缓慢的问题。</p>
 <p>案例最后，如果你在开始时，执行了 iptables 命令，那也不要忘了删掉它：</p>
 <pre><code>$ iptables -D INPUT -p udp --sport 53 -m string --string googleusercontent --algo bm -j DROP
-
 </code></pre>
 <p>不过，删除后你肯定还有疑问，明明我们的案例跟 Google 没啥关系，为什么要根据 googleusercontent ，这个毫不相关的字符串来过滤包呢？</p>
 <p>实际上，如果换一个 DNS 服务器，就可以用 PTR 反查到 35.190.27.188 所对应的域名：</p>
@@ -6058,7 +5975,6 @@ Authoritative answers can be found from:
 <p><img src="assets/4870a28c032bdd2a26561604ae2f7cb3.png" alt="img" /></p>
 <p>最后，再次强调 tcpdump 的输出格式，我在前面已经介绍了它的基本格式：</p>
 <pre><code>时间戳 协议 源地址. 源端口 &gt; 目的地址. 目的端口 网络包详细信息
-
 </code></pre>
 <p>其中，网络包的详细信息取决于协议，不同协议展示的格式也不同。所以，更详细的使用方法，还是需要你去查询 tcpdump 的 <a href="https://www.tcpdump.org/manpages/tcpdump.1.html">man</a> 手册（执行 man tcpdump 也可以得到）。</p>
 <p>不过，讲了这么多，你应该也发现了。tcpdump 虽然功能强大，可是输出格式却并不直观。特别是，当系统中网络包数比较多（比如 PPS 超过几千）的时候，你想从 tcpdump 抓取的网络包中分析问题，实在不容易。</p>
@@ -6067,11 +5983,9 @@ Authoritative answers can be found from:
 <p>Wireshark 也是最流行的一个网络分析工具，它最大的好处就是提供了跨平台的图形界面。跟 tcpdump 类似，Wireshark 也提供了强大的过滤规则表达式，同时，还内置了一系列的汇总分析工具。</p>
 <p>比如，拿刚刚的 ping 案例来说，你可以执行下面的命令，把抓取的网络包保存到 ping.pcap 文件中：</p>
 <pre><code>$ tcpdump -nn udp port 53 or host 35.190.27.188 -w ping.pcap
-
 </code></pre>
 <p>接着，把它拷贝到你安装有 Wireshark 的机器中，比如你可以用 scp 把它拷贝到本地来：</p>
 <pre><code>$ scp host-ip/path/ping.pcap .
-
 </code></pre>
 <p>然后，再用 Wireshark 打开它。打开后，你就可以看到下面这个界面：</p>
 <p><img src="assets/6b854703dcfcccf64c0a69adecf2f42c.png" alt="img" /></p>
@@ -6091,7 +6005,6 @@ $ tcpdump -nn host 93.184.216.34 -w web.pcap
 </blockquote>
 <p>接下来，切换到终端二，执行下面的 curl 命令，访问 <a href="http://example.com/">http://example.com</a>：</p>
 <pre><code>$ curl http://example.com
-
 </code></pre>
 <p>最后，再回到终端一，按下 Ctrl+C 停止 tcpdump，并把得到的 web.pcap 拷贝出来。</p>
 <p>使用 Wireshark 打开 web.pcap 后，你就可以在 Wireshark 中，看到如下的界面：</p>
@@ -6164,12 +6077,10 @@ $ tcpdump -nn host 93.184.216.34 -w web.pcap
                             <a href="/极客时间/MySQL实战45讲.md.html">下一页</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709ba3ab1c04fbdc","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
@@ -6178,11 +6089,9 @@ $ tcpdump -nn host 93.184.216.34 -w web.pcap
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-
     function gtag() {
         dataLayer.push(arguments);
     }
-
     gtag('js', new Date());
     gtag('config', 'G-NPSEEVD756');
     var path = window.location.pathname
@@ -6196,14 +6105,12 @@ $ tcpdump -nn host 93.184.216.34 -w web.pcap
     } else {
         setCookie("lastPath", path)
     }
-
     function setCookie(cname, cvalue) {
         var d = new Date();
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toGMTString();
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
     }
-
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -6213,7 +6120,5 @@ $ tcpdump -nn host 93.184.216.34 -w web.pcap
         }
         return "";
     }
-
 </script>
-
 </html>

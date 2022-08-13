@@ -1,1128 +1,400 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/00 开篇词  这一次，让我们一起来搞懂MySQL.md.html">00 开篇词  这一次，让我们一起来搞懂MySQL.md.html</a>
-
-
+                    <a href="/专栏/MySQL实战45讲/00 开篇词  这一次，让我们一起来搞懂MySQL.md.html">00 开篇词  这一次，让我们一起来搞懂MySQL</a>
+                </li>
+                <li>
+                    <a href="/专栏/MySQL实战45讲/01  基础架构：一条SQL查询语句是如何执行的？.md.html">01  基础架构：一条SQL查询语句是如何执行的？</a>
+                </li>
+                <li>
+                    <a href="/专栏/MySQL实战45讲/02  日志系统：一条SQL更新语句是如何执行的？.md.html">02  日志系统：一条SQL更新语句是如何执行的？</a>
+                </li>
+                <li>
+                    <a href="/专栏/MySQL实战45讲/03  事务隔离：为什么你改了我还看不见？.md.html">03  事务隔离：为什么你改了我还看不见？</a>
+                </li>
+                <li>
+                    <a href="/专栏/MySQL实战45讲/04  深入浅出索引（上）.md.html">04  深入浅出索引（上）</a>
+                </li>
+                <li>
+                    <a href="/专栏/MySQL实战45讲/05  深入浅出索引（下）.md.html">05  深入浅出索引（下）</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/MySQL实战45讲/06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？.md.html">06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/01  基础架构：一条SQL查询语句是如何执行的？.md.html">01  基础架构：一条SQL查询语句是如何执行的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/07  行锁功过：怎么减少行锁对性能的影响？.md.html">07  行锁功过：怎么减少行锁对性能的影响？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/02  日志系统：一条SQL更新语句是如何执行的？.md.html">02  日志系统：一条SQL更新语句是如何执行的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/08  事务到底是隔离的还是不隔离的？.md.html">08  事务到底是隔离的还是不隔离的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/03  事务隔离：为什么你改了我还看不见？.md.html">03  事务隔离：为什么你改了我还看不见？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/09  普通索引和唯一索引，应该怎么选择？.md.html">09  普通索引和唯一索引，应该怎么选择？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/04  深入浅出索引（上）.md.html">04  深入浅出索引（上）.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/10  MySQL为什么有时候会选错索引？.md.html">10  MySQL为什么有时候会选错索引？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/05  深入浅出索引（下）.md.html">05  深入浅出索引（下）.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/11  怎么给字符串字段加索引？.md.html">11  怎么给字符串字段加索引？</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/MySQL实战45讲/06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？.md.html">06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/MySQL实战45讲/12  为什么我的MySQL会“抖”一下？.md.html">12  为什么我的MySQL会“抖”一下？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/07  行锁功过：怎么减少行锁对性能的影响？.md.html">07  行锁功过：怎么减少行锁对性能的影响？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/13  为什么表数据删掉一半，表文件大小不变？.md.html">13  为什么表数据删掉一半，表文件大小不变？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/08  事务到底是隔离的还是不隔离的？.md.html">08  事务到底是隔离的还是不隔离的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/14  count()这么慢，我该怎么办？.md.html">14  count()这么慢，我该怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/09  普通索引和唯一索引，应该怎么选择？.md.html">09  普通索引和唯一索引，应该怎么选择？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/15  答疑文章（一）：日志和索引相关问题.md.html">15  答疑文章（一）：日志和索引相关问题</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/10  MySQL为什么有时候会选错索引？.md.html">10  MySQL为什么有时候会选错索引？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/16  “order by”是怎么工作的？.md.html">16  “order by”是怎么工作的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/11  怎么给字符串字段加索引？.md.html">11  怎么给字符串字段加索引？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/17  如何正确地显示随机消息？.md.html">17  如何正确地显示随机消息？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/12  为什么我的MySQL会“抖”一下？.md.html">12  为什么我的MySQL会“抖”一下？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/18  为什么这些SQL语句逻辑相同，性能却差异巨大？.md.html">18  为什么这些SQL语句逻辑相同，性能却差异巨大？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/13  为什么表数据删掉一半，表文件大小不变？.md.html">13  为什么表数据删掉一半，表文件大小不变？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/19  为什么我只查一行的语句，也执行这么慢？.md.html">19  为什么我只查一行的语句，也执行这么慢？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/14  count()这么慢，我该怎么办？.md.html">14  count()这么慢，我该怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/20  幻读是什么，幻读有什么问题？.md.html">20  幻读是什么，幻读有什么问题？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/15  答疑文章（一）：日志和索引相关问题.md.html">15  答疑文章（一）：日志和索引相关问题.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/21  为什么我只改一行的语句，锁这么多？.md.html">21  为什么我只改一行的语句，锁这么多？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/16  “order by”是怎么工作的？.md.html">16  “order by”是怎么工作的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/22  MySQL有哪些“饮鸩止渴”提高性能的方法？.md.html">22  MySQL有哪些“饮鸩止渴”提高性能的方法？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/17  如何正确地显示随机消息？.md.html">17  如何正确地显示随机消息？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/23  MySQL是怎么保证数据不丢的？.md.html">23  MySQL是怎么保证数据不丢的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/18  为什么这些SQL语句逻辑相同，性能却差异巨大？.md.html">18  为什么这些SQL语句逻辑相同，性能却差异巨大？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/24  MySQL是怎么保证主备一致的？.md.html">24  MySQL是怎么保证主备一致的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/19  为什么我只查一行的语句，也执行这么慢？.md.html">19  为什么我只查一行的语句，也执行这么慢？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/25  MySQL是怎么保证高可用的？.md.html">25  MySQL是怎么保证高可用的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/20  幻读是什么，幻读有什么问题？.md.html">20  幻读是什么，幻读有什么问题？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/26  备库为什么会延迟好几个小时？.md.html">26  备库为什么会延迟好几个小时？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/21  为什么我只改一行的语句，锁这么多？.md.html">21  为什么我只改一行的语句，锁这么多？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/27  主库出问题了，从库怎么办？.md.html">27  主库出问题了，从库怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/22  MySQL有哪些“饮鸩止渴”提高性能的方法？.md.html">22  MySQL有哪些“饮鸩止渴”提高性能的方法？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/28  读写分离有哪些坑？.md.html">28  读写分离有哪些坑？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/23  MySQL是怎么保证数据不丢的？.md.html">23  MySQL是怎么保证数据不丢的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/29  如何判断一个数据库是不是出问题了？.md.html">29  如何判断一个数据库是不是出问题了？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/24  MySQL是怎么保证主备一致的？.md.html">24  MySQL是怎么保证主备一致的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/30  答疑文章（二）：用动态的观点看加锁.md.html">30  答疑文章（二）：用动态的观点看加锁</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/25  MySQL是怎么保证高可用的？.md.html">25  MySQL是怎么保证高可用的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/31  误删数据后除了跑路，还能怎么办？.md.html">31  误删数据后除了跑路，还能怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/26  备库为什么会延迟好几个小时？.md.html">26  备库为什么会延迟好几个小时？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/32  为什么还有kill不掉的语句？.md.html">32  为什么还有kill不掉的语句？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/27  主库出问题了，从库怎么办？.md.html">27  主库出问题了，从库怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/33  我查这么多数据，会不会把数据库内存打爆？.md.html">33  我查这么多数据，会不会把数据库内存打爆？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/28  读写分离有哪些坑？.md.html">28  读写分离有哪些坑？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/34  到底可不可以使用join？.md.html">34  到底可不可以使用join？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/29  如何判断一个数据库是不是出问题了？.md.html">29  如何判断一个数据库是不是出问题了？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/35  join语句怎么优化？.md.html">35  join语句怎么优化？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/30  答疑文章（二）：用动态的观点看加锁.md.html">30  答疑文章（二）：用动态的观点看加锁.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/36  为什么临时表可以重名？.md.html">36  为什么临时表可以重名？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/31  误删数据后除了跑路，还能怎么办？.md.html">31  误删数据后除了跑路，还能怎么办？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/37  什么时候会使用内部临时表？.md.html">37  什么时候会使用内部临时表？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/32  为什么还有kill不掉的语句？.md.html">32  为什么还有kill不掉的语句？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/38  都说InnoDB好，那还要不要使用Memory引擎？.md.html">38  都说InnoDB好，那还要不要使用Memory引擎？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/33  我查这么多数据，会不会把数据库内存打爆？.md.html">33  我查这么多数据，会不会把数据库内存打爆？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/39  自增主键为什么不是连续的？.md.html">39  自增主键为什么不是连续的？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/34  到底可不可以使用join？.md.html">34  到底可不可以使用join？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/40  insert语句的锁为什么这么多？.md.html">40  insert语句的锁为什么这么多？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/35  join语句怎么优化？.md.html">35  join语句怎么优化？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/41  怎么最快地复制一张表？.md.html">41  怎么最快地复制一张表？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/36  为什么临时表可以重名？.md.html">36  为什么临时表可以重名？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/42  grant之后要跟着flush privileges吗？.md.html">42  grant之后要跟着flush privileges吗？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/37  什么时候会使用内部临时表？.md.html">37  什么时候会使用内部临时表？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/43  要不要使用分区表？.md.html">43  要不要使用分区表？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/38  都说InnoDB好，那还要不要使用Memory引擎？.md.html">38  都说InnoDB好，那还要不要使用Memory引擎？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/44  答疑文章（三）：说一说这些好问题.md.html">44  答疑文章（三）：说一说这些好问题</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/39  自增主键为什么不是连续的？.md.html">39  自增主键为什么不是连续的？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/45  自增id用完怎么办？.md.html">45  自增id用完怎么办？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/40  insert语句的锁为什么这么多？.md.html">40  insert语句的锁为什么这么多？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/我的MySQL心路历程.md.html">我的MySQL心路历程</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/41  怎么最快地复制一张表？.md.html">41  怎么最快地复制一张表？.md.html</a>
-
-
-
+                    <a href="/专栏/MySQL实战45讲/结束语  点线网面，一起构建MySQL知识网络.md.html">结束语  点线网面，一起构建MySQL知识网络</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/42  grant之后要跟着flush privileges吗？.md.html">42  grant之后要跟着flush privileges吗？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/43  要不要使用分区表？.md.html">43  要不要使用分区表？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/44  答疑文章（三）：说一说这些好问题.md.html">44  答疑文章（三）：说一说这些好问题.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/45  自增id用完怎么办？.md.html">45  自增id用完怎么办？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/我的MySQL心路历程.md.html">我的MySQL心路历程.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/MySQL实战45讲/结束语  点线网面，一起构建MySQL知识网络.md.html">结束语  点线网面，一起构建MySQL知识网络.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>06  全局锁和表锁 ：给表加个字段怎么有这么多阻碍？</h1>
-
 <p>今天我要跟你聊聊 MySQL 的锁。数据库锁设计的初衷是处理并发问题。作为多用户共享的资源，当出现并发访问的时候，数据库需要合理地控制资源的访问规则。而锁就是用来实现这些访问规则的重要数据结构。</p>
-
 <p><strong>根据加锁的范围，MySQL 里面的锁大致可以分成全局锁、表级锁和行锁三类</strong>。今天这篇文章，我会和你分享全局锁和表级锁。而关于行锁的内容，我会留着在下一篇文章中再和你详细介绍。</p>
-
 <p>这里需要说明的是，锁的设计比较复杂，这两篇文章不会涉及锁的具体实现细节，主要介绍的是碰到锁时的现象和其背后的原理。</p>
-
 <h1>全局锁</h1>
-
 <p>顾名思义，全局锁就是对整个数据库实例加锁。MySQL 提供了一个加全局读锁的方法，命令是 Flush tables with read lock (FTWRL)。当你需要让整个库处于只读状态的时候，可以使用这个命令，之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。</p>
-
 <p>**全局锁的典型使用场景是，做全库逻辑备份。**也就是把整库每个表都 select 出来存成文本。</p>
-
 <p>以前有一种做法，是通过 FTWRL 确保不会有其他线程对数据库做更新，然后对整个库做备份。注意，在备份过程中整个库完全处于只读状态。</p>
-
 <p>但是让整库都只读，听上去就很危险：</p>
-
 <ul>
-
 <li>如果你在主库上备份，那么在备份期间都不能执行更新，业务基本上就得停摆；</li>
-
 <li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的 binlog，会导致主从延迟。</li>
-
 </ul>
-
 <p>看来加全局锁不太好。但是细想一下，备份为什么要加锁呢？我们来看一下不加锁会有什么问题。</p>
-
 <p>假设你现在要维护“极客时间”的购买系统，关注的是用户账户余额表和用户课程表。</p>
-
 <p>现在发起一个逻辑备份。假设备份期间，有一个用户，他购买了一门课程，业务逻辑里就要扣掉他的余额，然后往已购课程里面加上一门课。</p>
-
 <p>如果时间顺序上是先备份账户余额表 (u_account)，然后用户购买，然后备份用户课程表 (u_course)，会怎么样呢？你可以看一下这个图：</p>
-
 <p><img src="assets/cbfd4a0bbb1210792064bcea4e49b0cd.png" alt="img" /></p>
-
 <p>图 1 业务和备份状态图</p>
-
 <p>可以看到，这个备份结果里，用户 A 的数据状态是“账户余额没扣，但是用户课程表里面已经多了一门课”。如果后面用这个备份来恢复数据的话，用户 A 就发现，自己赚了。</p>
-
 <p>作为用户可别觉得这样可真好啊，你可以试想一下：如果备份表的顺序反过来，先备份用户课程表再备份账户余额表，又可能会出现什么结果？</p>
-
 <p>也就是说，不加锁的话，备份系统备份的得到的库不是一个逻辑时间点，这个视图是逻辑不一致的。</p>
-
 <p>说到视图你肯定想起来了，我们在前面讲事务隔离的时候，其实是有一个方法能够拿到一致性视图的，对吧？</p>
-
 <p>是的，就是在可重复读隔离级别下开启一个事务。</p>
-
 <blockquote>
-
 <p>备注：如果你对事务隔离级别的概念不是很清晰的话，可以再回顾一下第 3 篇文章[《事务隔离：为什么你改了我还看不见？》]中的相关内容。</p>
-
 </blockquote>
-
 <p>官方自带的逻辑备份工具是 mysqldump。当 mysqldump 使用参数–single-transaction 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的。</p>
-
 <p>你一定在疑惑，有了这个功能，为什么还需要 FTWRL 呢？**一致性读是好，但前提是引擎要支持这个隔离级别。**比如，对于 MyISAM 这种不支持事务的引擎，如果备份过程中有更新，总是只能取到最新的数据，那么就破坏了备份的一致性。这时，我们就需要使用 FTWRL 命令了。</p>
-
 <p>所以，**single-transaction 方法只适用于所有的表使用事务引擎的库。**如果有的表使用了不支持事务的引擎，那么备份就只能通过 FTWRL 方法。这往往是 DBA 要求业务开发人员使用 InnoDB 替代 MyISAM 的原因之一。</p>
-
 <p>你也许会问，<strong>既然要全库只读，为什么不使用 set global readonly=true 的方式呢</strong>？确实 readonly 方式也可以让全库进入只读状态，但我还是会建议你用 FTWRL 方式，主要有两个原因：</p>
-
 <ul>
-
 <li>一是，在有些系统中，readonly 的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改 global 变量的方式影响面更大，我不建议你使用。</li>
-
 <li>二是，在异常处理机制上有差异。如果执行 FTWRL 命令之后由于客户端发生异常断开，那么 MySQL 会自动释放这个全局锁，整个库回到可以正常更新的状态。而将整个库设置为 readonly 之后，如果客户端发生异常，则数据库就会一直保持 readonly 状态，这样会导致整个库长时间处于不可写状态，风险较高。</li>
-
 </ul>
-
 <p>业务的更新不只是增删改数据（DML)，还有可能是加字段等修改表结构的操作（DDL）。不论是哪种方法，一个库被全局锁上以后，你要对里面任何一个表做加字段操作，都是会被锁住的。</p>
-
 <p>但是，即使没有被全局锁住，加字段也不是就能一帆风顺的，因为你还会碰到接下来我们要介绍的表级锁。</p>
-
 <h1>表级锁</h1>
-
 <p>MySQL 里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。</p>
-
 <p>**表锁的语法是 lock tables … read/write。**与 FTWRL 类似，可以用 unlock tables 主动释放锁，也可以在客户端断开的时候自动释放。需要注意，lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</p>
-
 <p>举个例子, 如果在某个线程 A 中执行 lock tables t1 read, t2 write; 这个语句，则其他线程写 t1、读写 t2 的语句都会被阻塞。同时，线程 A 在执行 unlock tables 之前，也只能执行读 t1、读写 t2 的操作。连写 t1 都不允许，自然也不能访问其他表。</p>
-
 <p>在还没有出现更细粒度的锁的时候，表锁是最常用的处理并发的方式。而对于 InnoDB 这种支持行锁的引擎，一般不使用 lock tables 命令来控制并发，毕竟锁住整个表的影响面还是太大。</p>
-
 <p>**另一类表级的锁是 MDL（metadata lock)。**MDL 不需要显式使用，在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。你可以想象一下，如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构对不上，肯定是不行的。</p>
-
 <p>因此，在 MySQL 5.5 版本中引入了 MDL，当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁。</p>
-
 <ul>
-
 <li>读锁之间不互斥，因此你可以有多个线程同时对一张表增删改查。</li>
-
 <li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
-
 </ul>
-
 <p>虽然 MDL 锁是系统默认会加的，但却是你不能忽略的一个机制。比如下面这个例子，我经常看到有人掉到这个坑里：给一个小表加个字段，导致整个库挂了。</p>
-
 <p>你肯定知道，给一个表加字段，或者修改字段，或者加索引，需要扫描全表的数据。在对大表操作的时候，你肯定会特别小心，以免对线上服务造成影响。而实际上，即使是小表，操作不慎也会出问题。我们来看一下下面的操作序列，假设表 t 是一个小表。</p>
-
 <blockquote>
-
 <p>备注：这里的实验环境是 MySQL 5.6。</p>
-
 </blockquote>
-
 <p><img src="assets/7cf6a3bf90d72d1f0fc156ececdfb0ce.jpg" alt="img" /></p>
-
 <p>我们可以看到 session A 先启动，这时候会对表 t 加一个 MDL 读锁。由于 session B 需要的也是 MDL 读锁，因此可以正常执行。</p>
-
 <p>之后 session C 会被 blocked，是因为 session A 的 MDL 读锁还没有释放，而 session C 需要 MDL 写锁，因此只能被阻塞。</p>
-
 <p>如果只有 session C 自己被阻塞还没什么关系，但是之后所有要在表 t 上新申请 MDL 读锁的请求也会被 session C 阻塞。前面我们说了，所有对表的增删改查操作都需要先申请 MDL 读锁，就都被锁住，等于这个表现在完全不可读写了。</p>
-
 <p>如果某个表上的查询语句频繁，而且客户端有重试机制，也就是说超时后会再起一个新 session 再请求的话，这个库的线程很快就会爆满。</p>
-
 <p>你现在应该知道了，事务中的 MDL 锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交后再释放。</p>
-
 <p>基于上面的分析，我们来讨论一个问题，<strong>如何安全地给小表加字段？</strong></p>
-
 <p>首先我们要解决长事务，事务不提交，就会一直占着 MDL 锁。在 MySQL 的 information_schema 库的 innodb_trx 表中，你可以查到当前执行中的事务。如果你要做 DDL 变更的表刚好有长事务在执行，要考虑先暂停 DDL，或者 kill 掉这个长事务。</p>
-
 <p>但考虑一下这个场景。如果你要变更的表是一个热点表，虽然数据量不大，但是上面的请求很频繁，而你不得不加个字段，你该怎么做呢？</p>
-
 <p>这时候 kill 可能未必管用，因为新的请求马上就来了。比较理想的机制是，在 alter table 语句里面设定等待时间，如果在这个指定的等待时间里面能够拿到 MDL 写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。之后开发人员或者 DBA 再通过重试命令重复这个过程。</p>
-
 <p>MariaDB 已经合并了 AliSQL 的这个功能，所以这两个开源分支目前都支持 DDL NOWAIT/WAIT n 这个语法。</p>
-
 <pre><code>ALTER TABLE tbl_name NOWAIT add column ...
-
-ALTER TABLE tbl_name WAIT N add column ... 
-
+ALTER TABLE tbl_name WAIT N add column ...
 </code></pre>
-
 <h1>小结</h1>
-
 <p>今天，我跟你介绍了 MySQL 的全局锁和表级锁。</p>
-
 <p>全局锁主要用在逻辑备份过程中。对于全部是 InnoDB 引擎的库，我建议你选择使用–single-transaction 参数，对应用会更友好。</p>
-
 <p>表锁一般是在数据库引擎不支持行锁的时候才会被用到的。如果你发现你的应用程序里有 lock tables 这样的语句，你需要追查一下，比较可能的情况是：</p>
-
 <ul>
-
 <li>要么是你的系统现在还在用 MyISAM 这类不支持事务的引擎，那要安排升级换引擎；</li>
-
 <li>要么是你的引擎升级了，但是代码还没升级。我见过这样的情况，最后业务开发就是把 lock tables 和 unlock tables 改成 begin 和 commit，问题就解决了。</li>
-
 </ul>
-
 <p>MDL 会直到事务提交才释放，在做表结构变更的时候，你一定要小心不要导致锁住线上查询和更新。</p>
-
 <p>最后，我给你留一个问题吧。备份一般都会在备库上执行，你在用–single-transaction 方法做逻辑备份的过程中，如果主库上的一个小表做了一个 DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？</p>
-
 <p>你可以把你的思考和观点写在留言区里，我会在下一篇文章的末尾和你讨论这个问题。感谢你的收听，也欢迎你把这篇文章分享给更多的朋友一起阅读。</p>
-
 <p>说明：这篇文章没有介绍到物理备份，物理备份会有一篇单独的文章。</p>
-
 <h1>上期问题时间</h1>
-
 <p>上期的问题是关于对联合主键索引和 InnoDB 索引组织表的理解。</p>
-
 <p>我直接贴 @老杨同志 的回复略作修改如下（我修改的部分用橙色标出）：</p>
-
 <p>表记录
-
 –a--|–b--|–c--|–d--
-
 1 2 3 d
-
 1 3 2 d
-
 1 4 3 d
-
 2 1 3 d
-
 2 2 2 d
-
 2 3 4 d
-
 主键 a，b 的聚簇索引组织顺序相当于 order by a,b ，也就是先按 a 排序，再按 b 排序，c 无序。</p>
-
 <p>索引 ca 的组织是先按 c 排序，再按 a 排序，同时记录主键
-
 –c--|–a--|–主键部分b-- （注意，这里不是 ab，而是只有 b）
-
 2 1 3
-
 2 2 2
-
 3 1 2
-
 3 1 4
-
 3 2 1
-
 4 2 3
-
 这个跟索引 c 的数据是一模一样的。</p>
-
 <p>索引 cb 的组织是先按 c 排序，在按 b 排序，同时记录主键
-
 –c--|–b--|–主键部分a-- （同上）
-
 2 2 2
-
 2 3 1
-
 3 1 2
-
 3 2 1
-
 3 4 1
-
 4 3 2</p>
-
 <p>所以，结论是 ca 可以去掉，cb 需要保留。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/MySQL实战45讲/05  深入浅出索引（下）.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/MySQL实战45讲/07  行锁功过：怎么减少行锁对性能的影响？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"709972983b3f3d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

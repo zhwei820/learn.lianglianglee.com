@@ -1,550 +1,320 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>33 如何为秒杀系统设计缓存体系？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/00 开篇寄语：缓存，你真的用对了吗？.md.html">00 开篇寄语：缓存，你真的用对了吗？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/00 开篇寄语：缓存，你真的用对了吗？.md.html">00 开篇寄语：缓存，你真的用对了吗？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/01 业务数据访问性能太低怎么办？.md.html">01 业务数据访问性能太低怎么办？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/01 业务数据访问性能太低怎么办？.md.html">01 业务数据访问性能太低怎么办？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/02 如何根据业务来选择缓存模式和组件？.md.html">02 如何根据业务来选择缓存模式和组件？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/02 如何根据业务来选择缓存模式和组件？.md.html">02 如何根据业务来选择缓存模式和组件？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/03 设计缓存架构时需要考量哪些因素？.md.html">03 设计缓存架构时需要考量哪些因素？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/03 设计缓存架构时需要考量哪些因素？.md.html">03 设计缓存架构时需要考量哪些因素？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/04 缓存失效、穿透和雪崩问题怎么处理？.md.html">04 缓存失效、穿透和雪崩问题怎么处理？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/04 缓存失效、穿透和雪崩问题怎么处理？.md.html">04 缓存失效、穿透和雪崩问题怎么处理？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/05 缓存数据不一致和并发竞争怎么处理？.md.html">05 缓存数据不一致和并发竞争怎么处理？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/05 缓存数据不一致和并发竞争怎么处理？.md.html">05 缓存数据不一致和并发竞争怎么处理？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/06 Hot Key和Big Key引发的问题怎么应对？.md.html">06 Hot Key和Big Key引发的问题怎么应对？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/06 Hot Key和Big Key引发的问题怎么应对？.md.html">06 Hot Key和Big Key引发的问题怎么应对？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/07 MC为何是应用最广泛的缓存组件？.md.html">07 MC为何是应用最广泛的缓存组件？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/07 MC为何是应用最广泛的缓存组件？.md.html">07 MC为何是应用最广泛的缓存组件？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/08 MC系统架构是如何布局的？.md.html">08 MC系统架构是如何布局的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/08 MC系统架构是如何布局的？.md.html">08 MC系统架构是如何布局的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/09 MC是如何使用多线程和状态机来处理请求命令的？.md.html">09 MC是如何使用多线程和状态机来处理请求命令的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/09 MC是如何使用多线程和状态机来处理请求命令的？.md.html">09 MC是如何使用多线程和状态机来处理请求命令的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/10 MC是怎么定位key的.md.html">10 MC是怎么定位key的.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/10 MC是怎么定位key的.md.html">10 MC是怎么定位key的</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/11 MC如何淘汰冷key和失效key.md.html">11 MC如何淘汰冷key和失效key.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/11 MC如何淘汰冷key和失效key.md.html">11 MC如何淘汰冷key和失效key</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/12 为何MC能长期维持高性能读写？.md.html">12 为何MC能长期维持高性能读写？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/12 为何MC能长期维持高性能读写？.md.html">12 为何MC能长期维持高性能读写？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/13 如何完整学习MC协议及优化client访问？.md.html">13 如何完整学习MC协议及优化client访问？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/13 如何完整学习MC协议及优化client访问？.md.html">13 如何完整学习MC协议及优化client访问？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/14 大数据时代，MC如何应对新的常见问题？.md.html">14 大数据时代，MC如何应对新的常见问题？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/14 大数据时代，MC如何应对新的常见问题？.md.html">14 大数据时代，MC如何应对新的常见问题？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/15 如何深入理解、应用及扩展 Twemproxy？.md.html">15 如何深入理解、应用及扩展 Twemproxy？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/15 如何深入理解、应用及扩展 Twemproxy？.md.html">15 如何深入理解、应用及扩展 Twemproxy？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/16 常用的缓存组件Redis是如何运行的？.md.html">16 常用的缓存组件Redis是如何运行的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/16 常用的缓存组件Redis是如何运行的？.md.html">16 常用的缓存组件Redis是如何运行的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/17 如何理解、选择并使用Redis的核心数据类型？.md.html">17 如何理解、选择并使用Redis的核心数据类型？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/17 如何理解、选择并使用Redis的核心数据类型？.md.html">17 如何理解、选择并使用Redis的核心数据类型？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/18 Redis协议的请求和响应有哪些“套路”可循？.md.html">18 Redis协议的请求和响应有哪些“套路”可循？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/18 Redis协议的请求和响应有哪些“套路”可循？.md.html">18 Redis协议的请求和响应有哪些“套路”可循？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/19 Redis系统架构中各个处理模块是干什么的？.md.html">19 Redis系统架构中各个处理模块是干什么的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/19 Redis系统架构中各个处理模块是干什么的？.md.html">19 Redis系统架构中各个处理模块是干什么的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/20 Redis如何处理文件事件和时间事件？.md.html">20 Redis如何处理文件事件和时间事件？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/20 Redis如何处理文件事件和时间事件？.md.html">20 Redis如何处理文件事件和时间事件？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/21 Redis读取请求数据后，如何进行协议解析和处理.md.html">21 Redis读取请求数据后，如何进行协议解析和处理.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/21 Redis读取请求数据后，如何进行协议解析和处理.md.html">21 Redis读取请求数据后，如何进行协议解析和处理</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/22 怎么认识和应用Redis内部数据结构？.md.html">22 怎么认识和应用Redis内部数据结构？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/22 怎么认识和应用Redis内部数据结构？.md.html">22 怎么认识和应用Redis内部数据结构？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/23 Redis是如何淘汰key的？.md.html">23 Redis是如何淘汰key的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/23 Redis是如何淘汰key的？.md.html">23 Redis是如何淘汰key的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/24 Redis崩溃后，如何进行数据恢复的？.md.html">24 Redis崩溃后，如何进行数据恢复的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/24 Redis崩溃后，如何进行数据恢复的？.md.html">24 Redis崩溃后，如何进行数据恢复的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/25  Redis是如何处理容易超时的系统调用的？.md.html">25  Redis是如何处理容易超时的系统调用的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/25  Redis是如何处理容易超时的系统调用的？.md.html">25  Redis是如何处理容易超时的系统调用的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/26 如何大幅成倍提升Redis处理性能？.md.html">26 如何大幅成倍提升Redis处理性能？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/26 如何大幅成倍提升Redis处理性能？.md.html">26 如何大幅成倍提升Redis处理性能？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/27 Redis是如何进行主从复制的？.md.html">27 Redis是如何进行主从复制的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/27 Redis是如何进行主从复制的？.md.html">27 Redis是如何进行主从复制的？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/28 如何构建一个高性能、易扩展的Redis集群？.md.html">28 如何构建一个高性能、易扩展的Redis集群？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/28 如何构建一个高性能、易扩展的Redis集群？.md.html">28 如何构建一个高性能、易扩展的Redis集群？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/29 从容应对亿级QPS访问，Redis还缺少什么？.md.html">29 从容应对亿级QPS访问，Redis还缺少什么？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/29 从容应对亿级QPS访问，Redis还缺少什么？.md.html">29 从容应对亿级QPS访问，Redis还缺少什么？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/30 面对海量数据，为什么无法设计出完美的分布式缓存体系？.md.html">30 面对海量数据，为什么无法设计出完美的分布式缓存体系？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/30 面对海量数据，为什么无法设计出完美的分布式缓存体系？.md.html">30 面对海量数据，为什么无法设计出完美的分布式缓存体系？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/31 如何设计足够可靠的分布式缓存体系，以满足大中型移动互联网系统的需要？.md.html">31 如何设计足够可靠的分布式缓存体系，以满足大中型移动互联网系统的需要？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/31 如何设计足够可靠的分布式缓存体系，以满足大中型移动互联网系统的需要？.md.html">31 如何设计足够可靠的分布式缓存体系，以满足大中型移动互联网系统的需要？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/32 一个典型的分布式缓存系统是什么样的？.md.html">32 一个典型的分布式缓存系统是什么样的？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/32 一个典型的分布式缓存系统是什么样的？.md.html">32 一个典型的分布式缓存系统是什么样的？</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/300分钟吃透分布式缓存-完/33 如何为秒杀系统设计缓存体系？.md.html">33 如何为秒杀系统设计缓存体系？.md.html</a>
+                    <a class="current-tab" href="/专栏/300分钟吃透分布式缓存-完/33 如何为秒杀系统设计缓存体系？.md.html">33 如何为秒杀系统设计缓存体系？</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/34 如何为海量计数场景设计缓存体系？.md.html">34 如何为海量计数场景设计缓存体系？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/34 如何为海量计数场景设计缓存体系？.md.html">34 如何为海量计数场景设计缓存体系？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/300分钟吃透分布式缓存-完/35 如何为社交feed场景设计缓存体系？.md.html">35 如何为社交feed场景设计缓存体系？.md.html</a>
+                    <a href="/专栏/300分钟吃透分布式缓存-完/35 如何为社交feed场景设计缓存体系？.md.html">35 如何为社交feed场景设计缓存体系？</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>33 如何为秒杀系统设计缓存体系？</h1>
-
 <p>本课时我们具体讲解如何为秒杀系统设计缓存体系。</p>
-
 <h2>秒杀系统分析</h2>
-
 <p>互联网电商为了吸引人气，经常会对一些商品进行低价秒杀售卖活动。比如几年前小米的不定期新品发售，又如当前每年定期举行双11、双12中的特价商品售卖。秒杀售卖时，大量消费者蜂拥而至，给电商带来了极大的人气，也给电商背后的服务系统带来了超高的并发访问负荷。</p>
-
 <p>在不同电商、不同的秒杀活动，秒杀系统售卖的商品、销售策略大不相同，但秒杀背后的秒杀系统却有很大的相似性，基本都有以下这些共同特点。</p>
-
 <p>首先，秒杀业务简单，每个秒杀活动售卖的商品是事先定义好的，这些商品有明确的类型和数量，卖完即止。</p>
-
 <p>其次，秒杀活动定时上架，而且会提供一个秒杀入口，消费者可以在活动开始后，通过这个入口进行抢购秒杀活动。</p>
-
 <p>再次，秒杀活动由于商品售价低廉，广泛宣传，购买者远大于商品数，开始售卖后，会被快速抢购一空。</p>
-
 <p>最后，由于秒杀活动的参与者众多，远超日常访客数量，大量消费者涌入秒杀系统，还不停的刷新访问，短时间内给系统带来超高的并发流量，直到活动结束，流量消失。</p>
-
 <p>分析了秒杀系统的特点，很容易发现，秒杀系统实际就是一个有计划的低价售卖活动，活动期间会带来 N 倍爆发性增长的瞬时流量，活动后，流量会快速消失。因此，秒杀活动会给后端服务带来如下的技术挑战。</p>
-
 <p>首先，秒杀活动持续时间短，但访问冲击量大，秒杀系统需要能够应对这种爆发性的类似攻击的访问模型。</p>
-
 <p>其次，业务的请求量远远大于售卖量，大部分是最终无法购买成功的请求，秒杀系统需要提前规划好处理策略；</p>
-
 <p>而且，由于业务前端访问量巨大，系统对后端数据的访问量也会短时间爆增，需要对数据存储资源进行良好设计。</p>
-
 <p>另外，秒杀活动虽然持续时间短，但活动期间会给整个业务系统带来超大负荷，业务系统需要制定各种策略，避免系统过载而宕机。</p>
-
 <p>最后，由于售卖活动商品价格低廉，存在套利空间，各种非法作弊手段层出，需要提前规划预防策略。</p>
-
 <h2>秒杀系统设计</h2>
-
 <p>在设计秒杀系统时，有两个设计原则。</p>
-
 <p>首先，要尽力将请求拦截在系统上游，层层设阻拦截，过滤掉无效或超量的请求。因为访问量远远大于商品数量，所有的请求打到后端服务的最后一步，其实并没有必要，反而会严重拖慢真正能成交的请求，降低用户体验。</p>
-
 <p>其次，要充分利用缓存，提升系统的性能和可用性。</p>
-
 <p><img src="assets/Cgq2xl4B4UqAL8uCAADQNODClaU362.png" alt="img" /></p>
-
 <p>秒杀系统专为秒杀活动服务，售卖商品确定，因此可以在设计秒杀商品页面时，将商品信息提前设计为静态信息，将静态的商品信息以及常规的 CSS、JS、宣传图片等静态资源，一起独立存放到 CDN 节点，加速访问，且降低系统访问压力。</p>
-
 <p>在访问前端也可以制定种种限制策略，比如活动没开始时，抢购按钮置灰，避免抢先访问，用户抢购一次后，也将按钮置灰，让用户排队等待，避免反复刷新。</p>
-
 <p>用户所有的请求进入秒杀系统前，通过负载均衡策略均匀分发到不同 Web 服务器，避免节点过载。在 Web 服务器中，首先进行各种服务预处理，检查用户的访问权限，识别并发刷订单的行为。同时在真正服务前，也要进行服务前置检查，避免超售发生。如果发现售出数量已经达到秒杀数量，则直接返回结束。</p>
-
 <p>秒杀系统在处理抢购业务逻辑时，除了对用户进行权限校验，还需要访问商品服务，对库存进行修改，访问订单服务进行订单创建，最后再进行支付、物流等后续服务。这些依赖服务，可以专门为秒杀业务设计排队策略，或者额外部署实例，对秒杀系统进行专门服务，避免影响其他常规业务系统。</p>
-
 <p><img src="assets/Cgq2xl4B4XiAaox5AACe7kKMixU642.png" alt="img" /></p>
-
 <p>在秒杀系统设计中，最重要的是在系统开发之初就进行有效分拆。首先分拆秒杀活动页面的内容，将静态内容分拆到 CDN，动态内容才通过接口访问。其次，要将秒杀业务系统和其他业务系统进行功能分拆，尽量将秒杀系统及依赖服务独立分拆部署，避免影响其他核心业务系统。</p>
-
 <p>由于秒杀的参与者远大于商品数，为了提高抢购的概率，时常会出现一些利用脚本和僵尸账户并发频繁调用接口进行强刷的行为，秒杀系统需要构建访问记录缓存，记录访问 IP、用户的访问行为，发现异常访问，提前进行阻断及返回。同时还需要构建用户缓存，并针对历史数据分析，提前缓存僵尸强刷专业户，方便在秒杀期间对其进行策略限制。这些访问记录、用户数据，通过缓存进行存储，可以加速访问，另外，对用户数据还进行缓存预热，避免活动期间大量穿透。</p>
-
 <p>在业务请求处理时，所有操作尽可能由缓存交互完成。由于秒杀商品较少，相关信息全部加载到内存，把缓存暂时当作存储用，并不会带来过大成本负担。</p>
-
 <p>为秒杀商品构建商品信息缓存，并对全部目标商品进行预热加载。同时对秒杀商品构建独立的库存缓存，加速库存检测。这样通过秒杀商品列表缓存，进行快速商品信息查询，通过库存缓存，可以快速确定秒杀活动进程，方便高效成交或无可售商品后的快速检测及返回。在用户抢购到商品后，要进行库存事务变更，进行库存、订单、支付等相关的构建和修改，这些操作可以尽量由系统只与缓存组件交互完成初步处理。后续落地等操作，必须要入DB库的操作，可以先利用消息队列机，记录成交事件信息，然后再逐步分批执行，避免对 DB 造成过大压力。</p>
-
 <p>总之，在秒杀系统中，除了常规的分拆访问内容和服务，最重要的是尽量将所有数据访问进行缓存化，尽量减少 DB 的访问，在大幅提升系统性能的同时，提升用户体验。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/300分钟吃透分布式缓存-完/32 一个典型的分布式缓存系统是什么样的？.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/300分钟吃透分布式缓存-完/34 如何为海量计数场景设计缓存体系？.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70996e7a78d63d60","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

@@ -1,1288 +1,472 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>09  资源隔离：为什么构建容器需要 Namespace ？.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
-
-
-
 <body>
-
-
-
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
-
-
-
             <ul class="uncollapsible">
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/00 溯本求源，吃透 Docker！.md.html">00 溯本求源，吃透 Docker！.md.html</a>
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/00 溯本求源，吃透 Docker！.md.html">00 溯本求源，吃透 Docker！</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/01  Docker 安装：入门案例带你了解容器技术原理.md.html">01  Docker 安装：入门案例带你了解容器技术原理</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/02  核心概念：镜像、容器、仓库，彻底掌握 Docker 架构核心设计理念.md.html">02  核心概念：镜像、容器、仓库，彻底掌握 Docker 架构核心设计理念</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/03  镜像使用：Docker 环境下如何配置你的镜像？.md.html">03  镜像使用：Docker 环境下如何配置你的镜像？</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/04  容器操作：得心应手掌握 Docker 容器基本操作.md.html">04  容器操作：得心应手掌握 Docker 容器基本操作</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/05  仓库访问：怎样搭建属于你的私有仓库？.md.html">05  仓库访问：怎样搭建属于你的私有仓库？</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/06  最佳实践：如何在生产中编写最优 Dockerfile？.md.html">06  最佳实践：如何在生产中编写最优 Dockerfile？</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/07  Docker 安全：基于内核的弱隔离系统如何保障安全性？.md.html">07  Docker 安全：基于内核的弱隔离系统如何保障安全性？</a>
+                </li>
+                <li>
+                    <a href="/专栏/由浅入深吃透 Docker-完/08  容器监控：容器监控原理及 cAdvisor 的安装与使用.md.html">08  容器监控：容器监控原理及 cAdvisor 的安装与使用</a>
+                </li>
+                <li>
+                    <a class="current-tab" href="/专栏/由浅入深吃透 Docker-完/09  资源隔离：为什么构建容器需要 Namespace ？.md.html">09  资源隔离：为什么构建容器需要 Namespace ？</a>
 
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/01  Docker 安装：入门案例带你了解容器技术原理.md.html">01  Docker 安装：入门案例带你了解容器技术原理.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/10  资源限制：如何通过 Cgroups 机制实现资源限制？.md.html">10  资源限制：如何通过 Cgroups 机制实现资源限制？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/02  核心概念：镜像、容器、仓库，彻底掌握 Docker 架构核心设计理念.md.html">02  核心概念：镜像、容器、仓库，彻底掌握 Docker 架构核心设计理念.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/11  组件组成：剖析 Docker 组件作用及其底层工作原理.md.html">11  组件组成：剖析 Docker 组件作用及其底层工作原理</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/03  镜像使用：Docker 环境下如何配置你的镜像？.md.html">03  镜像使用：Docker 环境下如何配置你的镜像？.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/12  网络模型：剖析 Docker 网络实现及 Libnetwork 底层原理.md.html">12  网络模型：剖析 Docker 网络实现及 Libnetwork 底层原理</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/04  容器操作：得心应手掌握 Docker 容器基本操作.md.html">04  容器操作：得心应手掌握 Docker 容器基本操作.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/13  数据存储：剖析 Docker 卷与持久化数据存储的底层原理.md.html">13  数据存储：剖析 Docker 卷与持久化数据存储的底层原理</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/05  仓库访问：怎样搭建属于你的私有仓库？.md.html">05  仓库访问：怎样搭建属于你的私有仓库？.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/14  文件存储驱动：AUFS 文件系统原理及生产环境的最佳配置.md.html">14  文件存储驱动：AUFS 文件系统原理及生产环境的最佳配置</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/06  最佳实践：如何在生产中编写最优 Dockerfile？.md.html">06  最佳实践：如何在生产中编写最优 Dockerfile？.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/15  文件存储驱动：Devicemapper 文件系统原理及生产环境的最佳配置.md.html">15  文件存储驱动：Devicemapper 文件系统原理及生产环境的最佳配置</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/07  Docker 安全：基于内核的弱隔离系统如何保障安全性？.md.html">07  Docker 安全：基于内核的弱隔离系统如何保障安全性？.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/16  文件存储驱动：OverlayFS 文件系统原理及生产环境的最佳配置.md.html">16  文件存储驱动：OverlayFS 文件系统原理及生产环境的最佳配置</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/08  容器监控：容器监控原理及 cAdvisor 的安装与使用.md.html">08  容器监控：容器监控原理及 cAdvisor 的安装与使用.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/17  原理实践：自己动手使用 Golang 开发 Docker（上）.md.html">17  原理实践：自己动手使用 Golang 开发 Docker（上）</a>
                 </li>
-
                 <li>
-
-
-
-                    <a class="current-tab" href="/专栏/由浅入深吃透 Docker-完/09  资源隔离：为什么构建容器需要 Namespace ？.md.html">09  资源隔离：为什么构建容器需要 Namespace ？.md.html</a>
-
-                    
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/18  原理实践：自己动手使用 Golang 开发 Docker（下）.md.html">18  原理实践：自己动手使用 Golang 开发 Docker（下）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/10  资源限制：如何通过 Cgroups 机制实现资源限制？.md.html">10  资源限制：如何通过 Cgroups 机制实现资源限制？.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/19  如何使用 Docker Compose 解决开发环境的依赖？.md.html">19  如何使用 Docker Compose 解决开发环境的依赖？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/11  组件组成：剖析 Docker 组件作用及其底层工作原理.md.html">11  组件组成：剖析 Docker 组件作用及其底层工作原理.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/20  如何在生产环境中使用 Docker Swarm 调度容器？.md.html">20  如何在生产环境中使用 Docker Swarm 调度容器？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/12  网络模型：剖析 Docker 网络实现及 Libnetwork 底层原理.md.html">12  网络模型：剖析 Docker 网络实现及 Libnetwork 底层原理.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/21  如何使 Docker 和 Kubernetes 结合发挥容器的最大价值？.md.html">21  如何使 Docker 和 Kubernetes 结合发挥容器的最大价值？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/13  数据存储：剖析 Docker 卷与持久化数据存储的底层原理.md.html">13  数据存储：剖析 Docker 卷与持久化数据存储的底层原理.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/22  多阶级构建：Docker 下如何实现镜像多阶级构建？.md.html">22  多阶级构建：Docker 下如何实现镜像多阶级构建？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/14  文件存储驱动：AUFS 文件系统原理及生产环境的最佳配置.md.html">14  文件存储驱动：AUFS 文件系统原理及生产环境的最佳配置.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/23  DevOps：容器化后如何通过 DevOps 提高协作效能？.md.html">23  DevOps：容器化后如何通过 DevOps 提高协作效能？</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/15  文件存储驱动：Devicemapper 文件系统原理及生产环境的最佳配置.md.html">15  文件存储驱动：Devicemapper 文件系统原理及生产环境的最佳配置.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/24  CICD：容器化后如何实现持续集成与交付？（上）.md.html">24  CICD：容器化后如何实现持续集成与交付？（上）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/16  文件存储驱动：OverlayFS 文件系统原理及生产环境的最佳配置.md.html">16  文件存储驱动：OverlayFS 文件系统原理及生产环境的最佳配置.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/25  CICD：容器化后如何实现持续集成与交付？（下）.md.html">25  CICD：容器化后如何实现持续集成与交付？（下）</a>
                 </li>
-
                 <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/17  原理实践：自己动手使用 Golang 开发 Docker（上）.md.html">17  原理实践：自己动手使用 Golang 开发 Docker（上）.md.html</a>
-
-
-
+                    <a href="/专栏/由浅入深吃透 Docker-完/26 结束语  展望未来：Docker 的称霸之路.md.html">26 结束语  展望未来：Docker 的称霸之路</a>
                 </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/18  原理实践：自己动手使用 Golang 开发 Docker（下）.md.html">18  原理实践：自己动手使用 Golang 开发 Docker（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/19  如何使用 Docker Compose 解决开发环境的依赖？.md.html">19  如何使用 Docker Compose 解决开发环境的依赖？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/20  如何在生产环境中使用 Docker Swarm 调度容器？.md.html">20  如何在生产环境中使用 Docker Swarm 调度容器？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/21  如何使 Docker 和 Kubernetes 结合发挥容器的最大价值？.md.html">21  如何使 Docker 和 Kubernetes 结合发挥容器的最大价值？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/22  多阶级构建：Docker 下如何实现镜像多阶级构建？.md.html">22  多阶级构建：Docker 下如何实现镜像多阶级构建？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/23  DevOps：容器化后如何通过 DevOps 提高协作效能？.md.html">23  DevOps：容器化后如何通过 DevOps 提高协作效能？.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/24  CICD：容器化后如何实现持续集成与交付？（上）.md.html">24  CICD：容器化后如何实现持续集成与交付？（上）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/25  CICD：容器化后如何实现持续集成与交付？（下）.md.html">25  CICD：容器化后如何实现持续集成与交付？（下）.md.html</a>
-
-
-
-                </li>
-
-                <li>
-
-
-
-                    
-
-                    <a href="/专栏/由浅入深吃透 Docker-完/26 结束语  展望未来：Docker 的称霸之路.md.html">26 结束语  展望未来：Docker 的称霸之路.md.html</a>
-
-
-
-                </li>
-
             </ul>
-
-
-
         </div>
-
     </div>
-
-
-
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
-
-
-
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
-
-
-
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
-
-
-
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
-
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
-
-
-
     </script>
-
-
-
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>09  资源隔离：为什么构建容器需要 Namespace ？</h1>
-
 <p>我们知道， Docker 是使用 Linux 的 Namespace 技术实现各种资源隔离的。那么究竟什么是 Namespace，各种 Namespace 都有什么作用，为什么 Docker 需要 Namespace呢？下面我带你一一揭秘。</p>
-
 <p>首先我们来了解一下什么是 Namespace。</p>
-
 <h3>什么是 Namespace？</h3>
-
 <p>下面是 Namespace 的维基百科定义：</p>
-
 <blockquote>
-
 <p>Namespace 是 Linux 内核的一项功能，该功能对内核资源进行分区，以使一组进程看到一组资源，而另一组进程看到另一组资源。Namespace 的工作方式通过为一组资源和进程设置相同的 Namespace 而起作用，但是这些 Namespace 引用了不同的资源。资源可能存在于多个 Namespace 中。这些资源可以是进程 ID、主机名、用户 ID、文件名、与网络访问相关的名称和进程间通信。</p>
-
 </blockquote>
-
 <p>简单来说，Namespace 是 Linux 内核的一个特性，该特性可以实现在同一主机系统中，对进程 ID、主机名、用户 ID、文件名、网络和进程间通信等资源的隔离。Docker 利用 Linux 内核的 Namespace 特性，实现了每个容器的资源相互隔离，从而保证容器内部只能访问到自己 Namespace 的资源。</p>
-
 <p>最新的 Linux 5.6 内核中提供了 8 种类型的 Namespace：</p>
-
 <table>
-
 <thead>
-
 <tr>
-
 <th>Namespace 名称</th>
-
 <th>作用</th>
-
 <th>内核版本</th>
-
 </tr>
-
 </thead>
-
 <tbody>
-
 <tr>
-
 <td>Mount（mnt）</td>
-
 <td>隔离挂载点</td>
-
 <td>2.4.19</td>
-
 </tr>
-
 <tr>
-
 <td>Process ID (pid)</td>
-
 <td>隔离进程 ID</td>
-
 <td>2.6.24</td>
-
 </tr>
-
 <tr>
-
 <td>Network (net)</td>
-
 <td>隔离网络设备，端口号等</td>
-
 <td>2.6.29</td>
-
 </tr>
-
 <tr>
-
 <td>Interprocess Communication (ipc)</td>
-
 <td>隔离 System V IPC 和 POSIX message queues</td>
-
 <td>2.6.19</td>
-
 </tr>
-
 <tr>
-
 <td>UTS Namespace(uts)</td>
-
 <td>隔离主机名和域名</td>
-
 <td>2.6.19</td>
-
 </tr>
-
 <tr>
-
 <td>User Namespace (user)</td>
-
 <td>隔离用户和用户组</td>
-
 <td>3.8</td>
-
 </tr>
-
 <tr>
-
 <td>Control group (cgroup) Namespace</td>
-
 <td>隔离 Cgroups 根目录</td>
-
 <td>4.6</td>
-
 </tr>
-
 <tr>
-
 <td>Time Namespace</td>
-
 <td>隔离系统时间</td>
-
 <td>5.6</td>
-
 </tr>
-
 </tbody>
-
 </table>
-
 <p>虽然 Linux 内核提供了8种 Namespace，但是最新版本的 Docker 只使用了其中的前6 种，分别为Mount Namespace、PID Namespace、Net Namespace、IPC Namespace、UTS Namespace、User Namespace。</p>
-
 <p>下面，我们详细了解下 Docker 使用的 6 种 Namespace的作用分别是什么。</p>
-
 <h3>各种 Namespace 的作用？</h3>
-
 <h4>（1）Mount Namespace</h4>
-
 <p>Mount Namespace 是 Linux 内核实现的第一个 Namespace，从内核的 2.4.19 版本开始加入。它可以用来隔离不同的进程或进程组看到的挂载点。通俗地说，就是可以实现在不同的进程中看到不同的挂载目录。使用 Mount Namespace 可以实现容器内只能看到自己的挂载信息，在容器内的挂载操作不会影响主机的挂载目录。</p>
-
 <p>下面我们通过一个实例来演示下 Mount Namespace。在演示之前，我们先来认识一个命令行工具 unshare。unshare 是 util-linux 工具包中的一个工具，CentOS 7 系统默认已经集成了该工具，<strong>使用 unshare 命令可以实现创建并访问不同类型的 Namespace</strong>。</p>
-
 <p>首先我们使用以下命令创建一个 bash 进程并且新建一个 Mount Namespace：</p>
-
 <pre><code>$ sudo unshare --mount --fork /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27554848536744424953485410">[email&#160;protected]</a> centos]#
-
 </code></pre>
-
 <p>执行完上述命令后，这时我们已经在主机上创建了一个新的 Mount Namespace，并且当前命令行窗口加入了新创建的 Mount Namespace。下面我通过一个例子来验证下，在独立的 Mount Namespace 内创建挂载目录是不影响主机的挂载目录的。</p>
-
 <p>首先在 /tmp 目录下创建一个目录。</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4869b9b80b497919a809b87c3">[email&#160;protected]</a> centos]# mkdir /tmp/tmpfs
-
 </code></pre>
-
 <p>创建好目录后使用 mount 命令挂载一个 tmpfs 类型的目录。命令如下：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="087a67677c486b6d667c677b3f">[email&#160;protected]</a> centos]# mount -t tmpfs -o size=20m tmpfs /tmp/tmpfs
-
 </code></pre>
-
 <p>然后使用 df 命令查看一下已经挂载的目录信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a9dbc6c6dde9caccc7ddc6da9e">[email&#160;protected]</a> centos]# df -h
-
-
-
 Filesystem      Size  Used Avail Use% Mounted on
-
-
-
 /dev/vda1       500G  1.4G  499G   1% /
-
-
-
 devtmpfs         16G     0   16G   0% /dev
-
-
-
 tmpfs            16G     0   16G   0% /dev/shm
-
-
-
 tmpfs            16G     0   16G   0% /sys/fs/cgroup
-
-
-
 tmpfs            16G   57M   16G   1% /run
-
-
-
 tmpfs           3.2G     0  3.2G   0% /run/user/1000
-
-
-
 tmpfs            20M     0   20M   0% /tmp/tmpfs
-
 </code></pre>
-
 <p>可以看到 /tmp/tmpfs 目录已经被正确挂载。为了验证主机上并没有挂载此目录，我们新打开一个命令行窗口，同样执行 df 命令查看主机的挂载信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5033353e243f231033353e243f2367">[email&#160;protected]</a> ~]$ df -h
-
-
-
 Filesystem      Size  Used Avail Use% Mounted on
-
-
-
 devtmpfs         16G     0   16G   0% /dev
-
-
-
 tmpfs            16G     0   16G   0% /dev/shm
-
-
-
 tmpfs            16G   57M   16G   1% /run
-
-
-
 tmpfs            16G     0   16G   0% /sys/fs/cgroup
-
-
-
 /dev/vda1       500G  1.4G  499G   1% /
-
-
-
 tmpfs           3.2G     0  3.2G   0% /run/user/1000
-
 </code></pre>
-
 <p>通过上面输出可以看到主机上并没有挂载 /tmp/tmpfs，可见我们独立的 Mount Namespace 中执行 mount 操作并不会影响主机。</p>
-
 <p>为了进一步验证我们的想法，我们继续在当前命令行窗口查看一下当前进程的 Namespace 信息，命令如下：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35475a5a417556505b415a4602">[email&#160;protected]</a> centos]# ls -l /proc/self/ns/
-
-
-
 total 0
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 ipc -&gt; ipc:[4026531839]
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 mnt -&gt; mnt:[4026532239]
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 net -&gt; net:[4026531956]
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 pid -&gt; pid:[4026531836]
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 user -&gt; user:[4026531837]
-
-
-
 lrwxrwxrwx. 1 root root 0 Sep  4 08:20 uts -&gt; uts:[4026531838]
-
 </code></pre>
-
 <p>然后新打开一个命令行窗口，使用相同的命令查看一下主机上的 Namespace 信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c6f696278637f4c6f696278637f3b">[email&#160;protected]</a> ~]$ ls -l /proc/self/ns/
-
-
-
 total 0
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 ipc -&gt; ipc:[4026531839]
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 mnt -&gt; mnt:[4026531840]
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 net -&gt; net:[4026531956]
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 pid -&gt; pid:[4026531836]
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 user -&gt; user:[4026531837]
-
-
-
 lrwxrwxrwx. 1 centos centos 0 Sep  4 08:20 uts -&gt; uts:[4026531838]
-
 </code></pre>
-
 <p>通过对比两次命令的输出结果，我们可以看到，除了 Mount Namespace 的 ID 值不一样外，其他Namespace 的 ID 值均一致。</p>
-
 <p>通过以上结果我们可以得出结论，<strong>使用 unshare 命令可以新建 Mount Namespace，并且在新建的 Mount Namespace 内 mount 是和外部完全隔离的。</strong></p>
-
 <h4>（2）PID Namespace</h4>
-
 <p>PID Namespace 的作用是用来隔离进程。在不同的 PID Namespace 中，进程可以拥有相同的 PID 号，利用 PID Namespace 可以实现每个容器的主进程为 1 号进程，而容器内的进程在主机上却拥有不同的PID。例如一个进程在主机上 PID 为 122，使用 PID Namespace 可以实现该进程在容器内看到的 PID 为 1。</p>
-
 <p>下面我们通过一个实例来演示下 PID Namespace的作用。首先我们使用以下命令创建一个 bash 进程，并且新建一个 PID Namespace：</p>
-
 <pre><code>$ sudo unshare --pid --fork --mount-proc /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87f5e8e8f3c7e4e2e9f3e8f4b0">[email&#160;protected]</a> centos]#
-
 </code></pre>
-
 <p>执行完上述命令后，我们在主机上创建了一个新的 PID Namespace，并且当前命令行窗口加入了新创建的 PID Namespace。在当前的命令行窗口使用 ps aux 命令查看一下进程信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccbea3a3b88cafa9a2b8a3bffb">[email&#160;protected]</a> centos]# ps aux
-
-
-
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-
-
-
 root         1  0.0  0.0 115544  2004 pts/0    S    10:57   0:00 bash
-
-
-
 root        10  0.0  0.0 155444  1764 pts/0    R+   10:59   0:00 ps aux
-
 </code></pre>
-
 <p>通过上述命令输出结果可以看到当前 Namespace 下 bash 为 1 号进程，而且我们也看不到主机上的其他进程信息。</p>
-
 <h4>（3）UTS Namespace</h4>
-
 <p>UTS Namespace 主要是用来隔离主机名的，它允许每个 UTS Namespace 拥有一个独立的主机名。例如我们的主机名称为 docker，使用 UTS Namespace 可以实现在容器内的主机名称为 lagoudocker 或者其他任意自定义主机名。</p>
-
 <p>同样我们通过一个实例来验证下 UTS Namespace 的作用，首先我们使用 unshare 命令来创建一个 UTS Namespace：</p>
-
 <pre><code>$ sudo unshare --uts --fork /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abd9c4c4dfebc8cec5dfc4d89c">[email&#160;protected]</a> centos]#
-
 </code></pre>
-
 <p>创建好 UTS Namespace 后，当前命令行窗口已经处于一个独立的 UTS Namespace 中，下面我们使用 hostname 命令（hostname 可以用来查看主机名称）设置一下主机名：</p>
-
 <pre><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f3eeeef5c1e2e4eff5eef2b6">[email&#160;protected]</a> centos]# hostname -b lagoudocker
-
 </code></pre>
-
 <p>然后再查看一下主机名：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9cbd6d6cdf9dadcd7cdd6ca8e">[email&#160;protected]</a> centos]# hostname
-
-
-
 lagoudocker
-
 </code></pre>
-
 <p>通过上面命令的输出，我们可以看到当前UTS Namespace 内的主机名已经被修改为 lagoudocker。然后我们新打开一个命令行窗口，使用相同的命令查看一下主机的 hostname：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f7c7a716b706c5f7c7a716b706c28">[email&#160;protected]</a> ~]$ hostname
-
-
-
 centos7
-
 </code></pre>
-
 <p>可以看到主机的名称仍然为 centos7，并没有被修改。由此，可以验证 UTS Namespace 可以用来隔离主机名。</p>
-
 <h4>（4）IPC Namespace</h4>
-
 <p>IPC Namespace 主要是用来隔离进程间通信的。例如 PID Namespace 和 IPC Namespace 一起使用可以实现同一 IPC Namespace 内的进程彼此可以通信，不同 IPC Namespace 的进程却不能通信。</p>
-
 <p>同样我们通过一个实例来验证下IPC Namespace的作用，首先我们使用 unshare 命令来创建一个 IPC Namespace：</p>
-
 <pre><code>$ sudo unshare --ipc --fork /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f98b96968db99a9c978d968ace">[email&#160;protected]</a> centos]#
-
 </code></pre>
-
 <p>下面我们需要借助两个命令来实现对 IPC Namespace 的验证。</p>
-
 <ul>
-
 <li>ipcs -q 命令：用来查看系统间通信队列列表。</li>
-
 <li>ipcmk -Q 命令：用来创建系统间通信队列。</li>
-
 </ul>
-
 <p>我们首先使用 ipcs -q 命令查看一下当前 IPC Namespace 下的系统通信队列列表：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e487818a908b97a487818a908b97d3">[email&#160;protected]</a> ~]$ ipcs -q
-
-
-
 ------ Message Queues --------
-
-
-
 key        msqid      owner      perms      used-bytes   messages
-
 </code></pre>
-
 <p>由上可以看到当前无任何系统通信队列，然后我们使用 ipcmk -Q 命令创建一个系统通信队列：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d7cacad1e5c6c0cbd1cad692">[email&#160;protected]</a> centos]# ipcmk -Q
-
-
-
 Message queue id: 0
-
 </code></pre>
-
 <p>再次使用 ipcs -q 命令查看当前 IPC Namespace 下的系统通信队列列表：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98eaf7f7ecd8fbfdf6ecf7ebaf">[email&#160;protected]</a> centos]# ipcs -q
-
-
-
 ------ Message Queues --------
-
-
-
 key        msqid      owner      perms      used-bytes   messages
-
-
-
 0x73682a32 0          root       644        0            0
-
 </code></pre>
-
 <p>可以看到我们已经成功创建了一个系统通信队列。然后我们新打开一个命令行窗口，使用ipcs -q 命令查看一下主机的系统通信队列：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1576707b617a665576707b617a6622">[email&#160;protected]</a> ~]$ ipcs -q
-
-
-
 ------ Message Queues --------
-
-
-
 key        msqid      owner      perms      used-bytes   messages
-
 </code></pre>
-
 <p>通过上面的实验，可以发现，在单独的 IPC Namespace 内创建的系统通信队列在主机上无法看到。即 IPC Namespace 实现了系统通信队列的隔离。</p>
-
 <h4>（5）User Namespace</h4>
-
 <p>User Namespace 主要是用来隔离用户和用户组的。一个比较典型的应用场景就是在主机上以非 root 用户运行的进程可以在一个单独的 User Namespace 中映射成 root 用户。使用 User Namespace 可以实现进程在容器内拥有 root 权限，而在主机上却只是普通用户。</p>
-
 <p>User Namesapce 的创建是可以不使用 root 权限的。下面我们以普通用户的身份创建一个 User Namespace，命令如下：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8abada6bca7bb88abada6bca7bbff">[email&#160;protected]</a> ~]$ unshare --user -r /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61130e0e152102040f150e1256">[email&#160;protected]</a> ~]#
-
 </code></pre>
-
 <blockquote>
-
 <p>CentOS7 默认允许创建的 User Namespace 为 0，如果执行上述命令失败（ unshare 命令返回的错误为 unshare: unshare failed: Invalid argument ），需要使用以下命令修改系统允许创建的 User Namespace 数量，命令为：echo 65535 &gt; /proc/sys/user/max_user_namespaces，然后再次尝试创建 User Namespace。</p>
-
 </blockquote>
-
 <p>然后执行 id 命令查看一下当前的用户信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="74061b1b003417111a001b0743">[email&#160;protected]</a> ~]# id
-
-
-
 uid=0(root) gid=0(root) groups=0(root),65534(nfsnobody) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-
 </code></pre>
-
 <p>通过上面的输出可以看到我们在新的 User Namespace 内已经是 root 用户了。下面我们使用只有主机 root 用户才可以执行的 reboot 命令来验证一下，在当前命令行窗口执行 reboot 命令：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b0914140f3b181e150f14084c">[email&#160;protected]</a> ~]# reboot
-
-
-
 Failed to open /dev/initctl: Permission denied
-
-
-
 Failed to talk to init daemon.
-
 </code></pre>
-
 <p>可以看到，我们在新创建的 User Namespace 内虽然是 root 用户，但是并没有权限执行 reboot 命令。这说明在隔离的 User Namespace 中，并不能获取到主机的 root 权限，也就是说 User Namespace 实现了用户和用户组的隔离。</p>
-
 <h4>（6）Net Namespace</h4>
-
 <p>Net Namespace 是用来隔离网络设备、IP 地址和端口等信息的。Net Namespace 可以让每个进程拥有自己独立的 IP 地址，端口和网卡信息。例如主机 IP 地址为 172.16.4.1 ，容器内可以设置独立的 IP 地址为 192.168.1.1。</p>
-
 <p>同样用实例验证，我们首先使用 ip a 命令查看一下主机上的网络信息：</p>
-
 <pre><code>$ ip a
-
-
-
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-
-
-
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-
-
-
     inet 127.0.0.1/8 scope host lo
-
-
-
        valid_lft forever preferred_lft forever
-
-
-
     inet6 ::1/128 scope host
-
-
-
        valid_lft forever preferred_lft forever
-
-
-
 2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-
-
-
     link/ether 02:11:b0:14:01:0c brd ff:ff:ff:ff:ff:ff
-
-
-
     inet 172.20.1.11/24 brd 172.20.1.255 scope global dynamic eth0
-
-
-
        valid_lft 86063337sec preferred_lft 86063337sec
-
-
-
     inet6 fe80::11:b0ff:fe14:10c/64 scope link
-
-
-
        valid_lft forever preferred_lft forever
-
-
-
 3: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default
-
-
-
     link/ether 02:42:82:8d:a0:df brd ff:ff:ff:ff:ff:ff
-
-
-
     inet 172.17.0.1/16 scope global docker0
-
-
-
        valid_lft forever preferred_lft forever
-
-
-
     inet6 fe80::42:82ff:fe8d:a0df/64 scope link
-
-
-
        valid_lft forever preferred_lft forever
-
 </code></pre>
-
 <p>然后我们使用以下命令创建一个 Net Namespace：</p>
-
 <pre><code>$ sudo unshare --net --fork /bin/bash
-
-
-
 [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3c1dcdcc7f3d0d6ddc7dcc084">[email&#160;protected]</a> centos]#
-
 </code></pre>
-
 <p>同样的我们使用 ip a 命令查看一下网络信息：</p>
-
 <pre><code>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f4e9e9f2c6e5e3e8f2e9f5b1">[email&#160;protected]</a> centos]# ip a
-
-
-
 1: lo: &lt;LOOPBACK&gt; mtu 65536 qdisc noop state DOWN group default qlen 1000
-
-
-
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-
 </code></pre>
-
 <p>可以看到，宿主机上有 lo、eth0、docker0 等网络设备，而我们新建的 Net Namespace 内则与主机上的网络设备不同。</p>
-
 <h3>为什么 Docker 需要 Namespace？</h3>
-
 <p>Linux 内核从 2002 年 2.4.19 版本开始加入了 Mount Namespace，而直到内核 3.8 版本加入了 User Namespace 才为容器提供了足够的支持功能。</p>
-
 <p>当 Docker 新建一个容器时， 它会创建这六种 Namespace，然后将容器中的进程加入这些 Namespace 之中，使得 Docker 容器中的进程只能看到当前 Namespace 中的系统资源。</p>
-
 <p>正是由于 Docker 使用了 Linux 的这些 Namespace 技术，才实现了 Docker 容器的隔离，可以说没有 Namespace，就没有 Docker 容器。</p>
-
 <h3>小结</h3>
-
 <p>到此，相信你已经了解了什么是 Namespace。Namespace 是 Linux 内核的一个特性，该特性可以实现在同一主机系统中对进程 ID、主机名、用户 ID、文件名、网络和进程间通信等资源的隔离。Docker 正是结合了这六种 Namespace 的功能，才诞生了 Docker 容器。</p>
-
 <p>最后，试想下，当我们使用 docker run --net=host 命令启动容器时，容器是否和主机共享同一个 Net Namespace？思考后，可以把你的想法写在留言区。</p>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/由浅入深吃透 Docker-完/08  容器监控：容器监控原理及 cAdvisor 的安装与使用.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/由浅入深吃透 Docker-完/10  资源限制：如何通过 Cgroups 机制实现资源限制？.md.html">下一页</a>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-
-
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997b4b8da03cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
-
-
-
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
-
-
-
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
-
-
-
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
-
-
-
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
-
-
-
 </script>
-
-
-
 </html>
-

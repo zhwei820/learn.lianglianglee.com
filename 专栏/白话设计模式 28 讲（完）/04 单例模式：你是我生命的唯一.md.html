@@ -1,794 +1,452 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>04 单例模式：你是我生命的唯一.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/00 生活中的设计模式：启程之前，请不要错过我.md.html">00 生活中的设计模式：启程之前，请不要错过我.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/00 生活中的设计模式：启程之前，请不要错过我.md.html">00 生活中的设计模式：启程之前，请不要错过我</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/01 监听模式：坑爹的热水器.md.html">01 监听模式：坑爹的热水器.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/01 监听模式：坑爹的热水器.md.html">01 监听模式：坑爹的热水器</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/02 适配模式：身高不够鞋来凑.md.html">02 适配模式：身高不够鞋来凑.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/02 适配模式：身高不够鞋来凑.md.html">02 适配模式：身高不够鞋来凑</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/03 状态模式：人与水的三态.md.html">03 状态模式：人与水的三态.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/03 状态模式：人与水的三态.md.html">03 状态模式：人与水的三态</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/白话设计模式 28 讲（完）/04 单例模式：你是我生命的唯一.md.html">04 单例模式：你是我生命的唯一.md.html</a>
+                    <a class="current-tab" href="/专栏/白话设计模式 28 讲（完）/04 单例模式：你是我生命的唯一.md.html">04 单例模式：你是我生命的唯一</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/05 职责模式：我的假条去哪了.md.html">05 职责模式：我的假条去哪了.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/05 职责模式：我的假条去哪了.md.html">05 职责模式：我的假条去哪了</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/06 中介模式：找房子问中介.md.html">06 中介模式：找房子问中介.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/06 中介模式：找房子问中介.md.html">06 中介模式：找房子问中介</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/07 代理模式：帮我拿一下快递.md.html">07 代理模式：帮我拿一下快递.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/07 代理模式：帮我拿一下快递.md.html">07 代理模式：帮我拿一下快递</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/08 装饰模式：你想怎么穿就怎么穿.md.html">08 装饰模式：你想怎么穿就怎么穿.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/08 装饰模式：你想怎么穿就怎么穿.md.html">08 装饰模式：你想怎么穿就怎么穿</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/09 工厂模式：你要拿铁还是摩卡.md.html">09 工厂模式：你要拿铁还是摩卡.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/09 工厂模式：你要拿铁还是摩卡.md.html">09 工厂模式：你要拿铁还是摩卡</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/10 迭代模式：下一个就是你了.md.html">10 迭代模式：下一个就是你了.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/10 迭代模式：下一个就是你了.md.html">10 迭代模式：下一个就是你了</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/11 组合模式：自己组装电脑.md.html">11 组合模式：自己组装电脑.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/11 组合模式：自己组装电脑.md.html">11 组合模式：自己组装电脑</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/12 构建模式：想要车还是庄园.md.html">12 构建模式：想要车还是庄园.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/12 构建模式：想要车还是庄园.md.html">12 构建模式：想要车还是庄园</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/13 克隆模式：给你一个分身术.md.html">13 克隆模式：给你一个分身术.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/13 克隆模式：给你一个分身术.md.html">13 克隆模式：给你一个分身术</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/14 策略模式：怎么来不重要，人到就行.md.html">14 策略模式：怎么来不重要，人到就行.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/14 策略模式：怎么来不重要，人到就行.md.html">14 策略模式：怎么来不重要，人到就行</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/15 命令模式：大闸蟹，走起！.md.html">15 命令模式：大闸蟹，走起！.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/15 命令模式：大闸蟹，走起！.md.html">15 命令模式：大闸蟹，走起！</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/16 备忘模式：好记性不如烂笔头.md.html">16 备忘模式：好记性不如烂笔头.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/16 备忘模式：好记性不如烂笔头.md.html">16 备忘模式：好记性不如烂笔头</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/17 享元模式：颜料很贵必须充分利用.md.html">17 享元模式：颜料很贵必须充分利用.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/17 享元模式：颜料很贵必须充分利用.md.html">17 享元模式：颜料很贵必须充分利用</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/18 外观模式：学妹别慌，学长帮你.md.html">18 外观模式：学妹别慌，学长帮你.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/18 外观模式：学妹别慌，学长帮你.md.html">18 外观模式：学妹别慌，学长帮你</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/19 访问模式：一千个读者一千个哈姆雷特.md.html">19 访问模式：一千个读者一千个哈姆雷特.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/19 访问模式：一千个读者一千个哈姆雷特.md.html">19 访问模式：一千个读者一千个哈姆雷特</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/20 生活中的设计模式：与经典设计模式的不解渊源.md.html">20 生活中的设计模式：与经典设计模式的不解渊源.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/20 生活中的设计模式：与经典设计模式的不解渊源.md.html">20 生活中的设计模式：与经典设计模式的不解渊源</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/21 生活中的设计模式：那些未完待续的设计模式.md.html">21 生活中的设计模式：那些未完待续的设计模式.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/21 生活中的设计模式：那些未完待续的设计模式.md.html">21 生活中的设计模式：那些未完待续的设计模式</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆.md.html">22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆.md.html">22 深入解读过滤器模式：制作一杯鲜纯细腻的豆浆</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/23 深入解读对象池技术：共享让生活更便捷.md.html">23 深入解读对象池技术：共享让生活更便捷.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/23 深入解读对象池技术：共享让生活更便捷.md.html">23 深入解读对象池技术：共享让生活更便捷</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/24 深入解读回调机制：把你技能亮出来.md.html">24 深入解读回调机制：把你技能亮出来.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/24 深入解读回调机制：把你技能亮出来.md.html">24 深入解读回调机制：把你技能亮出来</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/25 谈谈我对设计模式的理解.md.html">25 谈谈我对设计模式的理解.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/25 谈谈我对设计模式的理解.md.html">25 谈谈我对设计模式的理解</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/26 谈谈我对设计原则的思考.md.html">26 谈谈我对设计原则的思考.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/26 谈谈我对设计原则的思考.md.html">26 谈谈我对设计原则的思考</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/白话设计模式 28 讲（完）/27 谈谈我对项目重构的看法.md.html">27 谈谈我对项目重构的看法.md.html</a>
+                    <a href="/专栏/白话设计模式 28 讲（完）/27 谈谈我对项目重构的看法.md.html">27 谈谈我对项目重构的看法</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>04 单例模式：你是我生命的唯一</h1>
-
 <p>【故事剧情】</p>
-
 <blockquote>
-
 <p>爱情是每一个都渴望的，Tony 也是一样！自从毕业后，Tony 就一直没再谈过恋爱，离上一次的初恋也已经过去两年。一个巧合的机会，Tony 终于遇上了自己的喜欢的人，她叫 Jenny，有一头长发，天生爱笑、声音甜美、性格温和……</p>
-
 <p>作为一个程序员的 Tony，直男癌的症状也很明显：天生木讷、不善言辞。Tony 自然不敢正面表白，但他也有自己的方式，以一种传统书信的方式，展开了一场暗流涌动的追求……经历了一次次屡战屡败，屡败屡战的追求之后，Tony 和 Jenny 终于在一起了！</p>
-
 <p>然而好景不太长，由于种种的原因，最后 Jenny 还是和 Tony 分开了……</p>
-
 <p>人生就像一种旅行，蜿蜒曲折，一路向前！沿途你会看到许多的风景，也会经历很多的黑夜，但我们无法回头！有一些风景可能很短暂，而有一些风景我们希望能够伴随自己走完余生。Tony 经历过一次被爱，也经历过一次追爱；他希望下次能找到一个可陪伴自己走完余生的她，也是<strong>他的唯一！</strong></p>
-
 </blockquote>
-
 <p><img src="assets/b6726f60-c390-11e8-b5ca-0da8fdb41124.jpg" alt="img" /></p>
-
 <h3>用程序来模拟生活</h3>
-
 <p>相信每一个人都渴望有一个纯洁的爱情，希望找到唯一的她。不管你是单身狗一个，还是已经成双成对，肯定都希望你的伴侣是唯一的！程序如人生，程序也一样，有一些类你希望它只有一个实例。</p>
-
 <p>我们用程序来模拟一个真爱。</p>
-
 <p>源码示例：</p>
-
 <pre><code class="language-python">class MyBeautifulGril(object):
-
     &quot;&quot;&quot;我的漂亮女神&quot;&quot;&quot;
-
     __instance = None
-
     __isFirstInit = False
     def __new__(cls, name):
-
         if not cls.__instance:
-
             MyBeautifulGril.__instance = super().__new__(cls)
-
         return cls.__instance
     def __init__(self, name):
-
         if not self.__isFirstInit:
-
             self.__name = name
-
             print(&quot;遇见&quot; + name + &quot;，我一见钟情！&quot;)
-
             MyBeautifulGril.__isFirstInit = True
-
         else:
-
             print(&quot;遇见&quot; + name + &quot;，我置若罔闻！&quot;)
     def showMyHeart(self):
-
         print(self.__name + &quot;就我心中的唯一！&quot;)
 </code></pre>
-
 <p>测试代码：</p>
-
 <pre><code class="language-python">def TestLove():
-
     jenny = MyBeautifulGril(&quot;Jenny&quot;)
-
     jenny.showMyHeart()
-
     kimi = MyBeautifulGril(&quot;Kimi&quot;)
-
     kimi.showMyHeart()
-
     print(&quot;id(jenny):&quot;, id(jenny), &quot; id(kimi):&quot;, id(kimi))
 </code></pre>
-
 <p>输出结果：</p>
-
 <pre><code>遇见Jenny，我一见钟情！
-
 Jenny就我心中的唯一！
-
 遇见Kimi，我置若罔闻！
-
 Jenny就我心中的唯一！
-
 id(jenny): 47127888  id(kimi): 47127888
 </code></pre>
-
 <p>看到了没，一旦你初次选定了 Jenny，不管换几个女人，你心中念叨的还是 Jenny！这才是真爱啊！哈哈……</p>
-
 <h3>从剧情中思考单例模式</h3>
-
 <h4>单例模式</h4>
-
 <blockquote>
-
 <p>Ensure a class has only one instance, and provide a global point of access to it.</p>
-
 <p>确保一个类只有一个实例，并且提供一个访问它的全局方法。</p>
-
 </blockquote>
-
 <h4>设计思想</h4>
-
 <p>有一些人，你希望是唯一的，程序也一样，有一些类，你希望实例是唯一的。<strong>单例</strong>就是一个类只能有一个对象（实例），单例就是用来控制某些事物只允许有一个个体，比如在我们生活的世界中，有生命的星球只有一个——地球（至少到目前为止人类所发现的世界中是这样的）。</p>
-
 <p>人如果脚踏两只船，你的生活将会翻船！程序中的部分关键类如果有多个实例，将容易使逻辑混乱，程序崩溃！</p>
-
 <h3>单例模式的模型抽象</h3>
-
 <h4>代码框架</h4>
-
 <p>单例的实现方式有很多种，下面列出几种常见的方式。</p>
-
 <h5><strong>1. 重写 <em>new</em> 和 <em>init</em> 方法</strong></h5>
-
 <p>源码示例：</p>
-
 <pre><code class="language-python">class Singleton1(object):
-
     &quot;&quot;&quot;单例实现方式一&quot;&quot;&quot;
-
     __instance = None
-
     __isFirstInit = False
     def __new__(cls, name):
-
         if not cls.__instance:
-
             Singleton1.__instance = super().__new__(cls)
-
         return cls.__instance
     def __init__(self, name):
-
         if not self.__isFirstInit:
-
             self.__name = name
-
             Singleton1.__isFirstInit = True
     def getName(self):
-
         return self.__name
 # Test
-
 tony = Singleton1(&quot;Tony&quot;)
-
 karry = Singleton1(&quot;Karry&quot;)
-
 print(tony.getName(), karry.getName())
-
 print(&quot;id(tony):&quot;, id(tony), &quot;id(karry):&quot;, id(karry))
-
 print(&quot;tony == karry:&quot;, tony == karry)
 </code></pre>
-
 <p>输出结果：</p>
-
 <pre><code>Tony Tony
-
 id(tony): 46050320 id(karry): 46050320
-
 tony == karry: True
 </code></pre>
-
 <p>在 Python 3 的类中，<em>*new</em>* 负责对象的创建，而 <em>*init</em>* 负责对象的初始化；<em>*new</em>* 是一个类方法，而 <em>*init</em>* 是一个对象方法。</p>
-
 <p><em>*new</em>* 是我们通过类名进行实例化对象时自动调用的，<em>*init</em>* 是在每一次实例化对象之后调用的，<em>*new</em>* 方法创建一个实例之后返回这个实例对象，并将其传递给 <em>*init</em>* 方法的 self 参数。</p>
-
 <p>在上面的示例代码中，我们定义了一个静态的 <em>*instance</em>* 类变量，用来存放 Singleton1 的对象，<em>*new</em>* 方法每次返回同一个_<em>instance对象_</em>（若未初始化，则进行初始化）。因为每一次通过 s = Singleton1() 的方式创建对象时，都会自动调用 <em>*init</em>* 方法来初始化实例对象；因此 <em>*isFirstInit</em>* 的作用就是确保只对 <em>*instance</em>* 对象进行一次初始化，故事剧情中的代码就是用这种方式实现的单例。</p>
-
 <p>在 Java 和 C++ 这种静态语言中，实现单例模式的一个最简单的方法就是：将构造函数声明成 private，再定义一个 getInstance() 的静态方法返回一个对象，并确保 getInstance() 每次返回同一个对象即可，如下面的 Java 示例代码。</p>
-
 <pre><code class="language-java">/**
-
  * Java中单例模式的实现，未考虑线程安全
-
  */
-
 public class Singleton {
-
     private static Singleton instance = null;
     private String name;
     private Singleton(String name) {
-
         this.name = name;
-
     }
     public static Singleton getInstance(String name) {
-
         if (instance == null) {
-
             instance = new Singleton(name);
-
         }
-
         return instance;
-
     }
-
 }
 </code></pre>
-
 <p>Python 中 <em>*new</em>* 和 <em>*init</em>* 都是 public 的，所以我们需要通过重写 <em>*new</em>* 和 <em>*init</em>* 方法来改造对象的创建过来，从而实现单例模式。如果你要更详细地了解 Python 中 <em>*new</em>* 和 <em>*init</em>* 的原理和用法，请参见《<a href="https://blog.csdn.net/luoweifu/article/details/82732313">深入理解 Python 中的 <strong>new</strong> 和 <strong>init</strong></a>》。</p>
-
 <h5><strong>2. 自定义 metaclass 的方法</strong></h5>
-
 <pre><code class="language-python">class Singleton2(type):
-
     &quot;&quot;&quot;单例实现方式二&quot;&quot;&quot;
     def __init__(cls, what, bases=None, dict=None):
-
         super().__init__(what, bases, dict)
-
         cls._instance = None # 初始化全局变量cls._instance为None
     def __call__(cls, *args, **kwargs):
-
         # 控制对象的创建过程，如果cls._instance为None则创建，否则直接返回
-
         if cls._instance is None:
-
             cls._instance = super().__call__(*args, **kwargs)
-
         return cls._instance
 class CustomClass(metaclass=Singleton2):
-
     &quot;&quot;&quot;用户自定义的类&quot;&quot;&quot;
     def __init__(self, name):
-
         self.__name = name
     def getName(self):
-
         return self.__name
 tony = CustomClass(&quot;Tony&quot;)
-
 karry = CustomClass(&quot;Karry&quot;)
-
 print(tony.getName(), karry.getName())
-
 print(&quot;id(tony):&quot;, id(tony), &quot;id(karry):&quot;, id(karry))
-
 print(&quot;tony == karry:&quot;, tony == karry)
 </code></pre>
-
 <p>输出结果：</p>
-
 <pre><code>Tony Tony
-
 id(tony): 50794608 id(karry): 50794608
-
 tony == karry: True
 </code></pre>
-
 <p>在上面的代码中，我们定义了一个 metaclass（Singleton2）来控制对象的实例化过程。在定义自己的类时，我们通过 class CustomClass(metaclass=Singleton2) 来显示地指定 metaclass 为 Singleton2。如果你还不太熟悉 metaclass，想了解更多关于它的原理，请参见《[附录 Python 中 metaclass 的原理](》。</p>
-
 <h5><strong>3. 装饰器的方法</strong></h5>
-
 <pre><code class="language-python">def singletonDecorator(cls, *args, **kwargs):
-
     &quot;&quot;&quot;定义一个单例装饰器&quot;&quot;&quot;
-
     instance = {}
     def wrapperSingleton(*args, **kwargs):
-
         if cls not in instance:
-
             instance[cls] = cls(*args, **kwargs)
-
         return instance[cls]
     return wrapperSingleton
 @singletonDecorator
-
 class Singleton3:
-
     &quot;&quot;&quot;使用单例装饰器修饰一个类&quot;&quot;&quot;
     def __init__(self, name):
-
         self.__name = name
     def getName(self):
-
         return self.__name
 tony = Singleton3(&quot;Tony&quot;)
-
 karry = Singleton3(&quot;Karry&quot;)
-
 print(tony.getName(), karry.getName())
-
 print(&quot;id(tony):&quot;, id(tony), &quot;id(karry):&quot;, id(karry))
-
 print(&quot;tony == karry:&quot;, tony == karry)
 </code></pre>
-
 <p>输出结果：</p>
-
 <pre><code>Tony Tony
-
 id(tony): 46206704 id(karry): 46206704
-
 tony == karry: True
 </code></pre>
-
 <p>装饰器的实质就是对传进来的参数进行补充，可以在原有的类不做任何代码变动的前提下增加额外的功能，使用装饰器可以装饰多个类。用装饰器的方式来实现单例模式，通用性非常好，在实际项目中用的非常多。</p>
-
 <h4>类图</h4>
-
 <p>上面的代码框架可用类图表示如下：</p>
-
 <p><img src="assets/55e4e340-c394-11e8-b5ca-0da8fdb41124.jpg" alt="enter image description here" /></p>
-
 <h4>基于框架的实现</h4>
-
 <p>通过上面的方式三，我们知道，定义通用的装饰器方法之后再用它去修饰一个类，这个类就成了一个单例类，使用起来非常方便。最开始的示例代码我们假设它为 version 1.0，那么再看看基于装饰器的 version 2.0 吧。</p>
-
 <pre><code class="language-python">@singletonDecorator
-
 class MyBeautifulGril(object):
-
     &quot;&quot;&quot;我的漂亮女神&quot;&quot;&quot;
     def __init__(self, name):
-
         self.__name = name
-
         if self.__name == name:
-
             print(&quot;遇见&quot; + name + &quot;，我一见钟情！&quot;)
-
         else:
-
             print(&quot;遇见&quot; + name + &quot;，我置若罔闻！&quot;)
     def showMyHeart(self):
-
         print(self.__name + &quot;就我心中的唯一！&quot;)
 </code></pre>
-
 <p>输出结果：</p>
-
 <pre><code>遇见Jenny，我一见钟情！
-
 Jenny就我心中的唯一！
-
 Jenny就我心中的唯一！
-
 id(jenny): 58920752  id(kimi): 58920752
 </code></pre>
-
 <h3>应用场景</h3>
-
 <ol>
-
 <li>你希望这个类只有一个且只能有一个实例；</li>
-
 <li>项目中的一些全局管理类（Manager）可以用单例来实现。</li>
-
 </ol>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/白话设计模式 28 讲（完）/03 状态模式：人与水的三态.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/白话设计模式 28 讲（完）/05 职责模式：我的假条去哪了.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997b81efb43cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-

@@ -1,868 +1,472 @@
 <!DOCTYPE html>
-
 <!-- saved from url=(0046)https://kaiiiz.github.io/hexo-theme-book-demo/ -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
         <link rel="icon" href="/static/favicon.png">
-
         <title>12 限流降级与流量效果控制器（下）.md.html</title>
-
         <!-- Spectre.css framework -->
-
         <link rel="stylesheet" href="/static/index.css">
-
         <!-- theme css & js -->
-
         <meta name="generator" content="Hexo 4.2.0">
-
     </head>
 <body>
 <div class="book-container">
-
     <div class="book-sidebar">
-
         <div class="book-brand">
-
             <a href="/">
-
                 <img src="/static/favicon.png">
-
                 <span>技术文章摘抄</span>
-
             </a>
-
         </div>
-
         <div class="book-menu uncollapsible">
-
             <ul class="uncollapsible">
-
                 <li><a href="/" class="current-tab">首页</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li><a href="../">上一级</a></li>
-
             </ul>
             <ul class="uncollapsible">
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/01 开篇词：一次服务雪崩问题排查经历.md.html">01 开篇词：一次服务雪崩问题排查经历.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/01 开篇词：一次服务雪崩问题排查经历.md.html">01 开篇词：一次服务雪崩问题排查经历</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/02 为什么需要服务降级以及常见的几种降级方式.md.html">02 为什么需要服务降级以及常见的几种降级方式.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/02 为什么需要服务降级以及常见的几种降级方式.md.html">02 为什么需要服务降级以及常见的几种降级方式</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比.md.html">03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比.md.html">03 为什么选择 Sentinel，Sentinel 与 Hystrix 的对比</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/04 Sentinel 基于滑动窗口的实时指标数据统计.md.html">04 Sentinel 基于滑动窗口的实时指标数据统计.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/04 Sentinel 基于滑动窗口的实时指标数据统计.md.html">04 Sentinel 基于滑动窗口的实时指标数据统计</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/05 Sentinel 的一些概念与核心类介绍.md.html">05 Sentinel 的一些概念与核心类介绍.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/05 Sentinel 的一些概念与核心类介绍.md.html">05 Sentinel 的一些概念与核心类介绍</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程.md.html">06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程.md.html">06 Sentinel 中的责任链模式与 Sentinel 的整体工作流程</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/07 Java SPI 及 SPI 在 Sentinel 中的应用.md.html">07 Java SPI 及 SPI 在 Sentinel 中的应用.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/07 Java SPI 及 SPI 在 Sentinel 中的应用.md.html">07 Java SPI 及 SPI 在 Sentinel 中的应用</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/08 资源指标数据统计的实现全解析（上）.md.html">08 资源指标数据统计的实现全解析（上）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/08 资源指标数据统计的实现全解析（上）.md.html">08 资源指标数据统计的实现全解析（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/09 资源指标数据统计的实现全解析（下）.md.html">09 资源指标数据统计的实现全解析（下）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/09 资源指标数据统计的实现全解析（下）.md.html">09 资源指标数据统计的实现全解析（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/10 限流降级与流量效果控制器（上）.md.html">10 限流降级与流量效果控制器（上）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/10 限流降级与流量效果控制器（上）.md.html">10 限流降级与流量效果控制器（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/11 限流降级与流量效果控制器（中）.md.html">11 限流降级与流量效果控制器（中）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/11 限流降级与流量效果控制器（中）.md.html">11 限流降级与流量效果控制器（中）</a>
                 </li>
-
                 <li>
-                    <a class="current-tab" href="/专栏/深入理解 Sentinel（完）/12 限流降级与流量效果控制器（下）.md.html">12 限流降级与流量效果控制器（下）.md.html</a>
+                    <a class="current-tab" href="/专栏/深入理解 Sentinel（完）/12 限流降级与流量效果控制器（下）.md.html">12 限流降级与流量效果控制器（下）</a>
 
-                    
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/13 熔断降级与系统自适应限流.md.html">13 熔断降级与系统自适应限流.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/13 熔断降级与系统自适应限流.md.html">13 熔断降级与系统自适应限流</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/14 黑白名单限流与热点参数限流.md.html">14 黑白名单限流与热点参数限流.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/14 黑白名单限流与热点参数限流.md.html">14 黑白名单限流与热点参数限流</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/15 自定义 ProcessorSlot 实现开关降级.md.html">15 自定义 ProcessorSlot 实现开关降级.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/15 自定义 ProcessorSlot 实现开关降级.md.html">15 自定义 ProcessorSlot 实现开关降级</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/16 Sentinel 动态数据源：规则动态配置.md.html">16 Sentinel 动态数据源：规则动态配置.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/16 Sentinel 动态数据源：规则动态配置.md.html">16 Sentinel 动态数据源：规则动态配置</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/17 Sentinel 主流框架适配.md.html">17 Sentinel 主流框架适配.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/17 Sentinel 主流框架适配.md.html">17 Sentinel 主流框架适配</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/18 Sentinel 集群限流的实现（上）.md.html">18 Sentinel 集群限流的实现（上）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/18 Sentinel 集群限流的实现（上）.md.html">18 Sentinel 集群限流的实现（上）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/19 Sentinel 集群限流的实现（下）.md.html">19 Sentinel 集群限流的实现（下）.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/19 Sentinel 集群限流的实现（下）.md.html">19 Sentinel 集群限流的实现（下）</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/20 结束语：Sentinel 对应用的性能影响如何？.md.html">20 结束语：Sentinel 对应用的性能影响如何？.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/20 结束语：Sentinel 对应用的性能影响如何？.md.html">20 结束语：Sentinel 对应用的性能影响如何？</a>
                 </li>
-
                 <li>
                     
-
-                    <a href="/专栏/深入理解 Sentinel（完）/21 番外篇：Sentinel 1.8.0 熔断降级新特性解读.md.html">21 番外篇：Sentinel 1.8.0 熔断降级新特性解读.md.html</a>
+                    <a href="/专栏/深入理解 Sentinel（完）/21 番外篇：Sentinel 1.8.0 熔断降级新特性解读.md.html">21 番外篇：Sentinel 1.8.0 熔断降级新特性解读</a>
                 </li>
-
             </ul>
         </div>
-
     </div>
     <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
-
         <div class="sidebar-toggle-inner"></div>
-
     </div>
     <script>
-
         function add_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.add('show')
-
         }
         function remove_inner() {
-
             let inner = document.querySelector('.sidebar-toggle-inner')
-
             inner.classList.remove('show')
-
         }
         function sidebar_toggle() {
-
             let sidebar_toggle = document.querySelector('.sidebar-toggle')
-
             let sidebar = document.querySelector('.book-sidebar')
-
             let content = document.querySelector('.off-canvas-content')
-
             if (sidebar_toggle.classList.contains('extend')) { // show
-
                 sidebar_toggle.classList.remove('extend')
-
                 sidebar.classList.remove('hide')
-
                 content.classList.remove('extend')
-
             } else { // hide
-
                 sidebar_toggle.classList.add('extend')
-
                 sidebar.classList.add('hide')
-
                 content.classList.add('extend')
-
             }
-
         }
-
-
 function open_sidebar() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.add('show')
-
     overlay.classList.add('show')
-
 }
-
 function hide_canvas() {
-
     let sidebar = document.querySelector('.book-sidebar')
-
     let overlay = document.querySelector('.off-canvas-overlay')
-
     sidebar.classList.remove('show')
-
     overlay.classList.remove('show')
-
 }
     </script>
     <div class="off-canvas-content">
-
         <div class="columns">
-
             <div class="column col-12 col-lg-12">
-
                 <div class="book-navbar">
-
                     <!-- For Responsive Layout -->
-
                     <header class="navbar">
-
                         <section class="navbar-section">
-
                             <a onclick="open_sidebar()">
-
                                 <i class="icon icon-menu"></i>
-
                             </a>
-
                         </section>
-
                     </header>
-
                 </div>
-
                 <div class="book-content" style="max-width: 960px; margin: 0 auto;
-
     overflow-x: auto;
-
     overflow-y: hidden;">
-
                     <div class="book-post">
-
                         <p id="tip" align="center"></p>
-
                         <div><h1>12 限流降级与流量效果控制器（下）</h1>
-
 <h3>WarmUpController</h3>
-
 <p>Warm Up，冷启动。在应用升级重启时，应用自身需要一个预热的过程，预热之后才能到达一个稳定的性能状态，比如说，接口预热阶段完成 JIT 即时编译、完成一些单例对象的创建、线程池的创建、各种连接池的初始化、或者执行首次需要加锁执行的代码块。</p>
-
 <p>冷启动并非只在应用重启时需要，在一段时间没有访问的情况下，连接池存在大量过期连接需要待下次使用才移除掉并创建新的连接、一些热点数据缓存过期需要重新查数据库写入缓存等，这些场景下也需要冷启动。</p>
-
 <p>WarmUpController 支持设置冷启动周期（冷启动时长），默认为 10 秒，WarmUpController 在这 10 秒内会控制流量平缓的增长到限量阈值。例如，对某个接口限制 QPS 为 200，10 秒预热时间，那么这 10 秒内，相当于每秒的限流阈值分别为：5qps、15qps、35qps、70qps、90qps、115qps、145qps、170qps、190qps、200qps，当然，这组数据只是假设。</p>
-
 <p>如果要使用 WarmUpController，则限量规则阈值类型必须配置为 GRADE_QPS，例如：</p>
-
 <pre><code class="language-java"> FlowRule flowRule = new FlowRule();
-
  // 限流 QPS 阈值
-
  flowRule.setCount(200);
-
  // 流量控制效果配置为使用冷启动控制器
-
  flowRule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_WARM_UP);
-
  // 冷启动周期，单位秒
-
- flowRule.setWarmUpPeriodSec(10); 
-
+ flowRule.setWarmUpPeriodSec(10);
  flowRule.setResource(&quot;GET:/hello&quot;);
-
  FlowRuleManager.loadRules(Collections.singletonList(flowRule));
 </code></pre>
-
 <p>Sentinel 冷启动限流算法参考了 Guava 的 SmoothRateLimiter 实现的冷启动限流算法，但实现上有很大的区别，Sentinel 主要用于控制每秒的 QPS，不会控制每个请求的间隔时间，只要满足每秒通过的 QPS 即可。正因为与 Guava 的不同，官方文档目前也没有很详细的介绍具体实现，单看源码很难揣摩作者的思路，加上笔者水平有限，没能切底理解 Sentinel 冷启动限流算法实现的细节，因此我们也不过深的去分析 WarmUpController 的源码，只是结合 Guava 的实现算法作个简单介绍。</p>
-
 <p>Guava 的 SmoothRateLimiter 基于 Token Bucket 算法实现冷启动。我们先看一张图，从而了解 SmoothRateLimiter 中的一些基础知识。</p>
-
 <p><img src="assets/d7bf7130-e0bd-11ea-b45a-99f77a1eea3e" alt="12-01-warmup01" /></p>
-
 <ul>
-
 <li>横坐标 storedPermits 代表存储桶中的令牌数量。</li>
-
 <li>纵坐标代表获取一个令牌需要的时间，即请求通过的时间间隔。</li>
-
 <li>stableInterval：稳定产生令牌的时间间隔。</li>
-
 <li>coldInterval：冷启动产生令牌的最大时间隔间，等于稳定产生令牌的时间间隔乘以冷启动系数（stableInterval*coldFactor）。</li>
-
 <li>thresholdPermits：从冷启动到正常的令牌桶中令牌数量的阈值，是判断是否需要进入冷启动阶段的依据。</li>
-
 <li>maxPermits：最大允许令牌桶中存放的令牌数。</li>
-
 <li>slope：直线的斜率，即令牌生产的速率。</li>
-
 <li>warmupPeriod：预热时长，即冷启动周期，对应上图中的梯形面积。</li>
-
 </ul>
-
 <p>在 SmoothRateLimiter 中，冷启动系数（coldFactor）的值固定为 3，假设我们设置冷启动周期为 10s、限流为每秒钟生成令牌数 200 个。那么 warmupPeriod 为 10s，将 1 秒中内的微秒数除以每秒钟需要生产的令牌数计算出生产令牌的时间间隔（stableInterval）为 5000μs，冷启动阶段最长的生产令牌的时间间隔（coldInterval）等于稳定速率下生产令牌的时间间隔（stableInterval）乘以 3，即 15000μs。</p>
-
 <pre><code class="language-java">// stableIntervalMicros：stableInterval 转为微秒
-
 // permitsPerSecond: 每秒钟生成的令牌数上限为 200
-
 double stableIntervalMicros = SECONDS.toMicros(1L) / permitsPerSecond;
 </code></pre>
-
 <p>由于 coldFactor 等于 3，且 coldInterval 等于 stableInterval 乘以 coldFactor，所以（coldInterval-stableInterval）是 stableInterval 的两倍，所以从 thresholdPermits 到 0 的时间是从 maxPermits 到 thresholdPermits 时间的一半，也就是 warmupPeriod 的一半。因为梯形的面积等于 warmupPeriod，所以长方形面积是梯形面积的一半，长方形的面积是 warmupPeriod/2。</p>
-
 <p>根据长方形的面积计算公式：</p>
-
 <blockquote>
-
 <p>面积 = 长 * 宽</p>
-
 </blockquote>
-
 <p>可得：</p>
-
 <blockquote>
-
 <p>stableInterval*thresholdPermits = 1/2 * warmupPeriod</p>
-
 </blockquote>
-
 <p>所以：</p>
-
 <blockquote>
-
 <p>thresholdPermits = 0.5 * warmupPeriod/stableInterval</p>
-
 </blockquote>
-
 <pre><code class="language-java">// warmupPeriodMicros: warmupPeriod 转为微秒
-
 // stableIntervalMicros：stableInterval 转为微秒
-
 thresholdPermits = 0.5 * warmupPeriodMicros / stableIntervalMicros;
 </code></pre>
-
 <p>所以：</p>
-
 <blockquote>
-
 <p>thresholdPermits = 0.5 * 10s/5000μs = 1000</p>
-
 </blockquote>
-
 <p>由梯形面积公式：</p>
-
 <blockquote>
-
 <p>(上低 + 下低) * 高 / 2</p>
-
 </blockquote>
-
 <p>可得：</p>
-
 <blockquote>
-
 <p>warmupPeriod = ((stableInterval + coldInterval) * (maxPermits-thresholdPermits))/2</p>
-
 </blockquote>
-
 <p>推出：</p>
-
 <blockquote>
-
 <p>maxPermits=thresholdPermits+2*warmupPeriod/(stableInterval+coldInterval)</p>
-
 </blockquote>
-
 <pre><code class="language-java">// warmupPeriodMicros: warmupPeriod 转为微秒
-
 // stableIntervalMicros：stableInterval 转为微秒
-
 // coldIntervalMicros: coldInterval 转为微秒
-
 maxPermits = thresholdPermits + 2.0 * warmupPeriodMicros / (stableIntervalMicros + coldIntervalMicros);
 </code></pre>
-
 <p>所以：</p>
-
 <blockquote>
-
 <p>maxPermits = 1000 + 2.0 * 10s/(20000μs) = 2000</p>
-
 </blockquote>
-
 <p>由直线的斜率计算公式：</p>
-
 <blockquote>
-
 <p>斜率 = (y2-y1)/(x2-x1)</p>
-
 </blockquote>
-
 <p>可得：</p>
-
 <blockquote>
-
 <p>slope = (coldInterval - stableInterval)/(maxPermits - thresholdPermits)</p>
-
 </blockquote>
-
 <p>所以：</p>
-
 <blockquote>
-
 <p>slope = 10000μs/1000 = 10</p>
-
 </blockquote>
-
 <p>正常情况下，令牌以稳定时间间隔 stableInterval 生产令牌，一秒钟内能生产的令牌就刚好是限流的阈值。</p>
-
 <p>如果初始化令牌数为 maxPermits 时，系统直接进入冷启动阶段，此时生产令牌的间隔时间最长，等于 coldInterval。如果此时以稳定的速率消费存储桶中的令牌，由于消费速度大于生产速度，那么令牌桶中的令牌将会慢慢减少，当 storedPermits 中的令牌数慢慢下降到 thresholdPermits 时，冷启动周期结束，将会以稳定的时间间隔 stableInterval 生产令牌。当消费速度等于生产速度，则稳定在限量阈值，而当消费速度远小于生产速度时，存储桶中的令牌数就会堆积，如果堆积的令牌数超过 thresholdPermits，又会是一轮新的冷启动。</p>
-
 <p>SmoothRateLimiter 中，在每个请求获取令牌时根据当前时间与上一次获取令牌时间（nextFreeTicketMicros）的间隔时间计算需要生成新的令牌数并加入到令牌桶中。在应用重启时或者接口很久没有被访问后，nextFreeTicketMicros 的值要么为 0，要么远远小于当前时间，当前时间与 nextFreeTicketMicros 的间隔非常大，导致第一次生产令牌数就会达到 maxPermits，所以就会进入冷启动阶段。</p>
-
 <p>SmoothRateLimiter#resync 方法源码如下。</p>
-
 <pre><code class="language-java">// 该方法是被加锁同步调用的
-
 void resync(long nowMicros) {
-
     // nextFreeTicket: 上次生产令牌的时间
-
     if (nowMicros &gt; nextFreeTicketMicros) {
-
       // coolDownIntervalMicros 的值为 stableInterval
-
       // nowMicros - nextFreeTicketMicros: 当前时间与上次生产令牌的时间间隔
-
       double newPermits = (nowMicros - nextFreeTicketMicros) / coolDownIntervalMicros();
-
       // 存储桶的数量 = 桶中剩余的 + 新生产的， 与 maxPermits 取最小值
-
       storedPermits = min(maxPermits, storedPermits + newPermits);
-
       // 更新上次生产令牌的时间
-
       nextFreeTicketMicros = nowMicros;
-
     }
-
 }
 </code></pre>
-
 <p>了解了 Guava 的 SmoothRateLimiter 实现后，我们再来看下 Sentinel 的 WarmUpController。</p>
-
 <pre><code class="language-java">public class WarmUpController implements TrafficShapingController {
     protected double count;
-
     private int coldFactor;
-
     protected int warningToken = 0;
-
     private int maxToken;
-
     protected double slope;
     protected AtomicLong storedTokens = new AtomicLong(0);
-
     protected AtomicLong lastFilledTime = new AtomicLong(0);
-
 }
 </code></pre>
-
 <ul>
-
 <li>warningToken：等同于 thresholdPermits，稳定的令牌生产速率下令牌桶中存储的令牌数。</li>
-
 <li>maxToken：等同于 maxPermits，令牌桶的最大容量。</li>
-
 <li>storedTokens：令牌桶当前存储的令牌数量。</li>
-
 <li>lastFilledTime：上一次生产令牌的时间戳。</li>
-
 <li>coldFactor：冷启动系数，默认也是 3。</li>
-
 <li>slope：斜率，每秒放行请求数的增长速率。</li>
-
 <li>count：限流阈值 QPS。</li>
-
 </ul>
-
 <p>warningToken、maxToken、slope 的计算可参考 Guava 的 SmoothRateLimiter。</p>
-
 <p>WarmUpController#canPass 方法源码如下：</p>
-
 <pre><code class="language-java">@Override
-
     public boolean canPass(Node node, int acquireCount, boolean prioritized) {
-
         // 当前时间窗口通过的 qps
-
         long passQps = (long) node.passQps();
-
         // 前一个时间窗口通过的 qps
-
         long previousQps = (long) node.previousPassQps();
-
         // resync
-
         syncToken(previousQps);
         long restToken = storedTokens.get();
-
         // 如果令牌桶中存放的令牌数超过警戒线，则进入冷启动阶段，调整 QPS。
-
         if (restToken &gt;= warningToken) {
-
             // 超过 thresholdPermits 的当前令牌数
-
             long aboveToken = restToken - warningToken;
-
             double warningQps = Math.nextUp(1.0 / (aboveToken * slope + 1.0 / count));
-
             // 小于 warningQps 才放行
-
             if (passQps + acquireCount &lt;= warningQps) {
-
                 return true;
-
             }
-
         } else {
-
             // 未超过警戒线的情况下按正常限流，如果放行当前请求之后会导致通过的 QPS 超过阈值则拦截当前请求，
-
             // 否则放行。
-
             if (passQps + acquireCount &lt;= count) {
-
                 return true;
-
             }
-
         }
-
         return false;
-
     }
 </code></pre>
-
 <p>canPass 方法中，首先获取当前存储桶的令牌数，如果大于 warningToken，则控制 QPS。根据当前令牌桶中存储的令牌数量超出 warningToken 的令牌数计算当前秒需要控制的 QPS 的阈值，这两行代码是关键。</p>
-
 <pre><code class="language-java">// restToken：当前令牌桶中的令牌数量
-
 long aboveToken = restToken - warningToken;
-
 // 1.0 表示 1 秒
-
 double warningQps = Math.nextUp(1.0 / (aboveToken * slope + 1.0 / count));
 </code></pre>
-
 <p>我们看图理解这个公式。</p>
-
 <p><img src="assets/884d8050-e0be-11ea-9345-e7c4c4dd55f7" alt="12-01-warmup02" /></p>
-
 <p>结合上图我们可以看出：</p>
-
 <ul>
-
 <li>图中的 x1 虚线的长度就等于 aboveToken。</li>
-
 <li>此时生产令牌的间隔时间等于 y1 的长度加上 stableInterval，在 Sentinel 中单位为秒。</li>
-
 </ul>
-
 <p>根据斜率和 x1 可计算出 y1 的值为：</p>
-
 <blockquote>
-
 <p>y1 = slope * aboveToken</p>
-
 </blockquote>
-
 <p>而 1.0/count 计算出来的值是正常情况下每隔多少毫秒生产一个令牌，即 stableInterval。</p>
-
 <p>所以计算 warningQps 的公式等同于：</p>
-
 <pre><code class="language-java">// 当前生产令牌的间隔时间：aboveToken * slope + stableInterval
-
 // 1.0 / 生产令牌间隔时间 = 当前 1 秒所能生产的令牌数量
-
 double warningQps = Math.nextUp(1.0 / (aboveToken * slope + stableInterval));
 </code></pre>
-
 <p>当前生产令牌的间隔时间为：</p>
-
 <blockquote>
-
 <p>aboveToken * slope + stableInterval = stableInterval + y1；</p>
-
 </blockquote>
-
 <p>当前每秒所能生产的令牌数为：1.0/(stableInterval+y1)。</p>
-
 <p>所以 warningQps 就等于当前每秒所能生产的令牌数。</p>
-
 <p>Sentinel 中的 resync 与 SmoothRateLimiter 的 resync 方法不同，Sentinel 每秒只生产一次令牌。WarmUpController 的 syncToken 方法源码如下：</p>
-
-<pre><code class="language-java">   // passQps：上一秒通过的 QPS 总数 
-
+<pre><code class="language-java">   // passQps：上一秒通过的 QPS 总数
    protected void syncToken(long passQps) {
-
         long currentTime = TimeUtil.currentTimeMillis();
-
         // 去掉毫秒，取秒
-
         currentTime = currentTime - currentTime % 1000;
-
         long oldLastFillTime = lastFilledTime.get();
-
         // 控制每秒只更新一次
-
         if (currentTime &lt;= oldLastFillTime) {
-
             return;
-
         }
         long oldValue = storedTokens.get();
-
         // 计算新的存储桶存储的令牌数
-
         long newValue = coolDownTokens(currentTime, passQps);
-
         if (storedTokens.compareAndSet(oldValue, newValue)) {
-
             // storedTokens 扣减上个时间窗口的 qps
-
             long currentValue = storedTokens.addAndGet(-passQps);
-
             if (currentValue &lt; 0) {
-
                 storedTokens.set(0L);
-
             }
-
             lastFilledTime.set(currentTime);
-
         }
-
     }
 </code></pre>
-
 <p>Sentinel 并不是在每个请求通过时从桶中移除 Token，而是每秒在更新存储桶的令牌数时，再扣除上一秒消耗的令牌数量，上一秒消耗的令牌数量等于上一秒通过的请求数，这就是官方文档所写的每秒会自动掉落令牌。减少每一次请求都使用 CAS 更新令牌桶的令牌数可以降低 Sentinel 对应用性能的影响，这是非常巧妙的做法。</p>
-
 <blockquote>
-
 <p>更新令牌桶中的令牌总数 = 当前令牌桶中剩余的令牌总数 + 当前需要生成的令牌数（1 秒时间可生产的令牌总数）。</p>
-
 </blockquote>
-
 <p>coolDownTokens 方法的源码如下：</p>
-
 <pre><code class="language-java">   //  currentTime： 当前时间戳，单位为秒，但后面 3 位全为 0
-
    //  passQps：上一秒通过的 QPS
-
    private long coolDownTokens(long currentTime, long passQps) {
-
         long oldValue = storedTokens.get();
-
         long newValue = oldValue;
-
         // 添加令牌的判断前提条件: 当令牌的消耗远低于警戒线的时候
-
         if (oldValue &lt; warningToken) {
-
             newValue = (long) (oldValue + (currentTime - lastFilledTime.get()) * count / 1000);
-
         } else if (oldValue &gt; warningToken) {
-
             // 上一秒通过的请求数少于限流阈值的 1/coldFactor 时
-
             if (passQps &lt; (int) count / coldFactor) {
-
                 newValue = (long) (oldValue + (currentTime - lastFilledTime.get()) * count / 1000);
-
             }
-
         }
-
         return Math.min(newValue, maxToken);
-
     }
 </code></pre>
-
 <p>其中 (currentTime - lastFilledTime.get()) 为当前时间与上一次生产令牌时间的间隔时间，虽然单位为毫秒，但是已经去掉了毫秒的部分（毫秒部分全为 0）。如果 currentTime - lastFilledTime.get() 等于 1 秒，根据 1 秒等于 1000 毫秒，那么新生成的令牌数（newValue）等于限流阈值（count）。</p>
-
 <pre><code class="language-java">newValue = oldValue + 1000 * count / 1000
-
          = oldValue + count
 </code></pre>
-
 <p>如果是很久没有访问的情况下，lastFilledTime 远小于 currentTime，那么第一次生产的令牌数量将等于 maxToken。</p>
-
 <p>参考文献：</p>
-
 <ul>
-
 <li>[https://blog.wangqi.love/articles/Java/Guava RateLimiter 分析.html](https://blog.wangqi.love/articles/Java/Guava RateLimiter分析.html)</li>
-
 <li><a href="https://www.javadoop.com/post/rate-limiter">https://www.javadoop.com/post/rate-limiter</a></li>
-
 <li><a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/SmoothRateLimiter.java">https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/SmoothRateLimiter.java</a></li>
-
 </ul>
-
 </div>
-
                     </div>
-
                     <div>
-
                         <div style="float: left">
-
                             <a href="/专栏/深入理解 Sentinel（完）/11 限流降级与流量效果控制器（中）.md.html">上一页</a>
-
                         </div>
-
                         <div style="float: right">
-
                             <a href="/专栏/深入理解 Sentinel（完）/13 熔断降级与系统自适应限流.md.html">下一页</a>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
-
 </div>
-
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" data-cf-beacon='{"rayId":"70997b2038dc3cfa","version":"2021.12.0","r":1,"token":"1f5d475227ce4f0089a7cff1ab17c0f5","si":100}' crossorigin="anonymous"></script>
-
 </body>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NPSEEVD756"></script>
-
 <script>
-
     window.dataLayer = window.dataLayer || [];
     function gtag() {
-
         dataLayer.push(arguments);
-
     }
     gtag('js', new Date());
-
     gtag('config', 'G-NPSEEVD756');
-
     var path = window.location.pathname
-
     var cookie = getCookie("lastPath");
-
     console.log(path)
-
     if (path.replace("/", "") === "") {
-
         if (cookie.replace("/", "") !== "") {
-
             console.log(cookie)
-
             document.getElementById("tip").innerHTML = "<a href='" + cookie + "'>跳转到上次进度</a>"
-
         }
-
     } else {
-
         setCookie("lastPath", path)
-
     }
     function setCookie(cname, cvalue) {
-
         var d = new Date();
-
         d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-
         var expires = "expires=" + d.toGMTString();
-
         document.cookie = cname + "=" + cvalue + "; " + expires + ";path = /";
-
     }
     function getCookie(cname) {
-
         var name = cname + "=";
-
         var ca = document.cookie.split(';');
-
         for (var i = 0; i < ca.length; i++) {
-
             var c = ca[i].trim();
-
             if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
-
         }
-
         return "";
-
     }
 </script>
 </html>
-
