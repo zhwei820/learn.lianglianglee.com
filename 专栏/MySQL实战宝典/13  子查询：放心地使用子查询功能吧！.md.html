@@ -214,7 +214,7 @@ WHERE
 <p>所以，大部分人都更倾向写子查询，即便是天天与数据库打交道的 DBA 。</p>
 <p>不过从优化器的角度看，LEFT JOIN 更易于理解，能进行传统 JOIN 的两表连接，而子查询则要求优化器聪明地将其转换为最优的 JOIN 连接。</p>
 <p>我们来看一下，在 MySQL 8.0 版本中，对于上述两条 SQL，最终的执行计划都是：</p>
-<p><img src="assets/CioPOWC4r3iAWVV7AACB4gS2UBo664.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWC4r3iAWVV7AACB4gS2UBo664.png" alt="png" /></p>
 <p>可以看到，不论是子查询还是 LEFT JOIN，最终都被转换成了 Nested Loop Join，所以上述两条 SQL 的执行时间是一样的。</p>
 <p>即，在 MySQL 8.0 中，优化器会自动地将 IN 子查询优化，优化为最佳的 JOIN 执行计划，这样一来，会显著的提升性能。</p>
 <h3>子查询 IN 和 EXISTS，哪个性能更好？</h3>
@@ -238,7 +238,7 @@ WHERE
 </code></pre>
 <p>你要注意，千万不要盲目地相信网上的一些文章，有的说 IN 的性能更好，有的说 EXISTS 的子查询性能更好。你只关注 SQL 执行计划就可以，如果两者的执行计划一样，性能没有任何差别。</p>
 <p>接着说回来，对于上述 NOT EXISTS，它的执行计划如下图所示：</p>
-<p><img src="assets/Cgp9HWC4r4SAECp-AACB4gS2UBo705.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWC4r4SAECp-AACB4gS2UBo705.png" alt="png" /></p>
 <p>你可以看到，它和 NOT IN 的子查询执行计划一模一样，所以二者的性能也是一样的。讲完子查询的执行计划之后，接下来我们来看一下一种需要对子查询进行优化的 SQL：依赖子查询。</p>
 <h3>依赖子查询的优化</h3>
 <p>在 MySQL 8.0 版本之前，MySQL 对于子查询的优化并不充分。所以在子查询的执行计划中会看到 DEPENDENT SUBQUERY 的提示，这表示是一个依赖子查询，子查询需要依赖外部表的关联。</p>
@@ -258,7 +258,7 @@ WHERE
 </code></pre>
 <p>上述 SQL 语句的子查询部分表示“计算出每个员工最后成交的订单时间”，然后最外层的 SQL表示返回订单的相关信息。</p>
 <p>这条 SQL 在最新的 MySQL 8.0 中，其执行计划如下所示：</p>
-<p><img src="assets/Cgp9HWDB0u6Aews9AALrVP9U7VI559.png" alt="111.png" /></p>
+<p><img src="assets/Cgp9HWDB0u6Aews9AALrVP9U7VI559.png" alt="png" /></p>
 <p>通过命令 EXPLAIN FORMAT=tree 输出执行计划，你可以看到，第 3 行有这样的提示：<em><strong>Select #2 (subquery in condition; run only once)</strong></em>。这表示子查询只执行了一次，然后把最终的结果保存起来了。</p>
 <p>执行计划的第 6 行<strong>Index lookup on &lt;materialized_subquery&gt;</strong>，表示对表 orders 和子查询结果所得到的表进行 JOIN 连接，最后返回结果。</p>
 <p>所以，当前这个执行计划是对表 orders 做2次扫描，每次扫描约 5587618 条记录：</p>
@@ -267,14 +267,14 @@ WHERE
 <li>第 2 次表 oders 扫描，查询并返回每个员工的订单信息，即返回每个员工最后一笔成交的订单信息。</li>
 </ul>
 <p>最后，直接用命令 EXPLAIN 查看执行计划，如下图所示：</p>
-<p><img src="assets/CioPOWC4r7KACYe5AACVxJNJeuI046.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CioPOWC4r7KACYe5AACVxJNJeuI046.png" alt="png" /></p>
 <p>MySQL 8.0 版本执行过程</p>
 <p>如果是老版本的 MySQL 数据库，它的执行计划将会是依赖子查询，执行计划如下所示：</p>
-<p><img src="assets/CioPOWC4r8iAfI8RAACR2EFttxI059.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CioPOWC4r8iAfI8RAACR2EFttxI059.png" alt="png" /></p>
 <p>老版本 MySQL 执行过程</p>
 <p>对比 MySQL 8.0，只是在第二行的 select_type 这里有所不同，一个是 SUBQUERY，一个是DEPENDENT SUBQUERY。</p>
 <p>接着通过命令 EXPLAIN FORMAT=tree 查看更详细的执行计划过程：</p>
-<p><img src="assets/CioPOWC4r-OAFOmSAAFZr4rEsTs855.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CioPOWC4r-OAFOmSAAFZr4rEsTs855.png" alt="png" /></p>
 <p>可以发现，第 3 行的执行技术输出是：Select #2 (subquery in condition; dependent)，并不像先前的执行计划，提示只执行一次。另外，通过第 1 行也可以发现，这条 SQL 变成了 exists 子查询，每次和子查询进行关联。</p>
 <p>所以，上述执行计划其实表示：先查询每个员工的订单信息，接着对每条记录进行内部的子查询进行依赖判断。也就是说，先进行外表扫描，接着做依赖子查询的判断。<strong>所以，子查询执行了5587618，而不是1次！！！</strong></p>
 <p>所以，两者的执行计划，扫描次数的对比如下所示：</p>
@@ -295,9 +295,9 @@ WHERE
 </code></pre>
 <p>可以看到，我们将子查询改写为了派生表 o2，然后将表 o2 与外部表 orders 进行关联。关联的条件是：<em><strong>o1.o_clerk = o2.o_clerk AND o1.o_orderdate = o2.orderdate</strong></em>。
 通过上面的重写后，派生表 o2 对表 orders 进行了1次扫描，返回约 5587618 条记录。派生表o1 对表 orders 扫描 1 次，返回约 1792612 条记录。这与 8.0 的执行计划就非常相似了，其执行计划如下所示：</p>
-<p><img src="assets/CioPOWC4r_2AYA-8AACtbE83K7w426.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/CioPOWC4r_2AYA-8AACtbE83K7w426.png" alt="png" /></p>
 <p>最后，来看下上述 SQL 的执行时间：</p>
-<p><img src="assets/CioPOWC4sAqAETsfAAA-Ui3vTHk812.png" alt="Drawing 15.png" /></p>
+<p><img src="assets/CioPOWC4sAqAETsfAAA-Ui3vTHk812.png" alt="png" /></p>
 <p>可以看到，经过 SQL 重写后，派生表的执行速度几乎与独立子查询一样。所以，<strong>若看到依赖子查询的执行计划，记得先进行 SQL 重写优化哦。</strong></p>
 <h3>总结</h3>
 <p>这一讲，我们学习了 MySQL 子查询的优势、新版本 MySQL 8.0 对子查询的优化，以及老版本MySQL 下如何对子查询进行优化。希望你在学完今天的内容之后，可以不再受子查询编写的困惑，而是在各种场景下用好子查询。</p>

@@ -480,11 +480,11 @@ function hide_canvas() {
                         <div><h1>从SpringCloud开始，聊微服务架构</h1>
 <h1>背景</h1>
 <p>随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这个背景下，平台的技术架构也完成了从传统的单体应用到微服务化的演进。</p>
-<p><img src="assets/773171b0-78f1-11e7-a231-397f3769bb67.png" alt="enter image description here" /></p>
+<p><img src="assets/773171b0-78f1-11e7-a231-397f3769bb67.png" alt="png" /></p>
 <h1>系统架构的演进过程</h1>
 <h2>单一应用架构（第一代架构）</h2>
 <p>这是平台最开始的情况，当时流量小，为了节约成本,并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver:</p>
-<p><img src="assets/2b4ae6f0-78f1-11e7-9fa7-b3c415858abf.png" alt="enter image description here" /></p>
+<p><img src="assets/2b4ae6f0-78f1-11e7-9fa7-b3c415858abf.png" alt="png" /></p>
 <blockquote>
 <p><strong>表示层</strong> 位于最外层（最上层），最接近用户。用于显示数据和接收用户输入的数 据，为用户提供一种交互式操作的界面，平台所使用的是基于.net的web形式。</p>
 <p><strong>业务逻辑层</strong> 业务逻辑层（Business Logic Layer）无疑是系统架构中体现核心价值的部分。它的关注点主要集中在业务规则的制定、业务流程的实现等与业务需求有关的系统设计，也即是说它是与系统所应对的领域（Domain）逻辑有关，很多时候，也将业务逻辑层称为领域层。 业务逻辑层在体系架构中的位置很关键，它处于数据访问层与表示层中间，起到了数据交换中承上启下的作用。由于层是一种弱耦合结构，层与层之间的依赖是向下的，底层对于上层而言是“无知”的，改变上层的设计对于其调用的底层而言没有任何影响。如果在分层设计时，遵循了面向接口设计的思想，那么这种向下的依赖也应该是一种弱依赖关系。对于数据访问层而言，它是调用者；对于表示层而言，它却是被调用者。</p>
@@ -499,7 +499,7 @@ function hide_canvas() {
 </ul>
 <h2>垂直应用架构（第二代架构）</h2>
 <p>为了解决第一代架构面临的问题，团队制定了如下的策略，并形成了第二代应用架构(垂直应用架构)</p>
-<p><img src="assets/91ca1f00-7995-11e7-a25d-25787154610f.png" alt="enter image description here" /></p>
+<p><img src="assets/91ca1f00-7995-11e7-a25d-25787154610f.png" alt="png" /></p>
 <ul>
 <li>应用拆成独立的应用模块。</li>
 <li>各个应用模块独立部署，并在负载均衡通过session保持解决应用模块的水平扩展问题。</li>
@@ -539,7 +539,7 @@ function hide_canvas() {
 <li>去.net化，开发语言使用java来实现。</li>
 </ul>
 <p>并以此为基础进行了平台的第三代架构的重构工作。</p>
-<p><img src="assets/e36228c0-79d7-11e7-8051-59edfb78defb.png" alt="enter image description here" /></p>
+<p><img src="assets/e36228c0-79d7-11e7-8051-59edfb78defb.png" alt="png" /></p>
 <p>看第三代架构里面的组成，主要分为八个部分：</p>
 <ul>
 <li>
@@ -585,15 +585,15 @@ function hide_canvas() {
 <ul>
 <li>按照业务边界进行了划分，在一个团队内全栈，让团队自治，按照这样的方式组建，将沟通的成本维持在系统内部，每个子系统就会更加内聚，彼此的依赖耦合能变弱，跨系统的沟通成本也就能降低</li>
 </ul>
-<p><img src="assets/a9b3edb0-79f1-11e7-a25d-25787154610f.png" alt="enter image description here" /></p>
+<p><img src="assets/a9b3edb0-79f1-11e7-a25d-25787154610f.png" alt="png" /></p>
 <ul>
 <li>专门建立了一个架构师部门来负责第三代架构的推行工作。通常对于一个的架构师团队有系统架构、应用架构、运维、DBA、敏捷专家五个角色组成是一个比较合理的结构。那么又如何控制好架构组的产出，保证架构工作的顺利推行呢？</li>
 <li>首先：打造持续改进的自组织文化是实施微服务的关键基石。只有持续改进，持续学习和反馈，持续打造这样一个文化氛围和团队，微服务架构才能持续发展下去，保持新鲜的生命力，从而实现我们的初衷。</li>
 <li>其次：架构组的产品要经过严格的流程，因为架构组推行的是通用的解决方案，为了保证方案的质量，我们从方案调研到评审再到实施都有一个严格的闭环。</li>
 </ul>
-<p><img src="assets/1c28fe50-79f0-11e7-a25d-25787154610f.png" alt="enter image description here" /></p>
+<p><img src="assets/1c28fe50-79f0-11e7-a25d-25787154610f.png" alt="png" /></p>
 <p>再谈谈整个团队的交付流程与开发模式，如果没有预先定义好，则很难让微服务架构发挥出真正的价值，下面我们先来看看微服务架构的交付流程。</p>
-<p><img src="assets/5f5964b0-79f2-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/5f5964b0-79f2-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p>使用微服务架构开发应用程序，我们实际上是针对一个个微服务进行设计、开发、测试、部署，因为每个服务之间是没有彼此依赖的，大概的交付流程就像上图这样。</p>
 <p><strong>设计阶段：</strong></p>
 <p>架构组将产品功能拆分为若干微服务，为每个微服务设计 API 接口（例如 REST API），需要给出 API 文档，包括 API 的名称、版本、请求参数、响应结果、错误代码等信息。</p>
@@ -605,12 +605,12 @@ function hide_canvas() {
 <ul>
 <li>实践&quot;绞杀者模式&quot;：</li>
 </ul>
-<p><img src="assets/1d125aa0-79f5-11e7-8041-3de95b5c3afd.png" alt="enter image description here" /></p>
+<p><img src="assets/1d125aa0-79f5-11e7-8041-3de95b5c3afd.png" alt="png" /></p>
 <p>由于第三代架构跨度较大，并且面临了无法修改的.net遗留系统，我们采用绞杀者模式，在遗留系统外面增加新的Proxy代理微服务，并且在LB控制upstream的方式，而不是直接修改原有系统，逐步的实现对老系统的替换。</p>
 <ul>
 <li>开发规范</li>
 </ul>
-<p><img src="assets/f6debb70-79f5-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/f6debb70-79f5-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p>经验表明，我们需要善用代码版本控制系统，我曾经遇到一个开发团队，由于分支没有规范，最后一个小版本上线合代码居然化了几个小时，最后开发人员自己都不知道合到哪个分支。拿 Gitlab 来说，它很好地支持了多分支代码版本，我们需要利用这个特性来提高开发效率，上图就是我们目前的分支管理规范。</p>
 <p>最稳定的代码放在 master 分支上，我们不要直接在 master 分支上提交代码，只能在该分支上进行代码合并操作，例如将其它分支的代码合并到 master 分支上。</p>
 <p>我们日常开发中的代码需要从 master 分支拉一条 develop 分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其它分支合并到 develop 分支上去。</p>
@@ -635,7 +635,7 @@ function hide_canvas() {
 </ul>
 <h2>如何搭建微服务架构</h2>
 <p>为了搭建好微服务架构，技术选型是一个非常重要的阶段，只有选择合适的&quot;演员&quot;，才能把这台戏演好。</p>
-<p><img src="assets/8367ad10-7a58-11e7-8051-59edfb78defb.png" alt="enter image description here" /></p>
+<p><img src="assets/8367ad10-7a58-11e7-8051-59edfb78defb.png" alt="png" /></p>
 <p>我们使用 Spring Cloud 作为微服务开发框架，Spring Boot 拥有嵌入式 Tomcat，可直接运行一个 jar 包来发布微服务，此外它还提供了一系列“开箱即用”的插件,例如：配置中心，服务注册与发现，熔断器，路由，代理，控制总线，一次性令牌，全局锁，leader选举，分布式 会话，集群状态等，可大量提高我们的开发效率。</p>
 <table>
 <thead>
@@ -688,7 +688,7 @@ function hide_canvas() {
 </tbody>
 </table>
 <p><strong>工程结构规范</strong></p>
-<p><img src="assets/1145efc0-7a5e-11e7-a25d-25787154610f.png" alt="enter image description here" /></p>
+<p><img src="assets/1145efc0-7a5e-11e7-a25d-25787154610f.png" alt="png" /></p>
 <p>上图是我们实践中每个服务应该具有的项目组成结构。</p>
 <p>其中：</p>
 <ol>
@@ -702,7 +702,7 @@ function hide_canvas() {
 </li>
 </ol>
 <p><strong>API 网关实践</strong></p>
-<p><img src="assets/30da4300-7a67-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/30da4300-7a67-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p>API网关作为后端所有微服务和API的访问入口， 对微服务和API进行审计，流控， 监控，计费等。常用的API网关解决方案有：</p>
 <ul>
 <li>
@@ -720,7 +720,7 @@ function hide_canvas() {
 <p>良好的HTTP API支持， 可以动态管理upstreams， 这也意味着我们可以通过发布平台或者胶水系统无缝的实现服务注册和发现， 对服务的访问方透明。</p>
 </li>
 </ul>
-<p><img src="assets/a2c08ab0-7a71-11e7-a25d-25787154610f.png" alt="enter image description here" /></p>
+<p><img src="assets/a2c08ab0-7a71-11e7-a25d-25787154610f.png" alt="png" /></p>
 <p>在以上的方案里：</p>
 <p>consul作为状态存储或者说配置中心（主要使用consul的KV存储功能）；nginx作为API网关， 根据consul中upstreams的相关配置，动态分发流量到配置的upstreams结点；</p>
 <p>nginx根据配置项， 连接到consul集群；</p>
@@ -768,12 +768,12 @@ function hide_canvas() {
 <p>针对于微服务，我们在spring cloud基础上，对微服务架构进行了扩展，基于Google Dapper的概念，设计了一套基于微服务架构的分布式跟踪系统(WeAPM)。</p>
 </li>
 </ul>
-<p><img src="assets/c6759bb0-7a78-11e7-8041-3de95b5c3afd.png" alt="enter image description here" /></p>
+<p><img src="assets/c6759bb0-7a78-11e7-8041-3de95b5c3afd.png" alt="png" /></p>
 <p>如上图所示，我们可以通过服务名、时间、日志类型、方法名、异常级别、接口耗时等参数查询响应的日志。在得到的TrackID可以查询到该请求的整个链路日志，为重现问题、分析日志提供了极大方便。</p>
-<p><img src="assets/d415eb80-7a78-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/d415eb80-7a78-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p><strong>断路器实践</strong></p>
 <p>在微服务架构中，我们将系统拆分成了一个个的微服务，这样就有可能因为网络原因或是依赖服务自身问题出现调用故障或延迟，而这些问题会直接导致调用方的对外服务也出现延迟，若此时调用方的请求不断增加，最后就会出现因等待出现故障的依赖方响应而形成任务积压，最终导致自身服务的瘫痪。为了解决这样的问题，因此产生了<a href="http://microservices.io/patterns/reliability/circuit-breaker.html">断路器模式</a></p>
-<p><img src="assets/73c006a0-7a7b-11e7-8041-3de95b5c3afd.png" alt="enter image description here" /></p>
+<p><img src="assets/73c006a0-7a7b-11e7-8041-3de95b5c3afd.png" alt="png" /></p>
 <p>我们在实践中使用了Hystrix 来实现断路器的功能。Hystrix是Netflix开源的微服务框架套件之一，该框架目标在于通过控制那些访问远程系统、服务和第三方库的节点，从而对延迟和故障提供更强大的容错能力。Hystrix具备拥有回退机制和断路器功能的线程和信号隔离，请求缓存和请求打包，以及监控和配置等功能。</p>
 <p>断路器的使用流程如下：</p>
 <p>启用断路器</p>
@@ -798,7 +798,7 @@ function hide_canvas() {
     }
 </code></pre>
 <p>配置文件</p>
-<p><img src="assets/af074780-7a7d-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/af074780-7a7d-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p><strong>资源控制实践</strong></p>
 <p>聊到资源控制，估计很多小伙伴会联系到docker，docker确实是一个实现资源控制很不错的解决方案，我们前期做调研时也对是否使用docker进行了评审，但是最终选择放弃，而使用linux 的libcgroup脚本控制，原因如下：</p>
 <ul>
@@ -817,7 +817,7 @@ function hide_canvas() {
 <p>配置文件模板（以memory为例）：</p>
 <pre><code>    cat /etc/cgconfig.conf
 </code></pre>
-<p><img src="assets/433eb650-7a82-11e7-be31-0ba46ae5a9d4.png" alt="enter image description here" /></p>
+<p><img src="assets/433eb650-7a82-11e7-be31-0ba46ae5a9d4.png" alt="png" /></p>
 <p>看到memory子系统是挂载在目录/sys/fs/cgroup/memory下，进入这个目录创建一个文件夹，就创建了一个control group了。</p>
 <pre><code>    mkdir test
     echo &quot;服务进程号&quot;&gt;&gt;  tasks(tasks是test目录下的一个文件)

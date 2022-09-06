@@ -210,7 +210,7 @@ user.getUserAuthentication().getAuthorities()));
 <p>我们知道“0efa61be-32ab-4351-9dga-8ab668ababae”这个 Token 是由“spring_user”这个用户生成的，可以看到该结果中包含了用户的用户名、密码以及该用户名所拥有的角色，这些信息与我们在上一讲中初始化的“spring_user”用户信息保持一致。我们也可以尝试使用“spring_admin”这个用户来重复上述过程。</p>
 <h3>在微服务中嵌入访问授权控制</h3>
 <p>在一个微服务系统中，每个微服务作为独立的资源服务器，对自身资源的保护粒度并不是固定的，可以根据需求对访问权限进行精细化控制。在 Spring Security 中，对访问的不同控制层级进行了抽象，形成了<strong>用户、角色和请求方法</strong>这三种粒度，如下图所示：</p>
-<p><img src="assets/CioPOWDwBtmAMiWZAAFQfgXxt_0021.jpg" alt="image-2.png" /></p>
+<p><img src="assets/CioPOWDwBtmAMiWZAAFQfgXxt_0021.jpg" alt="png" /></p>
 <p>用户、角色和请求方法三种控制粒度示意图</p>
 <p>基于上图，我们可以对这三种粒度进行排列组合，形成用户、用户+角色以及用户+角色+请求方法这三种层级，这三种层级能够访问的资源范围逐一递减。用户层级是指只要是认证用户就能访问服务内的各种资源；而用户+角色层级在用户层级的基础上，还要求用户属于某一个或多个特定角色；最后的用户+角色+请求方法层级要求最高，能够对某些 HTTP 操作进行访问限制。接下来我们针对这三个层级展开讨论。</p>
 <h4>用户层级的权限访问控制</h4>
@@ -263,7 +263,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 <p>现在，我们使用普通“USER”角色生成的 Token，并调用&quot;/order/&quot;端点中的 Update 操作，同样会得到“access_denied”的错误信息。而尝试使用“ADMIN”角色生成的 Token 进行访问，就可以得到正常响应。</p>
 <h3>在微服务中传播 Token</h3>
 <p>我们知道一个微服务系统势必涉及多个服务之间的调用，并形成一个链路。因为访问所有服务的过程都需要进行访问权限的控制，所以我们需要确保生成的 Token 能够在服务调用链路中进行传播，如下图所示：</p>
-<p><img src="assets/Cgp9HWDwBumAe_JvAAEWjcq9xMI017.jpg" alt="image-3.png" /></p>
+<p><img src="assets/Cgp9HWDwBumAe_JvAAEWjcq9xMI017.jpg" alt="png" /></p>
 <p>微服务中 Token 传播示意图</p>
 <p>那么，如何实现上图中的 Token 传播效果呢？Spring Security 基于 RestTemplate 进行了封装，专门提供了一个用在 HTTP 请求中传播 Token 的 OAuth2RestTemplate 工具类。想要在业务代码中构建一个 OAuth2RestTemplate 对象，可以使用如下所示的示例代码：</p>
 <pre><code>@Bean

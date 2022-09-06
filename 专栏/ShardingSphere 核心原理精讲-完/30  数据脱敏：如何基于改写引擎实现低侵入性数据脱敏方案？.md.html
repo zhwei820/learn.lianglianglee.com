@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>与普通的编程模式一样，对于数据脱敏而言，我们同样先获取一个 DataSource 作为整个流程的入口，当然这里获取的不是一个普通的 DataSource，而是一个专门针对数据脱敏的 EncryptDataSource。对于数据脱敏模块，我们的思路还是从上到下，从 EncryptDataSource 开始进入到 ShardingSphere 数据脱敏的世界中。</p>
 <p>同时，我们这次讲解数据脱敏模块不是零基础，因为在前面介绍 ShardingDataSource、ShardingConnection、ShardingStatement 等内容时，已经对整个 SQL 执行流程的抽象过程做了全面介绍，所涉及的很多内容对于数据脱敏模块而言也都是适用的。</p>
 <p>让我们结合下图来做一些回顾：</p>
-<p><img src="assets/CgqCHl9sS86ASFTbAAB-yuAnnt4924.png" alt="image" /></p>
+<p><img src="assets/CgqCHl9sS86ASFTbAAB-yuAnnt4924.png" alt="png" /></p>
 <p>上图中，可以看到与数据脱敏模块相关的类实际上都继承了一个抽象类，而这些抽象类在前面的内容都已经做了介绍。因此，我们对数据脱敏模块将重点关注于几个核心类的讲解，对于已经介绍过的内容我们会做一些回顾，但不会面面俱到。</p>
 <p>基于上图，我们从 EncryptDataSource 开始入手，EncryptDataSource 的创建依赖于工厂类 EncryptDataSourceFactory，其实现如下所示：</p>
 <pre><code>public final class EncryptDataSourceFactory {
@@ -238,7 +238,7 @@ private EncryptRuleConfiguration ruleConfiguration;
 </code></pre>
 <p>ShardingEncryptor 接口中存在一对用于加密和解密的方法，同时该接口也继承了 TypeBasedSPI 接口，意味着会通过 SPI 的方式进行动态类加载。</p>
 <p>ShardingEncryptorServiceLoader 完成了这个工作，同时在 sharding-core-common 工程中，我们也找到了 SPI 的配置文件，如下所示：</p>
-<p><img src="assets/CgqCHl9jFdmATyqTAAC9ufzW9Ag886.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9jFdmATyqTAAC9ufzW9Ag886.png" alt="png" /></p>
 <p>ShardingEncryptor 的 SPI 配置文件</p>
 <p>可以看到这里有两个实现类，分别是 MD5ShardingEncryptor 和 AESShardingEncryptor。对于 MD5 算法而言，我们知道它是单向散列的，无法根据密文反推出明文，MD5ShardingEncryptor 的实现类如下所示：</p>
 <pre><code>public final class MD5ShardingEncryptor implements ShardingEncryptor {
@@ -501,7 +501,7 @@ public void rewrite(final ParameterBuilder parameterBuilder, final SQLStatementC
 }
 </code></pre>
 <p>关于 EncryptAssignmentParameterRewriter 的实现，这里面涉及的类也比较多，我们可以先来画张图作为后续讨论的基础，如下所示：</p>
-<p><img src="assets/CgqCHl9sS-OAJsx-AACWGMkVQXg279.png" alt="imag" /></p>
+<p><img src="assets/CgqCHl9sS-OAJsx-AACWGMkVQXg279.png" alt="png" /></p>
 <h4>3.EncryptAssignmentTokenGenerator</h4>
 <p>讨论完 EncryptParameterRewriterBuilder 之后，我们再来讨论 EncryptTokenGenerateBuilder。这里，我们也是以 EncryptAssignmentTokenGenerator 为例来进行展开，在这个类中，核心方法是 generateSQLTokens，如下所示：</p>
 <pre><code>@Override

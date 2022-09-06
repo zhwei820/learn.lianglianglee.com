@@ -232,7 +232,7 @@ function hide_canvas() {
 <p>AOF（Append Only File）中文是附加到文件，顾名思义 AOF 可以把 Redis 每个键值对操作都记录到文件（appendonly.aof）中。</p>
 <h3>2 持久化查询和设置</h3>
 <h4>1）查询 AOF 启动状态</h4>
-<p>使用 <code>config get appendonly</code> 命令，如下图所示： <img src="assets/2020-02-24-122526.png" alt="image.png" /> 其中，第一行为 AOF 文件的名称，而最后一行表示 AOF 启动的状态，yes 表示已启动，no 表示未启动。</p>
+<p>使用 <code>config get appendonly</code> 命令，如下图所示： <img src="assets/2020-02-24-122526.png" alt="png" /> 其中，第一行为 AOF 文件的名称，而最后一行表示 AOF 启动的状态，yes 表示已启动，no 表示未启动。</p>
 <h4>2）开启 AOF 持久化</h4>
 <p>Redis 默认是关闭 AOF 持久化的，想要开启 AOF 持久化，有以下两种方式：</p>
 <ul>
@@ -241,9 +241,9 @@ function hide_canvas() {
 </ul>
 <p>下面分别来看以上两种方式的实现。</p>
 <h5>① 命令行启动 AOF</h5>
-<p>命令行启动 AOF，使用 <code>config set appendonly yes</code> 命令，如下图所示： <img src="assets/2020-02-24-122527.png" alt="image.png" /> <strong>命令行启动 AOF 的优缺点</strong>：命令行启动优点是无需重启 Redis 服务，缺点是如果 Redis 服务重启，则之前使用命令行设置的配置就会失效。</p>
+<p>命令行启动 AOF，使用 <code>config set appendonly yes</code> 命令，如下图所示： <img src="assets/2020-02-24-122527.png" alt="png" /> <strong>命令行启动 AOF 的优缺点</strong>：命令行启动优点是无需重启 Redis 服务，缺点是如果 Redis 服务重启，则之前使用命令行设置的配置就会失效。</p>
 <h5>② 配置文件启动 AOF</h5>
-<p>Redis 的配置文件在它的根路径下的 redis.conf 文件中，获取 Redis 的根目录可以使用命令 <code>config get dir</code> 获取，如下图所示： <img src="assets/2020-02-24-122528.png" alt="image.png" /> 只需要在配置文件中设置 <code>appendonly yes</code> 即可，默认 <code>appendonly no</code> 表示关闭 AOF 持久化。 <strong>配置文件启动 AOF 的优缺点</strong>：修改配置文件的缺点是每次修改配置文件都要重启 Redis 服务才能生效，优点是无论重启多少次 Redis 服务，配置文件中设置的配置信息都不会失效。</p>
+<p>Redis 的配置文件在它的根路径下的 redis.conf 文件中，获取 Redis 的根目录可以使用命令 <code>config get dir</code> 获取，如下图所示： <img src="assets/2020-02-24-122528.png" alt="png" /> 只需要在配置文件中设置 <code>appendonly yes</code> 即可，默认 <code>appendonly no</code> 表示关闭 AOF 持久化。 <strong>配置文件启动 AOF 的优缺点</strong>：修改配置文件的缺点是每次修改配置文件都要重启 Redis 服务才能生效，优点是无论重启多少次 Redis 服务，配置文件中设置的配置信息都不会失效。</p>
 <h3>3 触发持久化</h3>
 <p>AOF 持久化开启之后，只要满足一定条件，就会触发 AOF 持久化。AOF 的触发条件分为两种：自动触发和手动触发。</p>
 <h4>1）自动触发</h4>
@@ -260,9 +260,9 @@ appendfsync everysec
 <blockquote>
 <p>小贴士：因为每次写入磁盘都会对 Redis 的性能造成一定的影响，所以要根据用户的实际情况设置相应的策略，一般设置每秒写入一次磁盘的频率就可以满足大部分的使用场景了。</p>
 </blockquote>
-<p>触发自动持久化的两种情况，如下图所示： <img src="assets/2020-02-24-122529.png" alt="image.png" /></p>
+<p>触发自动持久化的两种情况，如下图所示： <img src="assets/2020-02-24-122529.png" alt="png" /></p>
 <h4>2）手动触发</h4>
-<p>在客户端执行 <code>bgrewriteaof</code> 命令就可以手动触发 AOF 持久化，如下图所示： <img src="assets/2020-02-24-122530.png" alt="image.png" /> 可以看出执行完 <code>bgrewriteaof</code> 命令之后，AOF 持久化就会被触发。</p>
+<p>在客户端执行 <code>bgrewriteaof</code> 命令就可以手动触发 AOF 持久化，如下图所示： <img src="assets/2020-02-24-122530.png" alt="png" /> 可以看出执行完 <code>bgrewriteaof</code> 命令之后，AOF 持久化就会被触发。</p>
 <h3>4 AOF 文件重写</h3>
 <p>AOF 是通过记录 Redis 的执行命令来持久化（保存）数据的，所以随着时间的流逝 AOF 文件会越来越多，这样不仅增加了服务器的存储压力，也会造成 Redis 重启速度变慢，为了解决这个问题 Redis 提供了 AOF 重写的功能。</p>
 <h4>1）什么是 AOF 重写？</h4>
@@ -273,7 +273,7 @@ appendfsync everysec
 <li>auto-aof-rewrite-min-size：允许 AOF 重写的最小文件容量，默认是 64mb 。</li>
 <li>auto-aof-rewrite-percentage：AOF 文件重写的大小比例，默认值是 100，表示 100%，也就是只有当前 AOF 文件，比最后一次（上次）的 AOF 文件大一倍时，才会启动 AOF 文件重写。</li>
 </ul>
-<p>查询 auto-aof-rewrite-min-size 和 auto-aof-rewrite-percentage 的值，可使用 <code>config get xxx</code> 命令，如下图所示： <img src="assets/2020-02-24-122531.png" alt="image.png" /></p>
+<p>查询 auto-aof-rewrite-min-size 和 auto-aof-rewrite-percentage 的值，可使用 <code>config get xxx</code> 命令，如下图所示： <img src="assets/2020-02-24-122531.png" alt="png" /></p>
 <blockquote>
 <p>小贴士：只有同时满足 auto-aof-rewrite-min-size 和 auto-aof-rewrite-percentage 设置的条件，才会触发 AOF 文件重写。</p>
 </blockquote>
@@ -302,7 +302,7 @@ aof-load-truncated yes
 <p>其中比较重要的是 appendfsync 参数，用它来设置 AOF 的持久化策略，可以选择按时间间隔或者操作次数来存储 AOF 文件，这个参数的三个值在文章开头有说明，这里就不再复述了。</p>
 <h3>6 数据恢复</h3>
 <h4>1）正常数据恢复</h4>
-<p>正常情况下，只要开启了 AOF 持久化，并且提供了正常的 appendonly.aof 文件，在 Redis 启动时就会自定加载 AOF 文件并启动，执行如下图所示： <img src="assets/2020-02-24-122532.png" alt="image.png" /> 其中 <code>DB loaded from append only file......</code> 表示 Redis 服务器在启动时，先去加载了 AOF 持久化文件。</p>
+<p>正常情况下，只要开启了 AOF 持久化，并且提供了正常的 appendonly.aof 文件，在 Redis 启动时就会自定加载 AOF 文件并启动，执行如下图所示： <img src="assets/2020-02-24-122532.png" alt="png" /> 其中 <code>DB loaded from append only file......</code> 表示 Redis 服务器在启动时，先去加载了 AOF 持久化文件。</p>
 <blockquote>
 <p>小贴士：默认情况下 appendonly.aof 文件保存在 Redis 的根目录下。</p>
 </blockquote>
@@ -312,7 +312,7 @@ aof-load-truncated yes
 <li>如果只开启了 RDB 持久化，Redis 启动时只会加载 RDB 文件（dump.rdb），进行数据恢复；</li>
 <li>如果同时开启了 RDB 和 AOF 持久化，Redis 启动时只会加载 AOF 文件（appendonly.aof），进行数据恢复。</li>
 </ul>
-<p>在 AOF 开启的情况下，即使 AOF 文件不存在，只有 RDB 文件，也不会加载 RDB 文件。 AOF 和 RDB 的加载流程如下图所示： <img src="assets/2020-02-24-122534.png" alt="image.png" /></p>
+<p>在 AOF 开启的情况下，即使 AOF 文件不存在，只有 RDB 文件，也不会加载 RDB 文件。 AOF 和 RDB 的加载流程如下图所示： <img src="assets/2020-02-24-122534.png" alt="png" /></p>
 <h4>2）简单异常数据恢复</h4>
 <p>在 AOF 写入文件时如果服务器崩溃，或者是 AOF 存储已满的情况下，AOF 的最后一条命令可能被截断，这就是异常的 AOF 文件。</p>
 <p>在 AOF 文件异常的情况下，如果为修改 Redis 的配置文件，也就是使用 <code>aof-load-truncated</code> 等于 <code>yes</code> 的配置，Redis 在启动时会忽略最后一条命令，并顺利启动 Redis，执行结果如下：</p>

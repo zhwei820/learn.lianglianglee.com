@@ -252,7 +252,7 @@ function hide_canvas() {
 <p>早期程序员没有图形界面用，就用 Shell。而且图形界面制作成本较高，不能实现所有功能，因此今天的程序员依然在用 Shell。</p>
 <p>你平时还经常会看到一个词叫作bash（Bourne Again Shell），它是用 Shell 组成的程序。这里的 Bourne 是一个人名，Steve Bourne 是 bash 的发明者。</p>
 <p>我们今天学习的所有指令，不是写死在操作系统中的，而是一个个程序。比如<code>rm</code>指令，你可以用<code>which</code>指令查看它所在的目录。如下图所示，你会发现<code>rm</code>指令在<code>/usr/bin/rm</code>目录中。</p>
-<p><img src="assets/Ciqc1F9rD96AC0GrAAB1NDHyN48035.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9rD96AC0GrAAB1NDHyN48035.png" alt="png" /></p>
 <p>如上图所示，<code>ramroll</code>是我的英文名字，ubuntu 是我这台机器的名字。我输入了<code>which rm</code>，然后获得了<code>/usr/bin/rm</code>的结果，最终执行这条指令的是操作系统，连接我和操作系统的程序就是 Shell。</p>
 <p>Linux 对文件目录操作的指令就工作在 Shell 上，接下来我们讲讲文件目录操作指令。</p>
 <h3>Linux 对文件目录的抽象</h3>
@@ -277,7 +277,7 @@ function hide_canvas() {
 </ul>
 <p>利用上面这 3 种能力，你就可以方便的构造相对路径了。</p>
 <p>Linux提供了一个指令<code>pwd</code>（Print Working Directory）查看工作目录。下图是我输入<code>pwd</code>的结果。</p>
-<p><img src="assets/Ciqc1F9rEAqAYNQMAACAjjKxZlw157.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9rEAqAYNQMAACAjjKxZlw157.png" alt="png" /></p>
 <p>你可以看到我正在<code>/home/ramroll/Documents</code>目录下工作。</p>
 <h4>几种常见的文件类型</h4>
 <p>另一方面，Linux 下的目录也是一种文件；但是文件也不只有目录和可执行文件两种。常见的文件类型有以下 7 种:</p>
@@ -299,7 +299,7 @@ function hide_canvas() {
 <li>没有符号结尾的是普通文件；</li>
 <li>/ 结尾的是目录。</li>
 </ol>
-<p><img src="assets/Ciqc1F9rECOAaC4iAAEqYXENnnI551.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9rECOAaC4iAAEqYXENnnI551.png" alt="png" /></p>
 <h4>设备文件</h4>
 <p>Socket 是网络插座，是客户端和服务器之间同步数据的接口。其实，Linux 不只把 Socket 抽象成了文件，设备基本也都被抽象成了文件。因为设备需要不断和操作系统交换数据。而交换方式只有两种——读和写。所以设备是可以抽象成文件的，因为文件也支持这两种操作。</p>
 <p>Linux 把所有的设备都抽象成了文件，比如说打印机、USB、显卡等。这让整体的系统设计变得高度统一。</p>
@@ -307,33 +307,33 @@ function hide_canvas() {
 <h3>文件的增删改查</h3>
 <h4>增加</h4>
 <p>创建一个普通文件的方法有很多，最常见的有<code>touch</code>指令。比如下面我们创建了一个 a.txt 文件。</p>
-<p><img src="assets/CgqCHl9rEC-Ae_lzAAA_P5LZwCo061.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9rEC-Ae_lzAAA_P5LZwCo061.png" alt="png" /></p>
 <p><code>touch</code>指令本来是用来更改文件的时间戳的，但是如果文件不存在<code>touch</code>也会帮助创建一个空文件。</p>
 <p>如果你拿到一个指令不知道该怎么用，比如<code>touch</code>，你可以用<code>man touch</code>去获得帮助。<code>man</code>意思是 manual，就是说明书的意思，这里指的是系统的手册。如果你不知道<code>man</code>是什么，也可以使用<code>man man</code>。下图是使用<code>man man</code>的结果：</p>
-<p><img src="assets/Ciqc1F9rEDqAMZ0vAAXe1wrRPf0386.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9rEDqAMZ0vAAXe1wrRPf0386.png" alt="png" /></p>
 <p>另外如果我们需要增加一个目录，就需要用到<code>mkdir</code>指令（ make directory），比如我们创建一个<code>hello</code>目录，如下图所示：</p>
-<p><img src="assets/CgqCHl9rEEGAKH5HAABgveVKHzI705.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9rEEGAKH5HAABgveVKHzI705.png" alt="png" /></p>
 <h4>查看</h4>
 <p>创建之后我们可以用<code>ls</code>指令看到这个文件，<code>ls</code>是 list 的缩写。下面是指令 'ls' 的执行结果。</p>
-<p><img src="assets/Ciqc1F9rEF-AVHcKAABf8ABbQ0o651.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9rEF-AVHcKAABf8ABbQ0o651.png" alt="png" /></p>
 <p>我们看到在当前的目录下有一个<code>a.txt</code>文件，还有一个<code>hello</code>目录。如果你知道当前的工作目录，就可以使用<code>pwd</code>指令。</p>
 <p>如果想看到<code>a.txt</code>更完善的信息，还可以使用<code>ls -l</code>。<code>-l</code>是<code>ls</code>指令的可选参数。下图是<code>ls -l</code>的结果，你可以看到<code>a.txt</code>更详细的描述。</p>
-<p><img src="assets/CgqCHl9rEGqAA0XWAAEv83hemN0703.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl9rEGqAA0XWAAEv83hemN0703.png" alt="png" /></p>
 <p>如上图所示，我们看到两个<code>ramroll</code>，它们是<code>a.txt</code>所属的用户和所属的用户分组，刚好重名了。<code>Sep 13</code>是日期。 中间有一个<code>0</code>是<code>a.txt</code>的文件大小，目前<code>a.txt</code>中还没有写入内容，因此大小是<code>0</code>。</p>
 <p>另外虽然<code>hello</code>是空的目录，但是目录文件 Linux 上来就分配了<code>4096</code>字节的空间。这是因为目录内需要保存很多文件的描述信息。</p>
 <h4>删除</h4>
 <p>如果我们想要删除<code>a.txt</code>可以用<code>rm a.txt</code>；如我们要删除<code>hello</code>目录，可以用<code>rm hello</code>。<code>rm</code>是 remove 的缩写。</p>
-<p><img src="assets/CgqCHl9rEHSAaCuvAACmYor8yvE702.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl9rEHSAaCuvAACmYor8yvE702.png" alt="png" /></p>
 <p>但是当我们输入<code>rm hello</code>的时候，会提示<code>hello</code>是一个目录，不可以删除。因此我们需要增加一个可选项，比如<code>-r</code>即 recursive（递归）。目录是一个递归结构，所以需要用递归删除。最后，你会发现<code>rm hello -r</code>删除了<code>hello</code>目录。</p>
 <p>接下来我们尝试在 hello 目录下新增一个文件，比如相对路径是<code>hello/world/os.txt</code>。需要先创建 hello/world 目录。这种情况会用到<code>mkdir</code>的<code>-p</code>参数，这个参数控制<code>mkdir</code>当发现目标目录的父级目录不存在的时候会递归的创建。以下是我们的执行结果：</p>
-<p><img src="assets/Ciqc1F9rEJKAYE8qAAFVKf9hzs8021.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F9rEJKAYE8qAAFVKf9hzs8021.png" alt="png" /></p>
 <h4>修改</h4>
 <p>如果需要修改一个文件，可以使用<code>nano</code>或者<code>vi</code>编辑器。类似的工具还有很多，但是<code>nano</code>和<code>vi</code>一般是<code>linux</code>自带的。</p>
 <p>这里我不展开讲解了，你可以自己去尝试。在尝试的过程中如果遇到什么问题，可以写在留言区，我会逐一为你解答。</p>
 <h3>查阅文件内容</h3>
 <p>在了解了文件的增删改查操作后，下面我们来学习查阅文件内容。我们知道，Linux 下查阅文件内容，可以根据不同场景选择不同的指令。</p>
 <p>当文件较小时，比如一个配置文件，想要快速浏览这个文件，可以用<code>cat</code>指令。下面 cat 指令帮助我们快速查看<code>/etc/hosts</code>文件。<code>cat</code>指令将文件连接到标准输出流并打印到屏幕上。</p>
-<p><img src="assets/CgqCHl9rEKSAetBpAAJKmXNMtek042.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl9rEKSAetBpAAJKmXNMtek042.png" alt="png" /></p>
 <p>标准输出流（Standard Output）也是一种文件，进程可以将要输出的内容写入标准输出流文件，这样就可以在屏幕中打印。</p>
 <p>如果用<code>cat</code>查看大文件，比如一个线上的日志文件，因为动辄有几个 G，控制台打印出所有的内容就要非常久，而且刷屏显示看不到东西。</p>
 <p>而且如果在线上进行查看大文件的操作，会带来不必要的麻烦：</p>
@@ -341,7 +341,7 @@ function hide_canvas() {
 <p>其次，本身文件会读取到内存中，这时内存被大量占用，很危险，这可能导致其他应用内存不足。因此我们需要一些不用加载整个文件，就能查看文件内容的指令。</p>
 <p><strong>more</strong></p>
 <p><code>more</code>可以帮助我们读取文件，但不需要读取整个文件到内存中。本身<code>more</code>的定位是一个阅读过滤器，比如你在<code>more</code>里除了可以向下翻页，还可以输入一段文本进行搜索。</p>
-<p><img src="assets/CgqCHl9rEK6ANctWAAvN_sMIYLA038.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl9rEK6ANctWAAvN_sMIYLA038.png" alt="png" /></p>
 <p>如上图所示，我在<code>more</code>查看一个 nginx 日志后，先输入一个<code>/</code>，然后输入<code>192.168</code>看到的结果。<code>more</code>帮我找到了<code>192.168</code>所在的位置，然后又帮我定位到了这个位置。整个过程 more 指令只读取我们需要的部分到内存中。</p>
 <p><strong>less</strong></p>
 <p><code>less</code>是一个和<code>more</code>功能差不多的工具，打开<code>man</code>能够看到<code>less</code>的介绍上写着自己是<code>more</code>的反义词（opposite of more）。这样你可以看出<code>linux</code>生态其实也是很自由的一个生态，在这里创造工具也可以按照自己的喜好写文档。<code>less</code>支持向上翻页，这个功能<code>more</code>是做不到的。所以现在<code>less</code>用得更多一些。</p>
@@ -362,18 +362,18 @@ function hide_canvas() {
 <li>例 1：查找 ip 地址</li>
 </ul>
 <p>我们可以通过<code>grep</code>命令定位某个<code>ip</code>地址的用户都做了什么事情，如下图所示：</p>
-<p><img src="assets/CgqCHl9rELqAbYi4AAfJLxM4xgw204.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgqCHl9rELqAbYi4AAfJLxM4xgw204.png" alt="png" /></p>
 <ul>
 <li>例 2：查找时间段的日志</li>
 </ul>
 <p>我们可以通过 grep 命令查找某个时间段内用户都做了什么事情。如下图所示，你可以看到在某个 5 分钟内所有用户的访问情况。</p>
-<p><img src="assets/Ciqc1F9rEMGAQTTHAAYTLdI_HSA050.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/Ciqc1F9rEMGAQTTHAAYTLdI_HSA050.png" alt="png" /></p>
 <h3>查找文件</h3>
 <p>用户经常还会有一种诉求，就是查找文件。</p>
 <p>之前我们使用过一个<code>which</code>指令，这个指令可以查询一个指令文件所在的位置，比如<code>which grep</code>会，你会看到<code>grep</code>指令被安装的位置是<code>/usr/bin</code>。但是我们还需要一个更加通用的指令查找文件，也就是 find 指令。</p>
 <p><strong>find</strong></p>
 <p>find 指令帮助我们在文件系统中查找文件。 比如我们如果想要查找所有<code>.txt</code> 扩展名的文件，可以使用<code>find / -iname &quot;*.txt&quot;</code>，<code>-iname</code>这个参数是用来匹配查找的，i 字母代表忽略大小写，这里也可以用<code>-name</code>替代。输入这条指令，你会看到不断查找文件，如下图所示：</p>
-<p><img src="assets/CgqCHl9rEM2AD9SWAAdsfnMr8fw422.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/CgqCHl9rEM2AD9SWAAdsfnMr8fw422.png" alt="png" /></p>
 <h3>总结</h3>
 <p>这节课我们学习了很多指令，不知道你记住了多少？最后，我们再一起复习一下。</p>
 <ul>

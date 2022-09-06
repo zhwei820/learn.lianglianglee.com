@@ -275,7 +275,7 @@ function hide_canvas() {
 <p>Mixed 格式，就是 Statement 与 Row 的结合，在这种方式下，不同的 SQL 操作会区别对待。比如一般的数据操作使用 row 格式保存，有些表结构的变更语句，使用 statement 来记录。</p>
 <h4>主从复制过程</h4>
 <p>MySQL 主从复制过程如下图所示：</p>
-<p><img src="assets/CgqCHl7h4UKAHeKQAAGxgG2nPaQ910.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7h4UKAHeKQAAGxgG2nPaQ910.png" alt="png" /></p>
 <ul>
 <li>主库将变更写入 binlog 日志，从库连接到主库之后，主库会创建一个log dump 线程，用于发送 bin log 的内容。</li>
 <li>从库开启同步以后，会创建一个 IO 线程用来连接主库，请求主库中更新的 bin log，I/O 线程接收到主库 binlog dump 进程发来的更新之后，保存在本地 relay 日志中。</li>

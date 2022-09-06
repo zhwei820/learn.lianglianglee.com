@@ -256,7 +256,7 @@ function hide_canvas() {
 <p>TCC 提出了一种新的事务模型，基于业务层面的事务定义，锁粒度完全由业务自己控制，目的是解决复杂业务中，跨表跨库等大颗粒度资源锁定的问题。TCC 把事务运行过程分成 Try、Confirm / Cancel 两个阶段，每个阶段的逻辑由业务代码控制，避免了长事务，可以获取更高的性能。</p>
 <h4>TCC 的各个阶段</h4>
 <p>TCC 的具体流程如下图所示：</p>
-<p><img src="assets/Ciqc1F6qgbmAC6GbAAJF3yzrcWs383.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F6qgbmAC6GbAAJF3yzrcWs383.png" alt="png" /></p>
 <p><strong>Try 阶段</strong>：调用 Try 接口，尝试执行业务，完成所有业务检查，预留业务资源。</p>
 <p><strong>Confirm 或 Cancel 阶段</strong>：两者是互斥的，只能进入其中一个，并且都满足幂等性，允许失败重试。</p>
 <ul>
@@ -273,7 +273,7 @@ function hide_canvas() {
 <h3>从真实业务场景分析 TCC</h3>
 <p>下面以一个电商中的支付业务来演示，用户在支付以后，需要进行更新订单状态、扣减账户余额、增加账户积分和扣减商品操作。</p>
 <p>在实际业务中为了防止超卖，有下单减库存和付款减库存的区别，支付除了账户余额，还有各种第三方支付等，这里我们为了描述方便，统一使用扣款减库存，扣款来源是用户账户余额。</p>
-<p><img src="assets/Ciqc1F6qgfuAJQCgAAG9JoGK4rY210.png" alt="image.png" /></p>
+<p><img src="assets/Ciqc1F6qgfuAJQCgAAG9JoGK4rY210.png" alt="png" /></p>
 <h4>业务逻辑拆解</h4>
 <p>我们把订单业务拆解为以下几个步骤：</p>
 <ul>
@@ -305,7 +305,7 @@ function hide_canvas() {
 <h3>TCC 对比 2PC 两阶段提交</h3>
 <p>TCC 事务模型的思想类似 2PC 提交，下面对比 TCC 和基于 2PC 事务 XA 规范对比。</p>
 <h4>对比 2PC 提交</h4>
-<p><img src="assets/CgqCHl6qgjmAASLlAAServJ4VUM890.png" alt="image" /></p>
+<p><img src="assets/CgqCHl6qgjmAASLlAAServJ4VUM890.png" alt="png" /></p>
 <ul>
 <li>第一阶段</li>
 </ul>
@@ -325,7 +325,7 @@ function hide_canvas() {
 <p>在业务中引入 TCC 一般是依赖单独的 TCC 事务框架，可以选择自研或者应用开源组件。TCC 框架扮演了资源管理器的角色，常用的 TCC 开源组件有 Tcc-transaction、ByteTCC、Spring-cloud-rest-tcc 等。</p>
 <p>前面介绍过的 Seata，可以选择 TCC 事务模式，也支持了 AT 模式及 Saga 模式。</p>
 <p>以 Tcc-transaction 为例，源码托管在 <a href="https://github.com/changmingxie/tcc-transaction">Github-tcc-transaction</a>，提供了对 Spring 和 Dubbo 的适配，感兴趣的话可以查看 <a href="https://github.com/changmingxie/tcc-transaction/tree/master-1.2.x/tcc-transaction-tutorial-sample">tcc-transaction-tutorial-sample</a> 学习。</p>
-<p><img src="assets/CgqCHl6qgnGAV36VAACSjbYig5g034.png" alt="image" /></p>
+<p><img src="assets/CgqCHl6qgnGAV36VAACSjbYig5g034.png" alt="png" /></p>
 <h3>总结</h3>
 <p>这一课时介绍了 TCC 分布式事务模型的应用，通过一个实际例子分析了如何应用 TCC 对业务系统进行改造，并且对比了 TCC 和 2PC 两阶段提交，以及 TCC 相关的开源组件。</p>
 </div>

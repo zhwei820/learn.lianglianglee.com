@@ -191,7 +191,7 @@ function hide_canvas() {
 <h3>再谈 Reactor 线程模型</h3>
 <p>网络框架的设计离不开 I/O 线程模型，线程模型的优劣直接决定了系统的吞吐量、可扩展性、安全性等。目前主流的网络框架几乎都采用了 I/O 多路复用的方案。Reactor 模式作为其中的事件分发器，负责将读写事件分发给对应的读写事件处理者。大名鼎鼎的 Java 并发包作者 Doug Lea，在 <em>Scalable I/O in Java</em> 一文中阐述了服务端开发中 I/O 模型的演进过程。Netty 中<strong>三种 Reactor 线程模型</strong>也来源于这篇经典文章。下面我们对这三种 Reactor 线程模型做一个详细的分析。</p>
 <h4>单线程模型</h4>
-<p><img src="assets/Ciqc1F-ZNCCANWF0AAG4qWOzD48243.png" alt="1.png" />
+<p><img src="assets/Ciqc1F-ZNCCANWF0AAG4qWOzD48243.png" alt="png" />
 （<a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf]">摘自 Lea D. Scalable IO in Java</a>）</p>
 <p>上图描述了 Reactor 的单线程模型结构，在 Reactor 单线程模型中，所有 I/O 操作（包括连接建立、数据读写、事件分发等），都是由一个线程完成的。单线程模型逻辑简单，缺陷也十分明显：</p>
 <ul>
@@ -201,16 +201,16 @@ function hide_canvas() {
 <li>如果 I/O 线程一直处于满负荷状态，很可能造成服务端节点不可用。</li>
 </ul>
 <h4>多线程模型</h4>
-<p><img src="assets/Ciqc1F-ZNCyAeFxmAAH_Xaxv5gc975.png" alt="2.png" />
+<p><img src="assets/Ciqc1F-ZNCyAeFxmAAH_Xaxv5gc975.png" alt="png" />
 （<a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf]">摘自 Lea D. Scalable IO in Java</a>）</p>
 <p>由于单线程模型有性能方面的瓶颈，多线程模型作为解决方案就应运而生了。Reactor 多线程模型将业务逻辑交给多个线程进行处理。除此之外，多线程模型其他的操作与单线程模型是类似的，例如读取数据依然保留了串行化的设计。当客户端有数据发送至服务端时，Select 会监听到可读事件，数据读取完毕后提交到业务线程池中并发处理。</p>
 <h4>主从多线程模型</h4>
-<p><img src="assets/CgqCHl-ZNDiAPgGOAAHx74H-t44265.png" alt="3.png" />
+<p><img src="assets/CgqCHl-ZNDiAPgGOAAHx74H-t44265.png" alt="png" />
 （<a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf]">摘自 Lea D. Scalable IO in Java</a>）</p>
 <p>主从多线程模型由多个 Reactor 线程组成，每个 Reactor 线程都有独立的 Selector 对象。MainReactor 仅负责处理客户端连接的 Accept 事件，连接建立成功后将新创建的连接对象注册至 SubReactor。再由 SubReactor 分配线程池中的 I/O 线程与其连接绑定，它将负责连接生命周期内所有的 I/O 事件。</p>
 <p>Netty 推荐使用主从多线程模型，这样就可以轻松达到成千上万规模的客户端连接。在海量客户端并发请求的场景下，主从多线程模式甚至可以适当增加 SubReactor 线程的数量，从而利用多核能力提升系统的吞吐量。</p>
 <p>介绍了上述三种 Reactor 线程模型，再结合它们各自的架构图，我们能大致总结出 Reactor 线程模型运行机制的四个步骤，分别为<strong>连接注册</strong>、<strong>事件轮询</strong>、<strong>事件分发</strong>、<strong>任务处理</strong>，如下图所示。</p>
-<p><img src="assets/CgqCHl-ZNEGAMU-zAAEsYdWKArA085.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl-ZNEGAMU-zAAEsYdWKArA085.png" alt="png" /></p>
 <ul>
 <li>连接注册：Channel 建立后，注册至 Reactor 线程中的 Selector 选择器。</li>
 <li>事件轮询：轮询 Selector 选择器中已注册的所有 Channel 的 I/O 事件。</li>
@@ -222,7 +222,7 @@ function hide_canvas() {
 <h4>EventLoop 是什么</h4>
 <p>EventLoop 这个概念其实并不是 Netty 独有的，它是一种<strong>事件等待和处理的程序模型</strong>，可以解决多线程资源消耗高的问题。例如 Node.js 就采用了 EventLoop 的运行机制，不仅占用资源低，而且能够支撑了大规模的流量访问。</p>
 <p>下图展示了 EventLoop 通用的运行模式。每当事件发生时，应用程序都会将产生的事件放入事件队列当中，然后 EventLoop 会轮询从队列中取出事件执行或者将事件分发给相应的事件监听者执行。事件执行的方式通常分为<strong>立即执行、延后执行、定期执行</strong>几种。</p>
-<p><img src="assets/Ciqc1F-ZNFKAAZr4AANvWWMqnKw586.png" alt="5.png" /></p>
+<p><img src="assets/Ciqc1F-ZNFKAAZr4AANvWWMqnKw586.png" alt="png" /></p>
 <h3>Netty 如何实现 EventLoop</h3>
 <p>在 Netty 中 EventLoop 可以理解为 Reactor 线程模型的事件处理引擎，每个 EventLoop 线程都维护一个 Selector 选择器和任务队列 taskQueue。它主要负责处理 I/O 事件、普通任务和定时任务。</p>
 <p>Netty 中推荐使用 NioEventLoop 作为实现类，那么 Netty 是如何实现 NioEventLoop 的呢？首先我们来看 NioEventLoop 最核心的 run() 方法源码，本节课我们不会对源码做深入的分析，只是先了解 NioEventLoop 的实现结构。</p>
@@ -282,7 +282,7 @@ function hide_canvas() {
 </code></pre>
 <p>上述源码的结构比较清晰，NioEventLoop 每次循环的处理流程都包含事件轮询 select、事件处理 processSelectedKeys、任务处理 runAllTasks 几个步骤，是典型的 Reactor 线程模型的运行机制。而且 Netty 提供了一个参数 ioRatio，可以调整 I/O 事件处理和任务处理的时间比例。下面我们将着重从<strong>事件处理</strong>和<strong>任务处理</strong>两个核心部分出发，详细介绍 Netty EventLoop 的实现原理。</p>
 <h4>事件处理机制</h4>
-<p><img src="assets/Ciqc1F-ZNGGAcJWSAATcxrhDB1U168.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1F-ZNGGAcJWSAATcxrhDB1U168.png" alt="png" /></p>
 <p>结合 Netty 的整体架构，我们一起看下 EventLoop 的事件流转图，以便更好地理解 Netty EventLoop 的设计原理。NioEventLoop 的事件处理机制采用的是<strong>无锁串行化的设计思路</strong>。</p>
 <ul>
 <li><strong>BossEventLoopGroup</strong> 和 <strong>WorkerEventLoopGroup</strong> 包含一个或者多个 NioEventLoop。BossEventLoopGroup 负责监听客户端的 Accept 事件，当事件触发时，将事件注册至 WorkerEventLoopGroup 中的一个 NioEventLoop 上。每新建一个 Channel， 只选择一个 NioEventLoop 与其绑定。所以说 Channel 生命周期的所有事件处理都是<strong>线程独立</strong>的，不同的 NioEventLoop 线程之间不会发生任何交集。</li>

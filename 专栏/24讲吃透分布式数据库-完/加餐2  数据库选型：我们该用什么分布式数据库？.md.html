@@ -211,7 +211,7 @@ function hide_canvas() {
 <li>高效的异地数据同步。</li>
 </ol>
 <p>如下面的架构图所示，应用层通过 Cobar 访问数据库。</p>
-<p><img src="assets/Cgp9HWBzrSaABPOUAAH9MECqjKQ062.png" alt="image.png" /></p>
+<p><img src="assets/Cgp9HWBzrSaABPOUAAH9MECqjKQ062.png" alt="png" /></p>
 <p>其对数据库的访问分为读操作（select）和写操作（update、insert和delete）。写操作会在数据库上产生变更记录，MySQL 的变更记录叫 binlog，Oracle 的变更记录叫 redolog。Erosa 产品解析这些变更记录，并以统一的格式缓存至 Eromanga 中，后者负责管理变更数据的生产者、Erosa 和消费者之间的关系，负责跨机房数据库同步的 Otter 是这些变更数据的消费者之一。</p>
 <p>Cobar 可谓 OLTP 分布式数据库解决方案的先驱，至今其中的思想还可以从现在的中间件，甚至 NewSQL 数据库中看到。但在阿里集团服役三年后，由于人员变动而逐步停止维护。这个时候 MyCAT 开源社区接过了该项目的衣钵，在其上增加了诸多功能并进行 bug 修改，最终使其在多个行业中占用自己的位置。</p>
 <p>但是就像我曾经介绍的那样，中间件产品并不是真正的分布式数据库，它有自己的局限。比如 SQL 支持、查询性能、分布式事务、运维能力，等等，都有不可逾越的天花板。而有一些中间件产品幸运地得以继续进阶，最终演化为 NewSQL，甚至是云原生产品。阿里云的 PolarDB 就是这种类型的代表，它的前身是阿里云的分库分表中间件产品 DRDS，而 DRDS 来源于淘宝系的 TDDL 中间件。</p>

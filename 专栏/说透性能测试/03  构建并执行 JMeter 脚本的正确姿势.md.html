@@ -162,7 +162,7 @@ function hide_canvas() {
 <p><strong>脚本构建就是编写脚本</strong>，是你正式开始执行性能测试的第一步，对于常规的请求来说只需要通过界面的指引就可以完成，这个是非常容易的，但是上手容易不代表你使用方法科学，下面我带你看看常见的误区。</p>
 <h4>一个线程组、一条链路走到底</h4>
 <p>先来看下这样一张线程组的图：</p>
-<p><img src="assets/CgqCHl_-p9GABuguAABBUSnBL1I633.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl_-p9GABuguAABBUSnBL1I633.png" alt="png" /></p>
 <p>图 1：一个线程组</p>
 <p>图中包含了注册、登录、浏览商品、查看订单等，它们在同一个线程组，基于同一线程依次进行业务。这样的做法其实和自动化非常相似。</p>
 <p>比如张三先注册一个网站，然后进行登录、添加购物车等操作。但仔细想一想，对于一个网站的性能而言，这么考虑是有些问题的。</p>
@@ -183,7 +183,7 @@ function hide_canvas() {
 <p>在正确构建了脚本之后，我们就要来看如何执行脚本了。脚本执行就是你怎么去<strong>运行脚本</strong>，可能有的同学会一头雾水，我直接点击界面上的运行按钮不就行了吗？事实上真正的压测可不是这个样子的。</p>
 <h4>界面化执行性能测试</h4>
 <p>一些测试人员在 Windows 或 Mac 环境编写完脚本后，会直接用界面化的方式进行性能测试，这样的做法是非常不规范的。打开 JMeter 界面之后就会弹出提示，如图 2 所示：</p>
-<p><img src="assets/CgqCHl_-p-SAVYK0AAGf14hnG0w748.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_-p-SAVYK0AAGf14hnG0w748.png" alt="png" /></p>
 <p>图 2：界面化性能测试提示</p>
 <p>很多人会选择直接忽略掉，但图中的第一段是这样的：</p>
 <blockquote>
@@ -210,7 +210,7 @@ function hide_canvas() {
 <li>-o 表示指定的生成结果文件夹位置。</li>
 </ul>
 <p>我们来看一下执行了上面的脚本后的实际效果，如图 3 所示：</p>
-<p><img src="assets/CgqCHl_-p_GATU1yAACmJ7JsOJs941.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_-p_GATU1yAACmJ7JsOJs941.png" alt="png" /></p>
 <p>图 3：脚本执行后的效果</p>
 <p>从图中可以看到，命令行的方式直接产生了总的 TPS、报错和一些时间层级的指标。命令行的执行方式规避了一些图形化界面存在的问题，但这样的结果输出方式存在 2 个问题：</p>
 <ul>
@@ -220,7 +220,7 @@ function hide_canvas() {
 <p>这 2 个问题都有个关键词是“实时”，是在压测过程中容易遗漏的点。虽然压测之后我们有很多方式可以回溯，但在性能测试过程中，发现、排查、诊断问题是必不可少的环节，它能够帮助我们以最快的速度发现问题的线索，让问题迅速得到解决。</p>
 <p>先来看第一点：<strong>看不到实时的接口返回报错的具体信息</strong>。</p>
 <p>jmeter.log 刚刚执行过程中记录了哪些内容呢？如图 4 所示：</p>
-<p><img src="assets/CgqCHl_-p_yAeoEUAACugfrmrq0387.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl_-p_yAeoEUAACugfrmrq0387.png" alt="png" /></p>
 <p>图 4：jmeter.log 执行时记录的内容</p>
 <p>你可以看到只能显示报错率，但看不到具体的报错内容，那如何去解决呢？一般我会使用 beanshell，把判定为报错的内容增加到 log 里。beanshell 的示意代码如下所示，你可以根据自己的需求改进。</p>
 <pre><code>String response = prev.getResponseDataAsString();
@@ -236,12 +236,12 @@ if (code.equals(&quot;200&quot;)){//根据返回状态码判断
 	}
 </code></pre>
 <p>这样就会自动在 jmeter.log 中打印出具体的报错信息，如图 5 所示：</p>
-<p><img src="assets/Cip5yF_-qAaAX8ChAADQYOI-pf0391.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yF_-qAaAX8ChAADQYOI-pf0391.png" alt="png" /></p>
 <p>图 5：报错信息</p>
 <p>客户端的日志只是我们需要关注的点之一，排查错误的根因还需要结合服务端的报错日志，一般来说服务端的报错日志都有相关的平台记录和查询，比较原始的方式也可以根据服务器的路径找相关日志。</p>
 <p>我们再来看第二个问题：<strong>看不到综合场景下的每个接口的实时处理能力</strong>。</p>
 <p>我个人认为原生的实时查看结果是有些鸡肋的，如果想实时且直观地看到每个接口的处理能力，我比较推荐 JMeter+InfluxDB+Grafana 的方式，基本流程如下图所示：</p>
-<p><img src="assets/CgqCHl_-zTuAMf2DAABpdYPtYUw826.png" alt="Lark20210113-183606.png" /></p>
+<p><img src="assets/CgqCHl_-zTuAMf2DAABpdYPtYUw826.png" alt="png" /></p>
 <p>图 6：JMeter+InfluxDB+Grafana</p>
 <p>JMeter 的二次开发可以满足很多定制化的需求，但也比较考验开发的能力（关于二次开发，我会在《04 | JMeter 二次开发其实并不难 》中介绍）。如果不想进行二次开发，JMeter+InfluxDB+Grafana 也是一种比较好的实现方式了。</p>
 <p>下面，我会对 InfluxDB 和 Grafana 做一个简单的介绍，包括特点、安装等。</p>
@@ -270,13 +270,13 @@ show measurements;
 </code></pre>
 <p>InfluxDB 成功安装并且建库之后，我们就可以来配置 JMeter 脚本了。配置过程可以分为以下 3 步。</p>
 <p>（1）添加核心插件，在 listener 组件中选择 Backend Listener（如下图所示）。</p>
-<p><img src="assets/Cip5yF_-qB6AfHs5AAC0sfc1PXk340.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Cip5yF_-qB6AfHs5AAC0sfc1PXk340.png" alt="png" /></p>
 <p>图 7：添加 Backkend Listenner</p>
 <p>（2）Backend Listener implementation 中选择第二项（如下图所示）。</p>
-<p><img src="assets/Cip5yF_-qCeAbgnDAABvAV5R0ZE972.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Cip5yF_-qCeAbgnDAABvAV5R0ZE972.png" alt="png" /></p>
 <p>图 8：Backend Listener implementation</p>
 <p>（3）配置 InfluxDB URL，示例“http://127.0.0.1:8086/write?db=jmeter”；IP 为实际 InfluxDB 地址的 IP，DB 的值是 InfluxDB 中创建的库名字（如下图所示）。</p>
-<p><img src="assets/Cip5yF_-qC6AJwqYAADAf5IPUoI636.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Cip5yF_-qC6AJwqYAADAf5IPUoI636.png" alt="png" /></p>
 <p>图 9：配置连接 influxdb 库的具体信息</p>
 <p>配置完后运行 JMeter 脚本，再去 InfluxDB 的 JMeter 数据库中查看是否有数据，有数据则代表如上链路配置没有问题。</p>
 <p>我们再来了解一下 Grafana。</p>
@@ -299,27 +299,27 @@ show measurements;
 默认账号/密码：admin/admin
 </code></pre>
 <p>输入密码后如果出现了如下界面，说明 Grafana 安装成功了。</p>
-<p><img src="assets/Cip5yF_-qD2AKS4tAAB2Nrw_SqU315.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Cip5yF_-qD2AKS4tAAB2Nrw_SqU315.png" alt="png" /></p>
 <p>图 10：Grafana 界面</p>
 <h4>数据源配置</h4>
 <p>为什么要配置数据源呢，简单来说就是 Grafana 需要获取数据去展示，数据源的配置就是告诉你去哪里找数据，配置安装的 InfluxDB 地址和端口号，如下图所示：</p>
-<p><img src="assets/Cip5yF_-qEWADsLAAAA3aGGImVo621.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Cip5yF_-qEWADsLAAAA3aGGImVo621.png" alt="png" /></p>
 <p>图 11：配置地址和端口号</p>
 <p>然后输入 InfluxDB 中写入的数据库名字，如下图所示：</p>
-<p><img src="assets/Cip5yF_-qFCABo-uAABwZqAxu-0952.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/Cip5yF_-qFCABo-uAABwZqAxu-0952.png" alt="png" /></p>
 <p>图 12：数据库名字</p>
 <p>输入完成之后可以 Save &amp; Test，如出现以下示意图即配置成功：</p>
-<p><img src="assets/CgpVE1_-qFeAUOatAAA-H-XTdm0808.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgpVE1_-qFeAUOatAAA-H-XTdm0808.png" alt="png" /></p>
 <p>图 13：配置成功</p>
 <h4>导入 JMeter 模板</h4>
 <p>为了达到更好的展示效果，Grafana 官网提供了针对性的展示模版。先下载 <a href="https://grafana.com/Grafana/dashboards?search=InfluxDB">JMeter 模板</a>，然后再导入 Grafana。</p>
-<p><img src="assets/CgqCHl_-qGCAG68rAABPyrMBy0M066.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/CgqCHl_-qGCAG68rAABPyrMBy0M066.png" alt="png" /></p>
 <p>图 14：导入 JMeter 模板</p>
 <p>配置完成后，运行 JMeter 脚本。如果在界面右上方下拉选择 5s，则每 5s 更新一次：</p>
-<p><img src="assets/Ciqc1F_-qGiAX-znAAD8972KlRs589.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/Ciqc1F_-qGiAX-znAAD8972KlRs589.png" alt="png" /></p>
 <p>图 15：运行 JMeter 脚本</p>
 <p>如上图便是完成了实时压测情况下运行结果的实时展示图，你可以以此为基础，进行多接口的数据采集，相应增加脚本里的 Backend Listener 插件，区分不同的 application name 名称，你会看到不同的接口数据都进入 influxdb 数据库中。并且 Grafana 从 Edit 中进入， 你可以根据不同的 application name 修改 SQL 来区分展示。</p>
-<p><img src="assets/CgqCHl_-qHCABegiAAAtFFIYLCc365.png" alt="Drawing 15.png" /></p>
+<p><img src="assets/CgqCHl_-qHCABegiAAAtFFIYLCc365.png" alt="png" /></p>
 <p>图 16：编辑 Grafana</p>
 <h3>总结</h3>
 <p>这一讲我们主要介绍了构建和执行性能测试脚本时的一些注意事项，总结了目前业内使用 JMeter 常见的方法。你不仅需要知道这些常见的手段，也需要知道为什么要这么做，这么做有什么好处，同样随着实际采集数据指标的增高，这些做法可能还会存在哪些缺陷或者注意点，如果上述内容你都能考虑清楚了，相信你也就掌握工具了。</p>

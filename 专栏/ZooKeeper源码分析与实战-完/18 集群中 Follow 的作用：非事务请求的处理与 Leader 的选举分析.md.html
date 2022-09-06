@@ -205,7 +205,7 @@ function hide_canvas() {
 <p>简单介绍完 ZooKeeper 集群中 Follow 服务器在处理非事务性请求的过程后，接下来我们再从代码层面分析一下底层的逻辑实现是怎样的。</p>
 <p>从代码实现的角度讲，ZooKeeper 集群在接收到来自客户端的请求后，会将请求交给 Follow 服务器进行处理。而 Follow 服务器内部首先调用的是 FollowerZooKeeperServer 类，<strong>该类的作用是封装 Follow 服务器的属性和行为，你可以把该类当作一台 Follow 服务器的代码抽象。</strong></p>
 <p>如下图所示，该 FollowerZooKeeperServer 类继承了 LearnerZooKeeperServer 。在一个 FollowerZooKeeperServer 类内部，定义了一个核心的 ConcurrentLinkedQueue 类型的队列字段，用于存放接收到的会话请求。</p>
-<p><img src="assets/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7_AqmAchKvAABHDmj-uIc721.png" alt="png" /></p>
 <p>在定义了 FollowerZooKeeperServer 类之后，在该类的 setupRequestProcessors 函数中，定义了我们之前一直反复提到的处理责任链，指定了该处理链上的各个处理器。如下面的代码所示，分别按顺序定义了起始处理器 FollowerRequestProcessor 、提交处理器 CommitProcessor、同步处理器 SendAckRequestProcessor 以及最终处理器 FinalProcessor。</p>
 <pre><code>protected void setupRequestProcessors() {
     RequestProcessor finalProcessor = new FinalRequestProcessor(this);
@@ -221,7 +221,7 @@ function hide_canvas() {
 <h3>选举过程</h3>
 <p>介绍完 Follow 服务器处理非事务性请求的过程后，接下来我们再学习一下 Follow 服务器的另一个主要的功能：在 Leader 服务器崩溃的时候，重新选举出 Leader 服务器。</p>
 <p><strong>ZooKeeper 集群重新选举 Leader 的过程本质上只有 Follow 服务器参与工作</strong>。而在 ZooKeeper 集群重新选举 Leader 节点的过程中，如下图所示。主要可以分为 Leader 失效发现、重新选举 Leader 、Follow 服务器角色变更、集群同步这几个步骤。</p>
-<p><img src="assets/CgqCHl7_ArmAD4KYAABMANi9AkA539.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7_ArmAD4KYAABMANi9AkA539.png" alt="png" /></p>
 <h4>Leader 失效发现</h4>
 <p>通过之前的介绍我们知道，在 ZooKeeper 集群中，当 Leader 服务器失效时，ZooKeeper 集群会重新选举出新的 Leader 服务器。也就是说，Leader 服务器的失效会触发 ZooKeeper 开始新 Leader 服务器的选举，那么在 ZooKeeper 集群中，又是如何发现 Leader 服务器失效的呢？</p>
 <p>这里就要介绍到 Leader 失效发现。和我们之前介绍的保持客户端活跃性的方法，它是通过客户端定期向服务器发送 Ping 请求来实现的。在 ZooKeeper 集群中，探测 Leader 服务器是否存活的方式与保持客户端活跃性的方法非常相似。首先，Follow 服务器会定期向 Leader 服务器发送 网络请求，在接收到请求后，Leader 服务器会返回响应数据包给 Follow 服务器，而在 Follow 服务器接收到 Leader 服务器的响应后，如果判断 Leader 服务器运行正常，则继续进行数据同步和服务转发等工作，反之，则进行 Leader 服务器的重新选举操作。</p>
@@ -251,7 +251,7 @@ default:
     continue;
 </code></pre>
 <p>之后，在 ZooKeeper 集群选举 Leader 服务器时，是通过 FastLeaderElection 类实现的。该类实现了 TCP 方式的通信连接，用于在 ZooKeeper 集群中与其他 Follow 服务器进行协调沟通。</p>
-<p><img src="assets/Ciqc1F7_AtCAVRpLAABYUblVD80124.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7_AtCAVRpLAABYUblVD80124.png" alt="png" /></p>
 <p>如上图所示，FastLeaderElection 类继承了 Election 接口，定义其是用来进行选举的实现类。而在其内部，又定义了选举通信相关的一些配置参数，比如 finalizeWait 最终等待时间、最大通知间隔时间 maxNotificationInterval 等。</p>
 <p>在选举的过程中，首先调用 ToSend 函数向 ZooKeeper 集群中的其他角色服务器发送本机的投票信息，其他服务器在接收投票信息后，会对投票信息进行有效性验证等操作，之后 ZooKeeper 集群统计投票信息，如果过半数的机器投票信息一致，则集群就重新选出新的 Leader 服务器。</p>
 <pre><code>static public class ToSend {

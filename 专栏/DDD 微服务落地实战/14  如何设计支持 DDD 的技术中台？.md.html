@@ -155,7 +155,7 @@ function hide_canvas() {
 </ul>
 <p>因此，还需要有一个强有力的技术中台的支持，来简化 DDD 的设计实现，解决“最后一公里”的问题。唯有这样，DDD 才能在项目中真正落地。</p>
 <h3>传统 DDD 的架构设计</h3>
-<p><img src="assets/CgqCHl_q05-AX01vAAB19K5BZDQ843.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_q05-AX01vAAB19K5BZDQ843.png" alt="png" /></p>
 <p>通常，在支持领域驱动的软件项目中，架构设计如上图所示。</p>
 <ul>
 <li><strong>展现层</strong>是前端的 UI，它通过网络与后台的应用层交互。</li>
@@ -164,7 +164,7 @@ function hide_canvas() {
 <li>最后，通过仓库将领域对象中的<strong>数据持久化到数据库</strong>；使用工厂将数据从数据库中<strong>读取</strong>、<strong>拼装</strong>并<strong>还原</strong>成领域对象。</li>
 </ul>
 <p>这些都是将领域驱动落地到软件设计时所采用的方式。从架构分层上说，DDD 的仓库和工厂的设计介于业务领域层与基础设施层之间，即接口在业务领域层，而实现在基础设施层。DDD 的基础设施层相当于支撑 DDD 的基础技术架构，通过各种技术框架支持软件系统完成除了领域驱动以外的各种功能。</p>
-<p><img src="assets/Cip5yF_tSR6AMldHAAElu3pD1us550.png" alt="1.png" /></p>
+<p><img src="assets/Cip5yF_tSR6AMldHAAElu3pD1us550.png" alt="png" /></p>
 <p>然而，传统的软件系统采用 DDD 进行架构设计时，需要在各个层次之间进行各种数据结构的转换：</p>
 <ul>
 <li>首先，前端的数据结构是 JSON，传递到后台数据接入层时需要将其转换为数据传输对象DTO；</li>
@@ -172,10 +172,10 @@ function hide_canvas() {
 <li>最后，将数据持久化到数据库时，又要将 DO 转换为持久化对象 PO。</li>
 </ul>
 <p>在这个过程中，需要编写大量代码进行<strong>数据的转换</strong>，无疑将加大软件开发的工作量与日后变更的维护成本。因此，我们可不可以考虑上一讲所提到的设计，将各个层次的数据结构统一起来呢？</p>
-<p><img src="assets/Ciqc1F_q07uAXmqhAAERd9ZE2WA787.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F_q07uAXmqhAAERd9ZE2WA787.png" alt="png" /></p>
 <p>另外，传统的软件系统在采用 DDD 进行架构设计时，需要为每一个功能模块编写各自的仓库与工厂，如订单模块有订单仓库与订单工厂、库存模块有库存仓库与库存工厂。各个模块在编写仓库与工厂时，虽然实现了各自不同的业务，却形成了<strong>大量重复的代码</strong>。这样的问题与前面探讨的 Dao 的问题一样，是否可以通过配置与建模，设计成一个统一的仓库与工厂。如果是这样，那么仓库与工厂又与 Dao 是什么关系呢？基于对以上问题的思考，我提出了统一数据建模、内置聚合的实现、通用仓库和工厂，来简化 DDD 业务开发。因此，进行了如下的架构设计。</p>
 <h3>通用仓库与通用工厂的设计</h3>
-<p><img src="assets/CgqCHl_q08eAJ2WOAAIrg-1_zI4002.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl_q08eAJ2WOAAIrg-1_zI4002.png" alt="png" /></p>
 <p>该设计与上一讲的架构设计相比，差别仅是将单 Dao 替换为了通用仓库与通用工厂。也就是说，与 Dao 相比，DDD 的仓库就是在 Dao 的基础上<strong>扩展了一些新的功能</strong>。</p>
 <ul>
 <li>例如在<strong>装载或查询订单</strong>时，不仅要查询订单表，还要补填与订单相关的订单明细与客户信息、商品信息，并装配成一个订单对象。在这个过程中，查询订单是 Dao 的功能，但其他类似补填、装配等操作，则是仓库在 Dao 基础上进行的功能扩展。</li>
@@ -183,7 +183,7 @@ function hide_canvas() {
 </ul>
 <p>这就是 DDD 的仓库与 Dao 的关系。</p>
 <p>基于这种扩展关系，该如何设计这个通用仓库呢？如果熟悉设计模式，则会想到“装饰者模式”。“装饰者模式”的目的，就是在原有功能的基础上进行“透明功能扩展”。这种“透明功能扩展”，既可以扩展原有功能，又不影响原有的客户程序，使客户程序不用修改任何代码就能实现新功能，从而降低变更的维护成本。因此，将“通用仓库”设计成了这样。</p>
-<p><img src="assets/CgqCHl_q08-AagbGAAA1dTvg3n0066.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl_q08-AagbGAAA1dTvg3n0066.png" alt="png" /></p>
 <p>即在原有的 BasicDao 与 BasicDaoImpl 的基础上，增加了通用仓库 Repository。将 Repository 设计成装饰者，它也是接口 BasicDao 的实现类，是通过一个属性变量引用的 BasicDao。使用时，在 BasicDaoImpl 的基础上包一个 Repository，就可以扩展出那些 DDD 的功能。因此，所有的 Service 在注入 Dao 的时候：</p>
 <ul>
 <li>如果不使用 DDD，则像以前一样注入BasicDaoImpl；</li>

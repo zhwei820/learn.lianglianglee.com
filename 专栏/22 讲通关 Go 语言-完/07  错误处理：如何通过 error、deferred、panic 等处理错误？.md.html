@@ -362,7 +362,7 @@ if errors.As(err,&amp;cm){
 <p>小提示：interface{} 是空接口的意思，在 Go 语言中代表任意类型。</p>
 </blockquote>
 <p>panic 异常是一种非常严重的情况，会让程序中断运行，使程序崩溃，所以<strong>如果是不影响程序运行的错误，不要使用 panic，使用普通错误 error 即可。</strong></p>
-<p><img src="assets/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png" alt="pDE7ppQNyfRSIn1Q__thumbnail.png" /></p>
+<p><img src="assets/CgqCHl-15ZSAAsw5AAUnpsfN34w061.png" alt="png" /></p>
 <h3>Recover 捕获 Panic 异常</h3>
 <p>通常情况下，我们不对 panic 异常做任何处理，因为既然它是影响程序运行的异常，就让它直接崩溃即可。但是也的确有一些特例，比如在程序崩溃前做一些资源释放的处理，这时候就需要从 panic 异常中恢复，才能完成处理。</p>
 <p>在 Go 语言中，可以通过内置的 recover 函数恢复 panic 异常。因为在程序 panic 异常崩溃的时候，只有被 defer 修饰的函数才能被执行，所以 recover 函数要结合 defer 关键字使用才能生效。</p>

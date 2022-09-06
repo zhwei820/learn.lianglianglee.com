@@ -181,22 +181,22 @@ function hide_canvas() {
 <h3>产品介绍</h3>
 <h4>阿里云弹性容器实例 ECI</h4>
 <p>ECI 提供安全的 Serverless 容器运行服务。无需管理底层服务器，只需要提供打包好的 Docker 镜像，即可运行容器，并仅为容器实际运行消耗的资源付费。</p>
-<p><img src="assets/2020-08-26-031216.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031216.png" alt="png" /></p>
 <h4>阿里云容器服务产品族</h4>
-<p><img src="assets/2020-08-26-031217.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031217.png" alt="png" /></p>
 <p>不论是托管版的 Kubernetes（ACK）还是 Serverless 版 Kubernetes（ASK），都可以使用 ECI 作为容器资源层，其背后的实现就是借助虚拟节点技术，通过一个叫做 Virtual Node 的虚拟节点对接 ECI。</p>
-<p><img src="assets/2020-08-26-031219.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031219.png" alt="png" /></p>
 <h4>Kubernetes + ECI</h4>
 <p>有了 Virtual Kubelet，标准的 Kubernetes 集群就可以将 ECS 和虚拟节点混部，将 Virtual Node 作为应对突发流量的弹性资源池。</p>
-<p><img src="assets/2020-08-26-031228.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031228.png" alt="png" /></p>
 <h4>ASK（Serverless Kubernetes）+ ECI</h4>
 <p>Serverless 集群中没有任何 ECS worker 节点，也无需预留、规划资源，只有一个 Virtual Node，所有的 Pod 的创建都是在 Virtual Node 上，即基于 ECI 实例。</p>
-<p><img src="assets/2020-08-26-031231.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031231.png" alt="png" /></p>
 <p>Serverless Kubernetes 是以容器和 Kubernetes 为基础的 Serverless 服务，它提供了一种简单易用、极致弹性、最优成本和按需付费的 Kubernetes 容器服务，其中无需节点管理和运维，无需容量规划，让用户更关注应用而非基础设施的管理。</p>
 <h3>Spark on Kubernetes</h3>
 <p>Spark 自 2.3.0 开始试验性支持 Standalone、on YARN 以及 on Mesos 之外的新的部署方式：<a href="https://spark.apache.org/docs/2.3.0/running-on-kubernetes.html">Running Spark on Kubernetes</a>，如今支持已经非常成熟。</p>
 <h4>Kubernetes 的优势</h4>
-<p><img src="assets/2020-08-26-031232.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031232.png" alt="png" /></p>
 <p>Spark on kubernetes 相比于 on Yarn 等传统部署方式的优势：</p>
 <ul>
 <li>统一的资源管理。不论是什么类型的作业都可以在一个统一的 Kubernetes 集群中运行，不再需要单独为大数据作业维护一个独立的 YARN 集群。</li>
@@ -207,11 +207,11 @@ function hide_canvas() {
 <li>大数据上云。目前大数据应用上云常见的方式有两种：1）用 ECS 自建 YARN（不限于 YARN）集群；2）购买 EMR 服务，目前所有云厂商都有这类 PaaS，如今多了一个选择——Kubernetes。</li>
 </ul>
 <h4>Spark 调度</h4>
-<p><img src="assets/2020-08-26-031234.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031234.png" alt="png" /></p>
 <p>图中橙色部分是原生的 Spark 应用调度流程，而 Spark on Kubernetes 对此做了一定的扩展（黄色部分），实现了一个 <strong>KubernetesClusterManager</strong>。其中 **KubernetesClusterSchedulerBackend <strong>扩展了原生的</strong>CoarseGrainedSchedulerBackend，**新增了 **ExecutorPodsLifecycleManager、ExecutorPodsAllocator 和 KubernetesClient **等组件，实现了将标准的 Spark Driver 进程转换成 Kubernetes 的 Pod 进行管理。</p>
 <h4>Spark submit</h4>
 <p>在 Spark Operator 出现之前，在 Kubernetes 集群提交 Spark 作业只能通过 Spark submit 的方式。创建好 Kubernetes 集群，在本地即可提交作业。</p>
-<p><img src="assets/2020-08-26-031237.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031237.png" alt="png" /></p>
 <p>作业启动的基本流程：</p>
 <ul>
 <li>Spark 先在 K8s 集群中创建 Spark Driver（pod）。</li>
@@ -222,14 +222,14 @@ function hide_canvas() {
 <p>直接通过这种 Spark submit 的方式，参数非常不好维护，而且不够直观，尤其是当自定义参数增加的时候；此外，没有 Spark Application 的概念了，都是零散的 Kubernetes Pod 和 Service 这些基本的单元，当应用增多时，维护成本提高，缺少统一管理的机制。</p>
 <h4>Spark Operator</h4>
 <p><a href="https://github.com/GoogleCloudPlatform/spark-on-k8s-operator">Spark Operator</a> 就是为了解决在 Kubernetes 集群部署并维护 Spark 应用而开发的，Spark Operator 是经典的 CRD + Controller，即 Kubernetes Operator 的实现。</p>
-<p><img src="assets/2020-08-26-031240.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031240.png" alt="png" /></p>
 <p>下图为 SparkApplication 状态机：</p>
-<p><img src="assets/2020-08-26-031242.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031242.png" alt="png" /></p>
 <h4>Serverless Kubernetes + ECI</h4>
 <p>那么，如果在 Serverless Kubernetes 集群中运行 Spark，其实际上是对原生 Spark 的进一步精简。</p>
-<p><img src="assets/2020-08-26-031247.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031247.png" alt="png" /></p>
 <h4>存储选择</h4>
-<p><img src="assets/2020-08-26-031248.png" alt="image.png" /></p>
+<p><img src="assets/2020-08-26-031248.png" alt="png" /></p>
 <p>对于批量处理的数据源，由于集群不是基于 HDFS 的，所以数据源会有不同，需要计算与存储分离，Kubernetes 集群只负责提供计算资源。</p>
 <ul>
 <li>数据源的存储可以采用阿里云对象存储 OSS、阿里云分布式存储 HDFS 等。</li>

@@ -188,17 +188,17 @@ function hide_canvas() {
 <p>Redis 的内存模型比较复杂，内容也较多，感兴趣的读者可以查阅<a href="https://www.cnblogs.com/qwangxiao/p/8921171.html">《深入了解 Redis 的内存模型》博客</a>做更深了解。</p>
 <h5><strong>Redis 开源客户端</strong></h5>
 <p>Redis 的开源客户端众多，几乎支持所有编程语言，如下图所示。其中常用的 Java 客户端有 Jedis、Lettuce 以及 Redission。</p>
-<p><img src="assets/d3a75580-916a-11e8-be3d-c18388642029" alt="enter image description here" /></p>
+<p><img src="assets/d3a75580-916a-11e8-be3d-c18388642029" alt="png" /></p>
 <h5><strong>Redis 支持事务</strong></h5>
 <p>Redis 提供了一些在一定程度上支持线程安全和事务的命令，例如 multi/exec、watch、inc 等。由于 Redis 服务器是单线程的，任何单一请求的服务器操作命令都是原子的，但跨客户端的操作并不保证原子性，所以对于同一个连接的多个操作序列也不保证事务。</p>
 <h4>1.3 Redis 高可用解决方案</h4>
 <p>Redis 有很多高可用的解决方案，本节只简单介绍其中三种。</p>
 <h5><strong>方案1：Redis Cluster</strong></h5>
 <p>从3.0版本开始，Redis 支持集群模式——Redis Cluster，可线性扩展到1000个节点。Redis-Cluster 采用无中心架构，每个节点都保存数据和整个集群状态，每个节点都和其它所有节点连接，客户端直连 Redis 服务，免去了 Proxy 代理的损耗。Redis Cluster 最小集群需要三个主节点，为了保障可用性，每个主节点至少挂一个从节点（当主节点故障后，对应的从节点可以代替它继续工作），三主三从的 Redis Cluster 架构如下图所示：</p>
-<p><img src="assets/d4ca8050-966e-11e8-bd60-15398afc36e1" alt="enter image description here" /></p>
+<p><img src="assets/d4ca8050-966e-11e8-bd60-15398afc36e1" alt="png" /></p>
 <h5><strong>方案2：Twemproxy</strong></h5>
 <p>Twemproxy 是一个使用 C 语言编写、以代理的方式实现的、轻量级的 Redis 代理服务器。它通过引入一个代理层，将应用程序后端的多台 Redis 实例进行统一管理，使应用程序只需要在 Twemproxy 上进行操作，而不用关心后面具体有多少个真实的 Redis 实例，从而实现了基于 Redis 的集群服务。当某个节点宕掉时，Twemproxy 可以自动将它从集群中剔除，而当它恢复服务时，Twemproxy 也会自动连接。由于是代理，Twemproxy 会有微小的性能损失。</p>
-<p>Twemproxy 架构如下图所示： <img src="assets/4deaf140-9336-11e8-9530-11b8f149bb7c" alt="enter image description here" /></p>
+<p>Twemproxy 架构如下图所示： <img src="assets/4deaf140-9336-11e8-9530-11b8f149bb7c" alt="png" /></p>
 <h5><strong>方案3：Codis</strong></h5>
 <p>Codis 是一个分布式 Redis 解决方案，对于上层的应用来说，连接到 Codis Proxy 和连接原生的 Redis Server 没有明显的区别（部分命令不支持）， 上层应用可以像使用单机的 Redis 一样使用，Codis 底层会处理请求的转发，不停机的数据迁移等工作。关于 Codis，在第03课中将详细介绍。</p>
 <h3>2. Memcached 介绍</h3>

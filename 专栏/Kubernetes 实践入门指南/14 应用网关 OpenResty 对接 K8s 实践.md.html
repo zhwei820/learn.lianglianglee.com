@@ -169,13 +169,13 @@ function hide_canvas() {
 <p>当前云原生应用网关有很多选择，例如：Nginx/OpenResty、Traefik、Envoy 等，从部署流行度来看 OpenResty 毋容置疑是最流行的反向代理网关。本篇探讨的就是 Kubernetes 为了统一对外的入口网关而引入的 Ingress 对象是如何利用 OpenResty 来优化入口网关的能力的。</p>
 <h3>为什么需要 OpenResty</h3>
 <p>原生 Kubernetes Service 提供对外暴露服务的能力，通过唯一的 ClusterIP 接入 Pod 业务负载容器组对外提供服务名（附注：服务发现使用，采用内部 kube-dns 解析服务名称）并提供流量的软负载均衡。缺点是 Service 的 ClusterIP 地址只能在集群内部被访问，如果需要对集群外部用户提供此 Service 的访问能力，Kubernetes 需要通过另外两种方式来实现此类需求，一种是 <strong>NodePort</strong>，另一种是 <strong>LoadBalancer</strong>。</p>
-<p><img src="assets/ea127350-f337-11ea-a9e7-47fb41a2df40.jpg" alt="nodeport" /></p>
+<p><img src="assets/ea127350-f337-11ea-a9e7-47fb41a2df40.jpg" alt="png" /></p>
 <p>当容器应用采用 NodePort 方式来暴露 Service 并让外部用户访问时会有如下困扰：</p>
 <ul>
 <li>外部访问服务时需要带 NodePort</li>
 <li>每次部署服务后，NodePort 端口会改变</li>
 </ul>
-<p><img src="assets/fb9c8070-f337-11ea-a837-2d1765fb9067.jpg" alt="loadbalancer" /></p>
+<p><img src="assets/fb9c8070-f337-11ea-a837-2d1765fb9067.jpg" alt="png" /></p>
 <p>当容器应用采用 LoadBalancer 方式时，主要应用场景还是对接云厂商提供负载均衡上，当然云厂商都提供对应的负载均衡插件方便 Kubernetes 一键集成。</p>
 <p>对于大部分场景下，我们仍然需要采用私有的入口应用网关来对外提供服务暴露。这个时候通过暴露七层 Web 端口把外部流量挡在外面访问。同时对于用户来讲屏蔽了 NodePort 的存在，频繁部署应用的时候用户是不需要关心 NodePort 端口占用的。</p>
 <p>在早期 Kubernetes 引入的 ingress controller 的方案是采用的 Nginx 作为引擎的，它在使用中有一些比较突出的问题：</p>
@@ -183,10 +183,10 @@ function hide_canvas() {
 <p>Kubernetes 原生 Ingress 在设计上，将 YAML 配置文件交由 Ingress Controller 处理，转换为 nginx.conf，再触发 reload nginx.conf 使配置生效。日常运维免不了偶尔动一动 Ingress YAML 配置，每一次配置生效，都会触发一次 reload，这是不能接受的，尤其在入口流量采用⻓连接时更容易导致事故。</p>
 <h4><strong>扩展能力薄弱</strong></h4>
 <p>虽然 Ingress 设计之初是为了解决入口网关，但业务对于入口网关的需求一点都不比内部网关少。业务级灰度控制、熔断、流量控制、鉴权、流量管控等需求在 Ingress 上实现的呼声更高。然而原生 Ingress 提供的扩展是捉襟见肘。</p>
-<p><img src="assets/1f3b0060-f338-11ea-a9de-eb9ce9ef4f62.jpg" alt="ingress" /></p>
+<p><img src="assets/1f3b0060-f338-11ea-a9de-eb9ce9ef4f62.jpg" alt="png" /></p>
 <p>为了解决以上 Nginx 固有的问题，显然基于 Nginx + Lua 的扩展方案 OpenResty 是不二的替换方案。社区方面已经完成的从 Nginx 到 OpenResty 的 Ingress 核心组件替换。（附注：<a href="https://github.com/kubernetes/ingress-nginx/pull/4220">https://github.com/kubernetes/ingress-nginx/pull/4220</a>）</p>
 <h3>重新认识 NGINX Ingress Controller</h3>
-<p><img src="assets/2bdec7c0-f338-11ea-949f-999a932fc96d.jpg" alt="nginx-ingress-arch" /></p>
+<p><img src="assets/2bdec7c0-f338-11ea-949f-999a932fc96d.jpg" alt="png" /></p>
 <p>通常情况下，Kubernetes 控制器利用同步循环模式来检查控制器中的所需状态是否被更新或需要更改。为此，我们需要使用集群中的不同对象建立一个模型，特别是 Ingresses、Services、Endpoints、Secrets 和 Configmaps 来生成一个反映集群状态的当前配置文件。</p>
 <p>为了从集群中获取这个对象，我们使用 Kubernetes Informers，尤其是 <strong>FilteredSharedInformer</strong>。这个 Informer 允许在添加、修改或删除新对象时，使用回调对单个变化做出反应。不幸的是，我们无法知道某个特定的变化是否会影响最终的配置文件。因此在每一次变更时，我们都要根据集群的状态从头开始重建一个新的模型，并与当前模型进行比较。如果新模型与当前模型相等，那么我们就避免生成一个新的 Nginx 配置并触发重载。否则，我们检查是否仅是关于 Endpoints 的差异。如果是这样，我们就使用 HTTP POST 请求将新的 Endpoints 列表发送到 Nginx 内部运行的 Lua 处理程序，并再次避免生成新的 Nginx 配置和触发重载。如果运行的模型和新模型之间的区别不仅仅是 Endpoints，我们会根据新模型创建一个新的 Nginx 配置，替换当前模型并触发重载。</p>
 <p>为了避免进程重载，我们仍然需要清楚如下情况会导致重载:</p>

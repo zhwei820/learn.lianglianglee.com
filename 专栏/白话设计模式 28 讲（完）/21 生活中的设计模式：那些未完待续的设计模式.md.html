@@ -282,7 +282,7 @@ class TemplateImplB(Template):
 </code></pre>
 <h4>类图</h4>
 <p>模板方法模式的类图表示如下：</p>
-<p><img src="assets/eed01e10-8e4e-11e8-91f2-2b35ab59bab9.jpg" alt="enter image description here" /></p>
+<p><img src="assets/eed01e10-8e4e-11e8-91f2-2b35ab59bab9.jpg" alt="png" /></p>
 <p>Template 是一个模板类，用于定义模板方法（某种算法的框架），如示例中的 ReaderView。TemplateImplA 和 TemplateImplB 是模板类的具体子类，用于实现算法框架中的一些特定步骤。</p>
 <h4>应用场景</h4>
 <ul>
@@ -293,9 +293,9 @@ class TemplateImplB(Template):
 <h3>桥接模式</h3>
 <p>这个模式可以和策略模式合为一个模式，因为思想相同，代码结构也几乎一样，如下图它们的类图结构几乎相同，只是一个（策略模式）侧重于对象行为，一个（桥接模式）侧重于软件结构。</p>
 <h4>类图</h4>
-<p><img src="assets/61f84020-8e4f-11e8-9cd7-51dfc6c66063.jpg" alt="enter image description here" /></p>
+<p><img src="assets/61f84020-8e4f-11e8-9cd7-51dfc6c66063.jpg" alt="png" /></p>
 <p>策略模式的类图</p>
-<p><img src="assets/73af29a0-8e4f-11e8-9d8f-6d52f659a2b6.jpg" alt="enter image description here" /></p>
+<p><img src="assets/73af29a0-8e4f-11e8-9d8f-6d52f659a2b6.jpg" alt="png" /></p>
 <p>桥接模式的类图</p>
 <p>从类图可以看出，桥梁模式和策略模式几乎是一样的，只是多了对抽象（Abstraction）的具体实现类，用于对抽象化角色进行修正。</p>
 <h4>桥接模式</h4>
@@ -307,9 +307,9 @@ class TemplateImplB(Template):
 <p>设计模式其实就是一种编程思想，没有固定的结构。区分不同的模式，更多的是要从语义和用途是判断。</p>
 <h4>应用案例</h4>
 <p>在几何图形的分类中，假设我们有矩形和椭圆之分，这时又希望加入颜色（红色、绿色）来拓展它的层级。如果用一般继承的思想，则会有下面这样的类图：</p>
-<p><img src="assets/85d99570-8e4f-11e8-a3e9-3b5653895392.jpg" alt="enter image description here" /></p>
+<p><img src="assets/85d99570-8e4f-11e8-a3e9-3b5653895392.jpg" alt="png" /></p>
 <p>如果再增加几个形状（如三角形），再增加几种颜色（如蓝色、紫色），这个类图将会越来越膨胀和臃肿。这时，我们就希望对这个设计进行解耦，将形状和颜色分成两个分支，独立发展，互不影响。桥接模式就派上用场了，我们看一下使用桥接模式后的类图：</p>
-<p><img src="assets/947d99a0-8e4f-11e8-91f2-2b35ab59bab9.jpg" alt="enter image description here" /></p>
+<p><img src="assets/947d99a0-8e4f-11e8-91f2-2b35ab59bab9.jpg" alt="png" /></p>
 <p>实现代码如下：</p>
 <pre><code class="language-python">from abc import ABCMeta, abstractmethod
 # 引入ABCMeta和abstractmethod来定义抽象类和抽象方法
@@ -374,7 +374,7 @@ class Green(Color):
 </blockquote>
 <h4>类图</h4>
 <p>解释模式的类图表示如下：</p>
-<p><img src="assets/a7dd9f40-8e4f-11e8-80d1-2d51ff7e1c55.jpg" alt="enter image description here" /></p>
+<p><img src="assets/a7dd9f40-8e4f-11e8-80d1-2d51ff7e1c55.jpg" alt="png" /></p>
 <p>AbstractExpression 解释器的抽象类，定义统一的解析方法。TerminalExpression 是终结符表达式，终结符表达式是语法中的最小单元逻辑，不可再拆分，如下面示例中的 VarExpression。</p>
 <p>NonTerminalExpression 是非终结符表达式，方法中每一条规则对应一个非终结表达式，如下面示例中的 AddExpression 和 SubExpression。Context 是上下文环境类，包含解析器之外的一些全局信息，如下面示例中的 newExp 和 expressionMap。</p>
 <h4>应用案例</h4>
@@ -489,7 +489,7 @@ def getMapValue(expStr):
     return newExp, expressionMap
 </code></pre>
 <p>结果如下：</p>
-<p><img src="assets/b940ea80-8e4f-11e8-91f2-2b35ab59bab9.jpg" alt="enter image description here" /></p>
+<p><img src="assets/b940ea80-8e4f-11e8-91f2-2b35ab59bab9.jpg" alt="png" /></p>
 <p>解释器模式是一个简单的语法分析工具，最显著的优点是拓展性，修改语法规则只要修改相应的非终结符表达式就可以了。解释器模式在实际的项目开发中应用的比较少，因为现实复杂，较难维护，但在一些特定的领域还是会被用到，如数据分析、科学计算、数据统计与报表分析。</p>
 </div>
                     </div>

@@ -149,7 +149,7 @@ function hide_canvas() {
 <p>如果出现 Leader 故障下线的情况，就需要从所有的 Follower 中选举新的 Leader，以便继续提供服务。为了保证一致性，通常只能从 ISR 列表中选取新的 Leader （上面已经介绍，ISR 列表中的 Follower 与原 Leader 保持同步），因此，无论 ISR 中哪个 Follower 被选为新的 Leader，它都知道 HW 之前的数据，可以保证在切换了 Leader 后，Consumer 可以继续“看到”之前已经由 Producer 提交的数据。</p>
 <p>如下图所示，如果 Leader 宕机，Follower1 被选为新的 Leader，而新 Leader （原 Follower1 ）并没有完全同步之前 Leader 的所有数据（少了一个消息 6），之后，新 Leader 又继续接受了新的数据，此时，原本宕机的 Leader 经修复后重新上线，它将发现新 Leader 中的数据和自己持有的数据不一致，怎么办呢？</p>
 <p>为了保证一致性，必须有一方妥协，显然旧的 Leader 优先级较低，因此， 它会将自己的数据截断到宕机之前的 HW 位置（HW 之前的数据，与 Leader 一定是相同的），然后同步新 Leader 的数据。这便是所谓的 “截断机制”。</p>
-<p><img src="assets/0b5a9de0-cfad-11e8-8388-bd48f25029c6" alt="enter image description here" /></p>
+<p><img src="assets/0b5a9de0-cfad-11e8-8388-bd48f25029c6" alt="png" /></p>
 <h3>3. 消息生产的可靠性</h3>
 <h4>3.1 消息可能重复生产</h4>
 <p>在第 12 课 2.4 小节中，我们介绍了消息生产过程中保证数据可靠性的策略。该策略虽然可以保障消息不丢失，但无法避免出现重复消息。例如，生产者发送数据给 Leader，Leader 同步数据给 ISR 中的 Follower，同步到一半 Leader 时宕机，此时选出新的 Leader，它可能具有部分此次提交的数据，而生产者收到发送失败响应后将重发数据，新的 Leader 接受数据则数据重复。因此 Kafka 只支持“At Most Once”和“At Least Once”，而不支持“Exactly Once”，消息去重需在具体的业务中实现。</p>

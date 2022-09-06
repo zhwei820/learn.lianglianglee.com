@@ -297,7 +297,7 @@ function hide_canvas() {
 <h4>1. JDK SPI 机制</h4>
 <p>当服务的提供者提供了一种接口的实现之后，需要在 Classpath 下的 META-INF/services/ 目录里创建一个以服务接口命名的文件，此文件记录了该 jar 包提供的服务接口的具体实现类。当某个应用引入了该 jar 包且需要使用该服务时，JDK SPI 机制就可以通过查找这个 jar 包的 META-INF/services/ 中的配置文件来获得具体的实现类名，进行实现类的加载和实例化，最终使用该实现类完成业务功能。</p>
 <p>下面我们通过一个简单的示例演示下 JDK SPI 的基本使用方式：</p>
-<p><img src="assets/CgqCHl8o_UCAI01eAABGsg2cqbw825.png" alt="image" />.png]</p>
+<p><img src="assets/CgqCHl8o_UCAI01eAABGsg2cqbw825.png" alt="png" />.png]</p>
 <p>首先我们需要创建一个 Log 接口，来模拟日志打印的功能：</p>
 <pre><code>public interface Log {
     void log(String info); 
@@ -340,7 +340,7 @@ com.xxx.impl.Logback
 <h4>2. JDK SPI 源码分析</h4>
 <p>通过上述示例，我们可以看到 JDK SPI 的入口方法是 ServiceLoader.load() 方法，接下来我们就对其具体实现进行深入分析。</p>
 <p>在 ServiceLoader.load() 方法中，首先会尝试获取当前使用的 ClassLoader（获取当前线程绑定的 ClassLoader，查找失败后使用 SystemClassLoader），然后调用 reload() 方法，调用关系如下图所示：</p>
-<p><img src="assets/Ciqc1F8o_V6AR93jAABeDIu_Kso211.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8o_V6AR93jAABeDIu_Kso211.png" alt="png" /></p>
 <p>在 reload() 方法中，首先会清理 providers 缓存（LinkedHashMap 类型的集合），该缓存用来记录 ServiceLoader 创建的实现对象，其中 Key 为实现类的完整类名，Value 为实现类的对象。之后创建 LazyIterator 迭代器，用于读取 SPI 配置文件并实例化实现类对象。</p>
 <p>ServiceLoader.reload() 方法的具体实现，如下所示：</p>
 <pre><code>// 缓存，用来缓存 ServiceLoader创建的实现对象
@@ -351,7 +351,7 @@ public void reload() {
 } 
 </code></pre>
 <p>在前面的示例中，main() 方法中使用的迭代器底层就是调用了 ServiceLoader.LazyIterator 实现的。Iterator 接口有两个关键方法：hasNext() 方法和 next() 方法。这里的 LazyIterator 中的next() 方法最终调用的是其 nextService() 方法，hasNext() 方法最终调用的是 hasNextService() 方法，调用关系如下图所示：</p>
-<p><img src="assets/Ciqc1F8o_WmAZSkmAABmcc0uM54214.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8o_WmAZSkmAABmcc0uM54214.png" alt="png" /></p>
 <p>首先来看 LazyIterator.hasNextService() 方法，该方法主要<strong>负责查找 META-INF/services 目录下的 SPI 配置文件</strong>，并进行遍历，大致实现如下所示：</p>
 <pre><code>private static final String PREFIX = &quot;META-INF/services/&quot;;
 Enumeration&lt;URL&gt; configs = null; 

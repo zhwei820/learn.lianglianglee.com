@@ -359,7 +359,7 @@ function hide_canvas() {
     }
 </code></pre>
 <p>rollingCounterInSecond 是一个秒级的滑动窗口，rollingCounterInMinute 是一个分钟级的滑动窗口，类型为 ArrayMetric。分钟级的滑动窗口一共有 60 个 MetricBucket，每个 MetricBucket 都被 WindowWrap 包装，每个 MetricBucket 统计一秒钟内的各项指标数据，如下图所示：</p>
-<p><img src="assets/b0e48b80-e12c-11ea-8111-1feecf2da711" alt="09-02-leaparray" /></p>
+<p><img src="assets/b0e48b80-e12c-11ea-8111-1feecf2da711" alt="png" /></p>
 <p>当调用 rollingCounterInMinute#addSuccess 方法时，由 ArrayMetric 根据当前时间戳获取当前时间窗口的 MetricBucket，再调用 MetricBucket#addSuccess 方法将 success 这项指标的值加上方法参数传递进来的值（一般是 1）。MetricBucket 使用 LongAdder 记录各项指标数据的值。</p>
 <p>Sentinel 在 MetricEvent 枚举类中定义了 Sentinel 会收集哪些指标数据，MetricEvent 枚举类的源码如下：</p>
 <pre><code class="language-java">public enum MetricEvent {

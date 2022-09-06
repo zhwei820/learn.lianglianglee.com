@@ -157,9 +157,9 @@ function hide_canvas() {
 <li>所有的查询功能则不适用于领域驱动设计，而应当采用<strong>事务脚本模式</strong>（Transaction Script），即直接通过 SQL 语句进行查询。</li>
 </ul>
 <p>遵循该设计模式，是我们在许多软件项目中总结出来的最佳实践。因此，技术中台在建设时，对业务系统的支持也分为<strong>增删改</strong>与<strong>查询</strong>两个部分。</p>
-<p><img src="assets/Cip5yF_kdC6AKyj5AACxhqoIRjw348.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_kdC6AKyj5AACxhqoIRjw348.png" alt="png" /></p>
 <h3>增删改的架构设计</h3>
-<p><img src="assets/CgpVE1_kdD6AZg1HAALxpOUS2sc783.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_kdD6AZg1HAALxpOUS2sc783.png" alt="png" /></p>
 <p>增删改部分的技术中台架构设计</p>
 <p>在增删改部分中，采用了前面提到的单 Controller、单 Dao 的架构设计。如上图所示，各功能都有各自的前端 UI。但与以往架构不同的是，每个功能的前端 UI 对后台请求时，不再调用各自的 Controller，而是统一调用一个 Controller。然而，每个功能的前端在调用这一个 Controller 时，传递的参数是不一样的。首先从前端传递的是 bean，这个 bean 是什么呢？后台各功能都有一个 Service，将该 Service 注入 Dao 以后，会在 Spring 框架中配置成一个bean。这时，前端只知道调用的是这个 bean，但不知道它是哪个 Service。</p>
 <p>这样的设计，既保障了<strong>安全性</strong>（前端不知道具体是哪个类），又有效地实现了<strong>前后端分离</strong>，将前端代码与后端解耦。</p>
@@ -244,7 +244,7 @@ function hide_canvas() {
 <p>4.通过 SQL 语句执行数据库操作。</p>
 <h3>查询功能的架构设计</h3>
 <p>接着，是查询功能的技术中台设计，如图所示：</p>
-<p><img src="assets/Ciqc1F_kdKOAU7-vAAUEADk6Fzw219.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_kdKOAU7-vAAUEADk6Fzw219.png" alt="png" /></p>
 <p>查询功能的技术中台架构设计</p>
 <p>与增删改部分一样的是，查询功能中，每个功能的前端 UI 也是统一调用一个 Controller。但与增删改的部分不一样的是，查询功能的前端 UI 传递的参数不同，因此是另一个类 QueryController。</p>
 <p>在调用时，首先需要传递的还是 bean。但与增删改不同的是，查询功能的 Service 只有一个，那就是 QueryService。但是，该 Service 在 Spring 中配置的时候，往 Service 中注入的是不同的 Dao，就可以装配成各种不同的 bean。这样，前端调用的是不同的 bean，最后执行的就是不同的查询。</p>

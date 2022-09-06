@@ -382,40 +382,40 @@ Found 1 deadlock.
 <p>两种方式步骤都差不多，选择 RAW 方式上传文本字符串，然后点击分析按钮。</p>
 <h4><strong>分析结果页面</strong></h4>
 <p>等待片刻，自动跳转到分析结果页面。</p>
-<p><img src="assets/bb219280-7504-11ea-9628-dd9a4bfcf1d2" alt="6843295.png" /></p>
+<p><img src="assets/bb219280-7504-11ea-9628-dd9a4bfcf1d2" alt="png" /></p>
 <p>这里可以看到基本信息，以及右边的一些链接：</p>
 <ul>
 <li>分享报告，可以很方便地把报告结果发送给其他小伙伴。</li>
 </ul>
 <h4><strong>线程数汇总</strong></h4>
 <p>把页面往下拉，可以看到线程数量汇总报告。</p>
-<p><img src="assets/c6db4800-7504-11ea-b77f-634b57f46967" alt="6864312.png" /></p>
+<p><img src="assets/c6db4800-7504-11ea-b77f-634b57f46967" alt="png" /></p>
 <p>从这个报告中可以很直观地看到，线程总数为 26，其中 19 个运行状态线程，5 个等待状态的线程，2 个阻塞状态线程。</p>
 <p>右边还给了一个饼图，展示各种状态所占的比例。</p>
 <h4><strong>线程组分析</strong></h4>
 <p>接着是将线程按照名称自动分组。</p>
-<p><img src="assets/ef8a2af0-7504-11ea-9dae-5d0db1c26be7" alt="6898070.png" /></p>
+<p><img src="assets/ef8a2af0-7504-11ea-9dae-5d0db1c26be7" alt="png" /></p>
 <p>这里就看到线程命名的好处了吧！如果我们的线程池统一命名，那么相关资源池的使用情况就很直观。</p>
 <blockquote>
 <p>所以在代码里使用线程池的时候，统一添加线程名称就是一个好的习惯！</p>
 </blockquote>
 <h4><strong>守护线程分析</strong></h4>
 <p>接下来是守护线程分析：</p>
-<p><img src="assets/08d3b580-7505-11ea-9628-dd9a4bfcf1d2" alt="6923926.png" /></p>
+<p><img src="assets/08d3b580-7505-11ea-9628-dd9a4bfcf1d2" alt="png" /></p>
 <p>这里可以看到守护线程与前台线程的统计信息。</p>
 <h4><strong>死锁情况检测</strong></h4>
 <p>当然，也少不了死锁分析：</p>
-<p><img src="assets/f4af8010-7505-11ea-a691-fda85882301c" alt="6948610.png" /></p>
+<p><img src="assets/f4af8010-7505-11ea-a691-fda85882301c" alt="png" /></p>
 <p>可以看到，各个工具得出的死锁检测结果都差不多。并不难分析，其中给出了线程名称，以及方法调用栈信息，等待的是哪个锁。</p>
 <h4><strong>线程调用栈情况</strong></h4>
 <p>以及线程调用情况：</p>
-<p><img src="assets/ec4f55d0-7505-11ea-bb80-67799d8258e1" alt="7008839.png" /></p>
+<p><img src="assets/ec4f55d0-7505-11ea-bb80-67799d8258e1" alt="png" /></p>
 <p>后面是这些线程的详情：</p>
-<p><img src="assets/e5ca7b40-7505-11ea-a8c0-4fdc777140d0" alt="7058206.png" /></p>
+<p><img src="assets/e5ca7b40-7505-11ea-a8c0-4fdc777140d0" alt="png" /></p>
 <p>这块信息只是将相关的方法调用栈展示出来。</p>
 <h4><strong>热点方法统计</strong></h4>
 <p>热点方法是一个需要注意的重点，调用的越多，说明这一块可能是系统的性能瓶颈。</p>
-<p><img src="assets/d789f3d0-7505-11ea-965e-2b5335ba3591" alt="7104053.png" /></p>
+<p><img src="assets/d789f3d0-7505-11ea-965e-2b5335ba3591" alt="png" /></p>
 <p>这里展示了此次快照中正在执行的方法。如果只看热点方法抽样的话，更精确的工具是 JDK 内置的 hprof。</p>
 <p>但如果有很多方法阻塞或等待，则线程快照中展示的热点方法位置可以快速确定问题出现的代码行。</p>
 <h4><strong>CPU 消耗信息</strong></h4>
@@ -426,18 +426,18 @@ Found 1 deadlock.
 <p>这里看到 GC 线程数是 8 个，这个值跟具体的 CPU 内核数量相差不大就算是正常的。</p>
 <p>GC 线程数如果太多或者太少，会造成很多问题，我们在后面的章节中通过案例进行讲解。</p>
 <h4><strong>线程栈深度</strong></h4>
-<p><img src="assets/b3d1aa50-7505-11ea-a8c0-4fdc777140d0" alt="7277060.png" /></p>
+<p><img src="assets/b3d1aa50-7505-11ea-a8c0-4fdc777140d0" alt="png" /></p>
 <p>这里都小于10，说明堆栈都不深。</p>
 <h4><strong>复杂死锁检测</strong></h4>
 <p>接下来是复杂死锁检测和 Finalizer 线程的信息。</p>
-<p><img src="assets/a9ec3fa0-7505-11ea-965e-2b5335ba3591" alt="7295147.png" /></p>
+<p><img src="assets/a9ec3fa0-7505-11ea-965e-2b5335ba3591" alt="png" /></p>
 <p>简单死锁是指两个线程之间互相死等资源锁。那么什么复杂死锁呢？ 这个问题留给同学们自己搜索。</p>
 <h4><strong>火焰图</strong></h4>
-<p><img src="assets/a0e32b30-7505-11ea-8fb8-ffe43c2e987a" alt="7336167.png" /></p>
+<p><img src="assets/a0e32b30-7505-11ea-8fb8-ffe43c2e987a" alt="png" /></p>
 <p>火焰图挺有趣，将所有线程调用栈汇总到一张图片中。</p>
 <h4><strong>调用栈树</strong></h4>
 <p>如果我们把所有的调用栈合并到一起，整体来看呢？</p>
-<p><img src="assets/7502de70-7505-11ea-a8c0-4fdc777140d0" alt="7358293.png" /></p>
+<p><img src="assets/7502de70-7505-11ea-a8c0-4fdc777140d0" alt="png" /></p>
 <p>树形结构在有些时候也很有用，比如大量线程都在执行类似的调用栈路径时。</p>
 <p>以上这些信息，都有助于我们去分析和排查 JVM 问题，而图形工具相对于命令行工具的好处是直观、方便、快速，帮我们省去过滤一些不必要的干扰信息的时间。</p>
 <h3>参考链接</h3>

@@ -182,7 +182,7 @@ function hide_canvas() {
 <p>系统容错、降级等手段你肯定不陌生，很多文章都反复重申过，所以我的重点不再是普及相关理论知识，而是带你深入面试中对架构高可用问题的考察，带你避免面试中的易错点。</p>
 <h3>案例背景</h3>
 <p>先来看这样一道面试题：</p>
-<p><img src="assets/Cgp9HWAzkoCANywAAAAX6qOl804638.png" alt="1.png" /></p>
+<p><img src="assets/Cgp9HWAzkoCANywAAAAX6qOl804638.png" alt="png" /></p>
 <p>商品的一次查询</p>
 <blockquote>
 <p>某电商平台中有商品系统、促销系统、积分系统。商品的一次查询操作是由网关系统先调用商品系统查询商品列表，然后根据返回的商品列表信息，再查询促销和积分系统，匹配商品信息的促销活动和积分奖励，最终返回给客户端展示给用户。</p>
@@ -221,7 +221,7 @@ function hide_canvas() {
 <li><strong>“打开”转换“半打开”</strong>：当熔断处于打开状态时，我们会启动一个超时计时器，当计时器超时后，状态切换到半打开态。</li>
 <li><strong>“半打开”转换“关闭”</strong>：在熔断处于半打开状态时，请求可以达到后端服务，如果累计一定的成功次数后，状态切换到关闭态。</li>
 </ul>
-<p><img src="assets/CioPOWAzkrSAfZ7ZAAAzMHsPttE231.png" alt="image" /></p>
+<p><img src="assets/CioPOWAzkrSAfZ7ZAAAzMHsPttE231.png" alt="png" /></p>
 <p>熔断状态变更示意图</p>
 <p>在工作中，研发工程师经常会通过 Netflix 的开源项目 Hystrix 来实现熔断的功能，并不会探究其中的原理，我在 07 讲中就说过：</p>
 <blockquote>
@@ -229,7 +229,7 @@ function hide_canvas() {
 </blockquote>
 <p>所以很多时候，面试官也会考察你在不通过开源组件的前提下，怎么实现断路器的功能。</p>
 <h3>如何设计实现一个断路器</h3>
-<p><img src="assets/Cgp9HWAzkqOAfaG_AABo0kM-2s4680.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWAzkqOAfaG_AABo0kM-2s4680.png" alt="png" /></p>
 <p>断路器的流程图</p>
 <ul>
 <li><strong>“关闭”转“打开”：</strong> 当请求到来，首先判断是否在熔断中，如果没有熔断，则正常调用系统服务，此时统计系统的调用状态，如果失败次数超过阈值，则断路器“打开”。</li>

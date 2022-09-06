@@ -159,7 +159,7 @@ function hide_canvas() {
                         <div><h1>03  日志编写：怎样才能编写“可观测”的系统日志？</h1>
 <p>在 02 课时，我带你重新认识了系统日志，介绍了日志在系统中的重要性。既然日志如此重要，那我们应该如何编写它呢？</p>
 <p>这一节，我将带你从编写日志的工具、编写日志的方式，以及日志编写后的管理，就像是购物的售前、售中、售后，这 3 个方面来讲解，怎么样才可以写出更具有“可观测性”的日志内容。</p>
-<p><img src="assets/CgqCHl8tHg-AR1niAABq5d5i1-4639.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl8tHg-AR1niAABq5d5i1-4639.png" alt="png" /></p>
 <h3>日志框架</h3>
 <p>在编写日志之前，咱们先来了解一下有哪些日志框架可以协助我们编写日志。</p>
 <p>在介绍日志框架之前，我需要说明一下，如果你仍在使用 System.out.println、Exception.printStackTrace 或类似的控制台输出日志的方式，我推荐你改用第三方日志框架编写。这种控制台输出的方式，可以从它们的源码了解到它们是线程同步的，大量使用这种方式，会对程序性能造成严重的影响，因为它们同一时间只能有一个线程在进行执行。</p>
@@ -179,7 +179,7 @@ function hide_canvas() {
 <li>不同框架竞争：如果要引入多个日志框架，我们还需要考虑各个框架的输出位置。要是多个日志框架同时写入一个日志文件，还会涉及竞争问题，导致性能无法发挥。</li>
 </ol>
 <p>由此就出现了面向接口的日志框架，它提供了统一的 API。开发人员在编写代码的时候，直接使用这套面向接口的日志框架，当业务项目人员在使用时，只需要选择好实现框架，就可以统一日志实现框架。</p>
-<p><img src="assets/Ciqc1F8tHjOAWiuMAAB_uuNhVnM257.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F8tHjOAWiuMAAB_uuNhVnM257.png" alt="png" /></p>
 <p>目前使用最为广泛的日志接口框架是 SLF4J，出自 logback 的开发者，目前基本已经形成规范。SLF4J 提供了动态占位符的功能，大大提高了程序的性能，无须开发人员再对参数信息进行拼接。</p>
 <p>比如默认情况下程序是 info 级别的，在原先的代码方式中想要进行日志输出需要自行拼接字符串：</p>
 <pre><code>logger.debug(&quot;用户&quot; + userId + &quot;开始下单:&quot; + orderNo + &quot;,请求信息:&quot; + Gson.toJson(req));
@@ -198,7 +198,7 @@ function hide_canvas() {
 <li>日志开发时（前 5 项）：怎么样写出更有效率的日志？</li>
 <li>日志完成后（后 3 项）：上线前后有哪些需要注意的？</li>
 </ul>
-<p><img src="assets/Ciqc1F8tHiCALdt1AACxdCqLBeM381.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F8tHiCALdt1AACxdCqLBeM381.png" alt="png" /></p>
 <h4>日志编写位置</h4>
 <p>日志编写的位置可以说是重中之重，好的日志位置可以帮你解决问题，也可以让你更加了解代码的运行情况。我总结了几点比较重要的编写日志的位置，以供参考。</p>
 <ol>

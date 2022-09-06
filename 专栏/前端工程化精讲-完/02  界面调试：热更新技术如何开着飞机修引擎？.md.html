@@ -220,7 +220,7 @@ package.json
 }
 </code></pre>
 <p>当我们执行 npm run dev:reload，从日志中可以看到本地服务 http://localhost:8080/ 已启动，然后我们在浏览器中输入网址 http://localhost:8080/index.html （也可以在 devServer 的配置中加入 open 和 openPage 来自动打开网页）并打开控制台网络面板，可以看到在加载完页面和页面中引用的 js 文件后，服务还加载了路径前缀名为 /sockjs-node 的 websocket 链接，如下图：</p>
-<p><img src="assets/Ciqc1F807EuAEAxNAADYSkon5ms681.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F807EuAEAxNAADYSkon5ms681.png" alt="png" /></p>
 <p>通过这个 websocket 链接，就可以使打开的网页和本地服务间建立持久化的通信。当源代码发生变更时，我们就可以通过 Socket 通知到网页端，网页端在接到通知后会自动触发页面刷新。</p>
 <p>到了这里，在使用体验上我们似乎已经达到预期的效果了，但是在以下场景中仍然会遇到阻碍：在开发调试过程中，我们可能会在网页中进行一些操作，例如输入了一些表单数据想要调试错误提示的样式、打开了一个弹窗想要调试其中按钮的位置，然后切换回编辑器，修改样式文件进行保存。可是当我们再次返回网页时却发现，网页刷新后，之前输入的内容与打开的弹窗都消失了，网页又回到了初始化的状态。于是，我们不得不再次重复操作才能确认改动后的效果。对于这个问题，又该如何解决呢？</p>
 <h4>Hot Module Replacement</h4>
@@ -254,12 +254,12 @@ package.json
 </code></pre>
 <p>在上面的代码改动中，我们只是在源码部分新增导入了一个简单的 CSS 文件，用于演示热替换的效果。在配置文件中，首先我们在 devServer 配置中新增了 hot:true，其次，新增 module 的配置，使用 style-loader 和 css-loader 来解析导入的 CSS 文件。其中 css-loader 处理的是将导入的 CSS 文件转化为模块供后续 Loader 处理；而 style-loader 则是负责将 CSS 模块的内容在运行时添加到页面的 style 标签中。</p>
 <p>当我们执行 npm run dev:hmr 命令，可以看到页面控制台的网络面板与上个示例并无区别，而在审查元素面板中可以看到源码中的 CSS 被添加到了页面头部的新增 style 标签中。</p>
-<p><img src="assets/Ciqc1F807FmAZaa4AAEDscUHKXk227.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F807FmAZaa4AAEDscUHKXk227.png" alt="png" /></p>
 <p>而当修改源码中 CSS 的样式后，再回到网页端，我们则会发现这样一些变化：</p>
 <p>首先在网络面板中，只是新增了两个请求：hot-update.json 和 hot-update.js，而不像上一个立即刷新的示例中那样，会刷新页面重载所有请求。</p>
-<p><img src="assets/CgqCHl807GGAYoLGAABmQj838Ag823.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl807GGAYoLGAABmQj838Ag823.png" alt="png" /></p>
 <p>其次，在审查元素面板中我们可以看到，在页面的头部新增了 hot-update.js，并替换了原先 style 标签中的样式内容。</p>
-<p><img src="assets/CgqCHl807GeAFYunAAEuKSDazpo633.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl807GeAFYunAAEuKSDazpo633.png" alt="png" /></p>
 <p>正如我们所见，对于代码中引入的样式文件，可以通过上述设置来开启热替换。但是有同学也许会问，我们为什么不像上一个例子中那样改动 JS 的内容（例如改动显示的文本）来观察热替换的效果呢？原因在于，简单改动 JS 中的显示文本并不能达到热替换的效果。尽管网络端同样新增了 hot-update.json 和 hot-update.js，但紧随其后的是如上一个示例一般的刷新了整个页面。</p>
 <p>那么，为什么导入的 CSS 能触发模块热替换，而 JS 文件的内容修改就失效了呢？要回答这个问题，我们还得从 webpack 的热更新原理说起。</p>
 <h3>webpack 中的热更新原理</h3>
@@ -269,7 +269,7 @@ package.json
 <li>instant reload 示例中体现的，浏览器网页端与本地服务器端的 Websocket 通信。</li>
 <li>hmr 示例中体现的，也即是最核心的，模块解析与替换功能。</li>
 </ol>
-<p><img src="assets/Ciqc1F82OZmAFYuKAAC7WNDPQB4766.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F82OZmAFYuKAAC7WNDPQB4766.png" alt="png" /></p>
 <p>也就是说在这三种技术中，我们可以基于 Node.js 中提供的文件模块 fs.watch 来实现对文件和文件夹的监控，同样也可以使用 sockjs-node 或 socket.io 来实现 Websocket 的通信。而在这里，我们重点来看下第三种， webpack 中的模块解析与替换功能。</p>
 <h4>webpack 中的打包流程</h4>
 <p>在讲 webpack 的打包流程之前我们先解释几个 webpack 中的术语：</p>
@@ -286,8 +286,8 @@ package.json
 <li>webpack 通过入口点（<strong>entry point</strong>）递归处理各模块引用关系，最后输出为一个或多个产物包 js(bundle) 文件。</li>
 <li>每一个入口点都是一个块组（<strong>chunk group</strong>），在不考虑分包的情况下，一个 chunk group 中只有一个 <strong>chunk</strong>，该 chunk 包含递归分析后的所有模块。每一个 chunk 都有对应的一个打包后的输出文件（<strong>asset/bundle</strong>）。</li>
 </ol>
-<p><img src="assets/CgqCHl82OaWAMXDLAABdNTOV1dY952.png" alt="4.png" /></p>
-<p><img src="assets/CgqCHl807JGAPDOBAAJufukFuEU205.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl82OaWAMXDLAABdNTOV1dY952.png" alt="png" /></p>
+<p><img src="assets/CgqCHl807JGAPDOBAAJufukFuEU205.png" alt="png" /></p>
 <p>在上面的 hmr 示例中，从 entry 中的 './src/index1.js' 到打包产物的 dist/main.js，以模块的角度而言，其基本流程是：</p>
 <ol>
 <li>唯一 entry 创建一个块组（chunk group）， name 为 main，包含了 ./src/index1.js 这一个模块。</li>
@@ -297,7 +297,7 @@ package.json
 <li>依次类推，直到将所有依赖的模块均打入到 chunk 中，最后输出名为 main.js 的产物（我们称为 Asset 或 Bundle）。</li>
 </ol>
 <p>上述流程的结果我们可以在预览页面中控制台的 Sources 面板中看到，这里，我们重点看经过 style-loader 处理的 style.css 模块的代码：</p>
-<p><img src="assets/CgqCHl807JuAERI6AAMPF3IKpN0961.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl807JuAERI6AAMPF3IKpN0961.png" alt="png" /></p>
 <h4>style-loader 中的热替换代码</h4>
 <p>我们简化一下上述控制台中看到的 style-loader 处理后的模块代码，只看其热替换相关的部分。</p>
 <pre><code>//为了清晰期间，我们将模块名称注释以及与热更新无关的逻辑省略，并将 css 内容模块路径赋值为变量 cssContentPath 以便多处引用，实际代码可从示例运行时中查看 

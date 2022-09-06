@@ -291,7 +291,7 @@ function hide_canvas() {
 <li><strong>操作控制类：</strong> 在原生端点中只提供了一个关闭应用的端点，即 /shutdown 端点。</li>
 </ul>
 <p>根据 Spring Boot Actuator 默认提供的端点列表，我们将部分常见端点的类型、路径和描述梳理在如下表格中，仅供参考。</p>
-<p><img src="assets/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yGAKfl6Af_yWAAIDoRxLU2E765.png" alt="png" /></p>
 <p>通过访问上表中的各个端点，我们就可以获取自己感兴趣的监控信息了。例如访问了<a href="http://localhost:8082/actuator/health">http://localhost:8082/actuator/health</a>端点，我们就可以得到如下所示的 account-service 基本状态。</p>
 <pre><code>{
      &quot;status&quot;:&quot;UP&quot;
@@ -328,7 +328,7 @@ function hide_canvas() {
 <h4>扩展 Info 端点</h4>
 <p>Info 端点用于暴露 Spring Boot 应用的自身信息。在 Spring Boot 内部，它把这部分工作委托给了一系列 <a href="https://github.com/spring-projects/spring-boot/tree/v1.4.1.RELEASE/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/info/InfoContributor.java">InfoContributor</a> 对象，而 Info 端点会暴露所有 <a href="https://github.com/spring-projects/spring-boot/tree/v1.4.1.RELEASE/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/info/InfoContributor.java">InfoContributor</a> 对象所收集的各种信息。</p>
 <p>在Spring Boot 中包含了很多自动配置的 InfoContributor 对象，常见的 InfoContributor 及其描述如下表所示：</p>
-<p><img src="assets/CgqCHmAKfoOARrjaAADoOGMdQb4610.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHmAKfoOARrjaAADoOGMdQb4610.png" alt="png" /></p>
 <p>以上表中的 EnvironmentInfoContributor 为例，通过在配置文件中添加格式以“info”作为前缀的配置段，我们就可以定义 Info 端点暴露的数据。添加完成后，我们将看到所有在“info”配置段下的属性都将被自动暴露。</p>
 <p>比如你可以将如下所示配置信息添加到配置文件 application.yml 中：</p>
 <pre><code>info:

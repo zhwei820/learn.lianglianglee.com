@@ -253,7 +253,7 @@ function hide_canvas() {
 <p>分布式服务拆分以后，系统变得日趋复杂，业务的调用链也越来越长，如何快速定位线上故障，就需要依赖分布式调用跟踪技术。下面我们一起来看下分布式调用链相关的实现。</p>
 <h3>为什么需要分布式调用跟踪</h3>
 <p>随着分布式服务架构的流行，特别是微服务等设计理念在系统中的应用，系统架构变得越来越分散，如下图所示。</p>
-<p><img src="assets/CgqCHl7M6YaAdXpcAAF2ShT9Ssc825.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl7M6YaAdXpcAAF2ShT9Ssc825.png" alt="png" /></p>
 <p>可以看到，随着服务的拆分，系统的模块变得越来越多，不同的模块可能由不同的团队维护，一个请求可能会涉及几十个服务的协同处理， 牵扯到多个团队的业务系统。</p>
 <p>假设现在某次服务调用失败，或者出现请求超时，需要定位具体是哪个服务引起的异常，哪个环节导致的超时，就需要去每个服务里查看日志，这样的处理效率是非常低的。</p>
 <p>另外，系统拆分以后，缺乏一个自上而下全局的调用 ID，如何有效地进行相关的数据分析工作呢？比如电商的活动转化率、购买率、广告系统的点击链路等。如果没有一个统一的调用 ID 来记录，只依靠业务上的主键等是很难实现的，特别是对于一些大型网站系统，如淘宝、京东等，这些问题尤其突出。</p>
@@ -271,7 +271,7 @@ function hide_canvas() {
 <p>分布式链路跟踪的技术实现，主要是参考 Google 的 Dapper 论文，分布式调用跟踪是一种全链路日志，主要的设计基于 Span 日志格式，下面简单介绍这个日志结构。</p>
 <p>Dapper 用 Span 来表示一个服务调用开始和结束的时间，也就是时间区间，并记录了 Span 的名称以及每个 Span 的 ID 和父 ID，如果一个 Span 没有父 ID 则被称之为 Root Span。</p>
 <p>一个请求到达应用后所调用的所有服务，以及所有服务组成的调用链就像是一个树结构，追踪这个调用链路得到的树结构称之为 <strong>Trace</strong>，所有的 Span 都挂在一个特定的 Trace 上，共用一个 TraceId。</p>
-<p><img src="assets/CgqCHl7M6aGALudMAAG903WelvM769.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7M6aGALudMAAG903WelvM769.png" alt="png" /></p>
 <p>在一次 Trace 中，每个服务的每一次调用，就是一个 Span，每一个 Span 都有一个 ID 作为唯一标识。同样，每一次 Trace 都会生成一个 TraceId 在 Span 中作为追踪标识，另外再通过一个 parentSpanId，标明本次调用的发起者。</p>
 <p>当 Span 有了上面三个标识后，就可以很清晰地将多个 Span 进行梳理串联，最终归纳出一条完整的跟踪链路。</p>
 <p>确定了日志格式以后，接下来日志如何采集和解析，日志的采集和存储有许多开源的工具可以选择。一般来说，会使用离线 + 实时的方式去存储日志，主要是分布式日志采集的方式，典型的解决方案如 Flume 结合 Kafka 等 MQ，日志存储到 HBase 等存储中，接下来就可以根据需要进行相关的展示和分析。</p>
@@ -281,7 +281,7 @@ function hide_canvas() {
 <p>Dapper 是 Google 生产环境下的分布式跟踪系统，没有对外开源，但是 Google 发表了“Dapper - a Large-Scale Distributed Systems Tracing Infrastructure”论文，介绍了他们的分布式系统跟踪技术，所以后来的 Zipkin 和鹰眼等都借鉴了 Dapper 的设计思想。</p>
 <h4>Twitter 的 Zipkin</h4>
 <p>Zipkin 是一款开源的分布式实时数据追踪系统，基于 Google Dapper 的论文设计而来，由 Twitter 公司开发贡献。其主要功能是聚集来自各个异构系统的实时监控数据，用来追踪微服务架构下的系统延时问题，Zipkin 的用户界面可以呈现一幅关联图表，以显示有多少被追踪的请求通过了每一层应用。</p>
-<p><img src="assets/CgqCHl7M6a-AfUnxAAGWUVm1UPY645.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7M6a-AfUnxAAGWUVm1UPY645.png" alt="png" /></p>
 <h4>阿里的 EagleEye</h4>
 <p>EagleEye 鹰眼系统是 Google 的分布式调用跟踪系统 Dapper 在淘宝的实现，EagleEye 没有开源。下面这段介绍来自 阿里中间件团队：</p>
 <blockquote>

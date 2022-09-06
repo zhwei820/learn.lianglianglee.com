@@ -275,7 +275,7 @@ function hide_canvas() {
 <li>11 被存储到了地址 0x100；</li>
 <li>15 被存储到了地址 0x104；</li>
 </ul>
-<p><img src="assets/Ciqc1F9jNVKAbRJhAADt2il2zYI826.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9jNVKAbRJhAADt2il2zYI826.png" alt="png" /></p>
 <p>2.编译器将<code>a=11+15</code>转换成了 4 条指令，程序启动后，这些指令被导入了一个专门用来存储指令的区域，也就是正文段。如上图所示，这 4 条指令被存储到了 0x200-0x20c 的区域中：</p>
 <p>0x200 位置的 load 指令将地址 0x100 中的数据 11 导入寄存器 R0；</p>
 <p>0x204 位置的 load 指令将地址 0x104 中的数据 15 导入寄存器 R1；</p>
@@ -295,7 +295,7 @@ function hide_canvas() {
 <blockquote>
 <p>这里大家还是看下图，需要看一下才能明白。</p>
 </blockquote>
-<p><img src="assets/CgqCHl9fMJiAXO1-AABvVvPHepg435.png" alt="12.png" /></p>
+<p><img src="assets/CgqCHl9fMJiAXO1-AABvVvPHepg435.png" alt="png" /></p>
 <ul>
 <li>最左边的 6 位，叫作<strong>操作码</strong>，英文是 OpCode，100011 代表 load 指令；</li>
 <li>中间的 4 位 0000是寄存器的编号，这里代表寄存器 R0；</li>
@@ -303,7 +303,7 @@ function hide_canvas() {
 </ul>
 <p>所以我们是把操作码、寄存器的编号、要读取的地址合并到了一个 32 位的指令中。</p>
 <p>我们再来看一条求加法运算的 add 指令，16 进制表示是 0x08048000，换算成二进制就是：</p>
-<p><img src="assets/Ciqc1F9fMKGAT9ymAACIAk1pGnk727.png" alt="11.png" /></p>
+<p><img src="assets/Ciqc1F9fMKGAT9ymAACIAk1pGnk727.png" alt="png" /></p>
 <ul>
 <li>最左边的 6 位是指令编码，代表指令 add；</li>
 <li>紧接着的 4 位 0000 代表寄存器 R0；</li>
@@ -318,7 +318,7 @@ function hide_canvas() {
 <li>CPU 执行指令，我们将这个部分叫作 Execution。</li>
 <li>CPU 将结果存回寄存器或者将寄存器存入内存，我们将这个步骤叫作 Store。</li>
 </ol>
-<p><img src="assets/Ciqc1F9fMKiAZhMVAABIVEePzcA916.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F9fMKiAZhMVAABIVEePzcA916.png" alt="png" /></p>
 <p>上面 4 个步骤，我们叫作 CPU 的指令<strong>周期</strong>。CPU 的工作就是一个周期接着一个周期，周而复始。</p>
 <h4>指令的类型</h4>
 <p>通过上面的例子，你会发现不同类型（不同 OpCode）的指令、参数个数、每个参数的位宽，都不一样。而参数可以是以下这三种类型：</p>

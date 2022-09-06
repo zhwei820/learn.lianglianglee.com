@@ -291,7 +291,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>18  Buffer 缓冲区：我们不生产数据，我们只是数据的搬运工</h1>
 <p>Buffer 是一种字节容器，在 Netty 等 NIO 框架中都有类似的设计，例如，Java NIO 中的ByteBuffer、Netty4 中的 ByteBuf。Dubbo 抽象出了 ChannelBuffer 接口对底层 NIO 框架中的 Buffer 设计进行统一，其子类如下图所示：</p>
-<p><img src="assets/CgqCHl9pudyACkPPAABei6G8kSc033.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9pudyACkPPAABei6G8kSc033.png" alt="png" /></p>
 <p>ChannelBuffer 继承关系图</p>
 <p>下面我们就按照 ChannelBuffer 的继承结构，从顶层的 ChannelBuffer 接口开始，逐个向下介绍，直至最底层的各个实现类。</p>
 <h3>ChannelBuffer 接口</h3>
@@ -303,7 +303,7 @@ function hide_canvas() {
 <li>capacity()、clear()、copy() 等辅助方法用来获取 ChannelBuffer 容量以及实现清理、拷贝数据的功能，这里不再赘述。</li>
 <li>factory() 方法：该方法返回创建 ChannelBuffer 的工厂对象，ChannelBufferFactory 中定义了多个 getBuffer() 方法重载来创建 ChannelBuffer，如下图所示，这些 ChannelBufferFactory的实现都是单例的。</li>
 </ul>
-<p><img src="assets/Ciqc1F9pugWAMFoIAABVU01bqiI007.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9pugWAMFoIAABVU01bqiI007.png" alt="png" /></p>
 <p>ChannelBufferFactory 继承关系图</p>
 <p><strong>AbstractChannelBuffer 抽象类</strong>实现了 ChannelBuffer 接口的大部分方法，其核心是维护了以下四个索引。</p>
 <ul>
@@ -358,7 +358,7 @@ public ChannelBuffer getBuffer(byte[] array, int offset, int length) {
 <li>factory（ChannelBufferFactory 类型），用于创建被修饰的 HeapChannelBuffer 对象的 ChannelBufferFactory 工厂，默认为 HeapChannelBufferFactory。</li>
 </ul>
 <p>DynamicChannelBuffer 需要关注的是 ensureWritableBytes() 方法，该方法实现了动态扩容的功能，在每次写入数据之前，都需要调用该方法确定当前可用空间是否足够，调用位置如下图所示：</p>
-<p><img src="assets/CgqCHl9puiWABaDpAACaisslR0Q430.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9puiWABaDpAACaisslR0Q430.png" alt="png" /></p>
 <p>ensureWritableBytes() 方法如果检测到底层 ChannelBuffer 对象的空间不足，则会创建一个新的 ChannelBuffer（空间扩大为原来的两倍），然后将原来 ChannelBuffer 中的数据拷贝到新 ChannelBuffer 中，最后将 buffer 字段指向新 ChannelBuffer 对象，完成整个扩容操作。ensureWritableBytes() 方法的具体实现如下：</p>
 <pre><code>public void ensureWritableBytes(int minWritableBytes) {
     if (minWritableBytes &lt;= writableBytes()) {
@@ -404,10 +404,10 @@ public void setBytes(int index, byte[] src, int srcIndex, int length) {
 <p>NettyBackedChannelBuffer 对 ChannelBuffer 接口的实现都是调用底层封装的 Netty ByteBuf 实现的，这里就不再展开介绍，你若感兴趣的话也可以参考相关代码进行学习。</p>
 <h3>相关 Stream 以及门面类</h3>
 <p>在 ChannelBuffer 基础上，Dubbo 提供了一套输入输出流，如下图所示：</p>
-<p><img src="assets/Ciqc1F9puj2AXLalAALcfencKx0331.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9puj2AXLalAALcfencKx0331.png" alt="png" /></p>
 <p>ChannelBufferInputStream 底层封装了一个 ChannelBuffer，其实现 InputStream 接口的 read*() 方法全部都是从 ChannelBuffer 中读取数据。ChannelBufferInputStream 中还维护了一个 startIndex 和一个endIndex 索引，作为读取数据的起止位置。ChannelBufferOutputStream 与 ChannelBufferInputStream 类似，会向底层的 ChannelBuffer 写入数据，这里就不再展开，你若感兴趣的话可以参考源码进行分析。</p>
 <p>最后要介绍 ChannelBuffers 这个<strong>门面类</strong>，下图展示了 ChannelBuffers 这个门面类的所有方法：</p>
-<p><img src="assets/CgqCHl9pukOAT_8kAACo0xRQ2po574.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9pukOAT_8kAACo0xRQ2po574.png" alt="png" /></p>
 <p>对这些方法进行分类，可归纳出如下这些方法。</p>
 <ul>
 <li>dynamicBuffer() 方法：创建 DynamicChannelBuffer 对象，初始化大小由第一个参数指定，默认为 256。</li>

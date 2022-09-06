@@ -188,7 +188,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>24 内存分析与相关工具下篇（常见问题分析）</h1>
 <p>Java 程序的内存可以分为几个部分：堆（Heap space）、非堆（Non-Heap）、栈（Stack）等等，如下图所示：</p>
-<p><img src="assets/b8e25a80-71db-11ea-964d-61a29639fe46" alt="2459010.png" /></p>
+<p><img src="assets/b8e25a80-71db-11ea-964d-61a29639fe46" alt="png" /></p>
 <p>最常见的 java.lang.OutOfMemoryError 可以归为以下类型。</p>
 <h3>OutOfMemoryError: Java heap space</h3>
 <p>JVM 限制了 Java 程序的最大内存使用量，由 JVM 的启动参数决定。</p>
@@ -233,7 +233,7 @@ function hide_canvas() {
 <p>而“java.lang.OutOfMemoryError: GC overhead limit exceeded”这种错误发生的原因是：<strong>程序基本上耗尽了所有的可用内存，GC 也清理不了</strong>。</p>
 <h4><strong>原因分析</strong></h4>
 <p>JVM 抛出“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误就是发出了这样的信号：执行垃圾收集的时间比例太大，有效的运算量太小。默认情况下，如果 GC 花费的时间超过 98%，并且 GC 回收的内存少于 2%，JVM 就会抛出这个错误。就是说，系统没法好好干活了，几乎所有资源都用来去做 GC，但是 GC 也没啥效果。此时系统就像是到了癌症晚期，身体的营养都被癌细胞占据了，真正用于身体使用的非常少了，而且就算是调用所有营养去杀灭癌细胞也晚了，因为杀的效果很差了，还远远没有癌细胞复制的速度快。</p>
-<p><img src="assets/f346d1f0-71dc-11ea-8377-13f07d2f46fb" alt="06cff4f1-b6a6-4cda-b7f5-8e8837f55c3a.png" /></p>
+<p><img src="assets/f346d1f0-71dc-11ea-8377-13f07d2f46fb" alt="png" /></p>
 <p>注意，“java.lang.OutOfMemoryError: GC overhead limit exceeded”错误只在连续多次 <a href="http://blog.csdn.net/renfufei/article/details/54885190">GC</a> 都只回收了不到 2% 的极端情况下才会抛出。假如不抛出 GC overhead limit 错误会发生什么情况呢？那就是 GC 清理的这么点内存很快会再次填满，迫使 GC 再次执行。这样就形成恶性循环，CPU 使用率一直是 100%，而 GC 却没有任何成果。系统用户就会看到系统卡死——以前只需要几毫秒的操作，现在需要好几分钟甚至几小时才能完成。</p>
 <blockquote>
 <p>这也是一个很好的<a href="https://en.wikipedia.org/wiki/Fail-fast">快速失败原则</a>的案例。</p>
@@ -394,7 +394,7 @@ public class MicroGenerator {
 <p>Java 程序本质上是多线程的，可以同时执行多项任务。类似于在播放视频的时候，可以拖放窗口中的内容，却不需要暂停视频播放，即便是物理机上只有一个 CPU。</p>
 <p>线程（thread）可以看作是干活的工人（workers）。如果只有一个工人，在同一时间就只能执行一项任务。假若有很多工人，那么就可以同时执行多项任务。</p>
 <p>和现实世界类似，JVM 中的线程也需要内存空间来执行自己的任务。如果线程数量太多，就会引入新的问题：</p>
-<p><img src="assets/7d551650-71e1-11ea-97af-c3b20af12573" alt="7ff0ad95-3c2e-4246-badc-e007abf84978.png" /></p>
+<p><img src="assets/7d551650-71e1-11ea-97af-c3b20af12573" alt="png" /></p>
 <p>“java.lang.OutOfMemoryError: Unable to create new native thread”错误是<strong>程序创建的线程数量已达到上限值</strong>的异常信息。</p>
 <h4><strong>原因分析</strong></h4>
 <p>JVM 向操作系统申请创建新的 native thread（原生线程）时，就有可能会碰到“java.lang.OutOfMemoryError: Unable to create new native thread”错误。如果底层操作系统创建新的 native thread 失败，JVM 就会抛出相应的 OutOfMemoryError。</p>
@@ -471,7 +471,7 @@ max user processes (-u) 1800
 <p>一种解决办法是执行线程转储（thread dump）来分析具体情况，我们会在后面的章节讲解。</p>
 <h3>OutOfMemoryError: Out of swap space</h3>
 <p>JVM 启动参数指定了最大内存限制，如 <code>-Xmx</code> 以及相关的其他启动参数。假若 JVM 使用的内存总量超过可用的物理内存，操作系统就会用到虚拟内存（一般基于磁盘文件）。</p>
-<p><img src="assets/d416dd70-71e1-11ea-b76f-3b9120f55521" alt="40dddc4d-f192-40dc-9a1f-ab4df65d6f12.png" /></p>
+<p><img src="assets/d416dd70-71e1-11ea-b76f-3b9120f55521" alt="png" /></p>
 <p>错误信息“java.lang.OutOfMemoryError: Out of swap space”表明，交换空间（swap space/虚拟内存）不足，此时由于物理内存和交换空间都不足，所以导致内存分配失败。</p>
 <h4><strong>原因分析</strong></h4>
 <p>如果 native heap 内存耗尽，内存分配时 JVM 就会抛出“java.lang.OutOfmemoryError: Out of swap space”错误消息，告诉用户，请求分配内存的操作失败了。</p>
@@ -494,7 +494,7 @@ swapon swapfile
 <p>因为垃圾收集器需要清理整个内存空间，所以虚拟内存对 Java GC 来说是难以忍受的。存在内存交换时，执行<a href="http://blog.csdn.net/renfufei/article/details/54885190">垃圾收集</a>的<a href="http://blog.csdn.net/renfufei/article/details/61924893">暂停时间</a>会增加上百倍，所以最好不要增加，甚至是不要使用虚拟内存（毕竟访问内存的速度和磁盘的速度，差了几个数量级）。</p>
 <h3>OutOfMemoryError: Requested array size exceeds VM limit</h3>
 <p>Java 平台限制了数组的最大长度。各个版本的具体限制可能稍有不同，但范围都在 1~21 亿之间。（想想看，为什么是 21 亿？）</p>
-<p><img src="assets/15d241f0-71e2-11ea-9d98-f7fceb2428d3" alt="8cc643df-164f-4ee9-9142-7a27032418ec.png" /></p>
+<p><img src="assets/15d241f0-71e2-11ea-9d98-f7fceb2428d3" alt="png" /></p>
 <p>如果程序抛出“java.lang.OutOfMemoryError: Requested array size exceeds VM limit”错误，就说明程序想要创建的数组长度超过限制。</p>
 <h4><strong>原因分析</strong></h4>
 <p>这个错误是在真正为数组分配内存之前，JVM 会执行一项检查：要分配的数据结构在该平台是否可以寻址（addressable）。当然，这个错误比你所想的还要少见得多。</p>
@@ -546,7 +546,7 @@ java.lang.OutOfMemoryError: Requested array size exceeds VM limit
 <p>我们知道，操作系统（operating system）构建在进程（process）的基础上。进程由内核作业（kernel jobs）进行调度和维护，其中有一个内核作业称为“Out of memory killer（OOM 终结者）”，与本节所讲的 OutOfMemoryError 有关。</p>
 <p>Out of memory killer 在可用内存极低的情况下会杀死某些进程。只要达到触发条件就会激活，选中某个进程并杀掉。通常采用启发式算法，对所有进程计算评分（heuristics scoring），得分最低的进程将被 kill 掉。</p>
 <p>因此“Out of memory: Kill process or sacrifice child”和前面所讲的 <a href="http://blog.csdn.net/renfufei/article/category/5884735">OutOfMemoryError</a> 都不同，因为它既不由 JVM 触发，也不由 JVM 代理，而是系统内核内置的一种安全保护措施。</p>
-<p><img src="assets/f1e22a20-71e2-11ea-833b-93fabc8068c9" alt="13abc504-c840-4264-a905-e9011159484f.png" /></p>
+<p><img src="assets/f1e22a20-71e2-11ea-833b-93fabc8068c9" alt="png" /></p>
 <p>如果可用内存（含 swap）不足，就有可能会影响系统稳定，这时候 Out of memory killer 就会设法找出流氓进程并杀死他，也就是引起“Out of memory: kill process or sacrifice child”错误。</p>
 <h4><strong>原因分析</strong></h4>
 <p>默认情况下，Linux kernels（内核）允许进程申请的量超过系统可用内存。这是因为, 在大多数情况下，很多进程申请了很多内存，但实际使用的量并没有那么多。</p>

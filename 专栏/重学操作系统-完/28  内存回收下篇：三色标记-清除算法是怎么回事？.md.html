@@ -245,7 +245,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>28  内存回收下篇：三色标记-清除算法是怎么回事？</h1>
 <p>今天我们继续讨论内存回收问题。在上一讲，我们发现双色标记-清除算法有一个明显的问题，如下图所示：</p>
-<p><img src="assets/Cip5yF_Z2CCAZ4MFAABZx6AzarA983.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_Z2CCAZ4MFAABZx6AzarA983.png" alt="png" /></p>
 <p>你可以把 GC 的过程看作标记、清除及程序不断对内存进行修改的过程，分成 3 种任务：</p>
 <ol>
 <li>标记程序（Mark）</li>
@@ -253,13 +253,13 @@ function hide_canvas() {
 <li>变更程序（Mutation）</li>
 </ol>
 <p><strong>标记（Mark）就是找到不用的内存，清除（Sweep）就是回收不用的资源，而修改（Muation）则是指用户程序对内存进行了修改</strong>。通常情况下，在 GC 的设计中，上述 3 种程序不允许并行执行（Simultaneously）。对于 Mark、Sweep、Mutation 来说内存是共享的。如果并行执行相当于需要同时处理大量竞争条件的手段，这会增加非常多的开销。当然你可以开多个线程去 Mark、Mutation 或者 Sweep，但前提是每个过程都是独立的。</p>
-<p><img src="assets/Cip5yF_Z2CiASF0QAACL55G2CDE848.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yF_Z2CiASF0QAACL55G2CDE848.png" alt="png" /></p>
 <p>因为 Mark 和 Sweep 的过程都是 GC 管理，而 Mutation 是在执行应用程序，在实时性要求高的情况下可以允许一边 Mark，一边 Sweep 的情况； 优秀的算法设计也可能会支持一边 Mark、一边 Mutation 的情况。这种算法通常使用了 Read On Write 技术，本质就是先把内存拷贝一份去 Mark/Sweep，让 Mutation 完全和 Mark 隔离。</p>
-<p><img src="assets/CgqCHl_Z2C-ABz5lAAC4Jo2Y4mQ994.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_Z2C-ABz5lAAC4Jo2Y4mQ994.png" alt="png" /></p>
 <p>上图中 GC 开始后，拷贝了一份内存的原本，进行 Mark 和 Sweep，整理好内存之后，再将原本中所有的 Mutation 合并进新的内存。 这种算法设计起来会非常复杂，但是可以保证实时性 GC。</p>
 <p>上图的这种 GC 设计比较少见，通常 GC 都会发生 STL（Stop The World）问题，Mark/Sweep/Mutation 只能够交替执行。也就是说， 一种程序执行的时候，另一种程序必须停止。</p>
 <p><strong>对于双色标记-清除算法，如果 Mark 和 Sweep 之间存在 Mutation，那么 Mutation 的伤害是比较大的</strong>。比如 Mutation 新增了一个白色的对象，这个白色的对象就可能会在 Sweep 启动后被清除。当然也可以考虑新增黑色的对象，这样对象就不会在 Sweep 启动时被回收。但是会发生下面这个问题，如下图所示：</p>
-<p><img src="assets/Ciqc1F_Z2DeAGJzgAABVUsm0aqE938.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_Z2DeAGJzgAABVUsm0aqE938.png" alt="png" /></p>
 <p>如果一个新对象指向了一个已经删除的对象，一个新的黑色对象指向了一个白色对象，这个时候 GC 不会再遍历黑色对象，也就是白色的对象还是会被清除。<strong>因此，我们希望创建一个在并发环境更加稳定的程序，让 Mark/Mutation/Sweep 可以交替执行，不用特别在意它们之间的关联</strong>。</p>
 <p>有一个非常优雅地实现就是再增加一种中间的灰色，把灰色看作可以增量处理的工作，来重新定义白色的含义。</p>
 <h3>三色标记-清除算法（Tri-Color Mark Sweep）</h3>
@@ -311,7 +311,7 @@ function hide_canvas() {
 </ol>
 <p>如果用户程序创建了新对象，可以考虑把新对象直接标记为灰色。虽然，也可以考虑标记为黑色，但是标记为灰色可以让 GC 意识到新增了未完成的任务。比如用户创建了新对象之后，新对象引用了之前删除的对象，就需要重新标记创建的部分。</p>
 <p>如果用户删除了已有的对象，通常做法是等待下一次全量 Mark 算法处理。下图中我们删除了 Root Object 到 A 的引用，这个时候如果把 A 标记成白色，那么还需要判断是否还有其他路径引用到 A，而且 B,C 节点的颜色也需要重新计算。关键的问题是，虽然可以实现一个基于 A 的 DFS 去解决这个问题，但实际情况是我们并不着急解决这个问题，因为内存空间往往是有富余的。</p>
-<p><img src="assets/CgpVE1_Z2NiAbW5kAAD-d5qJRoI176.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgpVE1_Z2NiAbW5kAAD-d5qJRoI176.png" alt="png" /></p>
 <p><strong>在调整已有的引用关系时，三色标记算法的表现明显更好</strong>。下图是对象 B 将对 C 的引用改成了对 F 的引用，C,F 被加入灰色集合。接下来 GC 会递归遍历 C,F，最终然后 F,E,G 都会进入灰色集合。</p>
 <p><img src="assets/Ciqc1F_Z4mCANcwoAAFFnKmGj_w824.png" alt="图片32.png" /></p>
 <p>内存回收就好比有人在随手扔垃圾，清洁工需要不停打扫。如果清洁工能够跟上人们扔垃圾的速度，那么就不需要太多的 STL（Stop The World）。如果清洁工跟不上扔垃圾的速度，最终环境就会被全部弄乱，这个时候清洁工就会要求“Stop The World”。<strong>三色算法的优势就在于它支持多一些情况的 Mutation，这样能够提高“垃圾”被并发回收的概率</strong>。</p>
@@ -320,12 +320,12 @@ function hide_canvas() {
 <p>三色标记-清除算法，还没有解决内存回收产生碎片的问题。通常，我们会在三色标记-清除算法之上，再构建一个整理内存（Compact）的算法。如下图所示：</p>
 <p><img src="assets/CgqCHl_Z4LSAbg0BAAFFnKmGj_w022.png" alt="图片32.png" />
 Compact 算法将对象重新挤压到一起，让更多空间可以被使用。我们在设计这个算法时，观察到了一个现象：新创建出来的对象，死亡（被回收）概率会更高，而那些已经存在了一段时间的对象，往往更不容易死亡。这有点类似 LRU 缓存，其实是一个概率问题。接下来我们考虑针对这个现象进行优化。</p>
-<p><img src="assets/CgpVE1_Z2OuAXxFjAABfInodsKw867.png" alt="Drawing 15.png" /></p>
+<p><img src="assets/CgpVE1_Z2OuAXxFjAABfInodsKw867.png" alt="png" /></p>
 <p>如上图所示，你可以把新创建的对象，都先放到一个统一的区域，在 Java 中称为伊甸园（Eden）。这个区域因为频繁有新对象死亡，因此需要经常 GC。考虑整理使用中的对象成本较高，因此可以考虑将存活下来的对象拷贝到另一个区域，Java 中称为存活区（Survior）。存活区生存下来的对象再进入下一个区域，Java 中称为老生代。</p>
 <p>上图展示的三个区域，<strong>Eden、Survior 及老生代之间的关系是对象的死亡概率逐级递减，对象的存活周期逐级增加</strong>。三个区域都采用三色标记-清除算法。每次 Eden 存活下来的对象拷贝到 Survivor 区域之后，Eden 就可以完整的回收重利用。Eden 可以考虑和 Survivor 用 1:1 的空间，老生代则可以用更大的空间。Eden 中全量 GC 可以频繁执行，也可以增量 GC 混合全量 GC 执行。老生代中的 GC 频率可以更低，偶尔执行一次全量的 GC。</p>
 <h3>GC 的选择</h3>
 <p>最后我们来聊聊 GC 的选择。<strong>通常选择 GC 会有实时性要求（最大容忍的暂停时间），需要从是否为高并发场景、内存实际需求等维度去思考</strong>。<strong>在选择 GC 的时候，复杂的算法并不一定更有效。下面是一些简单有效的思考和判断</strong>。</p>
-<p><img src="assets/Cip5yF_Z2POASXuMAACh7n5TBi8380.png" alt="Drawing 17.png" /></p>
+<p><img src="assets/Cip5yF_Z2POASXuMAACh7n5TBi8380.png" alt="png" /></p>
 <ol>
 <li>如果你的程序内存需求较小，GC 压力小，这个时候每次用双色标记-清除算法，等彻底标记-清除完再执行应用程序，用户也不会感觉到多少延迟。双色标记-清除算法在这种场景可能会更加节省时间，因为程序简单。</li>
 <li>对于一些对暂停时间不敏感的应用，比如说数据分析类应用，那么选择一个并发执行的双色标记-清除算法的 GC 引擎，是一个非常不错的选择。因为这种应用 GC 暂停长一点时间都没有关系，关键是要最短时间内把整个 GC 执行完成。</li>

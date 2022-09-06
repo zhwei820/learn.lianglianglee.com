@@ -201,7 +201,7 @@ function hide_canvas() {
                         <div><h1>15  解析引擎：SQL 解析流程应该包括哪些核心阶段？（上）</h1>
 <p>你好，欢迎进入第 15 课时的学习，结束了对 ShardingSphere 中微内核架构等基础设施相关实现机制的介绍后，今天我们将正式进入到分片引擎的学习。</p>
 <p>对于一款分库分表中间件而言，分片是其最核心的功能。下图展示了整个 ShardingSphere 分片引擎的组成结构，我们已经在[《12 | 从应用到原理：如何高效阅读 ShardingSphere 源码》]这个课时中对分片引擎中所包含的各个组件进行了简单介绍。我们知道，对于分片引擎而言，第一个核心组件就是 SQL 解析引擎。</p>
-<p><img src="assets/Ciqc1F8nypyARZV3AACJf1UYtf4213.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F8nypyARZV3AACJf1UYtf4213.png" alt="png" /></p>
 <p>对于多数开发人员而言，SQL 解析是一个陌生的话题，但对于一个分库分表中间件来说却是一个基础组件，目前主流的分库分表中间件都包含了对解析组件的实现策略。可以说，SQL 解析引擎所生成的结果贯穿整个 ShardingSphere。如果我们无法很好地把握 SQL 的解析过程，在阅读 ShardingSphere 源码时就会遇到一些障碍。</p>
 <p>另一方面，SQL 的解析过程本身也很复杂，你在拿到 ShardingSphere 框架的源代码时，可能首先会问这样一个问题：SQL 的解析过程应该包含哪些核心阶段呢？接下来我将带你深度剖析这个话题。</p>
 <h3>从 DataSource 到 SQL 解析引擎入口</h3>
@@ -225,14 +225,14 @@ shardingRuleConfig.setDefaultTableShardingStrategyConfig(new StandardShardingStr
 return ShardingDataSourceFactory.createDataSource(createDataSourceMap(), shardingRuleConfig, new Properties());
 </code></pre>
 <p>可以看到，上述代码构建了几个数据源，加上分库、分表策略以及分片规则，然后通过 ShardingDataSourceFactory 获取了目前数据源 DataSource 。显然，对于应用开发而言，<strong>DataSource 就是我们使用 ShardingSphere 框架的入口</strong>。事实上，对于 ShardingSphere 内部的运行机制而言，DataSource 同样是引导我们进入分片引擎的入口。围绕 DataSource，通过跟踪代码的调用链路，我们可以得到如下所示的类层结构图：</p>
-<p><img src="assets/Ciqc1F8nyriAPY8tAAB8wwhtMU4809.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8nyriAPY8tAAB8wwhtMU4809.png" alt="png" /></p>
 <p>上图已经引出了 ShardingSphere 内核中的很多核心对象，但今天我们只关注位于整个链路的最底层对象，即图中的 SQLParseEngine。一方面，在 DataSource 的创建过程中，最终初始化了 SQLParseEngine；另一方面，负责执行路由功能的 ShardingRouter 也依赖于 SQLParseEngine。这个 SQLParseEngine 就是 ShardingSphere 中负责整个 SQL 解析过程的入口。</p>
 <h3>从 SQL 解析引擎到 SQL 解析内核</h3>
 <p>在 ShardingSphere 中，存在一批以“Engine”结尾的引擎类。从架构思想上看，这些类在设计和实现上普遍采用了外观模式。外观（Facade）模式的意图可以描述为子系统中的一组接口提供一个一致的界面。外观模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。该模式的示意图如下图所示：</p>
-<p><img src="assets/Ciqc1F8nysKAKGdhAABINS6qFpI839.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F8nysKAKGdhAABINS6qFpI839.png" alt="png" /></p>
 <p>从作用上讲，外观模式能够起到<strong>客户端与后端服务之间的隔离作用</strong>，随着业务需求的变化和时间的演进，外观背后各个子系统的划分和实现可能需要进行相应的调整和升级，这种调整和升级需要做到<strong>对客户端透明</strong>。在设计诸如 ShardingSphere 这样的中间件框架时，这种隔离性尤为重要。</p>
 <p>对于 SQL 解析引擎而言，情况同样类似。不同之处在于，SQLParseEngine 本身并不提供外观作用，而是把这部分功能委托给了另一个核心类 SQLParseKernel。从命名上看，这个类才是 SQL 解析的内核类，也是所谓的外观类。SQLParseKernel 屏蔽了后端服务中复杂的 SQL 抽象语法树对象 SQLAST、SQL 片段对象 SQLSegment ，以及最终的 SQL 语句 SQLStatement 对象的创建和管理过程。上述这些类之间的关系如下所示：</p>
-<p><img src="assets/CgqCHl8nytiAcb6GAABVel2mPvE115.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8nytiAcb6GAABVel2mPvE115.png" alt="png" /></p>
 <h4>1.SQLParseEngine</h4>
 <p>从前面的类层结构图中可以看到，AbstractRuntimeContext 是 SQLParseEngine 的构建入口。顾名思义，RuntimeContext 在 ShardingSphere 中充当一种运行时上下文，保存着与运行时环境下相关的分片规则、分片属性、数据库类型、执行引擎以及 SQL 解析引擎。作为 RuntimeContext 接口的实现类，AbstractRuntimeContex 在其构造函数中完成了对 SQLParseEngine 的构建，构建过程如下所示：</p>
 <pre><code>protected AbstractRuntimeContext(final T rule, final Properties props, final DatabaseType databaseType) {
@@ -335,7 +335,7 @@ private final SQLStatementFillerEngine fillerEngine;
 <li>通过 SQLStatementFiller 填充 SQLStatement</li>
 </ul>
 <p>这三个阶段便是 ShardingSphere 新一代 SQL 解析引擎的核心组成部分。其整体架构如下图所示：</p>
-<p><img src="assets/Ciqc1F8nyz2AaMf0AACQcl1OWTw870.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F8nyz2AaMf0AACQcl1OWTw870.png" alt="png" /></p>
 <p>至此，我们看到由<strong>解析、提取和填充</strong>这三个阶段所构成的整体 SQL 解析流程已经完成。现在能够根据一条 SQL 语句解析出对应的 SQLStatement 对象，供后续的 ShardingRouter 等路由引擎进行使用。</p>
 <p>本课时我们首先关注流程中的第一阶段，即如何生成一个 SQLAST（后两个阶段会在后续课时中讲解）。这部分的实现过程位于 SQLParserEngine 的 parse 方法，如下所示：</p>
 <pre><code>public SQLAST parse() {
@@ -388,7 +388,7 @@ private final SQLStatementFillerEngine fillerEngine;
 <p>从这种实现方式上看，我们可以断定 SQLParserEntry 是一个 SPI 接口。通过查看 SQLParserEntry 所处的代码包结构，更印证了这一观点，因为该类位于 shardingsphere-sql-parser-spi 工程的 org.apache.shardingsphere.sql.parser.spi 包中。</p>
 <p>关于 SQLParser 和 SQLParserEntry 这一对接口，还有一点值得探讨。注意到 SQLParser 接口位于 shardingsphere-sql-parser-spi 工程的 org.apache.shardingsphere.sql.parser.api 包中，所示它是一个 API 接口。</p>
 <p>从定位上讲，SQLParser 是解析器对外暴露的入口，而 SQLParserEntry 是解析器的底层实现，两者共同构成了 SQL 解析器本身。更宽泛的，从架构设计层次上讲，API 面向高层业务开发人员，而 SPI 面向底层框架开发人员，两者的关系如下图所示。作为一款优秀的中间件框架，这种 API 和 SPI 的对应关系在 ShardingSphere 中非常普遍，也是我们正确理解 ShardingSphere 架构设计上的一个切入点。</p>
-<p><img src="assets/CgqCHl8ny3WAAR7gAABKWeCFeTg698.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl8ny3WAAR7gAABKWeCFeTg698.png" alt="png" /></p>
 <p>SQLParser 和 SQLParserEntry 这两个接口的定义和实现都与基于 ANTLR4 的 AST 生成机制有关。ANTLR 是 Another Tool for Language Recognition 的简写，是一款能够根据输入自动生成语法树的开源语法分析器。ANTLR 可以将用户编写的 ANTLR 语法规则直接生成 Java、Go 语言的解析器，在 ShardingSphere 中就使用了 ANTLR4 来生成 AST。</p>
 <p>我们注意到 SQLParserEngine 的 parse 方法最终返回的是一个 SQLAST，该类的定义如下所示。</p>
 <pre><code>public final class SQLAST {

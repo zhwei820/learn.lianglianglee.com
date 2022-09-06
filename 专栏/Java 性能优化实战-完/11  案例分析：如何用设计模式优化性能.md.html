@@ -212,11 +212,11 @@ public class AopController {
 <pre><code>class com.github.xjjdog.spring.ABean$$EnhancerBySpringCGLIB$$a5d91535 | 1023
 </code></pre>
 <p>下面使用 arthas 分析这个执行过程，找出耗时最高的 AOP 方法。启动 arthas 后，可以从列表中看到我们的应用程序，在这里，输入 2 进入分析界面。</p>
-<p><img src="assets/Ciqc1F86TXeAUqo-AADHJU0cEYI383.jpg" alt="15956792012866.jpg" /></p>
+<p><img src="assets/Ciqc1F86TXeAUqo-AADHJU0cEYI383.jpg" alt="png" /></p>
 <p>在终端输入 trace 命令，然后访问 /aop 接口，终端将打印出一些 debug 信息，可以发现耗时操作就是 Spring 的代理类。</p>
 <pre><code>trace com.github.xjjdog.spring.ABean method
 </code></pre>
-<p><img src="assets/Ciqc1F86TX-Ad9lAAAEgaEWakik394.jpg" alt="15956796510862.jpg" /></p>
+<p><img src="assets/Ciqc1F86TX-Ad9lAAAEgaEWakik394.jpg" alt="png" /></p>
 <h3>代理模式</h3>
 <p>代理模式（Proxy）可以通过一个代理类，来控制对一个对象的访问。</p>
 <p>Java 中实现动态代理主要有两种模式：一种是使用 JDK，另外一种是使用 CGLib。</p>
@@ -242,7 +242,7 @@ ProxyCreateBenchmark.jdk    thrpt   10  15612.467 ±  268.362  ops/ms
 <p>当指定为单例时（默认行为），在 Spring 容器中，组件有且只有一份，当你注入相关组件的时候，获取的组件实例也是同一份。</p>
 <p>如果是普通的单例类，我们通常将单例的构造方法设置成私有的，单例有懒汉加载和饿汉加载模式。</p>
 <p>了解 JVM 类加载机制的同学都知道，一个类从加载到初始化，要经历 5 个步骤：加载、验证、准备、解析、初始化。</p>
-<p><img src="assets/Ciqc1F86TV-AT0GiAABJVGTaUd8838.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F86TV-AT0GiAABJVGTaUd8838.png" alt="png" /></p>
 <p>其中，static 字段和 static 代码块，是属于类的，在类加载的初始化阶段就已经被执行。它在字节码中对应的是 方法，属于类的（构造方法）。因为类的初始化只有一次，所以它就能够保证这个加载动作是线程安全的。</p>
 <p>根据以上原理，只要把单例的初始化动作，放在方法里，就能够实现<strong>饿汉模式</strong>。</p>
 <pre><code>private static Singleton instace = new Singleton();
@@ -250,7 +250,7 @@ ProxyCreateBenchmark.jdk    thrpt   10  15612.467 ±  268.362  ops/ms
 <p>饿汉模式在代码里用的很少，它会造成资源的浪费，生成很多可能永远不会用到的对象。
 而对象初始化就不一样了。通常，我们在 new 一个新对象的时候，都会调用它的构造方法，就是，用来初始化对象的属性。由于在同一时刻，多个线程可以同时调用函数，我们就需要使用 synchronized 关键字对生成过程进行同步。</p>
 <p>目前，<strong>公认的兼顾线程安全和效率的单例模式，就是 double check。很多面试官，会要求你手写，并分析 double check 的原理。</strong></p>
-<p><img src="assets/Ciqc1F86TauAd8scAAB4D1n3djc759.jpg" alt="15957667011612.jpg" /></p>
+<p><img src="assets/Ciqc1F86TauAd8scAAB4D1n3djc759.jpg" alt="png" /></p>
 <p>如上图，是 double check 的关键代码，我们介绍一下四个关键点：</p>
 <ul>
 <li>第一次检查，当 instance 为 null 的时候，进入对象实例化逻辑，否则直接返回。</li>

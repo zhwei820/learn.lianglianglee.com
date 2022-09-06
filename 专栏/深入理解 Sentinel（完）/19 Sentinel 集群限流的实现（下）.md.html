@@ -230,7 +230,7 @@ function hide_canvas() {
 </code></pre>
 <p>EmbeddedClusterTokenServer 接口继承 ClusterTokenServer，并继承 TokenService 接口，即整合客户端和服务端的功能，为嵌入式模式提供支持。在嵌入式模式下，如果当前节点是集群限流服务端，那就没有必要发起网络请求。</p>
 <p>这些接口以及默认实现类的关系如下图所示。</p>
-<p><img src="assets/a3a9f1c0-f5b9-11ea-a625-2d171281165b" alt="19-01-classs" /></p>
+<p><img src="assets/a3a9f1c0-f5b9-11ea-a625-2d171281165b" alt="png" /></p>
 <p>其中 DefaultClusterTokenClient 是 sentinel-cluster-client-default 模块中的 ClusterTokenClient 接口实现类，DefaultTokenService 与 DefaultEmbeddedTokenServer 分别是 sentinel-cluster-server-default 模块中的 ClusterTokenServer 接口与 EmbeddedClusterTokenServer 接口的实现类。</p>
 <p>当使用嵌入模式启用集群限流服务端时，使用的是 EmbeddedClusterTokenServer，否则使用 ClusterTokenServer，通过 Java SPI 实现。</p>
 <h4><strong>集群限流客户端</strong></h4>

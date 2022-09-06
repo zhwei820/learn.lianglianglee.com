@@ -195,7 +195,7 @@ function hide_canvas() {
                         <div><h1>03 ACL 权限控制：如何避免未经授权的访问？</h1>
 <p>在前边的几节课程中，我们学习了数据模型节点、Watch 监控机制等知识。并利用这些知识实现了在分布式环境中经常用到的诸如分布式锁、配置管理等功能。这些功能的本质都在于操作数据节点，而如果作为分布式锁或配置项的数据节点被错误删除或修改，那么对整个分布式系统有很大的影响，甚至会造成严重的生产事故。而作为在分布式领域应用最为广泛的一致性解决框架，ZooKeeper 提供一个很好的解决方案那就是 ACL 权限控制。</p>
 <p>说到 ACL 可能你会觉得陌生，但是提到权限控制相信你一定很熟悉。比如 Linux 系统将对文件的使用者分为三种身份，即 User、Group、Others。使用者对文件拥有读（read） 写（write）以及执行（execute）3 种方式的控制权。这种权限控制方式相对比较粗糙，在复杂的授权场景下往往并不适用。比如下边一个应用场景。</p>
-<p><img src="assets/CgqCHl67twGANQ9kAABTpMHtYI0138.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl67twGANQ9kAABTpMHtYI0138.png" alt="png" /></p>
 <p>上图给出了某个技术开发公司的一个工作项目 /object 。项目中的每个开发人员都可以读取和修改该项目中的文件，作为开发组长也对这个项目文件具有读取和修改的权限。其他技术开发组的员工则不能访问这个项目。如果我们用之前说到的 Linux 权限应该怎么设计呢？</p>
 <p>首先作为技术组长使用 User 身份，具有读、写、执行权限。项目组其他成员使用 Group 身份，具有读写权限，其他项目组的人员则没有任何权限。这样就实现了满足要求的权限设定了。</p>
 <p>但是，如果技术组新加入一个实习人员，为了能让他熟悉项目，必须具有该项目的读取的权限。但是目前他不具备修改项目的能力，所以并没给他赋予写入的权限。而如果使用现有的权限设置，显然将其分配给 User 用户或者 Group 用户都并不合适。而如果修改 Others 用户的权限，其他项目组的成员也能访问该项目文件。显然普通的三种身份的权限划分是无法满足要求的。而 ZooKeeper 中的 ACl 就能应对这种复杂的权限应用场景。</p>
@@ -226,13 +226,13 @@ addauth digest user:passwd
 <li>数据节点（delete）删除权限，授予权限的对象可以删除该数据节点的子节点；</li>
 <li>数据节点（admin）管理者权限，授予权限的对象可以对该数据节点体进行 ACL 权限设置。</li>
 </ul>
-<p><img src="assets/CgqCHl67tw2AbgggAACW3WWz4D4066.png" alt="image" /></p>
+<p><img src="assets/CgqCHl67tw2AbgggAACW3WWz4D4066.png" alt="png" /></p>
 <p>需要注意的一点是，<strong>每个节点都有维护自身的 ACL 权限数据，即使是该节点的子节点也是有自己的 ACL 权限而不是直接继承其父节点的权限</strong>。如下中“172.168.11.1”服务器有“/Config”节点的读取权限，但是没有其子节点的“/Config/dataBase_Config1”权限。</p>
-<p><img src="assets/CgqCHl67txWALBicAABysKoJmFg484.png" alt="image" /></p>
+<p><img src="assets/CgqCHl67txWALBicAABysKoJmFg484.png" alt="png" /></p>
 <h4>实现自己的权限口控制</h4>
 <p>通过上边的介绍我们了解了 ZooKeeper 中的权限相关知识，虽然 ZooKeeper 自身的权限控制机制已经做得很细，但是它还是提供了一种权限扩展机制来让用户实现自己的权限控制方式。官方文档中对这种机制的定义是 “Pluggable ZooKeeper Authenication”，意思是可插拔的授权机制，从名称上我们可以看出它的灵活性。那么这种机制是如何实现的呢？</p>
 <p>首先，要想实现自定义的权限控制机制，最核心的一点是实现 ZooKeeper 提供的权限控制器接口 AuthenticationProvider。下面这张图片展示了接口的内部结构，用户通过该接口实现自定义的权限控制。</p>
-<p><img src="assets/CgqCHl67tyGAJKDxAABxRTWnmZs166.png" alt="image" /></p>
+<p><img src="assets/CgqCHl67tyGAJKDxAABxRTWnmZs166.png" alt="png" /></p>
 <p>实现了自定义权限后，如何才能让 ZooKeeper 服务端使用自定义的权限验证方式呢？接下来就需要将自定义的权限控制注册到 ZooKeeper 服务器中，而注册的方式通常有两种。</p>
 <p>第一种是通过设置系统属性来注册自定义的权限控制器：</p>
 <pre><code class="language-java">-Dzookeeper.authProvider.x=CustomAuthenticationProvider

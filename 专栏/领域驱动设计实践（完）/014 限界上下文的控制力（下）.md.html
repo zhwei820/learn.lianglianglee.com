@@ -545,7 +545,7 @@ function hide_canvas() {
 <p>如上的诸多案例都是从技术层面而非业务层面为系统划分了应用边界，这种边界是由限界上下文完成的，通过它形成了对技术实现的隔离，避免不同的技术方案选择互相干扰导致架构的混乱。</p>
 <h3>案例：生成税务报告的技术风险</h3>
 <p>国际税务系统需要在政府指定的周期提交税务报告，凡是满足条件的 Assignee 都需要在规定时间内生成税务报告。在生成税务报告时，需要对 Assignee 提交的 Questionnaire 数据进行合并，并基于税收策略与 Assignee 个人情况执行计算。生成税务报告的时序图如下所示：</p>
-<p><img src="assets/7c416280-a039-11e8-b8d0-2b58eb2c7eec" alt="enter image description here" /></p>
+<p><img src="assets/7c416280-a039-11e8-b8d0-2b58eb2c7eec" alt="png" /></p>
 <p>代码如下所示：</p>
 <pre><code class="language-java">public class TaxReportGenerator {
     @Service
@@ -568,7 +568,7 @@ function hide_canvas() {
 <li>将报告生成识别为限界上下文，定义为可以单独部署的微服务，以便于灵活地实现水平扩展。</li>
 </ul>
 <p>如下图是我们基于技术实现识别出来的 report 限界上下文。在上下文边界内，引入了消息队列。server 作为生成者，在收集了税务数据后组装消息，然后将消息入队；作为消费者的 worker 订阅该消息，一旦消息传递到达，则负责生成报告：</p>
-<p><img src="assets/907cfb10-a039-11e8-a6c4-6bd0a07de37c" alt="enter image description here" /></p>
+<p><img src="assets/907cfb10-a039-11e8-a6c4-6bd0a07de37c" alt="png" /></p>
 <p>无论是 server 还是 worker，皆为并行执行，且在理论上可以无限制地水平扩展。倘若在性能上无法满足要求，我们可以增加 server 或 worker 节点。例如，我们希望所有税务报告能够在 4 小时内处理完毕，通过公式<code>2000*1/60/4</code>计算，预估需要 7 个 worker 并行执行即可满足目标。</p>
 </div>
                     </div>

@@ -177,7 +177,7 @@ public class AuthorizationServer {
 <h3>设置客户端和用户认证信息</h3>
 <p>上一讲我们提到 OAuth2 协议存在四种授权模式，并提到在微服务架构中，密码模式以其简单性得到了广泛的应用。在接下来的内容中，我们就以密码模式为例展开讲解。</p>
 <p>在密码模式下，用户向客户端提供用户名和密码，并将用户名和密码发给授权服务器从而请求 Token。授权服务器首先会对密码凭证信息进行认证，确认无误后，向客户端发放 Token。整个流程如下图所示：</p>
-<p><img src="assets/Cgp9HWDwB2GATe64AAEacKakyHk379.jpg" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWDwB2GATe64AAEacKakyHk379.jpg" alt="png" /></p>
 <p>密码模式授权流程示意图</p>
 <p>请注意，授权服务器在这里执行认证操作的目的是<strong>验证传入的用户名和密码是否正确</strong>。在密码模式下，这一步是必需的，如果采用其他授权模式，不一定会有用户认证这一环节。</p>
 <p>确定采用密码模式后，我们来看为了实现这一授权模式，需要对授权服务器做哪些开发工作。首先我们需要设置一些基础数据，包括客户端信息和用户信息。</p>
@@ -270,11 +270,11 @@ public class SpringWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 <h3>生成 Token</h3>
 <p>现在，OAuth2 授权服务器已经构建完毕，启动这个授权服务器，我们就可以获取 Token。我们在构建 OAuth2 服务器时已经提到授权服务器中会暴露一批端点供 HTTP 请求进行访问，而获取 Token 的端点就是<a href="http://localhost:8080/oauth/token">http://localhost:8080/oauth/token</a>。在使用该端点时，我们需要提供前面配置的客户端信息和用户信息。</p>
 <p>这里使用 Postman 来模拟 HTTP 请求，客户端信息设置方式如下图所示：</p>
-<p><img src="assets/Cgp9HWDwB76Ad4WHAAFWqbAkk6I359.jpg" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWDwB76Ad4WHAAFWqbAkk6I359.jpg" alt="png" /></p>
 <p>客户端信息设置示意图</p>
 <p>我们在“Authorization”请求头中指定认证类型为“Basic Auth”，然后设置客户端名称和客户端安全码分别为“spring”和“spring_secret”。</p>
 <p>接下来我们指定针对授权模式的专用配置信息。首先是用于指定授权模式的 grant_type 属性，以及用于指定客户端访问范围的 scope 属性，这里分别设置为 “password”和“webclient”。既然设置了密码模式，所以也需要指定用户名和密码用于识别用户身份，这里，我们以“spring_user”这个用户为例进行设置，如下图所示：</p>
-<p><img src="assets/Cgp9HWDwB_CAVjFCAAEqxkNRiNY244.jpg" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWDwB_CAVjFCAAEqxkNRiNY244.jpg" alt="png" /></p>
 <p>用户信息设置示意图</p>
 <p>在 Postman 中执行这个请求，会得到如下所示的返回结果：</p>
 <pre><code>{
@@ -289,7 +289,7 @@ public class SpringWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 <h3>小结与预告</h3>
 <p>对微服务访问进行安全性控制的首要条件是<strong>生成一个访问 Token</strong>。这一讲我们从构建 OAuth2 服务器讲起，基于密码模式给出了如何设置客户端信息、用户认证信息以及最终生成 Token 的实现过程。这个过程中需要开发人员熟悉 OAuth2 协议的相关概念以及 Spring Security 框架中提供的各项配置功能。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWDwCAOAI2-LAAGPXTcuzx0579.jpg" alt="13-2.jpg" /></p>
+<p><img src="assets/CioPOWDwCAOAI2-LAAGPXTcuzx0579.jpg" alt="png" /></p>
 <p>最后给你留一道思考题：基于密码模式，你能说明生成 Token 需要哪些具体的开发步骤吗？</p>
 </div>
                     </div>

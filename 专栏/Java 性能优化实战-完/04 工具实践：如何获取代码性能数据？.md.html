@@ -167,7 +167,7 @@ function hide_canvas() {
 <h1>nmon —— 获取系统性能数据</h1>
 <p>除了在上一课时中介绍的 top、free 等命令，还有一些将资源整合在一起的监控工具，</p>
 <p>nmon 便是一个老牌的 Linux 性能监控工具，它不仅有漂亮的监控界面（如下图所示），还能产出细致的监控报表。</p>
-<p><img src="assets/CgqCHl8X2gWANM2wAAkEF7IjoMg031.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8X2gWANM2wAAkEF7IjoMg031.png" alt="png" /></p>
 <p>我在对应用做性能评估时，通常会加上 nmon 的报告，这会让测试结果更加有说服力。你在平时工作中也可如此尝试。</p>
 <p>上一课时介绍的一些操作系统性能指标，都可从 nmon 中获取。它的监控范围很广，包括 CPU、内存、网络、磁盘、文件系统、NFS、系统资源等信息。</p>
 <p>nmon 在 sourceforge 发布，我已经下载下来并上传到了仓库中。比如我的是 CentOS 7 系统，选择对应的版本即可执行。</p>
@@ -182,12 +182,12 @@ function hide_canvas() {
 root      2228     1  0 16:33 pts/0    00:00:00 ./nmon_x86_64_centos7 -f -s 5 -c 12 -m .
 </code></pre>
 <p>使用 nmonchart 工具（见仓库），即可生成 html 文件。下面是生成文件的截图。</p>
-<p><img src="assets/Ciqc1F8X2m6ABh9lAAqiFOnIMT0061.png" alt="Drawing 1.png" />
+<p><img src="assets/Ciqc1F8X2m6ABh9lAAqiFOnIMT0061.png" alt="png" />
 nmonchart 报表</p>
 <h1>jvisualvm —— 获取 JVM 性能数据</h1>
 <p>jvisualvm 原是随着 JDK 发布的一个工具，Java 9 之后开始单独发布。通过它，可以了解应用在运行中的内部情况。我们可以连接本地或者远程的服务器，监控大量的性能数据。</p>
 <p>通过插件功能，jvisualvm 能获得更强大的扩展。如下图所示，建议把所有的插件下载下来进行体验。</p>
-<p><img src="assets/CgqCHl8X3PeAPufLAAPBFcBR8qY801.png" alt="Drawing 2.png" />
+<p><img src="assets/CgqCHl8X3PeAPufLAAPBFcBR8qY801.png" alt="png" />
 jvisualvm 插件安装</p>
 <p>要想监控远程的应用，还需要在被监控的 App 上加入 jmx 参数。</p>
 <pre><code>-Dcom.sun.management.jmxremote.port=14000
@@ -196,7 +196,7 @@ jvisualvm 插件安装</p>
 </code></pre>
 <p>上述配置的意义是开启 JMX 连接端口 14000，同时配置不需要 SSL 安全认证方式连接。</p>
 <p>对于性能优化来说，我们主要用到它的采样器。注意，由于抽样分析过程对程序运行性能有较大的影响，一般我们只在测试环境中使用此功能。</p>
-<p><img src="assets/CgqCHl8X3QOANLEGAAaKW6xLOSg775.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl8X3QOANLEGAAaKW6xLOSg775.png" alt="png" /></p>
 <p>jvisualvm CPU 性能采样图</p>
 <p>对于一个 Java 应用来说，除了要关注它的 CPU 指标，垃圾回收方面也是不容忽视的性能点，我们主要关注以下三点。</p>
 <ul>
@@ -215,48 +215,48 @@ jcmd &lt;pid&gt; JFR.stop
 <p><strong>JMC 集成了 JFR 的功能</strong>，下面介绍一下 JMC 的使用。</p>
 <h2>1.录制</h2>
 <p>下图是录制了一个 Tomcat 一分钟之后的结果，从左边的菜单栏即可进入相应的性能界面。</p>
-<p><img src="assets/CgqCHl8X3SyAbYa7AAfd6jZo6t4915.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8X3SyAbYa7AAfd6jZo6t4915.png" alt="png" /></p>
 <p>JMC 录制结果主界面</p>
 <p>通过录制数据，可以清晰了解到某一分钟内，操作系统资源，以及 JVM 内部的性能数据情况。</p>
 <h2>2.线程</h2>
 <p>选择相应的线程，即可了解线程的执行情况，比如 Wait、Idle 、Block 等状态和时序。</p>
 <p>以 C2 编译器线程为例，可以看到详细的热点类，以及方法内联后的代码大小。如下图所示，C2 此时正在疯狂运转。</p>
-<p><img src="assets/Ciqc1F8X3TWASVq0AAY9V2QKEX8030.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8X3TWASVq0AAY9V2QKEX8030.png" alt="png" /></p>
 <p>JMC 录制结果 线程界面</p>
 <h2>3.内存</h2>
 <p>通过内存界面，可以看到每个时间段内内存的申请情况。在排查内存溢出、内存泄漏等情况时，这个功能非常有用。</p>
-<p><img src="assets/Ciqc1F8X3T6AesX5AAcyVYacyeQ529.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8X3T6AesX5AAcyVYacyeQ529.png" alt="png" /></p>
 <p>JMC 录制结果 内存界面</p>
 <h2>4.锁</h2>
 <p>一些竞争非常严重的锁信息，以及一些死锁信息，都可以在锁信息界面中找到。</p>
 <p>可以看到，一些锁的具体 ID，以及关联的线程信息，都可以进行联动分析。</p>
-<p><img src="assets/CgqCHl8X3UeAJ5L_AAQ7-kTs7YM289.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8X3UeAJ5L_AAQ7-kTs7YM289.png" alt="png" /></p>
 <p>JMC 录制结果 锁信息界面</p>
 <h2>5.文件和 Socket</h2>
 <p>文件和 Socket 界面能够监控对 I/O 的读写，界面一目了然。如果你的应用 I/O 操作比较繁重，比如日志打印比较多、网络读写频繁，就可以在这里监控到相应的信息，并能够和执行栈关联起来。</p>
-<p><img src="assets/Ciqc1F8X3VGABH4xAAfkaSBZDio750.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F8X3VGABH4xAAfkaSBZDio750.png" alt="png" /></p>
 <p>JMC 录制结果 文件和 Socket 界面</p>
 <h2>6.方法调用</h2>
 <p>这个和 jvisualvm 的功能类似，展示的是方法调用信息和排行。从这里可以看到一些高耗时方法和热点方法。</p>
-<p><img src="assets/CgqCHl8X3WOAYQSCAAVmKbHpuBQ717.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8X3WOAYQSCAAVmKbHpuBQ717.png" alt="png" /></p>
 <p>JMC 录制结果 方法调用</p>
 <h2>7.垃圾回收</h2>
 <p>如果垃圾回收过于频繁，就会影响应用的性能。JFR 对垃圾回收进行了详细的记录，比如什么时候发生了垃圾回收，用的什么垃圾回收器，每次垃圾回收的耗时，甚至是什么原因引起的等问题，都可以在这里看到。</p>
-<p><img src="assets/Ciqc1F8X3X6ACtlVAAgwHnO3oHQ281.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F8X3X6ACtlVAAgwHnO3oHQ281.png" alt="png" /></p>
 <p>JMC 录制结果 垃圾回收</p>
 <h2>8.JIT</h2>
 <p>JIT 编译后的代码，执行速度会特别快，但它需要一个编译过程。编译界面显示了详细的 JIT 编译过程信息，包括生成后的 CodeCache 大小、方法内联信息等。</p>
-<p><img src="assets/CgqCHl8X3Y2AWi8dAAZ8RGTPyoA991.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl8X3Y2AWi8dAAZ8RGTPyoA991.png" alt="png" /></p>
 <p>JMC 录制结果 JIT 信息</p>
 <h2>9.TLAB</h2>
 <p>JVM 默认给每个线程开辟一个 buffer 区域，用来加速对象分配，这就是 TLAB（Thread Local Allocation Buffer）的概念。这个 buffer，就放在 Eden 区。</p>
 <p>原理和 Java 语言中的 ThreadLocal 类似，能够避免对公共区的操作，可以减少一些锁竞争。如下图所示的界面，详细地显示了这个分配过程。</p>
-<p><img src="assets/CgqCHl8X3baAW4VFAAaz04YR1w4277.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgqCHl8X3baAW4VFAAaz04YR1w4277.png" alt="png" /></p>
 <p>JMC 录制结果 TLAB 信息</p>
 <p>在后面的课时中，我们会有多个使用此工具的分析案例。</p>
 <h1>Arthas —— 获取单个请求的调用链耗时</h1>
 <p>Arthas 是一个 Java 诊断工具，可以排查内存溢出、CPU 飙升、负载高等内容，可以说是一个 jstack、jmap 等命令的大集合。</p>
-<p><img src="assets/CgqCHl8X3eSAP67rAANG-JDjv2E614.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/CgqCHl8X3eSAP67rAANG-JDjv2E614.png" alt="png" /></p>
 <p>Arthas 启动界面</p>
 <p>Arthas 支持很多命令，我们以 trace 命令为例。</p>
 <p>有时候，我们统计到某个接口的耗时非常高，但又无法找到具体原因时，就可以使用这个 trace 命令。该命令会从方法执行开始记录整个链路上的执行情况，然后统计每个节点的性能开销，最终以树状打印，很多性能问题一眼就能看出来。</p>

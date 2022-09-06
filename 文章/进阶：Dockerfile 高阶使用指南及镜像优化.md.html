@@ -491,7 +491,7 @@ function hide_canvas() {
 <h4>builder</h4>
 <p>这里我们需要引入一个概念 <strong>builder</strong> .</p>
 <p>builder 就是上面提到的特定模块，也就是说构建内容 context 是由 Docker CLI 发送给 dockerd；并最终由 builder 完成构建。</p>
-<p><img src="assets/7141ec30-830d-11e9-8eb9-49b38b06f9d6.jpg" alt="enter image description here" /></p>
+<p><img src="assets/7141ec30-830d-11e9-8eb9-49b38b06f9d6.jpg" alt="png" /></p>
 <p>在 <code>docker</code> 的顶级命令中，我们可以看到有一个 <code>builder</code> 的命令组。它有一个子命令 <code>prune</code> 用于清理所有构建过程中的缓存。</p>
 <p>以下是 Docker 18.09 的输出信息。</p>
 <pre><code>/ # docker builder
@@ -876,7 +876,7 @@ ff4a9e18658e        moby/buildkit:master   &quot;buildkitd&quot;         About a
 <h4>发现</h4>
 <p>首先推荐一个工具 <a href="https://github.com/wagoodman/dive">dive</a> ; 通过上次的 Chat 我们已经知道了镜像的组成和结构，dive 是一个命令行工具，使用它可以浏览 Docker 镜像每层的内容，以此来发现我们镜像中是否有什么不需要的东西存在。</p>
 <p>关于 dive 这里不做过多介绍了，该项目的文档中介绍还是比较详细的，我们可以用它来分析下刚才我们构建成功的镜像：</p>
-<p><img src="assets/2f5601d0-830d-11e9-a8d7-c164a8393e9a.jpg" alt="enter image description here" /></p>
+<p><img src="assets/2f5601d0-830d-11e9-a8d7-c164a8393e9a.jpg" alt="png" /></p>
 <p>第二种方法，则是比较一般的，通过之前介绍的 <code>docker image history</code> 来查看构建记录和每层的大小，以此来观察是否有非必要的操作之类的。</p>
 <h4>优化</h4>
 <p>我们对前面所举例中的 Spring Boot 项目的 Dockerfile 做点小改动：</p>

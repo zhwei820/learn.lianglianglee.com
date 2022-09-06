@@ -593,7 +593,7 @@ TransactionId:1-322</p>
 <li>在解析过程中，判断是否有主键，如果没有主键就使用二级索引，再没有二级索引就扫描全表。</li>
 </ul>
 <p>初始结构如下图
-<img src="assets/20210418151707365.png" alt="GTID" />
+<img src="assets/20210418151707365.png" alt="png" />
 当Master出现宕机后，就会演变成下图。
 <img src="assets/2021041815183969.png" alt="GTID复制" />
 通过上图我们可以看出来，当Master挂掉后，Slave-1执行完了Master的事务，Slave-2延时一些，所以没有执行完Master的事务，这个时候提升Slave-1为主，Slave-2连接了新主（Slave-1）后，将最新的GTID传给新主，然后Slave-1就从这个GTID的下一个GTID开始发送事务给Slave-2。<strong>这种自我寻找复制位置的模式减少事务丢失的可能性以及故障恢复的时间。</strong></p>

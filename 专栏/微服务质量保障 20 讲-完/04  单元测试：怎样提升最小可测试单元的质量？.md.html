@@ -158,7 +158,7 @@ function hide_canvas() {
 <h3>单元测试的价值</h3>
 <p>单元测试是一种白盒测试技术，通常由开发人员在编码阶段完成，目的是验证软件代码中的每个单元（方法或类等）是否符合预期，即<strong>尽早</strong>在<strong>尽量小的范围内</strong>暴露问题。</p>
 <p>我们都知道，问题发现得越早，修复的代价越小。毫无疑问，在开发阶段进行正确的单元测试可以极大地节省时间和金钱。如果跳过单元测试，会导致在后续更高级别的测试阶段产生更高的缺陷修复成本。</p>
-<p><img src="assets/Ciqc1F8f7cWAVsrMAABFwThSg-U472.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F8f7cWAVsrMAABFwThSg-U472.png" alt="png" /></p>
 <p>如图，假如有一个只包含两个单元 A 和 B 的程序，且只执行端到端测试，如果在测试过程中发现了缺陷，则可能有如下多种原因：</p>
 <ul>
 <li>该缺陷由单元 A 中的缺陷引起；</li>
@@ -185,10 +185,10 @@ function hide_canvas() {
 <p>就像之前课程所说：<strong>微服务中最大的复杂性不在于服务本身，而在于微服务之间的交互方式，服务与服务之间常常互相调用以实现更多更复杂的功能。</strong></p>
 <p>举个例子，我们需要测试的是订单类（Order）中的获取总价方法（getTotalPrice()），而在该方法中除了自有的一些代码逻辑外，通常需要去调用其他类的方法。比如这里调用的是用户类（User）的优惠等级方法（reductionLevel ()）和商品类（Goods）中的商品价格方法（getUnitPrice()）。很显然，优惠等级方法或商品价格方法，只要一方有错误，就会导致订单类获取总价方法的测试失败。基于这种情况，可以有两种单元测试类型。</p>
 <h4>1. 社交型单元测试（Sociable Unit Testing）</h4>
-<p><img src="assets/CgqCHl8f7e6AKMwnAABnkatxrFM928.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl8f7e6AKMwnAABnkatxrFM928.png" alt="png" /></p>
 <p>如图，测试订单类的获取总价方法（Order.getTotalPrice()）时会真实调用用户类的优惠等级方法（User.reductionLevel()）和商品类的商品单价方法（Goods.getUnitPrice()）。将被测试单元视为黑盒子，直接对其进行测试，这种单元测试称之为<strong>社交型单元测试（Sociable Unit Testing）</strong>。</p>
 <h4>2. 孤立型单元测试（Solitary Unit Testing）</h4>
-<p><img src="assets/Ciqc1F8f7h-AU6TmAAC372KA44g862.png" alt="Lark20200728-165448.png" /></p>
+<p><img src="assets/Ciqc1F8f7h-AU6TmAAC372KA44g862.png" alt="png" /></p>
 <p>如图，如果测试订单类的获取总价方法（Order.getTotalPrice()）时，使用测试替身 <strong>（test doubles）</strong> 技术来替代用户类的优惠等级方法（User.reductionLevel()）和商品类的商品单价方法（Goods.getUnitPrice()）的效果。对象及其依赖项之间的交互和协作被<strong>测试替身</strong>代替，这种单元测试称之为<strong>孤立型单元测试（Solitary Unit Testing）</strong>。</p>
 <p>另外，上述提到的测试替身是一种在测试中使用对象代替实际对象的技术，常用的技术如下。</p>
 <ul>
@@ -196,9 +196,9 @@ function hide_canvas() {
 <li><strong>模拟代码（Mocks）</strong>：模拟代码跟桩代码类似，它除了代替真实代码的能力之外，更强调是否使用了特定的参数调用了特定方法，因此，这种对象成为我们测试结果的基础。</li>
 </ul>
 <p>根据被测单元是否与其交互者隔离，会产生以上两种单元测试类型，这两种类型的单元测试在微服务测试中都起着重要作用，它们用来解决不同的测试问题。</p>
-<p><img src="assets/CgqCHl8f7kiAI3ksAAFYtUA3syQ407.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8f7kiAI3ksAAFYtUA3syQ407.png" alt="png" /></p>
 <p><strong>由上图可知，在微服务架构中，不同组成使用的单元测试类型不同：</strong></p>
-<p><img src="assets/CgqCHl8f7lqAYCVuAACnpSlf1e4918.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8f7lqAYCVuAACnpSlf1e4918.png" alt="png" /></p>
 <p>特别注意：当微服务的（网关+仓库+资源+服务层）与（域逻辑）之比相对较大时，单元测试可能收益不大。常见的情况有小型服务或某些几乎只包含了网关+仓库+资源+服务层等内容的服务，例如适配服务等。</p>
 <h3>如何开展单元测试？</h3>
 <p>在实际项目过程当中，应该怎样开展单元测试呢？通常来说，可以通过如下四个步骤来进行。</p>
@@ -216,7 +216,7 @@ function hide_canvas() {
 <p>只单纯地看单元测试的执行通过率还比较单一，为了更全面地看到测试的覆盖情况，可以借助代码覆盖率工具和技术。在 Java 语言里，常用覆盖率工具有 Jacoco、Emma 和 Cobertura，个人推荐使用 Jacoco。</p>
 <h4>4. 接入持续集成工具</h4>
 <p>接入持续集成工具是为了形成工具链，将单元测试、代码覆盖率统计集成在一起，使得代码有提交时便自动触发单元测试用例的执行，并伴随有代码覆盖率的统计，最后可以看到单元测试报告的数据（用例通过情况和代码层面各个维度的覆盖数据）。接着可以判断是否需要修改代码，这便形成了一个代码质量的反馈环，如下图所示。</p>
-<p><img src="assets/CgqCHl8f7peAZGzxAABmknW8jXs450.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8f7peAZGzxAABmknW8jXs450.png" alt="png" /></p>
 <p>后续的文章还会讲解到代码覆盖率工具和持续集成工具。</p>
 <h3>单元测试最佳实践</h3>
 <p>了解了如何开展单元测试，那么如何做到最好呢？我们都知道，代码产生错误无非是对一个业务逻辑或代码逻辑没有实现、实现不充分、实现错误或过分实现，所以无论是拆解业务逻辑还是拆解逻辑控制时都要做到 <strong>MECE 原则</strong>（全称 Mutually Exclusive Collectively Exhaustive，中文意思是“相互独立，完全穷尽”，即日常沟通中常说的“不重不漏”）。</p>

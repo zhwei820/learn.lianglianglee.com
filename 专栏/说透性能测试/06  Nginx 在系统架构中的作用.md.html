@@ -175,9 +175,9 @@ function hide_canvas() {
 <p>那我们的外网用户如何能够访问到内部的应用呢，Nginx 可以暴露端口给外网用户访问，当接收到请求之后分发给内部的服务器，此时的 Nginx 扮演的是<strong>反向代理的角色</strong>。这样一个过程，客户端是明确的，但对于访问到哪台具体的应用服务器是不明确的。就好像一个上海飞北京的班次，可能还有很多乘客到达北京之后会去沈阳、哈尔滨等，对于出发地上海而言，这个是不关心的。</p>
 <h4>负载均衡</h4>
 <p>负载均衡是 Nginx 最重要也是最常见的功能，为什么需要负载均衡呢？你可以想一想，比如你线上只有一台应用服务器，如下图所示。</p>
-<p><img src="assets/Ciqc1GAOtASAFkMnAAB8g0S7vEo985.png" alt="-1.png" /></p>
+<p><img src="assets/Ciqc1GAOtASAFkMnAAB8g0S7vEo985.png" alt="png" /></p>
 <p>但是随着用户体量的上升，一台服务器并不能支撑现有用户的访问，那你就会考虑使用两台或者多台服务器，如下图所示：</p>
-<p><img src="assets/CgqCHmAOtBuAdrykAADniCVZ-pg926.png" alt="-2.png" /></p>
+<p><img src="assets/CgqCHmAOtBuAdrykAADniCVZ-pg926.png" alt="png" /></p>
 <p>那用户如何能够相对均匀地访问到这些服务器呢，这就需要你去了解 Nginx 的负载均衡策略，简单来说，就是 Nginx 如何分发这些请求到后面的应用服务器集群，下面我介绍下 Nginx 的三种分配策略。</p>
 <p><strong>（1）轮询</strong></p>
 <p>也就是使用平均分配的方式，将每个请求依次分配到配置的后端服务器上。除非有服务宕机，才会停止分发。如下代码所示：</p>

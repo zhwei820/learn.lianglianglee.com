@@ -305,7 +305,7 @@ function hide_canvas() {
 <h3>Apache Curator 基础</h3>
 <p><strong>Apache Curator 是 Apache 基金会提供的一款 ZooKeeper 客户端，它提供了一套易用性和可读性非常强的 Fluent 风格的客户端 API ，可以帮助我们快速搭建稳定可靠的 ZooKeeper 客户端程序。</strong></p>
 <p>为便于你更全面了解 Curator 的功能，我整理出了如下表格，展示了 Curator 提供的 jar 包：</p>
-<p><img src="assets/Ciqc1F87iUKAAAs2AAE2Xaps_KE511.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F87iUKAAAs2AAE2Xaps_KE511.png" alt="png" /></p>
 <p>下面我们从最基础的使用展开，逐一介绍 Apache Curator 在实践中常用的核心功能，开始我们的 Apache Curator 之旅。</p>
 <h4>1. 基本操作</h4>
 <p>简单了解了 Apache Curator 各个组件的定位之后，下面我们立刻通过一个示例上手使用 Curator。首先，我们创建一个 Maven 项目，并添加 Apache Curator 的依赖：</p>
@@ -519,7 +519,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>接下来，我们打开 ZooKeeper 的命令行客户端，在 /user 节点下先后添加两个子节点，如下所示：</p>
-<p><img src="assets/Ciqc1F87iXuAQVanAABhI9RRD8M252.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F87iXuAQVanAABhI9RRD8M252.png" alt="png" /></p>
 <p>此时我们只得到一行输出：</p>
 <pre><code>NodeChildrenChanged,/user
 </code></pre>
@@ -616,13 +616,13 @@ TreeCache,type=NODE_ADDED path=/user/test2
 TreeCache,type=INITIALIZED
 </code></pre>
 <p>接下来，我们在 ZooKeeper 命令行客户端中<strong>更新 /user 节点中的数据</strong>：</p>
-<p><img src="assets/Ciqc1F87iY6ACWnvAAA8jA9QVgM875.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F87iY6ACWnvAAA8jA9QVgM875.png" alt="png" /></p>
 <p>得到如下输出：</p>
 <pre><code>TreeCache,type=NODE_UPDATED path=/user
 NodeCache节点路径：/user，节点数据为：userData
 </code></pre>
 <p><strong>创建 /user/test3 节点</strong>：</p>
-<p><img src="assets/CgqCHl87iZqAaG93AABwFnQJA7o497.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl87iZqAaG93AABwFnQJA7o497.png" alt="png" /></p>
 <p>得到输出：</p>
 <pre><code>TreeCache,type=NODE_ADDED path=/user/test3
 2020-06-26T08:35:22.393  CHILD_ADDED 
@@ -630,7 +630,7 @@ PathChildrenCache添加子节点:/user/test3
 PathChildrenCache子节点数据:xxx3
 </code></pre>
 <p><strong>更新 /user/test3 节点的数据</strong>：</p>
-<p><img src="assets/Ciqc1F87iaSAFZLpAABDyAm7vuE120.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F87iaSAFZLpAABDyAm7vuE120.png" alt="png" /></p>
 <p>得到输出：</p>
 <pre><code>TreeCache,type=NODE_UPDATED path=/user/test3
 2020-06-26T08:43:54.604  CHILD_UPDATED 
@@ -638,7 +638,7 @@ PathChildrenCache修改子节点路径:/user/test3
 PathChildrenCache修改子节点数据:xxx33
 </code></pre>
 <p><strong>删除 /user/test3 节点</strong>：</p>
-<p><img src="assets/CgqCHl87ia6AYvijAABBmFLfzx4213.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl87ia6AYvijAABBmFLfzx4213.png" alt="png" /></p>
 <p>得到输出：</p>
 <pre><code>TreeCache,type=NODE_REMOVED path=/user/test3
 2020-06-26T08:44:06.329  CHILD_REMOVED 
@@ -650,7 +650,7 @@ PathChildrenCache删除子节点:/user/test3
 <ul>
 <li><strong>ServiceInstance。</strong> 这是 curator-x-discovery 扩展包对服务实例的抽象，由 name、id、address、port 以及一个可选的 payload 属性构成。其存储在 ZooKeeper 中的方式如下图展示的这样。</li>
 </ul>
-<p><img src="assets/CgqCHl87icOABt59AADHccHcE1Q955.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl87icOABt59AADHccHcE1Q955.png" alt="png" /></p>
 <ul>
 <li><strong>ServiceProvider。</strong> 这是 curator-x-discovery 扩展包的核心组件之一，提供了多种不同策略的服务发现方式，具体策略有轮询调度、随机和黏性（总是选择相同的一个）。得到 ServiceProvider 对象之后，我们可以调用其 getInstance() 方法，按照指定策略获取 ServiceInstance 对象（即发现可用服务实例）；还可以调用 getAllInstances() 方法，获取所有 ServiceInstance 对象（即获取全部可用服务实例）。</li>
 <li><strong>ServiceDiscovery。</strong> 这是 curator-x-discovery 扩展包的入口类。开始必须调用 start() 方法，当使用完成应该调用 close() 方法进行销毁。</li>

@@ -293,15 +293,15 @@ function hide_canvas() {
 <p>在很多开源框架中，都需要定时任务的管理功能，例如 ZooKeeper、Netty、Quartz、Kafka 以及 Linux 操作系统。</p>
 <p>JDK 提供的 java.util.Timer 和 DelayedQueue 等工具类，可以帮助我们实现简单的定时任务管理，其底层实现使用的是<strong>堆</strong>这种数据结构，存取操作的复杂度都是 O(nlog(n))，无法支持大量的定时任务。在定时任务量比较大、性能要求比较高的场景中，为了将定时任务的存取操作以及取消操作的时间复杂度降为 O(1)，一般会使用<strong>时间轮</strong>的方式。</p>
 <p><strong>时间轮是一种高效的、批量管理定时任务的调度模型</strong>。时间轮一般会实现成一个环形结构，类似一个时钟，分为很多槽，一个槽代表一个时间间隔，每个槽使用双向链表存储定时任务；指针周期性地跳动，跳动到一个槽位，就执行该槽位的定时任务。</p>
-<p><img src="assets/CgqCHl8yQfKAEM41AAB8fTu5PCY623.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl8yQfKAEM41AAB8fTu5PCY623.png" alt="png" /></p>
 <p>时间轮环形结构示意图</p>
 <p>需要注意的是，单层时间轮的容量和精度都是有限的，对于精度要求特别高、时间跨度特别大或是海量定时任务需要调度的场景，通常会使用<strong>多级时间轮</strong>以及<strong>持久化存储与时间轮结合</strong>的方案。</p>
 <p>那在 Dubbo 中，时间轮的具体实现方式是怎样的呢？本课时我们就重点探讨下。Dubbo 的时间轮实现位于 dubbo-common 模块的 org.apache.dubbo.common.timer 包中，下面我们就来分析时间轮涉及的核心接口和实现。</p>
 <h3>核心接口</h3>
 <p>在 Dubbo 中，所有的定时任务都要继承 <strong>TimerTask 接口</strong>。TimerTask 接口非常简单，只定义了一个 run() 方法，该方法的入参是一个 Timeout 接口的对象。Timeout 对象与 TimerTask 对象一一对应，两者的关系类似于线程池返回的 Future 对象与提交到线程池中的任务对象之间的关系。通过 Timeout 对象，我们不仅可以查看定时任务的状态，还可以操作定时任务（例如取消关联的定时任务）。Timeout 接口中的方法如下图所示：</p>
-<p><img src="assets/CgqCHl8yQiKAGNLJAABUa6k9juY124.png" alt="image" />.png</p>
+<p><img src="assets/CgqCHl8yQiKAGNLJAABUa6k9juY124.png" alt="png" />.png</p>
 <p>Timer 接口定义了定时器的基本行为，如下图所示，其核心是 newTimeout() 方法：提交一个定时任务（TimerTask）并返回关联的 Timeout 对象，这有点类似于向线程池提交任务的感觉。</p>
-<p><img src="assets/CgqCHl8yQiuAC-1HAABO-eN3cPE094.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8yQiuAC-1HAABO-eN3cPE094.png" alt="png" /></p>
 <h3>HashedWheelTimeout</h3>
 <p>HashedWheelTimeout 是 Timeout 接口的唯一实现，是 HashedWheelTimer 的内部类。HashedWheelTimeout 扮演了两个角色：</p>
 <ul>

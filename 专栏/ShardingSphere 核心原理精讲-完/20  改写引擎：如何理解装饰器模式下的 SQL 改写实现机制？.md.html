@@ -229,7 +229,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>这段代码虽然内容不多，但却完整描述了实现 SQL 改写的整体流程，我们对核心代码都添加了注释，这里面涉及的<strong>核心类</strong>也很多，值得我们进行深入分析，相关核心类的整体结构如下：</p>
-<p><img src="assets/CgqCHl8-KY-AfKIDAACvtfju_F4857.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl8-KY-AfKIDAACvtfju_F4857.png" alt="png" /></p>
 <p>可以看到在整个类图中，SQLRewriteContext 处于中间位置，改写引擎 SQLRewriteEngine 和装饰器 SQLRewriteContextDecorator 都依赖于它。</p>
 <p>所以接下来，让我们先来看一下这个 SQLRewriteContext，并基于自增主键功能引出 SQL 改写引擎的基础组件 SQLToken。</p>
 <h3>从自增主键功能看改写引擎中的核心类</h3>
@@ -533,7 +533,7 @@ public String toString(final Map&lt;String, String&gt; logicAndActualTables) {
 }
 </code></pre>
 <p>而 BindingTableRule 又依赖于 TableRule 中保存的 ActualDataNodes 来完成 ActualTableIndex和ActualTable 的计算。回想起我们在案例中配置的分库分表规则，这里再次感受到了以 TableRule 和 BindingTableRule为 代表的各种 Rule 对象在 ShardingSphere 的串联作用：</p>
-<p><img src="assets/Ciqc1F8-KfuASC1zAAB-5yBwv_o382.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8-KfuASC1zAAB-5yBwv_o382.png" alt="png" /></p>
 <p>当 ShardingSQLBuilder 完成 SQL 的构建之后，我们再回到 ShardingSQLRewriteEngine，这个时候我们对它的 rewrite 方法就比较明确了：</p>
 <pre><code>@Override
 public SQLRewriteResult rewrite(final SQLRewriteContext sqlRewriteContext) {

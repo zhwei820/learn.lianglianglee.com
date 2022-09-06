@@ -219,7 +219,7 @@ function hide_canvas() {
 <p>按照 Java 语言规范和 Java 虚拟机规范的定义, 我们用 “<code>类加载</code>(Class Loading)” 来表示: 将 class/interface 名称映射为 Class 对象的一整个过程。 这个过程还可以划分为更具体的阶段: 加载，链接和初始化(loading, linking and initializing)。</p>
 <p>那么加载 class 的过程中到底发生了些什么呢？我们来详细看看。</p>
 <h3>5.1 类的生命周期和加载过程</h3>
-<p><img src="assets/6zd6i.png" alt="3de64ff2-77de-4468-af3a-c61bbb8cd944.png" /></p>
+<p><img src="assets/6zd6i.png" alt="png" /></p>
 <p>一个类在 JVM 里的生命周期有 7 个阶段，分别是加载（Loading）、验证（Verification）、准备（Preparation）、解析（Resolution）、初始化（Initialization）、使用（Using）、卸载（Unloading）。</p>
 <p>其中前五个部分（加载，验证，准备，解析，初始化）统称为类加载，下面我们就分别来说一下这五个过程。</p>
 <p>1）<strong>加载</strong> 加载阶段也可以称为“装载”阶段。 这个阶段主要的操作是： 根据明确知道的 class 完全限定名, 来获取二进制 classfile 格式的字节流，简单点说就是找到文件系统中/jar 包中/或存在于任何地方的“<code>class 文件</code>”。 如果找不到二进制表示形式，则会抛出 <code>NoClassDefFound</code> 错误。</p>
@@ -284,14 +284,14 @@ function hide_canvas() {
 <li>应用类加载器（AppClassLoader）</li>
 </ul>
 <p>一般启动类加载器是由 JVM 内部实现的，在 Java 的 API 里无法拿到，但是我们可以侧面看到和影响它（后面的内容会演示）。后 2 种类加载器在 Oracle Hotspot JVM 里，都是在中<code>sun.misc.Launcher</code>定义的，扩展类加载器和应用类加载器一般都继承自<code>URLClassLoader</code>类，这个类也默认实现了从各种不同来源加载 class 字节码转换成 Class 的方法。</p>
-<p><img src="assets/esz0u.png" alt="c32f4986-0e72-4268-a90a-7451e1931161.png" /></p>
+<p><img src="assets/esz0u.png" alt="png" /></p>
 <ol>
 <li>启动类加载器（bootstrap class loader）: 它用来加载 Java 的核心类，是用原生 C++ 代码来实现的，并不继承自 java.lang.ClassLoader（负责加载JDK中jre/lib/rt.jar里所有的class）。它可以看做是 JVM 自带的，我们再代码层面无法直接获取到启动类加载器的引用，所以不允许直接操作它， 如果打印出来就是个 <code>null</code>。举例来说，java.lang.String 是由启动类加载器加载的，所以 String.class.getClassLoader() 就会返回 null。但是后面可以看到可以通过命令行参数影响它加载什么。</li>
 <li>扩展类加载器（extensions class loader）：它负责加载 JRE 的扩展目录，lib/ext 或者由 java.ext.dirs 系统属性指定的目录中的 JAR 包的类，代码里直接获取它的父类加载器为 null（因为无法拿到启动类加载器）。</li>
 <li>应用类加载器（app class loader）：它负责在 JVM 启动时加载来自 Java 命令的 -classpath 或者 -cp 选项、java.class.path 系统属性指定的 jar 包和类路径。在应用程序代码里可以通过 ClassLoader 的静态方法 getSystemClassLoader() 来获取应用类加载器。如果没有特别指定，则在没有使用自定义类加载器情况下，用户自定义的类都由此加载器加载。</li>
 </ol>
 <p>此外还可以自定义类加载器。如果用户自定义了类加载器，则自定义类加载器都以应用类加载器作为父加载器。应用类加载器的父类加载器为扩展类加载器。这些类加载器是有层次关系的，启动加载器又叫根加载器，是扩展加载器的父加载器，但是直接从 ExClassLoader 里拿不到它的引用，同样会返回 null。</p>
-<p><img src="assets/csrk7.png" alt="8a806e88-cd41-4a28-b552-76efb0a1fdba.png" /></p>
+<p><img src="assets/csrk7.png" alt="png" /></p>
 <p>类加载机制有三个特点：</p>
 <ol>
 <li>双亲委托：当一个自定义类加载器需要加载一个类，比如 java.lang.String，它很懒，不会一上来就直接试图加载它，而是先委托自己的父加载器去加载，父加载器如果发现自己还有父加载器，会一直往前找，这样只要上级加载器，比如启动类加载器已经加载了某个类比如 java.lang.String，所有的子加载器都不需要自己加载了。如果几个类加载器都没有加载到指定名称的类，那么会抛出 ClassNotFountException 异常。</li>

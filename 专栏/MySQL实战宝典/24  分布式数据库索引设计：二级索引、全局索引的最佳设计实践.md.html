@@ -198,7 +198,7 @@ function hide_canvas() {
 ) ENGINE=InnoDB
 </code></pre>
 <p>如果把 o_orderkey 设计成上图所示的自增，那么很可能 o_orderkey 同为 1 的记录在不同的分片出现，如下图所示：</p>
-<p><img src="assets/CioPOWD5SNqAQ1OnAAEeCSHRa5U020.jpg" alt="MySQL24.jpg" /></p>
+<p><img src="assets/CioPOWD5SNqAQ1OnAAEeCSHRa5U020.jpg" alt="png" /></p>
 <p><strong>所以，在分布式数据库架构下，尽量不要用自增作为表的主键</strong>，这也是我们在第一模块“表结构设计”中强调过的：自增性能很差、安全性不高、不适用于分布式架构。</p>
 <p>讲到这儿，我们已经说明白了“自增主键”的所有问题，那么该如何设计主键呢？依然还是用全局唯一的键作为主键，比如 MySQL 自动生成的有序 UUID；业务生成的全局唯一键（比如发号器）；或者是开源的 UUID 生成算法，比如雪花算法（但是存在时间回溯的问题）。</p>
 <p>总之，<strong>用有序的全局唯一替代自增，是这个时代数据库主键的主流设计标准</strong>，如果你还停留在用自增做主键，或许代表你已经落后于时代发展了。</p>
@@ -253,7 +253,7 @@ WHERE o_orderate &gt;= ? o_orderdate &lt; ?
 <p>因此，再次提醒你，分布式数据库架构设计的要求是<strong>业务的绝大部分请求能够根据分片键定位到 1 个分片上</strong>。</p>
 <p>如果业务大部分请求都需要扫描所有分片信息才能获得最终结果，那么就不适合进行分布式架构的改造或设计。</p>
 <p>最后，我们再来回顾下淘宝用户订单表的设计：
-<img src="assets/CioPOWD5S4WAW3LhAAGIoSrgttw888.jpg" alt="02.jpg" /></p>
+<img src="assets/CioPOWD5S4WAW3LhAAGIoSrgttw888.jpg" alt="png" /></p>
 <p>上图是我的淘宝订单信息，可以看到，订单号的最后 6 位都是 308113，所以可以大概率推测出：</p>
 <ul>
 <li>淘宝订单表的分片键是用户 ID；</li>
@@ -262,7 +262,7 @@ WHERE o_orderate &gt;= ? o_orderdate &lt; ?
 <h3>全局表</h3>
 <p>在分布式数据库中，有时会有一些无法提供分片键的表，但这些表又非常小，一般用于保存一些全局信息，平时更新也较少，绝大多数场景仅用于查询操作。</p>
 <p>例如 tpch 库中的表 nation，用于存储国家信息，但是在我们前面的 SQL 关联查询中，又经常会使用到这张表，对于这种全局表，可以在每个分片中存储，这样就不用跨分片地进行查询了。如下面的设计：</p>
-<p><img src="assets/CioPOWD5S9mAGWuNAAGamtLlYKw303.jpg" alt="03.jpg" /></p>
+<p><img src="assets/CioPOWD5S9mAGWuNAAGamtLlYKw303.jpg" alt="png" /></p>
 <h3>唯一索引</h3>
 <p>最后我们来谈谈唯一索引的设计，与主键一样，如果只是通过数据库表本身唯一约束创建的索引，则无法保证在所有分片中都是唯一的。</p>
 <p>所以，在分布式数据库中，唯一索引一样要通过类似主键的 UUID 的机制实现，用全局唯一去替代局部唯一，但实际上，即便是单机的 MySQL 数据库架构，我们也推荐使用全局唯一的设计。因为你不知道，什么时候，你的业务就会升级到全局唯一的要求了。</p>

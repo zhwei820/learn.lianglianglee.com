@@ -184,7 +184,7 @@ management.endpoint.prometheus.enabled=true
 management.metrics.export.prometheus.enabled=true
 </code></pre>
 <p>启动之后，我们就可以通过访问<a href="http://localhost:8080/actuator/prometheus">监控接口</a>来获取监控数据。</p>
-<p><img src="assets/CgqCHl9htcuAAw51AAK0O_g_pbM862.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9htcuAAw51AAK0O_g_pbM862.png" alt="png" /></p>
 <p>想要监控业务数据也是比较简单的，你只需要注入一个 MeterRegistry 实例即可，下面是一段示例代码：</p>
 <pre><code>@Autowired
 MeterRegistry registry;
@@ -202,10 +202,10 @@ public String test() {
 <pre><code>test_total{from=&quot;127.0.0.1&quot;,method=&quot;test&quot;,} 5.0
 </code></pre>
 <p>这里简单介绍一下流行的<strong>Prometheus 监控体系</strong>，Prometheus 使用拉的方式获取监控数据，这个暴露数据的过程可以交给功能更加齐全的 telegraf 组件。</p>
-<p><img src="assets/CgqCHl9htdiAO89HAAK1NRYCNZE604.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9htdiAO89HAAK1NRYCNZE604.png" alt="png" /></p>
 <p>如上图，我们通常使用 Grafana 进行监控数据的展示，使用 AlertManager 组件进行提前预警。这一部分的搭建工作不是我们的重点，感兴趣的同学可自行研究。</p>
 <p>下图便是一张典型的监控图，可以看到 Redis 的缓存命中率等情况。</p>
-<p><img src="assets/Ciqc1F9htd-AXIKHAANYYdIDl6g753.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9htd-AXIKHAANYYdIDl6g753.png" alt="png" /></p>
 <h3>Java 生成火焰图</h3>
 <p><strong>火焰图</strong>是用来分析程序运行瓶颈的工具。</p>
 <p>火焰图也可以用来分析 Java 应用。可以从 <a href="https://github.com/jvm-profiling-tools/async-profiler">github</a> 上下载 async-profiler 的压缩包进行相关操作。比如，我们把它解压到 /root/ 目录，然后以 javaagent 的方式来启动 Java 应用，命令行如下：</p>
@@ -213,11 +213,11 @@ public String test() {
 </code></pre>
 <p>运行一段时间后，停止进程，可以看到在当前目录下，生成了 profile.svg 文件，这个文件是可以用浏览器打开的。
 如下图所示，纵向，表示的是调用栈的深度；横向，表明的是消耗的时间。所以格子的宽度越大，越说明它可能是一个瓶颈。一层层向下浏览，即可找到需要优化的目标。</p>
-<p><img src="assets/Ciqc1F9htfOAN3G1AEK7W4TM0AU264.gif" alt="2020-08-21 17-07-35.2020-08-21 17_12_29.gif" /></p>
+<p><img src="assets/Ciqc1F9htfOAN3G1AEK7W4TM0AU264.gif" alt="png" /></p>
 <h3>优化思路</h3>
 <p>对一个普通的 Web 服务来说，我们来看一下，要访问到具体的数据，都要经历哪些主要的环节？</p>
 <p>如下图，在浏览器中输入相应的域名，需要通过 DNS 解析到具体的 IP 地址上，为了保证高可用，我们的服务一般都会部署多份，然后使用 Nginx 做反向代理和负载均衡。</p>
-<p><img src="assets/Ciqc1F9htgCAcdwGAAIVQmXnOPo885.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9htgCAcdwGAAIVQmXnOPo885.png" alt="png" /></p>
 <p>Nginx 根据资源的特性，会承担一部分动静分离的功能。其中，动态功能部分，会进入我们的SpringBoot 服务。</p>
 <p>SpringBoot 默认使用内嵌的 tomcat 作为 Web 容器，使用典型的 MVC 模式，最终访问到我们的数据。</p>
 <h3>HTTP 优化</h3>
@@ -349,7 +349,7 @@ Transfer/sec:      1.51MB
 <pre><code>java -javaagent:/opt/skywalking-agent/skywalking-agent.jar -Dskywalking.agent.service_name=the-demo-name  -jar /opt/test-service/spring-boot-demo.ja  --spring.profiles.active=dev
 </code></pre>
 <p>访问一些服务的链接，打开 Skywalking 的 UI，即可看到下图的界面。这些指标可以类比“01 | 理论分析：性能优化，有哪些衡量指标？需要注意什么？”提到的衡量指标去理解，我们就可以从图中找到响应比较慢 QPS 又比较高的接口，进行专项优化。</p>
-<p><img src="assets/Ciqc1F9htwyARKqMAAgxG3QYe8A553.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9htwyARKqMAAgxG3QYe8A553.png" alt="png" /></p>
 <h3>各个层次的优化方向</h3>
 <h4>1.Controller 层</h4>
 <p>controller 层用于接收前端的查询参数，然后构造查询结果。现在很多项目都采用前后端分离的架构，所以 controller 层的方法，一般会使用 @ResponseBody 注解，把查询的结果，解析成 JSON 数据返回（兼顾效率和可读性）。</p>
@@ -363,10 +363,10 @@ Transfer/sec:      1.51MB
 <p>service 层的代码组织，对代码的可读性、性能影响都比较大。我们常说的设计模式，大多数都是针对 service 层来说的。</p>
 <p>service 层会频繁使用更底层的资源，通过组合的方式获取我们所需要的数据，大多数可以通过我们前面课时提供的优化思路进行优化。</p>
 <p>这里要着重提到的一点，就是分布式事务。</p>
-<p><img src="assets/CgqCHl9htvaAf1S-AAKlZCq3SXg275.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl9htvaAf1S-AAKlZCq3SXg275.png" alt="png" /></p>
 <p>如上图，四个操作分散在三个不同的资源中。要想达到一致性，需要三个不同的资源 MySQL、MQ、ElasticSearch 进行统一协调。它们底层的协议，以及实现方式，都是不一样的，那就无法通过 Spring 提供的 Transaction 注解来解决，需要借助外部的组件来完成。</p>
 <p>很多人都体验过，加入了一些保证一致性的代码，一压测，性能掉的惊掉下巴。分布式事务是性能杀手，因为它要使用额外的步骤去保证一致性，常用的方法有：两阶段提交方案、TCC、本地消息表、MQ 事务消息、分布式事务中间件等。</p>
-<p><img src="assets/Ciqc1F9htx6ADeh6AAFoqvxy4eM753.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F9htx6ADeh6AAFoqvxy4eM753.png" alt="png" /></p>
 <p>如上图，分布式事务要在改造成本、性能、时效等方面进行综合考虑。有一个介于分布式事务和非事务之间的名词，叫作<strong>柔性事务</strong>。柔性事务的理念是将业务逻辑和互斥操作，从资源层上移至业务层面。</p>
 <p><strong>关于传统事务和柔性事务，我们来简单比较一下。</strong></p>
 <p><strong>ACID</strong></p>

@@ -161,7 +161,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>13  案例分析：多线程锁的优化</h1>
 <p>我们在上一课时，了解到可以使用 ThreadLocal，来避免 SimpleDateFormat 在并发环境下引起的时间错乱问题。其实还有一种解决方式，就是通过对<strong>parse 方法</strong>进行加锁，也能保证日期处理类的正确运行，代码如下图（可见<a href="https://gitee.com/xjjdog/tuning-lagou-res/tree/master/tuning-011/design-pattern">仓库</a>）：</p>
-<p><img src="assets/Ciqc1F9DbU6AeoPsAAC8Nn863qc911.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9DbU6AeoPsAAC8Nn863qc911.png" alt="png" /></p>
 <p>其实锁对性能的影响，是非常大的。因为对资源加锁以后，资源就被加锁的线程独占，其他的线程就只能排队等待这个锁，此时程序由并行执行，变相地成了顺序执行，执行速度自然就降低了。</p>
 <p>下面是开启了 50 个线程，使用 ThreadLocal 和同步锁方式性能的一个对比。</p>
 <pre><code>Benchmark                                 Mode  Cnt     Score      Error   Units
@@ -229,7 +229,7 @@ void syncBlock();
 </code></pre>
 <p>这两者虽然显示效果不同，但他们都是通过 monitor 来实现同步的。我们可以通过下面这张图，来看一下 monitor 的原理。</p>
 <p><strong>注意了，下面是面试题目高发地。比如，你能描述一下 monitor 锁的实现原理吗？</strong></p>
-<p><img src="assets/CgqCHl9Dl-mAHYlWAACjjjqUdwE492.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl9Dl-mAHYlWAACjjjqUdwE492.png" alt="png" /></p>
 <p>如上图所示，我们可以把运行时的对象锁抽象地分成三部分。其中，EntrySet 和 WaitSet 是两个队列，中间虚线部分是当前持有锁的线程，我们可以想象一下线程的执行过程。</p>
 <p>当第一个线程到来时，发现并没有线程持有对象锁，它会直接成为活动线程，进入 RUNNING 状态。</p>
 <p>接着又来了三个线程，要争抢对象锁。此时，这三个线程发现锁已经被占用了，就先进入 EntrySet 缓存起来，进入 BLOCKED 状态。此时，从 jstack 命令，可以看到他们展示的信息都是 waiting for monitor entry。</p>
@@ -271,7 +271,7 @@ void syncBlock();
 <p>在 JDK 1.8 中，synchronized 的速度已经有了显著的提升，它都做了哪些优化呢？答案就是分级锁。JVM 会根据使用情况，对 synchronized 的锁，进行升级，它大体可以按照下面的路径进行升级：偏向锁 — 轻量级锁 — 重量级锁。</p>
 <p><strong>锁只能升级，不能降级</strong>，所以一旦升级为重量级锁，就只能依靠操作系统进行调度。</p>
 <p>要想了解锁升级的过程，需要先看一下对象在内存里的结构。</p>
-<p><img src="assets/Ciqc1F9Dl_uAUOqvAABFvlyPAbE897.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F9Dl_uAUOqvAABFvlyPAbE897.png" alt="png" /></p>
 <p>如上图所示，对象分为 MarkWord、Class Pointer、Instance Data、Padding 四个部分。</p>
 <p>和锁升级关系最大的就是 MarkWord，它的长度是 24 位，我们着重介绍一下。它包含Thread ID（23bit）、Age（6bit）、Biased（1bit）、Tag（2bit） 四个部分，锁升级就是靠判断 Thread Id、Biased、Tag 等三个变量值来进行的。</p>
 <ul>
@@ -396,7 +396,7 @@ FairVSNoFairBenchmark.nofair  thrpt   10  35195.649 ± 6503.375  ops/ms
 <h4>2.优化技巧</h4>
 <p>锁的优化理论其实很简单，那就是<strong>减少锁的冲突</strong>。无论是锁的读写分离，还是分段锁，本质上都是为了<strong>避免多个线程同时获取同一把锁</strong>。</p>
 <p>所以我们可以总结一下优化的一般思路：减少锁的粒度、减少锁持有的时间、锁分级、锁分离 、锁消除、乐观锁、无锁等。</p>
-<p><img src="assets/Ciqc1F9DmBqAEgcKAABk33fmf4k676.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F9DmBqAEgcKAABk33fmf4k676.png" alt="png" /></p>
 <ul>
 <li><strong>减少锁粒度</strong></li>
 </ul>

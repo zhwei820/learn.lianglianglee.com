@@ -177,7 +177,7 @@ function hide_canvas() {
 <p>镜像是一个只读的 Docker 容器模板，包含启动容器所需要的所有文件系统结构和内容。简单来讲，镜像是一个特殊的文件系统，它提供了容器运行时所需的程序、软件库、资源、配置等静态数据。即<strong>镜像不包含任何动态数据，镜像内容在构建后不会被改变</strong>。</p>
 <p>然后我们来看下如何操作镜像。</p>
 <h3>镜像操作</h3>
-<p><img src="assets/CgqCHl9SDkWAaxh7AAFaMgWI7cI029.png" alt="Lark20200904-175130.png" /></p>
+<p><img src="assets/CgqCHl9SDkWAaxh7AAFaMgWI7cI029.png" alt="png" /></p>
 <p>图 1 镜像操作</p>
 <p>从图中可知，镜像的操作可分为：</p>
 <ul>
@@ -398,7 +398,7 @@ RUN mkdir /tmp/testdir
 ...
 </code></pre>
 <p>通过上面的目录结构可以看到，Dockerfile 的每一行命令，都生成了一个镜像层，每一层的 diff 夹下只存放了增量数据，如图 2 所示。</p>
-<p><img src="assets/CgqCHl9SDmGACBEjAABkgtnn_hE625.png" alt="Lark20200904-175137.png" /></p>
+<p><img src="assets/CgqCHl9SDmGACBEjAABkgtnn_hE625.png" alt="png" /></p>
 <p>图 2 镜像文件系统</p>
 <p>分层的结构使得 Docker 镜像非常轻量，每一层根据镜像的内容都有一个唯一的 ID 值，当不同的镜像之间有相同的镜像层时，便可以实现不同的镜像之间共享镜像层的效果。</p>
 <p>总结一下， Docker 镜像是静态的分层管理的文件组合，镜像底层的实现依赖于联合文件系统（UnionFS）。充分掌握镜像的原理，可以帮助我们在生产实践中构建出最优的镜像，同时也可以帮助我们更好地理解容器和镜像的关系。</p>

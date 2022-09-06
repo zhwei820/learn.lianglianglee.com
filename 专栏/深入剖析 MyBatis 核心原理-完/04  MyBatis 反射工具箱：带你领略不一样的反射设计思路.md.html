@@ -223,7 +223,7 @@ public ArrayList getA();
 }
 </code></pre>
 <p>Invoker 接口的继承关系如下图所示：</p>
-<p><img src="assets/Cgp9HWAaP06ASpANAACOQ0WzRSk795.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWAaP06ASpANAACOQ0WzRSk795.png" alt="png" /></p>
 <p>Invoker 接口继承关系图</p>
 <p>其中，MethodInvoker 是通过反射方式执行底层封装的 Method 方法（例如，getter/setter 方法）完成属性读写效果的，Get/SetFieldInvoker 是通过反射方式读写底层封装的 Field 字段，进而实现属性读写效果的。</p>
 <h4>4. ReflectorFactory</h4>
@@ -251,7 +251,7 @@ public ArrayList getA();
 <h3>ObjectWrapper</h3>
 <p><strong>MetaClass 中封装的是 Class 元信息，ObjectWrapper 封装的则是对象元信息</strong>。在 ObjectWrapper 中抽象了一个对象的属性信息，并提供了查询对象属性信息的相关方法，以及更新属性值的相关方法。</p>
 <p>ObjectWrapper 的实现类如下图所示：</p>
-<p><img src="assets/CioPOWAaP22Aea6TAAB1kkkDx98845.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWAaP22Aea6TAAB1kkkDx98845.png" alt="png" /></p>
 <p>ObjectWrapper 继承关系图</p>
 <p><strong>BaseWrapper 是 ObjectWrapper 接口的抽象实现</strong>，其中只有一个 MetaObject 类型的字段。BaseWrapper 为子类实现了 resolveCollection()、getCollectionValue() 和 setCollectionValue() 三个针对集合对象的处理方法。其中，resolveCollection() 方法会将指定属性作为集合对象返回，底层依赖 MetaObject.getValue()方法实现（后面还会详细介绍）。getCollectionValue() 方法和 setCollectionValue() 方法会解析属性表达式的下标信息，然后获取/设置集合中的对应元素，这里解析属性表达式依然是依赖前面介绍的 PropertyTokenizer 工具类。</p>
 <p><strong>BeanWrapper 继承了 BaseWrapper 抽象类</strong>，底层除了封装了一个 JavaBean 对象之外，还封装了该 JavaBean 类型对应的 MetaClass 对象，以及从 BaseWrapper 继承下来的 MetaObject 对象。</p>

@@ -187,7 +187,7 @@ function hide_canvas() {
 </blockquote>
 <p>从定义来看，分布式数据库是一种把数据分散存储在不同物理位置的数据库。</p>
 <p>对比我们之前学习的数据库，数据都是存放在一个实例对应的物理存储上，而在分布式数据库中，数据将存放在不同的数据库实例上。</p>
-<p><img src="assets/CioPOWDwBKCAEJhCAAGqGQf7oRA517.jpg" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDwBKCAEJhCAAGqGQf7oRA517.jpg" alt="png" /></p>
 <p>分布式数据库的架构</p>
 <p>从图中我们可以看到，在分布式数据库下，分布式数据库本身分为计算层、元数据层和存储层：</p>
 <ul>
@@ -202,10 +202,10 @@ function hide_canvas() {
 <p>接下来，我们看一看分布式 MySQL 数据库的整体架构。</p>
 <h3>分布式MySQL架构</h3>
 <p>在学习分布式 MySQL 架构前，我们先看一下原先单机 MySQL 架构是怎样的。</p>
-<p><img src="assets/Cgp9HWDwBLGAQwqhAAC-vh9tMJc469.jpg" alt="Drawing 1.png" />
+<p><img src="assets/Cgp9HWDwBLGAQwqhAAC-vh9tMJc469.jpg" alt="png" />
 可以看到，原先客户端是通过 MySQL 通信协议访问 MySQL 数据库，MySQL 数据库会通过高可用技术做多副本，当发生宕机进行切换。</p>
 <p>那么对于分布式 MySQL 数据库架构，其整体架构如下图所示：</p>
-<p><img src="assets/CioPOWDwBMGATGn4AAE-TVO6njo113.jpg" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWDwBMGATGn4AAE-TVO6njo113.jpg" alt="png" /></p>
 <p>从上图可以看到，这时数据将打散存储在下方各个 MySQL 实例中，每份数据叫“分片（Shard）”。</p>
 <p>在分布式 MySQL 架构下，客户端不再是访问 MySQL 数据库本身，而是访问一个分布式中间件。</p>
 <p>这个分布式中间件的通信协议依然采用 MySQL 通信协议（因为原先客户端是如何访问的MySQL 的，现在就如何访问分布式中间件）。分布式中间件会根据元数据信息，自动将用户请求路由到下面的 MySQL 分片中，从而将存储存取到指定的节点。</p>

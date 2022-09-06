@@ -213,10 +213,10 @@ COMMIT;
 <p>用户可以通过命令 XA_RECOVER 查看节点上事务有悬挂事务：</p>
 <p><img src="assets/CioPOWEVB_GAScw3AALL2SV2QHs125.png" alt="图片4" /></p>
 <p>如果有悬挂事务，则这个事务持有的锁资源都是没有释放的。可以通过命令SHOW ENGINE INNODB STATUS 进行查看：
-<img src="assets/CioPOWEVCBWAUJX7AAXrOE_0ylE945.png" alt="1.png" /></p>
+<img src="assets/CioPOWEVCBWAUJX7AAXrOE_0ylE945.png" alt="png" /></p>
 <p>从上图可以看到，事务 5136 处于 PREPARE状态，已经有 218 秒了，这就是一个悬挂事务，并且这个事务只有了两个行锁对象。</p>
 <p>可以通过命令 XA RECOVER 人工的进行提交：
-<img src="assets/CioPOWEVCCyAfJTjAAPcHT0OqKw598.png" alt="2.png" /></p>
+<img src="assets/CioPOWEVCCyAfJTjAAPcHT0OqKw598.png" alt="png" /></p>
 <p>讲到这，同学们应该都了了分布式事务的 2PC 实现和使用方法。它是一种由数据库层实现强一致事务解决方案。其优点是使用简单，当前大部分的语言都支持 2PC 的实现。若使用中间件，业务完全就不用关心事务是不是分布式的。</p>
 <p>然而，他的缺点是，事务的提交开销变大了，从 1 次 COMMIT 变成了两次 PREPARE 和COMMIT。而对于海量的互联网业务来说，2PC 的性能是无法接受。因此，这就有了业务级的分布式事务实现，即柔性事务。</p>
 <h3>柔性事务</h3>

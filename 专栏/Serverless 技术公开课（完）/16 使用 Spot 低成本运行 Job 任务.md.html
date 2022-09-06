@@ -179,14 +179,14 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>16 使用 Spot 低成本运行 Job 任务</h1>
 <h3>成本优化</h3>
-<p><img src="assets/2020-08-26-031132.jpg" alt="1.jpg" /></p>
+<p><img src="assets/2020-08-26-031132.jpg" alt="png" /></p>
 <p>ECI 除了有秒级弹性、无限容量的优势之外，在一些特定场景下对成本的优化也是非常明显的，通过上图我们可以看到，相同规格的实例，在日运行时间少于 14 小时的时候，使用 ECI 会更加便宜。</p>
-<p><img src="assets/2020-08-26-031133.jpg" alt="2.jpg" /></p>
+<p><img src="assets/2020-08-26-031133.jpg" alt="png" /></p>
 <p>除了日运行时长小于 14 小时的情形，ECI 实例还支持多种计费类型，客户可以根据自身业务选择相应的计费模式：long run 类型的可以采用 RI 实例券；运行时长低于 1 小时可以选用 Spot 竞价实例；针对突发流量部分，采用按量实例。</p>
 <h3>Spot 实例概述</h3>
-<p><img src="assets/2020-08-26-031135.jpg" alt="3.jpg" /></p>
+<p><img src="assets/2020-08-26-031135.jpg" alt="png" /></p>
 <p>抢占式实例是一种按需实例，可以在数据计算等场景中降低计算成本。抢占式实例创建成功后拥有一小时的保护周期。抢占式实例的市场价格会随供需变化而浮动，我们支持两种 spot 策略，一种是完全根据市场出价，一种是指定价格上限，我们只需要给 pod 加上对应的 annotation 即可，使用方法非常简单。</p>
-<p><img src="assets/2020-08-26-031137.jpg" alt="4.jpg" /></p>
+<p><img src="assets/2020-08-26-031137.jpg" alt="png" /></p>
 <ul>
 <li>SpotAsPriceGo：系统自动出价，跟随当前市场实际价格（通常以折扣的形式体现）</li>
 <li>SpotWithPriceLimit：设置抢占实例价格上限</li>
@@ -195,16 +195,16 @@ function hide_canvas() {
 <li>用户价格 &gt;= ECI 按量实例价格，使用 ECI 按量实例价格来创建实例。</li>
 </ul>
 <h3>创建 Spot 实例</h3>
-<p><img src="assets/2020-08-26-031138.jpg" alt="5.jpg" /></p>
+<p><img src="assets/2020-08-26-031138.jpg" alt="png" /></p>
 <ul>
 <li>根据规格查看实例按量价格，<a href="https://www.aliyun.com/price/product#/ecs/detail">点击查询</a></li>
 </ul>
 <p>首先我们查询出【华北 2（北京）地域 ecs.c5.large 按量（小时）价格：0.62】，然后我们以此规格来创建 Spot 竞价实例。</p>
-<p><img src="assets/2020-08-26-031140.jpg" alt="6.jpg" /></p>
+<p><img src="assets/2020-08-26-031140.jpg" alt="png" /></p>
 <p>采用 Spot 实例来运行 CronJob，分别采用“指定最高限价”、“系统自动出价”的方式。随市场价的场景目前还没有办法直接看到真实的价格，只能根据实例 ID 查询账单信息。</p>
-<p><img src="assets/2020-08-26-031141.jpg" alt="7.jpg" /></p>
+<p><img src="assets/2020-08-26-031141.jpg" alt="png" /></p>
 <p>采用 Spot 实例运行 Deployment，在本次实验中我们采用指定最高限价的策略，并设置一个极低的小时价格，可以看到 2 个 Pod 都创建失败了，使用 kubectl describe 命令可以看到失败的详细原因为价格不匹配：The current price of recommend instanceTypes above user max price。</p>
-<p><img src="assets/2020-08-26-031142.jpg" alt="8.jpg" /></p>
+<p><img src="assets/2020-08-26-031142.jpg" alt="png" /></p>
 <p>如上图所示，当 Spot 实例运行超过 1 小时保护期后，有可能会因为库存不足，或者设置的价格小于市场价而触发实例释放，实例释放前 3 分钟会有事件通知。</p>
 <h3>应用场景</h3>
 <p>您可以在抢占式实例上部署以下业务：</p>

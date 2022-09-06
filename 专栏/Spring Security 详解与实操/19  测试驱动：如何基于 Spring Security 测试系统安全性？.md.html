@@ -160,7 +160,7 @@ function hide_canvas() {
 <h3>安全性测试与 Mock 机制</h3>
 <p>正如前面提到的，验证安全性功能正确性的难点在于组件与组件之间的依赖关系，为了弄清楚这个关系，这里就需要引出测试领域非常重要的一个概念，即 Mock（模拟）。<strong>针对测试组件涉及的外部依赖，我们的关注点在于这些组件之间的调用关系，以及返回的结果或发生的异常等，而不是组件内部的执行过程</strong>。因此常见的技巧就是使用 Mock 对象来替代真实的依赖对象，从而模拟真实的调用场景。</p>
 <p>我们以一个常见的三层 Web 服务架构为例来进一步解释 Mock 的实施方法。Controller 层会访问 Service 层，而 Service 层又会访问 Repository 层，我们对 Controller 层的端点进行验证时，就需要模拟 Service 层组件的功能。同样，对 Service 层组件进行测试时，也需要假定 Repository 层组件的结果是可以获取的，如下所示：</p>
-<p><img src="assets/Cgp9HWD_wkmAWv3aAADg8flYF9Q967.jpg" alt="2.jpg" /></p>
+<p><img src="assets/Cgp9HWD_wkmAWv3aAADg8flYF9Q967.jpg" alt="png" /></p>
 <p>Web 服务中各层组件与 Mock 对象示意图</p>
 <p>对于 Spring Security 而言，上图所展示的原理同样适用，例如我们可以通过模拟用户的方式来测试用户认证和授权功能的正确性。在本讲后面的内容中，我们会给出相关的代码示例。</p>
 <h3>Spring Security 中的测试解决方案</h3>

@@ -295,7 +295,7 @@ function hide_canvas() {
 <p>DubboProtocol.protocolBindingRefer() 方法则会将底层的 ExchangeClient 集合封装成 DubboInvoker，然后由上层逻辑封装成代理对象，这样业务层就可以像调用本地 Bean 一样，完成远程调用。</p>
 <h3>深入 Invoker</h3>
 <p>首先，我们来看 AbstractInvoker 这个抽象类，它继承了 Invoker 接口，继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-Oq-uAdi4nAABRchTw_kQ666.png" alt="png" /></p>
 <p>AbstractInvoker 继承关系示意图</p>
 <p>从图中可以看到，最核心的 DubboInvoker 继承自AbstractInvoker 抽象类，AbstractInvoker 的核心字段有如下几个。</p>
 <ul>
@@ -470,7 +470,7 @@ private static final InternalThreadLocal&lt;RpcContext&gt; SERVER_LOCAL = ...
 }
 </code></pre>
 <p>oneway 指的是客户端发送消息后，不需要得到响应。所以，对于那些不关心服务端响应的请求，就比较适合使用 oneway 通信，如下图所示：</p>
-<p><img src="assets/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png" alt="Lark20201023-161312.png" /></p>
+<p><img src="assets/CgqCHl-SkLWAaPzTAACgt5rmWHg530.png" alt="png" /></p>
 <p>oneway 和 twoway 通信方式对比图</p>
 <p>可以看到发送 oneway 请求的方式是send() 方法，而后面发送 twoway 请求的方式是 request() 方法。通过之前的分析我们知道，request() 方法会相应地创建 DefaultFuture 对象以及检测超时的定时任务，而 send() 方法则不会创建这些东西，它是直接将 Invocation 包装成 oneway 类型的 Request 发送出去。</p>
 <p>在服务端的 HeaderExchangeHandler.receive() 方法中，会针对 oneway 请求和 twoway 请求执行不同的分支处理：twoway 请求由 handleRequest() 方法进行处理，其中会关注调用结果并形成 Response 返回给客户端；oneway 请求则直接交给上层的 DubboProtocol.requestHandler，完成方法调用之后，不会返回任何 Response。</p>

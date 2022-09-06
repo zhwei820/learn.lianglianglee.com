@@ -157,12 +157,12 @@ function hide_canvas() {
 <p>上一讲我带你学习了如何应用 Arthas 定位代码以及链路问题。这一讲我将带你来学习一个关键的内存数据库中间件 Redis，希望你可以了解它的作用，以及在使用过程中的常见问题以及解决方案。</p>
 <h3>为什么使用内存数据库？</h3>
 <p>首先我们来看看最早期的 Web 架构是什么样的，如图 1 所示：</p>
-<p><img src="assets/Cgp9HWA_jkyAW6_xAABZGKmSgp0617.png" alt="1.png" /></p>
+<p><img src="assets/Cgp9HWA_jkyAW6_xAABZGKmSgp0617.png" alt="png" /></p>
 <p>图 1：早期架构</p>
 <p>这是互联网早期的常用架构，不过这样的架构一般只满足于基本的业务运转，一旦业务量迅速增高，就会出现各种<strong>请求延迟</strong>，甚至<strong>超时响应</strong>或者<strong>直接请求拒绝</strong>的情况 ，也就是在高访问量下会发生性能问题，而且这样的框架性能问题又集中在<strong>数据库层面</strong>。</p>
 <p>那么问题来了，为什么会产生这种情况呢？由于数据库的数据是存在硬盘上，硬盘的 I/O 读写瓶颈会直接影响<strong>并发量</strong>。既然磁盘 I/O 读写时瓶颈，我们是不是可以采用速度更快的内存来<strong>存储常用但数据量不算大的数据</strong>呢？答案是肯定的。</p>
 <p>为了解决上面的问题，目前通用的做法是<strong>引入基于内存的数据库</strong>，这样的数据库一般是把数据先放到内存里，引入缓存中间件之后的项目 Web 服务架构图如下所示：</p>
-<p><img src="assets/Cgp9HWA_jl-AZ0_0AAC_NrxVK8s022.png" alt="2.png" /></p>
+<p><img src="assets/Cgp9HWA_jl-AZ0_0AAC_NrxVK8s022.png" alt="png" /></p>
 <p>图 2：演变架构</p>
 <p>这样便可以较大程度缓解传统数据库带来的磁盘 I/O 读写瓶颈，而我们最常使用的基于内存的数据库就是 <strong>Redis</strong> 和 <strong>MemCached</strong>。</p>
 <h3>Redis 和 Memcached 对比</h3>
@@ -216,10 +216,10 @@ public Result getRedisTestData(){
 <p>通过如上三步就可以完成 Java 使用 Redis 的 demo，我大概总结下代码流程，第一次先判断 Redis 中是否存在查询的数据，如果没有就需要从数据库中读取数据了，读取成功之后把数据回写到 Redis 中，后面的请求就能直接从 Redis 中直接读取了，较大地减少了对数据库的查询压力。我们可以通过运行上面写好的代码来看下实际效果。</p>
 <p>首先我们向数据表 redis_test 插入 10w 条数据，然后分两次访问该接口，对比下两次访问的响应时间。</p>
 <p>第一次直接从 MySQL 数据库读取，一共花了 39.43s，如下图所示：</p>
-<p><img src="assets/Cgp9HWA9DVKAYW32AAFDyYw_tDs126.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWA9DVKAYW32AAFDyYw_tDs126.png" alt="png" /></p>
 <p>图 3：MySQL 取数据耗时</p>
 <p>而第二次数据已经进入 Redis，请求只需要 2.62s，节省了很长时间。值得注意的是为了演示效果，取出的数据条数达到 10w+，所以响应时间也达到了秒级别。在正常的互联网业务当中，Redis 读写操作均在毫秒级别。</p>
-<p><img src="assets/CioPOWA9DVmACUdmAAFWomKWRnk641.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWA9DVmACUdmAAFWomKWRnk641.png" alt="png" /></p>
 <p>图 4：Redis 取数据耗时</p>
 <p>从上面实例可以看出使用 Redis 和不使用 Redis <strong>性能差距明显</strong>，所以从目前的互联网项目来讲，使用 Redis 是一个非常普遍的情况，接下来我们来了解下 Redis 其他特性和优缺点。</p>
 <h3>Redis 其他特性以及优缺点</h3>

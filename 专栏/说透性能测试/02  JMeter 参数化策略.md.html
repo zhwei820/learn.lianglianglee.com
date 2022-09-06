@@ -181,18 +181,18 @@ function hide_canvas() {
 <h4>CSV Data Set Config</h4>
 <p>CSV Data Set Config 的可配置选项较多，也是目前性能测试参数化时使用最多的插件，这里我就重点介绍一下 CSV Data Set Config。</p>
 <p>在配置组件中添加元件 CSV Data Set Config，如下图所示：</p>
-<p><img src="assets/Ciqc1F_7uM2AMFOoAAFcsKt5GDc012.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_7uM2AMFOoAAFcsKt5GDc012.png" alt="png" /></p>
 <p>图 1：CSV Data Set Config</p>
 <p>我们来看一下 CSV Data Set Config 各项的含义。</p>
 <p><strong>文件名</strong>：顾名思义，这里填写文件的名字即可。</p>
 <p>保存参数化数据的文件目录，我这边是将 user.csv 和脚本放置在同一路径下。在这里我要推荐一个小技巧，就是“<strong>相对路径</strong>”。使用绝对路径，在做脚本迁移时大部分情况下都需要修改。如果你是先在 Windows 或 Mac 机器上修改脚本，再将脚本上传到 Linux 服务器上执行测试的，那你就可以用相对路径，这样就不用频繁修改该选项了。</p>
 <p><strong>文件编码</strong>：指定文件的编码格式，设置的格式一般需要和文件编码格式一致，大部分情况下保存编码格式为 UTF-8 即可。</p>
 <p><strong>变量名称</strong>：对应参数文件每列的变量名，类似 Excel 文件的文件头，主要是作为后续引用的标识符，一般使用英文。如下图所示：</p>
-<p><img src="assets/CgqCHl_7uN-ALfhLAADCt_4kBrI773.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_7uN-ALfhLAADCt_4kBrI773.png" alt="png" /></p>
 <p>图 2：user.csv</p>
 <p>图中我标示了 name 和 password，相对应 user.csv 中的第一列和第二列。</p>
 <p>那如何引用需要的文件数据？通过“${变量名称}”就可以了，如下图所示：</p>
-<p><img src="assets/Ciqc1F_7uOaACU7pAACyoK2kugg837.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_7uOaACU7pAACyoK2kugg837.png" alt="png" /></p>
 <p>图 3：引用演示图</p>
 <p><strong>忽略首行</strong>： 第一行不读取。比如图 2 的第一行我只是标示这一列是什么类型的数据，实际上并不是需要读取的业务数据，此时就可以采用忽略首行。</p>
 <p><strong>分隔符</strong>：用来标示参数文件中的分隔符号，与参数文件中的分隔符保持一致即可。</p>
@@ -216,7 +216,7 @@ function hide_canvas() {
 <h4>JMeter 如何实现关联</h4>
 <p>JMeter实现关联有 3 种方式：边界提取器，通过左右边界的方式关联需要的数据；Json Extractor提取器，针对返回的 json 数据类型；正则表达式提取器，通过正则表达式去提取数据，实现关联。</p>
 <p>正则表达式提取器是最为常用，也是这里我要向你介绍的关联方式。我们来看下面的例子：</p>
-<p><img src="assets/Cip5yF_7uPGATVcpAABwbh3j2xc538.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yF_7uPGATVcpAABwbh3j2xc538.png" alt="png" /></p>
 <p>图 4：正则表达式提取器</p>
 <p>我们来看一下正则表达式提取器中每一项的含义。</p>
 <ul>
@@ -236,10 +236,10 @@ function hide_canvas() {
 <ul>
 <li><strong>缺省值</strong>：正则匹配失败时的取值。比如这里我设置的是 null（token 值取不到时就会用 null 代替）。上面我们已经匹配了 token 值，在被测接口传参处直接用“${token}”就可以了。</li>
 </ul>
-<p><img src="assets/CgpVE1_7uPyAFTS7AAAim7aU0H8431.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgpVE1_7uPyAFTS7AAAim7aU0H8431.png" alt="png" /></p>
 <p>图 5：关联 Token</p>
 <p>关联后就可以看到，每次都能进行正常的业务返回了。</p>
-<p><img src="assets/CgpVE1_7uQWAYQQjAAIhTkpdTuc704.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgpVE1_7uQWAYQQjAAIhTkpdTuc704.png" alt="png" /></p>
 <p>图 6：关联后正常业务返回</p>
 <h3>总结</h3>
 <p>这一讲我介绍了参数化策略以及使用场景。作为性能测试中最常用到的操作，你不仅要学会基本操作，还需要思考参数化策略适合的场景以及参数化数据对性能测试的影响。说到这里，我就要问一个问题了：不同的参数对性能结果会不会有影响？</p>

@@ -266,10 +266,10 @@ public void deserialize(InputArchive archive, String tag)
 </code></pre>
 <p>Record 接口的内部实现逻辑非常简单，只是定义了一个 序列化方法 serialize 和一个反序列化方法 deserialize 。而在 Record 起到关键作用的则是两个重要的类：OutputArchive 和 InputArchive ，其实这两个类才是真正的序列化和反序列化工具类。</p>
 <p>在 OutputArchive 中定义了可进行序列化的参数类型，根据不同的序列化方式调用不同的实现类进行序列化操作。如下图所示，Jute 可以通过 Binary 、 Csv 、Xml 等方式进行序列化操作。</p>
-<p><img src="assets/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F6-a8CAUVfhAABcAV_NNXw402.png" alt="png" /></p>
 <p>而对应于序列化操作，在反序列化时也会相应调用不同的实现类，来进行反序列化操作。
 如下图所示：</p>
-<p><img src="assets/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png" alt="image" /></p>
+<p><img src="assets/CgqCHl6-a8mAOP1YAABW8fO1GAM913.png" alt="png" /></p>
 <p>注意：无论是序列化还是反序列化，都可以对多个对象进行操作，所以当我们在定义序列化和反序列化方法时，需要字符类型参数 tag 表示要序列化或反序列化哪个对象。</p>
 <h4>总结</h4>
 <p>本课时介绍了什么是序列化以及为什么要进行序列化，简单来说，就是将对象编译成字节码的形式，方便将对象信息存储到本地或通过网络传输。</p>

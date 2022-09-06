@@ -295,7 +295,7 @@ function hide_canvas() {
 <p>Dubbo 本身是一个分布式的 RPC 开源框架，各个依赖于 Dubbo 的服务节点都是单独部署的，为了让 Provider 和 Consumer 能够实时获取彼此的信息，就得依赖于一个<strong>一致性的服务发现组件</strong>实现注册和订阅。Dubbo 可以接入多种服务发现组件，例如，ZooKeeper、etcd、Consul、Eureka 等。其中，Dubbo 特别推荐使用 ZooKeeper。</p>
 <p><strong>ZooKeeper 是为分布式应用所设计的高可用且一致性的开源协调服务</strong>。它是一个树型的目录服务，支持变更推送，非常适合应用在生产环境中。</p>
 <p>下面是 Dubbo 官方文档中的一张图，展示了 Dubbo 在 Zookeeper 中的节点层级结构：</p>
-<p><img src="assets/Ciqc1F9gay-AdrWMAAGjEWP00aQ382.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9gay-AdrWMAAGjEWP00aQ382.png" alt="png" /></p>
 <p>Zookeeper 存储的 Dubbo 数据</p>
 <p>图中的“dubbo”节点是 Dubbo 在 Zookeeper 中的根节点，“dubbo”是这个根节点的默认名称，当然我们也可以通过配置进行修改。</p>
 <p>图中 Service 这一层的节点名称是服务接口的全名，例如 demo 示例中，该节点的名称为“org.apache.dubbo.demo.DemoService”。</p>
@@ -303,7 +303,7 @@ function hide_canvas() {
 <p>根据不同的 Type 节点，图中 URL 这一层中的节点包括：Provider URL 、Consumer URL 、Routes URL 和 Configurations URL。</p>
 <h3>ZookeeperRegistryFactory</h3>
 <p>在前面第 13 课时介绍 Dubbo 注册中心核心概念的时候，我们讲解了 RegistryFactory 这个工厂接口以及其子类 AbstractRegistryFactory，AbstractRegistryFactory 仅仅是提供了缓存 Registry 对象的功能，并未真正实现 Registry 的创建，具体的创建逻辑是由子类完成的。在 dubbo-registry-zookeeper 模块中的 SPI 配置文件（目录位置如下图所示）中，指定了<strong>RegistryFactory 的实现类—— ZookeeperRegistryFactory</strong>。</p>
-<p><img src="assets/CgqCHl9ga02AUesuAABPhgP1Voc406.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9ga02AUesuAABPhgP1Voc406.png" alt="png" /></p>
 <p>RegistryFactory 的 SPI 配置文件位置</p>
 <p>ZookeeperRegistryFactory 实现了 AbstractRegistryFactory，其中的 createRegistry() 方法会创建 ZookeeperRegistry 实例，后续将由该 ZookeeperRegistry 实例完成与 Zookeeper 的交互。</p>
 <p>另外，ZookeeperRegistryFactory 中还提供了一个 setZookeeperTransporter() 方法，你可以回顾一下之前我们介绍的 Dubbo SPI 机制，会通过 SPI 或 Spring Ioc 的方式完成自动装载。</p>
@@ -319,7 +319,7 @@ public interface ZookeeperTransporter {
 }
 </code></pre>
 <p>我们从代码中可以看到，ZookeeperTransporter 接口被 @SPI 注解修饰，成为一个扩展点，默认选择扩展名 “curator” 的实现，其中的 connect() 方法用于创建 ZookeeperClient 实例（该方法被 @Adaptive 注解修饰，我们可以通过 URL 参数中的 client 或 transporter 参数覆盖 @SPI 注解指定的默认扩展名）。</p>
-<p><img src="assets/CgqCHl9ga2CAVhNZAACNo2yx1q4384.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9ga2CAVhNZAACNo2yx1q4384.png" alt="png" /></p>
 <p>按照前面对 Registry 分析的思路，作为一个抽象实现，AbstractZookeeperTransporter 肯定是实现了创建 ZookeeperClient 之外的其他一些增强功能，然后由子类继承。不然的话，直接由 CuratorZookeeperTransporter 实现 ZookeeperTransporter 接口创建 ZookeeperClient 实例并返回即可，没必要在继承关系中再增加一层抽象类。</p>
 <pre><code>public class CuratorZookeeperTransporter extends
         AbstractZookeeperTransporter {
@@ -360,15 +360,15 @@ public interface ZookeeperTransporter {
 <ul>
 <li><strong>StateListener</strong>：主要负责监听 Dubbo 与 Zookeeper 集群的连接状态，包括 SESSION_LOST、CONNECTED、RECONNECTED、SUSPENDED 和 NEW_SESSION_CREATED。</li>
 </ul>
-<p><img src="assets/CgqCHl9ga4GAQmYSAAAtjyGIDtE504.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9ga4GAQmYSAAAtjyGIDtE504.png" alt="png" /></p>
 <ul>
 <li><strong>DataListener</strong>：主要监听某个节点存储的数据变化。</li>
 </ul>
-<p><img src="assets/Ciqc1F9ga4qAVm-6AAAzoshbsio688.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9ga4qAVm-6AAAzoshbsio688.png" alt="png" /></p>
 <ul>
 <li>**ChildListener：**主要监听某个 ZNode 节点下的子节点变化。</li>
 </ul>
-<p><img src="assets/CgqCHl9ga4-Aa-4IAABLF9PT8ls256.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9ga4-Aa-4IAABLF9PT8ls256.png" alt="png" /></p>
 <p>在 AbstractZookeeperClient 中维护了 stateListeners、listeners 以及 childListeners 三个集合，分别管理上述三种类型的监听器。虽然监听内容不同，但是它们的管理方式是类似的，所以这里我们只分析 listeners 集合的操作：</p>
 <pre><code>public void addDataListener(String path,
       DataListener listener, Executor executor) {
@@ -456,11 +456,11 @@ public interface ZookeeperTransporter {
 <p>在 ZookeeperRegistry 的构造方法中，会通过 ZookeeperTransporter 创建 ZookeeperClient 实例并连接到 Zookeeper 集群，同时还会添加一个连接状态的监听器。在该监听器中主要关注RECONNECTED 状态和 NEW_SESSION_CREATED 状态，在当前 Dubbo 节点与 Zookeeper 的连接恢复或是 Session 恢复的时候，会重新进行注册/订阅，防止数据丢失。这段代码比较简单，我们就不展开分析了。</p>
 <p>doRegister() 方法和 doUnregister() 方法的实现都是通过 ZookeeperClient 找到合适的路径，然后创建（或删除）相应的 ZNode 节点。这里唯一需要注意的是，doRegister() 方法注册 Provider URL 的时候，会根据 dynamic 参数决定创建临时 ZNode 节点还是持久 ZNode 节点（默认创建临时 ZNode 节点），这样当 Provider 端与 Zookeeper 会话关闭时，可以快速将变更推送到 Consumer 端。</p>
 <p>这里注意一下 toUrlPath() 这个方法得到的路径，是由下图中展示的方法拼装而成的，其中每个方法对应本课时开始展示的 Zookeeper 节点层级图中的一层。</p>
-<p><img src="assets/Ciqc1F9ga6qAOzWsAAGn7w4zPbo192.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9ga6qAOzWsAAGn7w4zPbo192.png" alt="png" /></p>
 <p>doSubscribe() 方法的核心是通过 ZookeeperClient 在指定的 path 上添加 ChildListener 监听器，当订阅的节点发现变化的时候，会通过 ChildListener 监听器触发 notify() 方法，在 notify() 方法中会触发传入的 NotifyListener 监听器。</p>
 <p>从 doSubscribe() 方法的代码结构可看出，doSubscribe() 方法的逻辑分为了两个大的分支。</p>
 <p>一个分支是处理：订阅 URL 中明确指定了 Service 层接口的订阅请求。该分支会从 URL 拿到 Consumer 关注的 category 节点集合，然后在每个 category 节点上添加 ChildListener 监听器。下面是 Demo 示例中 Consumer 订阅的三个 path，图中展示了构造 path 各个部分的相关方法：</p>
-<p><img src="assets/Ciqc1F9gc_WAYTGzAAEKDnK-16Q791.png" alt="Lark20200915-155646.png" /></p>
+<p><img src="assets/Ciqc1F9gc_WAYTGzAAEKDnK-16Q791.png" alt="png" /></p>
 <p>下面是这个分支的核心源码分析：</p>
 <pre><code>List&lt;URL&gt; urls = new ArrayList&lt;&gt;();
 for (String path : toCategoriesPath(url)) { // 要订阅的所有path

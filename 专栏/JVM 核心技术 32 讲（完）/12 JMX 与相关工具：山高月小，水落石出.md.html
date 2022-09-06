@@ -302,11 +302,11 @@ public class MXBeanTest {
 </blockquote>
 <p>以 JConsole 为例，我们看一下，连接到了远程 JVM 以后，在最后一个面板即可看到 MBean 信息。</p>
 <p>例如，我们可以查看 JVM 的一些信息：</p>
-<p><img src="assets/58f59680-2d68-11ea-a743-8137f2e46c91" alt="enter image description here" /></p>
+<p><img src="assets/58f59680-2d68-11ea-a743-8137f2e46c91" alt="png" /></p>
 <p>也可以直接调用方法，例如查看 VM 参数：</p>
-<p><img src="assets/629d8300-2d68-11ea-a743-8137f2e46c91" alt="enter image description here" /></p>
+<p><img src="assets/629d8300-2d68-11ea-a743-8137f2e46c91" alt="png" /></p>
 <p>如果启动的进程是 Tomcat 或者是 Spring Boot 启动的嵌入式 Tomcat，那么我们还可以看到很多 Tomcat 的信息：</p>
-<p><img src="assets/6bd52180-2d68-11ea-b8bc-595e31068820" alt="enter image description here" /></p>
+<p><img src="assets/6bd52180-2d68-11ea-b8bc-595e31068820" alt="png" /></p>
 <h2>JMX 的 MBean 创建和远程访问</h2>
 <p>前面讲了在同一个 JVM 里获取 MBean，现在我们再来写一个更完整的例子：创建一个 MBean，然后远程访问它。</p>
 <p>先定义一个 UserMBean 接口（必须以 MBean 作为后缀）：</p>
@@ -386,11 +386,11 @@ public class UserJmxServer {
 <p>打开 JConsole，在远程输入：</p>
 <pre><code>service:jmx:rmi:///jndi/rmi://localhost:1099/user
 </code></pre>
-<p><img src="assets/7c66ebf0-2d68-11ea-b6a8-fbb27a899f8c" alt="enter image description here" /></p>
+<p><img src="assets/7c66ebf0-2d68-11ea-b6a8-fbb27a899f8c" alt="png" /></p>
 <p>查看 User 的属性：</p>
-<p><img src="assets/84cfa1b0-2d68-11ea-8fee-9f496e85c50f" alt="enter image description here" /></p>
+<p><img src="assets/84cfa1b0-2d68-11ea-8fee-9f496e85c50f" alt="png" /></p>
 <p>直接修改 UserName 的值：</p>
-<p><img src="assets/8cb2acb0-2d68-11ea-b6fe-19eaa05aac2e" alt="enter image description here" /></p>
+<p><img src="assets/8cb2acb0-2d68-11ea-b6fe-19eaa05aac2e" alt="png" /></p>
 <h3>使用 JMX 远程访问 MBean</h3>
 <p>我们先使用 JMXUrl 来创建一个 MBeanServerConnection，连接到 MBeanServer，然后就可以通过 ObjectName，也可以看做是 MBean 的地址，像反射一样去拿服务器端 MBean 里的属性，或者调用 MBean 的方法。示例如下：</p>
 <pre><code class="language-java">package io.github.kimmking.jvmstudy.jmx;

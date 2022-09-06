@@ -481,7 +481,7 @@ function hide_canvas() {
 <h4>引入主题</h4>
 <p>为什么要读Spring源码，有的人为了学习Spring中的先进思想，也有的人是为了更好的理解设计模式，当然也有很大一部分小伙伴是为了应付面试，Spring Bean的生命周期啦，Spring AOP的原理啦，Spring IoC的原理啦，应付面试，看几篇博客，对照着看看源码，应该就没什么问题了，但是如果想真正的玩懂Spring，需要花的时间真的很多，需要你沉下心，从最基础的看起，今天我们就来看看Spring中的基础——BeanDefinition。</p>
 <h4>什么是BeanDefinition</h4>
-<p><img src="assets/15100432-b6f3e81ca4e0b5b4.png" alt="image.png" />
+<p><img src="assets/15100432-b6f3e81ca4e0b5b4.png" alt="png" />
 Spring官网中有详细的说明，我们来翻译下：
 SpringIoc容器管理一个Bean或多个Bean，这些Bean通过我们提供给容器的配置元数据被创建出来（例如，在xml中的定义）
 在容器中，这些Bean的定义用BeanDefinition对象来表示，包含以下元数据：</p>
@@ -493,14 +493,14 @@ SpringIoc容器管理一个Bean或多个Bean，这些Bean通过我们提供给�
 </ul>
 <p>Spring官网中对BeanDefinition的解释还是很详细的，但是不是那么通俗易懂，其实BeanDefinition是比较容易解释的：BeanDefinition就是用来描述一个Bean或者BeanDefinition就是Bean的定义。</p>
 <p>创建一个Java Bean，大概是下面这个酱紫：
-<img src="assets/15100432-87de503f024f272f.png" alt="image.png" />
+<img src="assets/15100432-87de503f024f272f.png" alt="png" />
 我们写的Java文件，会编译为Class文件，运行程序，类加载器会加载Class文件，放入JVM的方法区，我们就可以愉快的new对象了。</p>
 <p>创建一个Spring Bean，大概是下面这个酱紫：
-<img src="assets/15100432-4e677493ee644264.png" alt="image.png" />
+<img src="assets/15100432-4e677493ee644264.png" alt="png" />
 我们写的Java文件，会编译为Class文件，运行程序，类加载器会加载Class文件，放入JVM的方法区，这一步还是保持不变（当然这个也没办法变。。。）
 下面就是Spring的事情了，Spring会解析我们的配置类（配置文件），假设现在只配置了A，解析后，Spring会把A的BeanDefinition放到一个map中去，随后，由一个一个的BeanPostProcessor进行加工，最终把经历了完整的Spring生命周期的Bean放入了singleObjects。</p>
 <h4>BeanDefinition类图鸟瞰</h4>
-<p><img src="assets/15100432-18d3be0ba6b0eda8.png" alt="image.png" />
+<p><img src="assets/15100432-18d3be0ba6b0eda8.png" alt="png" />
 大家可以看到，Spring中BeanDefinition的类图还是相当复杂的，我刚开始读Spring源码的时候，觉得BeanDefinition应该是一个特别简单的东西，但是后面发觉并不是那么回事。</p>
 <p>下面我将对涉及到的类逐个进行解读。</p>
 <h4>AttributeAccessor</h4>
@@ -691,9 +691,9 @@ Root bean: class [com.codebear.springcycle.AuthorService]; scope=prototype; abst
 <p>在介绍GenericBeanDefinition的时候，写了两段代码。</p>
 <p>给第一个代码打上断点，观察下mergedBeanDefinitions，会发现parentBeanDefinition和
 childBeanDefinition在mergedBeanDefinitions都变为了RootBeanDefinition：
-<img src="assets/15100432-bef9e1704c952ffe.png" alt="image.png" /></p>
+<img src="assets/15100432-bef9e1704c952ffe.png" alt="png" /></p>
 <p>给第二个代码打上断点，也观察下mergedBeanDefinitions，会发现authorService在mergedBeanDefinitions也变为了RootBeanDefinition：
-<img src="assets/15100432-d355a3707f7a6a85.png" alt="image.png" /></p>
+<img src="assets/15100432-d355a3707f7a6a85.png" alt="png" /></p>
 <p>可以看到在mergedBeanDefinitions存放的都是RootBeanDefinition。</p>
 <p>RootBeanDefinition也可以用来充当父BeanDefinition，就像下面的酱紫：</p>
 <pre><code> public static void main(String[] args) {

@@ -182,46 +182,46 @@ function hide_canvas() {
 <tbody>
 <tr>
 <td align="left">统一共享集群</td>
-<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="green" /></td>
-<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="green" /></td>
+<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="png" /></td>
+<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="png" /></td>
 <td align="left"><img src="assets/e37fa4b0-d65c-11ea-b558-cd3c105f83ae.jpg" alt="red" /></td>
 <td align="left"><img src="assets/e37fa4b0-d65c-11ea-b558-cd3c105f83ae.jpg" alt="red" /></td>
 </tr>
 <tr>
 <td align="left">独立环境多区集群</td>
-<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="yellow" /></td>
-<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="yellow" /></td>
-<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="brown" /></td>
-<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="brown" /></td>
+<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
 </tr>
 <tr>
 <td align="left">应用环境多区集群</td>
-<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="brown" /></td>
-<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="brown" /></td>
-<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="yellow" /></td>
-<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="yellow" /></td>
+<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/c8edbba0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
+<td align="left"><img src="assets/b1b81cf0-d65c-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></td>
 </tr>
 <tr>
 <td align="left">专用小型集群</td>
 <td align="left"><img src="assets/e37fa4b0-d65c-11ea-b558-cd3c105f83ae.jpg" alt="red" /></td>
 <td align="left"><img src="assets/e37fa4b0-d65c-11ea-b558-cd3c105f83ae.jpg" alt="red" /></td>
-<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="green" /></td>
-<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="green" /></td>
+<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="png" /></td>
+<td align="left"><img src="assets/8cfbd0f0-d65c-11ea-9203-1bcff1a80007.jpg" alt="png" /></td>
 </tr>
 </tbody>
 </table>
 <p>通过以上的对比分析，显然当前最佳的方式是，以环境为中心或以应用为中心部署多集群模式会获得最佳的收益。</p>
 <h3>构建弹性 CI/CD 流程的策略</h3>
 <p>构建 CI/CD 流程的工具很多，	但是我们无论使用何种工具，我们都会困 	惑如何引入 Kubernetes 系统。通过实践得知，目前业界主要在采用 GitOps 工作流与 Kubernetes 配合使用可以获得很多的收益。这里我们可以参考业界知名的 CI/CD 工具 JenkinsX 架构图作为参考：</p>
-<p><img src="assets/0307b200-d65d-11ea-8ff5-1f2baade933b.jpg" alt="5-1-jenkinsx_arch" /></p>
+<p><img src="assets/0307b200-d65d-11ea-8ff5-1f2baade933b.jpg" alt="png" /></p>
 <p>GitOps 配合 Jenkins 的 Pipeline 流水线，可以创建业务场景中需要的流水线，可以让业务应用根据需要在各种环境中切换并持续迭代。这种策略的好处在于充分利用 Git 的版本工作流控制了代码的集成质量，并且依靠流水线的特性又让持续的迭代能力可以得到充分体现。</p>
 <h3>构建弹性多租户资源管理策略</h3>
 <p>Kubernetes 内部的账号系统有 User、Group、ServiceAccount，当我们通过 RBAC 授权获得资源权限之后，其实这 3 个资源的权限能力是一样的。因为使用场景的不同，针对人的权限，我们一般会提供 User、Group 对象。当面对 Pod 之间，或者是外部系统服务对 Kubernetes API 的调用时，一般会采用 ServiceAccount。在原生 Kubernetes 环境下，我们可以通过 Namespace 把账号和资源进行绑定，以实现基于 API 级别的多租户。但是原生的多租户配置过于繁琐，一般我们会采用一些辅助的开源多租户工具来帮助我们，例如 Kiosk 多租户扩展套件：</p>
-<p><img src="assets/24de6a40-d65d-11ea-a0a4-91ded31f57b1.jpg" alt="5-1-kiosk-workflow" /></p>
+<p><img src="assets/24de6a40-d65d-11ea-a0a4-91ded31f57b1.jpg" alt="png" /></p>
 <p>通过 Kiosk 的设计流程图，我们可以清晰地定义每一个用户的权限，并配置合理的资源环境。让原来繁琐的配置过程简化成默认的租户模板，让多租户的配置过程变得更标准。</p>
 <h3>构建弹性安全策略</h3>
 <p>基于 Kubernetes 容器集群的安全考量，它的攻击面很多。所以我们要想做一份完备的安全策略，依然需要借助在系统层面的安全经验作为参考。根据业界知名的 MITRE ATT&amp;CK 全球安全知识库的安全框架设计，我们有如下方面需要考量：</p>
-<p><img src="assets/479410d0-d65d-11ea-8e3d-27a3708e9ea4.jpg" alt="5-1-security-attach-interface" /></p>
+<p><img src="assets/479410d0-d65d-11ea-8e3d-27a3708e9ea4.jpg" alt="png" /></p>
 <h4><strong>Initial Access（准入攻击面）</strong></h4>
 <p>我们需要考虑的面主要是认证授权的审计工作。比如在云端的 Kubernetes，当云端的认证凭证泄露就会导致容器集群暴露在外。比如 Kubeconfig 文件，它是集群管理员的管理授权文件，一旦被攻击者获得授权，整个集群就会暴露在攻击者的眼前。另外基础镜像的潜在 Bug 问题、应用程序的漏洞等问题，稍有不慎，也会对集群带来安全隐患。还有内置的开源面板 Kubernetes Dashboard 也不应该暴露在外网，需要保证其面板的端口安全。</p>
 <h4><strong>Execution（执行攻击面）</strong></h4>

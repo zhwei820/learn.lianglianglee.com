@@ -724,7 +724,7 @@ public class ItemParameter implements Parameter {
 </blockquote>
 <p>高内聚原则与职责的分配有关，如果职责分配合理，就能减少许多不必要产生的依赖；松耦合原则与职责的变化有关，如果能对这种变化进行抽象与隔离，就能降低二者之间的依赖程度。因此，要实现自治对象的稳定空间，还需要识别变化点，对变化的职责进行分离和封装。实际上，许多设计模式都可以说是“分离和封装变化”原则的体现。</p>
 <p>当我们发现一个对象包含的职责既有不变的部分，又有可变的部分，就可以将可变的部分分离出去，将其抽象为一个接口，再以委派的形式传入到原对象，如下图所示：</p>
-<p><img src="assets/b6290e60-a0cb-11e9-8ede-0bef8cb861c0" alt="79214590.png" /></p>
+<p><img src="assets/b6290e60-a0cb-11e9-8ede-0bef8cb861c0" alt="png" /></p>
 <p>此时抽象出来的接口 Changable 其实就是策略模式（Strategy Pattern）或者命令模式（Command Pattern）的体现。例如，Java 线程的实现机制是不变的，但运行在线程中的业务却随时可变，将这部分可变的业务部分分离出来，抽象为 Runnable 接口，再以构造函数参数的方式传入到 Thread 中：</p>
 <pre><code class="language-java">public class Thread ... {
     private Runnable target;
@@ -795,7 +795,7 @@ public class ItemParameter implements Parameter {
 }
 </code></pre>
 <p>如果一个对象存在两个可能变化的职责，就违背了“单一职责原则”，即“引起变化的原因只能有一个”。我们需要分离这两个可变的职责，分别进行抽象，然后形成这两个抽象职责的组合，就是桥接模式（Bridge Pattern）的体现：</p>
-<p><img src="assets/3329f0f0-a0cc-11e9-b749-5fa0f3065823" alt="52350468.png" /></p>
+<p><img src="assets/3329f0f0-a0cc-11e9-b749-5fa0f3065823" alt="png" /></p>
 <p>例如在实现数据权限控制时，需要根据解析配置内容获得数据权限规则，然后再根据解析后的规则对数据进行过滤。需要支持多种解析规则，同时也需要支持多种过滤规则，二者的变化方向是完全不同的。这时，就不能像下面这样将它们定义到一个类或接口中：</p>
 <pre><code class="language-java">public interface DataRuleParser {
     List&lt;DataRule&gt; parseRules();

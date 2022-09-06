@@ -217,7 +217,7 @@ function hide_canvas() {
 <p>于是 Tony 找到了我爱我家，认识了里面的职员 Vangie。Vangie 问了他对房子的要求。Tony 说：“18平米左右，要有独卫，要有窗户，最好是朝南，有厨房更好！价位在2000左右。”Vangie 立马就说：“上地西里有一间，但没有厨房；当代城市家园有两间，一间主卧，一间次卧，但卫生间是共用的；美和园有一间，比较适合你，但价格会贵一点。” 真是了如指掌啊！说完就带着 Tony 开始看房了……</p>
 <p>一天就找到了还算合适的房子。但不得不再次吐槽：北京的房子真 TM 贵啊，18平米，精装修，有朝南窗户，一个超小（1m宽不到）的阳台，卫生间5人共用，厨房共用，价格要2600每月。押一付三，加一个月的中介费，一次交了一万多，要开始吃土了，内心滴了无数滴血……</p>
 </blockquote>
-<p><img src="assets/5f2a5230-d5b7-11e7-8257-812093f8cef1.jpg" alt="enter image description here" /></p>
+<p><img src="assets/5f2a5230-d5b7-11e7-8257-812093f8cef1.jpg" alt="png" /></p>
 <h3>用程序来模拟生活</h3>
 <p>上面的生活场景中，Tony 通过中介来找房子，因为找房子的过程实在太繁琐了，而且对房源信息不了解。通过中介，他省去了很多麻烦的细节，合同也是直接跟中介签，你甚至可能都不知道房东是谁。</p>
 <p>我们将通过程序来模拟一下上面找房子的过程。</p>
@@ -351,23 +351,23 @@ Tony 与中介 我爱我家 签订 金隅美和园 的房子的租赁合同, 租
 </code></pre>
 <h3>从剧情中思考中介模式</h3>
 <p>从这个示例中我们知道，Tony 找房子并不需要与房东进行直接交涉，甚至连房东是谁都不知道，他只需要与中介进行交涉即可，一切都可通过中介完成。使得他找房子的过程，由这样一个状态：</p>
-<p><img src="assets/a5aa43a0-d5b7-11e7-ba8d-675556ef95d9.jpg" alt="enter image description here" /></p>
+<p><img src="assets/a5aa43a0-d5b7-11e7-ba8d-675556ef95d9.jpg" alt="png" /></p>
 <p>变成了这样一个状态：</p>
-<p><img src="assets/b8ab6060-d5b7-11e7-9223-c7e0b1ab6cc2.jpg" alt="enter image description here" /></p>
+<p><img src="assets/b8ab6060-d5b7-11e7-9223-c7e0b1ab6cc2.jpg" alt="png" /></p>
 <p>这无疑给他减少了很多的麻烦。</p>
 <p>这种由中介来承接房客与房东之间的交互的过程，在程序中叫做<strong>中介模式</strong>。用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。中介者模式又称为调停者模式，它是一种对象行为型模式。</p>
 <h3>中介模式的模型抽象</h3>
 <p>在很多系统中，很容易多个类相互耦合，形成了网状结构。而中介模式将这种网状结构分离为星型结构。</p>
 <p>原始的网状结构：</p>
-<p><img src="assets/d1cb9100-d5b7-11e7-9223-c7e0b1ab6cc2.jpg" alt="enter image description here" /></p>
+<p><img src="assets/d1cb9100-d5b7-11e7-9223-c7e0b1ab6cc2.jpg" alt="png" /></p>
 <p>有中介者的星型结构：</p>
-<p><img src="assets/fc6cf520-d5b7-11e7-8257-812093f8cef1.jpg" alt="enter image description here" /></p>
+<p><img src="assets/fc6cf520-d5b7-11e7-8257-812093f8cef1.jpg" alt="png" /></p>
 <h4>类图</h4>
 <p>根据上面的示例代码，我们可以大致地构建出中介模式的类图关系如下：</p>
-<p><img src="assets/107596d0-d5b8-11e7-ba8d-675556ef95d9.jpg" alt="enter image description here" /></p>
+<p><img src="assets/107596d0-d5b8-11e7-ba8d-675556ef95d9.jpg" alt="png" /></p>
 <p>我再举一个实际应用中的例子。不管是 QQ、钉钉这类支持视频通迅的社交软件，还是 51Talk、TutorABC、ABC360 这类在线互联网教育的产品，都需要和通迅设备（扬声器、麦克风、摄像头）进行交互。在移动平台各类通迅设备一般只会有一个，但在 PC 端（尤其是 Windows 电脑），你可能会有多个扬声器、多个麦克风，甚至有多个摄像头，还可能会在通话的过程中由麦克风 A 切换到麦克风 B。如何与这些繁杂的设备进行交互呢？</p>
 <p>聪明的你一定会想到：用中介模式啊！对，就是它。我们看一下如何设计它的结构。</p>
-<p><img src="assets/355e22f0-d5b8-11e7-8179-bbfbeabb6f9b.jpg" alt="enter image description here" /></p>
+<p><img src="assets/355e22f0-d5b8-11e7-8179-bbfbeabb6f9b.jpg" alt="png" /></p>
 <p>上图中 DeviceUtil 其实就是中介者，客户端界面通过 DeviceUtil 这个中介与设备进行交互，这样界面类 ClientWidget 就不用同时维护三个 DeviceMgr 的对象，而只要与一个 DeviceUtil 的对象进行交互就可以。ClientWidget 可通过 DeviceUtil 枚举各类型（扬声器、麦克风、摄像头）的设备，同时可以通过 DeviceUtil 来读取和保存当前正在使用的各类型设备。</p>
 <p>这时，可能有读者要问了：为什么 DeviceUtil 到 DeviceMgr 的依赖指向与模型图不一样啊！这是因为这个应用中 ClientWidget 与 DeviceMgr 是单向的交互，只有 ClientWidget 调用 DeviceMgr，而一般不会有 DeviceMgr 调用 ClientWidget 的情况。而模型图是同时支持双向的交互，InteractiveObject 通过直接依赖与 Mediator 进行交互，而 User 也通过 Mediator 间接地与 InteractiveObjectImplA、InteractiveObjectImplB 进行交互（图中虚线表示）。</p>
 <h4>模型说明</h4>

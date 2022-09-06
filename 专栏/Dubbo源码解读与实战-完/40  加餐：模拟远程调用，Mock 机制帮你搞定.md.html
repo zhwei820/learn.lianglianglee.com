@@ -295,7 +295,7 @@ function hide_canvas() {
 <p>在前面第 38 课时中，我们深入介绍了 Dubbo 提供的多种 Cluster 实现以及相关的 Cluster Invoker 实现，其中的 ZoneAwareClusterInvoker 就涉及了 MockClusterInvoker 的相关内容。本课时我们就来介绍 Dubbo 中 Mock 机制的全链路流程，不仅包括与 Cluster 接口相关的 MockClusterWrapper 和 MockClusterInvoker，我们还会回顾前面课程的 Router 和 Protocol 接口，分析它们与 Mock 机制相关的实现。</p>
 <h3>MockClusterWrapper</h3>
 <p>Cluster 接口有两条继承线（如下图所示）：一条线是 AbstractCluster 抽象类，这条继承线涉及的全部 Cluster 实现类我们已经在[第 37 课时]中深入分析过了；另一条线是 MockClusterWrapper 这条线。</p>
-<p><img src="assets/Ciqc1F_PExSAAkePAABxACxNLzc156.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_PExSAAkePAABxACxNLzc156.png" alt="png" /></p>
 <p>Cluster 继承关系图</p>
 <p><strong>MockClusterWrapper 是 Cluster 对象的包装类</strong>，我们在之前[第 4 课时]介绍 Dubbo SPI 机制时已经分析过 Wrapper 的功能，MockClusterWrapper 类会对 Cluster 进行包装。下面是 MockClusterWrapper 的具体实现，其中会在 Cluster Invoker 对象的基础上使用 MockClusterInvoker 进行包装：</p>
 <pre><code>public class MockClusterWrapper implements Cluster {
@@ -382,7 +382,7 @@ function hide_canvas() {
 </code></pre>
 <h3>MockInvokersSelector</h3>
 <p>在[第 32 课时]和[第 33 课时]中，我们介绍了 Router 接口多个实现类，但当时并没有深入介绍 Mock 相关的 Router 实现类—— MockInvokersSelector，它的继承关系如下图所示：</p>
-<p><img src="assets/CgqCHl_PEyqAeilHAAAnrF4cOr8848.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_PEyqAeilHAAAnrF4cOr8848.png" alt="png" /></p>
 <p>MockInvokersSelector 继承关系图</p>
 <p><strong>MockInvokersSelector 是 Dubbo Mock 机制相关的 Router 实现</strong>，在未开启 Mock 机制的时候，会返回正常的 Invoker 对象集合；在开启 Mock 机制之后，会返回 MockInvoker 对象集合。MockInvokersSelector 的具体实现如下：</p>
 <pre><code>public &lt;T&gt; List&lt;Invoker&lt;T&gt;&gt; route(final List&lt;Invoker&lt;T&gt;&gt; invokers,

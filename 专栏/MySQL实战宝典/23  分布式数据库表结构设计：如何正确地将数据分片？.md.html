@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>而第一步就是要对表选出一个分片键，然后进行分布式架构的设计。</p>
 <p>对于上面的表orders，可以选择的分片键有：o_orderkey、o_orderdate、也可以是o_custkey。在选出分片键后，就要选择分片的算法，比较常见的有 RANGE 和 HASH 算法。</p>
 <p>比如，表 orders，选择分片键 o_orderdate，根据函数 YEAR 求出订单年份，然后根据RANGE 算法进行分片，这样就能设计出基于 RANGE 分片算法的分布式数据库架构：</p>
-<p><img src="assets/Cgp9HWDv4lmAI0tUAAFEb3P4_hc847.jpg" alt="image" /></p>
+<p><img src="assets/Cgp9HWDv4lmAI0tUAAFEb3P4_hc847.jpg" alt="png" /></p>
 <p>从图中我们可以看到，采用 RANGE 算法进行分片后，表 orders 中，1992 年的订单数据存放在分片 1 中、1993 年的订单数据存放在分片 2 中、1994 年的订单数据存放在分片 3中，依次类推，如果要存放新年份的订单数据，追加新的分片即可。</p>
 <p><strong>不过，RANGE 分片算法在分布式数据库架构中，是一种非常糟糕的算法</strong>，因为对于分布式架构，通常希望能解决传统单实例数据库两个痛点：</p>
 <ul>
@@ -216,10 +216,10 @@ function hide_canvas() {
 <p>所以在分布式架构中，RANGE 分区算法是一种比较糟糕的算法。但它也有好处：可以方便数据在不同机器间进行迁移（migrate），比如要把分片 2 中 1992 年的数据迁移到分片 1，直接将表进行迁移就行。</p>
 <p><strong>而对海量并发的 OLTP 业务来说，一般推荐用 HASH 的分区算法</strong>。这样分片的每个节点都可以有实时的访问，每个节点负载都能相对平衡，从而实现性能和存储层的线性可扩展。</p>
 <p>我们来看表 orders 根据 o_orderkey 进行 HASH 分片，分片算法如下：</p>
-<p><img src="assets/Cgp9HWDv4muAGAAaAAEKa7KWUCA758.jpg" alt="image" /></p>
+<p><img src="assets/Cgp9HWDv4muAGAAaAAEKa7KWUCA758.jpg" alt="png" /></p>
 <p>在上述分片算法中，分片键是 o_orderkey，总的分片数量是 4（即把原来 1 份数据打散到 4 张表中），具体来讲，分片算法是将 o_orderkey 除以 4 进行取模操作。</p>
 <p>最终，将表orders 根据 HASH 算法进行分布式设计后的结果如下图所示：</p>
-<p><img src="assets/CioPOWDv4oKAYT-OAAEs6WnCu9o191.jpg" alt="image" /></p>
+<p><img src="assets/CioPOWDv4oKAYT-OAAEs6WnCu9o191.jpg" alt="png" /></p>
 <p>可以看到，对于订单号除以 4，余数为 0 的数据存放在分片 1 中，余数为 1 的数据存放在分片 2 中，余数为 2 的数据存放在分片 3 中，以此类推。</p>
 <p>这种基于 HASH 算法的分片设计才能较好地应用于大型互联网业务，真正做到分布式数据库架构弹性可扩展的设计要求。</p>
 <p>但是，表 orders 分区键选择 o_orderkey 是最好地选择吗？并不是。</p>
@@ -227,7 +227,7 @@ function hide_canvas() {
 <p>如果用 o_orderkey 作分区键，那么 lineitem 可以用 l_orderkey 作为分区键，但这时会发现表customer 并没有订单的相关信息，即无法使用订单作为分片键。</p>
 <p>如果表 customer 选择另一个字段作为分片键，那么业务数据无法做到单元化，也就是对于表customer、orders、lineitem，分片数据在同一数据库实例上。</p>
 <p>所以，如果要实现分片数据的单元化，最好的选择是把用户字段作为分区键，在表 customer 中就是将 c_custkey 作为分片键，表orders 中将 o_custkey 作为分片键，表 lineitem 中将 l_custkey 作为分片键：</p>
-<p><img src="assets/Cgp9HWDv4pSAZulNAAFwBnC6gPU305.jpg" alt="image" /></p>
+<p><img src="assets/Cgp9HWDv4pSAZulNAAFwBnC6gPU305.jpg" alt="png" /></p>
 <p>这样做的好处是：根据用户维度进行查询时，可以在单个分片上完成所有的操作，不用涉及跨分片的访问，如下面的 SQL：</p>
 <pre><code>SELECT * FROM orders
 INNER JOIN lineitem ON o_orderkey = l_orderkey
@@ -260,11 +260,11 @@ ORDER BY o_orderdate DESC LIMIT 10
 <li>同一分片键的表都在同一库下，方便做整体数据的迁移和扩容。</li>
 </ul>
 <p>如果根据第 4 种标准的分库分表规范，那么分布式 MySQL 数据库的架构可以是这样：
-<img src="assets/Cgp9HWDv4qeAeLM7AAGBfl0Kr4I115.jpg" alt="image" /></p>
+<img src="assets/Cgp9HWDv4qeAeLM7AAGBfl0Kr4I115.jpg" alt="png" /></p>
 <p><strong>有没有发现，按上面这样的分布式设计，数据分片完成后，所有的库表依然是在同一个 MySQL实例上！！！</strong></p>
 <p>牢记，分布式数据库并不一定要求有很多个实例，最基本的要求是将数据进行打散分片。接着，用户可以根据自己的需要，进行扩缩容，以此实现数据库性能和容量的伸缩性。<strong>这才是分布式数据库真正的魅力所在</strong>。</p>
 <p>对于上述的分布式数据库架构，一开始我们将 4 个分片数据存储在一个 MySQL 实例上，但是如果遇到一些大促活动，可以对其进行扩容，比如把 4 个分片扩容到 4 个MySQL实例上：
-<img src="assets/CioPOWDv4-uACx5SAAF0mbv_uqE895.jpg" alt="06.jpg" /></p>
+<img src="assets/CioPOWDv4-uACx5SAAF0mbv_uqE895.jpg" alt="png" /></p>
 <p>如果完成了大促活动，又可以对资源进行回收，将分片又都放到一台 MySQL 实例上，这就是对资源进行缩容。</p>
 <p>总的来说，对分布式数据库进行扩缩容在互联网公司是一件常见的操作，比如对阿里来说，每年下半年 7 月开始，他们就要进行双 11 活动的容量评估，然后根据评估结果规划数据库的扩容。</p>
 <p>一般来说，电商的双 11 活动后，还有双 12、新年、春节，所以一般会持续到过完年再对数据库进行缩容。接下来，我们来看看如何进行扩缩容。</p>
@@ -278,9 +278,9 @@ ORDER BY o_orderdate DESC LIMIT 10
 replicate_do_db =&quot;tpch01&quot;
 </code></pre>
 <p>所以在进行扩容时，首先根据下图的方式对扩容的分片进行过滤复制的配置：</p>
-<p><img src="assets/Cgp9HWDv4zKAU0XpAAG23jW4LvA413.jpg" alt="image" /></p>
+<p><img src="assets/Cgp9HWDv4zKAU0XpAAG23jW4LvA413.jpg" alt="png" /></p>
 <p>然后再找一个业务低峰期，将业务的请求转向新的分片，完成最终的扩容操作：</p>
-<p><img src="assets/Cgp9HWDv4x-ANZ8IAAHJ0OFzx-c573.jpg" alt="image" /></p>
+<p><img src="assets/Cgp9HWDv4x-ANZ8IAAHJ0OFzx-c573.jpg" alt="png" /></p>
 <p>至于缩容操作，本质就是扩容操作的逆操作，这里就不再多说了。</p>
 <h3>总结</h3>
 <p>今天这一讲，我们学习了分布式数据库架构设计中的分片设计，也就是我们经常听说的分库分表设计。希望通过本讲，你能牢牢掌握以下内容：</p>

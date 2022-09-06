@@ -171,9 +171,9 @@ function hide_canvas() {
             final GenericObjectPoolConfig&lt;T&gt; config)
 </code></pre>
 <p><strong>Redis 的常用客户端 Jedis</strong>，就是使用 Commons Pool 管理连接池的，可以说是一个最佳实践。下图是 Jedis 使用工厂<strong>创建对象</strong>的主要代码块。对象工厂类最主要的方法就是makeObject，它的返回值是 PooledObject 类型，可以将对象使用 new DefaultPooledObject&lt;&gt;(obj) 进行简单包装返回。</p>
-<p><img src="assets/CgqCHl8xKV-AHSvoAAX4BkEi8aQ783.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8xKV-AHSvoAAX4BkEi8aQ783.png" alt="png" /></p>
 <p>我们再来介绍一下对象的生成过程，如下图，对象在进行<strong>获取</strong>时，将首先尝试从对象池里拿出一个，如果对象池中没有空闲的对象，就使用工厂类提供的方法，生成一个新的。</p>
-<p><img src="assets/Ciqc1F8xKWWAfETQAAXjITHnnyY877.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F8xKWWAfETQAAXjITHnnyY877.png" alt="png" /></p>
 <p>那对象是存在什么地方的呢？这个存储的职责，就是由一个叫作 LinkedBlockingDeque的结构来承担的，它是一个双向的队列。</p>
 <p>接下来看一下 GenericObjectPoolConfig 的主要属性：</p>
 <pre><code>private int maxTotal = DEFAULT_MAX_TOTAL;
@@ -196,7 +196,7 @@ private long timeBetweenEvictionRunsMillis = DEFAULT_TIME_BETWEEN_EVICTION_RUNS_
 private boolean blockWhenExhausted = DEFAULT_BLOCK_WHEN_EXHAUSTED;
 </code></pre>
 <p>参数很多，要想了解参数的意义，我们首先来看一下一个池化对象在整个池子中的生命周期。如下图所示，池子的操作主要有两个：一个是<strong>业务线程</strong>，一个是<strong>检测线程</strong>。</p>
-<p><img src="assets/CgqCHl8xKYKAdvm7AADGC-6LsfE257.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl8xKYKAdvm7AADGC-6LsfE257.png" alt="png" /></p>
 <p>对象池在进行初始化时，要指定三个主要的参数：</p>
 <ul>
 <li><strong>maxTotal</strong> 对象池中管理的对象上限</li>
@@ -206,7 +206,7 @@ private boolean blockWhenExhausted = DEFAULT_BLOCK_WHEN_EXHAUSTED;
 <p>其中 <strong>maxTotal</strong> 和业务线程有关，当业务线程想要获取对象时，会首先检测是否有空闲的对象。如果有，则返回一个；否则进入创建逻辑。此时，如果池中个数已经达到了最大值，就会创建失败，返回空对象。</p>
 <p>对象在获取的时候，有一个非常重要的参数，那就是<strong>最大等待时间（maxWaitMillis）</strong>，这个参数对应用方的性能影响是比较大的。该参数默认为 -1，表示永不超时，直到有对象空闲。</p>
 <p>如下图，如果对象创建非常缓慢或者使用非常繁忙，业务线程会持续阻塞 （blockWhenExhausted 默认为 true），进而导致正常服务也不能运行。</p>
-<p><img src="assets/CgqCHl8xKZGAbtiiAABfuEZ8gwQ793.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8xKZGAbtiiAABfuEZ8gwQ793.png" alt="png" /></p>
 <p>一般面试官会问：你会把超时参数设置成多大呢？</p>
 <p>我一般都会把最大等待时间，设置成接口可以忍受的最大延迟。比如，一个正常服务响应时间 10ms 左右，达到 1 秒钟就会感觉到卡顿，那么这个参数设置成 500~1000ms 都是可以的。超时之后，会抛出 NoSuchElementException 异常，请求<strong>会快速失败</strong>，不会影响其他业务线程，这种 Fail Fast 的思想，在互联网应用非常广泛。</p>
 <p>带有<strong>evcit</strong> 字样的参数，主要是处理对象逐出的。池化对象除了初始化和销毁的时候比较昂贵，在运行时也会占用系统资源。比如，<strong>连接池</strong>会占用多条连接，<strong>线程池</strong>会增加调度开销等。业务在突发流量下，会申请到超出正常情况的对象资源，放在池子中。等这些对象不再被使用，我们就需要把它清理掉。</p>
@@ -237,11 +237,11 @@ public class JedisPoolVSJedisBenchmark {
 ...
 </code></pre>
 <p>将测试结果使用 meta-chart 作图，展示结果如下图所示，可以看到使用了连接池的方式，它的吞吐量是未使用连接池方式的 5 倍！</p>
-<p><img src="assets/Ciqc1F8xKaCAP0c2AADCCnpuRd0416.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8xKaCAP0c2AADCCnpuRd0416.png" alt="png" /></p>
 <h3>数据库连接池 HikariCP</h3>
 <p><strong>HikariCP</strong> 源于日语“光”的意思（和光速一样快），它是 SpringBoot 中默认的数据库连接池。数据库是我们工作中经常使用到的组件，针对数据库设计的客户端连接池是非常多的，它的设计原理与我们在本课时开头提到的基本一致，可以有效地减少数据库连接创建、销毁的资源消耗。</p>
 <p>同是连接池，它们的性能也是有差别的，下图是 HikariCP 官方的一张测试图，可以看到它优异的性能，官方的 JMH 测试代码见 <a href="https://github.com/brettwooldridge/HikariCP-benchmark">Github</a>，我也已经拷贝了一份到仓库中。</p>
-<p><img src="assets/Ciqc1F8xKamACdt4AAG6dLqMUDo898.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F8xKamACdt4AAG6dLqMUDo898.png" alt="png" /></p>
 <p><strong>一般面试题是这么问的： HikariCP 为什么快呢？主要有三个方面：</strong></p>
 <ul>
 <li>它使用 FastList 替代 ArrayList，通过初始化的默认值，减少了越界检查的操作；</li>
@@ -255,7 +255,7 @@ public class JedisPoolVSJedisBenchmark {
 <p>另外，根据数据库查询和事务类型，一个应用中是可以配置多个数据库连接池的，这个优化技巧很少有人知道，在此简要描述一下。</p>
 <p>业务类型通常有两种：一种需要快速的响应时间，把数据尽快返回给用户；另外一种是可以在后台慢慢执行，耗时比较长，对时效性要求不高。如果这两种业务类型，共用一个数据库连接池，就容易发生资源争抢，进而影响接口响应速度。虽然微服务能够解决这种情况，但大多数服务是没有这种条件的，这时就可以对连接池进行拆分。</p>
 <p>如图，在同一个业务中，根据业务的属性，我们分了两个连接池，就是来处理这种情况的。</p>
-<p><img src="assets/CgqCHl8xKb-AaPAfAABFiMwiWmM309.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8xKb-AaPAfAABFiMwiWmM309.png" alt="png" /></p>
 <p>HikariCP 还提到了另外一个知识点，在 JDBC4 的协议中，通过 Connection.isValid() 就可以检测连接的有效性。这样，我们就不用设置一大堆的 test 参数了，HikariCP 也没有提供这样的参数。</p>
 <h3>结果缓存池</h3>
 <p>到了这里你可能会发现池（Pool）与缓存（Cache）有许多相似之处。</p>
@@ -273,7 +273,7 @@ public class JedisPoolVSJedisBenchmark {
 </ul>
 <p>将对象池化之后，只是开启了第一步优化。要想达到最优性能，就不得不调整池的一些关键参数，合理的池大小加上合理的超时时间，就可以让池发挥更大的价值。和缓存的命中率类似，对池的监控也是非常重要的。</p>
 <p>如下图，可以看到数据库连接池连接数长时间保持在高位不释放，同时等待的线程数急剧增加，这就能帮我们快速定位到数据库的事务问题。</p>
-<p><img src="assets/CgqCHl8xKcyAVb5-AAHduSa-zPY995.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl8xKcyAVb5-AAHduSa-zPY995.png" alt="png" /></p>
 <p>平常的编码中，有很多类似的场景。比如 Http 连接池，Okhttp 和 Httpclient 就都提供了连接池的概念，你可以类比着去分析一下，关注点也是在连接大小和超时时间上；在底层的中间件，比如 RPC，也通常使用连接池技术加速资源获取，比如 Dubbo 连接池、 Feign 切换成 httppclient 的实现等技术。</p>
 <p>你会发现，在不同资源层面的池化设计也是类似的。比如<strong>线程池</strong>，通过队列对任务进行了二层缓冲，提供了多样的拒绝策略等，线程池我们将在 12 课时进行介绍。线程池的这些特性，你同样可以借鉴到连接池技术中，用来缓解请求溢出，创建一些溢出策略。现实情况中，我们也会这么做。那么具体怎么做？有哪些做法？这部分内容就留给大家思考了，欢迎你在下方留言，与大家一起分享讨论，我也会针对你的思考进行一一点评。</p>
 <p>但无论以何种方式处理对象，让对象保持精简，提高它的复用度，都是我们的目标，所以下一课时，我将系统讲解大对象的复用和注意点。</p>

@@ -175,7 +175,7 @@ function hide_canvas() {
 <p><strong>装饰器模式就是一种通过组合方式实现扩展的设计模式</strong>，它可以完美地解决上述功能增强的问题。装饰器的核心思想是为已有实现类创建多个包装类，由这些新增的包装类完成新需求的扩展。</p>
 <p><strong>装饰器模式使用的是组合方式，相较于继承这种静态的扩展方式，装饰器模式可以在运行时根据系统状态，动态决定为一个实现类添加哪些扩展功能。</strong></p>
 <p>装饰器模式的核心类图，如下所示：</p>
-<p><img src="assets/Cgp9HWAwwdGAWEZ4AAG1zgT1MQM431.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWAwwdGAWEZ4AAG1zgT1MQM431.png" alt="png" /></p>
 <p>装饰器模式类图</p>
 <p>从图中可以看到，装饰器模式中的核心类主要有下面四个。</p>
 <ul>
@@ -232,7 +232,7 @@ function hide_canvas() {
 <p>在 releaseLock() 方法中，会从 locks 集合中删除 Key 关联的 CountDownLatch 对象，并唤醒阻塞在这个 CountDownLatch 对象上的业务线程。</p>
 <p>看到这里，你可能会问：假设业务线程 1、2 并发访问某个 Key，线程 1 查询 delegate 缓存失败，不释放锁，timeout &lt;=0 的时候，线程 2 就会阻塞吗？是的，但是线程 2 不会永久阻塞，因为我们需要保证线程 1 接下来会查询数据库，并调用 putObject() 方法或 removeObject() 方法，其中会通过 releaseLock() 方法释放锁。</p>
 <p>最终，我们得到 BlockingCache 的核心原理如下图所示：</p>
-<p><img src="assets/CioPOWAwwimAGb51AAJd328lR7k035.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWAwwimAGb51AAJd328lR7k035.png" alt="png" /></p>
 <p>BlockingCache 核心原理图</p>
 <h4>2. FifoCache</h4>
 <p>MyBatis 中的缓存本质上就是 JVM 堆中的一块内存，我们需要严格控制 Cache 的大小，防止 Cache 占用内存过大而影响程序的性能。操作系统有很多缓存淘汰规则，MyBatis 也提供了类似的规则来清理缓存。</p>

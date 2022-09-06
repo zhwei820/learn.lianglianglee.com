@@ -272,7 +272,7 @@ function hide_canvas() {
 <p>回顾上一课时的内容，我们不难理解 ShardingKeyGeneratorServiceLoader 类的作用。ShardingKeyGeneratorServiceLoader 继承了 TypeBasedSPIServiceLoader 类，并在静态方法中通过 NewInstanceServiceLoader 注册了类路径中所有的 ShardingKeyGenerator。然后，ShardingKeyGeneratorServiceLoader 的 newService 方法基于类型参数通过 SPI 创建实例，并赋值 Properties 属性。</p>
 <p>通过继承 TypeBasedSPIServiceLoader 类来创建一个新的 ServiceLoader 类，然后在其静态方法中注册相应的 SPI 实现，这是 ShardingSphere 中应用微内核模式的常见做法，很多地方都能看到类似的处理方法。</p>
 <p>我们在 sharding-core-common 工程的 META-INF/services 目录中看到了具体的 SPI 定义：</p>
-<p><img src="assets/Ciqc1F8iliiAVywgAAByh__z6Bw582.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F8iliiAVywgAAByh__z6Bw582.png" alt="png" /></p>
 <p>分布式主键 SPI 配置</p>
 <p>可以看到，这里有两个 ShardingKeyGenerator，分别是 SnowflakeShardingKeyGenerator 和 UUIDShardingKeyGenerator，它们都位于org.apache.shardingsphere.core.strategy.keygen 包下。</p>
 <h3>ShardingSphere 中的分布式主键实现方案</h3>
@@ -296,7 +296,7 @@ function hide_canvas() {
 </code></pre>
 <h4>SnowflakeShardingKeyGenerator</h4>
 <p>再来看 SnowFlake（雪花）算法，SnowFlake 是 ShardingSphere 默认的分布式主键生成策略。它是 Twitter 开源的分布式 ID 生成算法，其核心思想是使用一个 64bit 的 long 型数字作为全局唯一 ID，且 ID 引入了时间戳，基本上能够保持自增。SnowFlake 算法在分布式系统中的应用十分广泛，SnowFlake 算法中 64bit 的详细结构存在一定的规范：</p>
-<p><img src="assets/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl8ilkuAHxUeAAHYgqa5Z0Q435.png" alt="png" /></p>
 <p>64bit 的 ID 结构图</p>
 <p>在上图中，我们把 64bit 分成了四个部分：</p>
 <ul>

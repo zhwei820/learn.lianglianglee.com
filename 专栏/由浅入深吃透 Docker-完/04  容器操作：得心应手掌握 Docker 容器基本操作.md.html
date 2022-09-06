@@ -175,7 +175,7 @@ function hide_canvas() {
 <p>前几天在咱们的社群里看到有同学在讨论，说面试的时候被问到容器和镜像的区别，有同学回答说没什么区别，也许是在开玩笑，不过这两者的区别很大。今天，我们就来看看容器的相关知识，比如什么是容器？容器的生命周期，以及容器常用的操作命令。学完之后你可以对比下与镜像的区别。</p>
 <h3>容器（Container）是什么？</h3>
 <p>容器是基于镜像创建的可运行实例，并且单独存在，一个镜像可以创建出多个容器。运行容器化环境时，实际上是在容器内部创建该文件系统的读写副本。 这将添加一个容器层，该层允许修改镜像的整个副本。如图 1 所示。</p>
-<p><img src="assets/CgqCHl9YmlSAGgF0AABXUH--rM4624.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl9YmlSAGgF0AABXUH--rM4624.png" alt="png" /></p>
 <p>图1 容器组成</p>
 <p>了解完容器是什么，接下来我们聊一聊容器的生命周期。</p>
 <h3>容器的生命周期</h3>
@@ -188,7 +188,7 @@ function hide_canvas() {
 <li>deleted：删除状态</li>
 </ol>
 <p>各生命周期之前的转换关系如图所示：</p>
-<p><img src="assets/CgqCHl9YmniARFcOAADHTlGkncs129.png" alt="image" /></p>
+<p><img src="assets/CgqCHl9YmniARFcOAADHTlGkncs129.png" alt="png" /></p>
 <p>图2 容器的生命周期</p>
 <p>通过<code>docker create</code>命令生成的容器状态为初建状态，初建状态通过<code>docker start</code>命令可以转化为运行状态，运行状态的容器可以通过<code>docker stop</code>命令转化为停止状态，处于停止状态的容器可以通过<code>docker start</code>转化为运行状态，运行状态的容器也可以通过<code>docker pause</code>命令转化为暂停状态，处于暂停状态的容器可以通过<code>docker unpause</code>转化为运行状态 。处于初建状态、运行状态、停止状态、暂停状态的容器都可以直接删除。</p>
 <p>下面我通过实际操作和命令来讲解容器各生命周期间的转换关系。</p>

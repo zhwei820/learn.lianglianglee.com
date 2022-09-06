@@ -201,7 +201,7 @@ function hide_canvas() {
 <p>我会先依据我刚才讲的指标系统的原理，对 Prometheus 的系统架构做详细说明，然后讲解其中的 4 个常见功能。</p>
 <h4>系统架构</h4>
 <p>我们先来看一张 Prometheus 的架构图：</p>
-<p><img src="assets/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9pyTGATVArAAFB6U7Uslw981.png" alt="png" /></p>
 <p>根据我在原理中讲到的数据收集、指标聚合、指标查询和规则告警，我们也可以通过这 4 个步骤来了解 Prometheus。</p>
 <p>我们可以从图中看到，Prometheus 主要是采取拉取模式获取数据的，它提供了完善的服务发现机制，结合 K8s 的 API 可以动态感知服务的创建与销毁。通过可配置的方式，定期拉取服务列表的数据。对于一些短期存在的任务，Prometheus 同样提供了 PushGateway，让业务程序能够推送数据，再由收集系统来收集。</p>
 <p>其次是 Prometheus 的指标聚合。Prometheus 服务器接收到数据之后，会通过 TSDB 存储引擎聚合数据，然后存储到磁盘上。TSDB 中的数据结构和我在**13 | 告警质量：如何更好地创建告警规则和质量？**这一课时中，讲到的时序数据库的结构一样。</p>
@@ -256,7 +256,7 @@ description: &quot;{{ $labels.instance  }} 实例中的请求错误数超过 20 
 <p>上述代码声明了一个告警规则，接下来就可以通过 Alertmanager 组件进行更详细的通知方式配置。这部分内容十分简单，你可以通过<a href="https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/">官方提供的文档</a>学习。</p>
 <h4>Grafana</h4>
 <p>最后我带你简单认识一下 Grafana，它是<strong>一个通过可视化的形式查看指标数据的展示系统</strong>。通过它，你可以快速构建出 dashboard。其数据源就是依赖 Prometheus，通过 PromQL 的查询实现的。如下图所示：</p>
-<p><img src="assets/CgqCHl9pyVSAaRiNAAFaF113VPU106.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9pyVSAaRiNAAFaF113VPU106.png" alt="png" /></p>
 <p>这张图是官方 demo 所提供的展示内容，可以点击<a href="http://demo.robustperception.io:3000/d/KyOBFkuik/host-stats-prometheus-node-exporter?orgId=1">这里</a>访问。</p>
 <p>Grafana是依赖于 Prometheus 提供的数据搭建而成的。其中，<strong>最上面一行分别展示了当前的展示模板和对应查询时间范围</strong>，这个和我介绍的 Kibana 十分类似。<strong>下方的每一个模块展示的是通过 PromQL 所查询出数据的结果</strong>，这个部分可以选择不同的展示方式，例如柱状图、折线图、列表等。</p>
 <p>Grafana 还支持导入和导出展示模板，你可以下载一些已经很成熟的模板信息来使用。·</p>

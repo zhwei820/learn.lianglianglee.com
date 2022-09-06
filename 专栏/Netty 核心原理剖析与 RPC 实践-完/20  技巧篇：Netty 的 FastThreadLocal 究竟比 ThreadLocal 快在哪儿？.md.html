@@ -262,12 +262,12 @@ tradeOrder info：id=0, status=已支付
 </code></pre>
 <p>可以看出 thread-1 和 thread-2 虽然操作的是同一个 ThreadLocal 对象，但是它们取到了不同的线程名称和订单交易信息。那么一个线程内如何存在多个 ThreadLocal 对象，每个 ThreadLocal 对象是如何存储和检索的呢？</p>
 <p>接下来我们看看 ThreadLocal 的实现原理。既然多线程访问 ThreadLocal 变量时都会有自己独立的实例副本，那么很容易想到的方案就是在 ThreadLocal 中维护一个 Map，记录线程与实例之间的映射关系。当新增线程和销毁线程时都需要更新 Map 中的映射关系，因为会存在多线程并发修改，所以需要保证 Map 是线程安全的。那么 JDK 的 ThreadLocal 是这么实现的吗？答案是 NO。因为在高并发的场景并发修改 Map 需要加锁，势必会降低性能。JDK 为了避免加锁，采用了相反的设计思路。以 Thread 入手，在 Thread 中维护一个 Map，记录 ThreadLocal 与实例之间的映射关系，这样在同一个线程内，Map 就不需要加锁了。示例代码中线程 Thread 和 ThreadLocal 的关系可以用以下这幅图表示。</p>
-<p><img src="assets/CgpVE1_qwuqAN-08AAkfe67UOIA904.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgpVE1_qwuqAN-08AAkfe67UOIA904.png" alt="png" /></p>
 <p>那么在 Thread 内部，维护映射关系的 Map 是如何实现的呢？从源码中可以发现 Thread 使用的是 ThreadLocal 的内部类 ThreadLocalMap，所以 Thread、ThreadLocal 和 ThreadLocalMap 之间的关系可以用下图表示：</p>
-<p><img src="assets/Ciqc1F_qwvCAauqfAAI07PytbZY507.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F_qwvCAauqfAAI07PytbZY507.png" alt="png" /></p>
 <p>为了更加深入理解 ThreadLocal，了解 ThreadLocalMap 的内部实现是非常有必要的。ThreadLocalMap 其实与 HashMap 的数据结构类似，但是 ThreadLocalMap 不具备通用性，它是为 ThreadLocal 量身定制的。</p>
 <p>ThreadLocalMap 是一种使用线性探测法实现的哈希表，底层采用数组存储数据。如下图所示，ThreadLocalMap 会初始化一个长度为 16 的 Entry 数组，每个 Entry 对象用于保存 key-value 键值对。与 HashMap 不同的是，Entry 的 key 就是 ThreadLocal 对象本身，value 就是用户具体需要存储的值。</p>
-<p><img src="assets/Ciqc1F_qwveAHxDEAASdhRTxzyk624.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_qwveAHxDEAASdhRTxzyk624.png" alt="png" /></p>
 <p>当调用 ThreadLocal.set() 添加 Entry 对象时，是如何解决 Hash 冲突的呢？这就需要我们了解线性探测法的实现原理。每个 ThreadLocal 在初始化时都会有一个 Hash 值为 threadLocalHashCode，每增加一个 ThreadLocal， Hash 值就会固定增加一个魔术 HASH_INCREMENT = 0x61c88647。为什么取 0x61c88647 这个魔数呢？实验证明，通过 0x61c88647 累加生成的 threadLocalHashCode 与 2 的幂取模，得到的结果可以较为均匀地分布在长度为 2 的幂大小的数组中。有了 threadLocalHashCode 的基础，下面我们通过下面的表格来具体讲解线性探测法是如何实现的。</p>
 <p><img src="assets/CgqCHl_qyZGABbMMAACKf1C8HLE741.png" alt="图片2.png" /></p>
 <p>为了便于理解，我们采用一组简单的数据模拟 ThreadLocal.set() 的过程是如何解决 Hash 冲突的。</p>
@@ -325,10 +325,10 @@ class UnpaddedInternalThreadLocalMap {
 }
 </code></pre>
 <p>从 InternalThreadLocalMap 内部实现来看，与 ThreadLocalMap 一样都是采用数组的存储方式。但是 InternalThreadLocalMap 并没有使用线性探测法来解决 Hash 冲突，而是在 FastThreadLocal 初始化的时候分配一个数组索引 index，index 的值采用原子类 AtomicInteger 保证顺序递增，通过调用 InternalThreadLocalMap.nextVariableIndex() 方法获得。然后在读写数据的时候通过数组下标 index 直接定位到 FastThreadLocal 的位置，时间复杂度为 O(1)。如果数组下标递增到非常大，那么数组也会比较大，所以 FastThreadLocal 是通过空间换时间的思想提升读写性能。下面通过一幅图描述 InternalThreadLocalMap、index 和 FastThreadLocal 之间的关系。</p>
-<p><img src="assets/Ciqc1F_qw1KAUXO0AAMZJ_Hk4dQ099.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_qw1KAUXO0AAMZJ_Hk4dQ099.png" alt="png" /></p>
 <p>通过上面 FastThreadLocal 的内部结构图，我们对比下与 ThreadLocal 有哪些区别呢？FastThreadLocal 使用 Object 数组替代了 Entry 数组，Object[0] 存储的是一个Set&lt;FastThreadLocal&lt;?&gt;&gt; 集合，从数组下标 1 开始都是直接存储的 value 数据，不再采用 ThreadLocal 的键值对形式进行存储。</p>
 <p>假设现在我们有一批数据需要添加到数组中，分别为 value1、value2、value3、value4，对应的 FastThreadLocal 在初始化的时候生成的数组索引分别为 1、2、3、4。如下图所示。</p>
-<p><img src="assets/Ciqc1F_qw1qAYzsdAAEbsTk70Is389.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F_qw1qAYzsdAAEbsTk70Is389.png" alt="png" /></p>
 <p>至此，我们已经对 FastThreadLocal 有了一个基本的认识，下面我们结合具体的源码分析 FastThreadLocal 的实现原理。</p>
 <h3>FastThreadLocal 源码分析</h3>
 <p>在讲解源码之前，我们回过头看下上文中的 ThreadLocal 示例，如果把示例中 ThreadLocal 替换成 FastThread，应当如何使用呢？</p>
@@ -394,7 +394,7 @@ private static InternalThreadLocalMap slowGet() {
 }
 </code></pre>
 <p>InternalThreadLocalMap.get() 逻辑很简单，为了帮助你更好地理解，下面使用一幅图描述 InternalThreadLocalMap 的获取方式。</p>
-<p><img src="assets/Ciqc1F_qw2WAV1UtAAWTkglpnjs396.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F_qw2WAV1UtAAWTkglpnjs396.png" alt="png" /></p>
 <p>如果当前线程是 FastThreadLocalThread 类型，那么直接通过 fastGet() 方法获取 FastThreadLocalThread 的 threadLocalMap 属性即可。如果此时 InternalThreadLocalMap 不存在，直接创建一个返回。关于 InternalThreadLocalMap 的初始化在上文中已经介绍过，它会初始化一个长度为 32 的 Object 数组，数组中填充着 32 个缺省对象 UNSET 的引用。</p>
 <p>那么 slowGet() 又是什么作用呢？从代码分支来看，slowGet() 是针对非 FastThreadLocalThread 类型的线程发起调用时的一种兜底方案。如果当前线程不是 FastThreadLocalThread，内部是没有 InternalThreadLocalMap 属性的，Netty 在 UnpaddedInternalThreadLocalMap 中保存了一个 JDK 原生的 ThreadLocal，ThreadLocal 中存放着 InternalThreadLocalMap，此时获取 InternalThreadLocalMap 就退化成 JDK 原生的 ThreadLocal 获取。</p>
 <p>获取 InternalThreadLocalMap 的过程已经讲完了，下面看下 setKnownNotUnset() 如何将数据添加到 InternalThreadLocalMap 的。</p>

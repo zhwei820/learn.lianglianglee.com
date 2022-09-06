@@ -184,7 +184,7 @@ function hide_canvas() {
 <blockquote>
 <p>系统收到用户的频繁查询请求时，会先从缓存中查找数据，如果缓存中有数据，直接从中读取数据，响应给请求方；如果缓存中没有数据，则从数据库中读取数据，然后再更新缓存，这样再获取这条数据时，可以直接从缓存中获取，不用再读取数据库。</p>
 </blockquote>
-<p><img src="assets/Cgp9HWAprwaAXbnwAAA7DBL3j3M776.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWAprwaAXbnwAAA7DBL3j3M776.png" alt="png" /></p>
 <p>缓存设计方案</p>
 <p>这是一种常见的解决“查询请求频繁”的设计方案，那么这种方案在查询请求并发较高时，会存在什么问题呢？</p>
 <h3>案例分析</h3>
@@ -193,14 +193,14 @@ function hide_canvas() {
 <h3>案例解答</h3>
 <h4>缓存穿透问题</h4>
 <p>缓存穿透指的是每次查询个别 key 时，key 在缓存系统不命中，此时应用系统就会从数据库中查询，如果数据库中存在这条数据，则获取数据并更新缓存系统。但如果数据库中也没有这条数据，这个时候就无法更新缓存，就会造成一个问题：<strong>查询缓存中不存在的数据时，每次都要查询数据库</strong>。</p>
-<p><img src="assets/Cgp9HWAprx-AL9UOAABLG_KoMvg986.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWAprx-AL9UOAABLG_KoMvg986.png" alt="png" /></p>
 <p>缓存穿透</p>
 <p>那么如果有人利用“查询缓存中不存在的数据时，每次都要查询数据库”恶意攻击的话，数据库会承担非常大的压力，甚至宕机。</p>
 <p><strong>解决缓存穿透的通用方案是：</strong> 给所有指定的 key 预先设定一个默认值，比如空字符串“Null”，当返回这个空字符串“Null”时，我们可以认为这是一个不存在的 key，在业务代码中，就可以判断是否取消查询数据库的操作，或者等待一段时间再请求这个 key。如果此时取到的值不再是“Null”，我们就可以认为缓存中对应的 key 有值了，这就避免出现请求访问到数据库的情况，从而把大量的类似请求挡在了缓存之中。</p>
 <h4>缓存并发问题</h4>
 <p>假设在缓存失效的同时，出现多个客户端并发请求获取同一个 key 的情况，此时因为 key 已经过期了，所有请求在缓存数据库中查询 key 不命中，那么所有请求就会到数据库中去查询，然后当查询到数据之后，所有请求再重复将查询到的数据更新到缓存中。</p>
 <p>这里就会引发一个问题，所有请求更新的是同一条数据，这不仅会增加数据库的压力，还会因为反复更新缓存而占用缓存资源，这就叫缓存并发。<strong>那你怎么解决缓存并发呢？</strong></p>
-<p><img src="assets/CioPOWAprzCAHp6VAABhPy4VZWw709.png" alt="image" /></p>
+<p><img src="assets/CioPOWAprzCAHp6VAABhPy4VZWw709.png" alt="png" /></p>
 <p>解决缓存并发</p>
 <ol>
 <li>首先，客户端发起请求，先从缓存中读取数据，判断是否能从缓存中读取到数据；</li>
@@ -226,7 +226,7 @@ function hide_canvas() {
 <p>这是作为中高级研发工程师必须要掌握的内容。</p>
 <p>面试官会这样问：由于数据存储受限，系统并不是将所有数据都需要存放到缓存中的，而只是将其中一部分热点数据缓存起来，那么就引出来一个问题，即<strong>如何设计一个缓存策略，可以动态缓存热点数据呢？</strong></p>
 <p>我们同样举电商平台场景中的例子，现在要求只缓存用户经常访问的 Top 1000 的商品。</p>
-<p><img src="assets/CioPOWApr0GAUGfQAAA8YUKRnLM745.png" alt="image" /></p>
+<p><img src="assets/CioPOWApr0GAUGfQAAA8YUKRnLM745.png" alt="png" /></p>
 <p>解决缓存热点问题</p>
 <p>那么缓存策略的总体思路：就是通过判断数据最新访问时间来做排名，并过滤掉不常访问的数据，只留下经常访问的数据，具体细节如下。</p>
 <ol>
@@ -238,11 +238,11 @@ function hide_canvas() {
 <p>前面的内容中，我们都是将缓存操作与业务代码耦合在一起，这样虽然在项目初期实现起来简单容易，但是随着项目的迭代，代码的可维护性会越来越差，并且也不符合架构的“高内聚，低耦合”的设计原则，<strong>那么如何解决这个问题呢？</strong></p>
 <p>回答的思路可以是这样：将缓存操作与业务代码解耦，实现方案上可以通过 MySQL Binlog + Canal + MQ 的方式。</p>
 <p>我举一个实际的场景，比如用户在应用系统的后台添加一条配置信息，配置信息存储到了 MySQL 数据库中，同时数据库更新了 Binlog 日志数据，接着再通过使用 Canal 组件来获读取最新的 Binlog 日志数据，然后解析日志数据，并通过事先约定好的数据格式，发送到 MQ 消息队列中，最后再由应用系统将 MQ 中的数据更新到 Redis 中，这样就完成了缓存操作和业务代码之间的解耦。</p>
-<p><img src="assets/Cgp9HWApr1yAWMBPAABJhWDrIo4658.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWApr1yAWMBPAABJhWDrIo4658.png" alt="png" /></p>
 <p>解决缓存操作与业务系统分离</p>
 <h3>总结</h3>
 <p>为了方便你记忆，我总结一下今天的内容：</p>
-<p><img src="assets/Cgp9HWAosmeAHfikAAE7sA43-Kk951.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cgp9HWAosmeAHfikAAE7sA43-Kk951.png" alt="png" /></p>
 <p>今天这一讲，我推荐采用预设值方案解决缓存穿透（当然还有基于布隆过滤器的实现方式，但它本身存在误判的情况，实现起来也较复杂，所以我不推荐使用，不过你可以了解一下）。另外，你可以利用 Redis 的 setNX 方法来配合解决缓存并发。除此之外，你可以通过将缓存失效时间随机打散，或者设置缓存不过期，解决缓存雪崩的问题。</p>
 </div>
                     </div>

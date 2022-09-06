@@ -224,7 +224,7 @@ function hide_canvas() {
 </blockquote>
 <h3>事件处理机制回顾</h3>
 <p>首先我们以服务端接入客户端新连接为例，并结合前两节源码课学习的知识点，一起复习下 Netty 的事件处理流程，如下图所示。</p>
-<p><img src="assets/CgqCHl_Zyq-ALQoLAA9q2qihg8Q151.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl_Zyq-ALQoLAA9q2qihg8Q151.png" alt="png" /></p>
 <p>Netty 服务端启动后，BossEventLoopGroup 会负责监听客户端的 Accept 事件。当有客户端新连接接入时，BossEventLoopGroup 中的 NioEventLoop 首先会新建客户端 Channel，然后在 NioServerSocketChannel 中触发 channelRead 事件传播，NioServerSocketChannel 中包含了一种特殊的处理器 ServerBootstrapAcceptor，最终通过 ServerBootstrapAcceptor 的 channelRead() 方法将新建的客户端 Channel 分配到 WorkerEventLoopGroup 中。WorkerEventLoopGroup 中包含多个 NioEventLoop，它会选择其中一个 NioEventLoop 与新建的客户端 Channel 绑定。</p>
 <p>完成客户端连接注册之后，就可以接收客户端的请求数据了。当客户端向服务端发送数据时，NioEventLoop 会监听到 OP_READ 事件，然后分配 ByteBuf 并读取数据，读取完成后将数据传递给 Pipeline 进行处理。一般来说，数据会从 ChannelPipeline 的第一个 ChannelHandler 开始传播，将加工处理后的消息传递给下一个 ChannelHandler，整个过程是串行化执行。</p>
 <p>在前面两节课中，我们介绍了服务端如何接收客户端新连接，以及 NioEventLoop 的工作流程，接下来我们重点介绍 ChannelPipeline 是如何实现 Netty 事件驱动的，这样 Netty 整个事件处理流程已经可以串成一条主线。</p>
@@ -253,7 +253,7 @@ protected DefaultChannelPipeline(Channel channel) {
 }
 </code></pre>
 <p>当 ChannelPipeline 初始化完成后，会构成一个由 ChannelHandlerContext 对象组成的双向链表，默认 ChannelPipeline 初始化状态的最小结构仅包含 HeadContext 和 TailContext 两个节点，如下图所示。</p>
-<p><img src="assets/Ciqc1F_ZyruACytKAAOEkLnjkRc999.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F_ZyruACytKAAOEkLnjkRc999.png" alt="png" /></p>
 <p>HeadContext 和 TailContext 属于 ChannelPipeline 中两个特殊的节点，它们都继承自 AbstractChannelHandlerContext，根据源码看下 AbstractChannelHandlerContext 有哪些实现类，如下图所示。除了 HeadContext 和 TailContext，还有一个默认实现类 DefaultChannelHandlerContext，我们可以猜到 DefaultChannelHandlerContext 封装的是用户在 Netty 启动配置类中添加的自定义业务处理器，DefaultChannelHandlerContext 会插入到 HeadContext 和 TailContext 之间。</p>
 <p><img src="assets/Ciqc1F_fiOeALI8eAAVUA-uqBu0074.png" alt="图片3.png" /></p>
 <p>接着我们比较一下上述三种 AbstractChannelHandlerContext 实现类的内部结构，发现它们都包含当前 ChannelPipeline 的引用、处理器 ChannelHandler。有一点不同的是 HeadContext 节点还包含了用于操作底层数据读写的 unsafe 对象。对于 Inbound 事件，会先从 HeadContext 节点开始传播，所以 unsafe 可以看作是 Inbound 事件的发起者；对于 Outbound 事件，数据最后又会经过 HeadContext 节点返回给客户端，此时 unsafe 可以看作是 Outbound 事件的处理者。</p>
@@ -448,7 +448,7 @@ private static String generateName0(Class&lt;?&gt; handlerType) {
 }
 </code></pre>
 <p>addLast0() 非常简单，就是向 ChannelPipeline 中双向链表的尾部插入新的节点，其中 HeadContext 和 TailContext 一直是链表的头和尾，新的节点被插入到 HeadContext 和 TailContext 之间。例如代码示例中 SampleOutboundA 被添加时，双向链表的结构变化如下所示。</p>
-<p><img src="assets/Ciqc1F_ZywCAHl6DAAeLykJFOKE463.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F_ZywCAHl6DAAeLykJFOKE463.png" alt="png" /></p>
 <p>最后，添加完节点后，就到了回调用户方法，定位到 callHandlerAdded() 的核心源码：</p>
 <pre><code>final void callHandlerAdded() throws Exception {
     if (setAddComplete()) {
@@ -667,7 +667,7 @@ public ChannelHandlerContext fireChannelRead(final Object msg) {
 }
 </code></pre>
 <p>我们发现 HeadContext.channelRead() 并没有做什么特殊操作，而是直接通过 fireChannelRead() 方法继续将读事件继续传播下去。接下来 Netty 会通过 findContextInbound(MASK_CHANNEL_READ), msg) 找到 HeadContext 的下一个节点，然后继续执行我们之前介绍的静态方法 invokeChannelRead()，从而进入一个递归调用的过程，直至某个条件结束。以上 channelRead 的执行过程我们可以梳理成一幅流程图：</p>
-<p><img src="assets/Ciqc1F_Zyz-AR9gUAAYhisGwxMo407.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F_Zyz-AR9gUAAYhisGwxMo407.png" alt="png" /></p>
 <p>Netty 是如何判断 InboundHandler 是否关心 channelRead 事件呢？这就涉及findContextInbound(MASK_CHANNEL_READ), msg) 中的一个知识点，和上文中我们介绍的 executionMask 掩码运算是息息相关的。首先看下 findContextInbound() 的源码：</p>
 <pre><code>private AbstractChannelHandlerContext findContextInbound(int mask) {
     AbstractChannelHandlerContext ctx = this;

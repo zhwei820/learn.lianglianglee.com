@@ -294,10 +294,10 @@ Tony的工作项：
 <h3>备忘录模式的模型抽象</h3>
 <h4>类图</h4>
 <p>备忘录模式的类图表示如下：</p>
-<p><img src="assets/1e114240-7daa-11e8-8a07-2345656531ad.jpg" alt="enter image description here" /></p>
+<p><img src="assets/1e114240-7daa-11e8-8a07-2345656531ad.jpg" alt="png" /></p>
 <p>这是最原始和简单版本的备忘录模式的类图，在这个类图中，Originator 是要进行备份的对象的发起类，如示例中的 Engineer；Memento 是备份的状态，如示例中的 TodoList；Caretaker 是备份的管理类，如示例中的 TodoListCaretaker。Originator 依赖 Memento，但不直接与 Memento 进行交互，而是与 Memento 的管理类 Caretaker 进行交互。因为对于上层应用来说不用关心具体是怎么备份的以及备份了什么内容，而只需要创建一个备份点，并能从备份点中还原即可。</p>
 <p>简单版本的备忘录模式只能备忘一个属性而且只能备忘一次。因此在实际项目中很少看到这个版本，因为大部分实际应用场景都比这复杂。在实际项目中，通常会对原始的备忘录模式进行改造，也就是备忘录模式的升级版本。我们看一下比较通用的一个升级版的类图：</p>
-<p><img src="assets/2b1c08d0-7daa-11e8-8748-9f97e9dc7c3b.jpg" alt="enter image description here" /></p>
+<p><img src="assets/2b1c08d0-7daa-11e8-8748-9f97e9dc7c3b.jpg" alt="png" /></p>
 <h4>代码框架</h4>
 <p>因为升级版的备忘录模式比较通用，我们可以抽象出升级版备忘录模式的代码框架模型。</p>
 <pre><code class="language-python">from copy import deepcopy
@@ -417,7 +417,7 @@ def testTerminal():
 testTerminal()
 </code></pre>
 <p><strong>输出结果：</strong></p>
-<p><img src="assets/4328cda0-7daa-11e8-be78-bb5c0f92d7f1.jpg" alt="enter image description here" /></p>
+<p><img src="assets/4328cda0-7daa-11e8-be78-bb5c0f92d7f1.jpg" alt="png" /></p>
 <h3>应用场景</h3>
 <ul>
 <li>需要保存/恢复对象的状态或数据，如游戏的存档、虚拟机的快照。</li>

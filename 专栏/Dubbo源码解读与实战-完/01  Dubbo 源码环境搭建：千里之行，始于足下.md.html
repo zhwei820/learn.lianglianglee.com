@@ -300,7 +300,7 @@ function hide_canvas() {
 </ul>
 <h3>Dubbo 架构简介</h3>
 <p>为便于你更好理解和学习，在开始搭建 Dubbo 源码环境之前，我们先来简单介绍一下 Dubbo 架构中的核心角色，帮助你简单回顾一下 Dubbo 的架构，也帮助不熟悉 Dubbo 的小伙伴快速了解 Dubbo。下图展示了 Dubbo 核心架构：</p>
-<p><img src="assets/CgqCHl8eRaCAW4-LAAB7_C-aKWA601.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8eRaCAW4-LAAB7_C-aKWA601.png" alt="png" /></p>
 <p>Dubbo 核心架构图</p>
 <ul>
 <li><strong>Registry：注册中心。</strong> 负责服务地址的注册与查找，服务的 Provider 和 Consumer 只在启动时与注册中心交互。注册中心通过长连接感知 Provider 的存在，在 Provider 出现宕机的时候，注册中心会立即推送相关事件通知 Consumer。</li>
@@ -324,38 +324,38 @@ function hide_canvas() {
 <p>然后，在 IDEA 中导入源码，因为这个导入过程中会下载所需的依赖包，所以会耗费点时间。</p>
 <h3>Dubbo源码核心模块</h3>
 <p>在 IDEA 成功导入 Dubbo 源码之后，你看到的项目结构如下图所示：</p>
-<p><img src="assets/Ciqc1F8eRcOAdzNmAADHxcenG7I722.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8eRcOAdzNmAADHxcenG7I722.png" alt="png" /></p>
 <p>下面我们就来简单介绍一下这些核心模块的功能，至于详细分析，在后面的课时中我们还会继续讲解。</p>
 <ul>
 <li><strong>dubbo-common 模块：</strong> Dubbo 的一个公共模块，其中有很多工具类以及公共逻辑，例如课程后面紧接着要介绍的 Dubbo SPI 实现、时间轮实现、动态编译器等。</li>
 </ul>
-<p><img src="assets/CgqCHl8eRfWANQSTAAHowsC6F8s134.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8eRfWANQSTAAHowsC6F8s134.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-remoting 模块：</strong> Dubbo 的远程通信模块，其中的子模块依赖各种开源组件实现远程通信。在 dubbo-remoting-api 子模块中定义该模块的抽象概念，在其他子模块中依赖其他开源组件进行实现，例如，dubbo-remoting-netty4 子模块依赖 Netty 4 实现远程通信，dubbo-remoting-zookeeper 通过 Apache Curator 实现与 ZooKeeper 集群的交互。</li>
 </ul>
-<p><img src="assets/Ciqc1F8eRgCAR30EAABc4PYop3w206.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8eRgCAR30EAABc4PYop3w206.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-rpc 模块：</strong> Dubbo 中对远程调用协议进行抽象的模块，其中抽象了各种协议，依赖于 dubbo-remoting 模块的远程调用功能。dubbo-rpc-api 子模块是核心抽象，其他子模块是针对具体协议的实现，例如，dubbo-rpc-dubbo 子模块是对 Dubbo 协议的实现，依赖了 dubbo-remoting-netty4 等 dubbo-remoting 子模块。 dubbo-rpc 模块的实现中只包含一对一的调用，不关心集群的相关内容。</li>
 </ul>
-<p><img src="assets/Ciqc1F8eRguAA8jOAABqHomePJk138.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8eRguAA8jOAABqHomePJk138.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-cluster 模块：</strong> Dubbo 中负责管理集群的模块，提供了负载均衡、容错、路由等一系列集群相关的功能，最终的目的是将多个 Provider 伪装为一个 Provider，这样 Consumer 就可以像调用一个 Provider 那样调用 Provider 集群了。</li>
 <li><strong>dubbo-registry 模块：</strong> Dubbo 中负责与多种开源注册中心进行交互的模块，提供注册中心的能力。其中， dubbo-registry-api 子模块是顶层抽象，其他子模块是针对具体开源注册中心组件的具体实现，例如，dubbo-registry-zookeeper 子模块是 Dubbo 接入 ZooKeeper 的具体实现。</li>
 </ul>
-<p><img src="assets/CgqCHl8eRhWANEiTAAB2ATuQ2vc619.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8eRhWANEiTAAB2ATuQ2vc619.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-monitor 模块：</strong> Dubbo 的监控模块，主要用于统计服务调用次数、调用时间以及实现调用链跟踪的服务。</li>
 <li><strong>dubbo-config 模块：</strong> Dubbo 对外暴露的配置都是由该模块进行解析的。例如，dubbo-config-api 子模块负责处理 API 方式使用时的相关配置，dubbo-config-spring 子模块负责处理与 Spring 集成使用时的相关配置方式。有了 dubbo-config 模块，用户只需要了解 Dubbo 配置的规则即可，无须了解 Dubbo 内部的细节。</li>
 </ul>
-<p><img src="assets/CgqCHl8eRhyAVJ43AAAaPAwMeQ4525.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl8eRhyAVJ43AAAaPAwMeQ4525.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-metadata 模块：</strong> Dubbo 的元数据模块（本课程后续会详细介绍元数据的内容）。dubbo-metadata 模块的实现套路也是有一个 api 子模块进行抽象，然后其他子模块进行具体实现。</li>
 </ul>
-<p><img src="assets/CgqCHl8eRiSAPFIYAABXCRqgsNA891.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8eRiSAPFIYAABXCRqgsNA891.png" alt="png" /></p>
 <ul>
 <li><strong>dubbo-configcenter 模块：</strong> Dubbo 的动态配置模块，主要负责外部化配置以及服务治理规则的存储与通知，提供了多个子模块用来接入多种开源的服务发现组件。</li>
 </ul>
-<p><img src="assets/CgqCHl8eRiuAM7LfAAA9BmMR2zY483.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl8eRiuAM7LfAAA9BmMR2zY483.png" alt="png" /></p>
 <h3>Dubbo 源码中的 Demo 示例</h3>
 <p>在 Dubbo 源码中我们可以看到一个 dubbo-demo 模块，共包括三个非常基础 的 Dubbo 示例项目，分别是： <strong>使用 XML 配置的 Demo 示例、使用注解配置的 Demo 示例</strong> 以及 <strong>直接使用 API 的 Demo 示例</strong> 。下面我们将从这三个示例的角度，简单介绍 Dubbo 的基本使用。同时，这三个项目也将作为后续 Debug Dubbo 源码的入口，我们会根据需要在其之上进行修改 。不过在这儿之前，你需要先启动 ZooKeeper 作为注册中心，然后编写一个业务接口作为 Provider 和 Consumer 的公约。</p>
 <h4>启动 ZooKeeper</h4>
@@ -378,7 +378,7 @@ Starting zookeeper ... STARTED # 启动成功
 <li>Consumer ，如何使用服务、使用的服务名称是什么、需要传入什么参数、会得到什么响应。</li>
 </ul>
 <p>dubbo-demo-interface 模块就是定义业务接口的地方，如下图所示：</p>
-<p><img src="assets/CgqCHl8eRlWAPwvCAACx42Xn9Dk409.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl8eRlWAPwvCAACx42Xn9Dk409.png" alt="png" /></p>
 <p>其中，DemoService 接口中定义了两个方法：</p>
 <pre><code>public interface DemoService {
     String sayHello(String name); // 同步调用 
@@ -391,7 +391,7 @@ Starting zookeeper ... STARTED # 启动成功
 <h4>Demo 1：基于 XML 配置</h4>
 <p>在 dubbo-demo 模块下的 dubbo-demo-xml 模块，提供了基于 Spring XML 的 Provider 和 Consumer。</p>
 <p>我们先来看 dubbo-demo-xml-provider 模块，其结构如下图所示：</p>
-<p><img src="assets/CgqCHl8eRmKAT8LjAADV8C5fM8E391.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgqCHl8eRmKAT8LjAADV8C5fM8E391.png" alt="png" /></p>
 <p>在其 pom.xml 中除了一堆 dubbo 的依赖之外，还有依赖了 DemoService 这个公共接口：</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt; 
@@ -412,7 +412,7 @@ Starting zookeeper ... STARTED # 启动成功
 </code></pre>
 <p>最后，在 Application 中写个 main() 方法，指定 Spring 配置文件并启动 ClassPathXmlApplicationContext 即可。</p>
 <p>接下来再看 dubbo-demo-xml-consumer 模块，结构如下图所示：</p>
-<p><img src="assets/Ciqc1F8eRnuAWnTAAAE7eBUfEoA405.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/Ciqc1F8eRnuAWnTAAAE7eBUfEoA405.png" alt="png" /></p>
 <p>在 pom.xml 中同样依赖了 dubbo-demo-interface 这个公共模块。</p>
 <p>在 dubbo-consumer.xml 配置文件中，会指定注册中心地址（就是前面 ZooKeeper 的地址），这样 Dubbo 才能从 ZooKeeper 中拉取到 Provider 暴露的服务列表信息：</p>
 <pre><code>&lt;!-- Zookeeper地址 --&gt;

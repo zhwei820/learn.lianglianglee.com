@@ -506,10 +506,10 @@ function hide_canvas() {
 <pre><code>INSERT INTO hero(x, y, z, t) VALUES('a', 'bb', 'cccc', 'ddddd'), ('a', 'b', NULL, NULL);
 </code></pre>
 <p>现在表中的数据是这样的：
-<img src="assets/15100432-eedffb54dcdcbcbb.png" alt="image.png" /></p>
+<img src="assets/15100432-eedffb54dcdcbcbb.png" alt="png" /></p>
 <p>表建好了，数据填充好了，下面我们就来分析下在COMPACT行格式下，数据是如何存储的吧。</p>
 <h2>COMPACT行格式</h2>
-<p><img src="assets/15100432-971e813ef0d2285b.png" alt="image.png" /></p>
+<p><img src="assets/15100432-971e813ef0d2285b.png" alt="png" /></p>
 <p>从上图可以看到，一行数据被分为了两个部分，一部分是记录的额外信息，一部分是记录的真实数据。</p>
 <h3>记录额外信息</h3>
 <h4>变长字段字节数列表</h4>
@@ -552,7 +552,7 @@ function hide_canvas() {
 </tbody>
 </table>
 <p>所以，第一行数据x，y，t三个字段所占用的字节数分别是1 2 5，但是InnoDB会把所占用的字节数逆序排放，如果用16进制来表示变长字段所占用的字节数就是这样的效果了：
-<img src="assets/15100432-4bab1ecbf7cc93ca.png" alt="image.png" /></p>
+<img src="assets/15100432-4bab1ecbf7cc93ca.png" alt="png" /></p>
 <p><em>为了更容易理解、清晰，所以我用了空格来分割，其实是没有的。</em></p>
 <p>由于数据的长度都比较小，用一个字节就可以表示，但是如果变长字段占用的字节数比较多，就要用两个字节来表示了，到底使用一个字节来表示，还是用两个字节来表示，InnoDB有着自己的一套规则。在说这个规则之前，要先说明下规则中用到的三个变量：</p>
 <ol>
@@ -570,7 +570,7 @@ function hide_canvas() {
 </ol>
 <p>光看规则是不是觉得很绕，总结一下，该可变字段允许存储的最大字节数(W*M)&gt;255，且真实存储的字节数(L)超过127，就用两个字节来表示字符串所占用的字节数，否则用一个字节来表示字符串所占用的字节数。</p>
 <p>我们再来看看第二条数据，字段t的值是NULL，变长字段字节数列表只存储非NULL列内容占用的字节数，所以对于第二条数据，变长字段字节数列表只要存储x和y所占用的字节数即可，填充在变长字段字节数列表的效果是酱紫的：
-<img src="assets/15100432-6b4bf28a7a2d82bd.png" alt="image.png" /></p>
+<img src="assets/15100432-6b4bf28a7a2d82bd.png" alt="png" /></p>
 <p>变长字段字节数列表不是必须的，如果一个表中所有的字段都不是变长的，那么就没有变长字段字节数列表了。</p>
 <p>我们建的表采用的字符集是ascii编码的，一个字符所占用的字节固定是1，如果我们采用utf-8字符集，一个字段所占用的字节就不是固定的了，而是一个范围：1-3，所以如果我们采用这样的字符集，char(m)虽然是定长字段，但是也会被加入到变长字段字节数列表中。</p>
 <h4>NULL值列表</h4>
@@ -585,17 +585,17 @@ function hide_canvas() {
 <p>这里和变长字段字节数列表是一样的，是逆序排放的。</p>
 <p>我们新建的hero表有三个字段都允许为NULL，所以存在NULL值列表。</p>
 <p>我们先来看第一条数据，三个字段存储的实际数据都不为NULL，所以用二进制来表示是酱紫的：
-<img src="assets/15100432-8a4f9cfb17202e7f.png" alt="image.png" /></p>
+<img src="assets/15100432-8a4f9cfb17202e7f.png" alt="png" /></p>
 <p>但是InnoDB是用整数字节的二进制位来表示NULL值列表的，现在不足8位，所以要在高位补0，最终用二进制来表示是酱紫的：
-<img src="assets/15100432-2be184c3358e38ac.png" alt="image.png" /></p>
+<img src="assets/15100432-2be184c3358e38ac.png" alt="png" /></p>
 <p>所以，对于第一条数据，NULL值列表用十六进制表示是0x00。</p>
 <p>我们再来看看第二条数据，其中z和t两个字段存储的实际数据都是NULL，我们来看看用二进制如何来表示：
-<img src="assets/15100432-95eeef6437382e3e.png" alt="image.png" /></p>
+<img src="assets/15100432-95eeef6437382e3e.png" alt="png" /></p>
 <p>同样的，需要高位补0：
-<img src="assets/15100432-cb2ba643784395da.png" alt="image.png" /></p>
+<img src="assets/15100432-cb2ba643784395da.png" alt="png" /></p>
 <p>所以，对于第二条数据，NULL值列表用十六进制表示是0x06。</p>
 <p>我们把两条数据的NULL值列表都填充完毕是酱紫的效果：
-<img src="assets/15100432-561973f9ad46fe33.png" alt="image.png" /></p>
+<img src="assets/15100432-561973f9ad46fe33.png" alt="png" /></p>
 <h4>记录头信息</h4>
 <p>记录头信息中包含的内容很多，我先随便列举几条：</p>
 <ol>
@@ -617,7 +617,7 @@ function hide_canvas() {
 <h3>VARCHAR(M)最多能存储的数据</h3>
 <p>在讲可变字段字节数列表的时候，讲到InnoDB会有一套规则，计算是用一个字节来表示实际存储的字节数，还是用两个字节来表示实际存储的字节数，但是如果存储的字符串很长很长，用两个字节都无法表示，该怎么办呢？</p>
 <p>我们先来看看用两个字节最多可以表示的字节数是多少：
-<img src="assets/15100432-d5e62af469ef9e03.png" alt="image.png" />
+<img src="assets/15100432-d5e62af469ef9e03.png" alt="png" />
 用两个字节最多可以表示的字节数是65535。</p>
 <p>我们用这个最大字节数来试下，能不能成功创建一张表：</p>
 <pre><code>CREATE TABLE test_max ( test VARCHAR ( 65535 ) ) charset = ascii,
@@ -648,7 +648,7 @@ row_format = Compact
 <h3>行溢出</h3>
 <p>文章开头的时候，给大家简单的介绍了下页的概念，我们知道硬盘和内存之间交互的基本单位是页，而页的大小默认情况下16K，也就是16384字节，而VARCHAR(M)最多可以存储的远远不止16384字节，这样就出现了一个页存放不了一条记录的局面。</p>
 <p>在Compact和Redundant行格式中，对于占用字节数非常大的列，在记录的真实数据中只会存储一小部分数据（768个字节），剩余的数据分散存储在其他的页，为了可以找到它们，在记录的真实数据中会记录这些页的地址，就像下面酱紫：
-<img src="assets/15100432-d1d7c9453a175c67.png" alt="image.png" /></p>
+<img src="assets/15100432-d1d7c9453a175c67.png" alt="png" /></p>
 <h2>Dynamic和Compressed行格式</h2>
 <p>Dynamic和Compressed行格式和COMPACT行格式很相近，只是在行溢出的处理方式上有所不同，溢出后，Dynamic和Compressed行格式不会在记录的真实数据中存储一小部分数据，而是直接记录其他页的地址。Dynamic和Compressed行格式的区别是Compressed格式会对页进行压缩以节省空间。</p>
 <p>Redundant行格式是MySql5.0之前使用的，现在基本不会再使用，这里就不介绍了。</p>

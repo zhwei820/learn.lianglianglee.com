@@ -170,9 +170,9 @@ function hide_canvas() {
 <p>这是你在 JMeter 的线程组元件中的线程属性，线程组建立是你使用 JMeter 进行性能测试最基础的步骤，压力发起策略几乎都依赖于这个元件。</p>
 <h4>线程与循环</h4>
 <p>我们先来看两张图，看看它们之间有什么区别。</p>
-<p><img src="assets/Cip5yF_1Ha-ADn1PAABkFOXpDRg902.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_1Ha-ADn1PAABkFOXpDRg902.png" alt="png" /></p>
 <p>图 1：设置图 A</p>
-<p><img src="assets/CgpVE1_1HbmATgMeAACJsBol0Mc903.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_1HbmATgMeAACJsBol0Mc903.png" alt="png" /></p>
 <p>图 2：设置图 B</p>
 <p>从两张图的对比中，我们可以看到图 1 和图 2 的区别在于线程数和循环次数，一个是 1 和 10，一个则是 10 和 1。从结果来看，图 1 和图 2 都是发送了 10 个请求，那它们的核心区别是什么呢？ 我们不妨来看两段代码演示。</p>
 <p>先来看图 1 的代码演示：</p>
@@ -206,10 +206,10 @@ Thread-9 //不同的线程
 <h4>Ramp-Up</h4>
 <p>Ramp-Up 其实是一个可选项，如果没有特殊要求，保持默认配置脚本即可。如果填 1，代表在 1 秒内所有设置线程数全部启动。不过这个是理论上的，实际启动时间也依赖于硬件的接受程度。如果硬件跟不上，启动时间自然也会增加。</p>
 <p>在有的性能测试场景中，如果你不想在性能测试一开始让服务器的压力过大，希望按照一定的速度增加线程到既定数值，你就可以使用这个选项。比如我想用 10 个线程进行测试，启动速度是每秒 2 个线程，就可以在这里填 5，如下所示：</p>
-<p><img src="assets/Cip5yF_1HcyABzDxAABletIULYA933.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yF_1HcyABzDxAABletIULYA933.png" alt="png" /></p>
 <p>图 3：设置图 C</p>
 <p>我们来通过运行展示一下。</p>
-<p><img src="assets/CgpVE1_1HdKAeBVLAAG5WhpVanI202.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgpVE1_1HdKAeBVLAAG5WhpVanI202.png" alt="png" /></p>
 <p>图 4：生成线程数</p>
 <p>我使用了监听器中的用表格查看结果插件。通过这组数据可以看到，每秒产生了 2 个新的线程，合计在 5 秒内完成。</p>
 <h3>组件和元件</h3>
@@ -238,10 +238,10 @@ Thread-9 //不同的线程
 <p>我经常看到有的测试人员在需要在后置处理器中使用 BeanShell PostProcesor 的时候，错误地用了前置处理器中的 Beanshell PreProcessor，导致系统报错，无法实现预期的功能，甚至是测试无法进行下去。</p>
 <h4>元件作用域</h4>
 <p>以上说的都是组件相关的东西，这里就来看看元件作用域。我们先来看一张图：</p>
-<p><img src="assets/Cip5yF_1He-ALsdzAACx-Dpj8Qo799.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cip5yF_1He-ALsdzAACx-Dpj8Qo799.png" alt="png" /></p>
 <p>图 7：结果树 1、2、3</p>
 <p>在图中可以看到，我在不同位置放了 3 个一样的元件“查看结果树”（为了方便区分，我分别标记了 1、2、3）。运行后发现，查看结果树 1（图 8）里面显示了 HTTP1 和 HTTP2，而插件结果树 2 里只有 HTTP1，查看结果树 3 里面只有 HTTP2。</p>
-<p><img src="assets/CgpVE1_1HfyAP0epAAA7IET5M00253.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgpVE1_1HfyAP0epAAA7IET5M00253.png" alt="png" /></p>
 <p>图 8：查看结果树 1 的显示图</p>
 <p>这是为什么呢？这就要说到元件作用域了。</p>
 <p>通过截图可以发现 JMeter 元件除了从上到下的顺序外，有还具备一定的层次结构，比如图 5 中的响应断言和查看结果树，它相对于取样器存在父子组件的关系，说白了就是 HTTP 元件对取样器有效的区域，比如查看结果树 2 是 HTTP1 请求的子节点，那它就只对 HTTP1 生效；如果父节点是测试计划，那就会对测试计划下的 HTTP1 和 HTTP2 都生效。</p>

@@ -203,7 +203,7 @@ function hide_canvas() {
 <h4><strong>熔断降级判断流程</strong></h4>
 <p>DegradeSlot 是实现熔断降级的切入点，它作为 ProcessorSlot 插入到 ProcessorSlotChain 链表中，在 entry 方法中调用 Checker 去判断是否熔断当前请求，如果熔断则抛出 Block 异常。</p>
 <p>Checker 并不是一个接口，而是一种检测行为，限流的 ckeck 由 FlowRuleChecker 实现，而熔断的 check 行为则由 DegradeRuleManager 负责，真正 check 逻辑判断由 DegradeRule 实现，流程如下图所示。</p>
-<p><img src="assets/e1369f60-e12e-11ea-b6a2-55d68b770f3d" alt="13-01-degradeslot" /></p>
+<p><img src="assets/e1369f60-e12e-11ea-b6a2-55d68b770f3d" alt="png" /></p>
 <p>当 DegradeSlot#entry 方法被调用时，由 DegradeSlot 调用 DegradeRuleManager#checkDegrade 方法检查当前请求是否满足某个熔断降级规则。熔断规则配置由 DegradeRuleManager 加载，所以 DegradeSlot 将 check 逻辑交给 DegradeRuleManager 去完成，checkDegrade 方法的源码如下：</p>
 <pre><code class="language-java">public static void checkDegrade(ResourceWrapper resource, Context context, DefaultNode node, int count)
         throws BlockException {
@@ -365,7 +365,7 @@ public long totalException() {
 </code></pre>
 <h4><strong>系统自适应限流判断流程</strong></h4>
 <p>当 SystemSlot#entry 方法被调用时，由 SystemSlot 调用 SystemRuleManager#checkSystem 方法判断是否需要限流，流程如下图所示：</p>
-<p><img src="assets/39b558c0-e12f-11ea-b6a2-55d68b770f3d" alt="13-03-systemslot" /></p>
+<p><img src="assets/39b558c0-e12f-11ea-b6a2-55d68b770f3d" alt="png" /></p>
 <p>SystemRuleManager#checkSystem 方法从全局的资源指标数据统计节点 Constans.ENTRY_NODE 读取当前时间窗口的指标数据，判断总的 QPS、平均耗时这些指标数据是否达到阈值，或者总占用的线程数是否达到阈值，如果达到阈值则抛出 Block 异常（SystemBlockException）。除此之外，checkSystem 方法还实现了根据系统当前 Load 和 CPU 使用率限流。</p>
 <p>SystemRuleManager#checkSystem 方法源码如下：</p>
 <pre><code class="language-java">public static void checkSystem(ResourceWrapper resourceWrapper) throws BlockException {
@@ -414,7 +414,7 @@ public long totalException() {
 </ul>
 <h4><strong>获取系统负载和 CPU 使用率</strong></h4>
 <p>使用 TOP 命令可查看系统的平均负载（Load）和 CPU 使用率，如下图所示：</p>
-<p><img src="assets/4eecdd80-e12f-11ea-860c-27aeccb4bc5b" alt="13-02-system-top" /></p>
+<p><img src="assets/4eecdd80-e12f-11ea-860c-27aeccb4bc5b" alt="png" /></p>
 <ul>
 <li>Load Avg：三个浮点数，分别代表 1 分钟、5 分钟、15 分钟内系统的平均负载。</li>
 <li>CPU：usage 为 CPU 总的使用率，user 为用户线程的 CPU 使用率，sys 为系统线程的 CPU 使用率。</li>

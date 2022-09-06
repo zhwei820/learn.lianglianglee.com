@@ -181,13 +181,13 @@ function hide_canvas() {
 <h3>索引组织表</h3>
 <p>数据存储有<strong>堆表和索引组织表</strong>两种方式。</p>
 <p><strong>堆表中的数据无序存放，</strong> 数据的排序完全依赖于索引（Oracle、Microsoft SQL Server、PostgreSQL 早期默认支持的数据存储都是堆表结构）。</p>
-<p><img src="assets/Cgp9HWCscj-AMF2xAAGCKX1ziAQ251.png" alt="1.png" /></p>
+<p><img src="assets/Cgp9HWCscj-AMF2xAAGCKX1ziAQ251.png" alt="png" /></p>
 <p>从图中你能看到，堆表的组织结构中，数据和索引分开存储。索引是排序后的数据，而堆表中的数据是无序的，索引的叶子节点存放了数据在堆表中的地址，当堆表的数据发生改变，且位置发生了变更，所有索引中的地址都要更新，这非常影响性能，特别是对于 OLTP 业务。</p>
 <p><strong>而索引组织表，数据根据主键排序存放在索引中</strong>，主键索引也叫聚集索引（Clustered Index）。在索引组织表中，数据即索引，索引即数据。</p>
 <p>MySQL InnoDB 存储引擎就是这样的数据组织方式；Oracle、Microsoft SQL Server 后期也推出了支持索引组织表的存储方式。</p>
 <p>但是，PostgreSQL 数据库因为只支持堆表存储，不适合 OLTP 的访问特性，虽然它后期对堆表有一定的优化，但本质是通过空间换时间，对海量并发的 OLTP 业务支持依然存在局限性。</p>
 <p>回看 08 讲中的 User 表，其就是索引组织表的方式：</p>
-<p><img src="assets/CioPOWCsbt-Ac7SqAARB58fvCFA564.png" alt="2.png" /></p>
+<p><img src="assets/CioPOWCsbt-Ac7SqAARB58fvCFA564.png" alt="png" /></p>
 <p>表 User 的主键是 id，所以表中的数据根据 id 排序存储，叶子节点存放了表中完整的记录，可以看到表中的数据存放在索引中，即表就是索引，索引就是表。</p>
 <p>在了解完 MySQL InnoDB 的主键索引存储方式之后，接下来我们继续了解二级索引。</p>
 <h3>二级索引</h3>
@@ -207,7 +207,7 @@ function hide_canvas() {
 <pre><code>SELECT * FROM User WHERE name = 'David'，
 </code></pre>
 <p>通过二级索引 idx_name 只能定位主键值，需要额外再通过主键索引进行查询，才能得到最终的结果。<strong>这种“二级索引通过主键索引进行再一次查询”的操作叫作“回表”</strong>，你可以通过下图理解二级索引的查询：</p>
-<p><img src="assets/CioPOWCsciqAXCpWAAEzcba-N8Q504.png" alt="3.png" /></p>
+<p><img src="assets/CioPOWCsciqAXCpWAAEzcba-N8Q504.png" alt="png" /></p>
 <p>索引组织表这样的二级索引设计有一个非常大的好处：若记录发生了修改，则其他索引无须进行维护，除非记录的主键发生了修改。</p>
 <p>与堆表的索引实现对比着看，你会发现索引组织表在存在大量变更的场景下，性能优势会非常明显，因为大部分情况下都不需要维护其他二级索引。</p>
 <p>前面我强调“索引组织表，数据即索引，索引即数据”。那么为了便于理解二级索引，你可以将二级索引按照一张表来进行理解，比如索引 idx_name 可以理解成一张表，如下所示：</p>

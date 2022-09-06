@@ -173,11 +173,11 @@ function hide_canvas() {
 <li>优化用户体验，比如常见的音频/视频缓冲加载，通过提前缓冲数据，达到流畅的播放效果。</li>
 </ul>
 <p>缓冲在 Java 语言中被广泛应用，在 IDEA 中搜索 Buffer，可以看到长长的类列表，其中最典型的就是<strong>文件读取和写入字符流</strong>。</p>
-<p><img src="assets/Ciqc1F8hIpGANh2WAADfDKHvr7I288.jpg" alt="15932484217918.jpg" /></p>
+<p><img src="assets/Ciqc1F8hIpGANh2WAADfDKHvr7I288.jpg" alt="png" /></p>
 <h1>文件读写流</h1>
 <p>接下来，我会以文件读取和写入字符流为例进行讲解。</p>
 <p>Java 的 I/O 流设计，采用的是<strong>装饰器模式</strong>，当需要给类添加新的功能时，就可以将被装饰者通过参数传递到装饰者，封装成新的功能方法。下图是装饰器模式的典型示意图，就增加功能来说，装饰模式比生成子类更为灵活。</p>
-<p><img src="assets/Ciqc1F8hIqCAXF-UAACYqHfWtqs495.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8hIqCAXF-UAACYqHfWtqs495.png" alt="png" /></p>
 <p>在读取和写入流的 API 中，BufferedInputStream 和 BufferedReader 可以加快读取字符的速度，BufferedOutputStream 和 BufferedWriter 可以加快写入的速度。</p>
 <p>下面是直接读取文件的代码实现：</p>
 <pre><code>int result = 0;
@@ -259,7 +259,7 @@ private void fill() throws IOException {
 <p>这就是一个权衡的问题，缓冲区开得太大，会增加单次读写的时间，同时内存价格很高，不能无限制使用，缓冲流的默认缓冲区大小是 8192 字节，也就是 8KB，算是一个比较折中的值。</p>
 <p>这好比搬砖，如果一块一块搬，时间便都耗费在往返路上了；但若给你一个小推车，往返的次数便会大大降低，效率自然会有所提升。</p>
 <p>下图是使用 FileReader 和 BufferedReader 读取文件的 JMH 对比（相关代码见仓库），可以看到，使用了缓冲，读取效率有了很大的提升（暂未考虑系统文件缓存）。</p>
-<p><img src="assets/Ciqc1F8hItGALSyZAAA6Yg6KI-Y263.jpg" alt="15933320286502.jpg" /></p>
+<p><img src="assets/Ciqc1F8hItGALSyZAAA6Yg6KI-Y263.jpg" alt="png" /></p>
 <h1>日志缓冲</h1>
 <p>日志是程序员们最常打交道的地方。在高并发应用中，即使对日志进行了采样，日志数量依旧惊人，所以选择高速的日志组件至关重要。</p>
 <p>SLF4J 是 Java 里标准的日志记录库，它是一个允许你使用任何 Java 日志记录库的抽象适配层，最常用的实现是 Logback，支持修改后自动 reload，它比 Java 自带的 JUL 还要流行。</p>
@@ -276,7 +276,7 @@ private void fill() throws IOException {
         &lt;appender-ref ref =&quot;FILE&quot;/&gt;
 &lt;/appender&gt;
 </code></pre>
-<p><img src="assets/Ciqc1F8hIt2AC_tUAACr0rch4PI971.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8hIt2AC_tUAACr0rch4PI971.png" alt="png" /></p>
 <p>如上图，异步日志输出之后，日志信息将暂存在 ArrayBlockingQueue 列表中，后台会有一个 Worker 线程不断地获取缓冲区内容，然后写入磁盘中。</p>
 <p>上图中有三个关键参数：</p>
 <ul>
@@ -288,22 +288,22 @@ private void fill() throws IOException {
 <p>毫无疑问缓冲区是可以提高性能的，<strong>但它通常会引入一个异步的问题</strong>，使得编程模型变复杂。</p>
 <p>通过文件读写流和 Logback 两个例子，我们来看一下对于缓冲区设计的一些常规操作。</p>
 <p>如下图所示，资源 A 读取或写入一些操作到资源 B，这本是一个正常的操作流程，但由于中间插入了一个额外的<strong>存储层</strong>，所以这个流程被生生截断了，这时就需要你手动处理被截断两方的资源协调问题。</p>
-<p><img src="assets/Ciqc1F8hIuqATvhSAAB9F5pMiOE699.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8hIuqATvhSAAB9F5pMiOE699.png" alt="png" /></p>
 <p>根据资源的不同，对正常业务进行截断后的操作，分为同步操作和异步操作。</p>
 <h2>1.同步操作</h2>
 <p>同步操作的编程模型相对简单，在一个线程中就可完成，你只需要控制缓冲区的大小，并把握处理的时机。比如，缓冲区<strong>大小达到阈值</strong>，或者缓冲区的元素在缓冲区的<strong>停留时间超时</strong>，这时就会触发<strong>批量操作</strong>。</p>
 <p>由于所有的操作又都在<strong>单线程</strong>，或者同步方法块中完成，再加上资源 B 的处理能力有限，那么很多操作就会阻塞并等待在调用线程上。比如写文件时，需要等待前面的数据写入完毕，才能处理后面的请求。</p>
-<p><img src="assets/CgqCHl8hIvuAILAKAABaDCSPRRw546.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8hIvuAILAKAABaDCSPRRw546.png" alt="png" /></p>
 <h2>2.异步操作</h2>
 <p>异步操作就复杂很多。</p>
 <p>缓冲区的<strong>生产</strong>者一般是同步调用，但也可以采用异步方式进行填充，一旦采用异步操作，就涉及缓冲区满了以后，生产者的一些响应策略。</p>
 <p>此时，应该将这些策略抽象出来，根据业务的属性选择，比如直接抛弃、抛出异常，或者直接在用户的线程进行等待。你会发现它与线程池的饱和策略是类似的，这部分的详细概念将在 12 课时讲解。</p>
 <p>许多应用系统还会有更复杂的策略，比如在用户线程等待，设置一个超时时间，以及成功进入缓冲区之后的回调函数等。</p>
 <p>对缓冲区的<strong>消费</strong>，一般采用开启线程的方式，如果有多个线程消费缓冲区，还会存在信息同步和顺序问题。</p>
-<p><img src="assets/CgqCHl8hIwaAQl3SAACaljNt5Fs553.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8hIwaAQl3SAACaljNt5Fs553.png" alt="png" /></p>
 <h2>3.Kafka缓冲区示例</h2>
 <p><strong>这里以一个常见的面试题来讲解上面的知识点：Kafka 的生产者，有可能会丢数据吗？</strong></p>
-<p><img src="assets/CgqCHl8hIxKADeVuAACET9IDWMQ424.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8hIxKADeVuAACET9IDWMQ424.png" alt="png" /></p>
 <p>如图，要想解答这个问题，需要先了解 Kafka 对生产者的一些封装，其中有一个对性能影响非常大的点，就是缓冲。</p>
 <p>生产者会把发送到同一个 partition 的多条消息，封装在一个 batch（缓冲区）中。当 batch 满了（参数 batch.size），或者消息达到了超时时间（参数 linger.ms），缓冲区中的消息就会被发送到 broker 上。</p>
 <p>这个缓冲区默认是 16KB，如果生产者的业务突然断电，这 16KB 数据是没有机会发送出去的。此时，就造成了消息丢失。</p>

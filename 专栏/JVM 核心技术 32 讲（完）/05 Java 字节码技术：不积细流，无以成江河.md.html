@@ -393,7 +393,7 @@ SourceFile: &quot;HelloByteCode.java&quot;
 <p>想要深入了解字节码技术，我们需要先对字节码的执行模型有所了解。</p>
 <p>JVM 是一台基于栈的计算机器。每个线程都有一个独属于自己的线程栈(JVM stack)，用于存储<code>栈帧</code>(Frame)。每一次方法调用，JVM都会自动创建一个栈帧。<code>栈帧</code> 由 <code>操作数栈</code>， <code>局部变量数组</code> 以及一个<code>class 引用</code>组成。<code>class 引用</code> 指向当前方法在运行时常量池中对应的 class)。</p>
 <p>我们在前面反编译的代码中已经看到过这些内容。</p>
-<p><img src="assets/y6bxd.jpg" alt="c0463778-bb4c-43ab-9660-558d2897b364.jpg" /></p>
+<p><img src="assets/y6bxd.jpg" alt="png" /></p>
 <p><code>局部变量数组</code> 也称为 <code>局部变量表</code>(LocalVariableTable), 其中包含了方法的参数，以及局部变量。 局部变量数组的大小在编译时就已经确定: 和局部变量+形参的个数有关，还要看每个变量/参数占用多少个字节。操作数栈是一个 LIFO 结构的栈， 用于压入和弹出值。 它的大小也在编译时确定。</p>
 <p>有一些操作码/指令可以将值压入“操作数栈”； 还有一些操作码/指令则是从栈中获取操作数，并进行处理，再将结果压入栈。操作数栈还用于接收调用其他方法时返回的结果值。</p>
 <h3>4.7 方法体中的字节码解读</h3>
@@ -408,11 +408,11 @@ SourceFile: &quot;HelloByteCode.java&quot;
 <p>例如， <code>new</code> 就会占用三个槽位: 一个用于存放操作码指令自身，两个用于存放操作数。</p>
 <p>因此，下一条指令 <code>dup</code> 的索引从 <code>3</code> 开始。</p>
 <p>如果将这个方法体变成可视化数组，那么看起来应该是这样的：</p>
-<p><img src="assets/2wcmu.jpg" alt="2087a5ff-61b1-49ab-889e-698a73ceb41e.jpg" /></p>
+<p><img src="assets/2wcmu.jpg" alt="png" /></p>
 <p>每个操作码/指令都有对应的十六进制(HEX)表示形式， 如果换成十六进制来表示，则方法体可表示为HEX字符串。例如上面的方法体百世成十六进制如下所示：</p>
-<p><img src="assets/76qr6.jpg" alt="b75bd86b-45c4-4b05-9266-1b7151c7038f.jpg" /></p>
+<p><img src="assets/76qr6.jpg" alt="png" /></p>
 <p>甚至我们还可以在支持十六进制的编辑器中打开 class 文件，可以在其中找到对应的字符串：</p>
-<p><img src="assets/poywn.jpg" alt="9f8bf31f-e936-47c6-a3d1-f0c0de0fc898.jpg" /> （此图由开源文本编辑软件Atom的hex-view插件生成）</p>
+<p><img src="assets/poywn.jpg" alt="png" /> （此图由开源文本编辑软件Atom的hex-view插件生成）</p>
 <p>粗暴一点，我们可以通过 HEX 编辑器直接修改字节码，尽管这样做会有风险， 但如果只修改一个数值的话应该会很有趣。</p>
 <p>其实要使用编程的方式，方便和安全地实现字节码编辑和修改还有更好的办法，那就是使用 ASM 和 Javassist 之类的字节码操作工具，也可以在类加载器和 Agent 上面做文章，下一节课程会讨论 <code>类加载器</code>，其他主题则留待以后探讨。</p>
 <h3>4.8 对象初始化指令：new 指令, init 以及 clinit 简介</h3>
@@ -452,13 +452,13 @@ SourceFile: &quot;HelloByteCode.java&quot;
 <li><code>dup_x1</code> 将复制栈顶元素的值，并在栈顶插入两次(图中示例5)；</li>
 <li><code>dup2_x1</code> 则复制栈顶两个元素的值，并插入第三个值(图中示例6)。</li>
 </ul>
-<p><img src="assets/kg99w.jpg" alt="9d1a9509-c0ca-4320-983c-141257b0ddf5.jpg" /></p>
+<p><img src="assets/kg99w.jpg" alt="png" /></p>
 <p><code>dup_x1</code> 和 <code>dup2_x1</code> 指令看起来稍微有点复杂。而且为什么要设置这种指令呢? 在栈中复制最顶部的值？</p>
 <p>请看一个实际案例：怎样交换 2 个 double 类型的值？</p>
 <p>需要注意的是，一个 double 值占两个槽位，也就是说如果栈中有两个 double 值，它们将占用 4 个槽位。</p>
 <p>要执行交换，你可能想到了 <code>swap</code> 指令，但问题是 <code>swap</code> 只适用于单字(one-word, 单字一般指 32 位 4 个字节，64 位则是双字)，所以不能处理 double 类型，但 Java 中又没有 swap2 指令。</p>
 <p>怎么办呢? 解决方法就是使用 <code>dup2_x2</code> 指令，将操作数栈顶部的 double 值，复制到栈底 double 值的下方， 然后再使用 <code>pop2</code> 指令弹出栈顶的 double 值。结果就是交换了两个 double 值。 示意图如下图所示:</p>
-<p><img src="assets/yttg7.jpg" alt="17ee9537-a42f-4a49-bb87-9a03735ab83a.jpg" /></p>
+<p><img src="assets/yttg7.jpg" alt="png" /></p>
 <h4><code>dup</code>、<code>dup_x1</code>、<code>dup2_x1</code> 指令补充说明</h4>
 <p>指令的详细说明可参考 <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html">JVM 规范</a>：</p>
 <p><strong>dup 指令</strong></p>
@@ -656,7 +656,7 @@ public class LocalVariableTest {
 <p>关于 <code>LocalVariableTable</code> 有个有意思的事情，就是最前面的槽位会被方法参数占用。</p>
 <p>在这里，因为 <code>main</code> 是静态方法，所以槽位0中并没有设置为 <code>this</code> 引用的地址。 但是对于非静态方法来说， <code>this</code> 会将分配到第 0 号槽位中。</p>
 <blockquote>
-<p>再次提醒: 有过反射编程经验的同学可能比较容易理解: <code>Method#invoke(Object obj, Object... args)</code>; 有JavaScript编程经验的同学也可以类比: <code>fn.apply(obj, args) &amp;&amp; fn.call(obj, arg1, arg2);</code> <img src="assets/te9bw.jpg" alt="1e17af1a-6b6b-4992-a75c-9eac959bc467.jpg" /></p>
+<p>再次提醒: 有过反射编程经验的同学可能比较容易理解: <code>Method#invoke(Object obj, Object... args)</code>; 有JavaScript编程经验的同学也可以类比: <code>fn.apply(obj, args) &amp;&amp; fn.call(obj, arg1, arg2);</code> <img src="assets/te9bw.jpg" alt="png" /></p>
 </blockquote>
 <p>理解这些字节码的诀窍在于:</p>
 <p>给局部变量赋值时，需要使用相应的指令来进行 <code>store</code>，如 <code>astore_1</code>。<code>store</code> 类的指令都会删除栈顶值。 相应的 <code>load</code> 指令则会将值从局部变量表压入操作数栈，但并不会删除局部变量中的值。</p>
@@ -748,11 +748,11 @@ javap -c -verbose demo/jvm0104/ForLoopTest
 <p>Java 字节码中有许多指令可以执行算术运算。实际上，指令集中有很大一部分表示都是关于数学运算的。对于所有数值类型(<code>int</code>, <code>long</code>, <code>double</code>, <code>float</code>)，都有加，减，乘，除，取反的指令。</p>
 <p>那么 <code>byte</code> 和 <code>char</code>, <code>boolean</code> 呢? JVM 是当做 <code>int</code> 来处理的。另外还有部分指令用于数据类型之间的转换。</p>
 <blockquote>
-<p>算术操作码和类型 <img src="assets/58uua.jpg" alt="30666bbb-50a0-4114-9675-b0626fd0167b.jpg" /></p>
+<p>算术操作码和类型 <img src="assets/58uua.jpg" alt="png" /></p>
 </blockquote>
 <p>当我们想将 <code>int</code> 类型的值赋值给 <code>long</code> 类型的变量时，就会发生类型转换。</p>
 <blockquote>
-<p>类型转换操作码 <img src="assets/yzjfe.jpg" alt="e8c82cb5-6e86-4d52-90cc-40cde0fabaa0.jpg" /></p>
+<p>类型转换操作码 <img src="assets/yzjfe.jpg" alt="png" /></p>
 </blockquote>
 <p>在前面的示例中， 将 <code>int</code> 值作为参数传递给实际上接收 <code>double</code> 的 <code>submit()</code> 方法时，可以看到, 在实际调用该方法之前，使用了类型转换的操作码：</p>
 <pre><code>        31: iload         5

@@ -137,11 +137,11 @@ function hide_canvas() {
 <p>对于商业级消息中间件来说，可靠性至关重要，那么，Kafka 是如何确保消息生产、传输、存储及消费过程中的可靠性的呢？本文将从 Kafka 的架构切入，解读 Kafka 基本原理，并对其存储机制、复制原理、同步原理、可靠性和持久性等作详细解读。</p>
 <h3>1. Kafka 总体架构</h3>
 <p>基于 Kafka、ZooKeeper 的分布式消息队列系统总体架构如下图所示：</p>
-<p><img src="assets/e49bc290-cf95-11e8-8388-bd48f25029c6" alt="enter image description here" /></p>
+<p><img src="assets/e49bc290-cf95-11e8-8388-bd48f25029c6" alt="png" /></p>
 <p>典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 Broker（作为 Kafka 节点的服务器），若干 Consumer （Group），以及一个 ZooKeeper 集群。</p>
 <p>Kafka 通过 ZooKeeper 管理集群配置、选举 Leader，并在 Consumer Group 发生变化时进行 Rebalance（即消费者负载均衡，在下一课介绍）。Producer 使用 Push（推）模式将消息发布到 Broker，Consumer 使用 Pull（拉）模式从 Broker 订阅并消费消息。</p>
 <p>上图仅描摹了总体架构，并没有对作为 Kafka 节点的 Broker 进行深入刻画。事实上，它的内部细节相当复杂，如下图所示，Kafka 节点涉及 Topic、Partition 两个重要概念。</p>
-<p><img src="assets/4b558580-cafe-11e8-ba64-19e24fcb4ae1" alt="enter image description here" /></p>
+<p><img src="assets/4b558580-cafe-11e8-ba64-19e24fcb4ae1" alt="png" /></p>
 <p>在 Kafka 架构中，有几个术语需要了解下。</p>
 <ul>
 <li><strong>Producer：</strong> 生产者，即消息发送者，Push 消息到 Kafka 集群的 Broker（就是 Server）中；</li>
@@ -159,7 +159,7 @@ function hide_canvas() {
 <h4>1.1 Topic &amp; Partition</h4>
 <p>为了便于区分消息，Producer 向 Kafka 集群 Push 的消息会被归于某一类别，即 Topic。为了负载均衡、增强可扩展性，Topic 又被分为多个 Partition。从存储层面来看，每一个 Partition 都是一个有序的、不可变的记录序列，通俗点就是一个追加日志（Append Log）文件。每个 Partition 中的记录都会被分配一个称为偏移量（Offset）的序列 ID 号，该序列 ID 号唯一地标识 Partition 内的每个记录。</p>
 <p>Kafka 机制中，Producer Push 的消息是追加（Append）到 Partition 中的，这是一种顺序写磁盘的机制，效率远高于随机写内存，如下图所示：</p>
-<p><img src="assets/dba5c160-d66e-11e8-be45-7958f66a47cf" alt="enter image description here" /></p>
+<p><img src="assets/dba5c160-d66e-11e8-be45-7958f66a47cf" alt="png" /></p>
 <p>（来源：Kafka <a href="https://kafka.apache.org/intro">官网</a>）</p>
 <h4>1.2 Kafka 为什么要将 Topic 分区？</h4>
 <blockquote>
@@ -221,7 +221,7 @@ log.cleaner.enable=false #是否启用log压缩，一般不用启用，启用的
 </code></pre>
 <p>并没有发现“Segment”文件！事实上，Segment 文件由两部分组成，即 <code>.index</code> 文件和 <code>.log</code> 文件，分别为 Segment 索引文件和数据文件。观察上面的文件名，很容易理解它们的命规则，对于索引文件，Partition 全局的第一个 Segment 从 0 开始，后续每个 Segment 文件名为上一个 Segment 文件最后一条消息的偏移量（Offset）值，Offset 的数值由 20 位数字字符表示，没有数字的位置用 0 填充。对于数据文件，其命名与对应的索引文件保持一致即可。</p>
 <p>为了便于读者理解，以上面的其中一“对” Segment 文件为例：<code>00000000000000170410.index</code> 和 <code>00000000000000170410.log</code>，绘制其关系图，如下所示：</p>
-<p><img src="assets/f07c6d30-db6b-11e8-b319-bd941214645d" alt="enter image description here" /></p>
+<p><img src="assets/f07c6d30-db6b-11e8-b319-bd941214645d" alt="png" /></p>
 <p><code>.index</code> 文件作为索引文件，存储的是元数据；<code>.log</code> 文件作为数据文件，存储的是消息。如何通过索引访问具体的消息呢？事实上，索引文件中的元数据指向的是对应数据文件中消息的物理偏移地址，有了消息的物理地址，自然也就可以访问对应的消息了。</p>
 <p>其中以 <code>.index</code> 索引文件中的元数据 <code>[2, 365]</code> 为例，在 <code>.log</code> 数据文件表示第 2 个消息，即在全局 Partition 中表示 170410+2=170412 个消息，该消息的物理偏移地址为 365。</p>
 <p><strong>问题3：如何从 Partition 中通过 Offset 查找 Message？</strong></p>
@@ -270,7 +270,7 @@ records: [Record]
 </ul>
 <p>为了便于读者更好地理解副本概念，我们看下面这个例子。</p>
 <p>一个具有 4 个 Broker 的 Kafka 集群，TopicA 有 3 个 Partition，每个 Partition 有 3 个副本（Leader+Follower）。</p>
-<p><img src="assets/616acd70-cf9b-11e8-8388-bd48f25029c6" alt="enter image description here" /></p>
+<p><img src="assets/616acd70-cf9b-11e8-8388-bd48f25029c6" alt="png" /></p>
 <p>如果 Leader 所在的 Broker 发生故障或宕机，对应 Partition 将因无 Leader 而不能处理客户端请求，这时副本的作用就体现出来了：一个新 Leader 将从 Follower 中被选举出来并继续处理客户端的请求。</p>
 <p><strong>如何确保新选举出的 Leader 是最优秀的？</strong></p>
 <p>一个 Partition 有多个副本（Replica），为了提高可靠性，这些副本分散在不同的 Broker 上。由于带宽、读写性能、网络延迟等因素，同一时刻，这些副本的状态通常是不一致的，即 Follower 与 Leader 的状态不一致。那么，如何保证新 Leader 是优选出来的呢？</p>
@@ -281,7 +281,7 @@ records: [Record]
 <p>前面提到 Kafka 中，Topic 的每个 Partition 可能有多个副本（Replica）用于实现冗余，从而实现高可用。每个副本又有两个重要的属性 LEO 和 HW。</p>
 <p>通过前面内容的学习，我们知道在 Kafka 的存储机制中，Partition 可以细分为 Segment，而 Segment 是最终的存储粒度。不过，对于上层应用来说，仍然可以将 Partition 看作最小的存储单元，即 Partition 可以看作是由一系列的 Segment 组成的粒度更粗的存储单元，它由一系列有序的消息组成，这些消息被连续的追加到 Partition 中。</p>
 <p>LEO、HW 以及 Offset 的关系图如下：</p>
-<p><img src="assets/f7aa23c0-cfab-11e8-9378-c501de8503c2" alt="enter image description here" /></p>
+<p><img src="assets/f7aa23c0-cfab-11e8-9378-c501de8503c2" alt="png" /></p>
 <ul>
 <li>LEO：即日志末端位移（Log End Offset），表示每个副本的 Log 最后一条 Message 的位置。比如 LEO=10、HW=7，则表示该副本保存了 10 条消息，而后面 3 条处于 Uncommitted 状态。</li>
 <li>HW：即水位值（High Watermark）。对于同一个副本而言，其 HW 值不大于 LEO 值。小于等于 HW 值的所有消息都被认为是“已备份”的（Replicated），对于任何一个 Partition，取其对应的 ISR 中最小的 LEO 作为 HW，Consumer 最多只能消费到 HW 所在的位置。</li>
@@ -292,7 +292,7 @@ records: [Record]
 </blockquote>
 <p><strong>下面我们举例说明。</strong></p>
 <p>某个 Partition 的 ISR 列表包括 3 个副本（1 个 Leader+2 个 Follower），当 Producer 向其 Leader 写入一条消息后，HW 和 LEO 有如下变化过程：</p>
-<p><img src="assets/ac639f00-cfaa-11e8-add6-178f04093f1a" alt="enter image description here" /></p>
+<p><img src="assets/ac639f00-cfaa-11e8-add6-178f04093f1a" alt="png" /></p>
 <p>由上图可以看出，Kafka 的复制机制既不是完全的同步复制，也不是单纯的异步复制。同步复制要求所有能工作的 Follower 都复制完，这条消息才会被置为 Committed 状态，该复制方式受限于复制最慢的 Follower，会极大地影响吞吐率，因而极少应用于生产环境。而异步复制方式下，Follower 异步地从 Leader 复制数据，数据只要被 Leader 写入 Log 就被认为已经 Committed（类似 Redis，主从异步复制）。如果在 Follower 尚未复制完成的情况下，Leader 宕机，则必然导致数据丢失，很多时候，这是不可接受的。</p>
 <p>相较于完全同步复制和异步复制，Kafka 使用 ISR 的策略则是一种较“中庸”的策略，在可靠性和吞吐率方面取得了较好的平衡。某种意义上，ISR 策略与第 8 课中介绍的 Raft 算法所采用的“多数派原则”类似，不过 ISR 更为灵活。</p>
 <h4>2.4 Kafka 消息生产的可靠性</h4>
@@ -345,9 +345,9 @@ records: [Record]
 <h4>3.2 Topic 在 ZooKeeper 中的注册</h4>
 <p>在 Kafka 中，所有 Topic 与 Broker 的对应关系都由 ZooKeeper 来维护，在 ZooKeeper 中，通过建立专属的节点来存储这些信息，其路径为 <code>/brokers/topics/{topic_name}</code>。</p>
 <p>前面说过，为了保障数据的可靠性，每个 Topic 的 Partition 实际上是存在备份的，并且备份的数量由 Kafka 机制中的 Replicas 来控制。那么问题来了，如下图所示，假设某个 TopicA 被分为 2 个 Partition，并且存在两个备份，由于这 2 个 Partition（1-2）被分布在不同的 Broker 上，同一个 Partiton 与其备份不能（也不应该）存储于同一个 Broker 上。以 Partition1 为例，假设它被存储于 Broker2，其对应的备份分别存储于 Broker1 和 Broker4，有了备份，可靠性得到保障，但数据一致性却是个问题。</p>
-<p><img src="assets/7161bf30-cb00-11e8-bcac-99cd81fed45b" alt="enter image description here" /></p>
+<p><img src="assets/7161bf30-cb00-11e8-bcac-99cd81fed45b" alt="png" /></p>
 <p>为了保障数据的一致性，ZooKeeper 机制得以引入。基于 ZooKeeper，Kafka 为每一个 Partition 找一个节点作为 Leader，其余备份作为 Follower；接续上图的例子，就 TopicA 的 Partition1 而言，如果位于 Broker2（Kafka 节点）上的 Partition1 为 Leader，那么位于 Broker1 和 Broker4 上面的 Partition1 就充当 Follower，则有下图：</p>
-<p><img src="assets/780e1ef0-cb00-11e8-9b13-63a667cc1a24" alt="enter image description here" /></p>
+<p><img src="assets/780e1ef0-cb00-11e8-9b13-63a667cc1a24" alt="png" /></p>
 <p>基于上图的架构，当 Producer Push 的消息写入 Partition（分区）时，作为 Leader 的 Broker（Kafka 节点）会将消息写入自己的分区，同时还会将此消息复制到各个 Follower，实现同步。如果某个 Follower 挂掉，Leader 会再找一个替代并同步消息；如果 Leader 挂了，Follower 们会选举出一个新的 Leader 替代，继续业务，这些都是由 ZooKeeper 完成的。</p>
 <h4>3.3 Consumer 在 ZooKeeper 中的注册</h4>
 <p><strong>Consumer Group 注册</strong></p>

@@ -222,24 +222,24 @@ function hide_canvas() {
                         <div><h1>05 Redis 持久化——混合持久化</h1>
 <p>RDB 和 AOF 持久化各有利弊，RDB 可能会导致一定时间内的数据丢失，而 AOF 由于文件较大则会影响 Redis 的启动速度，为了能同时使用 RDB 和 AOF 各种的优点，Redis 4.0 之后新增了混合持久化的方式。</p>
 <p>在开启混合持久化的情况下，AOF 重写时会把 Redis 的持久化数据，以 RDB 的格式写入到 AOF 文件的开头，之后的数据再以 AOF 的格式化追加的文件的末尾。</p>
-<p>混合持久化的数据存储结构如下图所示： <img src="assets/2020-02-24-122549.png" alt="image.png" /></p>
+<p>混合持久化的数据存储结构如下图所示： <img src="assets/2020-02-24-122549.png" alt="png" /></p>
 <h3>1 开启混合持久化</h3>
-<p>查询是否开启混合持久化可以使用 <code>config get aof-use-rdb-preamble</code> 命令，执行结果如下图所示： <img src="assets/2020-02-24-122552.png" alt="image.png" /> 其中 yes 表示已经开启混合持久化，no 表示关闭，Redis 5.0 默认值为 yes。 如果是其他版本的 Redis 首先需要检查一下，是否已经开启了混合持久化，如果关闭的情况下，可以通过以下两种方式开启：</p>
+<p>查询是否开启混合持久化可以使用 <code>config get aof-use-rdb-preamble</code> 命令，执行结果如下图所示： <img src="assets/2020-02-24-122552.png" alt="png" /> 其中 yes 表示已经开启混合持久化，no 表示关闭，Redis 5.0 默认值为 yes。 如果是其他版本的 Redis 首先需要检查一下，是否已经开启了混合持久化，如果关闭的情况下，可以通过以下两种方式开启：</p>
 <ul>
 <li>通过命令行开启</li>
 <li>通过修改 Redis 配置文件开启</li>
 </ul>
 <h4>1）通过命令行开启</h4>
-<p>使用命令 <code>config set aof-use-rdb-preamble yes</code> 执行结果如下图所示： <img src="assets/2020-02-24-122553.png" alt="image.png" /></p>
+<p>使用命令 <code>config set aof-use-rdb-preamble yes</code> 执行结果如下图所示： <img src="assets/2020-02-24-122553.png" alt="png" /></p>
 <blockquote>
 <p>小贴士：命令行设置配置的缺点是重启 Redis 服务之后，设置的配置就会失效。</p>
 </blockquote>
 <h4>2）通过修改 Redis 配置文件开启</h4>
-<p>在 Redis 的根路径下找到 redis.conf 文件，把配置文件中的 <code>aof-use-rdb-preamble no</code> 改为 <code>aof-use-rdb-preamble yes</code> 如下图所示： <img src="assets/2020-02-24-122555.png" alt="image.png" /></p>
+<p>在 Redis 的根路径下找到 redis.conf 文件，把配置文件中的 <code>aof-use-rdb-preamble no</code> 改为 <code>aof-use-rdb-preamble yes</code> 如下图所示： <img src="assets/2020-02-24-122555.png" alt="png" /></p>
 <h3>2 实例运行</h3>
-<p>当在混合持久化关闭的情况下，使用 <code>bgrewriteaof</code> 触发 AOF 文件重写之后，查看 appendonly.aof 文件的持久化日志，如下图所示： <img src="assets/2020-02-24-122556.png" alt="image.png" /> 可以看出，当混合持久化关闭的情况下 AOF 持久化文件存储的为标准的 AOF 格式的文件。 当混合持久化开启的模式下，使用 <code>bgrewriteaof</code> 命令触发 AOF 文件重写，得到 appendonly.aof 的文件内容如下图所示： <img src="assets/2020-02-24-122557.png" alt="image.png" /> 可以看出 appendonly.aof 文件存储的内容是 <code>REDIS</code> 开头的 RDB 格式的内容，并非为 AOF 格式的日志。</p>
+<p>当在混合持久化关闭的情况下，使用 <code>bgrewriteaof</code> 触发 AOF 文件重写之后，查看 appendonly.aof 文件的持久化日志，如下图所示： <img src="assets/2020-02-24-122556.png" alt="png" /> 可以看出，当混合持久化关闭的情况下 AOF 持久化文件存储的为标准的 AOF 格式的文件。 当混合持久化开启的模式下，使用 <code>bgrewriteaof</code> 命令触发 AOF 文件重写，得到 appendonly.aof 的文件内容如下图所示： <img src="assets/2020-02-24-122557.png" alt="png" /> 可以看出 appendonly.aof 文件存储的内容是 <code>REDIS</code> 开头的 RDB 格式的内容，并非为 AOF 格式的日志。</p>
 <h3>3 数据恢复和源码解析</h3>
-<p>混合持久化的数据恢复和 AOF 持久化过程是一样的，只需要把 appendonly.aof 放到 Redis 的根目录，在 Redis 启动时，只要开启了 AOF 持久化，Redis 就会自动加载并恢复数据。 Redis 启动信息如下图所示： <img src="assets/2020-02-24-122558.png" alt="image.png" /> 可以看出 Redis 在服务器初始化的时候加载了 AOF 文件的内容。</p>
+<p>混合持久化的数据恢复和 AOF 持久化过程是一样的，只需要把 appendonly.aof 放到 Redis 的根目录，在 Redis 启动时，只要开启了 AOF 持久化，Redis 就会自动加载并恢复数据。 Redis 启动信息如下图所示： <img src="assets/2020-02-24-122558.png" alt="png" /> 可以看出 Redis 在服务器初始化的时候加载了 AOF 文件的内容。</p>
 <h4>1）混合持久化的加载流程</h4>
 <p>混合持久化的加载流程如下：</p>
 <ol>
@@ -248,7 +248,7 @@ function hide_canvas() {
 <li>判断 AOF 文件开头是 RDB 的格式, 先加载 RDB 内容再加载剩余的 AOF 内容；</li>
 <li>判断 AOF 文件开头不是 RDB 的格式，直接以 AOF 格式加载整个文件。</li>
 </ol>
-<p>AOF 加载流程图如下图所示： <img src="assets/2020-02-24-122601.png" alt="image.png" /> 2）源码解析</p>
+<p>AOF 加载流程图如下图所示： <img src="assets/2020-02-24-122601.png" alt="png" /> 2）源码解析</p>
 <p>Redis 判断 AOF 文件的开头是否是 RDB 格式的，是通过关键字 <code>REDIS</code> 判断的，RDB 文件的开头一定是 <code>REDIS</code> 关键字开头的，判断源码在 Redis 的 src/aof.c 中，核心代码如下所示：</p>
 <pre><code class="language-c">char sig[5]; /* &quot;REDIS&quot; */
 if (fread(sig,1,5,fp) != 5 || memcmp(sig,&quot;REDIS&quot;,5) != 0) {

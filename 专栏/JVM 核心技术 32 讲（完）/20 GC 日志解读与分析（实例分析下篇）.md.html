@@ -347,7 +347,7 @@ Heap
 <li><code>[Free CSet: 0.0 ms]</code>：将回收集中被释放的小堆归还所消耗的时间，以便他们能用来分配新的对象。</li>
 </ol>
 <p>此次 Young GC 对应的示意图如下所示：</p>
-<p><img src="assets/e9b457b0-6864-11ea-9d64-851af22d0044" alt="58726143.png" /></p>
+<p><img src="assets/e9b457b0-6864-11ea-9d64-851af22d0044" alt="png" /></p>
 <h3>Concurrent Marking（并发标记）</h3>
 <p>当堆内存的总体使用比例达到一定数值时，就会触发并发标记。这个默认比例是 45%，但也可以通过 JVM 参数 <strong>InitiatingHeapOccupancyPercent</strong> 来设置。和 CMS 一样，G1 的并发标记也是由多个阶段组成，其中一些阶段是完全并发的，还有一些阶段则会暂停应用线程。</p>
 <h4><strong>阶段 1：Initial Mark（初始标记）</strong></h4>
@@ -410,7 +410,7 @@ Heap
 </blockquote>
 <p>标记周期一般只在碰到 region 中一个存活对象都没有的时候，才会顺手处理一把，大多数情况下都不释放内存。</p>
 <p>示意图如下所示：</p>
-<p><img src="assets/a3907380-6865-11ea-bc7d-05803d82869a" alt="52452256.png" /></p>
+<p><img src="assets/a3907380-6865-11ea-bc7d-05803d82869a" alt="png" /></p>
 <h3>Evacuation Pause（mixed）（转移暂停：混合模式）</h3>
 <p>并发标记完成之后，G1 将执行一次混合收集（mixed collection），不只清理年轻代，还将一部分老年代区域也加入到 collection set 中。</p>
 <p>混合模式的转移暂停（Evacuation Pause）不一定紧跟并发标记阶段。</p>
@@ -462,9 +462,9 @@ Heap
 </code></pre>
 <p>因为我们的堆内存空间很小，存活对象的数量也不多，所以这里看到的 Full GC 暂停时间很短。</p>
 <p>此次 Full GC 的示意图如下所示：</p>
-<p><img src="assets/1b6e2e60-6866-11ea-a490-d3e65769b9bf" alt="59111406.png" /></p>
+<p><img src="assets/1b6e2e60-6866-11ea-a490-d3e65769b9bf" alt="png" /></p>
 <p>在堆内存较大的情况下（8G+），如果 G1 发生了 Full GC，暂停时间可能会退化，达到几十秒甚至更多。如下面这张图片所示：</p>
-<p><img src="assets/2bce1360-6866-11ea-9d64-851af22d0044" alt="5b03ee3d-1e0a-4375-a5f6-aab17f4d1184.jpg" /></p>
+<p><img src="assets/2bce1360-6866-11ea-9d64-851af22d0044" alt="png" /></p>
 <p>从其中的 OldGen 部分可以看到，118 次 Full GC 消耗了 31 分钟，平均每次达到 20 秒，按图像比例可粗略得知，吞吐率不足 30%。</p>
 <p>这张图片所表示的场景是在压测 Flink 按时间窗口进行聚合计算时发生的，主要原因是对象太多，堆内存空间不足而导致的，修改对象类型为原生数据类型之后问题得到缓解，加大堆内存空间，满足批处理/流计算的需求之后 GC 问题不再复现。</p>
 <p>发生持续时间很长的 Full GC 暂停时，就需要我们进行排查和分析，确定是否需要修改 GC 配置，或者增加内存，还是需要修改程序的业务逻辑。关于 G1 的调优，我们在后面的调优部分再进行介绍。</p>

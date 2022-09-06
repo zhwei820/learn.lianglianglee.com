@@ -538,7 +538,7 @@ function hide_canvas() {
 <li>BillReviewService</li>
 </ul>
 <p>在这些对象中，InternalSettlementBill 被定义为实体类，TemplateReplacement 被定义为值对象。由于存在多种结算账单，实现时考虑了代码的可扩展与重用，在设计模型中引入了<strong>模板方法</strong>模式改进领域模型，即引入的 BaseBillReviewExportTemplate。注意，该抽象类命名中包含的 Template 并非结算账单模板，而是为了体现它运用了模板方法模式。同时，还定义了领域服务 InternalSettlementBillService 和 BillReviewService。它们之间的关系如下所示：</p>
-<p><img src="assets/87ab3c30-dd4c-11e9-8134-9900814ad853" alt="76569101.png" /></p>
+<p><img src="assets/87ab3c30-dd4c-11e9-8134-9900814ad853" alt="png" /></p>
 <p>实现代码为：</p>
 <pre><code class="language-java">package settlement.domain;
 import lombok.Data;
@@ -716,9 +716,9 @@ public class PoiUtils {
 <li>导出结算账单</li>
 </ul>
 <p>通过分析这些职责，尤其关注职责中描述的领域概念，并识别职责的履行者，可以获得如下所示的领域模型：</p>
-<p><img src="assets/c2f993e0-dd4c-11e9-a584-59c5758c1abc" alt="78003004.png" /></p>
+<p><img src="assets/c2f993e0-dd4c-11e9-a584-59c5758c1abc" alt="png" /></p>
 <p>对比前后两个领域模型，我引入了 SettlementBillTemplate 对象，由它代表结算账单模板。这里要特别注意区分**结算账单（SettlementBill）<strong>和</strong>结算账单模板（SettlementBillTemplate）**两个概念。模板规定了结算账单填充数据的内容和格式，不同的结算账单会有不同的模板。一旦填充了模板变量值后，就会形成结算账单。虽然从领域概念上讲，结算账单有多种类别，如内部结算账单、交易结算账单等。但这个区别主要体现在模板上，因为它决定了结算账单要填充的值，至于结算账单本身是没有任何区别的。因此，在导出结算账单这个业务场景中，不同账单的区别就体现在模板和模板变量值上。模板和模板变量放在同一个聚合中。可以为模板定义如下的继承体系，继承体系中的每个子类为一个独立的聚合：</p>
-<p><img src="assets/ccc05300-dd4c-11e9-9cc8-a572519b0723" alt="80875465.png" /></p>
+<p><img src="assets/ccc05300-dd4c-11e9-9cc8-a572519b0723" alt="png" /></p>
 <h3>避免贫血模型</h3>
 <p>一旦理清了需求，就可以获得正确的领域分析模型与设计模型。每个领域模型对象都体现了领域知识，也可以让我们根据它们所拥有的数据合理分配职责。在前面给出的领域设计模型中，一个模板可以包含多个模板变量，模板变量的值就来自这个作为主体的模板实体对象。每个模板对象自身了解自己的变量是哪些，该如何组装这些模板变量。根据“信息专家模式”，这个组装模板变量的功能就该分配给模板实体，而非之前模型中的 InternalSettlementBillService 服务。转移职责后的 InternalSettlementBillTemplate 实体定义如下：</p>
 <pre><code class="language-java">package settlement.domain;

@@ -341,7 +341,7 @@ public class BMWFactory implements CarFactory {
 <p>虽然通过反射技术可以有效地减少工厂类的数据量，但是反射相比直接创建工厂类有性能损失，所以对于性能敏感的场景，应当谨慎使用反射。</p>
 <h3>责任链模式</h3>
 <p>想必学完本专栏的前面课程后，责任链模式大家应该再熟悉不过了，自然而然联想到 ChannlPipeline 和 ChannelHandler。ChannlPipeline 内部是由一组 ChannelHandler 实例组成的，内部通过双向链表将不同的 ChannelHandler 链接在一起，如下图所示。</p>
-<p><img src="assets/Cip5yGAKfLmANJ_0AAZUvQP4FxQ293.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yGAKfLmANJ_0AAZUvQP4FxQ293.png" alt="png" /></p>
 <p>对于 Netty 中责任链模式的实现，也遵循了责任链模式的四个基本要素：</p>
 <h4>责任处理器接口</h4>
 <p>ChannelHandler 对应的就是责任处理器接口，ChannelHandler 有两个重要的子接口：ChannelInboundHandler和ChannelOutboundHandler，分别拦截入站和出站的各种 I/O 事件。</p>
@@ -363,12 +363,12 @@ public class BMWFactory implements CarFactory {
 }
 </code></pre>
 <p>ChannelPipeline 提供了一系列 add 和 remove 相关接口用于动态添加和删除 ChannelHandler 处理器，如下所示：</p>
-<p><img src="assets/CgpVE2AKfMSAehuyAA0_w5_fB-c556.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE2AKfMSAehuyAA0_w5_fB-c556.png" alt="png" /></p>
 <h4>上下文</h4>
 <p>从 ChannelPipeline 内部结构定义可以看出，ChannelHandlerContext 负责保存责任链节点上下文信息。ChannelHandlerContext 是对 ChannelHandler 的封装，每个 ChannelHandler 都对应一个 ChannelHandlerContext，实际上 ChannelPipeline 维护的是与 ChannelHandlerContext 的关系。</p>
 <h4>责任传播和终止机制</h4>
 <p>ChannelHandlerContext 提供了 fire 系列的方法用于事件传播，如下所示：</p>
-<p><img src="assets/Cip5yGAKfM6AHTnGAA43hnlCx54417.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yGAKfM6AHTnGAA43hnlCx54417.png" alt="png" /></p>
 <p>以 ChannelInboundHandlerAdapter 的 channelRead 方法为例，ChannelHandlerContext 会默认调用 fireChannelRead 方法将事件默认传递到下一个处理器。如果我们重写了 ChannelInboundHandlerAdapter 的 channelRead 方法，并且没有调用 fireChannelRead 进行事件传播，那么表示此次事件传播已终止。</p>
 <h3>观察者模式</h3>
 <p>观察者模式有两个角色：观察者和被观察。被观察者发布消息，观察者订阅消息，没有订阅的观察者是收不到消息的。首先我们通过一个简单的例子看下观察者模式的是如何实现的。</p>

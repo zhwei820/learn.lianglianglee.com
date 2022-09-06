@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>这个问题非常重要，值得我们专门花一个课时的内容来进行分析和讲解。可以说，<strong>理解 JDBC 规范以及 ShardingSphere 对 JDBC 规范的重写方式，是正确使用 ShardingSphere 实现数据分片的前提</strong>。今天，我们就深入讨论 JDBC 规范与 ShardingSphere 的这层关系，帮你从底层设计上解开其中的神奇之处。</p>
 <h3>JDBC 规范简介</h3>
 <p>ShardingSphere 提供了与 JDBC 规范完全兼容的实现过程，在对这一过程进行详细展开之前，先来回顾一下 JDBC 规范。<strong>JDBC（Java Database Connectivity）的设计初衷是提供一套用于各种数据库的统一标准</strong>，而不同的数据库厂家共同遵守这套标准，并提供各自的实现方案供应用程序调用。作为统一标准，JDBC 规范具有完整的架构体系，如下图所示：</p>
-<p><img src="assets/CgqCHl7xtaiASay6AAB0vuO1kAA457.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl7xtaiASay6AAB0vuO1kAA457.png" alt="png" /></p>
 <p>JDBC 架构中的 Driver Manager 负责加载各种不同的驱动程序（Driver），并根据不同的请求，向调用者返回相应的数据库连接（Connection）。而应用程序通过调用 JDBC API 来实现对数据库的操作。<strong>对于开发人员而言，JDBC API 是我们访问数据库的主要途径，也是 ShardingSphere 重写 JDBC 规范并添加分片功能的入口</strong>。如果我们使用 JDBC 开发一个访问数据库的处理流程，常见的代码风格如下所示：</p>
 <pre><code>// 创建池化的数据源
 PooledDataSource dataSource = new PooledDataSource ();
@@ -239,10 +239,10 @@ connection.close();
 }
 </code></pre>
 <p>可以看到，DataSource 接口提供了两个获取 Connection 的重载方法，并继承了 CommonDataSource 接口，该接口是 JDBC 中关于数据源定义的根接口。除了 DataSource 接口之外，它还有两个子接口：</p>
-<p><img src="assets/CgqCHl7xtbuALDZqAABj4c2IofU664.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl7xtbuALDZqAABj4c2IofU664.png" alt="png" /></p>
 <p>其中，DataSource 是官方定义的获取 Connection 的基础接口，ConnectionPoolDataSource 是从连接池 ConnectionPool 中获取的 Connection 接口。而 XADataSource 则用来实现在分布式事务环境下获取 Connection，我们在讨论 ShardingSphere 的分布式事务时会接触到这个接口。</p>
 <p><strong>请注意，DataSource 接口同时还继承了一个 Wrapper 接口</strong>。从接口的命名上看，可以判断该接口应该起到一种包装器的作用，事实上，由于很多数据库供应商提供了超越标准 JDBC API 的扩展功能，所以，Wrapper 接口可以把一个由第三方供应商提供的、非 JDBC 标准的接口包装成标准接口。以 DataSource 接口为例，如果我们想要实现自己的数据源 MyDataSource，就可以提供一个实现了 Wrapper 接口的 MyDataSourceWrapper 类来完成包装和适配：</p>
-<p><img src="assets/CgqCHl7xtdOAZEGNAABnV-ZtNrk288.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl7xtdOAZEGNAABnV-ZtNrk288.png" alt="png" /></p>
 <p>在 JDBC 规范中，除了 DataSource 之外，Connection、Statement、ResultSet 等核心对象也都继承了这个接口。显然，ShardingSphere 提供的就是非 JDBC 标准的接口，所以也应该会用到这个 Wrapper 接口，并提供了类似的实现方案。</p>
 <h4>Connection</h4>
 <p>DataSource 的目的是获取 Connection 对象，我们可以把 Connection 理解为一种<strong>会话（Session）机制</strong>。Connection 代表一个数据库连接，负责完成与数据库之间的通信。所有 SQL 的执行都是在某个特定 Connection 环境中进行的，同时它还提供了一组重载方法，分别用于创建 Statement 和 PreparedStatement。另一方面，Connection 也涉及事务相关的操作，为了实现分片操作，ShardingSphere 同样也实现了定制化的 Connection 类 ShardingConnection。</p>
@@ -252,14 +252,14 @@ connection.close();
 <h4>ResultSet</h4>
 <p>一旦通过 Statement 或 PreparedStatement 执行了 SQL 语句并获得了 ResultSet 对象后，那么就可以通过调用 Resulset 对象中的 next() 方法遍历整个结果集。如果 next() 方法返回为 true，就意味结果集中存在数据，则可以调用 ResultSet 对象的一系列 getXXX() 方法来取得对应的结果值。对于分库分表操作而言，因为涉及从多个数据库或数据表中获取目标数据，势必需要对获取的结果进行归并。因此，ShardingSphere 中也提供了分片环境下的 ShardingResultSet 对象。</p>
 <p>作为总结，我们梳理了基于 JDBC 规范进行数据库访问的开发流程图，如下图所示：</p>
-<p><img src="assets/Ciqc1F7xteqAQsj5AAB1bj_eu10085.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F7xteqAQsj5AAB1bj_eu10085.png" alt="png" /></p>
 <p>ShardingSphere 提供了与 JDBC 规范完全兼容的 API。也就是说，开发人员可以基于这个开发流程和 JDBC 中的核心接口完成分片引擎、数据脱敏等操作，我们来看一下。</p>
 <h3>基于适配器模式的 JDBC 重写实现方案</h3>
 <p>在 ShardingSphere 中，实现与 JDBC 规范兼容性的基本策略就是采用了设计模式中的适配器模式（Adapter Pattern）。<strong>适配器模式通常被用作连接两个不兼容接口之间的桥梁，涉及为某一个接口加入独立的或不兼容的功能。</strong></p>
 <p>作为一套适配 JDBC 规范的实现方案，ShardingSphere 需要对上面介绍的 JDBC API 中的 DataSource、Connection、Statement 及 ResultSet 等核心对象都完成重写。虽然这些对象承载着不同功能，但重写机制应该是共通的，否则就需要对不同对象都实现定制化开发，显然，这不符合我们的设计原则。为此，ShardingSphere 抽象并开发了一套基于适配器模式的实现方案，整体结构是这样的，如下图所示：</p>
-<p><img src="assets/Ciqc1F7xtfeAIlV7AABhpWkSy7c199.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F7xtfeAIlV7AABhpWkSy7c199.png" alt="png" /></p>
 <p>首先，我们看到这里有一个 JdbcObject 接口，这个接口泛指 JDBC API 中的 DataSource、Connection、Statement 等核心接口。前面提到，这些接口都继承自包装器 Wrapper 接口。ShardingSphere 为这个 Wrapper 接口提供了一个实现类 WrapperAdapter，这点在图中得到了展示。在 ShardingSphere 代码工程 sharding-jdbc-core 的 org.apache.shardingsphere.shardingjdbc.jdbc.adapter 包中包含了所有与 Adapter 相关的实现类：</p>
-<p><img src="assets/Ciqc1F7xtgWAb3PaAAAW8D9SY1w475.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F7xtgWAb3PaAAAW8D9SY1w475.png" alt="png" /></p>
 <p>在 ShardingSphere 基于适配器模式的实现方案图的底部，有一个 ShardingJdbcObject 类的定义。这个类也是一种泛指，代表 ShardingSphere 中用于分片的 ShardingDataSource、ShardingConnection、ShardingStatement 等对象。</p>
 <p>最后发现 ShardingJdbcObject 继承自一个 AbstractJdbcObjectAdapter，而 AbstractJdbcObjectAdapter 又继承自 AbstractUnsupportedOperationJdbcObject，这两个类都是抽象类，而且也都泛指一组类。两者的区别在于，AbstractJdbcObjectAdapter 只提供了针对 JdbcObject 接口的一部分实现方法，这些方法是我们完成分片操作所需要的。而对于那些我们不需要的方法实现，则全部交由 AbstractUnsupportedOperationJdbcObject 进行实现，这两个类的所有方法的合集，就是原有 JdbcObject 接口的所有方法定义。</p>
 <p>这样，我们大致了解了 ShardingSphere 对 JDBC 规范中核心接口的重写机制。这个重写机制非常重要，在 ShardingSphere 中应用也很广泛，我们可以通过示例对这一机制做进一步理解。</p>
@@ -267,10 +267,10 @@ connection.close();
 <p>通过前面的介绍，我们知道 ShardingSphere 的分片引擎中提供了一系列 ShardingJdbcObject 来支持分片操作，包括 ShardingDataSource、ShardingConnection、ShardingStatement、ShardingPreparedStament 等。这里以最具代表性的 ShardingConnection 为例，来讲解它的实现过程。请注意，今天我们关注的还是重写机制，不会对 ShardingConnection 中的具体功能以及与其他类之间的交互过程做过多展开讲解。</p>
 <h4>ShardingConnection 类层结构</h4>
 <p>ShardingConnection 是对 JDBC 中 Connection 的适配和包装，所以它需要提供 Connection 接口中定义的方法，包括 createConnection、getMetaData、各种重载的 prepareStatement 和 createStatement 以及针对事务的 setAutoCommit、commit 和 rollback 方法等。ShardingConnection 对这些方法都进行了重写，如下图所示：</p>
-<p><img src="assets/CgqCHl7xthSAHp4DAACJDJsvmyk879.png" alt="Drawing 6.png" />
+<p><img src="assets/CgqCHl7xthSAHp4DAACJDJsvmyk879.png" alt="png" />
 ShardingConnection 中的方法列表图</p>
 <p>ShardingConnection 类的一条类层结构支线就是适配器模式的具体应用，这部分内容的类层结构与前面介绍的重写机制的类层结构是完全一致的，如下图所示：</p>
-<p><img src="assets/CgqCHl9MudqAOb9wAAEeGv0YTn807.jpeg" alt="111.jpeg" /></p>
+<p><img src="assets/CgqCHl9MudqAOb9wAAEeGv0YTn807.jpeg" alt="png" /></p>
 <h4>AbstractConnectionAdapter</h4>
 <p>我们首先来看看 AbstractConnectionAdapter 抽象类，ShardingConnection 直接继承了它。在 AbstractConnectionAdapter 中发现了一个 cachedConnections 属性，它是一个 Map 对象，该对象其实缓存了这个经过封装的 ShardingConnection 背后真实的 Connection 对象。如果我们对一个 AbstractConnectionAdapter 重复使用，那么这些 cachedConnections 也会一直被缓存，直到调用 close 方法。可以从 AbstractConnectionAdapter 的 getConnections 方法中理解具体的操作过程：</p>
 <pre><code>public final List&lt;Connection&gt; getConnections(final ConnectionMode connectionMode, final String dataSourceName, final int connectionSize) throws SQLException {

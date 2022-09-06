@@ -291,13 +291,13 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>28  复杂问题简单化，代理帮你隐藏了多少底层细节？</h1>
 <p>在前面介绍 DubboProtocol 的相关实现时，我们知道 Protocol 这一层以及后面介绍的 Cluster 层暴露出来的接口都是 Dubbo 内部的一些概念，业务层无法直接使用。为了让业务逻辑能够无缝使用 Dubbo，我们就需要将业务逻辑与 Dubbo 内部概念打通，这就用到了动态生成代理对象的功能。Proxy 层在 Dubbo 架构中的位置如下所示（虽然在架构图中 Proxy 层与 Protocol 层距离很远，但 Proxy 的具体代码实现就位于 dubbo-rpc-api 模块中）：</p>
-<p><img src="assets/CgqCHl-WrK6Af2f9ACAFYNhhHPc051.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-WrK6Af2f9ACAFYNhhHPc051.png" alt="png" /></p>
 <p>Dubbo 架构中 Proxy 层的位置图</p>
 <p>在 Consumer 进行调用的时候，Dubbo 会通过<strong>动态代理</strong>将业务接口实现对象转化为相应的 Invoker 对象，然后在 Cluster 层、Protocol 层都会使用 Invoker。在 Provider 暴露服务的时候，也会有 Invoker 对象与业务接口实现对象之间的转换，这同样也是通过<strong>动态代理</strong>实现的。</p>
 <p>实现动态代理的常见方案有：JDK 动态代理、CGLib 动态代理和 Javassist 动态代理。这些方案的应用都还是比较广泛的，例如，Hibernate 底层使用了 Javassist 和 CGLib，Spring 使用了 CGLib 和 JDK 动态代理，MyBatis 底层使用了 JDK 动态代理和 Javassist。</p>
 <p>从性能方面看，Javassist 与 CGLib 的实现方式相差无几，两者都比 JDK 动态代理性能要高，具体高多少，这就要看具体的机器、JDK 版本、测试基准的具体实现等条件了。</p>
 <p><strong>Dubbo 提供了两种方式来实现代理，分别是 JDK 动态代理和 Javassist</strong>。我们可以在 proxy 这个包内，看到相应工厂类，如下图所示：</p>
-<p><img src="assets/Ciqc1F-WrLqALvCWAACKW4k6bv4319.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-WrLqALvCWAACKW4k6bv4319.png" alt="png" /></p>
 <p>ProxyFactory 核心实现的位置</p>
 <p>了解了 Proxy 存在的必要性以及 Dubbo 提供的两种代理生成方式之后，下面我们就开始对 Proxy 层的实现进行深入分析。</p>
 <h3>ProxyFactory</h3>
@@ -316,7 +316,7 @@ public interface ProxyFactory {
 </code></pre>
 <p>看到 ProxyFactory 上的 @SPI 注解我们知道，其默认实现使用 Javassist 来创建代码对象。</p>
 <p><strong>AbstractProxyFactory 是代理工厂的抽象类</strong>，继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F-WrMiAXWheAACKwcyiNxw669.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F-WrMiAXWheAACKwcyiNxw669.png" alt="png" /></p>
 <p>AbstractProxyFactory 继承关系图</p>
 <h3>AbstractProxyFactory</h3>
 <p>AbstractProxyFactory 主要处理的是需要代理的接口，具体实现在 getProxy() 方法中：</p>
@@ -639,7 +639,7 @@ synchronized (cache) { // 加锁
 }
 </code></pre>
 <p>在前面两个课时中我们已经介绍了 Invoker 接口的一个重要实现分支—— AbstractInvoker 以及它的一个实现 DubboInvoker。AbstractProxyInvoker 是 Invoker 接口的另一个实现分支，继承关系如下图所示，其实现类都是 ProxyFactory 实现中的匿名内部类。</p>
-<p><img src="assets/CgqCHl-WrSOAU0FXAABwy4VTTF4402.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-WrSOAU0FXAABwy4VTTF4402.png" alt="png" /></p>
 <p>在 AbstractProxyInvoker 实现的 invoke() 方法中，会将 doInvoke() 方法返回的结果封装成 CompletableFuture 对象，然后再封装成 AsyncRpcResult 对象返回，具体实现如下：</p>
 <pre><code>public Result invoke(Invocation invocation) throws RpcException {
     // 执行doInvoke()方法，调用业务实现

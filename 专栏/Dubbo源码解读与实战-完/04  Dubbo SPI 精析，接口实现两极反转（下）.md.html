@@ -313,9 +313,9 @@ function hide_canvas() {
 <p>下面我们正式进入 Dubbo SPI 核心实现的介绍。</p>
 <h4>1. @SPI 注解</h4>
 <p>Dubbo 中某个接口被 @SPI注解修饰时，就表示该接口是<strong>扩展接口</strong>，前文示例中的 org.apache.dubbo.rpc.Protocol 接口就是一个扩展接口：</p>
-<p><img src="assets/CgqCHl8s936AYuePAABLd6cRz6w646.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8s936AYuePAABLd6cRz6w646.png" alt="png" /></p>
 <p>@SPI 注解的 value 值指定了默认的扩展名称，例如，在通过 Dubbo SPI 加载 Protocol 接口实现时，如果没有明确指定扩展名，则默认会将 @SPI 注解的 value 值作为扩展名，即加载 dubbo 这个扩展名对应的 org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol 这个扩展实现类，相关的 SPI 配置文件在 dubbo-rpc-dubbo 模块中，如下图所示：</p>
-<p><img src="assets/CgqCHl8s94mAaj2mAABcaXHNXqc467.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8s94mAaj2mAABcaXHNXqc467.png" alt="png" /></p>
 <p><strong>那 ExtensionLoader 是如何处理 @SPI 注解的呢？</strong></p>
 <p>ExtensionLoader 位于 dubbo-common 模块中的 extension 包中，功能类似于 JDK SPI 中的 java.util.ServiceLoader。Dubbo SPI 的核心逻辑几乎都封装在 ExtensionLoader 之中（其中就包括 @SPI 注解的处理逻辑），其使用方式如下所示：</p>
 <pre><code>Protocol protocol = ExtensionLoader
@@ -327,7 +327,7 @@ function hide_canvas() {
 </ul>
 <pre><code> DubboInternalLoadingStrategy &gt; DubboLoadingStrategy &gt; ServicesLoadingStrateg
 </code></pre>
-<p><img src="assets/Ciqc1F8s95mANXYKAADUVwBlgxs297.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8s95mANXYKAADUVwBlgxs297.png" alt="png" /></p>
 <ul>
 <li><strong>EXTENSION_LOADERS（ConcurrentMap&lt;Class, ExtensionLoader&gt;类型）</strong>
 ：Dubbo 中一个扩展接口对应一个 ExtensionLoader 实例，该集合缓存了全部 ExtensionLoader 实例，其中的 Key 为扩展接口，Value 为加载其扩展实现的 ExtensionLoader 实例。</li>
@@ -407,7 +407,7 @@ function hide_canvas() {
 </code></pre>
 <h4>2. @Adaptive 注解与适配器</h4>
 <p>@Adaptive 注解用来实现 Dubbo 的适配器功能，那什么是适配器呢？这里我们通过一个示例进行说明。Dubbo 中的 ExtensionFactory 接口有三个实现类，如下图所示，ExtensionFactory 接口上有 @SPI 注解，AdaptiveExtensionFactory 实现类上有 @Adaptive 注解。</p>
-<p><img src="assets/Ciqc1F8s-D6AZFtdAAC318rtQ-I710.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8s-D6AZFtdAAC318rtQ-I710.png" alt="png" /></p>
 <p>AdaptiveExtensionFactory 不实现任何具体的功能，而是用来适配 ExtensionFactory 的 SpiExtensionFactory 和 SpringExtensionFactory 这两种实现。AdaptiveExtensionFactory 会根据运行时的一些状态来选择具体调用 ExtensionFactory 的哪个实现。</p>
 <p>@Adaptive 注解还可以加到接口方法之上，Dubbo 会动态生成适配器类。例如，Transporter接口有两个被 @Adaptive 注解修饰的方法：</p>
 <pre><code>@SPI(&quot;netty&quot;)
@@ -441,7 +441,7 @@ public interface Transporter {
 </code></pre>
 <p>生成 Transporter$Adaptive 这个类的逻辑位于 ExtensionLoader.createAdaptiveExtensionClass() 方法，若感兴趣你可以看一下相关代码，其中涉及的 javassist 等方面的知识，在后面的课时中我们会进行介绍。</p>
 <p>明确了 @Adaptive 注解的作用之后，我们回到 ExtensionLoader.createExtension() 方法，其中在扫描 SPI 配置文件的时候，会调用 loadClass() 方法加载 SPI 配置文件中指定的类，如下图所示：</p>
-<p><img src="assets/CgqCHl8s-H2AJE1LAACILXqbtHY819.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8s-H2AJE1LAACILXqbtHY819.png" alt="png" /></p>
 <p>loadClass() 方法中会识别加载扩展实现类上的 @Adaptive 注解，将该扩展实现的类型缓存到 cachedAdaptiveClass 这个实例字段上（volatile修饰）：</p>
 <pre><code>private void loadClass(){
     if (clazz.isAnnotationPresent(Adaptive.class)) { 
@@ -635,7 +635,7 @@ public &lt;T&gt; T getExtension(Class&lt;T&gt; type, String name) {
 }
 </code></pre>
 <p>最后举个简单的例子说明上述处理流程，假设 cachedActivates 集合缓存的扩展实现如下表所示：</p>
-<p><img src="assets/CgqCHl8tNGCAIw8fAACXC_dle_g809.png" alt="11.png" /></p>
+<p><img src="assets/CgqCHl8tNGCAIw8fAACXC_dle_g809.png" alt="png" /></p>
 <p>在 Provider 端调用 getActivateExtension() 方法时传入的 values 配置为 &quot;demoFilter3、-demoFilter2、default、demoFilter1&quot;，那么根据上面的逻辑：</p>
 <ol>
 <li>得到默认激活的扩展实实现集合中有 [ demoFilter4, demoFilter6 ]；</li>

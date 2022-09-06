@@ -219,7 +219,7 @@ slave-parallel-workers = 16
 <h3>主从复制延迟监控</h3>
 <h4>Seconds_Behind_Master</h4>
 <p>很多同学或许知道通过命令 SHOW SLAVE STATUS，其中的 Seconds_Behind_Master 可以查看复制延迟，如：</p>
-<p><img src="assets/CioPOWDDKNSAVgwsAAFw4VDRM9U648.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDDKNSAVgwsAAFw4VDRM9U648.png" alt="png" /></p>
 <p>但是，<strong>Seconds_Behind_Master 不准确！用于严格判断主从延迟的问题并不合适，</strong> 有这样三个原因。</p>
 <ol>
 <li>它计算规则是（当前回放二进制时间 - 二进制日志中的时间），如果 I/O 线程有延迟，那么 Second_Behind_Master 为 0，这时可能已经落后非常多了，例如存在有大事务的情况下；</li>
@@ -252,13 +252,13 @@ END
 <h3>读写分离设计</h3>
 <p>读写分离设计是指：把对数据库的读写请求分布到不同的数据库服务器上。对于写入操作只能请求主服务器，而对读取操作则可以将读取请求分布到不同的从服务器上。</p>
 <p>这样能有效降低主服务器的负载，提升从服务器资源利用率，从而进一步提升整体业务的性能。下面这张图显示了一种常见的业务读写分离的架构设计：</p>
-<p><img src="assets/Cgp9HWDDKOGAbQ-bAABk4et1jJc226.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWDDKOGAbQ-bAABk4et1jJc226.png" alt="png" /></p>
 <p>上图引入了 Load Balance 负载均衡的组件，这样 Server 对于数据库的请求不用关心后面有多少个从机，对于业务来说也就是透明的，只需访问 Load Balance 服务器的 IP 或域名就可以。</p>
 <p>通过配置 Load Balance 服务，还能将读取请求平均或按照权重平均分布到不同的从服务器。这可以根据架构的需要做灵活的设计。</p>
 <p><strong>请记住：读写分离设计的前提是从机不能落后主机很多，最好是能准实时数据同步，务必一定要开始并行复制，并确保线上已经将大事务拆成小事务</strong>。</p>
 <p>当然，若是一些报表类的查询，只要不影响最终结果，业务是能够容忍一些延迟的。但无论如何，请一定要在线上数据库环境中做好主从复制延迟的监控。</p>
 <p>如果真的由于一些不可预知的情况发生，比如一个初级 DBA 在主机上做了一个大事务操作，导致主从延迟发生，那么怎么做好读写分离设计的兜底呢？</p>
-<p><img src="assets/Cgp9HWDDKOiANgKUAABuavikDzo165.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWDDKOiANgKUAABuavikDzo165.png" alt="png" /></p>
 <p>在 Load Balance 服务器，可以配置较小比例的读取请求访问主机，如上图所示的 1%，其余三台从服务器各自承担 33% 的读取请求。</p>
 <p>如果发生严重的主从复制情况，可以设置下面从机权重为 0，将主机权重设置为 100%，这样就不会因为数据延迟，导致对于业务的影响了。</p>
 <h3>总结</h3>

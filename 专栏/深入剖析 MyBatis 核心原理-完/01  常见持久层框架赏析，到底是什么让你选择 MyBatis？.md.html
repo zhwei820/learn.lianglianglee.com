@@ -183,13 +183,13 @@ function hide_canvas() {
 </ol>
 <p>无论是执行查询操作，还是执行其他 DML 操作，1、2、3、4、6 这些步骤都会重复出现。为了简化重复逻辑，提高代码的可维护性，可以<strong>将上述重复逻辑封装到一个类似 DBUtils 的工具类中</strong>，在使用时只需要调用 DBUtils 工具类中的方法即可。当然，我们也可以<strong>使用“反射+配置”的方式，将步骤 5 中关系模型到对象模型的转换进行封装</strong>，但是这种封装要做到通用化且兼顾灵活性，就需要一定的编程功底。</p>
 <p>为了处理上述代码重复的问题以及后续的维护问题，我们在实践中会进行一系列评估，选择一款适合项目需求、符合人员能力的 ORM（Object Relational Mapping，对象-关系映射）框架来封装 1~6 步的重复性代码，实现对象模型、关系模型之间的转换。这正是<strong>ORM 框架的核心功能：根据配置（配置文件或是注解）实现对象模型、关系模型两者之间无感知的映射</strong>（如下图）。</p>
-<p><img src="assets/CgqCHmAON9CAWnMJAACJd8-3Mcg506.png" alt="Lark20210125-111459.png" /></p>
+<p><img src="assets/CgqCHmAON9CAWnMJAACJd8-3Mcg506.png" alt="png" /></p>
 <p>对象模型与关系模型的映射</p>
 <p>在生产环境中，数据库一般都是比较稀缺的，数据库连接也是整个服务中比较珍贵的资源之一。建立数据库连接涉及鉴权、握手等一系列网络操作，是一个比较耗时的操作，所以我们不能像上述 JDBC 基本操作流程那样直接释放掉数据库连接，否则持久层很容易成为整个系统的性能瓶颈。</p>
 <p>Java 程序员一般会使用数据库连接池的方式进行优化，此时就需要引入第三方的连接池实现，当然，也可以自研一个连接池，但是要处理连接活跃数、控制连接的状态等一系列操作还是有一定难度的。另外，有一些查询返回的数据是需要本地缓存的，这样可以提高整个程序的查询性能，这就需要缓存的支持。</p>
 <p>如果没有 ORM 框架的存在，这就需要我们 Java 开发者熟悉相关连接池、缓存等组件的 API 并手动编写一些“黏合”代码来完成集成，而且这些代码重复度很高，这显然不是我们希望看到的结果。</p>
 <p>很多 ORM 框架都支持集成第三方缓存、第三方数据源等常用组件，并对外提供统一的配置接入方式，这样我们只需要使用简单的配置即可完成第三方组件的集成。当我们需要更换某个第三方组件的时候，只需要引入相关依赖并更新配置即可，这就<strong>大大提高了开发效率以及整个系统的可维护性</strong>。</p>
-<p><img src="assets/CgpVE2ARDn-AdyGBAAVffl0vlNA234.png" alt="2021127-6553.png" />
+<p><img src="assets/CgpVE2ARDn-AdyGBAAVffl0vlNA234.png" alt="png" />
 下面我们就简单介绍一下在实践中常用的几种 ORM 框架。</p>
 <h3>Hibernate</h3>
 <p>Hibernate 是 Java 生态中著名的 ORM 框架之一。Hibernate 现在也在扩展自己的生态，开始支持多种异构数据的持久化，不仅仅提供 ORM 框架，还提供了 Hibernate Search 来支持全文搜索，提供 validation 来进行数据校验，提供 Hibernate OGM 来支持 NoSQL 解决方案。</p>
@@ -197,7 +197,7 @@ function hide_canvas() {
 <p>在使用 Hibernate 的时候，Java 开发可以使用映射文件或是注解定义 Java 语言中的类与数据库中的表之间的各种映射关系，这里使用到的映射文件后缀为“.hbm.xml”。hbm.xml 映射文件将一张数据库表与一个 Java 类进行关联之后，该数据库表中的每一行记录都可以被转换成对应的一个 Java 对象。<strong>正是由于 Hibernate 映射的存在，Java 开发只需要使用面向对象思维就可以完成数据库表的设计。</strong></p>
 <p>在 Java 这种纯面向对象的语言中，两个 Java 对象之间可能存在一对一、一对多或多对多等复杂关联关系。Hibernate 中的映射文件也必须要能够表达这种复杂关联关系才能够满足我们的需求，同时，还要能够将这种关联关系与数据库中的关联表、外键等一系列关系模型中的概念进行映射，这也就是 ORM 框架中常提到的“<strong>关联映射</strong>”。</p>
 <p>下面我们就来结合示例介绍“一对多”关联关系。例如，一个顾客（Customer）可以创建多个订单（Order），而一个订单（Order）只属于一个顾客（Customer），两者之间存在一对多的关系。在 Java 程序中，可以在 Customer 类中添加一个 List 类型的字段来维护这种一对多的关系；在数据库中，可以在订单表（t_order）中添加一个 customer_id 列作为外键，指向顾客表（t_customer）的主键 id，从而维护这种一对多的关系，如下图所示：</p>
-<p><img src="assets/CgqCHmAON92AUlSJAAGm39S5TAY573.png" alt="Lark20210125-111502.png" /></p>
+<p><img src="assets/CgqCHmAON92AUlSJAAGm39S5TAY573.png" alt="png" /></p>
 <p>关系模型中的一对多和对象模型中的一对多</p>
 <p>在 Hibernate 中，可以通过如下 Customer.hbm.xml 配置文件将这两种关系进行映射：</p>
 <pre><code>&lt;hibernate-mapping&gt;
@@ -262,16 +262,16 @@ List&lt;Customer&gt; list = criteria.add(Restrictions.like(&quot;name&quot;,&quo
 <p>JPA 是在 JDK 5.0 后提出的 Java 持久化规范（JSR 338）。<strong>JPA 规范本身是为了整合市面上已有的 ORM 框架</strong>，结束 Hibernate、EclipseLink、JDO 等 ORM 框架各自为战的割裂局面，简化 Java 持久层开发。</p>
 <p>JPA 规范从现有的 ORM 框架中借鉴了很多优点，例如，Gavin King 作为 Hibernate 创始人，同时也参与了 JPA 规范的编写，所以在 JPA 规范中可以看到很多与 Hibernate 类似的概念和设计。</p>
 <p>既然 JPA 是一个持久化规范，没有提供具体持久化实现，那谁来提供实现呢？答案是市面上的 ORM 框架，例如，Hibernate、EclipseLink 等都提供了符合 JPA 规范的具体实现，如下图所示：</p>
-<p><img src="assets/CgqCHmAJKpiAD5DOAAEJWo_r1B4663.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHmAJKpiAD5DOAAEJWo_r1B4663.png" alt="png" /></p>
 <p>JPA 生态图</p>
 <p>JPA 有三个核心部分：ORM 映射元数据、操作实体对象 API 和面向对象的查询语言（JPQL）。这与 Hibernate 的核心功能基本类似，就不再重复讲述。</p>
 <p>Java 开发者应该都知道“Spring 全家桶”的强大，Spring 目前已经成为事实上的标准了，很少有企业会完全离开 Spring 来开发 Java 程序。现在的 Spring 已经不仅仅是最早的 IoC 容器了，而是整个 Spring 生态，例如，Spring Cloud、Spring Boot、Spring Security 等，其中就包含了 Spring Data。</p>
 <p><strong>Spring Data 是 Spring 在持久化方面做的一系列扩展和整合</strong>，下图就展示了 Spring Data 中的子项目：</p>
-<p><img src="assets/CgqCHmAJKq6AZEwjAAHdDlc6RI0325.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHmAJKq6AZEwjAAHdDlc6RI0325.png" alt="png" /></p>
 <p>Spring Data 生态图</p>
 <p>Spring Data 中的每个子项目都对应一个持久化存储，通过不断的整合接入各种持久化存储的能力，Spring 的生态又向前迈进了一大步，其中最常被大家用到的应该就是 Spring Data JPA。</p>
 <p><strong>Spring Data JPA 是符合 JPA 规范的一个 Repository 层的实现</strong>，其所在的位置如下图所示：</p>
-<p><img src="assets/CgqCHmAJKraAbIoyAAEm9GmJgx4010.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHmAJKraAbIoyAAEm9GmJgx4010.png" alt="png" /></p>
 <p>Spring Data JPA 生态图</p>
 <p>虽然市面上的绝大多数 ORM 框架都实现了 JPA 规范，但是它们在 JPA 基础上也有各自的发展和修改，这样导致我们在使用 JPA 的时候，依旧无法无缝切换底层的 ORM 框架实现。而使用 Spring Data JPA 时，由于<strong>Spring Data JPA 帮助我们抹平了各个 ORM 框架的差异，从而可以让我们的上层业务无缝地切换 ORM 实现框架</strong>。</p>
 <h3>MyBatis</h3>

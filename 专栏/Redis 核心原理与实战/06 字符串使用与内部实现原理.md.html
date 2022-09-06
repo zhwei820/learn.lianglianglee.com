@@ -525,7 +525,7 @@ OK
 <li>*ptr：对象指针用于指向具体的内容，占用 64 bits(8 字节)。</li>
 </ul>
 <p>redisObject 总共占用 0.5 bytes + 0.5 bytes + 3 bytes + 4 bytes + 8 bytes = 16 bytes(字节)。</p>
-<p>了解了 redisObject 之后，我们再来看 SDS 自身的数据结构，从 SDS 的源码可以看出，SDS 的存储类型一共有 5 种：SDS<em>TYPE</em>5、SDS<em>TYPE</em>8、SDS<em>TYPE</em>16、SDS<em>TYPE</em>32、SDS<em>TYPE</em>64，在这些类型中最小的存储类型为 SDS<em>TYPE</em>５，但 SDS<em>TYPE</em>５ 类型会默认转成 SDS<em>TYPE</em>8，以下源码可以证明，如下图所示： <img src="assets/2020-02-28-031223.png" alt="SDS-0116-1.png" /></p>
+<p>了解了 redisObject 之后，我们再来看 SDS 自身的数据结构，从 SDS 的源码可以看出，SDS 的存储类型一共有 5 种：SDS<em>TYPE</em>5、SDS<em>TYPE</em>8、SDS<em>TYPE</em>16、SDS<em>TYPE</em>32、SDS<em>TYPE</em>64，在这些类型中最小的存储类型为 SDS<em>TYPE</em>５，但 SDS<em>TYPE</em>５ 类型会默认转成 SDS<em>TYPE</em>8，以下源码可以证明，如下图所示： <img src="assets/2020-02-28-031223.png" alt="png" /></p>
 <p>那我们直接来看 SDS<em>TYPE</em>8 的源码：</p>
 <pre><code class="language-c">struct __attribute__ ((__packed__)) sdshdr8 {
     uint8_t len; // 1 byte

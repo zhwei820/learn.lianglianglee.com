@@ -168,10 +168,10 @@ function hide_canvas() {
                         <div><h1>08 K8s 集群安装工具 kubeadm 的落地实践</h1>
 <p>kubeadm 是 Kubernetes 项目官方维护的支持一键部署安装 Kubernetes 集群的命令行工具。使用过它的读者肯定对它仅仅两步操作就能轻松组建集群的方式印象深刻：<code>kubeadm init</code> 以及 <code>kubeadm join</code> 这两个命令可以快速创建 Kubernetes 集群。当然这种便捷的操作并不能在生产环境中直接使用，我们要考虑组件的高可用布局，并且还需要考虑可持续的维护性。这些更实际的业务需求迫切需要我们重新梳理一下 kubeadm 在业界的使用情况，通过借鉴参考前人的成功经验可以帮助我们正确的使用好 kubeadm。</p>
 <p>首先，经典的 Kubernetes 高可用集群的架构图在社区官方文档中定义如下：</p>
-<p><img src="assets/c5131cb0-d660-11ea-8a75-23aebf65f18c.jpg" alt="7-1-kubeadm-k8s-ha-arch" /></p>
+<p><img src="assets/c5131cb0-d660-11ea-8a75-23aebf65f18c.jpg" alt="png" /></p>
 <p>从上图架构中可知，Kubernetes 集群的控制面使用 3 台节点把控制组件堆叠起来，形成冗余的高可用系统。其中 etcd 系统作为集群状态数据存储的中心，采用 Raft 一致性算法保证了业务数据读写的一致性。细心的读者肯定会发现，控制面节点中 apiserver 是和当前主机 etcd 组件进行交互的，这种堆叠方式相当于把流量进行了分流，在集群规模固定的情况下可以有效的保证组件的读写性能。</p>
 <p>因为 etcd 键值集群存储着整个集群的状态数据，是非常关键的系统组件。官方还提供了外置型 etcd 集群的高可用部署架构：</p>
-<p><img src="assets/4a5db0c0-d660-11ea-aefa-4fa1d18dcf14.jpg" alt="7-2-ha-kube-etcd-external-arch" /></p>
+<p><img src="assets/4a5db0c0-d660-11ea-aefa-4fa1d18dcf14.jpg" alt="png" /></p>
 <p>kubeadm 同时支持以上两种技术架构的高可用部署，两种架构对比起来，最明显的区别在于外置型 etcd 集群模式需要的 etcd 数据面机器节点数量不需要和控制面机器节点数量一致，可以按照集群规模提供 3 个或者 5 个 etcd 节点来保证业务高可用能力。社区的开发兴趣小组 k8s-sig-cluster-lifecycle 还发布了 etcdadm 开源工具来自动化部署外置 etcd 集群。</p>
 <h3>安装前的基准检查工作</h3>
 <p>集群主机首要需要检查的就是硬件信息的唯一性，防止集群信息的冲突。确保每个节点上 MAC 地址和 product_uuid 的唯一性。检查办法如下：</p>
@@ -307,7 +307,7 @@ sysctl --system
 <h3>使用 kubeadm 安装高可用集群</h3>
 <h4><strong>为 kube-apiserver 创建负载均衡</strong></h4>
 <p>因为工作节点和控制面节点之间是通过 kube-apiserver 来同步集群状态的，工作节点需要通过一个反向代理来把流量负载均衡到控制面集群中。一般的安装案例中，采用额外的 HAProxy 加 keeplived 来做请求流量的负载均衡。因为最新的 Linux 内核已经支持 IPVS 组件，可以实现内核态的流量代理，业界实践已经有通过动态维护 IPVS 规则来实现负载访问 apiserver。具体配置如图：</p>
-<p><img src="assets/aa990160-d660-11ea-8a86-ed86f9ad27de.jpg" alt="7-3-kubeadm-lvs-lb" /></p>
+<p><img src="assets/aa990160-d660-11ea-8a86-ed86f9ad27de.jpg" alt="png" /></p>
 <h3>实践总结</h3>
 <p>Kubernetes 推出了很多安装解决方案，因为环境的差异化，让各种安装工具百花齐放，让用户选择起来很是困惑。kubeadm 算是一个在多种选型中比较突出的一个方案。因为采用了容器化部署方式，其运维难度要比二进制方式要大很多，在安装过程中还是会碰到版本不一致等问题，目前社区也在优化巩固这方面的功能稳定性，可以预见在不久之后，基于 kubeadm 的方式应该会成为主流的安装解决方案。</p>
 <p>参考文章：</p>

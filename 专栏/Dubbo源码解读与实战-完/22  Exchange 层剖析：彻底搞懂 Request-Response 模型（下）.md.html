@@ -299,7 +299,7 @@ function hide_canvas() {
 </ul>
 <p>因此，HeaderExchangeClient 侧重定时轮资源的分配、定时任务的创建和取消。</p>
 <p>HeaderExchangeClient 实现的是 ExchangeClient 接口，如下图所示，间接实现了 ExchangeChannel 和 Client 接口，ExchangeClient 接口是个空接口，没有定义任何方法。</p>
-<p><img src="assets/Ciqc1F-AF6OAT7YOAAAw9BR-aXg961.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-AF6OAT7YOAAAw9BR-aXg961.png" alt="png" /></p>
 <p>HeaderExchangeClient 继承关系图</p>
 <p>HeaderExchangeClient 中有以下两个核心字段。</p>
 <ul>
@@ -327,7 +327,7 @@ function hide_canvas() {
 <p>其实，startReconnectTask() 方法的具体实现与前面展示的 startHeartBeatTask() 方法类似，这里就不再赘述。</p>
 <p>下面我们继续回到心跳定时任务进行分析，你可以回顾第 20 课时介绍的 NettyClient 实现，其 canHandleIdle() 方法返回 true，表示该实现可以自己发送心跳请求，无须 HeaderExchangeClient 再启动一个定时任务。NettyClient 主要依靠 IdleStateHandler 中的定时任务来触发心跳事件，依靠 NettyClientHandler 来发送心跳请求。</p>
 <p>对于无法自己发送心跳请求的 Client 实现，HeaderExchangeClient 会为其启动 HeartbeatTimerTask 心跳定时任务，其继承关系如下图所示：</p>
-<p><img src="assets/CgqCHl-AF7eAHJWXAABGVZRbaEE743.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl-AF7eAHJWXAABGVZRbaEE743.png" alt="png" /></p>
 <p>TimerTask 继承关系图</p>
 <p>我们先来看 AbstractTimerTask 这个抽象类，它有三个字段。</p>
 <ul>
@@ -377,7 +377,7 @@ function hide_canvas() {
 <p>在 HeaderExchangeChannel.close(timeout) 方法中首先会将自身的 closed 字段设置为 true，这样就不会继续发送请求。如果当前 Channel 上还有请求未收到响应，会循环等待至收到响应，如果超时未收到响应，会自己创建一个状态码将连接关闭的 Response 交给 DefaultFuture 处理，与收到 disconnected 事件相同。然后会关闭 Transport 层的 Channel，以 NettyChannel 为例，NettyChannel.close() 方法会先将自身的 closed 字段设置为 true，清理 CHANNEL_MAP 缓存中的记录，以及 Channel 的附加属性，最后才是关闭 io.netty.channel.Channel。</p>
 <h3>HeaderExchangeServer</h3>
 <p>下面再来看 HeaderExchangeServer，其继承关系如下图所示，其中 Endpoint、RemotingServer、Resetable 这三个接口我们在前面已经详细介绍过了，这里不再重复。</p>
-<p><img src="assets/CgqCHl-AF8eAUB8nAACKkTpW9nc845.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl-AF8eAUB8nAACKkTpW9nc845.png" alt="png" /></p>
 <p>HeaderExchangeServer 的继承关系图</p>
 <p>与前面介绍的 HeaderExchangeClient 一样，HeaderExchangeServer 是 RemotingServer 的装饰器，实现自 RemotingServer 接口的大部分方法都委托给了所修饰的 RemotingServer 对象。</p>
 <p>在 HeaderExchangeServer 的构造方法中，会启动一个 CloseTimerTask 定时任务，定期关闭长时间空闲的连接，具体的实现方式与 HeaderExchangeClient 中的两个定时任务类似，这里不再展开分析。</p>
@@ -423,7 +423,7 @@ public interface Exchanger {
 }
 </code></pre>
 <p>Dubbo 只为 Exchanger 接口提供了 HeaderExchanger 这一个实现，其中 connect() 方法创建的是 HeaderExchangeClient 对象，bind() 方法创建的是 HeaderExchangeServer 对象，如下图所示：</p>
-<p><img src="assets/CgqCHl-AF9aANkhOAAB5TgtrSDg780.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-AF9aANkhOAAB5TgtrSDg780.png" alt="png" /></p>
 <p>HeaderExchanger 门面类</p>
 <p>从 HeaderExchanger 的实现可以看到，它会在 Transport 层的 Client 和 Server 实现基础之上，添加前文介绍的 HeaderExchangeClient 和 HeaderExchangeServer 装饰器。同时，为上层实现的 ExchangeHandler 实例添加了 HeaderExchangeHandler 以及 DecodeHandler 两个修饰器：</p>
 <pre><code>public class HeaderExchanger implements Exchanger {
@@ -441,7 +441,7 @@ public interface Exchanger {
 <h3>再谈 Codec2</h3>
 <p>在前面第 17 课时介绍 Dubbo Remoting 核心接口的时候提到，Codec2 接口提供了 encode() 和 decode() 两个方法来实现消息与字节流之间的相互转换。需要注意与 DecodeHandler 区分开来，<strong>DecodeHandler 是对请求体和响应结果的解码，Codec2 是对整个请求和响应的编解码</strong>。</p>
 <p>这里重点介绍 Transport 层和 Exchange 层对 Codec2 接口的实现，涉及的类如下图所示：</p>
-<p><img src="assets/CgqCHl-AF9-AQVPBAAByBFYPxkE786.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl-AF9-AQVPBAAByBFYPxkE786.png" alt="png" /></p>
 <p><strong>AbstractCodec</strong>抽象类并没有实现 Codec2 中定义的接口方法，而是提供了几个给子类用的基础方法，下面简单说明这些方法的功能。</p>
 <ul>
 <li>getSerialization() 方法：通过 SPI 获取当前使用的序列化方式。</li>
@@ -451,7 +451,7 @@ public interface Exchanger {
 <p>接下来看<strong>TransportCodec</strong>，我们可以看到这类上被标记了 @Deprecated 注解，表示已经废弃。TransportCodec 的实现非常简单，其中根据 getSerialization() 方法选择的序列化方法对传入消息或 ChannelBuffer 进行序列化或反序列化，这里就不再介绍 TransportCodec 实现了。</p>
 <p><strong>TelnetCodec</strong>继承了 TransportCodec 序列化和反序列化的基本能力，同时还提供了对 Telnet 命令处理的能力。</p>
 <p>最后来看<strong>ExchangeCodec</strong>，它在 TelnetCodec 的基础之上，添加了处理协议头的能力。下面是 Dubbo 协议的格式，能够清晰地看出协议中各个数据所占的位数：</p>
-<p><img src="assets/CgqCHl-AF-eAdTmiAADznCJnMrw389.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl-AF-eAdTmiAADznCJnMrw389.png" alt="png" /></p>
 <p>Dubbo 协议格式</p>
 <p>结合上图，我们来深入了解一下 Dubbo 协议中各个部分的含义：</p>
 <ul>

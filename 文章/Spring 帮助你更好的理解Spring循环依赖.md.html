@@ -530,7 +530,7 @@ public class AuthorService {
 }
 </code></pre>
 <p>启动后，令人恐惧的红色字体在控制台出现了：
-<img src="assets/15100432-9dd42da442010f30.png" alt="image.png" /></p>
+<img src="assets/15100432-9dd42da442010f30.png" alt="png" /></p>
 <p>如果是构造参数注入的循环依赖，Spring无法解决：</p>
 <pre><code>@Service
 public class AuthorService {
@@ -548,7 +548,7 @@ public class BookService {
 }
 </code></pre>
 <p>还是讨厌的红色字体：
-<img src="assets/15100432-d0b71854edfbcd9f.png" alt="image.png" /></p>
+<img src="assets/15100432-d0b71854edfbcd9f.png" alt="png" /></p>
 <h3>循环依赖可以关闭吗</h3>
 <p>可以，Spring提供了这个功能，我们需要这么写：</p>
 <pre><code>public class Main {
@@ -561,7 +561,7 @@ public class BookService {
 }
 </code></pre>
 <p>再次运行，就报错了：
-<img src="assets/15100432-2ecaf84436018d26.png" alt="image.png" /></p>
+<img src="assets/15100432-2ecaf84436018d26.png" alt="png" /></p>
 <p>需要注意的是，我们不能这么写：</p>
 <pre><code>        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         applicationContext.setAllowCircularReferences(false);

@@ -310,7 +310,7 @@ public void register(ServiceMeta serviceMeta) throws Exception {
 }
 </code></pre>
 <p>ServiceInstance 对象代表一个服务实例，它包含名称 name、唯一标识 id、地址 address、端口 port 以及用户自定义的可选属性 payload，我们有必要了解  ServiceInstance 在 Zookeeper 服务器中的存储形式，如下图所示。</p>
-<p><img src="assets/CgpVE1_-X2qAZ0QwAALfB-0Ouy4852.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgpVE1_-X2qAZ0QwAALfB-0Ouy4852.png" alt="png" /></p>
 <p>一般来说，我们会将相同版本的 RPC 服务归类在一起，所以可以将 ServiceInstance 的名称 name 根据服务名称和服务版本进行赋值，如下所示。</p>
 <pre><code>public class RpcServiceHelper {
     public static String buildServiceKey(String serviceName, String serviceVersion) {
@@ -344,12 +344,12 @@ public Object postProcessAfterInitialization(Object bean, String beanName) throw
 <h3>负载均衡算法基础</h3>
 <p>服务消费者在发起 RPC 调用之前，需要感知有多少服务端节点可用，然后从中选取一个进行调用。之前我们提到了几种常用的负载均衡策略：Round-Robin 轮询、Weighted Round-Robin 权重轮询、Least Connections 最少连接数、Consistent Hash 一致性 Hash 等。本节课我们讨论的主角是基于一致性 Hash 的负载均衡算法，一致性 Hash 算法可以保证每个服务节点分摊的流量尽可能均匀，而且能够把服务节点扩缩容带来的影响降到最低。下面我们一起看下一致性 Hash 算法的设计思路。</p>
 <p>在服务端节点扩缩容时，一致性 Hash 算法会尽可能保证客户端发起的 RPC 调用还是固定分配到相同的服务节点上。一致性 Hash 算法是采用哈希环来实现的，通过 Hash 函数将对象和服务器节点放置在哈希环上，一般来说服务器可以选择 IP + Port 进行 Hash，如下图所示。</p>
-<p><img src="assets/Cip5yF_-X3eAC2U7AAVmjGbnvBo221.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yF_-X3eAC2U7AAVmjGbnvBo221.png" alt="png" /></p>
 <p>图中 C1、C2、C3、C4 是客户端对象，N1、N2、N3 为服务节点，然后在哈希环中顺时针查找距离客户端对象 Hash 值最近的服务节点，即为客户端对应要调用的服务节点。假设现在服务节点扩容了一台 N4，经过 Hash 函数计算将其放入到哈希环中，哈希环变化如下图所示。</p>
-<p><img src="assets/Ciqc1F_-X32AB67NAAWtkSEKYRo724.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_-X32AB67NAAWtkSEKYRo724.png" alt="png" /></p>
 <p>此时 N2 和 N4 之间的客户端对象需要重新进行分配，可以看出只有 C3 会被分配到新的节点 N4 上，其他的都保持不变。服务节点下线与上线的处理过程是类似的，你可以自行分析下服务节点下线时哈希环是如何变化的。</p>
 <p>如果服务节点的数量很少，不管 Hash 算法如何，很大可能存在服务节点负载不均的现象。而且上图中在新增服务节点 N4 时，仅仅分担了 N1 节点的流量，其他节点并没有流量变化。为了解决上述问题，一致性 Hash 算法一般会引入虚拟节点的概念。如下图所示。</p>
-<p><img src="assets/CgqCHl_-X4WAKf5LAAgqURGXbLE488.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl_-X4WAKf5LAAgqURGXbLE488.png" alt="png" /></p>
 <p>图中相同颜色表示同一组虚拟服务器，它们经过 Hash 函数计算后被均匀放置在哈希环中。如果真实的服务节点越多，那么所需的虚拟节点就越少。在为客户端对象分配节点的时候，需要顺时针从哈希环中找到距离最近的虚拟节点，然后即可确定真实的服务节点。</p>
 <p>有了上述一致性 Hash 算法的基础知识，下面我们看看一致性 Hash 算法是如何实现的。</p>
 <h3>负载均衡算法实现</h3>

@@ -262,7 +262,7 @@ client.start();
 <p>无论使用什么开发语言和框架，程序都会出现错误与异常等情况，而 ZooKeeper 服务使客户端与服务端通过网络进行通信的方式协同工作，由于网络不稳定和不可靠等原因，使得网络中断或高延迟异常情况出现得更加频繁，所以处理好异常是决定 ZooKeeper 服务质量的关键。</p>
 <p>在 Curator 中，客户端与服务端建立会话连接后会一直监控该连接的运行情况。在底层实现中通过</p>
 <p>ConnectionStateListener 来监控会话的连接状态，当连接状态改变的时候，根据参数设置 ZooKeeper 服务会采取不同的处理方式，而一个会话基本有六种状态，如下图所示：</p>
-<p><img src="assets/Ciqc1F7pw-CAZMcMAABbJUFbJOY244.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7pw-CAZMcMAABbJUFbJOY244.png" alt="png" /></p>
 <p>下面我来为你详细讲解这六种状态的作用：</p>
 <ul>
 <li><strong>CONNECTED（已连接状态）</strong>：当客户端发起的会话成功连接到服务端后，该条会话的状态变为 CONNECTED 已连接状态。</li>
@@ -287,7 +287,7 @@ CuratorFrameworkFactory.Builder.canBeReadOnly() 的时候，该会话会一直�
 <h4>Leader 选举</h4>
 <p>除了异常处理，接下来我们再介绍一个在日常工作中经常要解决的问题，即开发 ZooKeeper 集群的相关功能。</p>
 <p>在分布式环境中，ZooKeeper 集群起到了关键作用。在之前的课程中我们讲过，Leader 选举是保证 ZooKeeper 集群可用性的解决方案，可以避免在集群使用中出现单点失效等问题。在 ZooKeeper 服务开始运行的时候，首先会选举出 Leader 节点服务器，之后在服务运行过程中，Leader 节点服务器失效时，又会重新在集群中进行 Leader 节点的选举操作。</p>
-<p><img src="assets/Ciqc1F7pxGCAPkfEAAAxSw3ff2o475.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7pxGCAPkfEAAAxSw3ff2o475.png" alt="png" /></p>
 <p>而在日常开发中，使用 ZooKeeper 原生的 API 开发 Leader 选举相关的功能相对比较复杂。Curator 框架中的 recipe 包为我们提供了高效的，方便易用的工具函数，分别是 LeaderSelector 和 LeaderLatch。</p>
 <p>LeaderSelector 函数的功能是选举 ZooKeeper 中的 Leader 服务器，其具体实现如下面的代码所示，通过构造函数的方式实例化。在一个构造方法中，第一个参数为会话的客户端实例 CuratorFramework，第二个参数是 LeaderSelectorListener 对象，它是在被选举成 Leader 服务器的事件触发时执行的回调函数。</p>
 <pre><code>public LeaderSelector(CuratorFramework client, String mutexPath,LeaderSelectorListener listener)

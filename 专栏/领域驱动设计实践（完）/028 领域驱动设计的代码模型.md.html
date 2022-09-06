@@ -466,7 +466,7 @@ function hide_canvas() {
 <h3>进程间通信的代码模型</h3>
 <p>如果限界上下文的边界是进程间通信，则意味着每个限界上下文就是一个单独的部署单元，此即微服务的意义。通常，我们希望一个微服务应该设计为单一职责的高内聚服务，然而麻雀虽小，五脏俱全，在微服务的边界范围内，我认为仍然需要为其建立分层架构。当然，由于微服务的粒度较小，它的代码模型一般<strong>采用命名空间级别的方式</strong>，整个微服务的代码模型生成一个 JAR 包即可。</p>
 <p>架构的设计需要“恰如其分”，在不同的微服务中，各自的领域逻辑复杂程度亦不尽相同，故而不必严格遵循领域驱动设计的规范。Martin Fowler 在《企业应用架构模式》一书中针对不同复杂度的领域，总结了三种不同的领域建模模式，包括事务脚本（Transaction Script）、表模块（Table Module）或领域模型（Domain Model）。在物理隔离的限界上下文内部，我们可以有针对性地选择不同的领域模型。Scott Millett 的著作《Patterns、Principles and Practices of Domain-Driven Design》就此给出了如下图所示的架构：</p>
-<p><img src="assets/6271f720-bbb9-11e8-b96b-8b6bcc33f72b" alt="enter image description here" /></p>
+<p><img src="assets/6271f720-bbb9-11e8-b96b-8b6bcc33f72b" alt="png" /></p>
 <p>领域模型不同，代码结构也会受到影响。例如，选择了事务脚本，领域模型就不一定要规避贫血模型，依赖注入也就未必成为必选项了，Repositories 的抽象意义也有所不同。既然本课程讲解领域驱动设计，因此这里主要探讨领域模型的建模方式，即领域驱动战术设计所建议的模式与原则。</p>
 <p>还记得前面在讲解层次的职责与协作关系给出的下订单案例吗？当我们选择第三种方案时，给出的代码模型如下所示：</p>
 <pre><code>ordercontext.infrastructure
@@ -536,7 +536,7 @@ notificationcontext
 <p>与之前的代码模型比较，现在的代码模型去掉了 infrastructure 的概念，改以各种 gateway 来表示。同时，还单独定义了 interfaces 模块，包含各种网关对应的抽象接口。</p>
 <p>代码模型需要考虑 Order Context 与 Notification Context 之间的跨进程协作。设计的目标是确保彼此之间的解耦合，此时可以引入上下文映射的开放主机服务模式与防腐层模式，同时还应避免遵奉者模式，即避免重用上游上下文的领域模型。因此，针对邮件通知功能，在 Order Context 中定义了调用 Notification Context 上下文服务的客户端 NotificationClient 与对应的抽象接口 NotificationService。这两个类型合起来恰好就是针对 Notification Context 的防腐层。Notification Context 定义了 NotificationController，相当于是该限界上下文的开放主机服务。</p>
 <p>Notification Context 定义了自己的领域模型，包括 Destination 与 Message。同时，在 controllers 中定义了服务消息 SendNotificationRequest；Order Context 则针对通知服务的调用，定义了自己的领域模型 Notification，以及匹配服务调用的请求消息对象 SendNotificationRequest。由于 Order Context 与 Notification Context 属于两个不同的微服务，因此在 Order Context 微服务中 gateways/client 的 NotificationClient 会发起对 NotificationController 的调用，这种协作方式如下图所示：</p>
-<p><img src="assets/7b5b1230-bbb9-11e8-87ee-555a7401b01d" alt="enter image description here" /></p>
+<p><img src="assets/7b5b1230-bbb9-11e8-87ee-555a7401b01d" alt="png" /></p>
 <p>由于限界上下文之间采用进程间通信，因此在 Notification Context 中，提供开放主机服务是必须的。倘若 NotificationController 以 RESTful 服务实现，则在 Order Context 发起对 RESTful 服务的调用属于基础设施的内容，因而必须定义 NotificationService 接口来隔离这种实现机制，使其符合整洁架构思想。</p>
 <h3>进程内通信的代码结构</h3>
 <p>如果限界上下文之间采用进程内通信，需要注意如何在代码模型中体现限界上下文的边界，更关键的则是要考虑两个处于相同进程中的限界上下文彼此之间该如何协作。如下是针对各种设计因素的考量。</p>
@@ -548,7 +548,7 @@ notificationcontext
 </ul>
 <p>综合考虑，如果确有迁移可能，且架构师需要追求一种纯粹的清晰架构，可以考虑在 interface 中定义自己的服务接口，然后在 gateway/client 中提供一个适配器，在实现该接口的同时，调用上游限界上下文的服务，无论这个服务是领域服务还是应用服务，甚至也可以是领域层的领域对象。因为这个调用的事实已经被 interface 中的接口隔离了。</p>
 <p>仍然以下订单场景为例，但此时的 Notification Context 与 Order Context 采用进程内通信，则这种协作方式如下图所示：</p>
-<p><img src="assets/8997a200-bbb9-11e8-87ee-555a7401b01d" alt="enter image description here" /></p>
+<p><img src="assets/8997a200-bbb9-11e8-87ee-555a7401b01d" alt="png" /></p>
 <p>与进程间通信的唯一区别在于：NotificationClient 不再通过跨进程调用的方式发起对 RESTful 服务的调用，即使在 Notification Context 中定义了这样的开放主机服务。如上图所示，NotificationClient 直接通过实例化的方式调用了 Notification Context 应用层的 NotificationAppService。这是在 Order Context 中，唯一与 Notification Context 产生了依赖的地方。</p>
 <p>如此看来，即使限界上下文采用进程内通信，也仅仅是封装在防腐层中发起调用的实现有所不同，即前面例子中的 NotificationClient，而这其实并不影响代码模型。因而，无论是进程间通信，还是进程内通信，我们设计的代码模型其实是一致的，并不受通信边界的影响。之所以这样设计，理由有二，具体如下。</p>
 <ul>

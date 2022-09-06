@@ -259,12 +259,12 @@ function hide_canvas() {
 </ul>
 <h4>操作系统分层</h4>
 <p>从上面 4 种能力来看操作系统和内核之间的关系，通常可以把操作系统分成 3 层，最底层的硬件设备抽象、中间的内核和最上层的应用。</p>
-<p><img src="assets/CgqCHl-P5meAd3VdAAB1f7DWz-I273.png" alt="Lark20201021-153830.png" /></p>
+<p><img src="assets/CgqCHl-P5meAd3VdAAB1f7DWz-I273.png" alt="png" /></p>
 <h4>内核是如何工作的？</h4>
 <p><strong>为了帮助你理解什么是内核，请你先思考一个问题：进程和内核的关系，是不是像浏览器请求服务端服务</strong>？你可以先自己思考，然后在留言区写下你此时此刻对这个问题的认知，等学完“模块三”再反过头来回顾这个知识，相信你定会产生新的理解。</p>
 <p>接下来，我们先一起分析一下这个问题。</p>
 <p>内核权限非常高，它可以管理进程、可以直接访问所有的内存，因此确实需要和进程之间有一定的隔离。这个隔离用类似请求/响应的模型，非常符合常理。</p>
-<p><img src="assets/CgqCHl-P5naAc5fsAABuTlhIQkw555.png" alt="Lark20201021-153825.png" /></p>
+<p><img src="assets/CgqCHl-P5naAc5fsAABuTlhIQkw555.png" alt="png" /></p>
 <p>但不同的是在浏览器、服务端模型中，浏览器和服务端是用不同的机器在执行，因此不需要共享一个 CPU。但是在进程调用内核的过程中，这里是存在资源共享的。</p>
 <ul>
 <li>比如，一个机器有 4 个 CPU，不可能让内核用一个 CPU，其他进程用剩下的 CPU。这样太浪费资源了。</li>
@@ -283,14 +283,14 @@ function hide_canvas() {
 <ul>
 <li><strong>ELF（Executable and Linkable Format）</strong></li>
 </ul>
-<p><img src="assets/Ciqc1F-P5pOAeET-AAEzXOQTzbA445.png" alt="Lark20201021-153821.png" /></p>
+<p><img src="assets/Ciqc1F-P5pOAeET-AAEzXOQTzbA445.png" alt="png" /></p>
 <p>这个名词翻译过来叫作可执行文件链接格式。这是一种从 Unix 继承而来的可执行文件的存储格式。我们可以看到 ELF 中把文件分成了一个个分段（Segment），每个段都有自己的作用。如果想要深入了解这块知识，会涉及部分编译原理的知识，如果你感兴趣可以去网上多查些资料或者去留言区我们一起讨论。</p>
 <ul>
 <li><strong>Monolithic Kernel</strong></li>
 </ul>
 <p>这个名词翻译过来就是宏内核，宏内核反义词就是 Microkernel ，微内核的意思。Linux 是宏内核架构，这说明 Linux 的内核是一个完整的可执行程序，且内核用最高权限来运行。宏内核的特点就是有很多程序会打包在内核中，比如，文件系统、驱动、内存管理等。当然这并不是说，每次安装驱动都需要重新编译内核，现在 Linux 也可以动态加载内核模块。所以哪些模块在内核层，哪些模块在用户层，这是一种系统层的拆分，并不是很强的物理隔离。</p>
 <p>与宏内核对应，接下来说说<strong>微内核，内核只保留最基本的能力。比如进程调度、虚拟内存、中断。多数应用，甚至包括驱动程序、文件系统，是在用户空间管理的</strong>。</p>
-<p><img src="assets/CgqCHl-QEKSAYD22AAFXRfj1rsA581.png" alt="Lark20201021-183457.png" /></p>
+<p><img src="assets/CgqCHl-QEKSAYD22AAFXRfj1rsA581.png" alt="png" /></p>
 <p>学到这里，你可能会问：在内核层和在用户层有什么区别吗？</p>
 <p>感觉分层其实差不多。 我这里说一个很大的区别，比如说驱动程序是需要频繁调用底层能力的，如果在内核中，性能肯定会好很多。对于微内核设计，驱动在内核外，驱动和硬件设备交互就需要频繁做内核态的切换。</p>
 <p>当然微内核也有它的好处，比如说微内核体积更小、可移植性更强。不过我认为，随着计算能力、存储技术越来越发达，体积小、安装快已经不能算是一个很大的优势了。现在更重要的是如何有效利用硬件设备的性能。</p>
@@ -300,11 +300,11 @@ function hide_canvas() {
 <h3>Window 设计</h3>
 <p>接下来我们说说 Windows 的设计，Windows 和 Linux 的设计有很大程度的相似性。Windows也有内核，它的内核是 C/C++ 写的。准确地说，Windows 有两个内核版本。一个是早期的Windows 9x 内核，早期的 Win95, Win98 都是这个内核。我们今天用的 Windows 7, Windows 10 是另一个内核，叫作 Windows NT。NT 指的是 New Technology。接下来我们讨论的都是 NT 版本的内核。</p>
 <p>下面我找到一张 Windows 内核架构的图片给你一个直观感受。</p>
-<p><img src="assets/Ciqc1F-P5suAH9CJAAFl4zKFbJc816.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F-P5suAH9CJAAFl4zKFbJc816.png" alt="png" /></p>
 <p>Windows 同样支持 Multitask 和 SMP（对称多处理）。Windows 的内核设计属于混合类型。你可以看到内核中有一个 Microkernel 模块。而整个内核实现又像宏内核一样，含有的能力非常多，是一个完整的整体。</p>
 <p>Windows 下也有自己的可执行文件格式，这个格式叫作 Portable Executable（PE），也就是可移植执行文件，扩展名通常是<code>.exe</code>、<code>.dll</code>、<code>.sys</code>等。</p>
 <p>PE 文件的结构和 ELF 结构有很多相通的地方，我找到了一张图片帮助你更直观地理解。 因为这部分知识涉及编译原理，我这里就不详细介绍了，感兴趣同学可以在留言区和大家一起讨论，或者查阅更多资料。</p>
-<p><img src="assets/CgqCHl-P5ySAAg5CAACF0kTmx_k209.png" alt="Lark20201021-153828.png" /></p>
+<p><img src="assets/CgqCHl-P5ySAAg5CAACF0kTmx_k209.png" alt="png" /></p>
 <p>Windows 还有很多独特的能力，比如 Hyper-V 虚拟化技术，有关虚拟化技术我们将在“模块八：虚拟化和其他”中详细讲解。</p>
 <h3>总结</h3>
 <p>这一讲我们学习了内核的基础知识，包括内核的作用、整体架构以及 3 种内核类型（宏内核、微内核和混合类型内核）。内核很小（微内核）方便移植，因为体积小、安装快；内核大（宏内核），方便优化性能，毕竟内核更了解计算机中的资源。我们还学习了操作系统对执行文件的抽象，但是没有很深入讨论，内核部分有很多知识是需要在后面的几个模块中体现的，比如进程、文件、内存相关的能力等。</p>

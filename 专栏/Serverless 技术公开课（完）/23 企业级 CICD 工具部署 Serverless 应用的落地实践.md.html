@@ -179,12 +179,12 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>23 企业级 CICD 工具部署 Serverless 应用的落地实践</h1>
 <h3>背景知识</h3>
-<p><img src="assets/2020-09-07-105841.png" alt="1.png" /></p>
+<p><img src="assets/2020-09-07-105841.png" alt="png" /></p>
 <p>通过以往几节课程的学习，相信大家对于 SAE 平台已经有了一定的了解。SAE 为客户免除了很多复杂的运维工作，开箱即用、按用量付费；与此同时 SAE 提供了丰富的 Open API，可以很容易地与其他平台做集成；类似云效以及 Jenkins 的 CI/CD 工具是敏捷软件研发实践中的重要一环，可以自动化地将客户的代码编译、测试、打包并部署至各个环境，从而提升团队的研发效率。</p>
 <p>本篇文章分为两个部分，首先介绍使用云效平台实现从源码到 SAE 环境的持续集成，然后介绍使用 Jenkins 的情况下持续集成该如何配置。</p>
 <h3>使用云效部署到 SAE</h3>
 <p>云效（rdc.console.aliyun.com），是阿里云推出的企业级一站式 Devops 平台型产品，功能覆盖了从【需求-&gt;开发-&gt;测试-&gt;发布-&gt;运维-&gt;运营】全流程。对云效感兴趣的同学可以去【阿里云官网】搜索【云效】，本文只介绍与 CI/CD 相关的部分功能。</p>
-<p><img src="assets/2020-09-07-105843.png" alt="2.PNG" /></p>
+<p><img src="assets/2020-09-07-105843.png" alt="png" /></p>
 <p>如上图所示，图的上半部分是我们的配置流程，下半部分的流程图是我们所要执行的持续集成流程的示例。云效首先会从代码仓库中拉取相应的代码，然后进行代码检查以及单元测试，接着是代码编译构建，这一步会产出相应的生成物：在这里我们用一个 java 应用来举例，如果构建产出物这一步选择是 jar 类型，那么流水线在运行时运行 mvn package 命令产出对应的 jar 包；如果构建产出物类型是 Docker 镜像，那么在构建这一步在产出 jar 包后会继续执行 docker build 命令来构建对应的 Docker 镜像并上传到您所选择的 ACR 镜像仓库；流水线的最后两步是调用 SAE 的 Open API 将构建物（jar 包/Docker 镜像）部署分发到测试环境，根据我们预先的设置，在部署完测试环境这一步后流水线会停下来等待手动触发下一步操作；等待手动验证测试环境的部署一切正常后，手动触发流水线继续运行，这次将调用 <a href="https://help.aliyun.com/document_detail/126353.html">Open API</a> 部署到生产环境。</p>
 <p>操作步骤：</p>
 <ul>
@@ -195,7 +195,7 @@ function hide_canvas() {
 </ul>
 <h3>使用 Jenkins 部署 SAE</h3>
 <p>Jenkins 是被业界广泛使用的开源 CI/CD 平台，使用 Jenkins 可以将源码打包编译后部署至 SAE，其达成的最终效果与“通过云产品云效部署至SAE”类似，通过 Jenkins 将应用源码编译成为 jar 包，然后通过maven plugin 来调用 SAE 的 Open API 部署接口将应用部署至 SAE。</p>
-<p><img src="assets/2020-09-07-105846.png" alt="3.PNG" /></p>
+<p><img src="assets/2020-09-07-105846.png" alt="png" /></p>
 <p>操作步骤：</p>
 <ul>
 <li>代码库中有相应的打包配置，在使用 Jenkins 时我们打包的产出构建物是 jar 包，所以此处要求我们项目根目录下有对应的 maven配置文件 pom.xml；</li>

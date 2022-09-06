@@ -214,11 +214,11 @@ function hide_canvas() {
 </ol>
 <p>在我们讲述树结构时，曾经用过递归去实现树的遍历。接下来，我们围绕中序遍历，再来看看递归在其中的作用。</p>
 <p>对树中的任意结点来说，先中序遍历它的左子树，然后打印这个结点，最后中序遍历它的右子树。可见，中序遍历是这样的一个问题，如下图所示：</p>
-<p><img src="assets/Ciqc1F7wi5-AQ7X-AACey5P-Rqo687.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F7wi5-AQ7X-AACey5P-Rqo687.png" alt="png" /></p>
 <p>当某个结点没有左子树和右子树时，则直接打印结点，完成终止。由此可见，树的中序遍历完全满足递归的两个条件，因此可以通过递归实现。例如下面这棵树：</p>
-<p><img src="assets/Ciqc1F7wi62AHGyNAACGyrE1oy4433.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F7wi62AHGyNAACGyrE1oy4433.png" alt="png" /></p>
 <p>当采用递归实现中序遍历时，程序执行的逻辑架构如下图所示：</p>
-<p><img src="assets/CgqCHl7wi8WAX8o8ACxp60OXat8318.gif" alt="3.gif" /></p>
+<p><img src="assets/CgqCHl7wi8WAX8o8ACxp60OXat8318.gif" alt="png" /></p>
 <p>其中，每个蓝色的括号都是一次递归调用。代码如下所示：</p>
 <pre><code>// 中序遍历
 public static void inOrderTraverse(Node node) {
@@ -235,7 +235,7 @@ public static void inOrderTraverse(Node node) {
 <p>下面我们通过一个古老而又经典的汉诺塔问题，帮助你理解复杂的递归问题。</p>
 <p>汉诺塔问题是源于印度一个古老传说的益智玩具。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着 64 片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上，并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。</p>
 <p>我们可以把这个问题抽象为一个数学问题。如下图所示，从左到右有 x、y、z 三根柱子，其中 x 柱子上面有从小叠到大的 n 个圆盘。现要求将 x 柱子上的圆盘移到 z 柱子上去。要求是，每次只能移动一个盘子，且大盘子不能被放在小盘子上面。求移动的步骤。</p>
-<p><img src="assets/CgqCHl7wi--AaoWAAABKD6oIV5c850.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl7wi--AaoWAAABKD6oIV5c850.png" alt="png" /></p>
 <p>我们来分析一下这个问题。这是一个大规模的复杂问题，如果要采用递归方法去解决的话，就要先把问题化简。</p>
 <p>我们的原问题是，把从小到大的 n 个盘子，从 x 移动到 z。</p>
 <p>我们可以将这个大问题拆解为以下 3 个小问题：</p>
@@ -245,7 +245,7 @@ public static void inOrderTraverse(Node node) {
 <li>再把从小到大的 n-1 个盘子，从 y 移动到 z。</li>
 </ol>
 <p><strong>首先，我们来判断它是否满足递归的第一个条件。</strong> 其中，第 1 和第 3 个问题就是汉诺塔问题。这样我们就完成了一次把大问题缩小为完全一样的小规模问题。我们已经定义好了递归体，也就是满足来递归的第一个条件。如下图所示：</p>
-<p><img src="assets/Ciqc1F7wjAuAJ7yrAAzAObiXQfs227.gif" alt="5.gif" /></p>
+<p><img src="assets/Ciqc1F7wjAuAJ7yrAAzAObiXQfs227.gif" alt="png" /></p>
 <p><strong>接下来我们来看判断它是否满足终止条件</strong>。随着递归体不断缩小范围，汉诺塔问题由原来“移动从小到大的 n 个盘子”，缩小为“移动从小到大的 n-1 个盘子”，直到缩小为“移动从小到大的 1 个盘子”。移动从小到大的 1 个盘子，就是移动最小的那个盘子。根据规则可以发现，最小的盘子是可以自由移动的。因此，递归的第二个条件，终止条件，也是满足的。</p>
 <p>经过仔细分析可见，汉诺塔问题是完全可以用递归实现的。我们定义汉诺塔的递归函数为 hanio()。这个函数的输入参数包括了：</p>
 <ul>
@@ -281,7 +281,7 @@ public void hanio(int n, String x, String y, String z) {
 <p>在主函数中，执行了 hanio(3, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)。我们发现 3 比 1 要大，则进入递归体。分别先后执行了 hanio(2, &quot;x&quot;, &quot;z&quot;, &quot;y&quot;)、&quot;移动: x-&gt;z&quot;、hanio(2, &quot;y&quot;, &quot;x&quot;, &quot;z&quot;)。</p>
 <p>其中的 hanio(2, &quot;x&quot;, &quot;z&quot;, &quot;y&quot;)，又先后执行了 hanio(1, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)、&quot;移动: x-&gt;y&quot;、hanio(1, &quot;z&quot;, &quot;x&quot;, &quot;y&quot;)。在这里，hanio(1, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;) 的执行结果是 &quot;移动: x-&gt;z&quot;，hanio(1, &quot;z&quot;, &quot;x&quot;, &quot;y&quot;)的执行结果是&quot;移动: z-&gt;y&quot;。</p>
 <p>另一边，hanio(2, &quot;y&quot;, &quot;x&quot;, &quot;z&quot;) 则要先后执行 hanio(1, &quot;y&quot;, &quot;z&quot;, &quot;x&quot;)、&quot;移动: y-&gt;z&quot;、hanio(1, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)。在这里，hanio(1, &quot;y&quot;, &quot;z&quot;, &quot;x&quot;) 的执行结果是&quot;移动: y-&gt;x&quot;，hanio(1, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;) 的执行结果是 &quot;移动: x-&gt;z&quot;。</p>
-<p><img src="assets/Ciqc1F7wjD6AHleLAAmzm2nvvmw746.gif" alt="6.gif" /></p>
+<p><img src="assets/Ciqc1F7wjD6AHleLAAmzm2nvvmw746.gif" alt="png" /></p>
 <p><strong>最终梳理一下，代码执行的结果就是：</strong></p>
 <p>移动: x-&gt;z</p>
 <p>移动: x-&gt;y</p>

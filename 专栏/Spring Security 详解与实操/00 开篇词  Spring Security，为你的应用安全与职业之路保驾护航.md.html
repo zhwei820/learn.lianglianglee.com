@@ -161,12 +161,12 @@ function hide_canvas() {
 <p>说到安全性，你可能会想到加解密算法、HTTPS 协议等常见的技术体系，<strong>但系统安全是一个综合性的主题，并非简单采用一些技术体系就能构建有效的解决方案</strong>。</p>
 <p>我们以一个分布式环境下的应用场景为例。假设你要开发一个工单系统，而生成工单所依赖的用户订单信息维护在第三方订单系统中。为了生成工单，就必须让工单系统读取订单系统中的用户订单信息。</p>
 <p>那么问题来了，工单系统如何获得用户的授权呢？一般我们想到的方法是用户将自己在订单管理平台上用户名和密码告诉工单系统，然后工单系统通过用户名和密码登录到订单管理平台并读取用户的订单记录，整个过程如下图所示：</p>
-<p><img src="assets/CioPOWC3WquAXuQVAACRr8Z_UXc476.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWC3WquAXuQVAACRr8Z_UXc476.png" alt="png" /></p>
 <p>订单系统用户认证和授权交互示意图</p>
 <p>上述方案看起来没有什么问题，但如果你仔细分析一下，就会发现这个流程在安全性上存在一些漏洞。</p>
 <p>比如，一旦用户修改了订单管理平台的密码，工单系统就无法正常访问了。为此，我们<strong>需要引入诸如 OAuth2 协议完成分布式环境下的认证和授权</strong>。</p>
 <p>我们通过一张图简单对比一下 OAuth2 协议与传统实现方案：</p>
-<p><img src="assets/CioPOWC3WrKADX7QAACv6cIqFgQ494.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWC3WrKADX7QAACv6cIqFgQ494.png" alt="png" /></p>
 <p>OAuth2 协议与传统实现方案的对比图</p>
 <p>但是想要实现 OAuth2 协议并没有那么简单。OAuth2 协议涉及的技术体系非常复杂，需要综合考虑用户认证、密码加解密和存储、Token 生成和校验、分布式 Session 和公私钥管理，以及完成各个客户端的权限管理。这时就<strong>需要引入专门的安全性开发框架</strong>，而<strong>Spring Security 就是这样一款开发框架</strong>。</p>
 <p>Spring Security 专门提供了 UAA（User Account and Authentication，用户账户和认证）服务，封装了 OAuth2 协议，用于管理用户账户、OAuth2 客户端以及用于鉴权的 Token。而 UAA 也只是 Spring Security 众多核心功能中的一部分。</p>
@@ -185,7 +185,7 @@ function hide_canvas() {
 <li>……</li>
 </ul>
 <p>同时，<strong>在普遍倡导用户隐私和数据价值的当下，掌握各种安全性相关技术的开发人员和架构师也成了稀缺人才，越发受到行业的认可和重视</strong>。</p>
-<p><img src="assets/CioPOWC3WrqAGPu1AAClhPaa34E826.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWC3WrqAGPu1AAClhPaa34E826.png" alt="png" /></p>
 <p>（职位信息来源：拉勾网）</p>
 <p>对于开发人员而言，如何<strong>使用各种技术体系解决安全性问题</strong>是一大困惑。经验丰富的开发人员需要熟练使用 Spring Security 框架来应对业务发展的需求。例如，全面掌握 Spring Security 框架提供的认证、授权、方法级安全访问、OAuth2、JWT 等核心功能，构建自己对系统安全性设计的知识体系和解决方案。</p>
 <p>而对于架构师而言，难点在于如何<strong>基于框架提供的功能并结合具体的业务场景，对框架进行扩展和定制化开发</strong>。这就需要他们对 Spring Security 中的用户认证和访问授权等核心功能的设计原理有充分的了解，能够从源码级别剖析框架的底层实现机制，进而满足更深层次的需求。</p>

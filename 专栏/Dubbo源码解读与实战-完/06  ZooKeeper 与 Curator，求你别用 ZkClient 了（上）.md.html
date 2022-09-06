@@ -292,13 +292,13 @@ function hide_canvas() {
                         <div><h1>06  ZooKeeper 与 Curator，求你别用 ZkClient 了（上）</h1>
 <p>在前面我们介绍 Dubbo 简化架构的时候提到过，Dubbo Provider 在启动时会将自身的服务信息整理成 URL 注册到注册中心，Dubbo Consumer 在启动时会向注册中心订阅感兴趣的 Provider 信息，之后 Provider 和 Consumer 才能建立连接，进行后续的交互。可见，<strong>一个稳定、高效的注册中心对基于 Dubbo 的微服务来说是至关重要的</strong>。</p>
 <p>Dubbo 目前支持 Consul、etcd、Nacos、ZooKeeper、Redis 等多种开源组件作为注册中心，并且在 Dubbo 源码也有相应的接入模块，如下图所示：</p>
-<p><img src="assets/Ciqc1F81FQ2ANt6EAADZ01G_QYM489.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F81FQ2ANt6EAADZ01G_QYM489.png" alt="png" /></p>
 <p><strong>Dubbo 官方推荐使用 ZooKeeper 作为注册中心</strong>，它是在实际生产中最常用的注册中心实现，这也是我们本课时要介绍 ZooKeeper 核心原理的原因。</p>
 <p>要与 ZooKeeper 集群进行交互，我们可以使用 ZooKeeper 原生客户端或是 ZkClient、Apache Curator 等第三方开源客户端。在后面介绍 dubbo-registry-zookeeper 模块的具体实现时你会看到，Dubbo 底层使用的是 Apache Curator。<strong>Apache Curator 是实践中最常用的 ZooKeeper 客户端。</strong></p>
 <h3>ZooKeeper 核心概念</h3>
 <p><strong>Apache ZooKeeper 是一个针对分布式系统的、可靠的、可扩展的协调服务</strong>，它通常作为统一命名服务、统一配置管理、注册中心（分布式集群管理）、分布式锁服务、Leader 选举服务等角色出现。很多分布式系统都依赖与 ZooKeeper 集群实现分布式系统间的协调调度，例如：Dubbo、HDFS 2.x、HBase、Kafka 等。<strong>ZooKeeper 已经成为现代分布式系统的标配</strong>。</p>
 <p>ZooKeeper 本身也是一个分布式应用程序，下图展示了 ZooKeeper 集群的核心架构。</p>
-<p><img src="assets/CgqCHl82OOeARx1GAAEjvCaXdEE505.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl82OOeARx1GAAEjvCaXdEE505.png" alt="png" /></p>
 <p>ZooKeeper 集群的核心架构图</p>
 <ul>
 <li><strong>Client 节点</strong>：从业务角度来看，这是分布式应用中的一个节点，通过 ZkClient 或是其他 ZooKeeper 客户端与 ZooKeeper 集群中的一个 Server 实例维持长连接，并定时发送心跳。从 ZooKeeper 集群的角度来看，它是 ZooKeeper 集群的一个客户端，可以主动查询或操作 ZooKeeper 集群中的数据，也可以在某些 ZooKeeper 节点（ZNode）上添加监听。当被监听的 ZNode 节点发生变化时，例如，该 ZNode 节点被删除、新增子节点或是其中数据被修改等，ZooKeeper 集群都会立即通过长连接通知 Client。</li>
@@ -307,7 +307,7 @@ function hide_canvas() {
 <li><strong>Observer 节点</strong>：ZooKeeper 集群中特殊的从节点，不会参与 Leader 节点的选举，其他功能与 Follower 节点相同。引入 Observer 角色的目的是增加 ZooKeeper 集群读操作的吞吐量，如果单纯依靠增加 Follower 节点来提高 ZooKeeper 的读吞吐量，那么有一个很严重的副作用，就是 ZooKeeper 集群的写能力会大大降低，因为 ZooKeeper 写数据时需要 Leader 将写操作同步给半数以上的 Follower 节点。引入 Observer 节点使得 ZooKeeper 集群在写能力不降低的情况下，大大提升了读操作的吞吐量。</li>
 </ul>
 <p>了解了 ZooKeeper 整体的架构之后，我们再来了解一下 ZooKeeper 集群存储数据的逻辑结构。ZooKeeper 逻辑上是按照<strong>树型结构</strong>进行数据存储的（如下图），其中的节点称为 <strong>ZNode</strong>。每个 ZNode 有一个名称标识，即树根到该节点的路径（用 “/” 分隔），ZooKeeper 树中的每个节点都可以拥有子节点，这与文件系统的目录树类似。</p>
-<p><img src="assets/CgqCHl82OR6AJaDUAAEpNFJyW_0507.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl82OR6AJaDUAAEpNFJyW_0507.png" alt="png" /></p>
 <p>ZooKeeper 树型存储结构</p>
 <p>ZNode 节点类型有如下四种：</p>
 <ul>
@@ -317,7 +317,7 @@ function hide_canvas() {
 <li><strong>临时顺序节点。</strong> 基本特性与临时节点一致，创建节点的过程中，ZooKeeper 会在其名字后自动追加一个单调增长的数字后缀，作为新的节点名。</li>
 </ul>
 <p>在每个 ZNode 中都维护着一个 stat 结构，记录了该 ZNode 的元数据，其中包括版本号、操作控制列表（ACL）、时间戳和数据长度等信息，如下表所示：</p>
-<p><img src="assets/CgqCHl81FVuAFUp7AARJWw4cOq4421.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl81FVuAFUp7AARJWw4cOq4421.png" alt="png" /></p>
 <p>我们除了可以通过 ZooKeeper Client 对 ZNode 进行增删改查等基本操作，还可以注册 Watcher 监听 ZNode 节点、其中的数据以及子节点的变化。一旦监听到变化，则相应的 Watcher 即被触发，相应的 ZooKeeper Client 会立即得到通知。Watcher 有如下特点：</p>
 <ul>
 <li><strong>主动推送。</strong> Watcher 被触发时，由 ZooKeeper 集群主动将更新推送给客户端，而不需要客户端轮询。</li>
@@ -337,7 +337,7 @@ function hide_canvas() {
 <li>最后，Follower 节点会返回 Client 写请求相应的响应。</li>
 </ol>
 <p>下图展示了写操作的核心流程：</p>
-<p><img src="assets/Ciqc1F81FXOAKEC8AAKkiqE6rHY039.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F81FXOAKEC8AAKkiqE6rHY039.png" alt="png" /></p>
 <p>写操作核心流程图</p>
 <h3>崩溃恢复</h3>
 <p>上面写请求处理流程中，如果发生 Leader 节点宕机，整个 ZooKeeper 集群可能处于如下两种状态：</p>

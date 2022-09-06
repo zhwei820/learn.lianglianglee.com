@@ -292,7 +292,7 @@ function hide_canvas() {
                         <div><h1>11  简易版 RPC 框架实现（上）</h1>
 <p>这是“基础知识”部分的最后一课时，我们将会运用前面介绍的基础知识来做一个实践项目 —— 编写一个简易版本的 RPC 框架，作为“基础知识”部分的总结和回顾。</p>
 <p>RPC 是“远程过程调用（Remote Procedure Call）”的缩写形式，比较通俗的解释是：<strong>像本地方法调用一样调用远程的服务</strong>。虽然 RPC 的定义非常简单，但是相对完整的、通用的 RPC 框架涉及很多方面的内容，例如注册发现、服务治理、负载均衡、集群容错、RPC 协议等，如下图所示：</p>
-<p><img src="assets/Ciqc1F9N7ryADlJBAAIlSORjRt8863.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9N7ryADlJBAAIlSORjRt8863.png" alt="png" /></p>
 <p>简易 RPC 框架的架构图</p>
 <p>本课时我们主要实现<strong>RPC 框架的基石部分——远程调用</strong>，简易版 RPC 框架一次远程调用的核心流程是这样的：</p>
 <ol>
@@ -306,7 +306,7 @@ function hide_canvas() {
 <p>这个远程调用的过程，就是我们简易版本 RPC 框架的核心实现，只有理解了这个流程，才能进行后续的开发。</p>
 <h3>项目结构</h3>
 <p>了解了简易版 RPC 框架的工作流程和实现目标之后，我们再来看下项目的结构，为了方便起见，这里我们将整个项目放到了一个 Module 中了，如下图所示，你可以按照自己的需求进行模块划分。</p>
-<p><img src="assets/Ciqc1F9N7suABhc9AAEN07V6uf8238.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F9N7suABhc9AAEN07V6uf8238.png" alt="png" /></p>
 <p>那这各个包的功能是怎样的呢？我们就来一一说明。</p>
 <ul>
 <li>protocol：简易版 RPC 框架的自定义协议。</li>
@@ -321,7 +321,7 @@ function hide_canvas() {
 <p>从功能角度考虑，HTTP 协议在 1.X 时代，只支持半双工传输模式，虽然支持长连接，但是不支持服务端主动推送数据。从效率角度来看，在一次简单的远程调用中，只需要传递方法名和加个简单的参数，此时，HTTP 请求中大部分数据都被 HTTP Header 占据，真正的有效负载非常少，效率就比较低。</p>
 <p>当然，HTTP 协议也有自己的优势，例如，天然穿透防火墙，大量的框架和开源软件支持 HTTP 接口，而且配合 REST 规范使用也是很便捷的，所以有很多 RPC 框架直接使用 HTTP 协议，尤其是在 HTTP 2.0 之后，如 gRPC、Spring Cloud 等。</p>
 <p>这里我们自定义一个简易版的 Demo RPC 协议，如下图所示：</p>
-<p><img src="assets/Ciqc1F9N7tiAMnZdAAC77BEcyZk305.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F9N7tiAMnZdAAC77BEcyZk305.png" alt="png" /></p>
 <p>在 Demo RPC 的消息头中，包含了整个 RPC 消息的一些控制信息，例如，版本号、魔数、消息类型、附加信息、消息 ID 以及消息体的长度，在附加信息（extraInfo）中，按位进行划分，分别定义消息的类型、序列化方式、压缩方式以及请求类型。当然，你也可以自己扩充 Demo RPC 协议，实现更加复杂的功能。</p>
 <p>Demo RPC 消息头对应的实体类是 Header，其定义如下：</p>
 <pre><code>public class Header {
@@ -391,7 +391,7 @@ public class Response implements Serializable {
 <h3>编解码实现</h3>
 <p>了解了自定义协议的结构之后，我们再来解决协议的编解码问题。</p>
 <p>前面课时介绍 Netty 核心概念的时候我们提到过，Netty 每个 Channel 绑定一个 ChannelPipeline，并依赖 ChannelPipeline 中添加的 ChannelHandler 处理接收到（或要发送）的数据，其中就包括字节到消息（以及消息到字节）的转换。Netty 中提供了 ByteToMessageDecoder、 MessageToByteEncoder、MessageToMessageEncoder、MessageToMessageDecoder 等抽象类来实现 Message 与 ByteBuf 之间的转换以及 Message 之间的转换，如下图所示：</p>
-<p><img src="assets/CgqCHl9N89uAPRjFAAE8pTlyXls424.png" alt="image" /></p>
+<p><img src="assets/CgqCHl9N89uAPRjFAAE8pTlyXls424.png" alt="png" /></p>
 <p>Netty 提供的 Decoder 和 Encoder 实现</p>
 <p>在 Netty 的源码中，我们可以看到对很多已有协议的序列化和反序列化都是基于上述抽象类实现的，例如，HttpServerCodec 中通过依赖 HttpServerRequestDecoder 和 HttpServerResponseEncoder 来实现 HTTP 请求的解码和 HTTP 响应的编码。如下图所示，HttpServerRequestDecoder 继承自 ByteToMessageDecoder，实现了 ByteBuf 到 HTTP 请求之间的转换；HttpServerResponseEncoder 继承自 MessageToMessageEncoder，实现 HTTP 响应到其他消息的转换（其中包括转换成 ByteBuf 的能力）。</p>
 <p><img src="assets/CgqCHl9OAneAfCv0AADjLyEPSpc098.png" alt="HttpServerCodec结构图.png" /></p>

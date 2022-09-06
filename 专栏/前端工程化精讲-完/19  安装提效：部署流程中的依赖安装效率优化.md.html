@@ -200,7 +200,7 @@ time pnpm i
 </ul>
 <h4>环境状态的五个分析维度</h4>
 <p>在确定了安装工具和分析方式后，我们还需要对执行过程进行划分，下面我一共区分了 5 种项目执行安装时可能遇到的场景：</p>
-<p><img src="assets/Ciqc1F-EFtSATNnGAABjLC1FXMQ343.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-EFtSATNnGAABjLC1FXMQ343.png" alt="png" /></p>
 <blockquote>
 <p>注 1：除了第一种纯净环境外，后面的环境中都存在 Lock 文件。因为 Lock 文件对于提供稳定依赖版本至关重要。出于现实场景考虑，这里不再单独对比没有 Lock 文件但存在历史安装目录的场景。
 注 2： 为了屏蔽网络对解析下载依赖包的影响，所有目录下均使用相同注册表网址 registry.npm.taobao.org。
@@ -209,7 +209,7 @@ time pnpm i
 <h3>不同维度对安装效率的影响分析</h3>
 <h4>纯净环境</h4>
 <p>首先来对纯净环境进行分析，不同安装方式的执行耗时统计如下：</p>
-<p><img src="assets/Ciqc1F-EFuOAf51jAABmxP3DGmM839.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-EFuOAf51jAABmxP3DGmM839.png" alt="png" /></p>
 <blockquote>
 <p>注 1：总安装时间为执行后显示的时间。而各阶段的细分时间在日志中分析获取。
 注 2：在 pnpm 的执行过程中并未对各阶段进行完全分隔，而是针对不同依赖包递归执行各阶段，这种情况在<strong>纯净环境中尤其明显</strong>，因此阶段时间上不便做单独划分。</p>
@@ -222,7 +222,7 @@ time pnpm i
 </ul>
 <h4>Lock 环境</h4>
 <p>然后我们来考察 Lock 文件对于安装效率的影响。和第一种最纯净的情况相比，带有 Lock 文件的情况通常更符合现实中项目在部署环境中的初始状态（因为 Lock 文件可以在一定程度上保证项目依赖版本的稳定性，因此通常都会把 Lock 文件也保留在代码仓库中）。引入 Lock 文件后，不同安装工具执行安装的耗时情况如下：</p>
-<p><img src="assets/CgqCHl-EFwyAUyc0AABWRUrdf70141.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl-EFwyAUyc0AABWRUrdf70141.png" alt="png" /></p>
 <blockquote>
 <p>注 1： Yarn 解析依赖阶段日志未显示耗时，因此标记为 0 秒。</p>
 </blockquote>
@@ -233,7 +233,7 @@ time pnpm i
 </ul>
 <h4>缓存环境</h4>
 <p>缓存环境是在部署服务中可能遇到的一种情形。项目在部署过程中依赖安装时产生了本地缓存，部署结束后项目工作目录被删除，因此再次部署开始时工作目录内有 Lock 文件，也有本地缓存，但是不存在安装目录。这种情形下的耗时统计如下：</p>
-<p><img src="assets/CgqCHl-EFxqARvOCAABWYHKz7lk118.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-EFxqARvOCAABWYHKz7lk118.png" alt="png" /></p>
 <p>对结果的分析如下：</p>
 <ul>
 <li>从执行时间上看，各类型的安装方式的耗时都明显下降。</li>
@@ -241,7 +241,7 @@ time pnpm i
 </ul>
 <h4>无缓存的重复安装环境</h4>
 <p>无缓存的重复安装环境在本地环境下部署时可能遇到，即当本地已存在安装目录，但人工清理缓存后再次执行安装时可能遇到。这种情况的耗时如下：</p>
-<p><img src="assets/Ciqc1F-EFyqAc4dbAABWpKpPTt4305.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-EFyqAc4dbAABWpKpPTt4305.png" alt="png" /></p>
 <p>对结果的分析如下：</p>
 <ul>
 <li>从上面的表格中可以看到，存在安装目录这一条件首先<strong>对链接阶段能起到优化的作用</strong>。对于下载阶段，除了使用 PnP 的两种安装方式外，当项目中已存在安装目录时，下载阶段耗时也趋近于零。其中 Yarn v1 表现最好，各主要阶段都直接略过，而 npm 和 pnpm 则多少还有一些处理过程。</li>
@@ -249,7 +249,7 @@ time pnpm i
 </ul>
 <h4>有缓存的重复安装环境</h4>
 <p>最后是安装目录与本地缓存都存在的情况，耗时如下：</p>
-<p><img src="assets/CgqCHl-EFzKAOLpCAABS3Wdu4Zw636.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl-EFzKAOLpCAABS3Wdu4Zw636.png" alt="png" /></p>
 <p>对结果的分析如下：</p>
 <ul>
 <li>无论对于哪种安装方式而言，这种情况都是最理想的。可以看到，各安装工具的耗时都趋近于零。其中尤其对于 Yarn v1 而言效率最高，而 pnpm 次之，npm 相对最慢。</li>

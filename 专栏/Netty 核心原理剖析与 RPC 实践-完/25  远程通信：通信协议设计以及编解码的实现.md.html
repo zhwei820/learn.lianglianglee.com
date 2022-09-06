@@ -229,13 +229,13 @@ function hide_canvas() {
 </blockquote>
 <h3>RPC 通信方案设计</h3>
 <p>结合本节课的目标，接下来我们对 RPC 请求调用和结果响应两个过程分别进行详细拆解分析。首先看下 RPC 请求调用的过程，如下图所示。</p>
-<p><img src="assets/Cip5yF_1MaqAfz8pAAYSNNmMolY852.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_1MaqAfz8pAAYSNNmMolY852.png" alt="png" /></p>
 <p>RPC 请求的过程对于服务消费者来说是出站操作，对于服务提供者来说是入站操作。数据发送前，服务消费者将 RPC 请求信息封装成 MiniRpcProtocol 对象，然后通过编码器 MiniRpcEncoder 进行二进制编码，最后直接向发送至远端即可。服务提供者收到请求数据后，将二进制数据交给解码器 MiniRpcDecoder，解码后再次生成 MiniRpcProtocol 对象，然后传递给 RpcRequestHandler 执行真正的 RPC 请求调用。</p>
 <p>我们暂时忽略 RpcRequestHandler 是如何执行 RPC 请求调用的，接下来我们继续分析 RpcRequestHandler 处理成功后是如何向服务消费者返回响应结果的，如下图所示：</p>
-<p><img src="assets/CgqCHl_1MbKAZCUWAAX6xAhFw5k042.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_1MbKAZCUWAAX6xAhFw5k042.png" alt="png" /></p>
 <p>与 RPC 请求过程相反，是由服务提供者将响应结果封装成 MiniRpcProtocol 对象，然后通过 MiniRpcEncoder 编码发送给服务消费者。服务消费者对响应结果进行解码，因为 RPC 请求是高并发的，所以需要 RpcRequestHandler 根据响应结果找到对应的请求，最后将响应结果返回。</p>
 <p>综合 RPC 请求调用和结果响应的处理过程来看，编码器 MiniRpcEncoder、解码器 MiniRpcDecoder 以及通信协议对象 MiniRpcProtocol 都可以设计成复用的，最终服务消费者和服务提供者的 ChannelPipeline 结构如下图所示。</p>
-<p><img src="assets/CgqCHl_1MbmAeZgjAAd9EAWpmuE609.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_1MbmAeZgjAAd9EAWpmuE609.png" alt="png" /></p>
 <p>由此可见，在实现 Netty 网络通信模块时，先画图分析 ChannelHandler 的处理流程是非常有帮助的。</p>
 <h3>自定义 RPC 通信协议</h3>
 <p>协议是服务消费者和服务提供者之间通信的基础，主流的 RPC 框架都会自定义通信协议，相比于 HTTP、HTTPS、JSON 等通用的协议，自定义协议可以实现更好的性能、扩展性以及安全性。在《接头暗语：利用 Netty 如何实现自定义协议通信》课程中，我们学习了设计一个完备的通信协议需要考虑哪些因素，同时结合 RPC 请求调用与结果响应的场景，我们设计了一个简易版的 RPC 自定义协议，如下所示：</p>

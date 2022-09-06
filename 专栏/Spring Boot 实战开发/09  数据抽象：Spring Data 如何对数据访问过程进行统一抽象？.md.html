@@ -179,7 +179,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>在以上代码中，我们看到 Repository 接口只是一个空接口，通过泛型指定了领域实体对象的类型和 ID。在 Spring Data 中，存在一大批 Repository 接口的子接口和实现类，该接口的部分类层结构如下所示：</p>
-<p><img src="assets/CgqCHl_TH_mAIaaLAABBNaldOqE595.png" alt="image" /></p>
+<p><img src="assets/CgqCHl_TH_mAIaaLAABBNaldOqE595.png" alt="png" /></p>
 <p>Repository 接口的部分类层结构图</p>
 <p>可以看到 CrudRepository 接口是对 Repository 接口的最常见扩展，添加了对领域实体的 CRUD 操作功能，具体定义如下代码所示：</p>
 <pre><code>public interface CrudRepository&lt;T, ID&gt; extends Repository&lt;T, ID&gt; {
@@ -284,11 +284,11 @@ public @interface Query {
 <p>在上面的例子中，通过 findByFirstNameAndLastname 这样符合普通语义的方法名，并在参数列表中按照方法名中参数的顺序和名称（即第一个参数是 fistName，第二个参数 lastName）传入相应的参数，Spring Data 就能自动组装 SQL 语句从而实现衍生查询。是不是很神奇？</p>
 <p><strong>而想要使用方法名实现衍生查询，我们需要对 Repository 中定义的方法名进行一定约束。</strong></p>
 <p>首先我们需要指定一些查询关键字，常见的关键字如下表所示：</p>
-<p><img src="assets/Cip5yF_YhK6AcrMVAAQOamtdsF0627.png" alt="Lark20201215-174017.png" /></p>
+<p><img src="assets/Cip5yF_YhK6AcrMVAAQOamtdsF0627.png" alt="png" /></p>
 <p>方法名衍生查询中查询关键字列表</p>
 <p>有了这些查询关键字后，在方法命名上我们还需要指定查询字段和一些限制性条件。例如，在前面的示例中，我们只是基于“fistName”和“lastName”这两个字段做查询。</p>
 <p>事实上，我们可以查询的内容非常多，下表列出了更多的方法名衍生查询示例，你可以参考下。</p>
-<p><img src="assets/Cip5yF_YhLiAbg0pAAEzy-P0ZVA978.png" alt="Lark20201215-174023.png" /></p>
+<p><img src="assets/Cip5yF_YhLiAbg0pAAEzy-P0ZVA978.png" alt="png" /></p>
 <p>方法名衍生查询示例</p>
 <p>在 Spring Data 中，方法名衍生查询的功能非常强大，上表中罗列的这些也只是全部功能中的一小部分而已。</p>
 <p>讲到这里，你可能会问一个问题：如果我们在一个 Repository 中同时指定了 @Query 注解和方法名衍生查询，那么 Spring Data 会具体执行哪一个呢？要想回答这个问题，就需要我们对查询策略有一定的了解。</p>
@@ -316,7 +316,7 @@ public @interface Query {
 <h3>Spring Data 中的组件</h3>
 <p><strong>Spring Data 支持对多种数据存储媒介进行数据访问，表现为提供了一系列默认的 Repository，包括针对关系型数据库的 JPA/JDBC Repository，针对 MongoDB、Neo4j、Redis 等 NoSQL 对应的 Repository，支持 Hadoop 的大数据访问的 Repository，甚至包括 Spring Batch 和 Spring Integration 在内的系统集成的 Repository。</strong></p>
 <p>在 Spring Data 的官方网站<a href="https://spring.io/projects/spring-data">https://spring.io/projects/spring-data</a> 中，列出了其提供的所有组件，如下图所示：</p>
-<p><img src="assets/CgqCHl_TICWAOAMHAAAkcFfMwis206.png" alt="image" /></p>
+<p><img src="assets/CgqCHl_TICWAOAMHAAAkcFfMwis206.png" alt="png" /></p>
 <p>Spring Data 所提供的组件列表（来自 Spring Data 官网）</p>
 <p>根据官网介绍，Spring Data 中的组件可以分成四大类：核心模块（Main modules）、社区模块（Community modules）、关联模块（Related modules）和正在孵化的模块（Modules in Incubation）。例如，前面介绍的 Respository 和多样化查询功能就在核心模块 Spring Data Commons 组件中。</p>
 <p><strong>这里，我特别想强调下的是正在孵化的模块，它目前只包含一个组件，即 Spring Data R2DBC。</strong> R2DBC 是<a href="https://github.com/r2dbc/">Reactive Relational Database Connectivity</a> 的简写，代表响应式关系型数据库连接，相当于是响应式数据访问领域的 JDBC 规范。</p>

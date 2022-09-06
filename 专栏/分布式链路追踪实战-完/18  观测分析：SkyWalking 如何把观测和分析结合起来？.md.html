@@ -165,7 +165,7 @@ function hide_canvas() {
 <p>SkyWalking 和 Zipkin 的定位不同，决定了它们不是相同类型的产品。<strong>SkyWalking 中提供的组件更加偏向业务应用层面</strong>，并没有涉及过多的组件级别的观测；<strong>Zipkin 提供了更多组件级别的链路观测</strong>，但并没有提供太多的链路分析能力。你可以根据两者的侧重点来选择合适的产品。</p>
 <h3>系统架构</h3>
 <p>下面是官网提供的 SkyWalking 的系统架构图，我们先通过这张图来了解它：</p>
-<p><img src="assets/CgqCHl9xYUSAMdjMAAM5S7oWJck457.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl9xYUSAMdjMAAM5S7oWJck457.png" alt="png" /></p>
 <p>从中间往上看，<strong>首先是 Receiver Cluster，它代表接收器集群，是整个后端服务的接入入口，专门用来收集各个指标，链路信息，相当于我在上一节所讲的链路收集器。</strong></p>
 <p><strong>再往后面走是 Aggregator Cluster，代表聚合服务器，它会汇总接收器集群收集到的所有数据，并且最终存储至数据库，并进行对应的告警通知</strong>。右侧标明了它支持的多种不同的存储方式，比如常见的 ElasticSearch、MySQL，我们可以根据需要来选择。</p>
 <p>图的左上方表示，我们可以使用 CLI 和 GUI，通过 HTTP 的形式向集群服务器发送请求来读取数据。</p>
@@ -195,14 +195,14 @@ function hide_canvas() {
 <p>最后，基于 OAL 语言，我们自定义了统计指标。我们可以将其运用在自定义的 UI 展示和告警中，将动态统计指标的优势最大化，从而来实现一套高度可定制化的观测平台。</p>
 <h4>拓扑图</h4>
 <p>除了统计指标之外，链路分析中的另外一个关键点就是拓扑。拓扑图可以展示服务、端点、实例之间的引用关系，将引用关系与统计指标相结合后，我们能更快地了解到系统整体的运行情况，以及流量主要分布在哪里。下图就展示了在 SkyWalking 中，是怎样展现服务之间的拓扑的。</p>
-<p><img src="assets/Ciqc1F9xYeSAGKOBAAC5r84ETek340.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9xYeSAGKOBAAC5r84ETek340.png" alt="png" /></p>
 <p>在这张图中，从左到右代表服务从接入流量到服务处理中的完整拓扑信息。用户发起访问，首先经由 ProjectA 服务，然后引入 ProjectB、ProjectC 和其他的云服务，ProjectB、ProjectC 又分别调用了其余的组件和服务。服务依赖之间使用线进行连接，可以清楚地描绘出彼此的关系。</p>
 <p>传统的拓扑检测，通常是利用时间窗口来推断服务之间的依赖关系。比如 RPC 中消费者发送请求给提供者，提供者会先完成请求，再将链路数据发送到链路收集器端。此时，由于收集器端并不清楚是谁调用了提供者，所以会将数据保留一段到内存中。消费者完成请求处理后，将链路信息再发送到链路收集器中，此时再进行数据匹配，才能得知提供者的消费者是哪一个。得知消费者之后，保存在内存中的数据就会被删掉。</p>
 <p>在分布式系统中，RPC 的请求数量可能非常巨大，如果使用传统的拓扑检测，虽然也能完成，但是会导致高延迟和高内存使用。同时由于是基于时间窗口模式，如果提供者的数据上报事件超过了时间窗口规定的时间，就会出现无法匹配的问题。</p>
 <p>SkyWalking 为了解决上面提到的延迟和内存问题，引入了一个新的分析方式来进行拓扑检测，这种方式叫作 STAM（Streaming Topology Analysis Method）。</p>
 <p><strong>STAM 通过在消息传递的内容中注入更多的链路上下文信息，解决了传统拓扑检测中高延迟和高内存的问题。</strong></p>
 <p>Zipkin 和 SkyWalking 在 OkHttp 框架的消息传递时，都会将链路信息放置在请求头中。<strong>无论它们的采集器是如何实现的，在进行消息传递时，都会通过某种方式将链路信息设置到请求中</strong>。如下图所示：</p>
-<p><img src="assets/Ciqc1F9xYgmAfvCDAAEDn5gIMBo308.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9xYgmAfvCDAAEDn5gIMBo308.png" alt="png" /></p>
 <p>我们可以看到其中有三个“sw8”开头的 header 内容，“sw8”也是 SkyWalking 在进行链路上下文传递中的关键信息。这里进行了转码处理，我们可以通过阅读官方对跨线程消息透传协议的 <a href="https://github.com/apache/skywalking/blob/6fe2041b470113e626cb3f41e3789261d31f2548/docs/en/protocols/Skywalking-Cross-Process-Propagation-Headers-Protocol-v3.md.html">介绍</a>，了解到它进行了信息的传递。我列出一些其中比较关键的部分。</p>
 <ol>
 <li>Trace Id：用于记录全局的链路 Id。</li>

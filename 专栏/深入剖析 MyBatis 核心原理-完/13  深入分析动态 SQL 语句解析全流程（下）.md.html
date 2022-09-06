@@ -192,7 +192,7 @@ private void applyItem(DynamicContext context, Object o, int i) {
 </code></pre>
 <p>但如果传入的集合不是 Map 类型，则通过 applyIndex() 方法和 applyItem() 方法将集合元素的下标索引和元素值本身绑定到 PrefixedContext 中。</p>
 <p>完成 PrefixedContext 的绑定之后，会调用 <code>&lt;foreach&gt;</code> 标签下子 SqlNode 的 apply() 方法，其中传入的 DynamicContext 实际上是 ForEachSqlNode$FilteredDynamicContext 这个内部类，它也是 DynamicContext 的装饰器，核心功能是：根据前面在 PrefixedContext 中绑定的各种变量，处理 SQL 片段中的“#{}”占位符。FilteredDynamicContext 在多次循环中的处理效果如下图所示：</p>
-<p><img src="assets/Cgp9HWBB-4WADZbeAAIPDjI-G2A404.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWBB-4WADZbeAAIPDjI-G2A404.png" alt="png" /></p>
 <p>FilteredDynamicContext 变化过程示意图</p>
 <p>下面是 FilteredDynamicContext.appendSql() 方法的核心实现：</p>
 <pre><code>public void appendSql(String sql) {
@@ -244,7 +244,7 @@ private void applyItem(DynamicContext context, Object o, int i) {
 <p>经过上述一系列处理之后，SQL 语句最终会由 SqlSource 进行最后的处理。</p>
 <p><strong>在 SqlSource 接口中只定义了一个 getBoundSql() 方法，它控制着动态 SQL 语句解析的整个流程</strong>，它会根据从 Mapper.xml 映射文件（或注解）解析到的 SQL 语句以及执行 SQL 时传入的实参，返回一条可执行的 SQL。</p>
 <p>下图展示了 SqlSource 接口的核心实现：</p>
-<p><img src="assets/CioPOWBB-6CAFZlRAAEeTrexVm4358.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWBB-6CAFZlRAAEeTrexVm4358.png" alt="png" /></p>
 <p>SqlSource 接口继承图</p>
 <p>下面我们简单介绍一下这三个核心实现类的具体含义。</p>
 <ul>

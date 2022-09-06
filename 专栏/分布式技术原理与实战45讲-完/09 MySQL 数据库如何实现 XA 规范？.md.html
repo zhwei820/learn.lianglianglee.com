@@ -303,7 +303,7 @@ show binary logs;
 <p>不论是 statement 还是 row 格式，binlog 都会添加一个 XID_EVENT 作为事务的结束，该事件记录了事务的 ID 也就是 Xid，在 MySQL 进行崩溃恢复时根据 binlog 中提交的情况来决定如何恢复。</p>
 <h4>Binlog 同步过程</h4>
 <p>下面来看看 Binlog 下的事务提交过程，整体过程是先写 redo log，再写 binlog，并以 binlog 写成功为事务提交成功的标志。</p>
-<p><img src="assets/Ciqah16n4WSAMCkOAAEJyX3OrOY183.png" alt="image" /></p>
+<p><img src="assets/Ciqah16n4WSAMCkOAAEJyX3OrOY183.png" alt="png" /></p>
 <p>当有事务提交时：</p>
 <ul>
 <li>第一步，InnoDB 进入 Prepare 阶段，并且 write/sync redo log，写 redo log，将事务的 XID 写入到 redo 日志中，binlog 不作任何操作；</li>

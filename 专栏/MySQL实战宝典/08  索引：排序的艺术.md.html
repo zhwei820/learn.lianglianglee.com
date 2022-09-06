@@ -188,7 +188,7 @@ function hide_canvas() {
 <p><strong>B+树索引的特点是：</strong> 基于磁盘的平衡树，但树非常矮，通常为 3~4 层，能存放千万到上亿的排序数据。树矮意味着访问效率高，从千万或上亿数据里查询一条数据，只用 3、4 次 I/O。</p>
 <p>又因为现在的固态硬盘每秒能执行至少 10000 次 I/O ，所以查询一条数据，哪怕全部在磁盘上，也只需要 0.003 ~ 0.004 秒。另外，因为 B+ 树矮，在做排序时，也只需要比较 3~4 次就能定位数据需要插入的位置，排序效率非常不错。</p>
 <p>B+ 树索引由根节点（root node）、中间节点（non leaf node）、叶子节点（leaf node）组成，其中叶子节点存放所有排序后的数据。<strong>当然也存在一种比较特殊的情况</strong>，比如高度为 1 的B+ 树索引：</p>
-<p><img src="assets/CioPOWCk3P2AETnSAADbd7NkkIw226.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWCk3P2AETnSAADbd7NkkIw226.png" alt="png" /></p>
 <p>上图中，第一个列就是 B+ 树索引排序的列，你可以理解它是表 User 中的列 id，类型为 8 字节的 BIGINT，所以列 userId 就是索引键（key），类似下表：</p>
 <pre><code>CREATE TABLE User (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -201,7 +201,7 @@ function hide_canvas() {
 <p>所有 B+ 树都是从高度为 1 的树开始，然后根据数据的插入，慢慢增加树的高度。<strong>你要牢记：索引是对记录进行排序，</strong> 高度为 1 的 B+ 树索引中，存放的记录都已经排序好了，若要在一个叶子节点内再进行查询，只进行二叉查找，就能快速定位数据。</p>
 <p>可随着插入 B+ 树索引的记录变多，1个页（16K）无法存放这么多数据，所以会发生 B+ 树的分裂，B+ 树的高度变为 2，当 B+ 树的高度大于等于 2 时，根节点和中间节点存放的是索引键对，由（索引键、指针）组成。</p>
 <p>索引键就是排序的列，而指针是指向下一层的地址，在 MySQL 的 InnoDB 存储引擎中占用 6 个字节。下图显示了 B+ 树高度为 2 时，B+ 树索引的样子：</p>
-<p><img src="assets/CioPOWCk3QiACiKfAAGD5zqFkGQ603.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWCk3QiACiKfAAGD5zqFkGQ603.png" alt="png" /></p>
 <p>可以看到，在上面的B+树索引中，若要查询索引键值为 5 的记录，则首先查找根节点，查到键值对（20，地址），这表示小于 20 的记录在地址指向的下一层叶子节点中。接着根据下一层地址就可以找到最左边的叶子节点，在叶子节点中根据二叉查找就能找到索引键值为 5 的记录。</p>
 <p>那一个高度为 2 的 B+ 树索引，理论上最多能存放多少行记录呢?</p>
 <p>在 MySQL InnoDB 存储引擎中，一个页的大小为 16K，在上面的表 User 中，键值 userId 是BIGINT 类型，则：</p>
@@ -215,13 +215,13 @@ function hide_canvas() {
 </code></pre>
 <p>也就是说，35200 条记录排序后，生成的 B+ 树索引高度为 2。在 35200 条记录中根据索引键查询一条记录只需要查询 2 个页，一个根叶，一个叶子节点，就能定位到记录所在的页。</p>
 <p>高度为 3 的 B+ 树索引本质上与高度 2 的索引一致，如下图所示，不再赘述：</p>
-<p><img src="assets/CioPOWCk3RKAPxMHAAF2YtY7XzI340.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CioPOWCk3RKAPxMHAAF2YtY7XzI340.png" alt="png" /></p>
 <p>同理，树高度为 3 的 B+ 树索引，最多能存放的记录数为：</p>
 <pre><code>总记录数 = 1100（根节点） * 1100（中间节点） * 32 =  38,720,000
 </code></pre>
 <p>讲到这儿，你会发现，高度为 3 的 B+ 树索引竟然能存放 3800W 条记录。在 3800W 条记录中定位一条记录，只需要查询 3 个页。<strong>那么 B+ 树索引的优势是否逐步体现出来了呢</strong>？</p>
 <p>不过，在真实环境中，每个页其实利用率并没有这么高，还会存在一些碎片的情况，我们假设每个页的使用率为60%，则：</p>
-<p><img src="assets/Cgp9HWCk3RqAWic4AADLJpJ9heo761.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Cgp9HWCk3RqAWic4AADLJpJ9heo761.png" alt="png" /></p>
 <p>表格显示了 B+ 树的威力，即在 50 多亿的数据中，根据索引键值查询记录，只需要 4 次 I/O，大概仅需 0.004 秒。如果这些查询的页已经被缓存在内存缓冲池中，查询性能会更快。</p>
 <p>在数据库中，上述的索引查询请求对应的 SQL 语句为：</p>
 <pre><code>SELECT * FROM User WHERE id = ?
@@ -269,7 +269,7 @@ possible_keys: NULL
 <p>你不可能要求所有插入的数据都是有序的，因为索引的本身就是用于数据的排序，插入数据都已经是排序的，那么你就不需要 B+ 树索引进行数据查询了。</p>
 <p>所以对于 B+ 树索引，在 MySQL 数据库设计中，仅要求主键的索引设计为顺序，比如使用自增，或使用函数 UUID_TO_BIN 排序的 UUID，而不用无序值做主键。</p>
 <p>我们再回顾 05 讲的自增、UUID、UUID 排序的插入性能对比：</p>
-<p><img src="assets/CioPOWCk3TuAchxwAACr8OD6suQ711.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CioPOWCk3TuAchxwAACr8OD6suQ711.png" alt="png" /></p>
 <p>可以看到，UUID 由于是无序值，所以在插入时性能比起顺序值自增 ID 和排序 UUID，性能上差距比较明显。</p>
 <p><strong>所以，我再次强调：</strong> 在表结构设计时，主键的设计一定要尽可能地使用顺序值，这样才能保证在海量并发业务场景下的性能。</p>
 <p>以上就是索引查询和插入的知识，接下来我们就分析怎么在 MySQL 数据库中查看 B+ 树索引。</p>

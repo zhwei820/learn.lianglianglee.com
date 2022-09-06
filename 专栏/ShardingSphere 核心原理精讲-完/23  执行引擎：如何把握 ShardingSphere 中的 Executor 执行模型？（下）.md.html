@@ -219,7 +219,7 @@ private ResultSet currentResultSet;
 </code></pre>
 <p>在继续介绍 ShardingStatement 之前，我们先梳理一下与它相关的类层结构。我们在 <strong>“06 | 规范兼容：JDBC 规范与 ShardingSphere 是什么关系？”</strong> 中的 ShardingConnection 提到，ShardingSphere 通过适配器模式包装了自己的实现类，除了已经介绍的 ShardingConnection 类之外，还包含今天要介绍的 ShardingStatement 和 ShardingPreparedStament。</p>
 <p>根据这一点，我们可以想象 ShardingStatement 应该具备与 ShardingConnection 类似的类层结构：</p>
-<p><img src="assets/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9MzLGAdeNfAACM0dnojxQ073.png" alt="png" /></p>
 <p>然后我们来到上图中 AbstractStatementAdapter 类，这里的很多方法的风格都与 ShardingConnection 的父类 AbstractConnectionAdapter 一致，例如如下所示的 setPoolable 方法：</p>
 <pre><code>public final void setPoolable(final boolean poolable) throws SQLException {
     this.poolable = poolable;
@@ -367,7 +367,7 @@ private final List&lt;Object&gt; parameters = new ArrayList&lt;&gt;();
 }
 </code></pre>
 <p>关于 AbstractShardingPreparedStatementAdapter 还需要注意的是它的<strong>类层结构</strong>，如下图所示，可以看到 AbstractShardingPreparedStatementAdapter 继承了 AbstractUnsupportedOperationPreparedStatement 类；而 AbstractUnsupportedOperationPreparedStatement 却又继承了 AbstractStatementAdapter 类并实现了 PreparedStatement：</p>
-<p><img src="assets/Ciqc1F9MzNeACiagAACzQd-8eig186.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9MzNeACiagAACzQd-8eig186.png" alt="png" /></p>
 <p>形成这种类层结构的原因在于，PreparedStatement 本来就是在 Statement 的基础上添加了各种参数设置功能，换句话说，Statement 的功能 PreparedStatement 都应该有。</p>
 <p>所以一方面 AbstractStatementAdapter 提供了所有 Statement 的功能；另一方面，AbstractShardingPreparedStatementAdapter 首先把 AbstractStatementAdapter 所有的功能继承过来，但它自身可能有一些无法实现的关于 PreparedStatement 的功能，所以同样提供了 AbstractUnsupportedOperationPreparedStatement 类，并被最终的 AbstractShardingPreparedStatementAdapter 适配器类所继承。</p>
 <p>这样就形成了如上图所示的复杂类层结构。</p>

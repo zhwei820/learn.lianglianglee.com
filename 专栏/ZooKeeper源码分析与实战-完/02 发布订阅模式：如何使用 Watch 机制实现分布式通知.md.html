@@ -210,14 +210,14 @@ Watcher：监控事件
 <pre><code class="language-js">getData(String path, Watcher watcher, Stat stat)
 </code></pre>
 <p>知道了 ZooKeeper 添加服务器监控事件的方式，下面我们来讲解一下触发通知的条件。</p>
-<p><img src="assets/Ciqc1F61ILaAb7sQAAC6T3wMHDU651.png" alt="image.png" /></p>
+<p><img src="assets/Ciqc1F61ILaAb7sQAAC6T3wMHDU651.png" alt="png" /></p>
 <p>上图中列出了客户端在不同会话状态下，相应的在服务器节点所能支持的事件类型。例如在客户端连接服务端的时候，可以对数据节点的创建、删除、数据变更、子节点的更新等操作进行监控。</p>
 <p>现在我们已经从应用层的角度了解了 ZooKeeper 中的 Watch 机制，而学习 ZooKeeper 过程中一个大问题就是入门容易精通难，像上边我们通过几个简单的 API 调用就可以对服务器的节点状态变更进行监控，但是在实际生产环境中我们会遇到很多意想不到的问题，要想解决好这些问题就要深入理解 Watch 的底层实现机制。</p>
 <h3>Watch 机制的底层原理</h3>
 <p>现在我们就深入底层了解其背后的实现原理。与上个课时直接通过底层代码的调用过程来分析不同，在 Watch 底层实现的分析阶段，由于 Watch 机制涉及了客户端和服务端的多个函数和操作节点，单单按照程序执行流程分析跳跃性对整体实现机制的理解难度大，这也是我在学习 Watch 这部分底层实现遇到的问题。为了更好地阐述 Watch 机制，我们另辟蹊径，从设计模式角度出发来分析其底层实现：</p>
-<p><img src="assets/Ciqc1F61IL-AEQuUAABdpaAsy2k628.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F61IL-AEQuUAABdpaAsy2k628.png" alt="png" /></p>
 <p>最初我在开始学习 Watch 机制的时候，它给我的第一印象是，其结构很像设计模式中的”观察者模式“，一个对象或者数据节点可能会被多个客户端监控，当对应事件被触发时，会通知这些对象或客户端。我们可以将 Watch 机制理解为是分布式环境下的观察者模式。所以接下来我们就以观察者模式的角度点来看看 ZooKeeper 底层 Watch 是如何实现的。</p>
-<p><img src="assets/Ciqc1F61IMWAbWW9AABzXk9xuOs953.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F61IMWAbWW9AABzXk9xuOs953.png" alt="png" /></p>
 <p>通常我们在实现观察者模式时，最核心或者说关键的代码就是创建一个列表来存放观察者。
 而在 ZooKeeper 中则是在客户端和服务器端分别实现两个存放观察者列表，即：ZKWatchManager 和 WatchManager。其核心操作就是围绕着这两个展开的。</p>
 <h4>客户端 Watch 注册实现过程</h4>
@@ -400,7 +400,7 @@ rsp = new GetDataResponse(b, stat);
 <p>提到 ZooKeeper 的应用场景，你可能第一时间会想到最为典型的发布订阅功能。发布订阅功能可以看作是一个一对多的关系，即一个服务或数据的发布者可以被多个不同的消费者调用。一般一个发布订阅模式的数据交互可以分为消费者主动请求生产者信息的拉取模式，和生产者数据变更时主动推送给消费者的推送模式。ZooKeeper 采用了两种模式结合的方式实现订阅发布功能。下面我们来分析一个具体案例：</p>
 <p>在系统开发的过程中会用到各种各样的配置信息，如数据库配置项、第三方接口、服务地址等，这些配置操作在我们开发过程中很容易完成，但是放到一个大规模的集群中配置起来就比较麻烦了。通常这种集群中，我们可以用配置管理功能自动完成服务器配置信息的维护，利用ZooKeeper 的发布订阅功能就能解决这个问题。</p>
 <p>我们可以把诸如数据库配置项这样的信息存储在 ZooKeeper 数据节点中。如图中的 /confs/data_item1。服务器集群客户端对该节点添加 Watch 事件监控，当集群中的服务启动时，会读取该节点数据获取数据配置信息。而当该节点数据发生变化时，ZooKeeper 服务器会发送 Watch 事件给各个客户端，集群中的客户端在接收到该通知后，重新读取节点的数据库配置信息。</p>
-<p><img src="assets/CgqCHl61INaAJeAEAAA8lZ8lpbE688.png" alt="image" /></p>
+<p><img src="assets/CgqCHl61INaAJeAEAAA8lZ8lpbE688.png" alt="png" /></p>
 <p>我们使用 Watch 机制实现了一个分布式环境下的配置管理功能，通过对 ZooKeeper 服务器节点添加数据变更事件，实现当数据库配置项信息变更后，集群中的各个客户端能接收到该变更事件的通知，并获取最新的配置信息。<strong>要注意一点是，我们提到 Watch 具有一次性，所以当我们获得服务器通知后要再次添加 Watch 事件。</strong></p>
 <h3>结束语</h3>
 <p>本课时我们学习了 ZooKeeper 中非常重要的基础知识——Watch 监控机制。详细分析了 ZooKeeper 在处理 Watch 事件的底层实现，并通过我们掌握的知识实现了一个集群环境下的配置管理功能。</p>

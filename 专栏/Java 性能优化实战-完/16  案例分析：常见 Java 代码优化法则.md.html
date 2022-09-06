@@ -441,7 +441,7 @@ RegexVsRagelBenchmark.regex  thrpt   10  201.322 ±  47.056  ops/ms
 <h4>案例 2：HikariCP 的字节码修改</h4>
 <p>在 <strong>“09 | 案例分析：池化对象的应用场景”</strong> 中，我们提到了 HikariCP 对字节码的修改，这个职责是由 JavassistProxyFactory 类来管理的。Javassist 是一个字节码类库，HikariCP 就是用它对字节码进行修改。</p>
 <p>如下图所示，这是工厂类的主要方法。</p>
-<p><img src="assets/CgqCHl9PEBqAUmucAABlRi1dKhM359.jpg" alt="15970255895249.jpg" /></p>
+<p><img src="assets/CgqCHl9PEBqAUmucAABlRi1dKhM359.jpg" alt="png" /></p>
 <p>它通过 generateProxyClass 生成代理类，主要是针对 Connection、Statement、ResultSet、DatabaseMetaData 等 jdbc 的核心接口。</p>
 <p>右键运行这个类，可以看到代码生成了一堆 Class 文件。</p>
 <pre><code>Generating com.zaxxer.hikari.pool.HikariProxyConnection
@@ -453,7 +453,7 @@ Generating com.zaxxer.hikari.pool.HikariProxyCallableStatement
 Generating method bodies for com.zaxxer.hikari.proxy.ProxyFactory
 </code></pre>
 <p>对于这一部分的代码组织，使用了设计模式中的委托模式。我们发现 HikariCP 源码中的代理类，比如 ProxyConnection，都是 abstract 的，它的具体实例就是使用 javassist 生成的 class 文件。反编译这些生成的 class 文件，可以看到它实际上是通过调用父类中的委托对象进行处理的。</p>
-<p><img src="assets/CgqCHl9PECuAFz5zAAB0EwpHKE0091.jpg" alt="15970285875030.jpg" /></p>
+<p><img src="assets/CgqCHl9PECuAFz5zAAB0EwpHKE0091.jpg" alt="png" /></p>
 <p>这么做有两个好处：</p>
 <ul>
 <li>第一，在代码中只需要实现需要修改的 JDBC 接口方法，其他的交给代理类自动生成的代码，极大地减少了编码数量。</li>

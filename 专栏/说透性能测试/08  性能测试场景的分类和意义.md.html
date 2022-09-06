@@ -168,24 +168,24 @@ function hide_canvas() {
 </ul>
 <h3>单接口负载场景</h3>
 <p><strong>单接口负载场景就是通过模拟多线程对单接口进行负载测试</strong>。我的具体做法是选定线程数后持续循环运行一定时间，比如分别运行 100 线程、200 线程、300线程等，一般相同线程数运行 10～15 min，然后获取事务响应时间、TPS、报错率，监测测试系统的各服务器资源使用情况（CPU、内存、磁盘、网络等），把具体数据记录之后再开始跑下一个线程数。每一组线程数级别会有对应的 TPS，直到你找到 TPS 的拐点。如下图所示，横坐标是线程数，纵坐标是 TPS，线程数增加到 400 时出现了拐点。</p>
-<p><img src="assets/Cip5yGAXxtmALS-eAAJEi_Hw2MM930.png" alt="1.png" /></p>
+<p><img src="assets/Cip5yGAXxtmALS-eAAJEi_Hw2MM930.png" alt="png" /></p>
 <p>这里需要<strong>注意的点</strong>有两个。</p>
 <ul>
 <li>使用工具做性能测试时，动辄就是上千的线程数，所以如果你是一位初学者，我更加倾向于你从一个相对<strong>比较低的线程数梯度增加</strong>，这样才能够比较清晰地找到 TPS 的拐点。</li>
 <li>我还建议为<strong>每个虚拟用户级别做单独的场景</strong>，网上绝大部分的教程，在一个场景中做了很多梯度（如下图所示），这样只是看上去简单方便一些，其实很不利于分析和诊断，这个方式我并不推荐。因为并不是每一个量级的性能表现都是类似的，而且一个场景多梯度出来的报表也可能没你想象中的清晰明了。在 JMeter 的聚合报告中还会将结果数据平均化，<strong>这样的方式并不能准确地记录每个线程梯度对应的 TPS</strong>。而在一个场景里先固定虚拟用户可以将自己的精力聚焦在诊断上。</li>
 </ul>
-<p><img src="assets/CgpVE2AXxvSANDuYAAEQbLHr5vg312.png" alt="2.png" /></p>
+<p><img src="assets/CgpVE2AXxvSANDuYAAEQbLHr5vg312.png" alt="png" /></p>
 <h3>混合场景负载测试</h3>
 <p>混合场景是性能测试中最重要的场景之一，这个场景是为了最大程度模拟用户真实的操作。真实的线上操作不只有单接口的操作，一定是多种业务同时在进行，比如张三在浏览商品，李四在添加购物车等。</p>
 <p>所以混合场景测试会将多个接口按照实际大促时候的比例混合起来，然后增加线程数找出多个接口 TPS 的和对应的峰值。这个比例也是混合场景的关键，在[《07 | 你真的知道如何制定性能测试的目标吗？》]中已经较为详细地阐述了制定比例的方法，本讲就不再赘述。加用户运行的基本策略可以参考上文的<strong>单接口负载测试</strong>。混合场景执行除了要观察总的 TPS，还有一个非常关键的因素就是如何控制接口之间的调用比例，使其不能偏离预期。</p>
 <p><strong>如何使用 JMeter 去控制场景比例？</strong></p>
 <p>相信你已经知道线程数可以改变接口的 TPS，但是如果每次通过线程数调整这个过程会比较烦琐。JMeter 提供了一个能较好地解决这个问题的插件，叫作<strong>吞吐量控制器</strong>，它在逻辑控制器组件中，如下图所示：</p>
-<p><img src="assets/Cip5yGARB_2Ad2-zAACP3jPiNm4329.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yGARB_2Ad2-zAACP3jPiNm4329.png" alt="png" /></p>
 <p>我来简单介绍一下这个插件配置规则，默认的情况下使用的是<strong>百分比模式</strong>，也就是 Percent Excutions。吞吐量一栏对应的是 TPS 占比，我用 login 和 register 这两个接口来模拟下，</p>
 <p>login 接口配置比例是 80%，如下图所示，剩下的 20% 配置给 register。</p>
-<p><img src="assets/Cip5yGARCASAO_NdAABzzrCLU6s777.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yGARCASAO_NdAABzzrCLU6s777.png" alt="png" /></p>
 <p>看下运行后的效果，我直接在 JMeter 中添加聚合报告元件，如下图所示：</p>
-<p><img src="assets/Cip5yGAXxxiAFWIcAAC-NsocAFk929.png" alt="5.png" /></p>
+<p><img src="assets/Cip5yGAXxxiAFWIcAAC-NsocAFk929.png" alt="png" /></p>
 <p>实际计算下来的值为 1778.2/2222.7≈0.8，这个数据是比较准确的。</p>
 <p>以上是我所说的基石场景，包括基准测试、负载测试、混合场景测试等，这三个场景是有<strong>依次执行的顺序关系</strong>的，按照顺序执行更容易发现问题且减少不必要的工作，比如你连基准测试都不通过，就没有必要进行负载测试了。所以我们在做每一次性能测试时，都不应该省去或者颠倒上述的场景步骤。</p>
 <p>接着我带你继续学习其他性能测试场景，为了达到相对应的性能测试目的，这些场景可以根据需求进行选择。</p>

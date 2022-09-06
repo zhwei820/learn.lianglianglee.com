@@ -368,10 +368,10 @@ public interface ServiceDiscovery extends Prioritized {
 }
 </code></pre>
 <p>ServiceDiscovery 接口被 @SPI 注解修饰，是一个扩展点，针对不同的注册中心，有不同的 ServiceDiscovery 实现，如下图所示：</p>
-<p><img src="assets/Ciqc1F_q45aAGn14AAEh58Guyew441.png" alt="Lark20201229-160604.png" /></p>
+<p><img src="assets/Ciqc1F_q45aAGn14AAEh58Guyew441.png" alt="png" /></p>
 <p>ServiceDiscovery 继承关系图</p>
 <p>在 Dubbo 创建 ServiceDiscovery 对象的时候，会通过 ServiceDiscoveryFactory 工厂类进行创建。ServiceDiscoveryFactory 接口也是一个扩展接口，Dubbo 只提供了一个默认实现—— DefaultServiceDiscoveryFactory，其继承关系如下图所示：</p>
-<p><img src="assets/CgpVE1_q4_iAZ8ARAAEu4mMS65Y213.png" alt="Lark20201229-160606.png" /></p>
+<p><img src="assets/CgpVE1_q4_iAZ8ARAAEu4mMS65Y213.png" alt="png" /></p>
 <p>ServiceDiscoveryFactory 继承关系图</p>
 <p>在 AbstractServiceDiscoveryFactory 中维护了一个 ConcurrentMap&lt;String, ServiceDiscovery&gt; 类型的集合（discoveries 字段）来缓存 ServiceDiscovery 对象，并提供了一个 createDiscovery() 抽象方法来创建 ServiceDiscovery 实例。</p>
 <pre><code>public ServiceDiscovery getServiceDiscovery(URL registryURL) {
@@ -427,7 +427,7 @@ public static org.apache.curator.x.discovery.ServiceInstance&lt;ZookeeperInstanc
 <p>除了上述服务实例发布的功能之外，在服务实例订阅的时候，还会用到 ZookeeperServiceDiscovery 查询服务实例的信息，这些方法都是直接依赖 Apache Curator 实现的，例如，getServices() 方法会调用 Curator ServiceDiscovery 的 queryForNames() 方法查询 Service Name，getInstances() 方法会通过 Curator ServiceDiscovery 的 queryForInstances() 方法查询 Service Instance。</p>
 <h3>EventListener 接口</h3>
 <p>ZookeeperServiceDiscovery 除了实现了 ServiceDiscovery 接口之外，还实现了 EventListener 接口，如下图所示：</p>
-<p><img src="assets/Cip5yF_petCAV9sXAAB9u4EYOqk073.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yF_petCAV9sXAAB9u4EYOqk073.png" alt="png" /></p>
 <p>ZookeeperServiceDiscovery 继承关系图</p>
 <p>也就是说，<strong>ZookeeperServiceDiscovery 本身也是 EventListener 实现，可以作为 EventListener 监听某些事件</strong>。下面我们先来看 Dubbo 中 EventListener 接口的定义，其中关注三个方法：onEvent() 方法、getPriority() 方法和 findEventType() 工具方法。</p>
 <pre><code>@SPI
@@ -461,7 +461,7 @@ public interface EventListener&lt;E extends Event&gt; extends java.util.EventLis
 }
 </code></pre>
 <p>Dubbo 中有很多 EventListener 接口的实现，如下图所示：</p>
-<p><img src="assets/Cip5yF_petmAI2w9AAC5QQrgGjY394.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yF_petmAI2w9AAC5QQrgGjY394.png" alt="png" /></p>
 <p>EventListener 继承关系图</p>
 <p>我们先来重点关注 ZookeeperServiceDiscovery 这个实现，在其 onEvent() 方法（以及 addServiceInstancesChangedListener() 方法）中会调用 registerServiceWatcher() 方法重新注册：</p>
 <pre><code>public void onEvent(ServiceInstancesChangedEvent event) {
@@ -517,7 +517,7 @@ public interface EventDispatcher extends Listenable&lt;EventListener&lt;?&gt;&gt
 }
 </code></pre>
 <p>EventDispatcher 接口被 @SPI 注解修饰，是一个扩展点，Dubbo 提供了两个具体实现——ParallelEventDispatcher 和 DirectEventDispatcher，如下图所示：</p>
-<p><img src="assets/Cip5yF_pew-AdtkyAAB-Epfg96E814.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yF_pew-AdtkyAAB-Epfg96E814.png" alt="png" /></p>
 <p>EventDispatcher 继承关系图</p>
 <p>在 AbstractEventDispatcher 中维护了两个核心字段。</p>
 <ul>

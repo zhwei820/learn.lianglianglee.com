@@ -163,7 +163,7 @@ function hide_canvas() {
 <p>Netty 的高性能架构，是基于一个网络编程设计模式 Reactor 进行设计的。现在，大多数与 I/O 相关的组件，都会使用 Reactor 模型，比如 Tomcat、Redis、Nginx 等，可见 Reactor 应用的广泛性。</p>
 <p>Reactor 是 NIO 的基础。为什么 NIO 的性能就能够比传统的阻塞 I/O 性能高呢？我们首先来看一下传统阻塞式 I/O 的一些特点。</p>
 <h3>阻塞 I/O 模型</h3>
-<p><img src="assets/CgqCHl9MynKADFW4AAB9PAD7ZA0902.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9MynKADFW4AAB9PAD7ZA0902.png" alt="png" /></p>
 <p>如上图，是典型的<strong>BIO 模型</strong>，每当有一个连接到来，经过协调器的处理，就开启一个对应的线程进行接管。如果连接有 1000 条，那就需要 1000 个线程。</p>
 <p>线程资源是非常昂贵的，除了占用大量的内存，还会占用非常多的 CPU 调度时间，所以 BIO 在连接非常多的情况下，效率会变得非常低。</p>
 <p>下面的代码是使用 ServerSocket 实现的一个简单 Socket 服务器，监听在 8888 端口。</p>
@@ -207,7 +207,7 @@ nice
 PONG:nice
 </code></pre>
 <p>使用 “04 | 工具实践：如何获取代码性能数据？”提到的 JMC 工具，在录制期间发起多个连接，能够发现有多个线程在运行，和连接数是一一对应的。</p>
-<p><img src="assets/CgqCHl9MyoiAGgY5AAGbD3wkqUs988.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9MyoiAGgY5AAGbD3wkqUs988.png" alt="png" /></p>
 <p>可以看到，BIO 的读写操作是阻塞的，线程的整个生命周期和连接的生命周期是一样的，而且不能够被复用。</p>
 <p>就单个阻塞 I/O 来说，它的效率并不比 NIO 慢。但是当服务的连接增多，考虑到整个服务器的资源调度和资源利用率等因素，NIO 就有了显著的效果，NIO 非常适合高并发场景。</p>
 <h3>非阻塞 I/O 模型</h3>
@@ -294,7 +294,7 @@ ssc.register(selector, ssc.validOps());
 <li>写就绪事件（OP_WRITE）。</li>
 </ul>
 <p>任何网络和文件操作，都可以抽象成这四个事件。</p>
-<p><img src="assets/Ciqc1F9MyqmAdmlrAAMSNPAj_F4698.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9MyqmAdmlrAAMSNPAj_F4698.png" alt="png" /></p>
 <p>接下来，在 while 循环里，使用 select 函数，阻塞在主线程里。所谓<strong>阻塞</strong>，就是操作系统不再分配 CPU 时间片到当前线程中，所以 select 函数是几乎不占用任何系统资源的。</p>
 <pre><code>int num = selector.select();
 </code></pre>
@@ -333,7 +333,7 @@ int size = sc.read(buf);
 <h3>Reactor 模式</h3>
 <p>了解了 BIO 和 NIO 的一些使用方式，Reactor 模式就呼之欲出了。</p>
 <p>NIO 是基于事件机制的，有一个叫作 Selector 的选择器，阻塞获取关注的事件列表。获取到事件列表后，可以通过分发器，进行真正的数据操作。</p>
-<p><img src="assets/Ciqc1F9MysaAZw9aAADxUNI1q_I139.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9MysaAZw9aAADxUNI1q_I139.png" alt="png" /></p>
 <blockquote>
 <p>该图来自 Doug Lea 的<a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">《</a><a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">Scalable IO in Java》</a>，该图指明了最简单的 Reactor 模型的基本元素。</p>
 </blockquote>
@@ -346,7 +346,7 @@ int size = sc.read(buf);
 <li><strong>Reactor</strong>将具体的事件分配（dispatch）给 Handler。</li>
 </ul>
 <p>我们可以对上面的模型进行进一步细化，如下图所示，将 Reactor 分为 mainReactor 和 subReactor 两部分。</p>
-<p><img src="assets/Ciqc1F9MytSAebMfAAFlMTAoyJQ496.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F9MytSAebMfAAFlMTAoyJQ496.png" alt="png" /></p>
 <blockquote>
 <p>该图来自 Doug Lea 的 <a href="http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf">《Scalable IO in Java》</a></p>
 </blockquote>
@@ -413,7 +413,7 @@ int size = sc.read(buf);
 <p>所以，市面上对 AIO 的实践并不多，在采用技术选型的时候，一定要谨慎。</p>
 <h3>响应式编程</h3>
 <p>你可能听说过 Spring 5.0 的 WebFlux，WebFlux 是可以替代 Spring MVC 的一套解决方案，可以编写响应式的应用，两者之间的关系如下图所示：</p>
-<p><img src="assets/Ciqc1F9My2WAeCGbAACrOS4gYGA066.png" alt="image.png" /></p>
+<p><img src="assets/Ciqc1F9My2WAeCGbAACrOS4gYGA066.png" alt="png" /></p>
 <p>Spring WebFlux 的底层使用的是 Netty，所以操作是异步非阻塞的，类似的组件还有 vert.x、akka、rxjava 等。</p>
 <p>WebFlux 是运行在 project reactor 之上的一个封装，其根本特性是后者提供的，至于再底层的非阻塞模型，就是由 Netty 保证的了。</p>
 <p>非阻塞的特性我们可以理解，那响应式又是什么概念呢？</p>

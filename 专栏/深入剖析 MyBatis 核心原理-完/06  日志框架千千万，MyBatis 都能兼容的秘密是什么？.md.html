@@ -168,7 +168,7 @@ function hide_canvas() {
 <h3>适配器模式</h3>
 <p>适配器模式主要解决的是<strong>由于接口不能兼容而导致类无法使用的问题，这在处理遗留代码以及集成第三方框架的时候用得比较多</strong>。其核心原理是：<strong>通过组合的方式，将需要适配的类转换成使用者能够使用的接口</strong>。</p>
 <p>适配器模式的类图如下所示：</p>
-<p><img src="assets/Cgp9HWAfYoOAKO6lAAEyIgsMVKA161.png" alt="2.png" /></p>
+<p><img src="assets/Cgp9HWAfYoOAKO6lAAEyIgsMVKA161.png" alt="png" /></p>
 <p>适配器模式类图</p>
 <p>在该类图中，你可以看到适配器模式涉及的三个核心角色。</p>
 <ul>
@@ -181,7 +181,7 @@ function hide_canvas() {
 <h3>日志模块</h3>
 <p><strong>MyBatis 自定义的 Log 接口位于 org.apache.ibatis.logging 包中，相关的适配器也位于该包中</strong>，下面我们就来看看该模块的具体实现。</p>
 <p>首先是 LogFactory 工厂类，它负责创建 Log 对象。这些 Log 接口的实现类中，就包含了多种第三方日志框架的适配器，如下图所示：</p>
-<p><img src="assets/CioPOWAfYo6AbKZWAAKqpRwXpuA169.png" alt="3.png" /></p>
+<p><img src="assets/CioPOWAfYo6AbKZWAAKqpRwXpuA169.png" alt="png" /></p>
 <p>Log 接口继承关系图</p>
 <p>在 LogFactory 类中有<a href="https://github.com/xxxlxy2008/mybatis/blob/master/src/main/java/org/apache/ibatis/logging/LogFactory.java#L31-L43">一段静态代码块</a>，其中会依次加载各个第三方日志框架的适配器。在静态代码块执行的 tryImplementation() 方法中，首先会检测 logConstructor 字段是否为空，如果不为空，则表示已经成功确定当前使用的日志框架，直接返回；如果为空，则在当前线程中执行传入的 Runnable.run() 方法，尝试确定当前使用的日志框架。</p>
 <p>以 JDK Logging 的加载流程（useJdkLogging() 方法）为例，其具体代码实现和注释如下：</p>
@@ -203,7 +203,7 @@ private static void setImplementation(Class&lt;? extends Log&gt; implClass) {
 </code></pre>
 <p>下面我们以 Jdk14LoggingImpl 为例介绍一下 MyBatis Log 接口的实现。</p>
 <p>Jdk14LoggingImpl 作为 Java Logging 的适配器，在实现 MyBatis Log 接口的同时，在内部还封装了一个 java.util.logging.Logger 对象（这是 JDK 提供的日志框架），如下图所示：</p>
-<p><img src="assets/CioPOWAeM0WAMQPTAABNRPFy7R0954.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWAeM0WAMQPTAABNRPFy7R0954.png" alt="png" /></p>
 <p>Jdk14LoggingImpl 继承关系图</p>
 <p>Jdk14LoggingImpl 对 Log 接口的实现也比较简单，其中会将日志输出操作委托给底层封装的java.util.logging.Logger 对象的相应方法，这与前文介绍的典型适配器模式的实现完全一致。Jdk14LoggingImpl 中的核心实现以及注释如下：</p>
 <pre><code>public class Jdk14LoggingImpl implements Log {
@@ -226,7 +226,7 @@ private static void setImplementation(Class&lt;? extends Log&gt; implClass) {
 <p>在后面即将介绍的 org.apache.ibatis.logging.jdbc 包中，使用到了 JDK 动态代理的相关知识，所以这里我们就先来介绍一下经典的静态代理模式，以及 JDK 提供的动态代理。</p>
 <h4>1. 静态代理模式</h4>
 <p>经典的静态代理模式，其类图如下所示：</p>
-<p><img src="assets/Cgp9HWAfYrOAWv7JAAD2hkpzuWw664.png" alt="4.png" /></p>
+<p><img src="assets/Cgp9HWAfYrOAWv7JAAD2hkpzuWw664.png" alt="png" /></p>
 <p>代理模式类图</p>
 <p>从该类图中，你可以看到与代理模式相关的三个核心角色。</p>
 <ul>
@@ -378,7 +378,7 @@ private static void setImplementation(Class&lt;? extends Log&gt; implClass) {
 <h3>JDBC Logger</h3>
 <p>了解了代理模式以及 JDK 动态代理的基础知识之后，下面我们开始分析 org.apache.ibatis.logging.jdbc 包中的内容。</p>
 <p>首先来看其中<strong>最基础的抽象类—— BaseJdbcLogger，它是 jdbc 包下其他 Logger 类的父类</strong>，继承关系如下图所示：</p>
-<p><img src="assets/CioPOWAfYsuAc9WjAAFm7izVaMI477.png" alt="1.png" /></p>
+<p><img src="assets/CioPOWAfYsuAc9WjAAFm7izVaMI477.png" alt="png" /></p>
 <p>BaseJdbcLogger 继承关系图</p>
 <p>在 BaseJdbcLogger 这个抽象类中，定义了 SET_METHODS 和 EXECUTE_METHODS 两个 Set 类型的集合。其中，SET_METHODS 用于记录绑定 SQL 参数涉及的全部 set*() 方法名称，例如 setString() 方法、setInt() 方法等。EXECUTE_METHODS 用于记录执行 SQL 语句涉及的所有方法名称，例如 execute() 方法、executeUpdate() 方法、executeQuery() 方法、addBatch() 方法等。这两个集合都是在 BaseJdbcLogger 的静态代码块中被填充的。</p>
 <p>从上面的 BaseJdbcLogger 继承关系图中可以看到，BaseJdbcLogger 的子类同时会实现 InvocationHandler 接口。</p>

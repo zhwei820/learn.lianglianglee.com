@@ -159,7 +159,7 @@ function hide_canvas() {
 <p><strong>组件（Component）通常指大型系统中任何封装良好、连贯且可独立替换的中间子系统，在微服务架构中，一般代表单个微服务，因而组件测试（Component Testing）就是对单个服务的测试。</strong></p>
 <p>在一个典型的微服务应用程序中，会有许多微服务，且它们之间存在相互调用关系。因此，要想高效地对单个微服务进行测试，需要将其依赖的其他微服务和数据存储模块进行模拟（mock）。</p>
 <p>比如，使用测试替身（Test Double）工具隔离掉单个微服务依赖的其他微服务和数据存储，避免测试过程中受到依赖服务或数据存储模块的各类影响（如服务不可用、服务缺陷、数据库连接断开等）而出现阻塞测试过程、测试无效等情况。</p>
-<p><img src="assets/CgqCHl8pBgqANMbHAABddoBq1dc448.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8pBgqANMbHAABddoBq1dc448.png" alt="png" /></p>
 <p>从某种意义上来说，组件测试的本质上是将一个微服务与其依赖的所有其他服务和数据存储模块等隔离开，对该服务进行的功能验收测试。</p>
 <p>基于组件测试的隔离特性，它有如下优势：</p>
 <ul>
@@ -170,7 +170,7 @@ function hide_canvas() {
 <p>根据组件测试调用其依赖模块的方式，以及测试替身位于被测服务所在进程的内部或外部，可以有两种方式：进程内组件测试和进程外组件测试。</p>
 <h3>进程内组件测试</h3>
 <p>进程内组件测试是将测试替身注入所测服务所在的进程中，这样对服务的依赖调用通过方法调用的方式实现，不再需要使用网络。</p>
-<p><img src="assets/CgqCHl8pBhmAIvbCAAYUsJRZIuE903.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl8pBhmAIvbCAAYUsJRZIuE903.png" alt="png" /></p>
 <p>进程内组件测试示意图</p>
 <p>如图所示，进程内组件测试有如下变化：</p>
 <ul>
@@ -183,14 +183,14 @@ function hide_canvas() {
 <h3>进程外组件测试</h3>
 <p>进程外组件测试则是将测试替身置于被测服务所在进程之外，因而被测服务需要通过实际网络调用与模拟的外部服务进行交互。</p>
 <p>如下图所示，只用模拟的外部服务（Stub Service）替代了真实的外部服务（External Service），所以模拟的外部服务和被测服务都以单独的进程运行，而对于数据库、消息代理等基础设施模块则直接使用真实的。因此，被测服务和模拟的外部服务存在于不同的进程中，这就是“进程外（out-of-process）”的具体表现。除了对功能逻辑有所验证外，进程外组件测试还验证了微服务具有正确的网络配置并能够处理网络请求。</p>
-<p><img src="assets/CgqCHl8pBlWAB4TKAAaCogpYuQQ495.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl8pBlWAB4TKAAaCogpYuQQ495.png" alt="png" /></p>
 <p>进程外组件测试示意图</p>
 <p>关于外部服务模拟，也有不同的类型，常见的有使用事先构造好的静态数据、通过传参方式动态调用API、使用<strong>录制回放技术</strong>（record-replay mechanism），你可以根据自己的需求选取模拟类型，如果依赖的服务仅提供少数几个固定的功能，并且返回结果较为固定，可以使用静态数据来模拟；如果依赖的服务功能较为单一，但是返回结果有一定的规律，可以使用动态调用 API 的方式来模拟；如果依赖的服务功能丰富多样，那么推荐使用录制回放技术来模拟。</p>
 <p>在实际微服务项目中，进程外的组件测试非常常见，一般使用服务虚拟化工具对依赖的服务进行模拟。上一课时给出了 Wiremock 模拟服务通信的例子，在进行组件测试时，依然可以用Wiremock，但与集成测试不同的是，组件测试需要更加深入：<strong>验证被测服务的功能或行为是否符合预期、返回结果的格式是否符合预期、对服务超时、异常返回等异常行为是否具有容错能力，等等。</strong></p>
 <p>用 Wiremock 模拟服务的具体步骤如下：</p>
 <p>1.下载 <a href="https://repo1.maven.org/maven2/com/github/tomakehurst/wiremock-jre8-standalone/2.27.0/wiremock-jre8-standalone-2.27.0.jar">Wiremock 独立版本</a>（wiremock-jre8-standalone-2.27.0.jar）;
 2.作为独立版本运行，效果如下：</p>
-<p><img src="assets/CgqCHl8pBmaAcHr_AADb2quOzVs534.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8pBmaAcHr_AADb2quOzVs534.png" alt="png" /></p>
 <p>启动后，Wiremock 会在本地启动一个监听指定端口的 web 服务，端口可以用 --port和 --https-port 来分别指定 http 协议和指定 https 协议端口。之后发到指定端口的请求，就会由 WireMock 来完成响应，从而达到接口 Mock 的目的。</p>
 <p>这时，在本地运行目录下会看到自动生成 __files 和 mappings 两个目录。这两个目录中存放的是 Mock 模拟的接口匹配内容。其中 __files 存放接口响应中会用到的一些文件资源，mappings 存放接口响应匹配规则。匹配文件以 json 格式存放在 mappings 目录下，WireMock 会在启动后自动加载该目录下所有符合格式的文件作为匹配规则使用。</p>
 <p>3.编辑匹配规则文件 tq.json，放到 mappings 目录下，内容如下：</p>
@@ -209,7 +209,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>注意：body 中的内容为 Json 格式时，需要对其中出现的双引号进行转义，否则启动 Wiremock 时将报错。</p>
-<p><img src="assets/Ciqc1F8pBomAKzePAAI6xPBo8Uo976.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8pBomAKzePAAI6xPBo8Uo976.png" alt="png" /></p>
 <p>4.重新启动 Wiremock，访问模拟服务的对应接口（ <a href="http://localhost:8080/api/json/est/now">http://localhost:8080/api/json/est/now</a>），返回如下：</p>
 <pre><code>{
 $id: &quot;1&quot;,
@@ -292,7 +292,7 @@ serviceResponse: null,
 <p>Wiremock 的模拟能力远远不止这些，足够你用它来模拟被测服务，感兴趣的话可以自行探索和学习。</p>
 <h3>“进程内” VS “进程外”</h3>
 <p>如上可知，两种测试方法各有优劣，如下是示意图，方便查看它们的异同：</p>
-<p><img src="assets/CgqCHl8pByGARk8eAAgwMHVWdTI199.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8pByGARk8eAAgwMHVWdTI199.png" alt="png" /></p>
 <p>两种测试方法的示意图对比</p>
 <p>两种测试类型的优缺点对比：</p>
 <table>

@@ -546,7 +546,7 @@ function hide_canvas() {
 <h3>可靠事件模式</h3>
 <p>可靠事件模式的一种实现结合了本地事务与可靠消息传递的特性。在本地事务中，当前限界上下文的业务表与事件消息表处于同一个数据库，如此就可以保证业务数据的更改与事件消息的插入能够保证强一致性。当事件消息成功插入到事件消息表后，再利用事件发布者（Event Publisher）轮询该事件消息表，向消息队列（消息代理）发布事件。这时候，就需要利用消息队列传递消息的“至少一次（at least once）”特性，保证该事件消息无论如何都要传递到消息队列中，并被消息的订阅者成功订阅。只要保证事件处理器对该事件的处理是幂等的，就能保证执行操作的可靠性，最终达成数据的一致。</p>
 <p>以话费充值业务场景为例，由交易服务发起支付操作，调用支付服务。支付服务在更新了 ACCOUNTS 表的账户余额同时，还要将 PaymentCompleted 事件追加到属于同一个数据库的 EVENTS 表中。EventPublisher 会定时轮询 EVENTS 表，获得新追加的事件后将其发布给消息队列。充值服务订阅 PaymentCompleted 事件。一旦收到该事件之后，就会执行充值服务的领域逻辑，更新 FEES 表。这个执行过程如下图所示：</p>
-<p><img src="assets/6cfa6400-21a9-11ea-99cd-25ac5ddd6bb3" alt="33308538.png" /></p>
+<p><img src="assets/6cfa6400-21a9-11ea-99cd-25ac5ddd6bb3" alt="png" /></p>
 <p>充值服务在成功完成充值后，在更新话费的同时，还要将 PhoneBillCharged 事件追加到充值数据库的 EVENTS 表中，然后由 EventPublisher 轮询 EVENTS 表并发布事件。交易服务会订阅 PhoneBillCharged 事件，然后添加一条新的交易记录在 TRANSACTIONS 数据表。这个流程同样采用可靠事件模式。</p>
 <p>在实现可靠事件模式时，领域事件是领域模型中不可缺少的一部分。领域事件的持久化与聚合的持久化发生在一个本地事务范围内，为了保证它们的事务一致性，可以将该领域事件放在聚合边界内部，同时为聚合以及对应的资源库增加操作领域事件的功能。ThoughtWorks 的滕云在文章《<a href="https://insights.thoughtworks.cn/back-end-development-practice-series-3/">后端开发实践系列——事件驱动架构(EDA)编码实践</a>》中给出了支持领域事件的聚合抽象类与资源库抽象类的范例。例如，能够感知领域事件的聚合抽象类：</p>
 <pre><code class="language-java">public abstract class DomainEventAwareAggregate {
@@ -595,7 +595,7 @@ function hide_canvas() {
 <p>Try 阶段锁定了资源后，进入 Confirm 阶段执行业务的实际操作，由于 Try 阶段已经做了业务检查，Confirm 阶段的操作只需要直接使用 Try 阶段锁定的业务资源。如果Try阶段采用冻结金额来锁定资源，在 Confirm 阶段只需扣掉之前冻结的金额即可。如果 Try 阶段的操作执行失败，就进入到 Cancel 阶段，这个阶段的操作需要释放 Try 阶段锁定的资源，即扣掉之前冻结的金额，并增加（注意：是增加而非撤销，这正是回滚与补偿的区别）账户的可用余额。</p>
 <p>显然，为了应对 TCC 模式的这三个阶段，必须为支付服务的支付操作定义对应的操作，即对应的 tryPay()、confirmPay() 与 cancelPay() 方法。同理，既然 TCC 模式用于协调多个分布式服务，则参与该模式的所有服务都需要遵循该模式划分的三个阶段。故而在话费充值业务场景中，充值服务也需要定义这三个操作：tryCharge()、confirmCharge() 与 cancelCharge()。不同之处在于话费充值的 tryCharge() 操作无需锁定或预留资源。</p>
 <p>TCC 模式将参与主体分为发起方（又称为主业务服务）与参与方（又称为从业务服务）。发起方负责协调事务管理器和多个参与方，由其在启动事务之后，调用所有参与方的 Try 方法。当所有 Try 方法均执行成功时，由事务管理器调用每个参与方的 Confirm 方法。倘若任何一个参与方的 Try 方法执行失败，事务管理器就会调用每个参与方的 Cancel 方法完成补偿。以话费充值场景为例，交易服务为发起方，支付服务与充值服务为参与方，它们采用 TCC 模式的执行流程如下图所示：</p>
-<p><img src="assets/d8c4b0a0-21a9-11ea-b9a2-37be941213d5" alt="85720380.png" /></p>
+<p><img src="assets/d8c4b0a0-21a9-11ea-b9a2-37be941213d5" alt="png" /></p>
 <p>显然，<strong>TCC 模式改变了参与方代表事务资源的领域模型，并对服务接口的定义做出了要求</strong>。倘若一个领域模型要作为 TCC 模式的事务资源，就需要定义相关属性支持对资源自身的锁定或预留。同时，每个作为参与方的业务服务接口都需要定义 Try、Confirm 与 Cancel 方法，在实现这些方法时，还需要保证这些方法具有幂等性。</p>
 <p>为了尽量避免 TCC 模式对领域模型产生影响，关键之处在于遵循整洁架构思想，让领域模型不要依赖本属于基础设施的 TCC 实现机制或框架。因此，在领域驱动分层架构中，应由基础设施层中扮演北向网关的远程服务作为 TCC 模式发起方与参与方的服务。例如，如果使用 tcc-transaction 框架实现 Dubbo 服务的 TCC 模式，那么在基础设施层的提供者实现类中，Try 方法需要通过 @Compensable 标注来指定 Confirm 方法和 Cancel 方法，如支付服务：</p>
 <pre><code class="language-java">package com.dddsample.paymentcontext.gateway.providers;

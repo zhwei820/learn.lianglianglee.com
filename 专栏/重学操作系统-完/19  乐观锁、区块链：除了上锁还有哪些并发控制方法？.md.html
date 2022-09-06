@@ -282,7 +282,7 @@ account=bob, iphone=100
 …… 以及很多其他的数据
 </code></pre>
 <p>我们假设这里的钱可能是 Alice 用某种手段放进来的。或者我们再简化这个模型，比如全世界所有人的钱，都在这个系统里，这样我们就不用关心钱从哪里来这个问题了。如果是比特币，钱是需要挖矿的。</p>
-<p><img src="assets/Ciqc1F-ryT2AGJM0AAC05iMFOvc116.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F-ryT2AGJM0AAC05iMFOvc116.png" alt="png" /></p>
 <p>如图，这个结构也叫作区块链。每个 Block 下面可以存一些数据，每个 Block 知道上一个节点是谁。每个 Block 有上一个节点的摘要签名。也就是说，如果 Block 10 是 Block 11 的上一个节点，那么 Block 11 会知道 Block 10 的存在，且用 Block 11 中 Block 10 的摘要签名，可以证明 Block 10 的数据没有被篡改过。</p>
 <p>区块链构成了一个基于历史版本的事实链，前一个版本是后一个版本的历史。Alice 的钱和苹果店的 iPhone 数量，包括全世界所有人的钱，都在这些 Block 里。</p>
 <p><strong>购买转账的过程</strong></p>
@@ -291,7 +291,7 @@ account=bob, iphone=100
 from=B, to=A, object=iphone, signature=苹果店的签名
 </code></pre>
 <p>那么我们可以在末端节点上再增加一个区块，代表这次交易，如下图：</p>
-<p><img src="assets/Ciqc1F-ryUiAQ5JUAAEC6zaXAKM772.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F-ryUiAQ5JUAAEC6zaXAKM772.png" alt="png" /></p>
 <p>比如，Alice 先在本地完成这件事情，本地的区块链就会像上图那样。 假设有一个中心化的服务器，专门接收这些区块数据，Alice 接下来就可以把数据提交到中心化的服务器，苹果店从中心化服务器上看到这条信息，认为交易被 Alice 执行了，就准备发货。</p>
 <p>如果世界上有很多人同时在这个末端节点上写新的 Block。那么可以考虑由一个可信任的中心服务帮助合并新增的区块数据。就好像多个人同时编辑了一篇文章，发生了冲突，那就可以考虑由一个人整合大家需要修改和新增的内容，避免同时操作产生混乱。</p>
 <h4>解决欺诈问题</h4>
@@ -310,10 +310,10 @@ from=B1, to=A, object=iphonex2, signature=另一个苹果店的签名
 <p>所以结论是，区块链一旦写入就不能修改，这样可以防止很多欺诈行为。</p>
 <h4>解决并发问题</h4>
 <p>假设全球有几十亿人都在下单。那么每次下单，需要创建新的一个 Block。这种情况，会导致最后面的 Block，开很多分支。</p>
-<p><img src="assets/Ciqc1F-ryVaAO-KFAADCyXfna24816.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F-ryVaAO-KFAADCyXfna24816.png" alt="png" /></p>
 <p>这个时候你会发现，这里有同步问题对不对？ 最傻的方案就是用锁解决，比如用一个集中式的办法，去接收所有的请求，这样就又回到中心化的设计。</p>
 <p>还有一个高明的办法，就是允许商家开分支。 用户和苹果店订合同，苹果店独立做一个分支，把用户的合同连起来。</p>
-<p><img src="assets/Ciqc1F-ryV-ATtpAAACJ4ZgkVtU059.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F-ryV-ATtpAAACJ4ZgkVtU059.png" alt="png" /></p>
 <p>这样苹果店自己先维护自己的 Block-Chain，等待合适的时机，再去合并到主分支上。 如果有合同合并不进去，比如余额不足，那再作废这个合同（不发货了）。</p>
 <p>这里请你思考这样一种处理方式：如果全世界每天有 1000 亿笔订单要处理，那么可以先拆分成 100 个区域，每个区域是 10W 家店。这样最终每家店的平均并发量在 10000 单。 然后可以考虑每过多长时间，比如 10s，进行一次逐级合并。</p>
 <p>这样，整体每个节点的压力就不是很大了。</p>

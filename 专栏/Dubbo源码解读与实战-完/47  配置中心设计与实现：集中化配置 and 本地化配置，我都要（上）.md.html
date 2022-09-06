@@ -306,11 +306,11 @@ function hide_canvas() {
 </ol>
 <h3>Configuration</h3>
 <p><strong>Configuration 接口是 Dubbo 中所有配置的基础接口</strong>，其中定义了根据指定 Key 获取对应配置值的相关方法，如下图所示：</p>
-<p><img src="assets/Cip5yF_zz3yABBYdAACqAETTGm0778.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_zz3yABBYdAACqAETTGm0778.png" alt="png" /></p>
 <p>Configuration 接口核心方法</p>
 <p>从上图中我们可以看到，Configuration 针对不同的 boolean、int、String 返回值都有对应的 get*() 方法，同时还提供了带有默认值的 get*() 方法。<strong>这些 get<p style="text-align:center">*() 方法底层首先调用 getInternalProperty() 方法获取配置值</strong>，然后调用 convert() 方法将获取到的配置值转换成返回值的类型之后返回。getInternalProperty() 是一个抽象方法，由 Configuration 接口的子类具体实现。</p>
 <p>下图展示了 Dubbo 中提供的 Configuration 接口实现，包括：SystemConfiguration、EnvironmentConfiguration、InmemoryConfiguration、PropertiesConfiguration、CompositeConfiguration、ConfigConfigurationAdapter 和 DynamicConfiguration。下面我们将结合具体代码逐个介绍其实现。</p>
-<p><img src="assets/Cip5yF_zz6eAMN_oAACEEj9pVjg547.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yF_zz6eAMN_oAACEEj9pVjg547.png" alt="png" /></p>
 <p>Configuration 继承关系图</p>
 <h4>SystemConfiguration &amp; EnvironmentConfiguration</h4>
 <p>SystemConfiguration 是从 Java Properties 配置（也就是 -D 配置参数）中获取相应的配置项，EnvironmentConfiguration 是从使用环境变量中获取相应的配置。两者的 getInternalProperty() 方法实现如下：</p>
@@ -435,7 +435,7 @@ public interface OrderedPropertiesProvider {
 </code></pre>
 <h4>ConfigConfigurationAdapter</h4>
 <p>Dubbo 通过 AbstractConfig 类来抽象实例对应的配置，如下图所示：</p>
-<p><img src="assets/CgqCHl_zz8WAHdY3AAMJFKW_uQE360.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_zz8WAHdY3AAMJFKW_uQE360.png" alt="png" /></p>
 <p>AbstractConfig 继承关系图</p>
 <p>这些 AbstractConfig 实现基本都对应一个固定的配置，也定义了配置对应的字段以及 getter/setter() 方法。例如，RegistryConfig 这个实现类就对应了注册中心的相关配置，其中包含了 address、protocol、port、timeout 等一系列与注册中心相关的字段以及对应的 getter/setter() 方法，来接收用户通过 XML、Annotation 或是 API 方式传入的注册中心配置。</p>
 <p><strong>ConfigConfigurationAdapter 是 AbstractConfig 与 Configuration 之间的适配器</strong>，它会将 AbstractConfig 对象转换成 Configuration 对象。在 ConfigConfigurationAdapter 的构造方法中会获取 AbstractConfig 对象的全部字段，并转换成一个 Map&lt;String, String&gt; 集合返回，该 Map&lt;String, String&gt; 集合将会被 ConfigConfigurationAdapter 的 metaData 字段引用。相关示例代码如下：</p>
@@ -485,9 +485,9 @@ public interface DynamicConfigurationFactory {
 }
 </code></pre>
 <p>DynamicConfigurationFactory 接口的继承关系以及 DynamicConfiguration 接口对应的继承关系如下：</p>
-<p><img src="assets/CgqCHl_0L-GAPVy9AAEqog2bl7U068.png" alt="11.png" /></p>
+<p><img src="assets/CgqCHl_0L-GAPVy9AAEqog2bl7U068.png" alt="png" /></p>
 <p>DynamicConfigurationFactory 继承关系图</p>
-<p><img src="assets/Cip5yF_zz9iAM1YYAAB_QXlLDcU550.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yF_zz9iAM1YYAAB_QXlLDcU550.png" alt="png" /></p>
 <p>DynamicConfiguration 继承关系图</p>
 <p>我们先来看 AbstractDynamicConfigurationFactory 的实现，其中会维护一个 dynamicConfigurations 集合（Map&lt;String, DynamicConfiguration&gt; 类型），在 getDynamicConfiguration() 方法中会填充该集合，实现<strong>缓存</strong>DynamicConfiguration 对象的效果。同时，AbstractDynamicConfigurationFactory 提供了一个 createDynamicConfiguration() 方法给子类实现，来<strong>创建</strong>DynamicConfiguration 对象。</p>
 <p>以 ZookeeperDynamicConfigurationFactory 实现为例，其 createDynamicConfiguration() 方法创建的就是 ZookeeperDynamicConfiguration 对象：</p>
@@ -575,7 +575,7 @@ public interface DynamicConfigurationFactory {
 }
 </code></pre>
 <p>CacheListener 中调用的监听器都是 ConfigurationListener 接口实现，如下图所示，这里涉及[第 33 课时]介绍的 TagRouter、AppRouter 和 ServiceRouter，它们主要是监听路由配置的变化；还涉及 RegistryDirectory 和 RegistryProtocol 中的四个内部类（AbstractConfiguratorListener 的子类），它们主要监听 Provider 和 Consumer 的配置变化。</p>
-<p><img src="assets/CgqCHl_0L9WAYbfVAAGH_E-l-UU432.png" alt="222.png" /></p>
+<p><img src="assets/CgqCHl_0L9WAYbfVAAGH_E-l-UU432.png" alt="png" /></p>
 <p>ConfigurationListener 继承关系图</p>
 <p>这些 ConfigurationListener 实现在前面的课程中已经详细介绍过了，这里就不再重复。ZookeeperDynamicConfiguration 中还提供了 addListener()、removeListener() 两个方法用来增删 ConfigurationListener 监听器，具体实现比较简单，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo">源码</a>进行学习。</p>
 <p>介绍完 ZookeeperDynamicConfiguration 的初始化过程之后，我们再来看 ZookeeperDynamicConfiguration 中<strong>读取配置、写入配置</strong>的相关操作。相关方法的实现如下：</p>

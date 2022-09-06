@@ -305,7 +305,7 @@ function hide_canvas() {
 </code></pre>
 <p>InvokeMode 有三个可选值，分别是 SYNC、ASYNC 和 FUTURE。这里对于 SYNC 模式返回的线程池是 ThreadlessExecutor，至于其他两种异步模式，会根据 URL 选择对应的共享线程池。</p>
 <p><strong>SYNC 表示同步模式</strong>，是 Dubbo 的默认调用模式，具体含义如下图所示，客户端发送请求之后，客户端线程会阻塞等待服务端返回响应。</p>
-<p><img src="assets/CgqCHl-X8UOAOTRbAACy-uBf52M689.png" alt="Lark20201027-180625.png" /></p>
+<p><img src="assets/CgqCHl-X8UOAOTRbAACy-uBf52M689.png" alt="png" /></p>
 <p>SYNC 调用模式图</p>
 <p>在拿到线程池之后，DubboInvoker 就会调用 ExchangeClient.request() 方法，将 Invocation 包装成 Request 请求发送出去，同时会创建相应的 DefaultFuture 返回。注意，这里还加了一个回调，取出其中的 AppResponse 对象。AppResponse 表示的是服务端返回的具体响应，其中有三个字段。</p>
 <ul>
@@ -424,7 +424,7 @@ private BiConsumer&lt;Result, Throwable&gt; afterContext = (appResponse, t) -&gt
 </code></pre>
 <p>ThreadlessExecutor 针对同步请求的优化，我们在前面的第 20 课时已经详细介绍过了，这里不再重复。</p>
 <p>最后要说明的是，<strong>AsyncRpcResult 实现了 Result 接口</strong>，如下图所示：</p>
-<p><img src="assets/Ciqc1F-WqdmAbppOAABOGWzVljY775.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-WqdmAbppOAABOGWzVljY775.png" alt="png" /></p>
 <p>AsyncRpcResult 继承关系图</p>
 <p>AsyncRpcResult 对 Result 接口的实现，例如，getValue() 方法、recreate() 方法、getAttachments() 方法等，都会先调用 getAppResponse() 方法从 responseFuture 中拿到 AppResponse 对象，然后再调用其对应的方法。这里我们以 recreate() 方法为例，简单分析一下：</p>
 <pre><code>public Result getAppResponse() { // 省略异常处理的逻辑
@@ -468,7 +468,7 @@ public Object recreate() throws Throwable {
 <p>另外，CompletableFuture 提供了良好的回调方法，例如，whenComplete()、whenCompleteAsync() 等方法都可以在逻辑完成后，执行该方法中添加的 action 逻辑，实现回调的逻辑。同时，CompletableFuture 很好地支持了 Future 间的相互协调或组合，例如，thenApply()、thenApplyAsync() 等方法。</p>
 <p>正是由于 CompletableFuture 的增强，我们可以更加流畅地使用回调，不必因为等待一个响应而阻塞着调用线程，而是通过前面介绍的方法告诉 CompletableFuture 完成当前逻辑之后，就去执行某个特定的函数。在 Demo 示例（即 dubbo-demo 模块中的 Demo ）中，返回 CompletableFuture 的 sayHelloAsync() 方法就是使用的 FUTURE 模式。</p>
 <p>好了，DubboInvoker 涉及的同步调用、异步调用的原理和底层实现就介绍到这里了，我们可以通过一张流程图进行简单总结，如下所示：</p>
-<p><img src="assets/Ciqc1F-X8WuACaAKAAEb-X6qf4Y710.png" alt="Lark20201027-180621.png" /></p>
+<p><img src="assets/Ciqc1F-X8WuACaAKAAEb-X6qf4Y710.png" alt="png" /></p>
 <p>DubboInvoker 核心流程图</p>
 <p>在 Client 端发送请求时，首先会创建对应的 DefaultFuture（其中记录了请求 ID 等信息），然后依赖 Netty 的异步发送特性将请求发送到 Server 端。需要说明的是，这整个发送过程是不会阻塞任何线程的。之后，将 DefaultFuture 返回给上层，在这个返回过程中，DefaultFuture 会被封装成 AsyncRpcResult，同时也可以添加回调函数。</p>
 <p>当 Client 端接收到响应结果的时候，会交给关联的线程池（ExecutorService）或是业务线程（使用 ThreadlessExecutor 场景）进行处理，得到 Server 返回的真正结果。拿到真正的返回结果后，会将其设置到 DefaultFuture 中，并调用 complete() 方法将其设置为完成状态。此时，就会触发前面注册在 DefaulFuture 上的回调函数，执行回调逻辑。</p>
@@ -477,7 +477,7 @@ public Object recreate() throws Throwable {
 <h4>1. ListenerInvokerWrapper</h4>
 <p>在前面的第 23 课时中简单提到过 InvokerListener 接口，我们可以提供其实现来监听 refer 事件以及 destroy 事件，相应地要实现 referred() 方法以及 destroyed() 方法。</p>
 <p>ProtocolListenerWrapper 是 Protocol 接口的实现之一，如下图所示：</p>
-<p><img src="assets/CgqCHl-WqfyAZ0TzAAAbeTUMLT0465.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-WqfyAZ0TzAAAbeTUMLT0465.png" alt="png" /></p>
 <p>ProtocolListenerWrapper 继承关系图</p>
 <p>ProtocolListenerWrapper 本身是 Protocol 接口的装饰器，在其 export() 方法和 refer() 方法中，会分别在原有 Invoker 基础上封装一层 ListenerExporterWrapper 和 ListenerInvokerWrapper。</p>
 <p><strong>ListenerInvokerWrapper 是 Invoker 的装饰器</strong>，其构造方法参数列表中除了被修饰的 Invoker 外，还有 InvokerListener 列表，在构造方法内部会遍历整个 InvokerListener 列表，并调用每个 InvokerListener 的 referred() 方法，通知它们 Invoker 被引用的事件。核心逻辑如下：</p>

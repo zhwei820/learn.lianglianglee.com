@@ -201,18 +201,18 @@ function hide_canvas() {
 <p>这时候就傻眼了，这么复杂的方程怎么解呢？接下来，我们介绍<strong>梯度下降算法</strong>来求解。</p>
 <h3>梯度下降法</h3>
 <p>对于一个函数，它的<strong>导数的含义是斜率</strong>，这也是高中数学知识之一。例如某个函数 f(x)，在某个点 x0 的 导数为 f'(x0) = k0。那么 k0，就是函数 f(x) 在 x0 处切线的斜率，如下图：</p>
-<p><img src="assets/Ciqc1F-qVZKAS8jJAABcDXkImPQ292.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F-qVZKAS8jJAABcDXkImPQ292.png" alt="png" /></p>
 <p>既然 k0 是斜率，我们很容易得出这样的结论：如果k0为正数，那么函数值在 x0 附近就是呈现“上升”趋势；反之，如果 k0 是负数，函数值在 x0 附近就是呈现“下降”趋势。</p>
 <p>围绕这个性质，我们就可以通过多轮迭代，逐步去逼近函数的极值点，如下图：</p>
-<p><img src="assets/CgqCHl-qVZ6AOlJUAABz4DaT__M220.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl-qVZ6AOlJUAABz4DaT__M220.png" alt="png" /></p>
 <p>我们把这个过程用数学语言来重新描述。先来定义一下函数的梯度，对于函数 f(x,y)，常用 ▽f(x,y) 来表示函数的梯度。其中 x、y 表示函数有两个或多个自变量，是个多元函数。梯度本身是个向量，表示的是函数在自变量构成的空间中，变化率最快的方向，其计算式为：</p>
-<p><img src="assets/Ciqc1F-qVaqATraDAAD0x8r1kug105.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F-qVaqATraDAAD0x8r1kug105.png" alt="png" /></p>
 <p>可见，如果函数 f(x) 是个一元函数，梯度和导数就非常近似了。区别只在于前者是向量，后者是标量。</p>
 <blockquote>
 <p>至于为什么梯度是函数变化率最快的方向，需要依赖泛函分析相关的知识来证明，证明的过程会比较复杂。如果你感兴趣，可以自己在网上找一些资料进行补充学习。在这里，我们记住这个性质就好了。</p>
 </blockquote>
 <p>有了梯度，我们就能找到函数变化率最快的方向。通过这个方向，就能指挥我们朝哪个方向去更新参数，来找到函数的极值，这就是梯度下降算法。</p>
-<p><img src="assets/Ciqc1F-ovdOAHnpsAANEdznZKzw098.png" alt="WechatIMG388.png" /></p>
+<p><img src="assets/Ciqc1F-ovdOAHnpsAANEdznZKzw098.png" alt="png" /></p>
 <p>我们对梯度下降法的原理进行分析。</p>
 <p>第 1 步，是把一些要用的公式预先推导出来。</p>
 <p>第 2 步，计算当前点的梯度，找到当前点变化率最快的方向。</p>
@@ -226,7 +226,7 @@ function hide_canvas() {
 <p>【例题2】按照之前，我们得到的商品利润函数 r 和补贴金额 x 的关系为 r(x) = p(x)×(m - x - c) = (2/(1+e-x) - 1)×(16 - x - 8)。下面利用梯度下降法，求解让利润最大的补贴额 x*。</p>
 <p>【解析】</p>
 <p>按照梯度下降法的流程来计算，首先需要写出目标函数 r(x) 的梯度函数，</p>
-<p><img src="assets/Ciqc1F-qVcyAKSCrAABh6x1GG7Y355.png" alt="5.png" /></p>
+<p><img src="assets/Ciqc1F-qVcyAKSCrAABh6x1GG7Y355.png" alt="png" /></p>
 <p>设置学习率 a 为 0.01，最大迭代次数 1000，然后就需要利用 xtemp = xtemp - a×▽r(xtemp) 来逐轮迭代。</p>
 <p>这样整体的代码如下：</p>
 <pre><code>import math
@@ -261,7 +261,7 @@ if __name__ == '__main__':
 <li>它要求目标函数为凸函数，否则就有可能会收敛到局部最优。
 例如下面的双峰函数便不是凸函数。幸运的是，实际业务环境中很少会遇到非凸的函数。如果真的遇到非凸的函数，一个可行的方法是，采用随机初始化 xtemp，并多次执行梯度下降法求解。</li>
 </ul>
-<p><img src="assets/CgqCHl-qVduAL6wWAABuccARt0M254.png" alt="6.png" /></p>
+<p><img src="assets/CgqCHl-qVduAL6wWAABuccARt0M254.png" alt="png" /></p>
 <h3>小结</h3>
 <p>在这一课时，我们学习的是如何从复杂业务环境中找到最优解。</p>
 <p>这需要你利用行业经验和领域知识，对问题进行函数的形式化定义，接着就是对目标函数求解最值的过程。</p>

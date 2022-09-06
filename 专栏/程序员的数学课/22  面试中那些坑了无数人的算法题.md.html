@@ -200,7 +200,7 @@ print win
 <li>在 13、14 行判断，如果大漂亮分数比你高，则大漂亮获胜一局。</li>
 </ul>
 <p>最终，打印出大漂亮获胜的局数。我们运行代码的结果如下图。</p>
-<p><img src="assets/CgpVE1_tlQqAHftLAABE5ruo4OM414.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgpVE1_tlQqAHftLAABE5ruo4OM414.png" alt="png" /></p>
 <p>可见，在 1000 次的游戏中，大漂亮获胜了 502 次。这样，我们可以估算出，大漂亮获胜的概率为 0.502。</p>
 <h4>【数学角度解答】</h4>
 <p>我们再从数学的角度重新计算一下这道题。在这里，我们需要通过加乘法则去拆解一下事件。假设 A 事件代表大漂亮抛 51 次硬币的得分，B 事件代表你抛 50 次硬币的得分，要计算的目标是 A 大于 B 的概率 P(A&gt;B)。</p>
@@ -223,7 +223,7 @@ P(N=0)·P(M+0&gt;B)+P(N=1)·P(M+1&gt;B)=
 <p>这与我们用代码仿真计算的结果是一致的。</p>
 <h3>例题2 数据上溢问题</h3>
 <p>对于一个 Sigmoid 函数，y=1/(1+e-x)。假设输入的自变量 x 很小，为 -1000000。因为要先计算 e-x 的值，即 e1000000，如下图所示，直接计算就会先得到一个非常大的数字而抛出异常。那么在线上代码中，该如何规避这种情况，计算出输出值呢？</p>
-<p><img src="assets/CgqCHl_tlRyAGEVyAAOiGgi9i8A083.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_tlRyAGEVyAAOiGgi9i8A083.png" alt="png" /></p>
 <p>其实，这里可以用到一个非常简单的技巧，对公式做个变形就能让程序适应这种情况了。我们知道，Sigmoid 函数的结果是一个在 0~1 之间的连续值。而之所以产生数据溢出是因为要先计算e-x 的值。处理这种情况，我们可以从数学的角度，对分子和分母都乘以 ex 这一项，则有</p>
 <p>y = 1/(1+e-x) = ex/(ex+1)。</p>
 <p>此时，输入 x=-1000000，则需要计算 ex，得到结果为 0.0。再带入到 Sigmoid 函数中，就可以得到结果啦。</p>
@@ -253,7 +253,7 @@ print sigmoid(b)
 <li>如果 x 不是负数，则通过第 7 行的公式来计算 y。</li>
 </ul>
 <p>我们在主函数中，分别输入了非常小和非常大的两个数字，并顺利得到结果分别为 0.0 和 1.0，如下图所示。</p>
-<p><img src="assets/CgqCHl_tlSeAJpQ6AABCtn1OaL8521.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_tlSeAJpQ6AABCtn1OaL8521.png" alt="png" /></p>
 <h3>例题3 投点距离期望问题</h3>
 <p>假设在墙上有一个半径为 10 厘米的圆形区域，现在大迷糊用飞镖向这个圆形区域进行均匀随机的投射。假设大迷糊不会“脱靶”，求大迷糊扎到的点到圆形区域圆心距离的期望。</p>
 <p>这个题用代码仿真会非常容易，我们给出下面的代码。</p>
@@ -285,7 +285,7 @@ print distance / inCircle
 <li>最后第 14 行，打印累计距离和合法投射次数的比值，得到了平均距离。</li>
 </ul>
 <p>这也是投射点到圆心距离的期望，我们运行代码的结果为 6.66 厘米，如下图所示。</p>
-<p><img src="assets/Ciqc1F_tlS6AK2f7AABGjfsXxYU116.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_tlS6AK2f7AABGjfsXxYU116.png" alt="png" /></p>
 <p>接下来，我们再从数学的角度来计算一下这个题目。</p>
 <h4>【数学角度解答】</h4>
 <p>题目中，要求解的是一个点到圆心距离这个随机变量的期望。很显然，点到圆心的距离是个连续值。要求某个连续型随机变量的期望，可以用期望的定义式来计算，即</p>
@@ -297,7 +297,7 @@ print distance / inCircle
 <p>我们不妨试着求一下投射问题的概率分布函数。假设在圆内有一个小圆，半径是 x0。那么投射点恰好也在小圆内的概率为 P(x&lt;x0) = π·x02/π·102 = x02/102。</p>
 <p>因此，概率分布函数为 F(x) = x2/102；又因为，概率密度函数是概率分布函数的导数，所以概率密度函数为 f(x) = 2x/102。</p>
 <p>我们把这些条件都带入到期望的公式中，则有</p>
-<p><img src="assets/CgqCHl_0HaWAJ0mbAADyboYaUTE926.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl_0HaWAJ0mbAADyboYaUTE926.png" alt="png" /></p>
 <p>这与我们用代码求解的 6.66 厘米是一致的。</p>
 <h3>小结</h3>
 <p>我们对这一讲进行总结。这一课时的内容是面试中的数学，面试官会通过一个简单的数学题，考察候选人解决问题的思考路径。</p>

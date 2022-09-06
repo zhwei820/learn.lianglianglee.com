@@ -198,7 +198,7 @@ function hide_canvas() {
 <p><strong>接下来定位问题</strong>。我们可以看到它对数据的顺序非常敏感，敏感点一是每个单词需要保证顺序；敏感点二是所有单词放在一起的顺序需要调整为逆序。我们曾学过的关于数据顺序敏感的结构有队列和栈，也许这些结构可以适用在这个问题中。此处需要逆序，栈是有非常大的可能性被使用到的。</p>
 <p><strong>然后我们进行数据操作分析</strong>。如果要使用栈的话，从结果出发，就需要按照顺序，把 This、is、a、good、example 分别入栈。要想把它们正确地入栈，就需要根据空格来拆分原始字符串。</p>
 <p><strong>因此，经过分析后，这个例子的解法为：用空格把句子分割成单词。如果发现了多余的连续空格，需要做一些删除的额外处理。一边得到单词，一边把单词放入栈中。直到最后，再把单词从栈中倒出来，形成结果字符串</strong>。</p>
-<p><img src="assets/Ciqc1F8MP8yAS72oABGrGx_blwA588.gif" alt="1.gif" /></p>
+<p><img src="assets/Ciqc1F8MP8yAS72oABGrGx_blwA588.gif" alt="png" /></p>
 <p><strong>最后，我们按照上面的思路进行编码开发</strong>。代码如下：</p>
 <pre><code>public static void main(String[] args) {
     String ss = &quot;This is a   good example&quot;;
@@ -242,7 +242,7 @@ private static String reverseWords(String s) {
 <p><strong>这段代码采用了一层的 for 循环，显然它的时间复杂度是 O(n)。相比较于比较暴力的解法，它之所以降低了时间复杂度，就在于它开辟了栈的存储空间。所以空间复杂度也是 O(n)</strong>。</p>
 <h4>例题 2：树的层序遍历</h4>
 <p><strong>【题目】</strong> 给定一棵树，按照层次顺序遍历并打印这棵树。例如，输入的树为：</p>
-<p><img src="assets/CgqCHl8MP_WAERuIAACStyOKMQk754.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl8MP_WAERuIAACStyOKMQk754.png" alt="png" /></p>
 <p>则打印 16、13、20、10、15、22、21、26。格外需要注意的是，这并不是前序遍历。</p>
 <p><strong>【解析】</strong> 如果你一直在学习这门课的话，一定对这道题目似曾相识。它是我们在 09 课时中留下的练习题。同时它也是高频面试题。仔细分析下这个问题，不难发现它是一个关于树的遍历问题。理论上是可以在 O(n) 时间复杂度下完成访问的。</p>
 <p>以往我们学过的遍历方式有前序、中序和后序遍历，它们的实现方法都是通过递归。以前序遍历为例，递归可以理解为，先解决根结点，再解决左子树一边的问题，最后解决右子树的问题。这很像是在用深度优先的原则去遍历一棵树。</p>
@@ -254,7 +254,7 @@ private static String reverseWords(String s) {
 <p>分析到这里，你应该能找到一些感觉了吧。一个结果序列对顺序敏感，而且没有逆序的操作，满足这些特点的数据结构只有队列。所以我们猜测这个问题的解决方案，极有可能要用到队列。</p>
 <p>队列只有入队列和出队列的操作。如果输出结果就是出队列的顺序，那这个顺序必然也是入队列的顺序，原因就在于队列的出入原则是先进先出。而入队列的原则是，上层父节点先进，左孩子再进，右孩子最后进。</p>
 <p><strong>因此，这道题目的解决方案就是，根结点入队列，随后循环执行结点出队列并打印结果，左孩子入队列，右孩子入队列。直到队列为空</strong>。如下图所示：</p>
-<p><img src="assets/CgqCHl8MQA2AWELaAA_8m3_f-_Q592.gif" alt="2.gif" /></p>
+<p><img src="assets/CgqCHl8MQA2AWELaAA_8m3_f-_Q592.gif" alt="png" /></p>
 <p>这个例子的代码如下：</p>
 <pre><code>public static void levelTraverse(Node root) {
 	LinkedList&lt;Node&gt; queue = new LinkedList&lt;Node&gt;();
@@ -344,7 +344,7 @@ public class testj {
 <p>从第 14 行开始，Inset() 函数中，需要判断 count 的奇偶性：如果 count 是偶数，则新的数据需要先加入最小堆，再弹出最小堆的堆顶，最后把弹出的数据加入最大堆。如果 count 是奇数，则新的数据需要先加入最大堆，再弹出最大堆的堆顶，最后把弹出的数据加入最小堆。</p>
 <p>执行完后，count 加 1。然后调用 GetMedian() 函数来寻找中位数，GetMedian() 函数通过 27 行直接返回最大堆的对顶，这是因为我们约定中位数在偶数个的时候，选择偏左的元素。</p>
 <p>最后，我们给出插入 22 的执行过程，如下图所示：</p>
-<p><img src="assets/Ciqc1F8MQD2AGebMAAm_13LKPTk687.gif" alt="4.gif" /></p>
+<p><img src="assets/Ciqc1F8MQD2AGebMAAm_13LKPTk687.gif" alt="png" /></p>
 <h3>总结</h3>
 <p>这一课时主要围绕数据结构展开问题的分析和讨论。对于树的层次遍历，我们再拓展一下。</p>
 <p>如果要打印的不是层次，而是蛇形遍历，又该如何实现呢？蛇形遍历就是 s 形遍历，即奇数层从左到右，偶数层从右到左。如果是例题 2 的树，则蛇形遍历的结果就是 16、20、13、10、15、22、26、21。我们就把这个问题当作本课时的练习题。</p>

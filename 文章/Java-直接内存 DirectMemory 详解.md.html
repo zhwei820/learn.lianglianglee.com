@@ -498,7 +498,7 @@ function hide_canvas() {
 <li>直接内存出现 OutOfMemoryError 异常的原因是物理机器的内存是受限的，但是我们通常会忘记需要为直接内存在物理机中预留相关内存空间；</li>
 </ul>
 <p>上述变化可以通过下面一图来表示：</p>
-<p><img src="assets/1634111413579.png" alt="1634111413579" /></p>
+<p><img src="assets/1634111413579.png" alt="png" /></p>
 <ul>
 <li>关于上述的内存：可以这么粗浅地认为：栈用于方法的层层调用、返回、顺序执行，堆负责存储对象。</li>
 <li>关于内存空间的称呼变化：JDK 1.4 之前的称呼 native heap 转为现在的称呼 directory memory 。之所以 heap 前加 native 来修饰，是因为要让其和虚拟机规范中的内存 heap，而现在称呼 directory memory 是因为我们能够直接通过引用访问对象，消除了拷贝操作。</li>
@@ -528,7 +528,7 @@ function hide_canvas() {
 <p> 在 Java 中分配内存的方式一般是通过 <code>sun.misc.Unsafe</code>类的公共 native 方法实现的（比如 文件以及网络 IO 类，但是非常不建议开发者使用，使用时一定要确保安全），而类 DirectByteBuffer 类的也是借助于此向物理内存(比如 JVM 运行于 Linux 上，那么 Linux 的内存就被称为物理内存)。</p>
 <p> Unsafe 是位于 sun.misc 包下的一个类，主要提供一些用于执行低级别、不安全操作的方法，如直接访问系统内存资源、自主管理内存资源等，这些方法在提升 Java 运行效率、增强 Java 语言底层资源操作能力方面起到了很大的作用。但由于 Unsafe 类使 Java 语言拥有了类似 C 语言指针一样操作内存空间的能力，这无疑也增加了程序发生相关指针问题的风险。在程序中过度、不正确使用 Unsafe 类会使得程序出错的概率变大，使得 Java 这种安全的语言变得不再“安全”，因此对 Unsafe 的使用一定要慎重。</p>
 <p> 而 ByteBuffer 提供的静态方法：<code>java.nio.ByteBuffer#allocateDirect</code> 将 Unsafe 类分配内存的相关操作封装好提供给开发者，如下图所示（图源：美团技术团队）：</p>
-<p><img src="assets/1634111499831.png" alt="1634111499831" /></p>
+<p><img src="assets/1634111499831.png" alt="png" /></p>
 <p> 从内存分配效率方面考虑的话，一般认为 HeapByteBuffer 以及 DirectByteBuffer 这种申请堆外内存的方式比堆内申请内存效率低，这主要是因为前者需要向物理机申请堆外内存，这是额外的开销。</p>
 <p><strong>延伸阅读</strong>：</p>
 <p> 美团技术团队：https://tech.meituan.com/2019/02/14/talk-about-java-magic-class-unsafe.html</p>
@@ -540,7 +540,7 @@ function hide_canvas() {
 <h2>5. ByteBuffer 和其他 Buffer 对比</h2>
 <p>在 rt.jar 包的 java.nio 包下还有很多其他类型的 Buffer 类，比如 CharBuffer、IntBuffer 等等（每个基本类型*都对应一个 *Buffer，除了特殊的占一个 bit 的布尔类型）。但是唯独只有 ByteBuffer 类提供了输入参数为其他基本类型的 <code>put</code> 方法，这是为什么呢？</p>
 <p> 这涉及了 Java 中整型基本类型存储的位数都是字节二进制位数的整数倍，如下表所示。</p>
-<p><img src="assets/1634111533052.png" alt="1634111533052" /></p>
+<p><img src="assets/1634111533052.png" alt="png" /></p>
 <p> 有人这样认为 Java 中存储本质以字节 byte 为单位，这不完全对，因为二进制才是本质存储。但是换个说法就对了：Java 字节所占的二进制位数的整数倍恰好是其他基本类型所占的二进制位数，上表就是这个含义。所以所有基本类型都可以用字节表示，比如 char 类型就是以两个字节大小存储的，如果 char 类型的数据前 8 位和后 8 位完全可以分别用两个 byte 表示。换句话说 ByteBuffer 起到了 CharBuffer 的作用。</p>
 <p>以下 <code>java.nio.DirectByteBuffer#putChar(char)</code>和 <code>java.nio.DirectByteBuffer#getChar()</code> 的源码：</p>
 <ul>

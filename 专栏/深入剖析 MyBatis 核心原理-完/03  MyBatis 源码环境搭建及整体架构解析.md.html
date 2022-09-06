@@ -168,7 +168,7 @@ function hide_canvas() {
 <p><strong>安装并启动一个关系型数据是调试 MyBatis 源码的基础</strong>。目前很多互联网公司都将 MySQL 作为首选数据库，所以这里我也就选用 MySQL 数据库来配合调试 MyBatis 源码。</p>
 <h4>1. 下载 MySQL</h4>
 <p>首先，从 <a href="https://dev.mysql.com/downloads/mysql/">MySQL 官网</a>下载最新版本的 MySQL Community Server。MySQL Community Server 是社区版本的 MySQL 服务端，可以免费试用。这里我选择使用 tar.gz 的方式进行安装，所以需要下载对应的 tar.gz 安装包，如下图红框所示：</p>
-<p><img src="assets/CgqCHmAJMb6AeZu1AAK2YtgNDxQ405.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHmAJMb6AeZu1AAK2YtgNDxQ405.png" alt="png" /></p>
 <p>MySQL 下载界面</p>
 <h4>2. 配置 MySQL</h4>
 <p>下载完 tar.gz 安装包后，我执行如下命令，就可以解压缩该 tar.gz 包，得到 mysql-8.0.22-macos10.15-x86_64 目录。</p>
@@ -181,7 +181,7 @@ function hide_canvas() {
 <pre><code>vim mysql.server
 </code></pre>
 <p>这里我需要将 basedir 和 datadir 变量分别设置为 MySQL 所在根目录以及 MySQL 目录下的 data 目录（如下图所示），最后再执行 :wq 命令保存 mysql.server 的修改并退出。</p>
-<p><img src="assets/Ciqc1GAJMc6AdFvAAAYzLYzkW_0254.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1GAJMc6AdFvAAAYzLYzkW_0254.png" alt="png" /></p>
 <p>mysql.server 文件修改示例图</p>
 <h4>3. 启动 MySQL</h4>
 <p>随后，我执行了如下命令，进入 MySQL 的 bin 目录：</p>
@@ -191,7 +191,7 @@ function hide_canvas() {
 <pre><code>./mysqld --initialize --user=root --basedir=/Users/xxx/Downloads/mysql-8.0.22-macos10.15-x86_64 --datadir=/Users/xxx/Downloads/mysql-8.0.22-macos10.15-x86_64/data
 </code></pre>
 <p>正常完成初始化过程之后，就可以在命令行中得到 MySQL 的初始默认密码，如下图所示：</p>
-<p><img src="assets/Ciqc1GAJMduAfkY2AAPds3lRaC8418.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1GAJMduAfkY2AAPds3lRaC8418.png" alt="png" /></p>
 <p>成功初始化 MySQL 示例图</p>
 <p>通过该默认密码，我就可以启动并登录 MySQL 服务了，首先需要跳转到 support-files 目录中：</p>
 <pre><code>cd ../support-files/
@@ -200,7 +200,7 @@ function hide_canvas() {
 <pre><code>./mysql.server start
 </code></pre>
 <p>MySQL 服务正常启动之后，就可以看到如下图所示的输出：</p>
-<p><img src="assets/Cip5yGAJMfmAf335AAC2sfPp2nA814.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yGAJMfmAf335AAC2sfPp2nA814.png" alt="png" /></p>
 <p>成功启动 MySQL 示例图</p>
 <h4>4. 登录 MySQL</h4>
 <p>接下来跳转到 bin 目录：</p>
@@ -210,7 +210,7 @@ function hide_canvas() {
 <pre><code>./mysql -uroot -p'rAUhw9e&amp;VPCs'
 </code></pre>
 <p>登录之后即可进入 MySQL Shell 中，如下图所示：</p>
-<p><img src="assets/Cip5yGAJMgWAJCDCAAIMcPd-JbI377.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yGAJMgWAJCDCAAIMcPd-JbI377.png" alt="png" /></p>
 <p>成功登录 MySQL 示例图</p>
 <p>然后我就可以在 MySQL Shell 中修改密码，具体命令如下所示：</p>
 <pre><code>ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码';
@@ -221,7 +221,7 @@ function hide_canvas() {
 ./mysql.server stop
 </code></pre>
 <p>得到如下输出，即表示 MySQL 服务成功关闭：</p>
-<p><img src="assets/Cip5yGAJMgyAXZ2fAAB3LJ1AyKE309.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cip5yGAJMgyAXZ2fAAB3LJ1AyKE309.png" alt="png" /></p>
 <p>成功关闭 MySQL 示例图</p>
 <p>这里还需要说明的是，在实际开发过程中，一般会使用到 MySQL 的图形界面客户端，例如 Navicat、MySQL Workbench Community Edition 等，一般只会在线上机器的 Linux 命令行中，才会直接使用 MySQL Shell 执行一些操作。</p>
 <p>当然，我个人也很推荐你使用这些图形界面客户端，它可以提高你日常的开发效率。</p>
@@ -232,7 +232,7 @@ function hide_canvas() {
 <pre><code>git clone https://github.com/mybatis/mybatis-3.git
 </code></pre>
 <p>网速不同，这个下载过程的耗时也会有所不同。下载完成后，可得到如下输出：</p>
-<p><img src="assets/Ciqc1GAJMhSAKlYfAAGPfec4aLQ116.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1GAJMhSAKlYfAAGPfec4aLQ116.png" alt="png" /></p>
 <p>MyBatis 下载示例图</p>
 <p>此时，在本地我就得到了一个 mybatis-3 目录，执行如下 cd 命令即可进入该目录：</p>
 <pre><code>cd ./mybatis-3/
@@ -244,18 +244,18 @@ function hide_canvas() {
 <pre><code>git branch -vv
 </code></pre>
 <p>这里我得到了如下图所示的输出，这表示我已经切换到了 mybatis-3.5.6 这个 tag 上了。</p>
-<p><img src="assets/Ciqc1GAJMh-AA0gYAAEnuAcnHRw585.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1GAJMh-AA0gYAAEnuAcnHRw585.png" alt="png" /></p>
 <p>git 分支示例图</p>
 <p>最后，我打开 IDEA ，选择 Open or Import，导入 MyBatis 源码，如下图所示：</p>
-<p><img src="assets/Cip5yGAJMiiACTxtAAFCLhvMfwQ983.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Cip5yGAJMiiACTxtAAFCLhvMfwQ983.png" alt="png" /></p>
 <p>IDEA 导入选项图</p>
 <p>导入完成之后，就可以看到 MyBatis 的源码结构，如下图所示：</p>
-<p><img src="assets/Cip5yGAJMjGANU2TAAHo4sj86f8952.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Cip5yGAJMjGANU2TAAHo4sj86f8952.png" alt="png" /></p>
 <p>MyBatis 的源码结构图</p>
 <h3>MyBatis 架构简介</h3>
 <p>完成 MyBatis 源码环境搭建之后，我再来带你分析一下 MyBatis 的架构。</p>
 <p>MyBatis 分为三层架构，分别是<strong>基础支撑层、核心处理层</strong>和<strong>接口层</strong>，如下图所示：</p>
-<p><img src="assets/CgpVE2AT9G2AXu4RAAM4svUMBPc909.png" alt="Lark20210129-194050.png" /></p>
+<p><img src="assets/CgpVE2AT9G2AXu4RAAM4svUMBPc909.png" alt="png" /></p>
 <p>MyBatis 三层架构图</p>
 <h4>1. 基础支撑层</h4>
 <p><strong>基础支撑层是整个 MyBatis 框架的地基，为整个 MyBatis 框架提供了非常基础的功能</strong>，其中每个模块都提供了一个内聚的、单一的能力，MyBatis 基础支撑层按照这些单一的能力可以划分为上图所示的九个基础模块。</p>
@@ -267,7 +267,7 @@ function hide_canvas() {
 <li>在将 ResultSet 映射成结果对象的时候，类型转换模块会将 JDBC 类型数据转换成 Java 类型数据。</li>
 </ul>
 <p>具体情况如下图所示：</p>
-<p><img src="assets/Cip5yGAT9HeAabOAAACw3SAaflI907.png" alt="Lark20210129-194053.png" /></p>
+<p><img src="assets/Cip5yGAT9HeAabOAAACw3SAaflI907.png" alt="png" /></p>
 <p>类型转换基本功能示意图</p>
 <p><strong>第二个，日志模块。</strong> 日志是我们生产实践中排查问题、定位 Bug、锁定性能瓶颈的主要线索来源，在任何一个成熟系统中都会有级别合理、信息翔实的日志模块，MyBatis 也不例外。MyBatis 提供了日志模块来集成 Java 生态中的第三方日志框架，该模块目前可以集成 Log4j、Log4j2、slf4j 等优秀的日志框架。</p>
 <p><strong>第三个，反射工具模块。</strong> Java 中的反射功能非常强大，许多开源框架都会依赖反射实现一些相对灵活的需求，但是大多数 Java 程序员在实际工作中很少会直接使用到反射技术。MyBatis 的反射工具箱是在 Java 反射的基础之上进行的一层封装，为上层使用方提供更加灵活、方便的 API 接口，同时缓存 Java 的原生反射相关的元数据，提升了反射代码执行的效率，优化了反射操作的性能。</p>
@@ -275,7 +275,7 @@ function hide_canvas() {
 <p>这里特别说明的是，在使用 MyBatis 的时候，我们无须编写 Mapper 接口的具体实现，而是利用 Binding 模块自动生成 Mapper 接口的动态代理对象。有些简单的数据操作，我们还可以直接在 Mapper 接口中使用注解完成，连 Mapper.xml 配置文件都无须编写，但如果 ResultSet 映射以及动态 SQL 非常复杂，还是建议在 Mapper.xml 配置文件中维护会比较方便。</p>
 <p><strong>第五个，数据源模块。</strong> 持久层框架核心组件之一就是数据源，一款性能出众的数据源可以成倍提升系统的性能。MyBatis 自身提供了一套不错的数据源实现，也是 MyBatis 的默认实现。另外，在 Java 生态中，就有很多优异开源的数据源可供选择，MyBatis 的数据源模块中也提供了与第三方数据源集成的相关接口，这也为用户提供了更多的选择空间，提升了数据源切换的灵活性。</p>
 <p><strong>第六个，缓存模块。</strong> 数据库是实践生成中非常核心的存储，很多业务数据都会落地到数据库，所以数据库性能的优劣直接影响了上层业务系统的优劣。我们很多线上业务都是读多写少的场景，在数据库遇到瓶颈时，缓存是最有效、最常用的手段之一（如下图所示），正确使用缓存可以将一部分数据库请求拦截在缓存这一层，这就能够减少一部分数据库的压力，提高系统性能。</p>
-<p><img src="assets/Cip5yGAT9ICAItLcAAHSeuL0ugo137.png" alt="Lark20210129-194055.png" /></p>
+<p><img src="assets/Cip5yGAT9ICAItLcAAHSeuL0ugo137.png" alt="png" /></p>
 <p>缓存模块结构图</p>
 <p>除了使用 Redis、Memcached 等外置的第三方缓存以外，持久化框架一般也会自带内置的缓存，例如，MyBatis 就提供了一级缓存和二级缓存，具体实现位于基础支撑层的缓存模块中。</p>
 <p><strong>第七个，解析器模块</strong>。在上一讲的订单系统示例中，我们可以看到 MyBatis 中有两大部分配置文件需要解析，一个是 mybatis-config.xml 配置文件，另一个是 Mapper.xml 配置文件。这两个文件都是由 MyBatis 的解析器模块进行解析的，其中主要是依赖 XPath 实现 XML 配置文件以及各类表达式的高效解析。</p>
@@ -290,7 +290,7 @@ function hide_canvas() {
 <p><strong>第三个，SQL 执行。</strong> 在 MyBatis 中，要执行一条 SQL 语句，会涉及非常多的组件，比较核心的有：Executor、StatementHandler、ParameterHandler 和 ResultSetHandler。</p>
 <p>其中，Executor 会调用事务管理模块实现事务的相关控制，同时会通过缓存模块管理一级缓存和二级缓存。SQL 语句的真正执行将会由 StatementHandler 实现。那具体是怎么完成的呢？StatementHandler 会先依赖 ParameterHandler 进行 SQL 模板的实参绑定，然后由 java.sql.Statement 对象将 SQL 语句以及绑定好的实参传到数据库执行，从数据库中拿到 ResultSet，最后，由 ResultSetHandler 将 ResultSet 映射成 Java 对象返回给调用方，这就是 SQL 执行模块的核心。</p>
 <p>下图展示了 MyBatis 执行一条 SQL 语句的核心过程：</p>
-<p><img src="assets/Cip5yGAT9JKAZRtgAAKpY4hLF6U463.png" alt="Lark20210129-194058.png" /></p>
+<p><img src="assets/Cip5yGAT9JKAZRtgAAKpY4hLF6U463.png" alt="png" /></p>
 <p>执行 SQL 语句的核心流程图</p>
 <p><strong>第四个，插件。</strong> 很多成熟的开源框架，都会以各种方式提供扩展能力。当框架原生能力不能满足某些场景的时候，就可以针对这些场景实现一些插件来满足需求，这样的框架才能有足够的生命力。这也是 MyBatis 插件接口存在的意义。</p>
 <p>与此同时，在实际应用的时候，你也可以通过自定义插件来扩展 MyBatis，或者改变 MyBatis 的默认行为。因为插件会影响 MyBatis 内核的行为，所以在自定义插件之前，你必须非常了解 MyBatis 内部的运行原理，以避免写出不符合预期的插件，引入一些诡异的功能 Bug 或性能问题。</p>

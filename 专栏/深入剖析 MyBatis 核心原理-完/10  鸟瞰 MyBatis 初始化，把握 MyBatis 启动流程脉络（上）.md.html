@@ -170,7 +170,7 @@ function hide_canvas() {
 <h3>构造者模式</h3>
 <p>构造者模式最核心的思想就是将创建复杂对象的过程与复杂对象本身进行拆分。通俗来讲，构造者模式是<strong>将复杂对象的创建过程分解成了多个简单步骤，在创建复杂对象的时候，只需要了解复杂对象的基本属性即可，而不需要关心复杂对象的内部构造过程</strong>。这样的话，使用方只需要关心这个复杂对象要什么数据，而不再关心内部细节。</p>
 <p>构造者模式的类图如下所示：</p>
-<p><img src="assets/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png" alt="2021223-18655.png" /></p>
+<p><img src="assets/Cgp9HWA01CyAP_FuAAGR6B2VRBg565.png" alt="png" /></p>
 <p>构造者模式类图</p>
 <p>从图中，我们可以看到构造者模式的四个核心组件。</p>
 <ul>
@@ -185,7 +185,7 @@ function hide_canvas() {
 <p>介绍完构造者模式相关的知识点之后，下面我们正式开始介绍 MyBatis 的初始化过程。</p>
 <p><strong>MyBatis 初始化的第一个步骤就是加载和解析 mybatis-config.xml 这个全局配置文件</strong>，入口是 XMLConfigBuilder 这个 Builder 对象，它由 SqlSessionFactoryBuilder.build() 方法创建。XMLConfigBuilder 会解析 mybatis-config.xml 配置文件得到对应的 Configuration 全局配置对象，然后 SqlSessionFactoryBuilder 会根据得到的 Configuration 全局配置对象创建一个 DefaultSqlSessionFactory 对象返回给上层使用。</p>
 <p>这里<strong>创建的 XMLConfigBuilder 对象的核心功能就是解析 mybatis-config.xml 配置文件</strong>。XMLConfigBuilder 有一部分能力继承自 BaseBuilder 抽象类，具体继承关系如下图所示：</p>
-<p><img src="assets/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png" alt="2021223-1877.png" /></p>
+<p><img src="assets/Cgp9HWA01DeAFFn1AAEKQNyimxk937.png" alt="png" /></p>
 <p>BaseBuilder 继承关系图</p>
 <p>BaseBuilder 抽象类扮演了构造者模式中 Builder 接口的角色，下面我们先来看 BaseBuilder 中各个字段的定义。</p>
 <ul>
@@ -373,7 +373,7 @@ if (context != null) {
 }
 </code></pre>
 <p>可以看到，解析<code>&lt;databaseIdProvider&gt;</code> 标签之后会得到一个 DatabaseIdProvider 对象，其核心方法是 getDatabaseId() 方法，主要是根据前面解析得到的 DataSource 对象来生成 DatabaseId。DatabaseIdProvider 的继承关系如下图所示：</p>
-<p><img src="assets/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png" alt="2021223-1874.png" /></p>
+<p><img src="assets/CioPOWA01E6AM0S_AAFq9Ci2CSc510.png" alt="png" /></p>
 <p>DatabaseIdProvider 继承关系图</p>
 <p>从继承关系图中可以看出，DefaultDatabaseIdProvider 是个空实现，而且已被标记为过时了，所以这里我们就重点来看 VendorDatabaseIdProvider 实现。</p>
 <p>在 getDatabaseId() 方法中，VendorDatabaseIdProvider 首先会从 DataSource 中拿到数据库的名称，然后根据 <code>&lt;databaseIdProvider&gt; </code>标签配置和 DataSource 返回的数据库名称，确定最终的 DatabaseId 标识，具体实现如下：</p>

@@ -176,7 +176,7 @@ function hide_canvas() {
                         <div><h1>17 Sentinel 主流框架适配</h1>
 <p>使用 Sentinel 需要用 try-catch-finally 将需要保护的资源（方法或者代码块）包装起来，在目标方法或者代码块执行之前，调用 ContextUtil#enter 方法以及 SphU#entry 方法，在抛出异常时，如果非 BlockException 异常需要调用 Tracer#trace 记录异常，修改异常指标数据，在 finally 中需要调用 Entry#exit 方法，以及 ContextUtil#exit 方法。</p>
 <p>为了节省这些步骤，Sentinel 提供了对主流框架的适配，如适配 Spring MVC、Webflux、Dubbo、Api Gateway 等框架。当然，对于 Sentinel 未适配的框架，我们也可以自己实现适配器。在 Sentinel 源码之外，alibaba 的 spring-cloud-starter-alibaba-sentinel 也为 Sentinel 提供与 OpenFeign 框架整合的支持。</p>
-<p><img src="assets/ae715de0-ed3b-11ea-be9c-f7616f01fc23" alt="17-01-sentinel-adapter" /></p>
+<p><img src="assets/ae715de0-ed3b-11ea-be9c-f7616f01fc23" alt="png" /></p>
 <h3>Spring MVC 适配器</h3>
 <p>Sentinel 借助 Spring MVC 框架的 HandlerInterceptor 适配 Spring MVC，但也需要我们借助 WebMvcConfigurer 将 SentinelWebInterceptor 注册到 Spring MVC 框架。</p>
 <h4><strong>使用步骤</strong></h4>
@@ -398,7 +398,7 @@ public interface DemoService {
 <p>当满足熔断条件时，Sentinel 会抛出一个 DegradeException 异常，如果配置了 fallback，那么 Sentinel 会从 Bean 工厂中根据 fallback 属性配置的类型取一个 Bean 并调用接口方法。</p>
 <h4><strong>Sentinel 与 OpenFeign 整合实现原理</strong></h4>
 <p>当 Sentinel 与 OpenFeign、Ribbon 整合时，客户端向服务端发起一次请求的过程如下图所示。</p>
-<p><img src="assets/7b545840-ed3b-11ea-9210-e5c7b119b96e" alt="17-02-openfeign-sentinel" /></p>
+<p><img src="assets/7b545840-ed3b-11ea-9210-e5c7b119b96e" alt="png" /></p>
 <ol>
 <li>当调用@FeignClient 接口的方法时，由 Sentinel 提供的方法调用拦截器（SentinelInvocationHandler）拦截方法的执行，根据接口方法上注解的 url 生成资源名称，然后调用 Sentinel 的 SphU#entry 方法（完成所有 ProcessorSlot#entry 方法的调用），判断当前发起的请求是否需要熔断；</li>
 <li>非熔断降级情况下，继续将请求交给 OpenFeign 的 MethodHandler 处理；</li>
@@ -408,7 +408,7 @@ public interface DemoService {
 </ol>
 <p>可见，Sentinel 处在接口调用的最前端，因此 Sentinel 统计的指标数据即不会受 Ribbon 的重试影响也不会受 OpenFeign 的重试影响。</p>
 <p>Sentinel 通过自己提供 InvocationHandler 替换 OpenFeign 的 InvocationHandler 实现请求拦截。SentinelInvocationHandler 源码调试如下图所示。</p>
-<p><img src="assets/d7b506c0-ed3b-11ea-816b-87f82de6664d" alt="17-02-openfeign-sentinel02" /></p>
+<p><img src="assets/d7b506c0-ed3b-11ea-816b-87f82de6664d" alt="png" /></p>
 <p>InvocationHandler 是 OpenFeign 为接口生成 JDK 动态代理类时所需要的，是接口的方法拦截处理器，Sentinel 通过替换 OpenFeign 的 InvocationHandler 拦截方法的执行，在 OpenFeign 处理接口调用之前完成熔断降级的检查。</p>
 <p>那么，Sentinel 是如何将原本的 FeignInvocationHandler 替换为 SentinelInvocationHandler 的呢？</p>
 <p>OpenFeign 通过 Feign.Builder 类创建接口的代理类，所以 Sentinel 直接将 Feign.Builder 也替换成了 SentinelFeign.Builder，由 SentinelFeignAutoConfiguration 自动配置类向 Spring 的 Bean 容器注入 SentinelFeign.Builder，代码如下：</p>

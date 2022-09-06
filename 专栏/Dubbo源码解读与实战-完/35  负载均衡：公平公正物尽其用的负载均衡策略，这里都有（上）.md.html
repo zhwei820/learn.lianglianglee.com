@@ -291,7 +291,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>35  负载均衡：公平公正物尽其用的负载均衡策略，这里都有（上）</h1>
 <p>在前面的课时中，我们已经详细介绍了 dubbo-cluster 模块中的 Directory 和 Router 两个核心接口以及核心实现，同时也介绍了这两个接口相关的周边知识。本课时我们继续按照下图的顺序介绍 LoadBalance 的相关内容。</p>
-<p><img src="assets/Ciqc1F-81uuAdW51AAH-O1mrOoA018.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-81uuAdW51AAH-O1mrOoA018.png" alt="png" /></p>
 <p>LoadBalance 核心接口图</p>
 <p><strong>LoadBalance（负载均衡）的职责是将网络请求或者其他形式的负载“均摊”到不同的服务节点上，从而避免服务集群中部分节点压力过大、资源紧张，而另一部分节点比较空闲的情况。</strong></p>
 <p>通过合理的负载均衡算法，我们希望可以让每个服务节点获取到适合自己处理能力的负载，<strong>实现处理能力和流量的合理分配</strong>。常用的负载均衡可分为<strong>软件负载均衡</strong>（比如，日常工作中使用的 Nginx）和<strong>硬件负载均衡</strong>（主要有 F5、Array、NetScaler 等，不过开发工程师在实践中很少直接接触到）。</p>
@@ -306,7 +306,7 @@ function hide_canvas() {
 </ul>
 <h3>LoadBalance 接口</h3>
 <p>上述 Dubbo 提供的负载均衡实现，都是 LoadBalance 接口的实现类，如下图所示：</p>
-<p><img src="assets/CgqCHl-81vaAYmqRAAFYpTlQI0s741.png" alt="Lark20201124-174750.png" /></p>
+<p><img src="assets/CgqCHl-81vaAYmqRAAFYpTlQI0s741.png" alt="png" /></p>
 <p>LoadBalance 继承关系图</p>
 <p><strong>LoadBalance 是一个扩展接口，默认使用的扩展实现是 RandomLoadBalance</strong>，其定义如下所示，其中的 @Adaptive 注解参数为 loadbalance，即动态生成的适配器会按照 URL 中的 loadbalance 参数值选择扩展实现类。</p>
 <pre><code>@SPI(RandomLoadBalance.NAME)
@@ -378,16 +378,16 @@ public interface LoadBalance {
 hash(请求参数) % 2^32
 </code></pre>
 <p>Provider 地址和请求经过对 2^32 取模得到的结果值，都会落到一个 Hash 环上，如下图所示：</p>
-<p><img src="assets/CgqCHl-81wSAO1YfAAFfH6Qgse0640.png" alt="Lark20201124-174752.png" /></p>
+<p><img src="assets/CgqCHl-81wSAO1YfAAFfH6Qgse0640.png" alt="png" /></p>
 <p>一致性 Hash 节点均匀分布图</p>
 <p>我们按顺时针的方向，依次将请求分发到对应的 Provider。这样，当某台 Provider 节点宕机或增加新的 Provider 节点时，只会影响这个 Provider 节点对应的请求。</p>
 <p>在理想情况下，一致性 Hash 算法会将这三个 Provider 节点均匀地分布到 Hash 环上，请求也可以均匀地分发给这三个 Provider 节点。但在实际情况中，这三个 Provider 节点地址取模之后的值，可能差距不大，这样会导致大量的请求落到一个 Provider 节点上，如下图所示：</p>
-<p><img src="assets/CgqCHl-81w2ATT5qAAFjvpkgTNM463.png" alt="Lark20201124-174755.png" /></p>
+<p><img src="assets/CgqCHl-81w2ATT5qAAFjvpkgTNM463.png" alt="png" /></p>
 <p>一致性 Hash 节点非均匀分布图</p>
 <p>这就出现了数据倾斜的问题。<strong>所谓数据倾斜是指由于节点不够分散，导致大量请求落到了同一个节点上，而其他节点只会接收到少量请求的情况</strong>。</p>
 <p>为了解决一致性 Hash 算法中出现的数据倾斜问题，又演化出了 Hash 槽的概念。</p>
 <p>Hash 槽解决数据倾斜的思路是：既然问题是由 Provider 节点在 Hash 环上分布不均匀造成的，那么可以虚拟出 n 组 P1、P2、P3 的 Provider 节点 ，让多组 Provider 节点相对均匀地分布在 Hash 环上。如下图所示，相同阴影的节点均为同一个 Provider 节点，比如 P1-1、P1-2……P1-99 表示的都是 P1 这个 Provider 节点。引入 Provider 虚拟节点之后，让 Provider 在圆环上分散开来，以避免数据倾斜问题。</p>
-<p><img src="assets/CgqCHl-81xaAEUSbAAG0t7C-hcQ544.png" alt="Lark20201124-174743.png" /></p>
+<p><img src="assets/CgqCHl-81xaAEUSbAAG0t7C-hcQ544.png" alt="png" /></p>
 <p>数据倾斜解决示意图</p>
 <h4>2. ConsistentHashSelector 实现分析</h4>
 <p>了解了一致性 Hash 算法的基本原理之后，我们再来看一下 ConsistentHashLoadBalance 一致性 Hash 负载均衡的具体实现。首先来看 doSelect() 方法的实现，其中会根据 ServiceKey 和 methodName 选择一个 ConsistentHashSelector 对象，<strong>核心算法都委托给 ConsistentHashSelector 对象完成。</strong></p>
@@ -476,7 +476,7 @@ private Invoker&lt;T&gt; selectForKey(long hash) {
 <h3>RandomLoadBalance</h3>
 <p>RandomLoadBalance 使用的负载均衡算法是<strong>加权随机算法</strong>。RandomLoadBalance 是一个简单、高效的负载均衡实现，它也是 Dubbo 默认使用的 LoadBalance 实现。</p>
 <p>这里我们通过一个示例来说明加权随机算法的核心思想。假设我们有三个 Provider 节点 A、B、C，它们对应的权重分别为 5、2、3，权重总和为 10。现在把这些权重值放到一维坐标轴上，[0, 5) 区间属于节点 A，[5, 7) 区间属于节点 B，[7, 10) 区间属于节点 C，如下图所示：</p>
-<p><img src="assets/Ciqc1F-81ySAdj_7AAAxc2j-s5k730.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F-81ySAdj_7AAAxc2j-s5k730.png" alt="png" /></p>
 <p>权重坐标轴示意图</p>
 <p>下面我们通过随机数生成器在 [0, 10) 这个范围内生成一个随机数，然后计算这个随机数会落到哪个区间中。例如，随机生成 4，就会落到 Provider A 对应的区间中，此时 RandomLoadBalance 就会返回 Provider A 这个节点。</p>
 <p>接下来我们再来看 RandomLoadBalance 中 doSelect() 方法的实现，其核心逻辑分为三个关键点：</p>

@@ -299,7 +299,7 @@ function hide_canvas() {
 <p>了解了上述背景知识之后，下面我们就正式开始介绍 Cluster 接口。</p>
 <h3>Cluster 接口与容错机制</h3>
 <p>Cluster 的工作流程大致可以分为两步（如下图所示）：①<strong>创建 Cluster Invoker 实例</strong>（在 Consumer 初始化时，Cluster 实现类会创建一个 Cluster Invoker 实例，即下图中的 merge 操作）；②<strong>使用 Cluster Invoker 实例</strong>（在 Consumer 服务消费者发起远程调用请求的时候，Cluster Invoker 会依赖前面课时介绍的 Directory、Router、LoadBalance 等组件得到最终要调用的 Invoker 对象）。</p>
-<p><img src="assets/Ciqc1F_GAzqAFfi0AAEr0jR4WUk707.png" alt="Lark20201201-164714.png" /></p>
+<p><img src="assets/Ciqc1F_GAzqAFfi0AAEr0jR4WUk707.png" alt="png" /></p>
 <p>Cluster 核心流程图</p>
 <p>Cluster Invoker 获取 Invoker 的流程大致可描述为如下：</p>
 <ol>
@@ -327,10 +327,10 @@ public interface Cluster {
 }
 </code></pre>
 <p>Cluster 接口的实现类如下图所示，分别对应前面提到的多种容错策略：</p>
-<p><img src="assets/Ciqc1F_GA0WADFvhAAFaDfyWGXU780.png" alt="Lark20201201-164718.png" /></p>
+<p><img src="assets/Ciqc1F_GA0WADFvhAAFaDfyWGXU780.png" alt="png" /></p>
 <p>Cluster 接口继承关系</p>
 <p><strong>在每个 Cluster 接口实现中，都会创建对应的 Invoker 对象，这些都继承自 AbstractClusterInvoker 抽象类</strong>，如下图所示：</p>
-<p><img src="assets/CgqCHl_GA0-AcVvrAAGLJ3YaO2Q177.png" alt="Lark20201201-164728.png" /></p>
+<p><img src="assets/CgqCHl_GA0-AcVvrAAGLJ3YaO2Q177.png" alt="png" /></p>
 <p>AbstractClusterInvoker 继承关系图</p>
 <p>通过上面两张继承关系图我们可以看出，Cluster 接口和 Invoker 接口都会有相应的抽象实现类，这些抽象实现类都实现了一些公共能力。下面我们就来深入介绍 AbstractClusterInvoker 和 AbstractCluster 这两个抽象类。</p>
 <h3>AbstractClusterInvoker</h3>
@@ -543,7 +543,7 @@ public &lt;T&gt; Invoker&lt;T&gt; join(Directory&lt;T&gt; directory) throws RpcE
 }
 </code></pre>
 <p>Dubbo 提供了两个 ClusterInterceptor 实现类，分别是 ConsumerContextClusterInterceptor 和 ZoneAwareClusterInterceptor，如下图所示：</p>
-<p><img src="assets/CgqCHl_GA2GAYY4rAAGXJIXwK1k980.png" alt="Lark20201201-164721.png" /></p>
+<p><img src="assets/CgqCHl_GA2GAYY4rAAGXJIXwK1k980.png" alt="png" /></p>
 <p>ClusterInterceptor 继承关系图</p>
 <p>在 ConsumerContextClusterInterceptor 的 before() 方法中，会在 RpcContext 中设置当前 Consumer 地址、此次调用的 Invoker 等信息，同时还会删除之前与当前线程绑定的 Server Context。在 after() 方法中，会删除本地 RpcContext 的信息。ConsumerContextClusterInterceptor 的具体实现如下：</p>
 <pre><code>public void before(AbstractClusterInvoker&lt;?&gt; invoker, Invocation invocation) {

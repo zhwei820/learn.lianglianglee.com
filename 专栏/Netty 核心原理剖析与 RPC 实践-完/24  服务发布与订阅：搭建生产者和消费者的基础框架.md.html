@@ -234,7 +234,7 @@ function hide_canvas() {
 </ul>
 <h3>项目结构</h3>
 <p>在动手开发项目之前，我们需要对项目结构有清晰的构思。根据上节课介绍的 RPC 框架设计架构，我们可以将项目结构划分为以下几个模块。</p>
-<p><img src="assets/Ciqc1F_1MRqAbEzjAAYR0w8pkqw383.png" alt="Lark20210106-113815.png" /></p>
+<p><img src="assets/Ciqc1F_1MRqAbEzjAAYR0w8pkqw383.png" alt="png" /></p>
 <p>其中每个模块都是什么角色呢？下面我们一一进行介绍。</p>
 <ul>
 <li>rpc-provider，服务提供者。负责发布 RPC 服务，接收和处理 RPC 请求。</li>
@@ -245,7 +245,7 @@ function hide_canvas() {
 <li>rpc-facade，RPC 服务接口。包含服务提供者需要对外暴露的接口，本模块主要用于模拟真实 RPC 调用的测试。</li>
 </ul>
 <p>如下图所示，首先我们需要清楚各个模块之间的依赖关系，才能帮助我们更好地梳理 Maven 的 pom 定义。rpc-core 是最基础的类库，所以大部分模块都依赖它。rpc-consumer 用于发起 RPC 调用。rpc-provider 负责处理 RPC 请求，如果不知道远程服务的地址，那么一切都是空谈了，所以两者都需要依赖 rpc-registry 提供的服务发现和服务注册的能力。</p>
-<p><img src="assets/CgpVE1_1MSWAQTIAAARy1QowhGA148.png" alt="Lark20210106-113819.png" /></p>
+<p><img src="assets/CgpVE1_1MSWAQTIAAARy1QowhGA148.png" alt="png" /></p>
 <h3>如何使用</h3>
 <p>我们不着急开始动手实现代码细节，而是考虑一个问题，最终实现的 RPC 框架应该让用户如何使用呢？这就跟我们学习一门技术一样，你不可能刚开始就直接陷入源码的细节，而是先熟悉它的基本使用方式，然后找到关键的切入点再深入研究实现原理，会起到事半功倍的效果。</p>
 <p>首先我们看下 RPC 框架想要实现的效果，如下所示：</p>

@@ -165,13 +165,13 @@ function hide_canvas() {
                         <div><h1>07  深入数据源和事务，把握持久化框架的两个关键命脉</h1>
 <p>数据源是持久层框架中最核心的组件之一，在实际工作中比较常见的数据源有 C3P0、Apache Common DBCP、Proxool 等。作为一款成熟的持久化框架，MyBatis 不仅自己提供了一套数据源实现，而且还能够方便地集成第三方数据源。</p>
 <p><strong>javax.sql.DataSource 是 Java 语言中用来抽象数据源的接口</strong>，其中定义了所有数据源实现的公共行为，MyBatis 自身提供的数据源实现也要实现该接口。MyBatis 提供了两种类型的数据源实现，分别是 PooledDataSource 和 UnpooledDataSource，继承关系如下图所示：</p>
-<p><img src="assets/Cgp9HWApSnyAeZddAADG9kv9Y-c887.png" alt="1.png" /></p>
+<p><img src="assets/Cgp9HWApSnyAeZddAADG9kv9Y-c887.png" alt="png" /></p>
 <p>针对不同的 DataSource 实现，MyBatis 提供了不同的工厂实现来进行创建，如下图所示，这是工厂方法模式的一个典型应用场景。</p>
-<p><img src="assets/CioPOWApSomAM5hXAADlDsSaiAY054.png" alt="2.png" /></p>
+<p><img src="assets/CioPOWApSomAM5hXAADlDsSaiAY054.png" alt="png" /></p>
 <p><strong>编写一个设计合理、性能优秀的数据源只是第一步</strong>，在通过数据源拿到数据库连接之后，还需要开启事务，才能进行数据的修改。MyBatis 对数据库事务进行了一层抽象，也就是我们这一讲后面要介绍的 Transaction 接口，它可以<strong>管理事务的开启、提交和回滚</strong>。</p>
 <h3>工厂方法模式</h3>
 <p>工厂方法模式中定义了 Factory 这个工厂接口，如下图所示，其中定义了 createProduct() 方法创建右侧继承树中的对象，不同的工厂接口实现类会创建右侧继承树中不同 Product 实现类（例如 ProductImpl 1 和 ProductImpl 2）。</p>
-<p><img src="assets/CioPOWApSqKAQyYyAAD_0kpOQec437.png" alt="3.png" /></p>
+<p><img src="assets/CioPOWApSqKAQyYyAAD_0kpOQec437.png" alt="png" /></p>
 <p>从上图中，我们可以看到工厂方法模式由四个核心角色构成。</p>
 <ul>
 <li>Factory 接口：工厂方法模式的核心接口之一。使用方会依赖 Factory 接口创建 Product 对象实例。</li>
@@ -184,7 +184,7 @@ function hide_canvas() {
 <h3>数据源工厂</h3>
 <p>了解了工厂方法模式的基础知识之后，下面我们回到 MyBatis 的数据源实现上来。<strong>MyBatis 的数据源模块也是用到了工厂方法模式，如果需要扩展新的数据源实现时，只需要添加对应的 Factory 实现类，新的数据源就可以被 MyBatis 使用。</strong></p>
 <p>DataSourceFactory 接口就扮演了 MyBatis 数据源实现中的 Factory 接口角色。UnpooledDataSourceFactory 和 PooledDataSourceFactory 实现了 DataSourceFactory 接口，也就是 Factory 接口实现类的角色。三者的继承关系如下图所示：</p>
-<p><img src="assets/Cgp9HWApSreAMsSEAADxE9_08B0637.png" alt="5.png" /></p>
+<p><img src="assets/Cgp9HWApSreAMsSEAADxE9_08B0637.png" alt="png" /></p>
 <p>DataSourceFactory 接口中最核心的方法是 getDataSource() 方法，该方法用来生成一个 DataSource 对象。</p>
 <p>在 UnpooledDataSourceFactory 这个实现类的初始化过程中，会直接创建 UnpooledDataSource 对象，其中的 dataSource 字段会指向该 UnpooledDataSource 对象。接下来调用的 setProperties() 方法会根据传入的配置信息，完成对该 UnpooledDataSource 对象相关属性的设置。</p>
 <p>UnpooledDataSourceFactory 对于 getDataSource() 方法的实现就相对简单了，其中直接返回了上面创建的 UnpooledDataSource 对象。</p>
@@ -469,7 +469,7 @@ function hide_canvas() {
 <p>可见，<strong>控制事务在一个以数据库为基础的服务中，是一件非常重要的工作</strong>。为此，MyBatis 专门抽象出来一个 Transaction 接口，好在相较于我们上面讲述的数据源，这部分内容还是比较简单、比较好理解的。</p>
 <p><strong>Transaction 接口是 MyBatis 中对数据库事务的抽象</strong>，其中定义了<strong>提交事务、回滚事务</strong>，以及<strong>获取事务底层数据库连接</strong>的方法。</p>
 <p>JdbcTransaction、ManagedTransaction 是 MyBatis 自带的两个 Transaction 接口实现，这里也使用到了工厂方法模式，如下图所示：</p>
-<p><img src="assets/CioPOWApSyGAb7OzAAFWzMbS1T8710.png" alt="6.png" /></p>
+<p><img src="assets/CioPOWApSyGAb7OzAAFWzMbS1T8710.png" alt="png" /></p>
 <p><strong>TransactionFactory 是用于创建 Transaction 的工厂接口</strong>，其中最核心的方法是 newTransaction() 方法，它会根据数据库连接或数据源创建 Transaction 对象。</p>
 <p>JdbcTransactionFactory 和 ManagedTransactionFactory 是 TransactionFactory 的两个实现类，分别用来创建 JdbcTransaction 对象和 ManagedTransaction 对象，具体实现比较简单，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/mybatis">源码</a>进行学习。</p>
 <p>接下来，我们看一下 JdbcTransaction 的实现，其中维护了事务关联的数据库连接以及数据源对象，同时还记录了事务自身的属性，例如，事务隔离级别和是否自动提交。</p>

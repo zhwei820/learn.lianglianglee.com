@@ -173,14 +173,14 @@ function hide_canvas() {
 <p>今天，我将通过一个课时的时间带领你梳理整个 Spring 家族中的技术体系，以及各种功能齐全的开发框架。让我们先来看一下 Spring 家族技术生态的全景图。</p>
 <h3>Spring 家族技术生态全景图</h3>
 <p>我们访问 Spring 的官方网站（<a href="https://spring.io/">https://spring.io/</a>）来对这个框架做宏观的了解。在 Spring 的主页中，展示了下面这张图：</p>
-<p><img src="assets/Ciqc1F-7VlGAesWiAACRuk5Qiko663.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-7VlGAesWiAACRuk5Qiko663.png" alt="png" /></p>
 <p>Spring 家族技术体系（来自 Spring 官网）</p>
 <p>从图中可以看到，这里罗列了 Spring 框架的七大核心技术体系，分别是微服务架构、响应式编程、云原生、Web 应用、Serverless 架构、事件驱动以及批处理。</p>
 <p>当然，这些技术体系各自独立但也有一定交集，例如微服务架构往往会与基于 Spring Cloud 的云原生技术结合在一起使用，而微服务架构的构建过程也需要依赖于能够提供 RESTful 风格的 Web 应用程序等。</p>
 <p>另一方面，在具备特定的技术特点之外，这些技术体系也各有其应用场景。例如，如果我们想要实现日常报表等轻量级的批处理任务，而又不想引入 Hadoop 这套庞大的离线处理平台时，使用基于 Spring Batch 的批处理框架是一个不错的选择。再比方说，如果想要实现与 Kafka、RabbitMQ 等各种主流消息中间件之间的集成，但又希望开发人员不需要了解这些中间件在使用上的差别，那么使用基于 Spring Cloud Stream 的事件驱动架构是你的首选，因为这个框架对外提供了统一的 API，从而屏蔽了内部各个中间件在实现上的差异性。</p>
 <p>我们无意对 Spring 中的所有七大技术体系做全面的展开。在日常开发过程中，如果构建单块 Web 服务，可以采用 Spring Boot。如果想要开发微服务架构，那么就需要使用基于 Spring Boot 的 Spring Cloud，而 Spring Cloud 同样内置了基于 Spring Cloud Stream 的事件驱动架构。同时，在这里我想特别强调的是响应式编程技术。响应式编程是 Spring 5 引入的最大创新，代表了一种系统架构设计和实现的技术方向。因此，今天我们也将从 Spring Boot、Spring Cloud 以及 Spring 响应式编程这三个技术体系进行切入，看看 Spring 具体能够为我们解决开发过程中的哪些问题。</p>
 <p>当然，所有我们现在能看到的 Spring 家族技术体系都是在 Spring Framework 基础上逐步演进而来的。在介绍上述技术体系之前，我们先简单了解下 Spring Framework 的整体架构，如下图所示：</p>
-<p><img src="assets/Ciqc1F-7XBiAUUZ5AACAA4yJiFs420.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F-7XBiAUUZ5AACAA4yJiFs420.png" alt="png" /></p>
 <p>Spring Framework 整体架构图</p>
 <p>Spring 从诞生之初就被认为是一种容器，上图中的“核心容器”部分就包含了一个容器所应该具备的核心功能，包括容器中基于依赖注入机制的 JavaBean 处理、面向切面 AOP、上下文 Context及 Spring 自身所提供的表达式工具等一些辅助功能。</p>
 <p>图中最上面的两个框就是构建应用程序所需要的最核心的两大功能组件，也是我们日常开发中最常用的组件，即数据访问和 Web 服务。这两大部分功能组件中包含的内容非常多，而且充分体现了 Spring Framework 的集成性，也就是说，框架内部整合了业界主流的数据库驱动、消息中间件、ORM 框架等各种工具，开发人员可以根据需要灵活地替换和调整自己想要使用的工具。</p>
@@ -212,20 +212,20 @@ public class DemoApplication {
 <p>可以看到，Spring Boot 的上述功能实际上从多个维度简化了 Web 应用程序的开关过程，这些维度包含编码、配置、部署和监控等。在 02 讲中，我们将通过一个具体的案例来对每个维度给出更为详细的描述。</p>
 <h3>Spring Cloud 与微服务架构</h3>
 <p>Spring Cloud 构建在 Spring Boot 基础之上，它的整体架构图如下所示：</p>
-<p><img src="assets/CgqCHl-7VsqAU_-oAAA1B5IapO8742.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-7VsqAU_-oAAA1B5IapO8742.png" alt="png" /></p>
 <p>Spring Cloud 与微服务整体架构图（来自 Spring 官网）</p>
 <p>技术组件的完备性是 Spring Cloud 框架的主要优势，它集成了业界一大批知名的微服务开发组件。Spring Cloud 的核心组件如下图所示：</p>
-<p><img src="assets/Ciqc1F-7Vt-ANEHuAACBTY1pIak300.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-7Vt-ANEHuAACBTY1pIak300.png" alt="png" /></p>
 <p>Spring Cloud 核心功能组件</p>
 <p>可以看到，基于 Spring Boot 的开发便利性，Spring Cloud 巧妙地简化了微服务系统基础设施的开发过程，Spring Cloud 包含上图中所展示的服务发现注册、API 网关、配置中心、消息总线、负载均衡、熔断器、数据监控等。</p>
 <h3>Spring 5 与响应式编程</h3>
 <p>目前，Spring 已经演进到 5.X 版本。随着 Spring 5 的正式发布，我们迎来了响应式编程（Reactive Programming）的全新发展时期。Spring 5 中内嵌了与数据管理相关的响应式数据访问、与系统集成相关的响应式消息通信以及与 Web 服务相关的响应式 Web 框架等多种响应式组件，从而极大地简化了响应式应用程序的开发过程和开发难度。</p>
 <p>下图展示了响应式编程的技术栈与传统的 Servlet 技术栈之间的对比：</p>
-<p><img src="assets/Ciqc1F-7VumAJcdAAACWjgTTFkY645.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F-7VumAJcdAAACWjgTTFkY645.png" alt="png" /></p>
 <p>响应式编程技术栈与 Servlet 技术栈之间的对比图（来自 Spring 官网）</p>
 <p>从上图可以看到，上图左侧为基于 Spring WebFlux 的技术栈，右侧为基于 Spring MVC 的技术栈。我们知道传统的 Spring MVC 构建在 Java EE 的 Servlet 标准之上，该标准本身就是阻塞式和同步的，而 Spring WebFlux 基于响应式流，因此可以用来构建异步非阻塞的服务。</p>
 <p>在 Spring 5 中，选取了 Project Reactor 作为响应式流的实现库。由于响应式编程的特性，Spring WebFlux 和 Project Reactor 的运行需要依赖于诸如 Netty 和 Undertow 等支持异步机制的容器。同时我们也可以选择使用较新版本的 Tomcat 和 Jetty 作为运行环境，因为它们支持异步 I/O 的 Servlet 3.1。下图更加明显地展示了 Spring MVC 和 Spring WebFlux 之间的区别和联系：</p>
-<p><img src="assets/Ciqc1F-8pB6AReQhAADiHs1UMA4354.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F-8pB6AReQhAADiHs1UMA4354.png" alt="png" /></p>
 <p>在基于 Spring Boot 以及 Spring Cloud 的应用程序中，Spring WebFlux 和 Spring MVC 可以混合进行使用。</p>
 <p>讲完 Spring 家族的技术体系，让我们回到课程。在 01 讲中，我们主要围绕 Spring Boot 框架展开讨论，分别从配置体系、数据访问、Web 服务、消息通信、系统安全、系统监控、应用测试等维度对该框架进行深入的剖析，所采用的版本为 2.2.X 版。</p>
 <h3>小结与预告</h3>

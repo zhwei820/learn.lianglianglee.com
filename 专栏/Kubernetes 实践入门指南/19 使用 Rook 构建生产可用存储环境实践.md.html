@@ -169,7 +169,7 @@ function hide_canvas() {
 <p>Rook 是基于 Kubernetes 之上构建的存储服务框架。它支持 Ceph、NFS 等多种底层存储的创建和管理。帮助系统管理员自动化维护存储的整个生命周期。存储的整个生命周期包括部署、启动、配置、申请、扩展、升级、迁移、灾难恢复、监控和资源管理等，看着就让笔者觉得事情不少，Rook 的目标就是降低运维的难度，让 Kubernetes 和 Rook 来帮你托管解决这些任务。</p>
 <h3>Rook 管理 Ceph 集群</h3>
 <p>Ceph 分布式存储是 Rook 支持的第一个标记为 Stable 的编排存储引擎，在笔者验证 Rook 操作 Ceph 的过程中发现，其社区文档、脚本都放在一起，初次新手很难知道如何一步一步体验 Rook 搭建 Ceph 的过程。这从一个侧面反应了分布式存储的技术难度和兼容性是一个长期的迭代过程，Rook 的本意是为了降低部署管理 Ceph 集群的难度，但是事与愿违，初期使用的过程并不友好，有很多不知名的问题存在官方文档中。</p>
-<p><img src="assets/45821220-16c6-11eb-8b57-67f291f7f7f6.jpg" alt="16-1-rook-arch.png" /></p>
+<p><img src="assets/45821220-16c6-11eb-8b57-67f291f7f7f6.jpg" alt="png" /></p>
 <p>在安装 Ceph 前要注意，目前最新的 Ceph 支持的存储后端 BlueStore 仅支持裸设备，不支持在本地文件系统之上建立存储块。因为 Rook 文档的混乱，一开始我们需要自己找到安装脚本目录，它在</p>
 <blockquote>
 <p><a href="https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/ceph">https://github.com/rook/rook/tree/master/cluster/examples/kubernetes/ceph</a></p>

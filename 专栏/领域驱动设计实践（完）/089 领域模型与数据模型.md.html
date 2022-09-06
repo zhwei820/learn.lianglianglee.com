@@ -536,9 +536,9 @@ function hide_canvas() {
 <li>多库多表：为不同的限界上下文建立不同的数据库，员工模型也映射不同的员工表，之间以共同的员工 ID 关联。这一方案符合微服务架构风格。</li>
 </ul>
 <p>无论数据模型采用哪一种设计方案，它们的领域模型包括对聚合内实体与值对象的定义，界定的聚合边界都不应有任何区别，即做到领域模型的设计与持久化机制无关。在领域模型中，受到数据模型影响的应只限于ORM元数据定义。如下图所示的代码结构，应不受数据模型设计方案的影响：</p>
-<p><img src="assets/a3a3a3b0-0f8c-11ea-b790-ddb23a223761" alt="31d8e84b-2647-4739-a5f6-ad9294ef052f.png" /></p>
+<p><img src="assets/a3a3a3b0-0f8c-11ea-b790-ddb23a223761" alt="png" /></p>
 <p>在领域模型中，员工上下文的 Employee 聚合根实体与薪资上下文的员工聚合根实体通过 EmployeeId 建立关联，薪资上下文中的 HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 三个聚合根实体之间没有任何关系。在设计领域模型时，不应该受到数据模型设计的干扰，但在实现领域模型时，就需要确定数据模型的设计方案，并在选定 ORM 框架的基础上，确定该如何映射领域模型到数据模型的实现方案，并编写代码实现。领域模型与数据模型彼此之间的关系如下图所示：</p>
-<p><img src="assets/bf77a9b0-0f8c-11ea-b8a0-75aeab1e38cf" alt="76245529.png" /></p>
+<p><img src="assets/bf77a9b0-0f8c-11ea-b8a0-75aeab1e38cf" alt="png" /></p>
 <p>从概念上讲，HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 都是员工，似乎应为其建立以 Employee 为父类的继承体系。然而，若采用领域驱动设计，根据业务能力与领域关注点划分了限界上下文，它们又应该分属不同的限界上下文。如果仍然设计为继承体系，就会导致薪资上下文成为员工上下文的遵奉者。这正是对象范式的领域驱动设计与常规的面向对象设计不同之处，<strong>领域驱动设计在战略和战术层面尤为关注和强调限界上下文与聚合的边界控制力</strong>。这是在运用领域驱动设计进行落地实现时，尤其需要注意的一点。</p>
 <h3>领域模型</h3>
 <p>不同的限界上下文有着不同的领域模型，也有着不同的统一语言，因此在定义领域模型的类型时，需要注意区分限界上下文的边界。</p>
@@ -556,7 +556,7 @@ public class Employee extends AbstractEntity&lt;EmployeeId&gt; implements Aggreg
 }
 </code></pre>
 <p>薪资上下文关心的领域逻辑是计算每种员工的薪资。倘若不同类型员工仅存在薪资计算行为的差异，自然可以引入策略模式，将这一行为分离出来，并抽象为薪资计算的接口。然而，不同类型员工还存在完全不同的属性和对等的行为，钟点工需要提交工作时间卡，月薪雇员需要记录缺勤记录，销售人员需要提交销售凭条，它们之间唯一存在的共性就是 EmployeeId，除此之外，我们还需要维护它们各自的一致性。因此，针对薪资上下文的领域模型，可以为不同类型雇员建立不同的聚合，然后在薪资计算行为层面引入抽象，保持适度的扩展能力：</p>
-<p><img src="assets/dbe50980-0f8c-11ea-b700-85fa1d9e7b57" alt="73601347.png" /></p>
+<p><img src="assets/dbe50980-0f8c-11ea-b700-85fa1d9e7b57" alt="png" /></p>
 <p>薪资上下文领域模型的聚合定义如下：</p>
 <pre><code class="language-java">package top.dddclub.payroll.payrollcontext.domain.hourlyemployee;
 public class HourlyEmployee extends AbstractEntity&lt;EmployeeId&gt; implements AggregateRoot&lt;HourlyEmployee&gt; {
@@ -654,7 +654,7 @@ public class CommissionedEmployeePayrollCalculator implements PayrollCalculator 
 <p>如前所述，取决于限界上下文的边界以及系统选择的架构风格，存在两种迥然不同的数据模型：单库单表和多库多表。它们的数据模型自然不同，由此也会影响到领域模型到数据模型之间的映射关系。</p>
 <h4>单库单表的ORM映射</h4>
 <p>若采用单体架构，员工对应的数据模型最简单的设计就是单库单表，即创建 employees 表。由于员工与工作时间卡、缺勤记录和销售凭条之间都存在一对多关系，因此采用单库设计的数据模型如下所示：</p>
-<p><img src="assets/037bc5b0-0f8d-11ea-b790-ddb23a223761" alt="74796269.png" /></p>
+<p><img src="assets/037bc5b0-0f8d-11ea-b790-ddb23a223761" alt="png" /></p>
 <p>领域驱动设计虽然隔离了领域模型与数据模型，但在实现持久化时，必须为持久化框架提供对象与关系的映射信息。倘若采用 JPA，就是通过 Java 标注来声明，这可以认为是持久化机制对领域模型的一点侵入。由于员工上下文和薪资上下文中的员工领域模型都映射自 employees 表，且薪资上下文的 HourlyEmployee、SalariedEmployee 与 CommissionedEmployee 聚合对应了各自类型的员工数据，故而在领域模型中设置映射信息时，需要作出一点点调整。映射元数据的声明如下所示：</p>
 <pre><code class="language-java">package top.dddclub.payroll.employeecontext.domain;
 @Entity
@@ -725,7 +725,7 @@ public class Salary {
 </code></pre>
 <h4>多库多表的 ORM 映射</h4>
 <p>多库多表的数据模型发生了本质的变化，因为要创建的表分布在不同的数据库。由于薪资上下文的数据库不再包含 employees 表，因此需要为钟点工、月薪雇员和销售人员分别创建三张表，以及与之关联的 timecards、absences 和 commissions 表：</p>
-<p><img src="assets/86f8f750-0f8d-11ea-9b6e-bb22052f4ab5" alt="75352172.png" /></p>
+<p><img src="assets/86f8f750-0f8d-11ea-9b6e-bb22052f4ab5" alt="png" /></p>
 <p>如果采用 JPA 规范实现资源库的持久化，就需要在各自的限界上下文中定义 persistence.xml 文件，定义不同的 Persistence Unit，并设置属性指向对应的数据库。</p>
 <p>既然数据模型中员工相关的表名与结构都发生了变化，领域模型的映射元数据也要做相应的调整：</p>
 <pre><code class="language-java">package top.dddclub.payroll.employeecontext.domain;

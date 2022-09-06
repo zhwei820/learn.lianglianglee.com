@@ -210,7 +210,7 @@ function hide_canvas() {
 <p>GIGABYTE Z170M M-ATX 的主板、Intel Core i5-6600K 的 CPU、Kingston Fury DDR4 的内存、Kingston V300 的 SSD 硬盘、Colorful iGame750 的显卡、DEEPCOOL 120T 水冷风扇、Antec VP 450P 的电源、AOC LV243XIP 的显示器、SAMA MATX 小板机箱……</p>
 <p>周末，Tony 花了一天的时间才把这些配件组装成一个完整的整机。一次点亮，Tony 成就感十足！与购买相同性能的整机相比，不仅价格减了三成，而且加深了对各个硬件的了解。</p>
 </blockquote>
-<p><img src="assets/33723c10-e39b-11e7-8709-2542c9dceea6.jpg" alt="enter image description here" /></p>
+<p><img src="assets/33723c10-e39b-11e7-8709-2542c9dceea6.jpg" alt="png" /></p>
 <h3>用程序来模拟生活</h3>
 <p>只要你对硬件稍微有一些了解，或者打开过机箱换过组件，一定知道 CPU、内存、显卡是插在主板上的，而硬盘也是连在主板上的，在机箱的后面有一排的插口，可以连接鼠标、键盘、耳麦、摄像头等外接配件，而显示器需要单独插电源才能工作。我们可以用代码来模拟台式电脑的组成，这里假设每一个组件都有开始工作和结束工作两个功能，还可以显示自己的信息和组成结构。</p>
 <p>源码示例：</p>
@@ -388,18 +388,18 @@ Tony DIY电脑 准备开始工作...
 <p>Tony 自己 DIY 组装的电脑是由各个配件组成的，在组装之前，就是一个个 CPU、硬盘、显卡等配件，不能称之为电脑，只有把它们按正确的方式组装在一起，配合操作系统才能正常运行。一般人使用电脑并不会关注内部的组成结构，只会关注一台整机。</p>
 <p>这里有明显的部分与整体的关系，主板、电源等是电脑的一部分，而主板上又有 CPU、硬盘、显卡，它们又可以认为是主板的一部分。像电脑一样，把对象组合成树形结构，以表示“部分-整体”的层次结构的程序设计模式就叫<strong>组合模式</strong>。组合模式使得用户对单个对象和组合对象的使用具有一致性，使用组合对象就像使用一般对象一样，不便关心内部的组织结构。</p>
 <p>如上面的示例中，组合的电脑具有明显层次组合关系，如：</p>
-<p><img src="assets/6c2db3e0-e39b-11e7-b359-dd1a130fd3aa.jpg" alt="enter image description here" /></p>
+<p><img src="assets/6c2db3e0-e39b-11e7-b359-dd1a130fd3aa.jpg" alt="png" /></p>
 <p>我们将这种层次关系转换成对象的组合关系如下：</p>
-<p><img src="assets/7929fb80-e39b-11e7-a626-77bb30a498d5.jpg" alt="enter image description here" /></p>
+<p><img src="assets/7929fb80-e39b-11e7-a626-77bb30a498d5.jpg" alt="png" /></p>
 <h3>组合模式的模型抽象</h3>
 <h4>类图</h4>
 <p>根据上面组装电脑的示例，将组合模式抽象成一般化的类图关系如下：</p>
-<p><img src="assets/8afe5810-e39b-11e7-8709-2542c9dceea6.jpg" alt="enter image description here" /></p>
+<p><img src="assets/8afe5810-e39b-11e7-8709-2542c9dceea6.jpg" alt="png" /></p>
 <p>这里 Composite 就是组合对象，组合对象可以添加或删除组件，它本身也是一个组件，因此组合对象可以像一般对象一样被使用，因为它也实现了 Component的feature() 方法。</p>
 <h4>模型说明</h4>
 <p>组合模式是一个非常常用的模式，你可能在有意或无意间就已经用上了，比如公司（各个部门或各个子公司）的组织架构，学校各个学院-班级的关系。</p>
 <p>如在图形绘制系统中，图元（GraphicUnit）可以有多种不同的类型：Text、Line、Rect、Ellipse 等，还可以是矢量图（vectorgraph）。而矢量图本身又是由一个或多个 Text、Line、Rect、Ellipse 组成。但所有的图元都有一个共同的方法，那就是 draw()。这里就得用组合模式。</p>
-<p><img src="assets/c1e18d70-e39b-11e7-9109-7f9bd2e50434.jpg" alt="enter image description here" /></p>
+<p><img src="assets/c1e18d70-e39b-11e7-9109-7f9bd2e50434.jpg" alt="png" /></p>
 <h5><strong>组合模式的优点</strong></h5>
 <ol>
 <li>调用简单，组合对象可以像一般对象一样使用。</li>

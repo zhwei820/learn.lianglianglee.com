@@ -191,7 +191,7 @@ function hide_canvas() {
 </code></pre>
 <p>Sentinel 冷启动限流算法参考了 Guava 的 SmoothRateLimiter 实现的冷启动限流算法，但实现上有很大的区别，Sentinel 主要用于控制每秒的 QPS，不会控制每个请求的间隔时间，只要满足每秒通过的 QPS 即可。正因为与 Guava 的不同，官方文档目前也没有很详细的介绍具体实现，单看源码很难揣摩作者的思路，加上笔者水平有限，没能切底理解 Sentinel 冷启动限流算法实现的细节，因此我们也不过深的去分析 WarmUpController 的源码，只是结合 Guava 的实现算法作个简单介绍。</p>
 <p>Guava 的 SmoothRateLimiter 基于 Token Bucket 算法实现冷启动。我们先看一张图，从而了解 SmoothRateLimiter 中的一些基础知识。</p>
-<p><img src="assets/d7bf7130-e0bd-11ea-b45a-99f77a1eea3e" alt="12-01-warmup01" /></p>
+<p><img src="assets/d7bf7130-e0bd-11ea-b45a-99f77a1eea3e" alt="png" /></p>
 <ul>
 <li>横坐标 storedPermits 代表存储桶中的令牌数量。</li>
 <li>纵坐标代表获取一个令牌需要的时间，即请求通过的时间间隔。</li>
@@ -336,7 +336,7 @@ long aboveToken = restToken - warningToken;
 double warningQps = Math.nextUp(1.0 / (aboveToken * slope + 1.0 / count));
 </code></pre>
 <p>我们看图理解这个公式。</p>
-<p><img src="assets/884d8050-e0be-11ea-9345-e7c4c4dd55f7" alt="12-01-warmup02" /></p>
+<p><img src="assets/884d8050-e0be-11ea-9345-e7c4c4dd55f7" alt="png" /></p>
 <p>结合上图我们可以看出：</p>
 <ul>
 <li>图中的 x1 虚线的长度就等于 aboveToken。</li>

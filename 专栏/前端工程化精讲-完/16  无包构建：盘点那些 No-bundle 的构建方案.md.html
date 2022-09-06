@@ -188,11 +188,11 @@ import { appendHTML } from './common.js'
 ...
 import('https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac6c5cecbd9c287cfd9ea9e849b9d849b9f">[email&#160;protected]</a>/slice.js').then((module) =&gt; {...})
 </code></pre>
-<p><img src="assets/CgqCHl9yo46AYuszAANDvM6jRMk647.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9yo46AYuszAANDvM6jRMk647.png" alt="png" /></p>
 <p>从示例中可以看到，在没有任何构建工具处理的情况下，在页面中引入带有 type=&quot;module&quot; 属性的 script，浏览器就会在加载入口模块时依次加载了所有被依赖的模块。下面我们就来深入了解一下这种基于浏览器加载 JS 模块的技术的细节。</p>
 <h3>基于浏览器的 JS 模块加载功能</h3>
 <p>从 caniuse 网站中可以看到，目前大部分主流的浏览器都已支持 JavaScript modules 这一特性，如下图所示：</p>
-<p><img src="assets/Ciqc1F9yo5aADhYKAAMTR4GJTG8708.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9yo5aADhYKAAMTR4GJTG8708.png" alt="png" /></p>
 <p>[图片来源：<a href="https://caniuse.com/es6-module">https://caniuse.com/es6-module</a>]</p>
 <p>我们来总结这种加载方式的注意点。</p>
 <h4>HTML 中的 Script 引用</h4>
@@ -223,9 +223,9 @@ cd example-vite
 npm install
 npm run dev
 </code></pre>
-<p><img src="assets/CgqCHl9yo-mAWrIzAAOaSZguuaM643.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9yo-mAWrIzAAOaSZguuaM643.png" alt="png" /></p>
 <p>可以看到，运行示例代码后，在浏览器中只引入了 src/main.js 这一个入口模块，但是在网络面板中却依次加载了若干依赖模块，包括外部模块 vue 和 css。依赖图如下：</p>
-<p><img src="assets/Ciqc1F9yo_GAWATTAACYUvrJKL4148.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9yo_GAWATTAACYUvrJKL4148.png" alt="png" /></p>
 <p>可以看到，经过 Vite 处理后，浏览器中加载的模块与源代码中导入的模块相比发生了变化，这些变化包括对外部依赖包的处理，对 vue 文件的处理，对 css 文件的处理等。下面我们就来逐个分析其中的变化。</p>
 <h4>对导入模块的解析</h4>
 <p><strong>对 HTML 文件的预处理</strong></p>

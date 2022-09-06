@@ -183,7 +183,7 @@ function hide_canvas() {
 <p>既然都是基于线程的，而线程中基本会伴随着方法栈，即每进入一个方法都会通过压入一个方法栈帧的情况来保存。<strong>那我们是不是可以定期查看方法栈的情况来确认问题呢？答案是肯定的</strong>。比如我们经常使用到的 jstack，其实就是实时地对所有线程的堆栈进行快照操作，来查看当前线程的执行情况。</p>
 <p>利用我上面提到的 2 点，再结合链路中的上下文信息，我们可以通过<strong>周期性地对执行中的线程进行快照操作，并聚合所有的快照，来获得应用线程在生命周期中的执行情况，从而估算代码的执行速度，查看出具体的原因</strong>。</p>
 <p>这样的处理方式，我们就叫作<strong>性能剖析</strong>（Profile），原理可以参照下图：</p>
-<p><img src="assets/Ciqc1F9HZ0uASChgAABQpC64934541.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9HZ0uASChgAABQpC64934541.png" alt="png" /></p>
 <p>在这张图中，<strong>第一行代表线程进行快照的周期情况</strong>，每一个周期都可以认为是一段时间，比如 10ms、100ms。周期的时间长短，决定了对程序性能影响的大小。因为在进行线程快照时程序会暂停，当快照完成后才会继续进行操作。</p>
 <p><strong>第二行则代表我们需要进行观测的方法的执行时间</strong>，线程快照只能做到周期性的快照获取。虽然可能并不能完全匹配，但通过这种方式，相对来说已经很精准了。</p>
 <p>性能剖析与埋点相比，有以下几个优势：</p>
@@ -199,11 +199,11 @@ function hide_canvas() {
 <p>这个时候我们一般可以通过 2 种方式查看线程聚合的结果信息，它们分别是<strong>火焰图</strong>和<strong>树形图</strong>。</p>
 <h4>火焰图</h4>
 <p>火焰图，顾名思义，是和火焰一样的图片。<strong>火焰图是在 Linux 环境中比较常见的一种性能剖析展现方式</strong>。火焰图有很多种展现形式，这里我就以我们会用到的 CPU 火焰图为例：</p>
-<p><img src="assets/Ciqc1F9HZ2KAXgC0AAaJrTEo0uQ972.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9HZ2KAXgC0AAaJrTEo0uQ972.png" alt="png" /></p>
 <p>CPU 火焰图</p>
 <p>在 CPU 火焰图中，每一个方格代表一个方法栈帧，方格的长度则代表它的执行时间，所以方格越长就说明该栈帧执行的时间越长。火焰图中在某一个方格中增高一层，就说明是这个方法栈帧中，又调用了某个方法的栈帧。最顶层的函数，是叶子函数。叶子函数的方格越宽，说明这个方法在这里的执行耗时越长。</p>
 <p>如果觉得上面的火焰图太复杂的话，我们可以看一张简化的图，如下：</p>
-<p><img src="assets/CgqCHl9HZ2mAaGjhAACnwkzLj5I930.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9HZ2mAaGjhAACnwkzLj5I930.png" alt="png" /></p>
 <p>图中，a 方法是执行的方法，可以看出来，其中 g 方法是执行时间相对较长的。</p>
 <p>无论是火焰图，还是这张简化的图，它们都通过图形的方式，让我们能够快速定位到执行缓慢的原因。但是这种的方式也存在一些问题：</p>
 <ol>
@@ -211,7 +211,7 @@ function hide_canvas() {
 <li><strong>很难发现非叶子节点的问题</strong>。我们在简化图中可以发现，我们在 d 方法中除了 e 和 f 方法的调用以外，其实 d 方法还有一段的时间是自己消耗的，并且没有被处理掉，这一问题在火焰图中会更加明显。</li>
 </ol>
 <h4>树形图</h4>
-<p><img src="assets/Ciqc1F9HZ6SAAuuSAACg533klAQ565.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9HZ6SAAuuSAACg533klAQ565.png" alt="png" /></p>
 <p>为了解决这 2 个问题，就有了另外一种展现方式，那就是<strong>树形图</strong>。树形图就是<strong>将方法的调用堆栈通过树形图的形式展现出来</strong>。这对于开发人员来说相对直观，因为你可以通过树形图的形式快速查看整体的调用情况，并且针对火焰图中的问题，树形图也有很好的解决方法：</p>
 <ul>
 <li>使用这样的形式，栈帧很容易识别，并且之间的调用关系也很容易理解。</li>

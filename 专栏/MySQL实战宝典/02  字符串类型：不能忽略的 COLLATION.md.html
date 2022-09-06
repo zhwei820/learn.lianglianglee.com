@@ -204,7 +204,7 @@ character-set-server = utf8mb4
 ...
 </code></pre>
 <p>另外，不同的字符集，CHAR(N)、VARCHAR(N) 对应最长的字节也不相同。比如 GBK 字符集，1 个字符最大存储 2 个字节，UTF8MB4 字符集 1 个字符最大存储 4 个字节。所以从底层存储内核看，<strong>在多字节字符集下，CHAR 和 VARCHAR 底层的实现完全相同，都是变长存储</strong>！</p>
-<p><img src="assets/CioPOWCLjb-ADQ97AADmWCr4bpE672.png" alt="1.png" /></p>
+<p><img src="assets/CioPOWCLjb-ADQ97AADmWCr4bpE672.png" alt="png" /></p>
 <p>从上面的例子可以看到，CHAR(1) 既可以存储 1 个 'a' 字节，也可以存储 4 个字节的 emoji 笑脸表情，因此 CHAR 本质也是变长的。</p>
 <p><strong>鉴于目前默认字符集推荐设置为 UTF8MB4，所以在表结构设计时，可以把 CHAR 全部用 VARCHAR 替换，底层存储的本质实现一模一样</strong>。</p>
 <h4>排序规则</h4>

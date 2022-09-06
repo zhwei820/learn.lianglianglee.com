@@ -280,9 +280,9 @@ cat &lt; pipe2 &gt; pipe1
 <h4>08 | 用户和权限管理指令： 请简述 Linux 权限划分的原则？</h4>
 <p><strong>【问题】</strong> 如果一个目录是只读权限，那么这个目录下面的文件还可写吗？</p>
 <p><strong>【解析】</strong> 这类问题，你一定要去尝试，观察现象再得到结果。</p>
-<p><img src="assets/Ciqc1F-JYOSAEeZOAAK-jHkfQpk505.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-JYOSAEeZOAAK-jHkfQpk505.png" alt="png" /></p>
 <p>你可以看到上图中，foo 目录不可读了，下面的<code>foo/bar</code>文件还可以写。 即便它不可写了，下面的<code>foo/bar</code>文件还是可以写。</p>
-<p><img src="assets/Ciqc1F-JYOuACHgqAADld0-OED0560.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-JYOuACHgqAADld0-OED0560.png" alt="png" /></p>
 <p>但是想要创建新文件就会出现报错，因为创建新文件也需要改目录文件。这个例子说明 Linux 中的文件内容并没有存在目录中，目录中却有文件清单。</p>
 <h4>09 | Linux 中的网络指令：如何查看一个域名有哪些 NS 记录？</h4>
 <p><strong>【问题】</strong> 如何查看正在 TIME_WAIT 状态的连接数量？</p>
@@ -292,33 +292,33 @@ cat &lt; pipe2 &gt; pipe1
 <h4>10 | 软件的安装： 编译安装和包管理器安装有什么优势和劣势？</h4>
 <p><strong>【问题】</strong> 如果你在编译安装 MySQL 时，发现找不到libcrypt.so ，应该如何处理？</p>
 <p><strong>【解析】</strong> 遇到这类问题，首先应该去查资料。 比如查 StackOverflow，搜索关键词：libcrypt.so not found，或者带上自己的操作系统<code>ubuntu</code>。下图是关于 Stackoverflow 的一个解答：</p>
-<p><img src="assets/Ciqc1F-JYUSACvI4AABGKWEIwZc693.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F-JYUSACvI4AABGKWEIwZc693.png" alt="png" /></p>
 <p>在这里我再多说两句，程序员成长最需要的是学习时间，如果在这前面加一个形容词，那就是大量的学习时间；而程序员最需要掌握的技能就是搜索和学习知识的能力。如果你看到今天的这篇内容，说明已经学完了《重学操作系统》专栏两个模块的知识，希望你可以坚持下去！</p>
 <h4>11 | 高级技巧之日志分析：利用 Linux 指令分析 Web 日志</h4>
 <p><strong>【问题 1 】</strong> 根据今天的 access_log 分析出有哪些终端访问了这个网站，并给出分组统计结果。</p>
 <p><strong>【解析】</strong><code>access_log</code>中有<code>Debian</code>和<code>Ubuntu</code>等等。我们可以利用下面的指令看到，第 12 列是终端，如下图所示：</p>
-<p><img src="assets/Ciqc1F-JYVKAeXxWAAFX4ed-XgU367.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F-JYVKAeXxWAAFX4ed-XgU367.png" alt="png" /></p>
 <p>我们还可以使用<code>sort</code>和<code>uniq</code>查看有哪些终端，如下图所示：</p>
-<p><img src="assets/Ciqc1F-JYVqABf8YAAJ8F9oyYEk538.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-JYVqABf8YAAJ8F9oyYEk538.png" alt="png" /></p>
 <p>最后需要写一个脚本，进行统计：</p>
 <pre><code>cat nginx_logs.txt |\
 awk '{tms[$12]++;next}END{for (t in tms) print t, tms[t]}'
 </code></pre>
 <p>结果如下：</p>
-<p><img src="assets/CgqCHl-JYWCAQ5S7AALOO3VxYyE532.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl-JYWCAQ5S7AALOO3VxYyE532.png" alt="png" /></p>
 <p><strong>【问题 2】</strong> 根据今天的 access_log 分析出访问量 Top 前三的网页。</p>
 <p>如果不需要 Substring 等复杂的处理，也可以使用<code>sort</code>和<code>uniq</code>的组合。如下图所示：</p>
-<p><img src="assets/CgqCHl-JYWmASpWzAAHX7u4P8x4076.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl-JYWmASpWzAAHX7u4P8x4076.png" alt="png" /></p>
 <h4>12 | 高级技巧之集群部署：利用 Linux 指令同时在多台机器部署程序</h4>
 <p><strong>【问题】</strong>~/.bashrc ~/.bash_profile, ~/.profile 和 /etc/profile 的区别是什么？</p>
 <p><strong>【解析】</strong> 执行一个 shell 的时候分成<strong>login shell</strong>和<strong>non-login shell</strong>。顾名思义我们使用了<code>sudo``su</code>切换到某个用户身份执行 shell，也就是<code>login shell</code>。还有 ssh 远程执行指令也是 login shell，也就是伴随登录的意思——<code>login shell</code> 会触发很多文件执行，路径如下：</p>
-<p><img src="assets/CgqCHl-M_a2AB4DCAABaALYsBvA370.png" alt="Lark20201019-104257.png" /></p>
+<p><img src="assets/CgqCHl-M_a2AB4DCAABaALYsBvA370.png" alt="png" /></p>
 <p>如果以当前用户身份正常执行一个 shell，比如说<code>./a.sh</code>，就是一个<code>non-login</code>的模式。 这时候不会触发上述的完整逻辑。</p>
 <p>另外shell还有另一种分法，就是<code>interactive</code>和<code>non-interactive</code>。interactive 是交互式的意思，当用户打开一个终端命令行工具后，会进入一个输入命令得到结果的交互界面，这个时候，就是<code>interactive shell</code>。</p>
 <p><code>baserc</code>文件通常只在<code>interactive</code>模式下才会执行，这是因为<code>~/.bashrc</code>文件中通常有这样的语句，如下图所示：</p>
-<p><img src="assets/CgqCHl-JYZmAU3eiAADOD88ztPA917.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl-JYZmAU3eiAADOD88ztPA917.png" alt="png" /></p>
 <p>这个语句通过<code>$-</code>看到当前<code>shell</code>的执行环境，如下图所示：</p>
-<p><img src="assets/Ciqc1F-JYZ-AKItgAABi7Cu95fc751.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F-JYZ-AKItgAABi7Cu95fc751.png" alt="png" /></p>
 <p>带 i 字符的就是<code>interactive</code>，没有带i字符就不是。</p>
 <p>因此， 如果你需要通过 ssh 远程 shell 执行一个文件，你就不是在 interactive 模式下，bashrc 不会触发。但是因为登录的原因，login shell 都会触发，也就是说 profile 文件依然会执行。</p>
 <h3>总结</h3>

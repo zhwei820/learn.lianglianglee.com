@@ -165,15 +165,15 @@ function hide_canvas() {
 <li>一个用户可以有多个用户地址，但每个订单只能有一个用户地址；</li>
 <li>此外，一个订单对应多个订单明细，每个订单明细对应一个商品，每个商品对应一个供应商。</li>
 </ul>
-<p><img src="assets/CgqCHl-ziNWAAo44AAC1mEZLzQ4146.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-ziNWAAo44AAC1mEZLzQ4146.png" alt="png" /></p>
 <p>最后，我们对订单可以进行“下单”“付款”“查看订单状态”等操作。因此形成了以下领域模型图：</p>
-<p><img src="assets/CgqCHl-ziMaANHZ2AABItYXLHGw993.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl-ziMaANHZ2AABItYXLHGw993.png" alt="png" /></p>
 <p>有了这样的领域模型，就可以通过该模型进行以下程序设计：</p>
-<p><img src="assets/Ciqc1F-ziN2Ado7rAABZ7uoFaUk291.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-ziN2Ado7rAABZ7uoFaUk291.png" alt="png" /></p>
 <p>通过领域模型的指导，将“订单”分为订单 Service 与值对象，将“用户”分为用户 Service 与值对象，将“商品”分为商品 Service 与值对象……然后，在此基础上实现各自的方法。</p>
 <h3>商品折扣的需求变更</h3>
 <p>当电商网站的付款功能按照领域模型完成了第一个版本的设计后，很快就迎来了<strong>第一次需求变更，即增加折扣功能</strong>，并且该折扣功能分为限时折扣、限量折扣、某类商品的折扣、某个商品的折扣与不折扣。当我们拿到这个需求时应当怎样设计呢？很显然，在 payoff() 方法中去插入 if 语句是不 OK 的。这时，按照领域驱动设计的思想，应当将需求变更还原到领域模型中进行分析，进而根据领域模型背后的真实世界进行变更。</p>
-<p><img src="assets/CgqCHl-ziOaAfB4LAAC5Mx6eA2E697.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl-ziOaAfB4LAAC5Mx6eA2E697.png" alt="png" /></p>
 <p>这是上一个版本的领域模型，现在我们要在这个模型的基础上增加折扣功能，并且还要分为限时折扣、限量折扣、某类商品的折扣等不同类型。这时，我们应当怎么分析设计呢？</p>
 <p><strong>首先要分析付款与折扣的关系。</strong></p>
 <p>付款与折扣是什么关系呢？你可能会认为折扣是在付款的过程中进行的折扣，因此就应当将折扣写到付款中。这样思考对吗？我们应当基于什么样的思想与原则来设计呢？这时，另外一个重量级的设计原则应该出场了，那就是“单一职责原则”。</p>
@@ -195,10 +195,10 @@ function hide_canvas() {
 <li>……</li>
 </ul>
 <p>最后发现，不同类型的折扣也是软件变化不同的原因。将它们放在同一个类、同一个方法中，合适吗？通过以上分析，我们做出了如下设计：</p>
-<p><img src="assets/CgqCHl-ziPSAEj-iAACZkldRtxU363.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl-ziPSAEj-iAACZkldRtxU363.png" alt="png" /></p>
 <p>在该设计中，将折扣功能从付款功能中独立出去，做出了一个接口，然后以此为基础设计了各种类型的折扣实现类。这样的设计，当付款功能发生变更时不会影响折扣，而折扣发生变更的时候不会影响付款。同样，当“限时折扣”发生变更时只与“限时折扣”有关，“限量折扣”发生变更时也只与“限量折扣”有关，与其他折扣类型无关。变更的范围缩小了，维护成本就降低了，设计质量提高了。这样的设计就是“单一职责原则”的真谛。</p>
 <p>接着，在这个版本的领域模型的基础上进行程序设计，在设计时还可以加入一些设计模式的内容，因此我们进行了如下的设计：</p>
-<p><img src="assets/CgqCHl-ziPyAAJUgAABRUq9tq5Y944.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl-ziPyAAJUgAABRUq9tq5Y944.png" alt="png" /></p>
 <p>显然，在该设计中加入了“策略模式”的内容，将折扣功能做成了一个折扣策略接口与各种折扣策略的实现类。当哪个折扣类型发生变更时就修改哪个折扣策略实现类；当要增加新的类型的折扣时就再写一个折扣策略实现类，设计质量得到了提高。</p>
 <h3>VIP 会员的需求变更</h3>
 <p>在第一次变更的基础上，很快迎来了第二次变更，这次是要<strong>增加 VIP 会员</strong>，业务需求如下。</p>
@@ -220,13 +220,13 @@ function hide_canvas() {
 <li>而“付款”与“VIP 会员”的关系是在付款的过程中去调用会员折扣、会员福利与会员特权。</li>
 </ul>
 <p>通过以上的分析，我们做出了以下版本的领域模型：</p>
-<p><img src="assets/Ciqc1F-ziQaAevJdAACdptUfGFQ317.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/Ciqc1F-ziQaAevJdAACdptUfGFQ317.png" alt="png" /></p>
 <p><strong>有了这些领域模型的变更，然后就可以以此作为基础，指导后面程序代码的变更了。</strong></p>
 <h3>支付方式的需求变更</h3>
 <p>同样，第三次变更是<strong>增加更多的支付方式</strong>，我们在领域模型中分析“付款”与“支付方式”之间的关系，发现它们也是软件变化不同的原因。因此，我们果断做出了这样的设计：</p>
-<p><img src="assets/CgqCHl-ziQ6ABA-UAABxRFWKpk4419.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/CgqCHl-ziQ6ABA-UAABxRFWKpk4419.png" alt="png" /></p>
 <p>而在设计实现时，因为要与各个第三方的支付系统对接，也就是要与外部系统对接。为了使第三方的外部系统的变更对我们的影响最小化，在它们中间果断加入了“适配器模式”，设计如下：</p>
-<p><img src="assets/Ciqc1F-ziRWARy4TAAB8IgTzU7A472.png" alt="Drawing 16.png" /></p>
+<p><img src="assets/Ciqc1F-ziRWARy4TAAB8IgTzU7A472.png" alt="png" /></p>
 <p>通过加入适配器模式，订单 Service 在进行支付时调用的不再是外部的支付接口，而是“支付方式”接口，与外部系统解耦。只要保证“支付方式”接口是稳定的，那么订单 Service 就是稳定的。比如：</p>
 <ul>
 <li>当支付宝支付接口发生变更时，影响的只限于支付宝 Adapter；</li>

@@ -188,7 +188,7 @@ System.out.println(&quot;Logic cost : &quot; + cost);
 </code></pre>
 <p>下面，我们介绍一下这个工具的使用。</p>
 <p>JMH 是一个 jar 包，它和单元测试框架 JUnit 非常像，可以通过注解进行一些基础配置。这部分配置有很多是可以通过 main 方法的 OptionsBuilder 进行设置的。</p>
-<p><img src="assets/Ciqc1F8epk6ALUNZAABpIyGz37g324.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F8epk6ALUNZAABpIyGz37g324.png" alt="png" /></p>
 <p>上图是一个典型的 JMH 程序执行的内容。通过开启多个进程，多个线程，先执行预热，然后执行迭代，最后汇总所有的测试数据进行分析。在执行前后，还可以根据粒度处理一些前置和后置操作。</p>
 <p>一段简单的 JMH 代码如下所示：</p>
 <pre><code>@BenchmarkMode(Mode.Throughput)
@@ -251,7 +251,7 @@ timeUnit = TimeUnit.SECONDS)
 </code></pre>
 <p>一般来说，基准测试都是针对比较小的、执行速度相对较快的代码块，这些代码有很大的可能性被 JIT 编译、内联，所以在编码时保持方法的精简，是一个好的习惯。具体优化过程，我们将在 18 课时介绍。</p>
 <p>说到预热，就不得不提一下在分布式环境下的服务预热。在对服务节点进行发布的时候，通常也会有预热过程，逐步放量到相应的服务节点，直到服务达到最优状态。如下图所示，负载均衡负责这个放量过程，一般是根据百分比进行放量。</p>
-<p><img src="assets/CgqCHl8epmWAWw_3AABS3CbQ8AE949.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl8epmWAWw_3AABS3CbQ8AE949.png" alt="png" /></p>
 <h2>2. @Measurement</h2>
 <p>样例如下：</p>
 <pre><code>@Measurement(
@@ -312,7 +312,7 @@ BenchmarkTest.shift  thrpt    5  480599.263 ± 20752.609  ops/ms
 <p>那么 fork 到底是在进程还是线程环境里运行呢？</p>
 <p>我们追踪一下 JMH 的源码，发现每个 fork 进程是单独运行在 Proccess 进程里的，这样就可以做完全的环境隔离，避免交叉影响。</p>
 <p>它的输入输出流，通过 Socket 连接的模式，发送到我们的执行终端。</p>
-<p><img src="assets/Ciqc1F8epneAFThuAABRpqRrEUw322.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F8epneAFThuAABRpqRrEUw322.png" alt="png" /></p>
 <p>在这里分享一个小技巧。其实 fork 注解有一个参数叫作 jvmArgsAppend，我们可以通过它传递一些 JVM 的参数。</p>
 <pre><code>@Fork(value = 3, jvmArgsAppend = {&quot;-Xmx2048m&quot;, &quot;-server&quot;, &quot;-XX:+AggressiveOpts&quot;})
 </code></pre>
@@ -379,12 +379,12 @@ public class JMHSample_27_Params {
 </code></pre>
 <p>值得注意的是，如果你设置了非常多的参数，这些参数将执行多次，通常会运行很长时间。比如参数 1 M 个，参数 2 N 个，那么总共要执行 M*N 次。</p>
 <p>下面是一个执行结果的截图：</p>
-<p><img src="assets/CgqCHl8ebZaAPtXOAAPe5vpFf_c784.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl8ebZaAPtXOAAPe5vpFf_c784.png" alt="png" /></p>
 <h2>10. @CompilerControl</h2>
 <p>这可以说是一个非常有用的功能了。</p>
 <p>Java 中方法调用的开销是比较大的，尤其是在调用量非常大的情况下。拿简单的getter/setter 方法来说，这种方法在 Java 代码中大量存在。我们在访问的时候，就需要创建相应的栈帧，访问到需要的字段后，再弹出栈帧，恢复原程序的执行。</p>
 <p>如果能够把这些对象的访问和操作，纳入目标方法的调用范围之内，就少了一次方法调用，速度就能得到提升，这就是方法内联的概念。如下图所示，代码经过 JIT 编译之后，效率会有大的提升。</p>
-<p><img src="assets/Ciqc1F8epoqAI9u2AAB4h_ABJWE362.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F8epoqAI9u2AAB4h_ABJWE362.png" alt="png" /></p>
 <p>这个注解可以用在类或者方法上，能够控制方法的编译行为，常用的有 3 种模式：</p>
 <p>强制使用内联（INLINE），禁止使用内联（DONT_INLINE），甚至是禁止方法编译（EXCLUDE）等。</p>
 <h1>将结果图形化</h1>
@@ -403,16 +403,16 @@ public class JMHSample_27_Params {
 <li><strong>LATEX</strong> 导出到 latex，一种基于 ΤΕΧ 的排版系统。</li>
 </ul>
 <p>一般来说，我们导出成 CSV 文件，直接在 Excel 中操作，生成如下相应的图形就可以了。</p>
-<p><img src="assets/Ciqc1F8ebi2AdAAbAALlvsHgcKk925.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8ebi2AdAAbAALlvsHgcKk925.png" alt="png" /></p>
 <h2>2. 结果图形化制图工具</h2>
 <p><strong>JMH Visualizer</strong></p>
 <p>这里有一个开源的项目，通过导出 json 文件，上传至 <a href="https://jmh.morethan.io/">JMH Visualizer</a>（点击链接跳转），可得到简单的统计结果。由于很多操作需要鼠标悬浮在上面进行操作，所以个人认为它的展示方式并不是很好。</p>
 <p><strong>JMH Visual Chart</strong></p>
 <p>相比较而言， <a href="http://deepoove.com/jmh-visual-chart">JMH Visual Chart</a>（点击链接跳转）这个工具，就相对直观一些。</p>
-<p><img src="assets/CgqCHl8ebkmAbujsAAHK-g94ooM905.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8ebkmAbujsAAHK-g94ooM905.png" alt="png" /></p>
 <p><strong>meta-chart</strong></p>
 <p>一个通用的 <a href="https://www.meta-chart.com/">在线图表生成器</a>（点击链接跳转），导出 CSV 文件后，做适当处理，即可导出精美图像。</p>
-<p><img src="assets/CgqCHl8eboKAHRe8AAGSfMVOXxw934.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8eboKAHRe8AAGSfMVOXxw934.png" alt="png" /></p>
 <p>像 Jenkins 等一些持续集成工具，也提供了相应的插件，用来直接显示这些测试结果。</p>
 <h1>小结</h1>
 <p>本课时主要介绍了 基准测试工具— JMH，官方的 JMH 有非常丰富的示例，比如伪共享（FalseSharing）的影响等高级话题。我已经把它放在了 <a href="https://gitee.com/xjjdog/tuning-lagou-res">Gitee</a>（点击链接跳转）上，你可以将其导入至 Idea 编辑器进行测试。</p>

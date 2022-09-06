@@ -273,7 +273,7 @@ function hide_canvas() {
 </ul>
 <p>下面我们对 Netty 中常用的抽象编解码类进行详细的介绍。</p>
 <h4>抽象编码类</h4>
-<p><img src="assets/CgqCHl-lDlWAUGw2AAMI8fuvukI452.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-lDlWAUGw2AAMI8fuvukI452.png" alt="png" /></p>
 <p>通过抽象编码类的继承图可以看出，编码类是 ChanneOutboundHandler 的抽象类实现，具体操作的是 Outbound 出站数据。</p>
 <ul>
 <li><strong>MessageToByteEncoder</strong></li>
@@ -343,7 +343,7 @@ protected void encode(ChannelHandlerContext ctx, CharSequence msg, List&lt;Objec
 </code></pre>
 <h4>抽象解码类</h4>
 <p>同样，我们先看下抽象解码类的继承关系图。解码类是 ChanneInboundHandler 的抽象类实现，操作的是 Inbound 入站数据。解码器实现的难度要远大于编码器，因为解码器需要考虑拆包/粘包问题。由于接收方有可能没有接收到完整的消息，所以解码框架需要对入站的数据做缓冲操作，直至获取到完整的消息。</p>
-<p><img src="assets/CgqCHl-lDmiAU8l2AAPWlIx6BfA268.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl-lDmiAU8l2AAPWlIx6BfA268.png" alt="png" /></p>
 <ul>
 <li><strong>抽象解码类 ByteToMessageDecoder。</strong></li>
 </ul>
@@ -364,7 +364,7 @@ protected void encode(ChannelHandlerContext ctx, CharSequence msg, List&lt;Objec
 <li><strong>抽象解码类 MessageToMessageDecoder。</strong></li>
 </ul>
 <p>MessageToMessageDecoder 与 ByteToMessageDecoder 作用类似，都是将一种消息类型的编码成另外一种消息类型。与 ByteToMessageDecoder 不同的是 MessageToMessageDecoder 并不会对数据报文进行缓存，它主要用作转换消息模型。比较推荐的做法是使用 ByteToMessageDecoder 解析 TCP 协议，解决拆包/粘包问题。解析得到有效的 ByteBuf 数据，然后传递给后续的 MessageToMessageDecoder 做数据对象的转换，具体流程如下图所示。
-<img src="assets/CgqCHl-op8iAMMV_AAH0Z4-w0bM373.png" alt="Lark20201109-102121.png" /></p>
+<img src="assets/CgqCHl-op8iAMMV_AAH0Z4-w0bM373.png" alt="png" /></p>
 <h3>通信协议实战</h3>
 <p>在上述通信协议设计的小节内容中，我们提到了协议的基本要素并给出了一个较为通用的协议示例。下面我们通过 Netty 的编辑码框架实现该协议的解码器，加深我们对 Netty 编解码框架的理解。</p>
 <p>在实现协议编码器之前，我们首先需要清楚一个问题：如何判断 ByteBuf 是否存在完整的报文？最常用的做法就是通过读取消息长度 dataLength 进行判断。如果 ByteBuf 的可读数据长度小于 dataLength，说明 ByteBuf 还不够获取一个完整的报文。在该协议前面的消息头部分包含了魔数、协议版本号、数据长度等固定字段，共 14 个字节。固定字段长度和数据长度可以作为我们判断消息完整性的依据，具体编码器实现逻辑示例如下：</p>

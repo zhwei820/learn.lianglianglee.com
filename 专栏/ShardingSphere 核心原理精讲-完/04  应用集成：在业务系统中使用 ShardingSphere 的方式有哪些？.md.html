@@ -202,7 +202,7 @@ function hide_canvas() {
 <p>在上一课时中，我详细介绍了 ShardingSphere 与 JDBC 规范之间的兼容性关系，我们知道 ShardingSphere 对 JDBC 规范进行了重写，并嵌入了分片机制。基于这种兼容性，开发人员使用 ShardingSphere 时就像在使用 JDBC 规范所暴露的各个接口一样。这一课时，我们将讨论如何在业务系统中使用 ShardingSphere 的具体方式。</p>
 <h3>如何抽象开源框架的应用方式？</h3>
 <p>当我们自己在设计和实现一款开源框架时，如何规划它的应用方式呢？作为一款与数据库访问相关的开源框架，ShardingSphere 提供了多个维度的应用方式，我们可以对这些应用方式进行抽象，从而提炼出一种模版。这个模版由四个维度组成，分别是<strong>底层工具、基础规范、开发框架和领域框架</strong>，如下图所示：</p>
-<p><img src="assets/CgqCHl75qv-AFbZvAACz7F_yXRM280.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl75qv-AFbZvAACz7F_yXRM280.png" alt="png" /></p>
 <h4>底层工具</h4>
 <p>底层工具指的是这个开源框架所面向的目标工具或所依赖的第三方工具。这种底层工具往往不是框架本身可以控制和管理的，框架的作用只是在它上面添加一个应用层，用于封装对这些底层工具的使用方式。</p>
 <p>对于 ShardingSphere 而言，<strong>这里所说的底层工具实际上指的是关系型数据库</strong>。目前，ShardingSphere 支持包括 MySQL、Oracle、SQLServer、PostgreSQL 以及任何遵循 SQL92 标准的数据库。</p>
@@ -247,7 +247,7 @@ spring.shardingsphere.datasource.test_datasource.password=root
 <h3>开发框架集成</h3>
 <p>从上面所介绍的配置信息中，你实际上已经看到了 ShardingSphere 中集成的两款主流开发框架，即 Spring 和 Spring Boot，它们都对 JDBC 规范做了封装。当然，对于没有使用或无法使用 Spring 家族框架的场景，我们也可以直接在原生 Java 应用程序中使用 ShardingSphere。</p>
 <p>在介绍开发框架的具体集成方式之前，我们来设计一个简单的应用场景。假设系统中存在一个用户表 User，这张表的数据量比较大，所以我们将它进行分库分表处理，计划分成两个数据库 ds0 和 ds1，然后每个库中再分成两张表 user0 和 user1：</p>
-<p><img src="assets/Ciqc1F75qxSADY5yAADgZQ5r488284.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F75qxSADY5yAADgZQ5r488284.png" alt="png" /></p>
 <p>接下来，让我们来看一下如何基于 Java 原生、Spring 及 Spring Boot 开发框架针对这一场景实现分库分表。</p>
 <h4>Java 原生</h4>
 <p>如果使用 Java 原生的开发方式，相当于我们需要全部通过 Java 代码来创建和管理 ShardingSphere 中与分库分表相关的所有类。如果不做特殊说明，本课程将默认使用 Maven 实现包依赖关系的管理。所以，首先需要引入对 sharding-jdbc-core 组件的 Maven 引用：</p>

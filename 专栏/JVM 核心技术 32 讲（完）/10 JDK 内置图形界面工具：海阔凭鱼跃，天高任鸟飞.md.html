@@ -193,9 +193,9 @@ function hide_canvas() {
 <h3>JConsole</h3>
 <p>JConsole，顾名思义，就是“Java 控制台”，在这里，我们可以从多个维度和时间范围去监控一个 Java 进程的内外部指标。进而通过这些指标数据来分析判断 JVM 的状态，为我们的调优提供依据。</p>
 <p>在 Windows 或 macOS 的运行窗口或命令行输入 jconsole，然后回车，可以看到如下界面：</p>
-<p><img src="assets/ff1ebc80-279b-11ea-a18c-6b6633a37de4" alt="63078367.png" /></p>
+<p><img src="assets/ff1ebc80-279b-11ea-a18c-6b6633a37de4" alt="png" /></p>
 <p>本地进程列表列出了本机的所有 Java 进程（远程进程我们在 JMX 课程进行讲解），选择一个要连接的 Java 进程，点击连接，然后可以看到如下界面：</p>
-<p><img src="assets/526825c0-279c-11ea-ab24-c1ca9407cc22" alt="63206281.png" /></p>
+<p><img src="assets/526825c0-279c-11ea-ab24-c1ca9407cc22" alt="png" /></p>
 <p>注意，点击右上角的绿色连接图标，即可连接或断开这个 Java 进程。</p>
 <p>上图中显示了总共 6 个标签页，每个标签页对应一个监控面板，分别为：</p>
 <ul>
@@ -221,10 +221,10 @@ function hide_canvas() {
 </blockquote>
 <p>当我们想关注最近 1 小时或者 1 分钟的数据，就可以选择对应的档。旁边的 3 个标签页（内存、线程、类），也都支持选择时间范围。</p>
 <h4>内存</h4>
-<p><img src="assets/e7685fa0-279c-11ea-a18c-6b6633a37de4" alt="63726065.png" /></p>
+<p><img src="assets/e7685fa0-279c-11ea-a18c-6b6633a37de4" alt="png" /></p>
 <p>内存监控，是 JConsole 中最常用的面板。内存面板的主区域中展示了内存占用量随时间变化的图像，可以通过这个图表，非常直观地判断内存的使用量和变化趋势。</p>
 <p>同时在左上方，我们可以在图表后面的下拉框中选择不同的内存区：</p>
-<p><img src="assets/f4dfcab0-279c-11ea-98b9-1d8ae01a003b" alt="65575723.png" /></p>
+<p><img src="assets/f4dfcab0-279c-11ea-98b9-1d8ae01a003b" alt="png" /></p>
 <p>本例中，我们使用的是 JDK 8，默认不配置 GC 启动参数。关于 GC 参数的详情请关注后面的 GC 内容，可以看到，这个 JVM 提供的内存图表包括：</p>
 <ul>
 <li>堆内存使用量，主要包括老年代（内存池“PS Old Gen”）、新生代（“PS Eden Space”）、存活区（“PS Survivor Space”）；</li>
@@ -240,19 +240,19 @@ function hide_canvas() {
 <p>打开一段时间以后，我们可以看到内存使用量出现了直线下降（见下图），这表明刚经过了一次 GC，也就是 JVM 执行了垃圾回收。</p>
 <p>其实我们可以注意到，内存面板其实相当于是 <code>jstat -gc</code> 或 <code>jstat -gcutil</code> 命令的图形化展示，它们的本质是一样的，都是通过采样的方式拿到JVM各个内存池的数据进行统计，并展示出来。</p>
 <p>其实图形界面存在一个问题，如果 GC 特别频繁，每秒钟执行了很多次 GC，实际上图表方式就很难反应出每一次的变化信息。</p>
-<p><img src="assets/4a573780-279d-11ea-a18c-6b6633a37de4" alt="64607499.png" /></p>
+<p><img src="assets/4a573780-279d-11ea-a18c-6b6633a37de4" alt="png" /></p>
 <h4>线程</h4>
 <p>线程面板展示了线程数变化信息，以及监测到的线程列表。</p>
 <ul>
 <li>我们可以常根据名称直接查看线程的状态（运行还是等待中）和调用栈（正在执行什么操作）。</li>
 <li>特别地，我们还可以直接点击“检测死锁”按钮来检测死锁，如果没有死锁则会提示“未检测到死锁”。</li>
 </ul>
-<p><img src="assets/54832110-279d-11ea-98c4-fbbd65598995" alt="64167338.png" /></p>
+<p><img src="assets/54832110-279d-11ea-98c4-fbbd65598995" alt="png" /></p>
 <h4>类</h4>
 <p>类监控面板，可以直接看到 JVM 加载和卸载的类数量汇总信息。</p>
-<p><img src="assets/6286c690-279d-11ea-967e-59cb267b8d93" alt="64205914.png" /></p>
+<p><img src="assets/6286c690-279d-11ea-967e-59cb267b8d93" alt="png" /></p>
 <h4>VM 概要</h4>
-<p><img src="assets/6bd01850-279d-11ea-a0eb-1b545b6b1d6b" alt="64231816.png" /></p>
+<p><img src="assets/6bd01850-279d-11ea-a0eb-1b545b6b1d6b" alt="png" /></p>
 <p>VM 概要的数据也很有用，可以看到总共有五个部分：</p>
 <ul>
 <li>第一部分是虚拟机的信息；</li>
@@ -268,47 +268,47 @@ function hide_canvas() {
 <p>$ <code>jvisualvm</code></p>
 </blockquote>
 <p>JVisualVM 启动后的界面大致如下：</p>
-<p><img src="assets/cb980db0-279d-11ea-98b9-1d8ae01a003b" alt="58401878.png" /></p>
+<p><img src="assets/cb980db0-279d-11ea-98b9-1d8ae01a003b" alt="png" /></p>
 <p>在其中可以看到本地的 JVM 实例。</p>
 <p>通过双击本地进程或者右键打开，就可以连接到某个 JVM，此时显示的基本信息如下图所示：</p>
-<p><img src="assets/dd642ce0-279d-11ea-967e-59cb267b8d93" alt="20be819f-99e1-4f28-bfc6-6bc564777966.png" /></p>
+<p><img src="assets/dd642ce0-279d-11ea-967e-59cb267b8d93" alt="png" /></p>
 <p>可以看到，在概述页签中有 PID、启动参数、系统属性等信息。</p>
 <p>切换到监视页签：</p>
-<p><img src="assets/f3540520-279d-11ea-a18c-6b6633a37de4" alt="fe7bf60f-1e1a-4fae-81a4-49e854c73fed.png" /></p>
+<p><img src="assets/f3540520-279d-11ea-a18c-6b6633a37de4" alt="png" /></p>
 <p>在监视页签中可以看到 JVM 整体的运行情况。比如 CPU、堆内存、类、线程等信息。还可以执行一些操作，比如“强制执行垃圾回收”、“堆 Dump”等。</p>
 <p>&quot;线程&quot;页签则展示了 JVM 中的线程列表。再一次看出在程序中对线程（池）命名的好处。</p>
-<p><img src="assets/0c1e74a0-279e-11ea-ab24-c1ca9407cc22" alt="70799622-072c-45fd-b5df-7c3ac1433061.png" /></p>
+<p><img src="assets/0c1e74a0-279e-11ea-ab24-c1ca9407cc22" alt="png" /></p>
 <p>与 JConsole 只能看线程的调用栈和状态信息相比，这里可以直观看到所有线程的状态颜色和运行时间，从而帮助我们分析过去一段时间哪些线程使用了较多的 CPU 资源。</p>
 <h4>抽样器与 Profiler</h4>
 <p>JVisualVM 默认情况下，比 JConsole 多了抽样器和 Profiler 这两个工具。</p>
 <p>例如抽样，可以配合我们在性能压测的时候，看压测过程中，各个线程发生了什么、或者是分配了多少内存，每个类直接占用了多少内存等等。</p>
-<p><img src="assets/1ec6c300-279e-11ea-b223-011b186c3530" alt="58663465.png" /></p>
-<p><img src="assets/26b4f190-279e-11ea-89f3-21019b5e3a69" alt="58766362.png" /></p>
+<p><img src="assets/1ec6c300-279e-11ea-b223-011b186c3530" alt="png" /></p>
+<p><img src="assets/26b4f190-279e-11ea-89f3-21019b5e3a69" alt="png" /></p>
 <p>使用 Profiler 时，需要先校准分析器。</p>
-<p><img src="assets/2fdc8a80-279e-11ea-89f3-21019b5e3a69" alt="58910878.png" /></p>
+<p><img src="assets/2fdc8a80-279e-11ea-89f3-21019b5e3a69" alt="png" /></p>
 <p>然后可以像抽样器一样使用了。</p>
-<p><img src="assets/385a75f0-279e-11ea-9b04-dd12b122c493" alt="59113954.png" /></p>
-<p><img src="assets/3fabef50-279e-11ea-967e-59cb267b8d93" alt="59294077.png" /></p>
+<p><img src="assets/385a75f0-279e-11ea-9b04-dd12b122c493" alt="png" /></p>
+<p><img src="assets/3fabef50-279e-11ea-967e-59cb267b8d93" alt="png" /></p>
 <p>从这个面板直接能看到热点方法与执行时间、占用内存以及比例，还可以设置过滤条件。</p>
 <p>同时我们可以直接把当前的数据和分析，作为快照保存，或者将数据导出，以后可以继续加载和分析。</p>
 <h4>插件</h4>
 <p>JVisualVM 最强大的地方在于插件。</p>
 <p>JDK 8 需要安装较高版本（如 Java SE 8u211），才能从官方服务器安装/更新 JVisualVM 的插件（否则只能凭运气找对应的历史版本）。</p>
-<p><img src="assets/57350530-279e-11ea-ab24-c1ca9407cc22" alt="8c352918-6e46-44c3-9081-0f0c7e57c581.png" /></p>
+<p><img src="assets/57350530-279e-11ea-ab24-c1ca9407cc22" alt="png" /></p>
 <p>JVisualVM 安装 MBeans 插件的步骤：</p>
 <blockquote>
 <p>通过工具(T)–插件(G)–可用插件–勾选具体的插件–安装–下一步–等待安装完成。</p>
 </blockquote>
-<p><img src="assets/79c6a900-279e-11ea-9b04-dd12b122c493" alt="b65b122e-53ea-4241-88bb-844a5cad65af.png" /></p>
+<p><img src="assets/79c6a900-279e-11ea-9b04-dd12b122c493" alt="png" /></p>
 <p>最常用的插件是 VisualGC 和 MBeans。</p>
 <p>如果看不到可用插件，请安装最新版本，或者下载插件到本地安装。 先排除网络问题，或者检查更新，重新启动试试。</p>
-<p><img src="assets/861e4c30-279e-11ea-a2ee-d3acdacb5a0b" alt="4b391dfa-1074-4084-9d37-b7f48779695c.png" /></p>
+<p><img src="assets/861e4c30-279e-11ea-a2ee-d3acdacb5a0b" alt="png" /></p>
 <p>安装完成后，重新连接某个 JVM，即可看到新安装的插件。</p>
 <p>切换到 VisualGC 页签：</p>
-<p><img src="assets/a274a190-279e-11ea-967e-59cb267b8d93" alt="260031cf-d2f0-4ca2-904e-298d4fe3f7b1.png" /></p>
+<p><img src="assets/a274a190-279e-11ea-967e-59cb267b8d93" alt="png" /></p>
 <p>在其中可以看到各个内存池的使用情况，以及类加载时间、GC 总次数、GC 总耗时等信息。比起命令行工具要简单得多。</p>
 <p>切换到 MBeans 标签：</p>
-<p><img src="assets/b7df1d30-279e-11ea-a37f-59408ceda1f2" alt="27e732cf-75f8-405e-8686-c2389948fc35.png" /></p>
+<p><img src="assets/b7df1d30-279e-11ea-a37f-59408ceda1f2" alt="png" /></p>
 <p>一般人可能不怎么关注 MBean，但 MBean 对于理解 GC的原理倒是挺有用的。</p>
 <p>主要看 java.lang 包下面的 MBean。比如内存池或者垃圾收集器等。</p>
 <p>从图中可以看到，Metaspace 内存池的 Type 是 NON_HEAP。</p>
@@ -325,7 +325,7 @@ function hide_canvas() {
 </ul>
 <p>根据经验，这些信息对分析GC性能来说，不能得出什么结论。只有编写程序，获取GC相关的 JMX 信息来进行统计和分析。</p>
 <p>下面看怎么执行远程实时监控。</p>
-<p><img src="assets/1d1f8630-279f-11ea-ab24-c1ca9407cc22" alt="56b59ee5-2885-425d-a174-b5ea279f9bf6.png" /></p>
+<p><img src="assets/1d1f8630-279f-11ea-ab24-c1ca9407cc22" alt="png" /></p>
 <p>如上图所示，从文件菜单中，我们可以选择“添加远程主机”，以及“添加 JMX 连接”。</p>
 <p>比如“添加 JMX 连接”，填上 IP 和端口号之后，勾选“不要求 SSL 连接”，点击“确定”按钮即可。</p>
 <p>关于目标 JVM 怎么启动 JMX 支持，请参考后面的 JMX 小节。</p>
@@ -333,29 +333,29 @@ function hide_canvas() {
 <h3>JMC 图形界面客户端</h3>
 <p>JMC 和 JVisualVM 功能类似，因为 JMC 的前身是 JRMC，JRMC 是 BEA 公司的 JRockit JDK 自带的分析工具，被 Oracle 收购以后，整合成了 JMC 工具。Oracle 试图用 JMC 来取代 JVisualVM，在商业环境使用 JFR 需要付费获取授权。</p>
 <p>在命令行输入 jmc 后，启动后的界面如下：</p>
-<p><img src="assets/96c672e0-27a0-11ea-a2ee-d3acdacb5a0b" alt="ad3d63a9-6050-4f7d-af0c-5e6fab8e81a1.jpg" /></p>
+<p><img src="assets/96c672e0-27a0-11ea-a2ee-d3acdacb5a0b" alt="png" /></p>
 <p>点击相关的按钮或者菜单即可启用对应的功能，JMC 提供的功能和 JVisualVM 差不多。</p>
 <h4>飞行记录器</h4>
 <p>除了 JConsole 和 JVisualVM 的常见功能（包括 JMX 和插件）以外，JMC 最大的亮点是飞行记录器。</p>
 <p>在进程上点击“飞行记录器”以后，第一次使用时需要确认一下取消锁定商业功能的选项：</p>
-<p><img src="assets/ce4fc8c0-279f-11ea-98b9-1d8ae01a003b" alt="59819531.png" /></p>
+<p><img src="assets/ce4fc8c0-279f-11ea-98b9-1d8ae01a003b" alt="png" /></p>
 <p>然后就可以看到飞行记录向导：</p>
-<p><img src="assets/d6dc0c10-279f-11ea-a0eb-1b545b6b1d6b" alt="59881001.png" /></p>
+<p><img src="assets/d6dc0c10-279f-11ea-a0eb-1b545b6b1d6b" alt="png" /></p>
 <p>点击下一步可以看到更多的配置：</p>
-<p><img src="assets/e3384320-279f-11ea-a0eb-1b545b6b1d6b" alt="59960019.png" /></p>
+<p><img src="assets/e3384320-279f-11ea-a0eb-1b545b6b1d6b" alt="png" /></p>
 <p>这里我们可以把堆内存分析、类加载两个选型也勾选上。点击完成，等待一分钟，就可以看到飞行记录。</p>
-<p><img src="assets/eb086260-279f-11ea-98b9-1d8ae01a003b" alt="60125860.png" /></p>
+<p><img src="assets/eb086260-279f-11ea-98b9-1d8ae01a003b" alt="png" /></p>
 <p>概况里可以使用仪表盘方式查看堆内存、CPU 占用率、GC 暂停时间等数据。</p>
 <p>内存面板则可以看到 GC 的详细分析：</p>
-<p><img src="assets/fb882b70-279f-11ea-967e-59cb267b8d93" alt="60966956.png" /></p>
-<p><img src="assets/055ad170-27a0-11ea-89f3-21019b5e3a69" alt="60997473.png" /></p>
+<p><img src="assets/fb882b70-279f-11ea-967e-59cb267b8d93" alt="png" /></p>
+<p><img src="assets/055ad170-27a0-11ea-89f3-21019b5e3a69" alt="png" /></p>
 <p>代码面板则可以看到热点方法的执行情况：</p>
-<p><img src="assets/143bdea0-27a0-11ea-a37f-59408ceda1f2" alt="60878569.png" /></p>
+<p><img src="assets/143bdea0-27a0-11ea-a37f-59408ceda1f2" alt="png" /></p>
 <p>线程面板则可以看到线程的锁争用情况等：</p>
-<p><img src="assets/1e886f90-27a0-11ea-967e-59cb267b8d93" alt="61168308.png" /></p>
+<p><img src="assets/1e886f90-27a0-11ea-967e-59cb267b8d93" alt="png" /></p>
 <p>跟 JConsole 和 JVisualVM 相比，这里已经有了很多分析数据了，内存分配速率、GC 的平均时间等等。</p>
 <p>最后，我们也可以通过保存飞行记录为 jfr 文件，以后随时查看和分析，或者发给其他人员来进行分析。</p>
-<p><img src="assets/2de5ffc0-27a0-11ea-98c4-fbbd65598995" alt="60801271.png" /></p>
+<p><img src="assets/2de5ffc0-27a0-11ea-98c4-fbbd65598995" alt="png" /></p>
 <h3>JStatD 服务端工具</h3>
 <p>JStatD 是一款强大的服务端支持工具，用于配合远程监控，所以放到图形界面这一篇介绍。</p>
 <p>但因为涉及暴露一些服务器信息，所以需要配置安全策略文件。</p>

@@ -243,10 +243,10 @@ public class SpringCssConfig {
 <p>可以看到这里通过创建一个 HashMap 来保存这些 Key-Value 对。类似的，我们也可以实现常见的一些数据结构的自动嵌入。</p>
 <h4>为自定义配置项添加提示功能</h4>
 <p>如果你已经使用过 Spring Boot 中的配置文件，并添加了一些内置的配置项，你就会发现，当我们输入某一个配置项的前缀时，诸如 IDEA、Eclipse 这样的，IDE 就会自动弹出该前缀下的所有配置信息供你进行选择，效果如下：</p>
-<p><img src="assets/Ciqc1F_AkJuAbymgAAA2lqR7sX4654.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_AkJuAbymgAAA2lqR7sX4654.png" alt="png" /></p>
 <p>IDE 自动提示配置项的效果图</p>
 <p>上图的效果对于管理自定义的配置信息非常有用。如何实现这种效果呢？当我们在 application.yml 配置文件中添加一个自定义配置项时，会注意到 IDE 会出现一个提示，说明这个配置项无法被 IDE 所识别，如下所示：</p>
-<p><img src="assets/CgqCHl_AkKuAfadcAAAT9yjkbDc611.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_AkKuAfadcAAAT9yjkbDc611.png" alt="png" /></p>
 <p>IDE 无法识别配置项时的示意图</p>
 <p>遇到这种提示时，我们是可以忽略的，因为它不会影响到任何执行效果。但为了达到自动提示效果，我们就需要生成配置元数据。生成元数据的方法也很简单，直接通过 IDE 的“Create metadata for 'springcss.order.point'”按钮，就可以选择创建配置元数据文件，这个文件的名称为 additional-spring-configuration-metadata.json，文件内容如下所示：</p>
 <pre><code>{&quot;properties&quot;: [{
@@ -256,7 +256,7 @@ public class SpringCssConfig {
 }]}
 </code></pre>
 <p>现在，假如我们在 application.properties 文件中输入“springcss”，IDE 就会自动提示完整的配置项内容，效果如下所示：</p>
-<p><img src="assets/CgqCHl_AkLOAOewrAAAZuAPdrEs491.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_AkLOAOewrAAAZuAPdrEs491.png" alt="png" /></p>
 <p>IDE 自动提示 springcss 前缀的效果图</p>
 <p>另外，假设我们需要为 springcss.order.point 配置项指定一个默认值，可以通过在元数据中添加一个&quot;defaultValue&quot;项来实现，如下所示：</p>
 <pre><code>{&quot;properties&quot;: [{
@@ -267,7 +267,7 @@ public class SpringCssConfig {
 }]}
 </code></pre>
 <p>这时候，在 IDE 中设置这个配置项时，就会提出该配置项的默认值为 10，效果如下所示：</p>
-<p><img src="assets/Ciqc1F_AkL6AGrQwAAAa2ONwouI508.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_AkL6AGrQwAAAa2ONwouI508.png" alt="png" /></p>
 <p>IDE 自动提示包含默认值的 springcss 前缀效果图</p>
 <h3>如何组织和整合配置信息？</h3>
 <p>在上一课时中，我们提到了 Profile 概念，Profile 可以认为是管理配置信息中的一种有效手段。今天，我们继续介绍另一种组织和整合配置信息的方法，这种方法同样依赖于前面介绍的 @ConfigurationProperties 注解。</p>
@@ -299,7 +299,7 @@ public class SpringCssConfig {
 –classpath:/
 </code></pre>
 <p>以下是按照优先级从高到低的顺序，如下所示：</p>
-<p><img src="assets/CgqCHl_FvNiAAWTiAAAzJGEDupA763.png" alt="IiC6LiP3KXM49YyV__thumbnail.png" /></p>
+<p><img src="assets/CgqCHl_FvNiAAWTiAAAzJGEDupA763.png" alt="png" /></p>
 <p>Spring Boot 会全部扫描上图中的这四个位置，扫描规则是高优先级配置内容会覆盖低优先级配置内容。而如果高优先级的配置文件中存在与低优先级配置文件不冲突的属性，则会形成一种互补配置，也就是说会整合所有不冲突的属性。</p>
 <h3>如何覆写内置的配置类？</h3>
 <p>关于 Spring Boot 配置体系，最后值得介绍的就是如何覆写它所提供的配置类。在前面的课程中，我们已经反复强调 Spring Boot 内置了大量的自动配置，如果我们不想使用这些配置，就需要对它们进行覆写。覆写的方法有很多，我们可以使用配置文件、Groovy 脚本以及 Java 代码。这里，我们就以Java代码为例来简单演示覆写配置类的实现方法。</p>

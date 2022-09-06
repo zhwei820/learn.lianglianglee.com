@@ -295,7 +295,7 @@ function hide_canvas() {
 <p>正如前文介绍 Netty 线程模型的时候提到，我们不能在 Netty 的 I/O 线程中执行耗时的业务逻辑。在 Demo RPC 框架的 Server 端接收到请求时，首先会通过上面介绍的 DemoRpcDecoder 反序列化得到请求消息，之后我们会通过一个自定义的 ChannelHandler（DemoRpcServerHandler）将请求提交给业务线程池进行处理。</p>
 <p>在 Demo RPC 框架的 Client 端接收到响应消息的时候，也是先通过 DemoRpcDecoder 反序列化得到响应消息，之后通过一个自定义的 ChannelHandler（DemoRpcClientHandler）将响应返回给上层业务。</p>
 <p>DemoRpcServerHandler 和 DemoRpcClientHandler 都继承自 SimpleChannelInboundHandler，如下图所示：</p>
-<p><img src="assets/Ciqc1F9R3QOAbbKRAAD4lAEEjtg767.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9R3QOAbbKRAAD4lAEEjtg767.png" alt="png" /></p>
 <p>DemoRpcClientHandler 和 DemoRpcServerHandler 的继承关系图</p>
 <p>下面我们就来看一下这两个自定义的 ChannelHandler 实现：</p>
 <pre><code>public class DemoRpcServerHandler extends
@@ -431,7 +431,7 @@ public class DemoRpcClientHandler extends
 }
 </code></pre>
 <p>通过 DemoRpcClient 的代码我们可以看到其 ChannelHandler 的执行顺序如下：</p>
-<p><img src="assets/Ciqc1F9R35eARBOdAAEUxDl6DGE227.png" alt="Lark20200904-143159.png" /></p>
+<p><img src="assets/Ciqc1F9R35eARBOdAAEUxDl6DGE227.png" alt="png" /></p>
 <p>客户端 ChannelHandler 结构图</p>
 <p>另外，在创建EventLoopGroup时并没有直接使用NioEventLoopGroup，而是在 NettyEventLoopFactory 中根据当前操作系统进行选择，对于 Linux 系统，会使用 EpollEventLoopGroup，其他系统则使用 NioEventLoopGroup。</p>
 <p>接下来我们再看<strong>DemoRpcServer 的具体实现</strong>：</p>
@@ -475,13 +475,13 @@ public class DemoRpcClientHandler extends
 }
 </code></pre>
 <p>通过对 DemoRpcServer 实现的分析，我们可以知道每个 Channel 上的 ChannelHandler 顺序如下：</p>
-<p><img src="assets/CgqCHl9R34eAEosNAAEZMNHAB1c561.png" alt="Lark20200904-143204.png" /></p>
+<p><img src="assets/CgqCHl9R34eAEosNAAEZMNHAB1c561.png" alt="png" /></p>
 <p>服务端 ChannelHandler 结构图</p>
 <h3>registry 相关实现</h3>
 <p>介绍完客户端和服务端的通信之后，我们再来看简易 RPC 框架的另一个基础能力——服务注册与服务发现能力，对应 demo-rpc 项目源码中的 registry 包。</p>
 <p>registry 包主要是依赖 Apache Curator 实现了一个简易版本的 ZooKeeper 客户端，并基于 ZooKeeper 实现了注册中心最基本的两个功能：Provider 注册以及 Consumer 订阅。</p>
 <p>这里我们先定义一个 Registry 接口，其中提供了注册以及查询服务实例的方法，如下图所示：</p>
-<p><img src="assets/Ciqc1F9R3WuAd1UPAAA82c309GI280.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9R3WuAd1UPAAA82c309GI280.png" alt="png" /></p>
 <p>ZooKeeperRegistry 是基于 curator-x-discovery 对 Registry 接口的实现类型，其中封装了之前课时介绍的 ServiceDiscovery，并在其上添加了 ServiceCache 缓存提高查询效率。ZooKeeperRegistry 的具体实现如下：</p>
 <pre><code>public class ZookeeperRegistry&lt;T&gt; implements Registry&lt;T&gt; {
     private InstanceSerializer serializer = 
@@ -628,7 +628,7 @@ public class DemoRpcClientHandler extends
 <p>你若感兴趣的话可以尝试进行扩展，以实现一个更加完善的代理层。</p>
 <h3>使用方接入</h3>
 <p>介绍完 Demo RPC 的核心实现之后，下面我们讲解下Demo RPC 框架的使用方式。这里涉及Consumer、DemoServiceImp、Provider三个类以及 DemoService 业务接口。</p>
-<p><img src="assets/Ciqc1F9R3YiAXV8hAAAtXArd3J0997.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9R3YiAXV8hAAAtXArd3J0997.png" alt="png" /></p>
 <p>使用接入的相关类</p>
 <p>首先，我们定义<strong>DemoService 接口</strong>作为业务 Server 接口，具体定义如下：</p>
 <pre><code>public interface DemoService {

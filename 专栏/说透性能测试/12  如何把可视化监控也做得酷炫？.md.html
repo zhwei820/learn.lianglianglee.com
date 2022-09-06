@@ -159,9 +159,9 @@ function hide_canvas() {
 <p>这一讲我们就来讲解可视化监控，你可以认为它是一节实操课，需要提前准备好你的服务器环境（推荐 CentOS 7.0），跟着我的步骤一步步进行就可以完成酷炫的监控报表。</p>
 <h3>命令行和图形化界面展示对比</h3>
 <p>对于初学者而言，你可能并不能从上述文字中感受到命令行和图形化界面展示的区别，那么我用两张图来对比下。</p>
-<p><img src="assets/Cgp9HWAeQEGAH4ObAAIZnEuEI9M121.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWAeQEGAH4ObAAIZnEuEI9M121.png" alt="png" /></p>
 <p>图 1：命令行方式</p>
-<p><img src="assets/Cgp9HWAeQEiAEWf_AAXTN9yw9Y0063.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWAeQEiAEWf_AAXTN9yw9Y0063.png" alt="png" /></p>
 <p>图 2：可视化监控大屏</p>
 <p>我想绝大部分还是更愿意看图 2 的可视化监控大屏，本讲的开头也说了命令行监控和可视化监控是一种互补的形式，这就代表两种方式各有千秋。可视化监控除了直观外，我认为还有如下两点优势。</p>
 <p><strong>（1）信息高度集中</strong></p>
@@ -195,7 +195,7 @@ function hide_canvas() {
 <pre><code>nohup ./node_exporter &amp;
 </code></pre>
 <p>当启动完成之后，可以用 ip:9100 的方式打开页面，如下所示，即认为 node_exporter 安装成功了。</p>
-<p><img src="assets/Cgp9HWAeQHCARf2SAAAPsbMo84s659.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWAeQHCARf2SAAAPsbMo84s659.png" alt="png" /></p>
 <p>图 4：node_exporter 安装示意图</p>
 <p>我们点击 Metrics 可以查看具体的采集信息，部分展示内容如下所示：</p>
 <pre><code># HELP node_cpu_seconds_total Seconds the cpus spent in each mode
@@ -231,14 +231,14 @@ tar zxvf prometheus-2.15.1.linux-amd64.tar.gz
 <pre><code>nohup ./prometheus &amp;
 </code></pre>
 <p>访问 <a href="http://ip:9090/targets">http://ip:9090/targets</a>，根据自己的实际情况填写 ip，出现如下截图表示安装成功。</p>
-<p><img src="assets/CioPOWAeQH2AP6pBAABkNC-TloM735.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWAeQH2AP6pBAABkNC-TloM735.png" alt="png" /></p>
 <p>图 5：Promethues 成功安装示意图</p>
 <h4>第三步是安装 Grafana</h4>
 <p>这部分第 03 讲已经讲解过，我们就不再赘述，安装完成 Grafana 之后，添加 Prometheus 数据源，测试并保存即可。</p>
-<p><img src="assets/Cgp9HWAeQIiAJMERAACXSmGUo8w948.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cgp9HWAeQIiAJMERAACXSmGUo8w948.png" alt="png" /></p>
 <p>图 6：Grafana 添加 Promethues 数据源</p>
 <p>接着导入官方提供的<strong>展示模板</strong>就可以，<a href="https://grafana.com/dashboards/8919">点击链接</a>。你可以自行选择相应的版本进行下载，也可以直接填写模板 ID，导入完成之后，便可以看到大屏了，示意图如下：</p>
-<p><img src="assets/CioPOWAeQJOAU5eUAAOCvFyaK3E786.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CioPOWAeQJOAU5eUAAOCvFyaK3E786.png" alt="png" /></p>
 <p>图 7：可视化大屏示意</p>
 <p>到目前为止，一款基于 Linux 硬件监控的大屏就打造完成了。</p>
 <h3>如何可视化监控数据库？</h3>
@@ -262,7 +262,7 @@ host=127.0.0.1
 <pre><code>nohup ./mysqld_exporter --config.my-cnf=my.cnf &amp;
 </code></pre>
 <p>然后通过网页访问来验证是否部署成功，访问地址一般是 ip:9104，可以看到如下展示信息：</p>
-<p><img src="assets/CioPOWAeQKGAUMGKAAAem_X3hX0515.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CioPOWAeQKGAUMGKAAAem_X3hX0515.png" alt="png" /></p>
 <p>点击 Meteric 你也可以发现很多手机端 MySQL 监控信息的参数选项，部分信息如下：</p>
 <pre><code># HELP mysql_global_variables_max_connections Generic gauge metric from SHOW GLOBAL VARIABLES.
 # TYPE mysql_global_variables_max_connections gauge
@@ -274,7 +274,7 @@ mysql_global_variables_max_connections 151
     - targets: ['127.0.0.1:9104']
 </code></pre>
 <p>关于<strong>Grafana 展示，</strong> 选择 Grafana 的 MySQL 监控相关模板导入即可，<a href="https://grafana.com/grafana/dashboards/11323">点击模板链接</a>。下载并导入后就可以了，MySQL 展示效果如下图所示。</p>
-<p><img src="assets/Cgp9HWAeQMKAP1owAAJD8a1CZnw412.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Cgp9HWAeQMKAP1owAAJD8a1CZnw412.png" alt="png" /></p>
 <p>图 8：mysql 可视化监控示意图</p>
 <h3>总结</h3>
 <p>这一讲主要讲述了<strong>Promethues + Exporter + Grafana</strong>的监控方案：</p>

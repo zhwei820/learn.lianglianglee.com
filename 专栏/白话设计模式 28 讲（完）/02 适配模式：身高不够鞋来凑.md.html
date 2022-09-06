@@ -305,14 +305,14 @@ Demi身高166在高跟鞋的适配下，你身高不输高圆圆，气质不输�
 <p>榫卯结构的经典模型如下图：</p>
 <p><img src="assets/a0c29f50-71ec-11e8-9e76-835574e7e257.jpg" alt="img" /></p>
 <p>榫卯是藏在木头里的灵魂！而随着时代的变化，其结构也发生着一些变化，现在很多建材生产商也在发明和生产新型的具有榫卯结构的木板。假设木板生产商有下面两块木板，木板 A 是榫，木板 B 是卯，A、B 两块木板就完全吻合。他们之间的榫卯接口是一种 T 字形的接口。</p>
-<p><img src="assets/dd5adc20-71ec-11e8-9e76-835574e7e257.jpg" alt="enter image description here" /></p>
+<p><img src="assets/dd5adc20-71ec-11e8-9e76-835574e7e257.jpg" alt="png" /></p>
 <p>后来，随着业务的拓展，木板厂商增加了一种新木板 C。但 C 是 L 形的接口，不能与木板 A 对接。为了让木板 C 能与木板 A 进行对接，就需要增加一个衔接板 D 进行适配，而这个 D 就相当于适配器，如下图：</p>
-<p><img src="assets/fadc6b10-71ec-11e8-b1ea-d92fd075c722.jpg" alt="enter image description here" /></p>
+<p><img src="assets/fadc6b10-71ec-11e8-b1ea-d92fd075c722.jpg" alt="png" /></p>
 <p>适配器模式通常用于对已有的系统拓展新功能时，尤其适用于在设计良好的系统框架下接入第三方的接口或第三方的 SDK 时。在系统的最初设计阶段，最好不要把适配器模式考虑进去，除非一些特殊的场景（如系统本身就是要去对接和适配多种类型的硬件接口）。</p>
 <h3>适配器模式的模型抽象</h3>
 <h4>类图</h4>
 <p>适配器模式的类图如下：</p>
-<p><img src="assets/43604d60-71ee-11e8-be4d-f5aac07d9486.jpg" alt="enter image description here" /></p>
+<p><img src="assets/43604d60-71ee-11e8-be4d-f5aac07d9486.jpg" alt="png" /></p>
 <p>Target 是一个接口类，是提供给用户调用的接口抽象，如上面示例中的 IHightPerson。Adaptee 是你要进行适配的对象类，如上面的 ShortPerson。Adapter 是一个适配器，是对 Adaptee 的适配，它将 Adaptee 的对象转换（或说包装）成符合 Target 接口的对象；如上面的 DecoratePerson，将 ShortPerson 的 getRealHeight 和 getShoesHeight 方法包装成 IHightPerson 的 getHeight 接口。</p>
 <h3>模型说明</h3>
 <h4>设计要点</h4>
@@ -336,13 +336,13 @@ Demi身高166在高跟鞋的适配下，你身高不输高圆圆，气质不输�
 </ul>
 <h3>实战应用</h3>
 <p>有一个电子书阅读器的项目（Reader），研发之初，产品经理经过各方讨论，最后告诉我们只支持 TXT 和 Epub 格式的电子书。然后经过仔细思考、精心设计，采用了如图1的代码架构。在这个类图中，有一个阅读器的核心类 Reader，一个 TXT 文档的关键类 TxtBook（负责 TXT 格式文件的解析），和一个 Epub 文档的关键类 EpubBook（负责 Epub 格式文件的解析）。</p>
-<p><img src="assets/dcd4aa40-71ee-11e8-89a0-a176c63a6bd8.jpg" alt="enter image description here" /></p>
+<p><img src="assets/dcd4aa40-71ee-11e8-89a0-a176c63a6bd8.jpg" alt="png" /></p>
 <p>图1：阅读器类图</p>
 <p>产品上线半年后，市场响应良好，业务部门反映：有很多办公人员也在用我们的阅读器，他们希望这个阅读器能同时支持 PDF 格式，这样就不用在多个阅读器神之间来回切换了，此时程序就需要增加对 PDF 格式的支持，而 PDF 并不是核心业务，我们不会单独为其开发一套 PDF 解析内核，而会使用一些开源的 PDF 库（我们称它为第三方库），如 MuPDF、TCPDF 等。而开源库的接口和我们的接口并不相同（如图2），返回的内容也不是我们直接需要的，需要经过一些转换才能符合我们的要求。</p>
-<p><img src="assets/19859f30-71ef-11e8-be4d-f5aac07d9486.jpg" alt="enter image description here" /></p>
+<p><img src="assets/19859f30-71ef-11e8-be4d-f5aac07d9486.jpg" alt="png" /></p>
 <p>图2：第三方 PDF 解析库的类图</p>
 <p>这时，我们就需要对 PDF 的解析库 MuPDF 进行适配。经过上面的学习，你一定知道这时该用适配器模式了，于是有了如下图3的类图结构。</p>
-<p><img src="assets/306de130-71ef-11e8-b1ea-d92fd075c722.jpg" alt="enter image description here" /></p>
+<p><img src="assets/306de130-71ef-11e8-b1ea-d92fd075c722.jpg" alt="png" /></p>
 <p>图3：兼容 PDF 的类图结构</p>
 <p><strong>代码实现如下：</strong></p>
 <pre><code class="language-python">class Page:

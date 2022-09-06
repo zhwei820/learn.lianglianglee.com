@@ -214,7 +214,7 @@ result = getResultSet(mergeEngine);
 <p>所谓<strong>归并</strong>，就是将从各个数据节点获取的多数据结果集，通过一定的策略组合成为一个结果集并正确的返回给请求客户端的过程。</p>
 <p><strong>按照不同的 SQL 类型以及应用场景划分</strong>，归并的类型可以分为遍历、排序、分组、分页和聚合 5 种类型，这 5 种类型是组合而非互斥的关系。</p>
 <p>其中遍历归并是最简单的归并，而排序归并是最常用地归并，在下文我会对两者分别详细介绍。</p>
-<p><img src="assets/CgqCHl9QzC6AA5U7AABkojINfPw834.png" alt="Lark20200903-185718.png" /></p>
+<p><img src="assets/CgqCHl9QzC6AA5U7AABkojINfPw834.png" alt="png" /></p>
 <p>归并的五大类型</p>
 <p><strong>按照归并实现的结构划分</strong>，ShardingSphere 中又存在流式归并、内存归并和装饰者归并这三种归并方案。</p>
 <ul>
@@ -224,7 +224,7 @@ result = getResultSet(mergeEngine);
 </ul>
 <p>显然，流式归并和内存归并是互斥的，装饰者归并可以在流式归并和内存归并之上做进一步的处理。</p>
 <p><strong>归并方案</strong>与归并类型之间同样存在一定的关联关系，其中遍历、排序以及流式分组都属于流式归并的一种，内存归并可以作用于统一的分组、排序以及聚合，而装饰者归并有分页归并和聚合归并这 2 种类型，它们之间的对应关系如下图所示：</p>
-<p><img src="assets/CgqCHl9QzD6AG8aFAACQddjkR3E088.png" alt="Lark20200903-185710.png" /></p>
+<p><img src="assets/CgqCHl9QzD6AG8aFAACQddjkR3E088.png" alt="png" /></p>
 <p>归并类型与归并方案之间的对应关系图</p>
 <h4>2.归并引擎</h4>
 <p>讲完概念回到代码，我们首先来到 shardingsphere-merge 代码工程中的 MergeEngine 接口：</p>
@@ -234,7 +234,7 @@ result = getResultSet(mergeEngine);
 }
 </code></pre>
 <p>可以看到 MergeEngine 接口非常简单，只有一个 merge 方法。在 ShardingSphere 中，该接口存在五个实现类，其类层结构如下所示：</p>
-<p><img src="assets/CgqCHl9Qli6AUetjAAAuTLxL5xw054.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9Qli6AUetjAAAuTLxL5xw054.png" alt="png" /></p>
 <p>MergeEngine 类层结构图</p>
 <p>从命名上看，可以看到名称中带有“Encrypt”的两个 MergeEngine 与数据脱敏相关，放在后续专题中再做讲解，其余的三个我们会先做一些分析。</p>
 <p>在此之前，我们还要来关注一下代表归并结果的 MergedResult 接口：</p>
@@ -337,11 +337,11 @@ public Object getValue(final int columnIndex, final Class&lt;?&gt; type) throws 
 <p>当在多个数据库中执行某一条 SQL 语句时，我们可以做到在每个库的内部完成排序功能。也就是说，我们的执行结果中保存着内部排好序的多个 QueryResult，然后要做的就是把它们放在一个地方然后进行全局的排序。因为每个 QueryResult 内容已经是有序的，因此只需要将 QueryResult 中当前游标指向的数据值进行排序即可，相当于对多个有序的数组进行排序。</p>
 <p>这个过程有点抽象，我们通过如下的示意图进行进一步说明。假设，在我们的健康任务 health_task 表中，存在一个健康点数字段 health_point，用于表示完成这个健康任务能够获取的健康分数。</p>
 <p>然后，我们需要根据这个 health_point 进行排序归并，初始的数据效果如下图所示：</p>
-<p><img src="assets/Ciqc1F9QzRSADVUyAABkYnJfMvs829.png" alt="Lark20200903-190058.png" /></p>
+<p><img src="assets/Ciqc1F9QzRSADVUyAABkYnJfMvs829.png" alt="png" /></p>
 <p>三张 health_task 表中的初始数据</p>
 <p>上图中展示了 3 张表返回的数据结果集，每个数据结果集都已经根据 health_point 字段进行了排序，但是 3 个数据结果集之间是无序的。排序归并的做法就是将 3 个数据结果集的当前游标指向的数据值进行排序，并放入到一个排序好的队列中。</p>
 <p>在上图中可以看到 health_task0 的第一个 health_point 最小，health_task1 的第一个 health_point 最大，health_task2 的第一个 health_point 次之，因此队列中应该按照 health_task1，health_task2 和 health_task0 的方式排序队列，效果如下：</p>
-<p><img src="assets/CgqCHl9QzHiAf33WAABsaH9vLR0050.png" alt="Lark20200903-185846.png" />
+<p><img src="assets/CgqCHl9QzHiAf33WAABsaH9vLR0050.png" alt="png" />
 队列中已排序的三张 health_task 表</p>
 <p>在 OrderByStreamMergedResult 中，我们可以看到如下所示的队列定义，用到了 JDK 中的 Queue 接口：</p>
 <pre><code>private final Queue&lt;OrderByValue&gt; orderByValuesQueue;
@@ -422,10 +422,10 @@ public boolean next() throws SQLException {
 }
 </code></pre>
 <p>这个过程同样需要用一系列图来进行解释。当进行第一次 next 调用时，排在队列首位的 health_task1 将会被弹出队列，并且将当前游标指向的数据值 50 返回。同时，我们还会将游标下移一位之后，重新把 health_task1 放入优先级队列。而优先级队列也会根据 health_task1 的当前数据结果集指向游标的数据值 45 进行排序，根据当前数值，health_task1 将会被排列在队列的第三位。如下所示：</p>
-<p><img src="assets/Ciqc1F9QzJaANhr0AABsaCCFqA0376.png" alt="Lark20200903-185915.png" /></p>
+<p><img src="assets/Ciqc1F9QzJaANhr0AABsaCCFqA0376.png" alt="png" /></p>
 <p>第一次 next 之后的优先级队列中的三张 health_task 表</p>
 <p>之前队列中排名第二的 health_task2 的数据结果集则自动排在了队列首位。而在进行第二次 next 时，只需要将目前排列在队列首位的 health_task2 弹出队列，并且将其数据结果集游标指向的值返回。当然，对于 health_task2 而言，我们同样下移游标，并继续将它加入优先级队列中，以此类推。</p>
-<p><img src="assets/CgqCHl9QzJ2AMQzxAABrQS5M0oA899.png" alt="Lark20200903-185920.png" /></p>
+<p><img src="assets/CgqCHl9QzJ2AMQzxAABrQS5M0oA899.png" alt="png" /></p>
 <p>第二次 next 之后的优先级队列中的三张 health_task 表</p>
 <p>可以看到，基于上述的设计和实现方法，对于每个数据结果集内部数据有序、而多数据结果集整体无序的情况下，我们无需将所有的数据都加载至内存即可进行排序。</p>
 <p>因此，ShardingSphere 在这里使用的是流式归并的方式，充分提高了归并效率。</p>

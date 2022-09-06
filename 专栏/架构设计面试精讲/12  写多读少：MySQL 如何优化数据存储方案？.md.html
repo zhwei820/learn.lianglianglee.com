@@ -179,7 +179,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>12  写多读少：MySQL 如何优化数据存储方案？</h1>
 <p>上一讲，我带你学习了在高并发读多写少的场景下，数据库的一种优化方案：读写分离。通过主从复制的技术把数据复制多份，读操作只读取从数据库中的数据，这样就增强了抵抗大量并发读请求的能力，提升了数据库的查询性能。这时，你的系统架构如下：</p>
-<p><img src="assets/CioPOWAguzCALW6-AAFqyLONgRo485.png" alt="1.png" /></p>
+<p><img src="assets/CioPOWAguzCALW6-AAFqyLONgRo485.png" alt="png" /></p>
 <p>系统架构图</p>
 <h3>案例背景</h3>
 <p>假设在这样的背景下，面试官出了一道考题：</p>
@@ -215,7 +215,7 @@ function hide_canvas() {
 <li><strong>垂直拆分</strong></li>
 </ul>
 <p>垂直拆分是根据数据的业务相关性进行拆分。比如一个数据库里面既存在商品数据，又存在订单数据，那么垂直拆分可以把商品数据放到商品库，把订单数据放到订单库。一般情况，垂直拆库常伴随着系统架构上的调整。</p>
-<p><img src="assets/CioPOWAgu0WAIPgVAAFI7tXmc4k883.png" alt="2021-02-08" /></p>
+<p><img src="assets/CioPOWAgu0WAIPgVAAFI7tXmc4k883.png" alt="png" /></p>
 <p>垂直拆分</p>
 <p>比如在对做系统“微服务”改造时，将原本一个单体系统拆分成多个子系统，每个系统提供单独的服务，那么随着应用层面的拆分带来的也有数据层面的拆分，将一个主库的数据表，拆分到多个独立的子库中去。</p>
 <p>对数据库进行垂直拆分最常规，优缺点也很明显。</p>
@@ -224,7 +224,7 @@ function hide_canvas() {
 <li><strong>水平拆分</strong></li>
 </ul>
 <p>垂直拆分随架构改造而拆分，关注点在于业务领域，而水平拆分指的是把单一库表数据按照规则拆分到多个数据库和多个数据表中，比如把单表 1 亿的数据按 Hash 取模拆分到 10 个相同结构的表中，每个表 1 千万的数据。并且拆分出来的表，可以分别存放到不同的物理数据库中，关注点在于数据扩展。</p>
-<p><img src="assets/Cgp9HWAgu1iATPotAAFyw-cShto270.png" alt="2021-02-08" /></p>
+<p><img src="assets/Cgp9HWAgu1iATPotAAFyw-cShto270.png" alt="png" /></p>
 <p>水平拆分</p>
 <p>拆分的规则就是哈希分片和范围分片（这部分内容你可以参考 04 讲中的内容，我就不赘述了）。但我要强调一下 Range 分片，因为 04 讲中有些同学对 Range 分片解决数据热点的问题有些误解。</p>
 <ul>
@@ -232,7 +232,7 @@ function hide_canvas() {
 </ul>
 <p>是按照某一个字段的区间来拆分，最好理解的就是按照时间字段分片，比如可以把一个月的数据放入一张表中，这样在查询时就可以根据时间先定位数据存储在哪个表里面，再按照查询条件来查询。</p>
 <p>但是按时间字段进行范围分片的场景并不多，因为会导致数据分布不均，毕竟不是每个月的销量都是平均的。所以常见的 Range 分片是按照字段类型，比如按照商品的所属品类进行分片。这样与 Hash 分片不同的是，Range 分片就可以加入对于业务的预估。</p>
-<p><img src="assets/Cgp9HWAgu2qAUY42AAJC1rwUuj0065.png" alt="2021-02-08" /></p>
+<p><img src="assets/Cgp9HWAgu2qAUY42AAJC1rwUuj0065.png" alt="png" /></p>
 <p>Range 分片</p>
 <p>但是同样的，由于不同“商品品类”的业务热点不同，对于商品数据存储也会存在热点数据问题，这个时候处理的手段有两个。</p>
 <p><strong>1、垂直扩展</strong></p>
@@ -240,14 +240,14 @@ function hide_canvas() {
 <p><strong>2、分片元数据</strong></p>
 <p>单机性能总是有极限的，互联网分布式架构设计高并发终极解决方案还是水平扩展，所以结合业务的特性，就需要在 Range 的基础上引入“分片元数据”的概念：分片的规则记录在一张表里面，每次执行查询的时候，先去表里查一下要找的数据在哪个分片中。</p>
 <p>这种方式的优点是灵活性高，并且分片规则可以随着业务发展随意改动。比如当某个分片已经是热点了，那就可以把这个分片再拆成几个分片，或者把这个分片的数据移到其他分片中去，然后修改一下分片元数据表，就可以在线完成数据的再分片了。</p>
-<p><img src="assets/Cgp9HWAgu4OAUhLoAAIZaMG-qhk310.png" alt="2021-02-08" /></p>
+<p><img src="assets/Cgp9HWAgu4OAUhLoAAIZaMG-qhk310.png" alt="png" /></p>
 <p>分片元数据</p>
 <p>但你要注意，分片元数据本身需要做高可用（面试考察点可以参考 04 讲中的内容）。方案缺点是实现起来复杂，需要二次查询，需要保证分片元数据服务的高可用。不过分片元数据表可以通过缓存进行提速。</p>
 <ul>
 <li><strong>垂直水平拆分</strong></li>
 </ul>
 <p>垂直水平拆分，是综合垂直和水平拆分方式的一种混合方式，垂直拆分把不同类型的数据存储到不同库中，再结合水平拆分，使单表数据量保持在合理范围内，提升性能。</p>
-<p><img src="assets/CioPOWAgu5GABkVtAAGYeNyTfrM932.png" alt="2021-02-08" /></p>
+<p><img src="assets/CioPOWAgu5GABkVtAAGYeNyTfrM932.png" alt="png" /></p>
 <p>垂直水平拆分</p>
 <h4>如何解决数据查询问题？</h4>
 <p>分库分表引入的另外一个问题就是数据查询的问题（比较常见），比如面试官会问类似的问题：</p>

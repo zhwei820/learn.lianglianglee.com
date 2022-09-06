@@ -171,7 +171,7 @@ public class SecurityConfig
 <p>针对方法级别授权，Spring Security 提供了 @PreAuthorize 和 @PostAuthorize 这两个注解，分别用于预授权和后授权。</p>
 <h4>@PreAuthorize 注解</h4>
 <p>先来看 @PreAuthorize 注解的使用场景。假设在一个基于 Spring Boot 的 Web 应用程序中，存在一个 Web 层组件 OrderController，该 Controller 会调用 Service 层的组件 OrderService。我们希望对访问 OrderService 层中方法的请求添加权限控制能力，即只有具备“DELETE”权限的请求才能执行 OrderService 中的 deleteOrder() 方法，而没有该权限的请求将直接抛出一个异常，如下图所示：</p>
-<p><img src="assets/CioPOWDUPfSAe8iSAABgIKGs6vA100.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDUPfSAe8iSAABgIKGs6vA100.png" alt="png" /></p>
 <p>Service 层组件预授权示意图</p>
 <p>显然，上述流程针对的是预授权的应用场景，因此我们可以使用 @PreAuthorize 注解，</p>
 <p>该注解定义如下：</p>
@@ -238,7 +238,7 @@ public List&lt;Order&gt; getOrderByUser(String user) {
 <p>这里我们将输入的“user”参数与通过 SpEL 表达式从安全上下文中获取的“authentication.principal.username”进行比对，如果相同就执行正确的方法逻辑，反之将直接抛出异常。</p>
 <h4>@PostAuthorize 注解</h4>
 <p>相较 @PreAuthorize 注解，@PostAuthorize 注解的应用场景可能少见一些。有时我们<strong>允许调用者正确调用方法，但希望该调用者不接受返回的响应结果</strong>。这听起来似乎有点奇怪，但在那些访问第三方外部系统的应用中，我们并不能完全相信返回数据的正确性，也有对调用的响应结果进行限制的需求，@PostAuthorize 注解为我们实现这类需求提供了很好的解决方案，如下所示：</p>
-<p><img src="assets/Cgp9HWDUPgKAEHdqAABip-uyyzg495.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWDUPgKAEHdqAABip-uyyzg495.png" alt="png" /></p>
 <p>Service 层组件后授权示意图</p>
 <p>为了演示 @PostAuthorize 注解，我们先来设定特定的返回值。假设我们存在如下所示的一个 Author 对象，保存着该作者的姓名和创作的图书作品：</p>
 <pre><code>public class Author {
@@ -304,7 +304,7 @@ public List&lt;Product&gt; findProducts() {
 <h3>小结与预告</h3>
 <p>这一讲我们关注的重点从 HTTP 端点级别的安全控制转换到了普通方法级别的安全控制。Spring Security 内置了一组非常实用的注解，方便开发人员实现全局方法安全机制，包括用于实现方法级别授权的 @PreAuthorize 和 @PostAuthorize 注解，以及用于实现方法级别过滤的 @PreFilter 注解和 @PostFilter 注解。我们针对这些注解的使用方法也给出了相应的描述和示例代码。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/Cgp9HWDUQa2Ac-ruAAKPFQeQ-YU960.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWDUQa2Ac-ruAAKPFQeQ-YU960.png" alt="png" /></p>
 <p>这里给你留一道思考题：针对 Spring Security 提供的全局方法安全机制，你能描述方法级别授权和方法级别过滤的区别以及它们各自的应用场景吗？欢迎在留言区写下你的想法。</p>
 </div>
                     </div>

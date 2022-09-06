@@ -179,7 +179,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>20 快速构建 JenkinsGitlab 持续集成环境</h1>
 <h3>ASK 介绍</h3>
-<p><img src="assets/2020-10-26-040914.png" alt="1.PNG" /></p>
+<p><img src="assets/2020-10-26-040914.png" alt="png" /></p>
 <p>首先，ASK 是什么？ASK 是阿里云推出的无服务器版 Kubernetes 容器服务。与传统的 Kubernetes 服务相比，ASK最大的特点就是通过虚拟节点接入 Kubernetes 集群，而 Kubernetes 的 Master 节点也完全由阿里云容器服务托管。因此，在整个 ASK 集群中，用户无需管理和运维真实节点，只用关心 Pod 资源即可，ASK 中的 Pod 则由阿里云弹性容器实例 ECI 承载。</p>
 <p><strong>ASK 的优势主要有以下几点：</strong></p>
 <ul>
@@ -197,7 +197,7 @@ function hide_canvas() {
 </ul>
 <h3>GitLab CI on ASK 的优势</h3>
 <p>说到 CI/CD，大家最熟悉的两个工具，一个是 Jenkins，另一个是 GitLab CI，随着 Devops 角色的流行，越来越多的企业采用 GitLab CI 作为持续集成的工具，下面给大家介绍下 GitLab CI on ASK。gitlab-runner 以 Pod 形式注册到 ASK 集群中，每个 CI/CD stage 也对应一个 Pod。</p>
-<p><img src="assets/2020-10-26-040920.png" alt="2.png" /></p>
+<p><img src="assets/2020-10-26-040920.png" alt="png" /></p>
 <p><strong>这么做的优势有以下几点：</strong></p>
 <ul>
 <li>服务高可用（Deployment+PVC）；</li>
@@ -220,15 +220,15 @@ function hide_canvas() {
 <ul>
 <li>在【<a href="https://cs.console.aliyun.com/?spm=5176.eciconsole.0.0.68254a9cNv12zh#/k8s/cluster/createV2/serverless">容器服务控制台</a>】创建标准 Serverless K8s 集群</li>
 </ul>
-<p><img src="assets/2020-10-26-040922.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040922.png" alt="png" /></p>
 <ul>
 <li>集群创建完成后，基本信息中有 API server 公网链接地址</li>
 </ul>
-<p><img src="assets/2020-10-26-040923.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040923.png" alt="png" /></p>
 <ul>
 <li>连接信息中有 ASK 集群访问凭证</li>
 </ul>
-<p><img src="assets/2020-10-26-040925.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040925.png" alt="png" /></p>
 <h4>2. 准备 PV/PVC</h4>
 <p>准备两个 nas 盘，一个做 gitlab runner cache，一个做 maven 仓库，请自行替换 nas server 地址和 path</p>
 <pre><code class="language-shell">kubectl apply -f mvn-pv.yaml
@@ -268,15 +268,15 @@ kubectl apply -f imagecache.yaml
 <h4>6. 部署 gitlab runner</h4>
 <pre><code class="language-shell">kubectl apply -f gitlab-runner-deployment.yaml
 </code></pre>
-<p><img src="assets/2020-10-26-040927.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040927.png" alt="png" /></p>
 <h4>7. 进行一个简单的 CI 任务</h4>
-<p><img src="assets/2020-10-26-040929.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040929.png" alt="png" /></p>
 <p>git repo 中的 .gitlab-ci.yml 类似 Jenkinsfile，定义了构建任务的工作流。我们修改 demo 项目中的 src/main/webapp/index.jsp 文件，然后 git commit -m &quot;change index info&quot; 提交。 gitlab 中的流水线任务即被触发，整个流程涉及到编译、打包、部署。</p>
-<p><img src="assets/2020-10-26-040930.png" alt="image.png" /></p>
-<p><img src="assets/2020-10-26-040931.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040930.png" alt="png" /></p>
+<p><img src="assets/2020-10-26-040931.png" alt="png" /></p>
 <h3>成本</h3>
 <p>使用 ASK 与一台预付费 ECS 的成本对比：</p>
-<p><img src="assets/2020-10-26-040932.png" alt="image.png" /></p>
+<p><img src="assets/2020-10-26-040932.png" alt="png" /></p>
 <p>从上述成本计算可以看出，当您每天的 CI/CD 任务少于 126 个时，使用 ASK+ECI 会比购买一台包年包月的 ECS 更加划算。在享受按需付费的同时，也降低了运维成本，更加重要的是，当业务规模扩大、CI/CD 任务数量陡增时，不再需要担心 Node 节点的扩容。ASK+ECI 的方案，可以被认为是 CI/CD 持续集成场景的量身标配。</p>
 </div>
                     </div>

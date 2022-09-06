@@ -158,7 +158,7 @@ function hide_canvas() {
 <h3>CI/CD &amp; “测试”环境</h3>
 <p><strong>CI/CD</strong></p>
 <p>缩略词 CI/CD 具有几个不同的含义，CI/CD 中的“CI”始终指<strong>持续集成</strong>（Continuous Integration），它代表研发人员工作的自动化流程，<strong>目的是让正在开发的软件始终处于可工作状态，</strong> 它主要关注代码是否可以编译成功，以及是否可通过单元测试和验收测试等。即，每次当开发人员提交了新代码，CI服务器会自动对这些代码的所属服务进行构建，并对其执行全面的自动化测试。根据测试的结果，可以确定新提交的代码和原有代码是否正确地集成在一起了。如果整个过程中出现了构建失败或测试失败，也需要立即让开发人员知道并修复。如此重复这个过程，就可以确保新代码能够持续地与原有代码正确地集成。</p>
-<p><img src="assets/CgqCHl9OBxOAOKByAAPwRmhK4Dg635.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9OBxOAOKByAAPwRmhK4Dg635.png" alt="png" /></p>
 <p>持续集成示意图</p>
 <p>而“CD”的含义却有两种：持续交付（Continuous Delivery）、持续部署（Continuous Deployment）。持续部署和持续交付是两个特别容易混淆的概念，它们之间最为本质的区别是：<strong>持续部署是一个技术操作，而持续交付则是一个业务行为。</strong></p>
 <p>我这边具体展开来说下它们两者的区别。</p>
@@ -167,20 +167,20 @@ function hide_canvas() {
 </ul>
 <p>持续交付是指所有开发人员始终让 Master 分支（也叫做主干分支或发布分支）保持可随时发布的状态，根据实际需要来判断是否进行一键式地发布。</p>
 <p>持续交付主要通过如下方式来实现：开发人员在特性分支（Feature分支）上工作，这些分支存在比较短暂的时间，进行过相应的功能测试后，则可以合并到 Master 分支。如果发现引入了其他错误类型（包括缺陷、性能问题、安全问题、可用性问题等）则将测试结果反馈给开发人员，开发人员立即对问题进行解决，使主干始终处于可部署状态，如下图所示。</p>
-<p><img src="assets/Ciqc1F9OByCADkrgAAd1WJT6DX0767.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9OByCADkrgAAd1WJT6DX0767.png" alt="png" /></p>
 <p>持续交付示意图</p>
 <ul>
 <li>持续部署</li>
 </ul>
 <p>持续部署是指，在持续交付的基础上，由开发人员或运维人员自助式地向生产环境部署优质的构建版本，甚至每当开发人员提交代码变更时，就触发自动化部署到生产环境。<strong>可见，持续交付是持续部署的前提，就像持续集成是持续交付的前提条件一样。</strong> 如下图所示。</p>
-<p><img src="assets/CgqCHl9OByaAPz2NAAFRgHQ4La4072.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9OByaAPz2NAAFRgHQ4La4072.png" alt="png" /></p>
 <p>持续部署示意图</p>
 <p>由上图可知，无论 CD 是持续部署还是持续交付，<strong>CI/CD 都是将重复的、手工的工作用自动化的方式来代替</strong>。因为这样可以减少不同阶段之间等待的时间成本、降低手工操作的出错率、快速收到反馈并修改。久而久之，最终整个产品的交付周期就缩短了。下面，本课时中的 CD 统一表示持续交付。</p>
 <p><strong>“测试”环境</strong></p>
 <p>文章标题提到的“测试”环境，并非代表我们日常所说的测试环境（Test 环境），而是产品交付过程中的各种环境。因为在产品交付过程中，不同的环境有着不同的特性和作用，需要在其中进行不同类型、针对不同对象的测试，所以它们都能起到“支撑测试活动”的作用。</p>
 <p>如上述的<strong>持续部署示意图</strong>或<strong>持续交付示意图</strong>所示，在产品交付过程中，从代码提交到发布到生产环境，会经历多个环境，如 Test 环境、Staging 环境和 Prod 环境等，这些环境在 CI/CD 方面发挥着“价值传递”的作用。</p>
 <p>例如，某个业务有一个名叫 Order 的微服务，研发人员对其进行开发后，需要先将代码提交到代码仓库。然后 CI 服务器从代码仓库中将代码拉取到 CI 服务器的特定目录，再通过提前配置好的编译命令对该服务进行编译，并将结果部署到 Test 环境中。如果 Test 环境测试通过，则会进一步部署到 Staging 环境中，Staging 环境测试通过后会以自动化或手工触发的方式在生产环境中部署。由此可见，<strong>Test、Staging、Prod 三个环境对要发布的微服务进行着构建和测试，每前进一步，该微服务就离交付更近一步，离实现业务价值就更近一步。</strong></p>
-<p><img src="assets/Ciqc1F9OBzOABTF9AATo-qaOITQ554.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9OBzOABTF9AATo-qaOITQ554.png" alt="png" /></p>
 <p>多环境实现价值传递</p>
 <p>我们知道，CI/CD 的本质是产品价值的传递。因此，当代码提交后会经历编译、部署，最终形成二进制包，这些软件包会流经不同的环境进行测试。可见，<strong>环境是产品交付过程中价值传递的载体。</strong></p>
 <p>为了快速交付产品价值，需要及时地在不同环境对产品进行测试，这不仅需要各自环境足够稳定，还需要在各种环境中进行各种类型的自动化测试。测试通过后，产品发布到线上，测试不通过，则快速将结果反馈给开发人员。这样便实现了**“快速响应，快速反馈”**的效果。这也是 CI/CD 的精髓。</p>
@@ -195,15 +195,15 @@ function hide_canvas() {
 <ul>
 <li><strong>整个测试团队共用一套测试环境</strong>：微服务架构下，当一个服务被多个服务依赖时，如果该服务不稳定，那么会影响其他大量服务无法测试。如图，当服务 B 不可用时，依赖服务 B 的其他服务也无法使用。</li>
 </ul>
-<p><img src="assets/CgqCHl9OB0OAMuxiAABf6EuumI0144.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9OB0OAMuxiAABf6EuumI0144.png" alt="png" /></p>
 <ul>
 <li><strong>每个测试人员一套完整的测试环境</strong>：这种情况下虽然可以解决环境依赖问题，但软硬件成本高，环境维护成本比较高，服务器资源利用率比较低。比如，业务系统包含 40 个微服务，测试团队有 10 人，那么就需要 40*10=400 台服务器来管理测试环境。现如今，虚拟化技术盛行，虽然可以从一定程度上减少资源成本，但维护成本依然不容忽视。</li>
 </ul>
-<p><img src="assets/Ciqc1F9OB1SARKn1AACBPT1nKJM083.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9OB1SARKn1AACBPT1nKJM083.png" alt="png" /></p>
 <ul>
 <li><strong>服务级复用的虚拟化技术，基于消息路由的控制，实现集群中部分服务的复用。</strong> 像阿里的“公共基础环境+特性环境”，美团的“骨干链路+泳道链路”、有赞的“基础环境（Default Service Chain）+SC 环境（Service-Chain）”都是在此方向上的有效尝试。</li>
 </ul>
-<p><img src="assets/CgqCHl9OB1-AJu65AACHP4QdVqU442.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl9OB1-AJu65AACHP4QdVqU442.png" alt="png" /></p>
 <p>服务链路隔离和复用</p>
 <p><strong>测试环境的测试关注点</strong></p>
 <p>测试人员将在该环境进行新功能测试、回归验证 Bug等内容，这包含了微服务架构下的分层测试策略（集成测试、组件测试、契约测试、端到端测试），以及一些非功能类型的测试。</p>
@@ -218,7 +218,7 @@ function hide_canvas() {
 </ul>
 <p>如果预发布环境使用生产环境的数据库备份，则需要进行不定期的数据库同步，保持和生产环境的设置、数据一致性。</p>
 <p>通常来讲，微服务架构下，数据库有许多库表且数据存储量大，所以以备份数据库方式的预发布环境比较少。如下图所示，两种预发布环境的区别在于使用数据库的方式。</p>
-<p><img src="assets/CgqCHl9OB2-AcVl6AAB34w7trfU945.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl9OB2-AcVl6AAB34w7trfU945.png" alt="png" /></p>
 <p>预发布环境连接的数据库有所不同</p>
 <p><strong>Staging 环境的特点</strong></p>
 <p>Staging 环境的特点是高度仿真，它是正式发布前的最后一个环境，数据库同生产环境。对于“数据库同生产环境”这一特点来说，需要特别注意的是，对于同一条用户数据，应避免同时在预发布环境和生产环境对其进行变更。因为数据库缓存存在这两套环境中，可能会产生数据不一致等问题，且难以定位和修复。</p>
@@ -237,7 +237,7 @@ function hide_canvas() {
 </ul>
 </li>
 </ul>
-<p><img src="assets/CgqCHl9OB3-AFaigAACcuc533fA687.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgqCHl9OB3-AFaigAACcuc533fA687.png" alt="png" /></p>
 <ul>
 <li>回归测试：在该环境进行回归测试，应尽量避免造成脏数据。发布过程需要流量来验证，建议采用 UI 层面的端到端自动化测试。</li>
 <li>特殊内容测试：测试环境可能会受到一些限制，一些流程或者数据没有测试到，就可以在预发布环境进行验证，从而保证产品上线质量。</li>
@@ -280,7 +280,7 @@ function hide_canvas() {
 </ul>
 <p>UAT(User Acceptance Test)，用户接受度测试，即验收测试，所以 UAT 环境主要是用来作为客户体验的环境。这个阶段可以收集客户的体验反馈，对于出现的问题可反哺到研发交付过程中。</p>
 <h4>各环境关系</h4>
-<p><img src="assets/Ciqc1F9OCA-AJ3ldAACj9CaQBck366.png" alt="11.png" /></p>
+<p><img src="assets/Ciqc1F9OCA-AJ3ldAACj9CaQBck366.png" alt="png" /></p>
 <p>生产环境之外的环境，都是对生产环境的仿真。仿真程度不同，能做的测试类型和深度是不同的。而生产环境，因为它的特殊性，能做的测试也是有限的，所以需要配合使用。几个环境最大的好处就是各司其职，既不会影响开发，也不会影响测试工作。</p>
 <h3>总结</h3>
 <p>本节课我讲解了 CI/CD 的基本概念，和“测试”环境。CI/CD 是持续集成和持续交付的意思，“测试”环境指的是产品交付过程中的各类环境，在 CI/CD 中的起到了产品价值传递的重要作用。</p>

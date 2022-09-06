@@ -580,9 +580,9 @@ function hide_canvas() {
 <h4>领域层的代码模型</h4>
 <p>在编写代码的过程中，要保证定义的类与接口遵循代码模型对模块、包、命名空间的划分。原则上，当前限界上下文的领域模型对象都定义在 domain 包里。在进一步对 domain 包进行划分时，<strong>千万不要按照领域驱动设计的设计要素类别进行划分</strong>——将领域服务、实体、值对象分门别类放在一起的做法是绝对错误的！包或模块的划分应依据<strong>变化的方向</strong>，这一划分原则满足“高内聚低耦合”原则。换言之，当前限界上下文的所有领域服务并非高内聚的，实体、值对象同样如此；但是，领域设计模型定义的每个聚合却应当是高内聚的，若非如此，只能说明聚合的设计存在问题。</p>
 <p>因此，在编写领域层代码时，应根据领域设计建模获得的设计模型，按照聚合对 domain 包进行划分，确定领域模型对象的命名空间，如下所示：</p>
-<p><img src="assets/81c61cd0-361c-11ea-b651-9bf55e9590d3" alt="da660fbb-d25e-4314-9834-0ac4cb065333.png" /></p>
+<p><img src="assets/81c61cd0-361c-11ea-b651-9bf55e9590d3" alt="png" /></p>
 <p>上图中的 candidate、course、learning、ticket 等命名空间，正是之前设计建模时识别出来的聚合。领域层的测试代码模型与之对应：</p>
-<p><img src="assets/910bb830-361c-11ea-a0e3-63013d6e72ad" alt="841e75f8-a588-41ca-b9df-d7969743c08c.png" /></p>
+<p><img src="assets/910bb830-361c-11ea-a0e3-63013d6e72ad" alt="png" /></p>
 <h4><strong>应用服务的编码实现</strong></h4>
 <p>在完成一个领域场景的领域层代码实现之后，将在应用层的应用服务交汇。一方面，需要根据服务定义，确定应用服务的接口与消息契约对象，并实现应用服务，然后由此向上（向外）实现基础设施层北向网关的远程服务；另一方面，需要为领域服务提供资源库的实现，以及其他需要访问外部资源的南向网关的代码逻辑。</p>
 <p>在编写应用服务时，需要考虑：</p>
@@ -918,7 +918,7 @@ public class TrainingResource {
 <p>为了保证远程服务的正确性，应考虑为远程服务编写集成测试或契约测试。若选择 Spring Boot 作为 REST 框架，可利用 Spring Boot 提供的测试沙箱 spring-boot-starter-test 为远程服务编写集成测试，或者选择 <a href="https://docs.pact.io/">Pact</a> 之类的测试框架为其编写消费者驱动的契约测试（Consumer-Driven Contract Test）。如果要面向前端定义控制器（Controller），还可考虑引入 <a href="https://graphql.org/">GraphQL</a> 定义服务，这些服务为前端组成了 BFF（Backend For Frontend）服务。此外，还可以引入 <a href="https://swagger.io/">Swagger</a> 为这些远程服务定义 API 文档。</p>
 <h3>EAS 系统的代码模型</h3>
 <p>应用服务与消息契约对象定义在应用层，远程服务虽然处于后端分层架构的顶层，但其本质仍然是基础设施层的北向网关。在定义代码模型时，可以根据分层架构的要素划分模块或包，也可以根据领域驱动设计的模式来划分。EAS 系统的代码模型如下图所示：</p>
-<p><img src="assets/f98e05c0-361c-11ea-b2c0-f10e3ce262c9" alt="d40a0752-6879-4423-82ee-6adeea9014f0.png" /></p>
+<p><img src="assets/f98e05c0-361c-11ea-b2c0-f10e3ce262c9" alt="png" /></p>
 <p>以下是对代码模型的详细说明：</p>
 <pre><code>* eas-ddd：项目名称为 EAS
     * eas-training：以项目名称为前缀，命名限界上下文对应的模块

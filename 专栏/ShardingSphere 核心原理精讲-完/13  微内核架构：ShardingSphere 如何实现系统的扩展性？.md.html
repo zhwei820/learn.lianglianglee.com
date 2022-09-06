@@ -206,13 +206,13 @@ function hide_canvas() {
 <p><strong>微内核架构本质上是为了提高系统的扩展性</strong> 。所谓扩展性，是指系统在经历不可避免的变更时所具有的灵活性，以及针对提供这样的灵活性所需要付出的成本间的平衡能力。也就是说，当在往系统中添加新业务时，不需要改变原有的各个组件，只需把新业务封闭在一个新的组件中就能完成整体业务的升级，我们认为这样的系统具有较好的可扩展性。</p>
 <p>就架构设计而言，扩展性是软件设计的永恒话题。而要实现系统扩展性，一种思路是提供可插拔式的机制来应对所发生的变化。当系统中现有的某个组件不满足要求时，我们可以实现一个新的组件来替换它，而整个过程对于系统的运行而言应该是无感知的，我们也可以根据需要随时完成这种新旧组件的替换。</p>
 <p>比如在下个课时中我们将要介绍的 ShardingSphere 中提供的分布式主键功能，分布式主键的实现可能有很多种，而扩展性在这个点上的体现就是， <strong>我们可以使用任意一种新的分布式主键实现来替换原有的实现，而不需要依赖分布式主键的业务代码做任何的改变</strong> 。</p>
-<p><img src="assets/CgqCHl8esVaAVlUFAACJmGjQZDA482.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl8esVaAVlUFAACJmGjQZDA482.png" alt="png" /></p>
 <p>微内核架构模式为这种实现扩展性的思路提供了架构设计上的支持，ShardingSphere 基于微内核架构实现了高度的扩展性。在介绍如何实现微内核架构之前，我们先对微内核架构的具体组成结构和基本原理做简要的阐述。</p>
 <h4>什么是微内核架构？</h4>
 <p>从组成结构上讲， <strong>微内核架构包含两部分组件：内核系统和插件</strong> 。这里的内核系统通常提供系统运行所需的最小功能集，而插件是独立的组件，包含自定义的各种业务代码，用来向内核系统增强或扩展额外的业务能力。在 ShardingSphere 中，前面提到的分布式主键就是插件，而 ShardingSphere 的运行时环境构成了内核系统。</p>
-<p><img src="assets/CgqCHl8esWOAJ-5cAACfxz06p_E616.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8esWOAJ-5cAACfxz06p_E616.png" alt="png" /></p>
 <p>那么这里的插件具体指的是什么呢？这就需要我们明确两个概念，一个概念就是经常在说的 <strong>API</strong> ，这是系统对外暴露的接口。而另一个概念就是 <strong>SPI</strong>（Service Provider Interface，服务提供接口），这是插件自身所具备的扩展点。就两者的关系而言，API 面向业务开发人员，而 SPI 面向框架开发人员，两者共同构成了 ShardingSphere 本身。</p>
-<p><img src="assets/Ciqc1F8esXOADonEAACE9HEUTJc298.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8esXOADonEAACE9HEUTJc298.png" alt="png" /></p>
 <p>可插拔式的实现机制说起来简单，做起来却不容易，我们需要考虑两方面内容。一方面，我们需要梳理系统的变化并把它们抽象成多个 SPI 扩展点。另一方面， <strong>当我们实现了这些 SPI 扩展点之后，就需要构建一个能够支持这种可插拔机制的具体实现，从而提供一种 SPI 运行时环境</strong> 。</p>
 <p>那么，ShardingSphere 是如何实现微内核架构的呢？让我们来一起看一下。</p>
 <h3>如何实现微内核架构？</h3>
@@ -261,7 +261,7 @@ public class Main {
 </code></pre>
 <p>如果我们调整 META-INF/services/com.tianyilan.KeyGenerator 文件中的内容，去掉 com.tianyilan.UUIDKeyGenerator 的定义，并重新打成 jar 包供 SPI 服务的使用者进行引用。再次执行 Main 函数，则只会得到基于 SnowflakeKeyGenerator 的输出结果。</p>
 <p>至此， 完整 的 SPI 提供者和使用者的实现过程演示完毕。我们通过一张图，总结基于 JDK 的 SPI 机制实现微内核架构的开发流程：</p>
-<p><img src="assets/Ciqc1F8esYqAdXABAADVVh6mYnA926.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8esYqAdXABAADVVh6mYnA926.png" alt="png" /></p>
 <p>这个示例非常简单，但却是 ShardingSphere 中实现微内核架构的基础。接下来，就让我们把话题转到 ShardingSphere，看看 ShardingSphere 中应用 SPI 机制的具体方法。</p>
 <h3>ShardingSphere 如何基于微内核架构实现扩展性？</h3>
 <p>ShardingSphere 中微内核架构的实现过程并不复杂，基本就是对 JDK 中 SPI 机制的封装。让我们一起来看一下。</p>
@@ -365,13 +365,13 @@ public class Main {
 </code></pre>
 <p>可以看到，这里并没有使用前面介绍的 TypeBasedSPIServiceLoader 来加载实例，而是直接使用更为底层的 NewInstanceServiceLoader。</p>
 <p>这里引入的 SQLParserEntry 接口就位于 shardingsphere-sql-parser-spi 工程的 org.apache.shardingsphere.sql.parser.spi 包中。显然，从包的命名上看，该接口是一个 SPI 接口。在 SQLParserEntry 类层结构接口中包含一批实现类，分别对应各个具体的数据库：</p>
-<p><img src="assets/Ciqc1F8ed26ANXCOAAArBJH3uDs890.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F8ed26ANXCOAAArBJH3uDs890.png" alt="png" /></p>
 <p>SQLParserEntry 实现类图</p>
 <p>我们先来看针对 MySQL 的代码工程 shardingsphere-sql-parser-mysql，在 META-INF/services 目录下，我们找到了一个 org.apache.shardingsphere.sql.parser.spi.SQLParserEntry 文件:</p>
-<p><img src="assets/CgqCHl8ed3aABqWdAABTnSG89Jg177.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8ed3aABqWdAABTnSG89Jg177.png" alt="png" /></p>
 <p>MySQL 代码工程中的 SPI 配置</p>
 <p>可以看到这里指向了 org.apache.shardingsphere.sql.parser.MySQLParserEntry 类。再来到 Oracle 的代码工程 shardingsphere-sql-parser-oracle，在 META-INF/services 目录下，同样找到了一个 org.apache.shardingsphere.sql.parser.spi.SQLParserEntry 文件：</p>
-<p><img src="assets/Ciqc1F8ed4GABKlZAABTzlYzJvc755.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8ed4GABKlZAABTzlYzJvc755.png" alt="png" /></p>
 <p>Oracle 代码工程中的 SPI 配置</p>
 <p>显然，这里应该指向 org.apache.shardingsphere.sql.parser.OracleParserEntry 类，通过这种方式，系统在运行时就会根据类路径动态加载 SPI。</p>
 <p>可以注意到，在 SQLParserEntry 接口的类层结构中，实际并没有使用到 TypeBasedSPI 接口 ，而是完全采用了 JDK 原生的 SPI 机制。</p>
@@ -402,7 +402,7 @@ public class Main {
 <p>那么它是如何实现的呢？ 首先，ConfigCenterServiceLoader 类通过 NewInstanceServiceLoader.register(ConfigCenter.class) 语句将所有 ConfigCenter 注册到系统中，这一步会通过 JDK 的 ServiceLoader 工具类加载类路径中的所有 ConfigCenter 实例。</p>
 <p>我们可以看到在上面的 load 方法中，通过父类 TypeBasedSPIServiceLoader 的 newService 方法，基于类型创建了 SPI 实例。</p>
 <p>以 ApolloConfigCenter 为例，我们来看它的使用方法。在 sharding-orchestration-config-apollo 工程的 META-INF/services 目录下，应该存在一个名为 org.apache.shardingsphere.orchestration.config.api.ConfigCenter 的配置文件，指向 ApolloConfigCenter 类：</p>
-<p><img src="assets/CgqCHl8eekGAa88DAABIbz4-Q20783.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8eekGAa88DAABIbz4-Q20783.png" alt="png" /></p>
 <p>Apollo 代码工程中的 SPI 配置</p>
 <p>其他的 ConfigCenter 实现也是一样，你可以自行查阅 sharding-orchestration-config-zookeeper-curator 等工程中的 SPI 配置文件。</p>
 <p>至此，我们全面了解了 ShardingSphere 中的微内核架构，也就可以基于 ShardingSphere 所提供的各种 SPI 扩展点提供满足自身需求的具体实现。</p>

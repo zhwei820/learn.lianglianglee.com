@@ -203,7 +203,7 @@ function hide_canvas() {
 <p>从今天开始，我们将进入 <strong>ShardingSphere 的路由（Routing）引擎部分的源码解析</strong>。从流程上讲，<strong>路由引擎</strong>是整个分片引擎执行流程中的第二步，即基于 SQL 解析引擎所生成的 SQLStatement，通过解析执行过程中所携带的上下文信息，来获取匹配数据库和表的分片策略，并生成路由结果。</p>
 <h3>分层：路由引擎整体架构</h3>
 <p>与介绍 SQL 解析引擎时一样，我们通过翻阅 ShardingSphere 源码，首先梳理了如下所示的包结构：</p>
-<p><img src="assets/CgqCHl8xJpiAQ0onAACcyggRCJ4878.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8xJpiAQ0onAACcyggRCJ4878.png" alt="png" /></p>
 <p>上述包图总结了与路由机制相关的各个核心类，我们可以看到整体呈一种对称结构，即根据是 <strong>PreparedStatement</strong> 还是<strong>普通 Statement</strong> 分成两个分支流程。</p>
 <p>同时，我们也可以把这张图中的类按照其所属的包结构<strong>分成两个层次</strong>：位于底层的 sharding-core-route 和位于上层的 sharding-core-entry，这也是 ShardingSphere 中所普遍采用的一种分包原则，即<strong>根据类的所属层级来组织包结构</strong>。关于 ShardingSphere 的分包原则我们在 [《12 | 从应用到原理：如何高效阅读 ShardingSphere 源码？》]中也已经进行了介绍，接下来我们具体分析这一原则在路由引擎中的应用。</p>
 <h4>1.sharding-core-route 工程</h4>
@@ -246,7 +246,7 @@ private final EncryptRule encryptRule;
 </code></pre>
 <p>ShardingRule 的内容非常丰富，但其定位更多是提供规则信息，而不属于核心流程，因此我们先不对其做详细展开。作为基础规则类，ShardingRule 会贯穿整个分片流程，在后续讲解过程中我们会穿插对它的介绍，这里先对上述变量的名称和含义有简单认识即可。</p>
 <p>我们回到 ShardingRouter 类，发现其核心方法只有一个，即 route 方法。这个方法的逻辑比较复杂，我们梳理它的执行步骤，如下图所示：</p>
-<p><img src="assets/CgqCHl8xJyqAHmcfAACVSxCxm4s053.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8xJyqAHmcfAACVSxCxm4s053.png" alt="png" /></p>
 <p>ShardingRouter 是路由引擎的核心类，<strong>在接下来的内容中，我们将对上图中的 6 个步骤分别一 一 详细展开，帮忙你理解一个路由引擎的设计思想和实现机制。</strong></p>
 <h4>1.分片合理性验证</h4>
 <p>我们首先来看 ShardingRouter 的第一个步骤，即验证分片信息的合理性，验证方式如下所示：</p>
@@ -414,7 +414,7 @@ RoutingResult routingResult = routingEngine.route();
 }
 </code></pre>
 <p>这些 RoutingEngine 的具体介绍我们放在下一课时《18 | 路由引擎：如何实现数据访问的分片路由和广播路由？》中进行详细介绍，这里只需要了解 ShardingSphere 在包结构的设计上把具体的 RoutingEngine 分成了六大类：即广播（broadcast）路由、混合（complex）路由、默认数据库（defaultdb）路由、无效（ignore）路由、标准（standard）路由以及单播（unicast）路由，如下所示：</p>
-<p><img src="assets/Ciqc1F8xJvuALcqiAAA5dODyQeU720.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8xJvuALcqiAAA5dODyQeU720.png" alt="png" /></p>
 <p>不同类型的 RoutingEngine 实现类</p>
 <p>RoutingEngine 的执行结果是 RoutingResult，而 RoutingResult 中包含了一个 RoutingUnit集合，RoutingUnit 中的变量定义如下所示，可以看到有两个关于 DataSource 名称的变量以及一个 TableUnit 列表：</p>
 <pre><code>//真实数据源名
@@ -466,10 +466,10 @@ private RoutingResult routingResult;
 }
 </code></pre>
 <p>这里的 SQLUnit 中就是最终的一条 SQL 语句以及相应参数的组合。因为路由结果对象 SQLRouteResult 会继续传递到分片引擎的后续流程，且内部结构比较复杂，所以这里通过如下所示的类图对其包含的各种变量进行总结，方便你进行理解。</p>
-<p><img src="assets/CgqCHl8xJ0eAMp1GAABywd2SYFQ497.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8xJ0eAMp1GAABywd2SYFQ497.png" alt="png" /></p>
 <p>至此，我们把 ShardingRouter 类的核心流程做了介绍。在 ShardingSphere 的路由引擎中，ShardingRouter 可以说是一个承上启下的核心类，向下我们可以挖掘各种 RoutingEngine 的具体实现；向上我们可以延展到读写分离等面向应用的具体场景。</p>
 <p>下图展示了 ShardingRouter 的这种定位关系。关于各种 RoutingEngine 的介绍是我们下一课时的内容，今天我们先将基于 ShardingRouter 讨论它的上层结构，从而引出了 ShardingEngine。</p>
-<p><img src="assets/CgqCHl8xJ1WAbAmHAAB_-h8F66g956.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8xJ1WAbAmHAAB_-h8F66g956.png" alt="png" /></p>
 <h3>从底层 ShardingRouter 到上层 ShardingEngine</h3>
 <p>我们的思路仍然是从下往上，先来看上图中的 StatementRoutingEngine，其实现如下所示：</p>
 <pre><code>public final class StatementRoutingEngine {
@@ -537,7 +537,7 @@ protected abstract SQLRouteResult route(String sql, List&lt;Object&gt; parameter
 }
 </code></pre>
 <p>至此，关于 ShardingSphere 路由引擎部分的内容基本都介绍完毕。对于上层结构而言，我们以 SimpleQueryShardingEngine 为例进行了展开，对于 PreparedQueryShardingEngine 的处理方式也是类似。作为总结，我们通过如下所示的时序图来梳理这些路由的主流程。</p>
-<p><img src="assets/CgqCHl8xJ2aAQabtAACUcSURKVc544.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl8xJ2aAQabtAACUcSURKVc544.png" alt="png" /></p>
 <h3>从源码解析到日常开发</h3>
 <p>分包设计原则可以用来设计和规划开源框架的代码结构。在今天的内容中，我们看到了 ShardingSphere 中非常典型的一种分层和分包实现策略。通过 sharding-core-route 和 sharding-core-entry 这两个工程，我们把路由引擎中位于底层的核心类 ShardingRouter 和位于上层的 PreparedQueryShardingEngine 及 SimpleQueryShardingEngine 类进行了合理的分层管理。ShardingSphere 对于分层和分包策略的应用有很多具体的表现形式，随着课程的不断演进，我们还会看到更多的应用场景。</p>
 <h3>小结与预告</h3>

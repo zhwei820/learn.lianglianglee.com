@@ -194,7 +194,7 @@ function hide_canvas() {
 <h3>RPC 实践操作</h3>
 <p>面试官通常会从线上的实际案例出发，考察候选人对“实践操作”的掌握程度。举个例子：在电商 App 商品详情页中，用户每次刷新页面时，App 都会请求业务网关系统，并由网关系统远程调用多个下游服务（比如商品服务、促销服务、广告服务等）。</p>
 <p>针对这个场景，面试官会问“对于整条 RPC 调用链路（从 App 到网关再到各个服务系统），怎么设置 RPC 的超时时间，要考虑哪些问题？”</p>
-<p><img src="assets/CgpVE2ABbtSAerROAADrjM6HgkI724.png" alt="Lark20210115-182949.png" /></p>
+<p><img src="assets/CgpVE2ABbtSAerROAADrjM6HgkI724.png" alt="png" /></p>
 <p>App 商品详情页服务调用</p>
 <p>一些初中级研发会觉得问题很简单，不用想也知道：App 远程调用网关系统的超时时间要大于网关系统调用后端各服务的超时时间之和。这样至少能保证在网关与下游服务的每个 PRC 调用执行完成之前不超时。</p>
 <p>如果你这么回答，从“实践”的角度上看，基本是不合格的。</p>
@@ -217,7 +217,7 @@ function hide_canvas() {
 <p>进一步，如果面试官觉得你“实践问题”答得不错，会深入考察你对 RPC 的原理性知识的掌握情况。</p>
 <h3>RPC 原理掌握</h3>
 <p>以刚刚的“电商 App”场景为例：</p>
-<p><img src="assets/CgpVE2ABbt-Aabb_AAEYewdmwhw920.png" alt="Lark20210115-182958.png" /></p>
+<p><img src="assets/CgpVE2ABbt-Aabb_AAEYewdmwhw920.png" alt="png" /></p>
 <p>App 商品详情页服务调用</p>
 <p>此时，商品详情页的 QPS 已达到了 2 万次/s，在做了服务化拆分之后，此时完成一次请求需要调用 3 次 RPC 服务，计算下来，RPC 服务需要承载大概 6 万次/s 的请求。那么你怎么设计 RPC 框架才能承载 6 万次/s 请求量呢？</p>
 <p>能否答好这个问题，很考验候选人对 RPC 原理掌握的深度，我建议你从两个角度分析。</p>
@@ -245,7 +245,7 @@ function hide_canvas() {
 <li>调用方获取到应答的数据包后，再反序列化成应答对象。</li>
 </ul>
 <p>这样调用方就完成了一次 RPC 调用。</p>
-<p><img src="assets/Ciqc1GABbyeAWysgAAGQtM8Kx4Q574.png" alt="Lark20210115-183000.png" /></p>
+<p><img src="assets/Ciqc1GABbyeAWysgAAGQtM8Kx4Q574.png" alt="png" /></p>
 <p>RPC 通信流程</p>
 <p>你应该能发现， RPC 通信流程中的核心组成部分包括了<strong>协议、序列化与反序列化，以及网络通信</strong>。在了解了 RPC 的调用流程后，我们回到“电商 App”的案例中，先来解答序列化的问题。</p>
 <h4>如何选型序列化方式</h4>
@@ -304,7 +304,7 @@ public class ServerTaskThread implements Runnable {
 }
 </code></pre>
 <p><strong>这段代码的主要逻辑是：</strong> 在服务端创建一个 ServerSocket 对象，绑定 9090 端口，然后启动运行，阻塞等待客户端发起连接请求，直到有客户端的连接发送过来后，accept() 方法返回。当有客户端的连接请求后，服务端会启动一个新线程 ServerTaskThread，用新创建的线程去处理当前用户的读写操作。</p>
-<p><img src="assets/Ciqc1GABbzKAHZZoAAG3ojSYQ8c878.png" alt="Lark20210115-183003.png" /></p>
+<p><img src="assets/Ciqc1GABbzKAHZZoAAG3ojSYQ8c878.png" alt="png" /></p>
 <p>BIO 网络模型</p>
 <p>所以，BIO 的网络模型中，<strong>每当客户端发送一个连接请求给服务端，服务端都会启动一个新的线程去处理客户端连接的读写操作</strong>，即每个 Socket 都对应一个独立的线程，客户端 Socket 和服务端工作线程的数量是 1 比 1，这会导致服务器的资源不够用，无法实现高并发下的网络开发。所以 BIO 的网络模型只适用于 Socket 连接不多的场景，无法支撑几十甚至上百万的连接场景。</p>
 <p>另外，<strong>BIO 模型有两处阻塞的地方</strong>。</p>
@@ -318,7 +318,7 @@ public class ServerTaskThread implements Runnable {
 <li><strong>有两处阻塞，分别是等待用户发起连接，和等待用户发送数据。</strong></li>
 </ul>
 <p><strong>那怎么解决这个问题呢？</strong> 答案是 NIO 网络模型，操作上是用一个线程处理多个连接，使得每一个工作线程都可以处理多个客户端的 Socket 请求，这样工作线程的利用率就能得到提升，所需的工作线程数量也随之减少。此时 NIO 的线程模型就变为 1 个工作线程对应多个客户端 Socket 的请求，这就是所谓的 I/O多路复用。</p>
-<p><img src="assets/Ciqc1GABbzqAPbdOAAIaibzeawc243.png" alt="Lark20210115-183005.png" /></p>
+<p><img src="assets/Ciqc1GABbzqAPbdOAAIaibzeawc243.png" alt="png" /></p>
 <p>NIO 网络模型</p>
 <p>顺着这个思路，我们继续深入思考：既然服务端的工作线程可以服务于多个客户端的连接请求，那么具体由哪个工作线程服务于哪个客户端请求呢？</p>
 <p>这时就需要一个调度者去监控所有的客户端连接，比如当图中的客户端 A 的输入已经准备好后，就由这个调度者去通知服务端的工作线程，告诉它们由工作线程 1 去服务于客户端 A 的请求。这种思路就是 NIO 编程模型的基本原理，调度者就是 Selector 选择器。</p>

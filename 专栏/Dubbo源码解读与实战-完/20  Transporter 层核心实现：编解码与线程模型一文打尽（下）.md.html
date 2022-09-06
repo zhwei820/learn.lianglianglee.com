@@ -339,7 +339,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>得到的 NettyClient 结构如下图所示：</p>
-<p><img src="assets/Ciqc1F90P1yAYThvAADLV6SJeac973.png" alt="Lark20200930-161759.png" /></p>
+<p><img src="assets/Ciqc1F90P1yAYThvAADLV6SJeac973.png" alt="png" /></p>
 <p>NettyClient 结构图</p>
 <p>NettyClientHandler 的实现方法与上一课时介绍的 NettyServerHandler 类似，同样是实现了 Netty 中的 ChannelDuplexHandler，其中会将所有方法委托给 NettyClient 关联的 ChannelHandler 对象进行处理。两者在 userEventTriggered() 方法的实现上有所不同，NettyServerHandler 在收到 IdleStateEvent 事件时会断开连接，而 NettyClientHandler 则会发送心跳消息，具体实现如下：</p>
 <pre><code>public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
@@ -364,7 +364,7 @@ function hide_canvas() {
 <li>active（AtomicBoolean）：用于标识当前 Channel 是否可用。</li>
 </ul>
 <p>另外，在 NettyChannel 中还有一个静态的 Map 集合（CHANNEL_MAP 字段），用来缓存当前 JVM 中 Netty 框架 Channel 与 Dubbo Channel 之间的映射关系。从下图的调用关系中可以看到，NettyChannel 提供了读写 CHANNEL_MAP 集合的方法：</p>
-<p><img src="assets/CgqCHl9wcRiAZFTaAADTxIPND7k175.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9wcRiAZFTaAADTxIPND7k175.png" alt="png" /></p>
 <p>NettyChannel 中还有一个要介绍的是 send() 方法，它会通过底层关联的 Netty 框架 Channel，将数据发送到对端。其中，可以通过第二个参数指定是否等待发送操作结束，具体实现如下：</p>
 <pre><code>public void send(Object message, boolean sent) throws RemotingException {
     // 调用AbstractChannel的send()方法检测连接是否可用
@@ -388,7 +388,7 @@ function hide_canvas() {
 <h3>ChannelHandler 继承线分析</h3>
 <p>前文介绍的 AbstractServer、AbstractClient 以及 Channel 实现，都是通过 AbstractPeer 实现了 ChannelHandler 接口，但只是做了一层简单的委托（也可以说成是装饰器），将全部方法委托给了其底层关联的 ChannelHandler 对象。</p>
 <p>这里我们就深入分析 ChannelHandler 的其他实现类，涉及的实现类如下所示：</p>
-<p><img src="assets/Ciqc1F9wcSGAXo7JAANZ2BjquOE739.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9wcSGAXo7JAANZ2BjquOE739.png" alt="png" /></p>
 <p>ChannelHandler 继承关系图</p>
 <p>其中<strong>ChannelHandlerDispatcher</strong>在[第 17 课时]已经介绍过了，它负责将多个 ChannelHandler 对象聚合成一个 ChannelHandler 对象。</p>
 <p><strong>ChannelHandlerAdapter</strong>是 ChannelHandler 的一个空实现，TelnetHandlerAdapter 继承了它并实现了 TelnetHandler 接口。至于Dubbo 对 Telnet 的支持，我们会在后面的课时中单独介绍，这里就先不展开分析了。</p>
@@ -420,7 +420,7 @@ function hide_canvas() {
 <p>通过上述介绍，我们发现 AbstractChannelHandlerDelegate 下的三个实现，其实都是在原有 ChannelHandler 的基础上添加了一些增强功能，这是典型的装饰器模式的应用。</p>
 <h4>Dispatcher 与 ChannelHandler</h4>
 <p>接下来，我们介绍 ChannelHandlerDelegate 接口的另一条继承线——<strong>WrappedChannelHandler</strong>，其子类主要是决定了 Dubbo 以何种线程模型处理收到的事件和消息，就是所谓的“消息派发机制”，与前面介绍的 ThreadPool 有紧密的联系。</p>
-<p><img src="assets/CgqCHl9wcTGAdInYAAJOSSxusf4539.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9wcTGAdInYAAJOSSxusf4539.png" alt="png" /></p>
 <p>WrappedChannelHandler 继承关系图</p>
 <p>从上图中我们可以看到，每个 WrappedChannelHandler 实现类的对象都由一个相应的 Dispatcher 实现类创建，下面是 Dispatcher 接口的定义：</p>
 <pre><code>@SPI(AllDispatcher.NAME) // 默认扩展名是all
@@ -520,7 +520,7 @@ public interface Dispatcher {
 <p>老版本中没有 ExecutorRepository 的概念，不会根据 URL 复用同一个线程池，而是通过 SPI 找到 ThreadPool 实现创建新线程池。</p>
 </blockquote>
 <p>此时，Dubbo Consumer 同步请求的线程模型如下图所示：</p>
-<p><img src="assets/CgqCHl9wcUWAY3b0AAFKI4e5Oa0017.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9wcUWAY3b0AAFKI4e5Oa0017.png" alt="png" /></p>
 <p>Dubbo Consumer 同步请求线程模型</p>
 <p>从图中我们可以看到下面的请求-响应流程：</p>
 <ol>
@@ -531,7 +531,7 @@ public interface Dispatcher {
 </ol>
 <p>在这个设计里面，Consumer 端会维护一个线程池，而且线程池是按照连接隔离的，即每个连接独享一个线程池。这样，当面临需要消费大量服务且并发数比较大的场景时，例如，典型网关类场景，可能会导致 Consumer 端线程个数不断增加，导致线程调度消耗过多 CPU ，也可能因为线程创建过多而导致 OOM。</p>
 <p>为了解决上述问题，Dubbo 在 2.7.5 版本之后，<strong>引入了 ThreadlessExecutor</strong>，将线程模型修改成了下图的样子：</p>
-<p><img src="assets/CgqCHl9wcVCAQdJjAAFE8eFivcY750.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9wcVCAQdJjAAFE8eFivcY750.png" alt="png" /></p>
 <p>引入 ThreadlessExecutor 后的结构图</p>
 <ol>
 <li>业务线程发出请求之后，拿到一个 Future 对象。</li>
@@ -586,10 +586,10 @@ public interface Dispatcher {
 }
 </code></pre>
 <p>结合前面的分析，我们可以得到下面这张图：</p>
-<p><img src="assets/Ciqc1F9wcV-AFAcTAADpElrp-Wc888.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9wcV-AFAcTAADpElrp-Wc888.png" alt="png" /></p>
 <p>Server 端 ChannelHandler 结构图</p>
 <p>我们可以在创建 NettyServerHandler 的地方添加断点 Debug 得到下图，也印证了上图的内容：</p>
-<p><img src="assets/CgqCHl9wcWaAJVA3AACBSF4eCzg786.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl9wcWaAJVA3AACBSF4eCzg786.png" alt="png" /></p>
 <h3>总结</h3>
 <p>本课时我们重点介绍了 Dubbo Transporter 层中 Client、 Channel、ChannelHandler 相关的实现以及优化。</p>
 <p>首先我们介绍了 AbstractClient 抽象接口以及基于 Netty 4 的 NettyClient 实现。接下来，介绍了 AbstractChannel 抽象类以及 NettyChannel 实现。最后，我们深入分析了 ChannelHandler 接口实现，其中详细分析 WrappedChannelHandler 等关键 ChannelHandler 实现，以及 ThreadlessExecutor 优化。</p>

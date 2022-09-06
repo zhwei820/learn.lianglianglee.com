@@ -249,14 +249,14 @@ function hide_canvas() {
 <p>那么接下来就请你带着这个优化问题，和我一起开始学习今天的内容。</p>
 <h3>内存管理单元</h3>
 <p>上一讲我们学习了虚拟地址到物理地址的转换过程。如下图所示：</p>
-<p><img src="assets/Ciqc1F_KEYiAGIk6AABN2sQtqqo988.png" alt="Lark20201204-183520.png" /></p>
+<p><img src="assets/Ciqc1F_KEYiAGIk6AABN2sQtqqo988.png" alt="png" /></p>
 <p>你可以把虚拟地址看成由页号和偏移量组成，把物理地址看成由 Frame Number 和偏移量组成。在 CPU 中有一个完成虚拟地址到物理地址转换的小型设备，叫作内存管理单元（Memory Management Unit(MMU）。</p>
 <p>在程序执行的时候，指令中的地址都是虚拟地址，虚拟地址会通过 MMU，MMU 会查询页表，计算出对应的 Frame Number，然后偏移量不变，组装成真实地址。然后 MMU 通过地址总线直接去访问内存。所以 MMU 承担了虚拟地址到物理地址的转换以及 CPU 对内存的操作这两件事情。</p>
 <p>如下图所示，从结构上 MMU 在 CPU 内部，并且直接和地址总线连接。因此 MMU 承担了 CPU 和内存之间的代理。对操作系统而言，MMU 是一类设备，有多种型号，就好比显卡有很多型号一样。操作系统需要理解这些型号，会使用 MMU。</p>
-<p><img src="assets/CgqCHl_KEZGAB4tfAAA_7O1Ajlg766.png" alt="Lark20201204-183533.png" /></p>
+<p><img src="assets/CgqCHl_KEZGAB4tfAAA_7O1Ajlg766.png" alt="png" /></p>
 <h3>TLB 和 MMU 的性能问题</h3>
 <p>上面的过程，会产生一个问题：指令的执行速度非常快，而 MMU 还需要从内存中查询页表。最快的内存查询页需要从 CPU 的缓存中读取，假设缓存有 95% 的命中率，比如读取到 L2 缓存，那么每次操作也需要几个 CPU 周期。你可以回顾一下 CPU 的指令周期，如下图所示，有 fetch/decode/execute 和 store。</p>
-<p><img src="assets/Ciqc1F_KDJ2AakpwAABJqXjoKBc358.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_KDJ2AakpwAABJqXjoKBc358.png" alt="png" /></p>
 <p>在 fetch、execute 和 store 这 3 个环节中都有可能发生内存操作，因此内存操作最好能在非常短的时间内完成，尤其是 Page Number 到 Frame Number 的映射，我们希望尽快可以完成，最好不到 0.2 个 CPU 周期，这样就不会因为地址换算而增加指令的 CPU 周期。</p>
 <p>因此，在 MMU 中往往还有一个微型的设备，叫作转置检测缓冲区（Translation Lookaside Buffer，TLB）。</p>
 <p>缓存的设计，通常是一张表，所以 TLB 也称作快表。TLB 中最主要的信息就是 Page Number到 Frame Number 的映射关系。</p>
@@ -309,10 +309,10 @@ function hide_canvas() {
 <pre><code>sudo sysctl -w vm.nr_hugepages=2048
 </code></pre>
 <p><code>sysctl</code>其实就是修改一下配置项，上面我们允许应用使用最多 2048 个大内存页。上面语句执行后，你可以按照下方截图的方式去查看自己大内存页表使用的情况。</p>
-<p><img src="assets/CgqCHl_KDLaAK0LFAAJ42-0NGSQ136.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl_KDLaAK0LFAAJ42-0NGSQ136.png" alt="png" /></p>
 <p>从上图中你可以看到我总共有 2048 个大内存页，每个大小是 2048KB。具体这个大小是不可以调整的，这个和机器用的 MMU 相关。</p>
 <p>打开大内存分页后如果有应用需要使用，就会去申请大内存分页。比如 Java 应用可以用<code>-XX:+UseLargePages</code>开启使用大内存分页。 下图是我通过一个 Java 程序加上 UseLargePages 参数的结果。</p>
-<p><img src="assets/Ciqc1F_KDLyAboRvAAJ45v4qI3g629.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F_KDLyAboRvAAJ45v4qI3g629.png" alt="png" /></p>
 <p>注意：我的 Java 应用使用的分页数 = Total-Free+Rsvd = 2048-2032+180 = 196。Total 就是总共的分页数，Free 代表空闲的（包含 Rsvd，Reserved 预留的）。因此是上面的计算关系。</p>
 <h3>总结</h3>
 <p><strong>那么通过这节课的学习，你现在可以尝试来回答本节关联的面试题目：什么情况下使用大内存分页</strong>？</p>

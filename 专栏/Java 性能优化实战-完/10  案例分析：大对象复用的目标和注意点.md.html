@@ -171,10 +171,10 @@ function hide_canvas() {
 <h3>String 的 substring 方法</h3>
 <p>我们都知道，String 在 Java 中是不可变的，如果你改动了其中的内容，它就会生成一个新的字符串。</p>
 <p>如果我们想要用到字符串中的一部分数据，就可以使用 substring 方法。</p>
-<p><img src="assets/CgqCHl8zkSuAJiz1AAXioe0G9Vc058.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8zkSuAJiz1AAXioe0G9Vc058.png" alt="png" /></p>
 <p>如上图所示，当我们需要一个子字符串的时候，substring 生成了一个新的字符串，这个字符串通过构造函数的 Arrays.copyOfRange 函数进行构造。</p>
 <p>这个函数在 JDK7 之后是没有问题的，但在 JDK6 中，却有着内存泄漏的风险，我们可以学习一下这个案例，来看一下大对象复用可能会产生的问题。</p>
-<p><img src="assets/CgqCHl8zkTWAcVQ4AAEesZzLTVo509.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8zkTWAcVQ4AAEesZzLTVo509.png" alt="png" /></p>
 <p>上图是我从 JDK 官方的一张截图。可以看到，它在创建子字符串的时候，并不只拷贝所需要的对象，而是把整个 value 引用了起来。如果原字符串比较大，即使不再使用，内存也不会释放。</p>
 <p>比如，一篇文章内容可能有几兆，我们仅仅是需要其中的摘要信息，也不得不维持整个的大对象。</p>
 <pre><code>String content = dao.getArticle(id);
@@ -227,7 +227,7 @@ articles.put(id,summary);
 <h3>保持合适的对象粒度</h3>
 <p>给你分享一个实际案例：我们有一个并发量非常高的业务系统，需要频繁使用到用户的基本数据。</p>
 <p>如下图所示，由于用户的基本信息，都是存放在另外一个服务中，所以每次用到用户的基本信息，都需要有一次网络交互。更加让人无法接受的是，即使是只需要用户的性别属性，也需要把所有的用户信息查询，拉取一遍。</p>
-<p><img src="assets/CgqCHl8zkWGABcIuAADyGLJaQ44758.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl8zkWGABcIuAADyGLJaQ44758.png" alt="png" /></p>
 <p>为了加快数据的查询速度，根据我们之前 [《08 | 案例分析：Redis 如何助力秒杀业务》]的描述，对数据进行了初步的缓存，放入到了 Redis 中，查询性能有了大的改善，但每次还是要查询很多冗余数据。</p>
 <p>原始的 redis key 是这样设计的：</p>
 <pre><code>type: string
@@ -271,7 +271,7 @@ String getSex(int userId) {
 <p>这些数据，放在堆内内存中，还是过大了。幸运的是，Redis 也支持 Bitmap 结构，如果内存有压力，我们可以把这个结构放到 Redis 中，判断逻辑也是类似的。</p>
 <p><strong>再插一道面试算法题：给出一个 1GB 内存的机器，提供 60亿 int 数据，如何快速判断有哪些数据是重复的？</strong></p>
 <p>大家可以类比思考一下。Bitmap 是一个比较底层的结构，在它之上还有一个叫作布隆过滤器的结构（Bloom Filter），布隆过滤器可以判断一个值不存在，或者可能存在。</p>
-<p><img src="assets/Ciqc1F8zkZWAKUhuAACFphHz8XU285.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8zkZWAKUhuAACFphHz8XU285.png" alt="png" /></p>
 <p>如图，它相比较 Bitmap，它多了一层 hash 算法。既然是 hash 算法，就会有冲突，所以有可能有多个值落在同一个 bit 上。它不像 HashMap一样，使用链表或者红黑树来处理冲突，而是直接将这个hash槽重复使用。从这个特性我们能够看出，布隆过滤器能够明确表示一个值不在集合中，但无法判断一个值确切的在集合中。</p>
 <p>Guava 中有一个 BloomFilter 的类，可以方便地实现相关功能。</p>
 <p>上面这种优化方式，<strong>本质上也是把大对象变成小对象的方式</strong>，在软件设计中有很多类似的思路。比如像一篇新发布的文章，频繁用到的是摘要数据，就不需要把整个文章内容都查询出来；用户的 feed 信息，也只需要保证可见信息的速度，而把完整信息存放在速度较慢的大型存储里。</p>
@@ -280,7 +280,7 @@ String getSex(int userId) {
 <p>所谓<strong>热数据</strong>，就是靠近用户的，被频繁使用的数据；而<strong>冷数据</strong>是那些访问频率非常低，年代非常久远的数据。</p>
 <p>同一句复杂的 SQL，运行在几千万的数据表上，和运行在几百万的数据表上，前者的效果肯定是很差的。所以，虽然你的系统刚开始上线时速度很快，但随着时间的推移，数据量的增加，就会渐渐变得很慢。</p>
 <p><strong>冷热分离</strong>是把数据分成两份，如下图，一般都会保持一份全量数据，用来做一些耗时的统计操作。</p>
-<p><img src="assets/CgqCHl8zkaGALD0uAADj7bx0YMY053.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8zkaGALD0uAADj7bx0YMY053.png" alt="png" /></p>
 <p><strong>由于冷热分离在工作中经常遇到，所以面试官会频繁问到数据冷热分离的方案。下面简单介绍三种：</strong></p>
 <h4>1.数据双写</h4>
 <p>把对冷热库的插入、更新、删除操作，全部放在一个统一的事务里面。由于热库（比如 MySQL）和冷库（比如 Hbase）的类型不同，这个事务大概率会是分布式事务。在项目初期，这种方式是可行的，但如果是改造一些遗留系统，分布式事务基本上是改不动的，我通常会把这种方案直接废弃掉。</p>

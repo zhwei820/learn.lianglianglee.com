@@ -190,7 +190,7 @@ volumeBindingMode: Immediate
 <p>所以总结下来，对于存储资源，我们默认指代的就是铁三角 API 对象：StorageClass、PersistentVolume、PersistentVolumeClaim。</p>
 <h3>了解 CSI</h3>
 <p>从 Kubernetes v1.13 开始 CSI 进入稳定可用阶段，所以用户有必要了解这个容器存储接口。CSI 卷类型是一种外部引用驱动的 CSI 卷插件，用于 Pod 与在同一节点上运行的外部 CSI 卷驱动程序交互。部署 CSI 兼容卷驱动后，用户可以使用 CSI 作为卷类型来挂载驱动提供的存储。</p>
-<p><img src="assets/c1e6bc40-2ce1-11eb-90f6-fbd19bda6e6e" alt="19-1-csi-arch" /></p>
+<p><img src="assets/c1e6bc40-2ce1-11eb-90f6-fbd19bda6e6e" alt="png" /></p>
 <p>一直以来，存储插件的测试、维护等事宜都由 Kubernetes 社区来完成，即使有贡献者提供协作也不容易合并到主分支发布。另外，存储插件需要随 Kubernetes 一同发布，如果存储插件存在问题有可能会影响 Kubernetes 其他组件的正常运行。</p>
 <p>鉴于此，Kubernetes 和 CNCF 决定把容器存储进行抽象，通过标准接口的形式把存储部分移到容器编排系统外部去。CSI 的设计目的是定义一个行业标准，该标准将使存储供应商能够自己实现，维护和部署他们的存储插件。这些存储插件会以 Sidecar Container 形式运行在 Kubernetes 上并为容器平台提供稳定的存储服务。</p>
 <p>如上 CSI 设计图：<strong>浅绿色</strong>表示从 Kubernetes 社区中抽离出来且可复用的组件，负责连接 CSI 插件（右侧）以及和 Kubernetes 集群交互：</p>

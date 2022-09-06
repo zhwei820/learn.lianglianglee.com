@@ -198,16 +198,16 @@ function hide_canvas() {
 <h4><strong>问题现象描述</strong></h4>
 <p>最近一段时间，通过监控指标发现，有一个服务节点的最大 GC 暂停时间经常会达到 400ms 以上。</p>
 <p>如下图所示：</p>
-<p><img src="assets/a2020390-7ba6-11ea-9687-397b36d0cdab" alt="85083641.png" /></p>
+<p><img src="assets/a2020390-7ba6-11ea-9687-397b36d0cdab" alt="png" /></p>
 <p>从图中可以看到，GC 暂停时间的峰值达到了 546ms，这里展示的时间点是 2020 年 02 月 04 日 09:20:00 左右。</p>
 <p>客户表示这种情况必须解决，因为服务调用的超时时间为 1s，要求最大 GC 暂停时间不超过 200ms，平均暂停时间达到 100ms 以内，对客户的交易策略产生了极大的影响。</p>
 <h4><strong>CPU 负载</strong></h4>
 <p>CPU 的使用情况如下图所示：</p>
-<p><img src="assets/333d8e90-7b4a-11ea-99ef-3bc3936801ae" alt="58517646.png" /></p>
+<p><img src="assets/333d8e90-7b4a-11ea-99ef-3bc3936801ae" alt="png" /></p>
 <p>从图中可以看到：系统负载为 4.92，CPU使用率 7% 左右，其实这个图中隐含了一些重要的线索，但我们此时并没有发现什么问题。</p>
 <h4><strong>GC 内存使用情况</strong></h4>
 <p>然后我们排查了这段时间的内存使用情况：</p>
-<p><img src="assets/b2ee4a10-7ba6-11ea-8a35-fda221135a5a" alt="85674124.png" /></p>
+<p><img src="assets/b2ee4a10-7ba6-11ea-8a35-fda221135a5a" alt="png" /></p>
 <p>从图中可以看到，大约 09:25 左右 old_gen 使用量大幅下跌，确实是发生了 FullGC。</p>
 <p>但 09:20 前后，老年代空间的使用量在缓慢上升，并没有下降，也就是说引发最大暂停时间的这个点并没有发生 FullGC。</p>
 <p>当然，这些是事后复盘分析得出的结论。当时对监控所反馈的信息并不是特别信任，怀疑就是触发了 FullGC 导致的长时间 GC 暂停。</p>
@@ -232,16 +232,16 @@ function hide_canvas() {
 <pre><code>-Xmx4g -Xms4g -XX:+UseG1GC -XX:MaxGCPauseMillis=50
 </code></pre>
 <p>接着服务启动成功，等待健康检测自动切换为新的服务节点，继续查看指标。</p>
-<p><img src="assets/36b1d380-7ba7-11ea-a711-0f902cb8434c" alt="55932616.png" /></p>
+<p><img src="assets/36b1d380-7ba7-11ea-a711-0f902cb8434c" alt="png" /></p>
 <p>看看暂停时间，每个节点的 GC 暂停时间都降下来了，基本上在 50ms 以内，比较符合我们的预期。</p>
 <p>嗯！事情到此结束了？远远没有。</p>
 <h4><strong>“彩蛋”惊喜</strong></h4>
 <p>过了一段时间，我们发现了个下面这个惊喜（也许是惊吓），如下图所示：</p>
-<p><img src="assets/3f7a8390-7ba7-11ea-b2e6-fdc2f968c34f" alt="50244521.png" /></p>
+<p><img src="assets/3f7a8390-7ba7-11ea-b2e6-fdc2f968c34f" alt="png" /></p>
 <p>中奖了，运行一段时间后，最大 GC 暂停时间达到了 1300ms。</p>
 <p>情况似乎更恶劣了。</p>
 <p>继续观察，发现不是个别现象：</p>
-<p><img src="assets/46a51400-7ba7-11ea-8dae-453849991cc6" alt="84108207.png" /></p>
+<p><img src="assets/46a51400-7ba7-11ea-8dae-453849991cc6" alt="png" /></p>
 <p>内心是懵的，觉得可能是指标算错了，比如把 10s 内的暂停时间全部加到了一起。</p>
 <h4><strong>注册 GC 事件监听</strong></h4>
 <p>于是想了个办法，通过 JMX 注册 GC 事件监听，把相关的信息直接打印出来。</p>
@@ -292,7 +292,7 @@ for (GarbageCollectorMXBean mbean
 -Xloggc:gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps
 </code></pre>
 <p>重新启动，希望这次能排查出问题的原因。</p>
-<p><img src="assets/5431dbd0-7ba7-11ea-b2e6-fdc2f968c34f" alt="84324884.png" /></p>
+<p><img src="assets/5431dbd0-7ba7-11ea-b2e6-fdc2f968c34f" alt="png" /></p>
 <p>运行一段时间，又发现了超长的暂停时间。</p>
 <h4><strong>分析 GC 日志</strong></h4>
 <p>因为不涉及敏感数据，那么我们把 GC 日志下载到本地进行分析。</p>
@@ -356,7 +356,7 @@ CommandLine flags:
 <p>看到这么多的 GC 工作线程我就开始警惕了，毕竟堆内存才指定了 4GB。</p>
 <p>按照一般的 CPU 和内存资源配比，常见的比例差不多是 4 核 4GB、4 核 8GB 这样的。</p>
 <p>看看对应的 CPU 负载监控信息：</p>
-<p><img src="assets/880bc8d0-7ba7-11ea-8940-6df1558f5aa2" alt="4600411.png" /></p>
+<p><img src="assets/880bc8d0-7ba7-11ea-8940-6df1558f5aa2" alt="png" /></p>
 <p>通过和运维同学的沟通，得到这个节点的配置被限制为 4 核 8GB。</p>
 <p>这样一来，GC 暂停时间过长的原因就定位到了：</p>
 <ul>
@@ -383,7 +383,7 @@ CommandLine flags:
 <p>设置并发标记的 GC 线程数量。默认值大约是 ParallelGCThreads 的四分之一。</p>
 <p>一般来说不用指定并发标记的 GC 线程数量，只用指定并行的即可。</p>
 <p>重新启动之后，看看 GC 暂停时间指标：</p>
-<p><img src="assets/95b9fb50-7ba7-11ea-9687-397b36d0cdab" alt="81569009.png" /></p>
+<p><img src="assets/95b9fb50-7ba7-11ea-9687-397b36d0cdab" alt="png" /></p>
 <p>红色箭头所指示的点就是重启的时间点，可以发现，暂停时间基本上都处于 50ms 范围内。</p>
 <p>后续的监控发现，这个参数确实解决了问题。</p>
 <p>那么还有没有其他的办法呢？请关注后续的章节《应对容器时代面临的挑战》。</p>

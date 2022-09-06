@@ -161,7 +161,7 @@ function hide_canvas() {
 <p>这个 Web 应用程序将采用经典的三层架构，即<strong>Web 层、服务层和数据访问层</strong>，因此我们会存在 HealthRecordController、HealthRecordService 以及 HealthRecordRepository，这是一条独立的代码流程，用来完成<strong>系统业务逻辑处理</strong>。</p>
 <p>另一方面，本案例的核心功能是<strong>实现自定义的用户认证流程</strong>，所以我们需要构建独立的 UserDetailsService 以及 AuthenticationProvider，这是另一条独立的代码流程。而在这条代码流程中，势必还需要 User 以及 UserRepository 等组件。</p>
 <p>我们可以把这两条代码线整合在一起，得到案例的整体设计蓝图，如下图所示：</p>
-<p><img src="assets/CioPOWDJyDOAKosUAACCwzt5aFc611.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDJyDOAKosUAACCwzt5aFc611.png" alt="png" /></p>
 <p>案例中的业务代码流程和用户认证流程</p>
 <h4>系统初始化</h4>
 <p>要想实现上图中的效果，我们需要先对系统进行初始化。这部分工作涉及<strong>领域对象的定义、数据库初始化脚本的整理以及相关依赖组件的引入</strong>。</p>
@@ -489,16 +489,16 @@ public class HealthRecordController {
 <p>这里我们从 Model 对象中获取了认证用户信息以及健康档案信息，并渲染在页面上。</p>
 <h3>案例演示</h3>
 <p>现在，让我们启动 Spring Boot 应用程序，并访问<a href="http://localhost:8080/?fileGuid=xxQTRXtVcqtHK6j8">http://localhost:8080</a>端点。因为访问系统的任何端点都需要认证，所以 Spring Security 会自动跳转到如下所示的登录界面：</p>
-<p><img src="assets/CioPOWDJyFCAWC1SAAA5aEhV0-A820.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWDJyFCAWC1SAAA5aEhV0-A820.png" alt="png" /></p>
 <p>用户登录界面</p>
 <p>我们分别输入用户名“jianxiang”和密码“12345”，系统就会跳转到健康档案主页：</p>
-<p><img src="assets/CioPOWDJyFeAUaWEAAB7TB8wdKw208.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWDJyFeAUaWEAAB7TB8wdKw208.png" alt="png" /></p>
 <p>健康档案主页</p>
 <p>在这个主页中，我们正确获取了登录用户的用户名，并展示了个人健康档案信息。这个结果也证实了自定义用户认证体系的正确性。你可以根据示例代码做一些尝试。</p>
 <h3>小结与预告</h3>
 <p>这一讲我们动手实践了“利用 Spring Security 基础功能保护 Web 应用程序”。综合第 2 讲到 6 讲中的核心知识点，我们设计了一个简单而又完整的案例，并通过构建用户管理和认证流程讲解了实现自定义用户认证机制的过程。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/Cgp9HWDJyF6AAUtVAACuoKgyiho485.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWDJyF6AAUtVAACuoKgyiho485.png" alt="png" /></p>
 <p>最后给你留一道思考题：在 Spring Security 中，实现一套自定义的用户认证体系需要哪些开发步骤？</p>
 </div>
                     </div>

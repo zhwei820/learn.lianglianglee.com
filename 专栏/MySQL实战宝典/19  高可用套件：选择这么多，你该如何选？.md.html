@@ -184,15 +184,15 @@ function hide_canvas() {
 <p>为了不让业务感知到数据库的宕机切换，这里要用到 VIP（Virtual IP）技术。其中，VIP 不是真实的物理 IP，而是可以随意绑定在任何一台服务器上。</p>
 <p>业务访问数据库，不是服务器上与网卡绑定的物理 IP，而是这台服务器上的 VIP。当数据库服务器发生宕机时，高可用套件会把 VIP 插拔到新的服务器上。数据库 Failover后，业务依旧访问的还是 VIP，所以使用 VIP 可以做到对业务透明。</p>
 <p>下面这张图显示了业务通过 VIP 进行数据库的访问：</p>
-<p><img src="assets/CioPOWDVmJeAKFW4AACnY-tPNl8837.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDVmJeAKFW4AACnY-tPNl8837.png" alt="png" /></p>
 <p>从上图可以看到，MySQL 的主服务器的 IP 地址是 192.168.1.10，两个从服务器的 IP 地址分别为 192.168.1.20、192.168.1.30。</p>
 <p>上层服务访问数据库并没有直接通过物理 IP 192.168.1.10，而是访问 VIP，地址为192.168.1.100。这时，如果 MySQL 数据库主服务器发生宕机，会进行如下的处理：</p>
-<p><img src="assets/Cgp9HWDVmJ6ATYQPAAC1xJ9Zf2M275.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWDVmJ6ATYQPAAC1xJ9Zf2M275.png" alt="png" /></p>
 <p>我们可以看到，当发生 Failover 后，由于上层服务访问的是 VIP 192.168.1.100，所以切换对服务来说是透明的，只是在切换过程中，服务会收到连接数据库失败的提示。但是通过重试机制，当下层数据库完成切换后，服务就可以继续使用了。所以，上层服务一定要做好错误重试的逻辑，否则就算启用 VIP，也无法实现透明的切换。</p>
 <p>但是 VIP 也是有局限性的，仅限于同机房同网段的 IP 设定。如果是我们之前设计的三园区同城跨机房容灾架构，VIP 就不可用了。这时就要用名字服务，常见的名字服务就是 DNS（Domain Name Service），如下所示：</p>
-<p><img src="assets/Cgp9HWDVmKSATzziAADNdCl83J0164.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWDVmKSATzziAADNdCl83J0164.png" alt="png" /></p>
 <p>从上图可以看到，这里将域名 m1.insidemysql.com 对应的 IP 指向为了 192.168.1.10，上层业务通过域名进行访问。当发生宕机，进行机房级切换后，结果变为：</p>
-<p><img src="assets/Cgp9HWDVmKqAfnSUAADHqckLKlU955.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWDVmKqAfnSUAADHqckLKlU955.png" alt="png" /></p>
 <p>可以看到，当发生 Failover 后，高可用套件会把域名指向为新的 MySQL 主服务器，IP 地址为202.177.54.20，这样也实现了对于上层服务的透明性。</p>
 <p>虽然使用域名或其他名字服务可以解决跨机房的切换问题，但是引入了新的组件。新组件的高可用的问题也需要特别注意。在架构设计时，请咨询公司提供名字服务的小组，和他们一起设计高可用的容灾架构。</p>
 <p>了解了上述的高可用透明切换机制，我们继续看一下业界 MySQL 常见的几款高可用套件。</p>
@@ -203,19 +203,19 @@ function hide_canvas() {
 <p>而 MHA Node 部署在每台 MySQL 服务器上，MHA Manager 通过执行 Node 节点的脚本完成failover 切换操作。</p>
 <p>MHA Manager 和 MHA Node 的通信是采用 ssh 的方式，也就是需要在生产环境中打通 MHA Manager 到所有 MySQL 节点的 ssh 策略，那么这里就存在潜在的安全风险。</p>
 <p>另外，ssh 通信，效率也不是特别高。所以，MHA 比较适合用于规模不是特别大的公司，所有MySQL 数据库的服务器数量不超过 20 台。</p>
-<p><img src="assets/Cgp9HWDVmMOAevY4AAEiqr35GSw848.png" alt="Drawing 4.png" />!</p>
+<p><img src="assets/Cgp9HWDVmMOAevY4AAEiqr35GSw848.png" alt="png" />!</p>
 <h3>Orchestrator</h3>
 <p>Orchestrator 是另一款开源的 MySQL 高可用套件，除了支持 failover 的切换，还可通过Orchestrator 完成 MySQL 数据库的一些简单的复制管理操作。Orchestrator 的开源地址为：<a href="https://github.com/openark/orchestrator">https://github.com/openark/orchestrator</a></p>
 <p>你可以把 Orchestrator 当成 MHA 的升级版，而且提供了 HTTP 接口来进行相关数据库的操作，比起 MHA 需要每次登录 MHA Manager 服务器来说，方便很多。</p>
 <p>下图显示了 Orchestrator 的高可用设计架构：</p>
-<p><img src="assets/CioPOWDVmLaAd1fTAAOTUVey1gw096.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CioPOWDVmLaAd1fTAAOTUVey1gw096.png" alt="png" /></p>
 <p>其基本实现原理与 MHA 是一样的，只是把元数据信息存储在了元数据库中，并且提供了HTTP 接口和命令的访问方式，使用上更为友好。</p>
 <p>但是由于管控节点到下面的 MySQL 数据库的管理依然是 ssh 的方式，依然存在 MHA 一样的短板问题，总的来说，关于 Orchestrator 我想提醒你，依然只建议使用在较小规模的数据库集群。</p>
 <h3>数据库管理平台</h3>
 <p>当然了，虽然 MHA 和 Orchestrator 都可以完成 MySQL 高可用的 failover 操作，但是，在生产环境中如果需要管理成千乃至上万的数据库服务器，由于它们的通信仅采用 ssh 的方式，并不能满足生产上的安全性和性能的要求。</p>
 <p>所以，几乎每家互联网公司都会自研一个数据库的管理平台，用于管理公司所有的数据库集群，以及数据库的容灾切换工作。</p>
 <p>接下来，我想带你详细了解数据库管理平台的架构。下图显示了数据库管理平台大致的实现框架：</p>
-<p><img src="assets/CioPOWDVmNeAdMXUAAD0Ll-5ibs948.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CioPOWDVmNeAdMXUAAD0Ll-5ibs948.png" alt="png" /></p>
 <p>上图中的数据库管理平台是用户操作数据库的入口。对数据库的大部分操作，比如数据库的初始化、数据查询、数据备份等操作、后续都能在这个平台完成，不用登录数据库服务器，这样的好处是能大大提升数据库操作的效率。</p>
 <p>数据库管理平台提供了 HTTP API 的方式，可用前后端分离的方式支持 Web、手机等多种访问方式。</p>
 <p>元数据库用于存储管理 MySQL 数据库所有的节点信息，比如 IP 地址、端口、域名等。</p>

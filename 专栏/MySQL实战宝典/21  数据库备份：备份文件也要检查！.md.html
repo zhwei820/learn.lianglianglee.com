@@ -246,7 +246,7 @@ Dump progress: 25/37 tables, 1683132/42965650 rows
 </code></pre>
 <p>上面的命令显示了通过 mysqlpump 进行备份。参数 --default-parallelism 表示设置备份的并行线程数。此外，与 mysqldump 不同的是，mysqlpump 在备份过程中可以查看备份的进度。</p>
 <p><strong>不过在真正的线上生产环境中，我并不推荐你使用 mysqlpump，</strong> 因为当备份并发线程数超过 1 时，它不能构建一个一致性的备份。见 mysqlpump 的提示：</p>
-<p><img src="assets/CioPOWDwBVSAUBo3AAFzQXF27bo136.jpg" alt="image.png" />
+<p><img src="assets/CioPOWDwBVSAUBo3AAFzQXF27bo136.jpg" alt="png" />
 另外，mysqlpump 的备份多线程是基于多个表的并行备份，如果数据库中存在一个超级大表，那么对于这个表的备份依然还是单线程的。那么有没有一种基于记录级别的并行备份，且支持一致性的逻辑备份工具呢？</p>
 <p>有的，那就是开源的 mydumper 工具，地址：<a href="https://github.com/maxbube/mydumper">https://github.com/maxbube/mydumper</a>。mydumper 的强大之处在于：</p>
 <ol>

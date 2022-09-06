@@ -511,7 +511,7 @@ function hide_canvas() {
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 </code></pre>
 <h4>脏写</h4>
-<p><img src="assets/15100432-64db941b7108e9b8.png" alt="image.png" />
+<p><img src="assets/15100432-64db941b7108e9b8.png" alt="png" />
 如图所示：</p>
 <ol>
 <li>sessionA和sessionB开启了一个事务；</li>
@@ -522,7 +522,7 @@ function hide_canvas() {
 </ol>
 <p>如果sessionB在回滚事务的时候把sessionA的修改也给回滚了，导致sessionA的提交丢失了，这种现象就被称为“脏写”。sessionA会一脸懵逼，我明明修改了数据，也提交了数据，为什么数据没有变化呢。</p>
 <h4>脏读</h4>
-<p><img src="assets/15100432-bb45dfb5d2cdaaae.png" alt="image.png" />
+<p><img src="assets/15100432-bb45dfb5d2cdaaae.png" alt="png" />
 如图所示：</p>
 <ol>
 <li>sessionA和sessionB开启了一个事务；</li>
@@ -530,7 +530,7 @@ function hide_canvas() {
 <li>sessionA查询了id=2的数据，如果读出来的数据的name是“地底王”，也就是读到了sessionB还没有提交的数据，就被称为“脏读”。</li>
 </ol>
 <h4>不可重复读</h4>
-<p><img src="assets/15100432-3e016ee5dd623ca4.png" alt="image.png" />
+<p><img src="assets/15100432-3e016ee5dd623ca4.png" alt="png" />
 如图所示：</p>
 <ol>
 <li>sessionA和sessionB开启了一个事务；</li>
@@ -539,7 +539,7 @@ function hide_canvas() {
 <li>sessionA再一次查询了id=2的数据，如果name是“梦境地底王”，说明在同一个事务中，sessionA前后读到的数据不一致，就被称为“不可重复读”。</li>
 </ol>
 <h4>幻读</h4>
-<p><img src="assets/15100432-bb07c982c8449ec0.png" alt="image.png" />
+<p><img src="assets/15100432-bb07c982c8449ec0.png" alt="png" />
 如图所示：</p>
 <ol>
 <li>sessionA和sessionB开启了一个事务；</li>
@@ -577,15 +577,15 @@ MySQL默认隔离级别，但是在MySQL中，此隔离级别解决了“幻读�
 必须，回滚指针，指向这行数据的上一个版本。</li>
 </ul>
 <p>如下图所示：
-<img src="assets/15100432-33c84c121ca641cf.png" alt="image.png" /></p>
+<img src="assets/15100432-33c84c121ca641cf.png" alt="png" /></p>
 <p>在这里需要着重说明下事务id，当我们开启一个事务，并不会马上获得事务id，哪怕我们在事务中执行select语句，也是没有事务id的（事务id为0），只有执行insert/update/delete语句才能获得事务id，这一点尤为重要。</p>
 <p>其中和MVCC紧密相关的是transaction_id和roll_pointer两个字段，在开发过程中，我们无需关心，但是要研究MVCC，我们必须关心。</p>
 <p>如果有类似这样的一行数据：
-<img src="assets/15100432-38454275d5db4109.png" alt="image.png" />
+<img src="assets/15100432-38454275d5db4109.png" alt="png" />
 代表这行数据是由transaction_id为9的事务创建出来的，roll_pointer是空的，因为这是一条新纪录。</p>
 <p><em>实际上，roll_pointer并不是空的，如果真要解释，需要绕一大圈，理解成空的，问题也不大。</em></p>
 <p>当我们开启事务，对这条数据进行修改，会变成这样：
-<img src="assets/15100432-5de4c1e3c96113a7.png" alt="image.png" /></p>
+<img src="assets/15100432-5de4c1e3c96113a7.png" alt="png" /></p>
 <p>有点感觉了吧，这就像一个单向链表，称之为“版本链”，最上面的数据是这个数据的最新版本，roll_pointer指向这个数据的旧版本，给人的感觉就是一行数据有多个版本，是不是符合“多版本并发控制”中的“多版本”这个概念，
 那么“并发控制”又是怎么做到的呢，别急，继续往下看。</p>
 <h4>ReadView</h4>
@@ -609,7 +609,7 @@ MySQL默认隔离级别，但是在MySQL中，此隔离级别解决了“幻读�
 <p>如果某个数据的最新版本不可以被读出来，就顺着roll_pointer找到该数据的上一个版本，继续做如上的判断，以此类推，如果第一个版本也不可见的话，代表该数据对当前事务完全不可见，查询结果就不包含这条记录了。</p>
 <p>看完上面的描述，是不是觉得“云里雾里”，“不知所云”，甚至“脑阔疼，整个人都不好了”。</p>
 <p>我们换个方法来解释，看会不会更容易理解点：
-<img src="assets/15100432-3c3f7dbe386391b2.png" alt="image.png" />
+<img src="assets/15100432-3c3f7dbe386391b2.png" alt="png" />
 在事务启动的一瞬间（执行CURD操作），会创建出ReadView，对于一个数据版本的trx_id来说，有以下三种情况：</p>
 <ul>
 <li>如果落在低水位，表示生成这个版本的事务已经提交了，或者是当前事务自己生成的，这个版本可见。</li>
@@ -621,7 +621,7 @@ b. 如果当前版本的trx_id不在活跃事务列表中，代表这个版本�
 <p>上面我比较简单的解释了下ReadView，用了两种方式来说明如何判断当前数据版本是否可见，不知道各位看官是不是有了一个比较模糊的概念，有了ReadView的基本概念，我们就可以具体看下READ COMMITTED、REPEATABLE READ这两个事务隔离级别为什么读到的数据是不同的，以及上述规则是如何应用的。</p>
 <h4>READ COMMITTED——每次读取数据都会创建ReadView</h4>
 <p>假设，现在系统只有一个活跃的事务T，事务id是100，事务中修改了数据，但是还没有提交，形成的版本链是这样的：
-<img src="assets/15100432-cae882ecd4fc0a0a.png" alt="image.png" /></p>
+<img src="assets/15100432-cae882ecd4fc0a0a.png" alt="png" /></p>
 <p>现在A事务启动，并且执行了select语句，此时会创建出一个ReadView，m_ids是【100】，min_trx_id是100， max_trx_id是101，creator_trx_id是0。</p>
 <p><em>为什么m_ids只有一个，为什么creator_trx_id是0？这里再次强调下，只有在事务中执行insert/update/delete语句才能获得事务id。</em></p>
 <p>那么A事务执行的select语句会读到什么数据呢？</p>
@@ -639,7 +639,7 @@ b. 如果当前版本的trx_id不在活跃事务列表中，代表这个版本�
 <p>所以读到的数据的name是“梦境地底王”。</p>
 <h4>REPEATABLE READ ——首次读取数据会创建ReadView</h4>
 <p>假设，现在系统只有一个活跃的事务T，事务id是100，事务中修改了数据，但是还没有提交，形成的版本链是这样的：
-<img src="https://upload-images.jianshu.io/upload_images/15100432-cae882ecd4fc0a0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" /></p>
+<img src="https://upload-images.jianshu.io/upload_images/15100432-cae882ecd4fc0a0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="png" /></p>
 <p>现在A事务启动，并且执行了select语句，此时会创建出一个ReadView，m_ids是【100】，min_trx_id是100， max_trx_id是101，creator_trx_id是0。</p>
 <p>那么A事务执行的select语句会读到什么数据呢？</p>
 <ol>

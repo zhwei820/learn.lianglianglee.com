@@ -206,7 +206,7 @@ function hide_canvas() {
 <h4>ShardingSphere 中的配置中心</h4>
 <p>关于配置信息的管理，常见的做法是把它们存放在配置文件中，我们可以基于 YAML 格式或 XML 格式的配置文件完成配置信息的维护，这在 ShardingSphere 中也都得到了支持。在单块系统中，配置文件能够满足需求，围绕配置文件展开的配置管理工作通常不会有太大挑战。但在分布式系统中，越来越多的运行时实例使得散落的配置难于管理，并且，配置不同步导致的问题十分严重。将配置集中于配置中心，可以更加有效地进行管理。</p>
 <p><strong>采用配置中心也就意味着采用集中式配置管理的设计思想</strong>。在集中式配置中心内，开发、测试和生产等不同的环境配置信息统一保存在配置中心内，这是一个维度。另一个维度就是需要确保分布式集群中同一类服务的所有服务实例保存同一份配置文件并且能够同步更新。配置中心的示意图如下所示：</p>
-<p><img src="assets/CgqCHl8VVZeAej3eAABEQzB6x7o265.png" alt="1.png" />
+<p><img src="assets/CgqCHl8VVZeAej3eAABEQzB6x7o265.png" alt="png" />
 集中式配置管理的设计思想</p>
 <p>在 ShardingSphere 中，提供了多种配置中心的实现方案，包括主流的 ZooKeeeper、Etcd、Apollo 和 Nacos。开发人员也可以根据需要实现自己的配置中心并通过 SPI 机制加载到 ShardingSphere 运行时环境中。</p>
 <p>另一方面，配置信息不是一成不变的。<strong>对修改后的配置信息的统一分发，是配置中心可以提供的另一个重要能力</strong>。配置中心中配置信息的任何变化都可以实时同步到各个服务实例中。在 ShardingSphere 中，通过配置中心可以支持数据源、数据表、分片以及读写分离策略的动态切换。</p>
@@ -214,7 +214,7 @@ function hide_canvas() {
 <h4>ShardingSphere 中的注册中心</h4>
 <p>在实现方式上，注册中心与配置中心非常类似，ShardingSphere 也提供了基于 ZooKeeeper 和 Etcd 这两款第三方工具的注册中心实现方案，而 ZooKeeeper 和 Etcd 同样也可以被用作配置中心。</p>
 <p>注册中心与配置中心的不同之处在于两者保存的数据类型。配置中心管理的显然是配置数据，但注册中心存放的是 ShardingSphere 运行时的各种动态/临时状态数据，最典型的运行时状态数据就是当前的 Datasource 实例。那么，保存这些动态和临时状态数据有什么用呢？我们来看一下这张图：</p>
-<p><img src="assets/Ciqc1F8VVaeARWcwAABcQXkFH-E790.png" alt="2.png" />
+<p><img src="assets/Ciqc1F8VVaeARWcwAABcQXkFH-E790.png" alt="png" />
 注册中心的数据存储和监听机制示意图</p>
 <p>注册中心一般都提供了分布式协调机制。在注册中心中，所有 DataSource 在指定路径根目录下创建临时节点，所有访问这些 DataSource 的业务服务都会监听该目录。当有新 DataSource 加入时，注册中心实时通知到所有业务服务，由业务服务做相应路由信息维护；而当某个 DataSource 宕机时，业务服务通过监听机制同样会收到通知。</p>
 <p>基于这种机制，我们就可以提供针对 DataSource 的治理能力，包括熔断对某一个 DataSource 的数据访问，或禁用对从库 DataSource 的访问等。</p>
@@ -323,10 +323,10 @@ spring.shardingsphere.orchestration.registry.namespace=orchestration-health_ms
 <pre><code>
 </code></pre>
 <p>同时，ZooKeeper 服务器端也对来自应用程序的请求作出响应。我们可以使用一些 ZooKeeper 可视化客户端工具来观察目前服务器上的数据。这里，我使用了 ZooInspector 这款工具，由于 ZooKeeper 本质上就是树状结构，~~现在~~所以在根节点中就新增了配置信息：</p>
-<p><img src="assets/CgqCHl8VVf2AWu6mAAAPpWnlsUo874.png" alt="3.png" />
+<p><img src="assets/CgqCHl8VVf2AWu6mAAAPpWnlsUo874.png" alt="png" />
 ZooKeeper 中的配置节点图</p>
 <p>我们关注“config”段内容，其中“rule”节点包含了读写分离的规则设置：</p>
-<p><img src="assets/CgqCHl8VVgWAXXOKAAAuZGtB8EQ493.png" alt="4.png" />
+<p><img src="assets/CgqCHl8VVgWAXXOKAAAuZGtB8EQ493.png" alt="png" />
 ZooKeeper 中的“rule”配置项</p>
 <p>而“datasource”节点包含的显然是前面所指定的各个数据源信息。</p>
 <p>由于我们在本地配置文件中将 spring.shardingsphere.orchestration.overwrite 配置项设置为 true，本地配置的变化就会影响到服务器端配置，进而影响到所有使用这些配置的应用程序。如果不希望产生这种影响，而是统一使用位于配置中心上的配置，应该怎么做呢？</p>

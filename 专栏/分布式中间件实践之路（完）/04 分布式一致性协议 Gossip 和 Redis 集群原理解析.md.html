@@ -136,11 +136,11 @@ function hide_canvas() {
 <p>Redis 是一个开源的、高性能的 Key-Value 数据库。基于 Redis 的分布式缓存已经有很多成功的商业应用，其中就包括阿里 ApsaraDB，阿里 Tair 中的 RDB 引擎，美团 MOS 以及腾讯云 CRS。本文我将着重介绍 Redis Cluster 原理、类 Codis 分布式方案以及分布式信息一致性协议 Gossip，以帮助大家深入理解 Redis。</p>
 <h3>1. Redis 单机模式</h3>
 <p>顾名思义，单机模式指 Redis 主节点以单个节点的形式存在，这个主节点可读可写，上面存储数据全集。在3.0版本之前，Redis 只能支持单机模式，出于可靠性考量，通常单机模式为“1主 N 备”的结构，如下所示：</p>
-<p><img src="assets/37baddd0-9409-11e8-968c-a5eca6168c1e" alt="enter image description here" /></p>
+<p><img src="assets/37baddd0-9409-11e8-968c-a5eca6168c1e" alt="png" /></p>
 <p>需要说明的是，即便有很多个 Redis 主节点，只要这些主节点以单机模式存在，本质上仍为单机模式。单机模式比较简单，足以支撑一般应用场景，但单机模式具有固有的局限性：不支持自动故障转移，扩容能力极为有限（只能 Scale Up，垂直扩容），存在高并发瓶颈。</p>
 <h4>1.1 不支持自动故障转移</h4>
 <p>Redis 单机模式下，即便是“1主 N 备”结构，当主节点故障时，备节点也无法自动升主，即无法自动故障转移（Failover）。故障转移需要“哨兵”Sentinel 辅助，Sentinel 是 Redis 高可用的解决方案，由一个或者多个 Sentinel 实例组成的系统可以监视 Redis 主节点及其从节点，当检测到 Redis 主节点下线时，会根据特定的选举规则从该主节点对应的所有从节点中选举出一个“最优”的从节点升主，然后由升主的新主节点处理请求。具有 Sentinel 系统的单机模式示意图如下：</p>
-<p><img src="assets/43d7e900-9409-11e8-968c-a5eca6168c1e" alt="enter image description here" /></p>
+<p><img src="assets/43d7e900-9409-11e8-968c-a5eca6168c1e" alt="png" /></p>
 <h4>1.2 扩容能力极为有限</h4>
 <p>这一点应该很好理解，单机模式下，只有主节点能够写入数据，那么，最大数据容量就取决于主节点所在物理机的内存容量，而物理机的内存扩容（Scale Up）能力目前仍是极为有限的。</p>
 <h4>1.3 高并发瓶颈</h4>
@@ -163,14 +163,14 @@ function hide_canvas() {
 <h4>2.2 Redis-Cluster 实现基础：分片</h4>
 <p>Redis 集群实现的基础是分片，即将数据集有机的分割为多个片，并将这些分片指派给多个 Redis 实例，每个实例只保存总数据集的一个子集。利用多台计算机内存和来支持更大的数据库，而避免受限于单机的内存容量；通过多核计算机集群，可有效扩展计算能力；通过多台计算机和网络适配器，允许我们扩展网络带宽。</p>
 <p>基于“分片”的思想，Redis 提出了 Hash Slot。Redis Cluster 把所有的物理节点映射到预先分好的16384个 Slot 上，当需要在 Redis 集群中放置一个 Key-Value 时，根据 CRC16(key) Mod 16384的值，决定将一个 Key 放到哪个 Slot 中。</p>
-<p><img src="assets/6d2751b0-9409-11e8-8505-51bc0cd8cebd" alt="enter image description here" /></p>
+<p><img src="assets/6d2751b0-9409-11e8-8505-51bc0cd8cebd" alt="png" /></p>
 <h4>2.3 Redis Cluster 请求路由方式</h4>
 <p>客户端直连 Redis 服务，进行读写操作时，Key 对应的 Slot 可能并不在当前直连的节点上，经过“重定向”才能转发到正确的节点。如下图所示，我们直接登录 <code>127.0.0.1:6379</code> 客户端，进行 Set 操作，当 Key 对应的 Slot 不在当前节点时（如 key-test)，客户端会报错并返回正确节点的 IP 和端口。Set 成功则返回 OK。</p>
-<p><img src="assets/98cb58c0-9409-11e8-9195-716ac3b68939" alt="enter image description here" /></p>
+<p><img src="assets/98cb58c0-9409-11e8-9195-716ac3b68939" alt="png" /></p>
 <p>以集群模式登录 <code>127.0.0.1:6379</code> 客户端（注意命令的差别：<code>-c</code> 表示集群模式)，则可以清楚的看到“重定向”的信息，并且客户端也发生了切换：“6379” -&gt; “6381”。</p>
-<p><img src="assets/9f0bb040-9409-11e8-8505-51bc0cd8cebd" alt="enter image description here" /></p>
+<p><img src="assets/9f0bb040-9409-11e8-8505-51bc0cd8cebd" alt="png" /></p>
 <p>以三节点为例，上述操作的路由查询流程示意图如下所示：</p>
-<p><img src="assets/cbc847a0-94d7-11e8-8763-ad4af9040eed" alt="enter image description here" /></p>
+<p><img src="assets/cbc847a0-94d7-11e8-8763-ad4af9040eed" alt="png" /></p>
 <p>和普通的查询路由相比，Redis Cluster 借助客户端实现的请求路由是一种混合形式的查询路由，它并非从一个 Redis 节点到另外一个 Redis，而是借助客户端转发到正确的节点。</p>
 <p>实际应用中，可以在客户端缓存 Slot 与 Redis 节点的映射关系，当接收到 MOVED 响应时修改缓存中的映射关系。如此，基于保存的映射关系，请求时会直接发送到正确的节点上，从而减少一次交互，提升效率。</p>
 <p>目前，包括 Lettuce、Jedis、Redission 在内的许多 Redis Client，都已经实现了对 Redis Cluster 的支持，关于客户端的内容，将在第05课中详细介绍。</p>
@@ -287,9 +287,9 @@ function hide_canvas() {
 </ol>
 <h4>4.2 如何保证消息传播的效率？</h4>
 <p>前面已经提到，集群的周期性函数 <code>clusterCron()</code> 执行周期是 100ms，为了保证传播效率，每10个周期，也就是 1s，每个节点都会随机选择5个其它节点，并从中选择一个最久没有通信的节点发送 ing消息，源码如下：</p>
-<p><img src="assets/77be7210-962b-11e8-a401-79c652738b8e" alt="enter image description here" /></p>
+<p><img src="assets/77be7210-962b-11e8-a401-79c652738b8e" alt="png" /></p>
 <p>当然，这样还是没法保证效率，毕竟5个节点是随机选出来的，其中最久没有通信的节点不一定是全局“最久”。因此，对哪些长时间没有“被” 随机到的节点进行特殊照顾：每个周期（100ms）内扫描一次本地节点列表，如果发现节点最近一次接受 Pong 消息的时间大于 <code>cluster_node_timeout/2</code>，则立刻发送 Ping 消息，防止该节点信息太长时间未更新。源码如下：</p>
-<p><img src="assets/3f9d0570-962d-11e8-8341-6d7159452ca4" alt="enter image description here" /></p>
+<p><img src="assets/3f9d0570-962d-11e8-8341-6d7159452ca4" alt="png" /></p>
 <h4>4.3 规模效应——无法忽略的成本问题</h4>
 <h5><strong>关键参数 cluster_node_timeout</strong></h5>
 <p>从上面的分析可以看出，<code>cluster_node_timeout</code> 参数对消息发送的节点数量影响非常大。当带宽资源紧张时，可以适当调大这个参数，如从默认15秒改为30秒来降低带宽占用率。但是，过度调大 <code>cluster_node_timeout</code> 会影响消息交换的频率从而影响故障转移、槽信息更新、新节点发现的速度，因此需要根据业务容忍度和资源消耗进行平衡。同时整个集群消息总交换量也跟节点数成正比。</p>
@@ -360,7 +360,7 @@ function hide_canvas() {
 <blockquote>
 <p>hash(key)%N = 目标节点编号， 其中 N 为 Redis 主节点的数量，哈希取余的方式会将不同的 Key 分发到不同的 Redis 主节点上。</p>
 </blockquote>
-<p><img src="assets/3b9c14e0-95a4-11e8-918e-f54082ec58b3" alt="enter image description here" /></p>
+<p><img src="assets/3b9c14e0-95a4-11e8-918e-f54082ec58b3" alt="png" /></p>
 <p>但是，Hash 算法有很多缺陷：</p>
 <ol>
 <li>不支持动态增加节点：当业务量增加，需要增加服务器节点后，上面的计算公式变为：<code>hash(key)%(N+1)</code>，那么，对于同一个 Key-Value，增加节点前后，对应的 Redis 节点可能是完全不同的，可能导致大量之前存储的数据失效；为了解决这个问题，需要将所有数据重新计算 Hash 值，再写入 Redis 服务器。</li>
@@ -372,12 +372,12 @@ function hide_canvas() {
 <p>为了克服客户端分片业务逻辑与数据存储逻辑耦合的不足，可以通过 Proxy 将业务逻辑和存储逻辑隔离。客户端发送请求到一个代理，代理解析客户端的数据，将请求转发至正确的节点，然后将结果回复给客户端。这种架构还有一个优点就是可以把 Proxy 当成一个中间件，在这个中间件上可以做很多事情，比如可以把集群和主从的兼容性做到几乎一致，可以做无缝扩减容、安全策略等。</p>
 <p>基于代理的分片已经有很多成熟的方案，如开源的 Codis，阿里云的 ApsaraDB for Redis/ApsaraCache，腾讯的 CRS 等。很多大企业也在采用 Proxy+Redis-Server 的架构。</p>
 <p>基本原理如下图所示：</p>
-<p><img src="assets/62990220-94e0-11e8-bcaa-73ee4805a006" alt="enter image description here" /></p>
+<p><img src="assets/62990220-94e0-11e8-bcaa-73ee4805a006" alt="png" /></p>
 <p>我们来了解下代理分片的缺点。没有完美的架构，由于使用了 Proxy，带宽和 CPU 基本都要加倍，对资源的消耗会大很多。</p>
 <h4>7.2 Codis 架构</h4>
 <p>Codis 是一个分布式 Redis 解决方案，对于上层的应用来说，连接到 Codis Proxy 和连接原生的 Redis Server 没有明显的区别 （参考6.1中的代理分片模式），客户端可以像使用单机 Redis 一样使用。</p>
 <p>架构图如下：</p>
-<p><img src="assets/f337f6f0-959f-11e8-b88f-171bb4051dab" alt="enter image description here" /></p>
+<p><img src="assets/f337f6f0-959f-11e8-b88f-171bb4051dab" alt="png" /></p>
 <h5><strong>Codis 简介</strong></h5>
 <p>从 Codis 的官方架构图可以看出，Codis 主要由四部分组成：</p>
 <ul>
@@ -399,7 +399,7 @@ function hide_canvas() {
 </ul>
 <h4>7.3 类 Codis 架构：Proxy + Redis-Server</h4>
 <p>在上面曾提到，实现 Redis 分布式的基础是分片。目前，主流的分片方案有三种，即 Redis Cluster、客户端分片、代理分片。除了官方推出的 Redis Cluster，大多数 IT 公司采用的都是基于代理的分片模式，即：Proxy + Redis-Server，这与 Codis 的原理类似，因此也称为“类 Codis”架构，其架构图如下：</p>
-<p><img src="assets/0e83e460-95a4-11e8-b88f-171bb4051dab" alt="enter image description here" /></p>
+<p><img src="assets/0e83e460-95a4-11e8-b88f-171bb4051dab" alt="png" /></p>
 <p>该架构有以下特点：</p>
 <ul>
 <li>分片算法：基于代理的分片原理，将物理节点映射到 Slot（Codis Slot 数为1024，其它方案一般为16384），对 Key-Value 进行读写操作时，采用一致性 Hash 算法或其它算法（如 Redis Cluster采用的 CRC16），计算 Key 对应的 Slot 编号，根据 Slot 编号转发到对应的物理节点；</li>

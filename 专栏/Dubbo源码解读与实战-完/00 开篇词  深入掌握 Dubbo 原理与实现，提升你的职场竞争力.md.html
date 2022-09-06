@@ -295,11 +295,11 @@ function hide_canvas() {
 <h3>为什么要学习 Dubbo</h3>
 <p>我们在谈论任何一项技术的时候，都需要强调它所适用的业务场景，因为： <strong>技术之所以有价值，就是因为它解决了一些业务场景难题。</strong></p>
 <p>一家公司由小做大，业务会不断发展，随之而来的是 DAU、订单量、数据量的不断增长，用来支撑业务的系统复杂度也会不断提高，模块之间的依赖关系也会日益复杂。这时候我们一般会从单体架构进入集群架构（如下图所示），在集群架构中通过负载均衡技术，将流量尽可能均摊到集群中的每台机器上，以此克服单台机器硬件资源的限制，做到横向扩展。</p>
-<p><img src="assets/Ciqc1F8eQ_eAbHovAAC1BISTRQE943.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F8eQ_eAbHovAAC1BISTRQE943.png" alt="png" /></p>
 <p>单体架构 VS 集群架构</p>
 <p>之后，又由于业务系统本身的实现较为复杂、扩展性较差、性能也有上限，代码和功能的复用能力较弱，我们会将一个巨型业务系统拆分成多个微服务，根据不同服务对资源的不同要求，选择更合理的硬件资源。例如，有些流量较小的服务只需要几台机器构成的集群即可，而核心业务则需要成百上千的机器来支持，这样就可以最大化系统资源的利用率。</p>
 <p>另外一个好处是，可以在服务维度进行重用，在需要某个服务的时候，直接接入即可，从而提高开发效率。拆分成独立的服务之后（如下图所示），整个服务可以最大化地实现重用，也可以更加灵活地扩展。</p>
-<p><img src="assets/Ciqc1F8eRAqAKU1gAAGcFDQgvSc126.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F8eRAqAKU1gAAGcFDQgvSc126.png" alt="png" /></p>
 <p>微服务架构图</p>
 <p>但是在微服务架构落地的过程中，我们需要解决的问题有很多，如：</p>
 <ul>
@@ -318,15 +318,15 @@ function hide_canvas() {
 <p>简单地说， <strong>Dubbo 是一个分布式服务框架，致力于提供高性能、透明化的 RPC 远程服务调用方案以及服务治理方案，以帮助我们解决微服务架构落地时的问题。</strong></p>
 <p>Dubbo 是由阿里开源，后来加入了 Apache 基金会，目前已经从孵化器毕业，成为 Apache 的顶级项目。Apache Dubbo 目前已经有接近 32.8 K 的 Star、21.4 K 的 Fork，其热度可见一斑， <strong>很多互联网大厂（如阿里、滴滴、去哪儿网等）都是直接使用 Dubbo 作为其 RPC 框架，也有些大厂会基于 Dubbo 进行二次开发实现自己的 RPC 框架</strong> ，如当当网的 DubboX。</p>
 <p>作为一名 Java 工程师，深入掌握 Dubbo 的原理和实现已经是大势所趋，并且成为你职场竞争力的关键项。拉勾网显示，研发工程师、架构师等高薪岗位，都要求你熟悉并曾经深入使用某种 RPC 框架，一线大厂更是要求你至少深入了解一款 RPC 框架的原理和核心实现。</p>
-<p><img src="assets/CgqCHl8eRBiAdm-9AACm_9hf8ac565.png" alt="Drawing 2.png" /></p>
-<p><img src="assets/Ciqc1F8eRCaAdTaTAACqwi3sVSo733.png" alt="Drawing 3.png" /></p>
-<p><img src="assets/CgqCHl8eRC2Acm_pAACV8eY8-C8598.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8eRBiAdm-9AACm_9hf8ac565.png" alt="png" /></p>
+<p><img src="assets/Ciqc1F8eRCaAdTaTAACqwi3sVSo733.png" alt="png" /></p>
+<p><img src="assets/CgqCHl8eRC2Acm_pAACV8eY8-C8598.png" alt="png" /></p>
 <p>（职位信息来源：拉勾网）</p>
 <p>而 Dubbo 就是首选。Dubbo 和 Spring Cloud 是目前主流的微服务框架，阿里、京东、小米、携程、去哪儿网等互联网公司的基础设施早已落成，并且后续的很多项目还是以 Dubbo 为主。Dubbo 重启之后，已经开始规划 3.0 版本，相信后面还会有更加惊艳的表现。</p>
 <p>另外，RPC 框架的核心原理和设计都是相通的，阅读过 Dubbo 源码之后，你再去了解其他 RPC 框架的代码，就是一件非常简单的事情了。</p>
 <h3>阅读 Dubbo 源码的痛点</h3>
 <p>学习和掌握一项技能的时候，一般都是按照“是什么”“怎么用”“为什么”（原理）逐层深入的：</p>
-<p><img src="assets/CgqCHl8eRDyAaP3fAABjUNh74KM999.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8eRDyAaP3fAABjUNh74KM999.png" alt="png" /></p>
 <p>同样，你可以通过阅读官方文档或是几篇介绍性的文章，迅速了解 Dubbo 是什么；接下来，再去上手，用 Dubbo 写几个项目，从而更加全面地熟悉 Dubbo 的使用方式和特性，成为一名“熟练工”，但这也是很多开发者所处的阶段。而“有技术追求”的开发者，一般不会满足于每天只是写写业务代码，而是会开始研究 Dubbo 的源码实现以及底层原理，这就对应了上图中的核心层：“原理”。</p>
 <p>而开始阅读源码时，不少开发者会提前去网上查找资料，或者直接埋头钻研源码，并因为这样的学习路径而普遍面临一些痛点问题：</p>
 <ul>

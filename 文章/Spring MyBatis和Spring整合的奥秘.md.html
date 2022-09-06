@@ -486,7 +486,7 @@ function hide_canvas() {
 <h4>mybatis-spring使用</h4>
 <p>因为现在有了SpringBoot，所以Mybatis和Spring的整合变得非常简单，但是如果没有SpringBoot，该怎么整合呢？我翻阅了百度的前几页，不知道是不是搜索关键词问题，几乎全是用XML的方式去整合Mybatis和Spring的，零XML配置，它不香吗？</p>
 <p>代码结构：
-<img src="assets/15100432-c2a982e6c0145a65.png" alt="image.png" /></p>
+<img src="assets/15100432-c2a982e6c0145a65.png" alt="png" /></p>
 <p>具体实现：</p>
 <pre><code> &lt;dependencies&gt;
         &lt;dependency&gt;
@@ -626,7 +626,7 @@ this.importBeanDefinitionRegistrars.put(registrar, importingClassMetadata);
 private final Map&lt;ImportBeanDefinitionRegistrar, AnnotationMetadata&gt; importBeanDefinitionRegistrars = new LinkedHashMap&lt;&gt;();
 </code></pre>
 <p>让我们就监视下configClass：
-<img src="assets/15100432-df700f54b54cb88d.png" alt="image.png" />
+<img src="assets/15100432-df700f54b54cb88d.png" alt="png" />
 可以看到我们写的MyBeanDefinitionRegistrar被放入了importBeanDefinitionRegistrars ，我们需要记住这个集合，至于还有一个什么，这里不用关心，当然，聪明的小伙伴肯定知道这是什么了。</p>
 <p>我们写的MyBeanDefinitionRegistrar只是被放入了一个Map，并没有执行，下面我们要找找它是在哪里执行的。</p>
 <p>我们需要回到ConfigurationClassPostProcessor的processConfigBeanDefinitions方法：</p>

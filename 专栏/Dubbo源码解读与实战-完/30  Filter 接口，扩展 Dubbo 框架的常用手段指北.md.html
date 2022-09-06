@@ -294,7 +294,7 @@ function hide_canvas() {
 <p>Filter 链的组装逻辑设计得非常灵活，其中可以通过“-”配置手动剔除 Dubbo 原生提供的、默认加载的 Filter，通过“default”来代替 Dubbo 原生提供的 Filter，这样就可以很好地控制哪些 Filter 要加载，以及 Filter 的真正执行顺序。</p>
 <p><strong>Filter 是扩展 Dubbo 功能的首选方案</strong>，并且 Dubbo 自身也提供了非常多的 Filter 实现来扩展自身功能。在回顾了 ProtocolFilterWrapper 加载 Filter 的大致逻辑之后，我们本课时就来深入介绍 Dubbo 内置的多种 Filter 实现类，以及自定义 Filter 扩展 Dubbo 的方式。</p>
 <p>在开始介绍 Filter 接口实现之前，我们需要了解一下 Filter 在 Dubbo 架构中的位置，这样才能明确 Filter 链处理请求/响应的位置，如下图红框所示：</p>
-<p><img src="assets/CgqCHl-lLz2APEb2ABSTPPnfqGQ345.png" alt="Lark20201106-191028.png" /></p>
+<p><img src="assets/CgqCHl-lLz2APEb2ABSTPPnfqGQ345.png" alt="png" /></p>
 <p>Filter 在 Dubbo 架构中的位置</p>
 <h3>ConsumerContextFilter</h3>
 <p>ConsumerContextFilter 是一个非常简单的 Consumer 端 Filter 实现，它会在当前的 RpcContext 中记录本地调用的一些状态信息（会记录到 LOCAL 对应的 RpcContext 中），例如，调用相关的 Invoker、Invocation 以及调用的本地地址、远端地址信息，具体实现如下：</p>
@@ -573,7 +573,7 @@ public AccessLogFilter() {
 }
 </code></pre>
 <p>在 LoggerFactory 中维护了一个 LOGGERS 集合（Map&lt;String, FailsafeLogger&gt; 类型），其中维护了当前使用的全部 FailsafeLogger 对象；FailsafeLogger 对象中封装了一个 Logger 对象，这个 Logger 接口是 Dubbo 自己定义的接口，Dubbo 针对每种第三方框架都提供了一个 Logger 接口的实现，如下图所示：</p>
-<p><img src="assets/Ciqc1F-lL4eAGvorAAEnucS-mWg399.png" alt="Lark20201106-191032.png" /></p>
+<p><img src="assets/Ciqc1F-lL4eAGvorAAEnucS-mWg399.png" alt="png" /></p>
 <p>Logger 接口的实现</p>
 <p>FailsafeLogger 是 Logger 对象的装饰器，它在每个 Logger 日志写入操作之外，都添加了 try/catch 异常处理。其他的 Dubbo Logger 实现类则是封装了相应第三方的 Logger 对象，并将日志输出操作委托给第三方的 Logger 对象完成。这里我们以 Log4j2Logger 为例进行简单分析：</p>
 <pre><code>public class Log4j2Logger implements Logger {
@@ -604,7 +604,7 @@ public AccessLogFilter() {
 }
 </code></pre>
 <p>LoggerAdapter 被 @SPI 注解修饰，是一个扩展接口，如下图所示，LoggerAdapter 对应每个第三方框架的一个相应实现，用于创建相应的 Dubbo Logger 实现对象。</p>
-<p><img src="assets/CgqCHl-lL4GAWy4JAAFMZJwzrp8801.png" alt="Lark20201106-191036.png" /></p>
+<p><img src="assets/CgqCHl-lL4GAWy4JAAFMZJwzrp8801.png" alt="png" /></p>
 <p>LoggerAdapter 接口实现</p>
 <p>以 Log4j2LoggerAdapter 为例，其核心在 getLogger() 方法中，主要是创建 Log4j2Logger 对象，具体实现如下：</p>
 <pre><code>public class Log4j2LoggerAdapter implements LoggerAdapter {

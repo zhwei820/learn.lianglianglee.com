@@ -361,7 +361,7 @@ func main()  {
 <p>从以上代码可以看到，只需要把建立链接的方法从 Dial 换成 DialHTTP 即可。</p>
 <p>现在分别运行服务端和客户端代码，就可以看到输出的结果了，和上面使用TCP 链接时是一样的。</p>
 <p>此外，Go 语言 net/rpc 包提供的 HTTP 协议的 RPC 还有一个调试的 URL，运行服务端代码后，在浏览器中输入 http://localhost:1234/debug/rpc 回车，即可看到服务端注册的RPC 服务，以及每个服务的方法，如下图所示：</p>
-<p><img src="assets/Ciqc1F_7zbWAb5PXAAA7zm9tcRE148.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F_7zbWAb5PXAAA7zm9tcRE148.png" alt="png" /></p>
 <p>如上图所示，<strong>注册的 RPC 服务</strong>、<strong>方法的签名</strong>、<strong>已经被调用的次数</strong>都可以看到。</p>
 <h3>JSON RPC 跨平台通信</h3>
 <p>以上我实现的RPC 服务是基于 gob 编码的，这种编码在跨语言调用的时候比较困难，而当前在微服务架构中，RPC 服务的实现者和调用者都可能是不同的编程语言，因此我们实现的 RPC 服务要支持多语言的调用。</p>

@@ -497,7 +497,7 @@ compositeDynamicConfiguration.addConfiguration(prepareEnvironment(configCenter))
 <p>随后，DubboBootstrap 执行 checkGlobalConfigs() 方法完成 ProviderConfig、ConsumerConfig、MetadataReportConfig 等一系列 AbstractConfig 的检查和初始化，具体实现比较简单，这里就不再展示。</p>
 <p>再紧接着，DubboBootstrap 会通过 initMetadataService() 方法初始化 MetadataReport、MetadataReportInstance 以及 MetadataService、MetadataServiceExporter，这些元数据相关的组件在前面的课时中已经深入分析过了，这里的初始化过程并不复杂，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/dubbo">源码</a>进行学习。</p>
 <p>在 DubboBootstrap 初始化的最后，会调用 initEventListener() 方法将 DubboBootstrap 作为 EventListener 监听器添加到 EventDispatcher 中。DubboBootstrap 继承了 GenericEventListener 抽象类，如下图所示：</p>
-<p><img src="assets/CgqCHl_z0G2AfVK7AABzPAVnhNE632.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_z0G2AfVK7AABzPAVnhNE632.png" alt="png" /></p>
 <p>EventListener 继承关系图</p>
 <p><strong>GenericEventListener 是一个泛型监听器，它可以让子类监听任意关心的 Event 事件，只需定义相关的 onEvent() 方法即可</strong>。在 GenericEventListener 中维护了一个 handleEventMethods 集合，其中 Key 是 Event 的子类，即监听器关心的事件，Value 是处理该类型 Event 的相应 onEvent() 方法。</p>
 <p>在 GenericEventListener 的构造方法中，通过反射将当前 GenericEventListener 实现的全部 onEvent() 方法都查找出来，并记录到 handleEventMethods 字段中。具体查找逻辑在 findHandleEventMethods() 方法中实现：</p>
@@ -530,7 +530,7 @@ compositeDynamicConfiguration.addConfiguration(prepareEnvironment(configCenter))
 }
 </code></pre>
 <p>我们可以查看 DubboBootstrap 的所有方法，目前并没有发现符合 isHandleEventMethod() 条件的方法。但在 GenericEventListener 的另一个实现—— LoggingEventListener 中，可以看到多个符合 isHandleEventMethod() 条件的方法（如下图所示），在这些 onEvent() 方法重载中会输出 INFO 日志。</p>
-<p><img src="assets/CgqCHl_z0HeARRBdAAF6NMV2xrI252.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_z0HeARRBdAAF6NMV2xrI252.png" alt="png" /></p>
 <p>LoggingEventListener 中 onEvent 方法重载</p>
 <p>至此，DubboBootstrap 整个初始化过程，以及该过程中与配置中心相关的逻辑就介绍完了。</p>
 <h3>总结</h3>

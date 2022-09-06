@@ -173,7 +173,7 @@ function hide_canvas() {
 <h3>创建第一个 Spring Boot Web 应用程序</h3>
 <p>基于 Spring Boot 创建 Web 应用程序的方法有很多，但最简单、最直接的方法是使用 Spring 官方提供的 Spring Initializer 初始化模板。</p>
 <p>初始化使用操作：直接访问 Spring Initializer 网站（<a href="https://start.spring.io/">http://start.spring.io/</a>），选择创建一个 Maven 项目并指定相应的 Group 和 Artifact，然后在添加的依赖中选择 Spring Web，点击生成即可。界面效果下图所示：</p>
-<p><img src="assets/Ciqc1F-83-KAYTQAAADMrUH44hQ767.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F-83-KAYTQAAADMrUH44hQ767.png" alt="png" /></p>
 <p>使用 Spring Initializer 创建 Web 应用程序示意图</p>
 <p>当然，对于有一定开发经验的同学而言，我们完全可以基于 Maven 本身的功能特性和结构，来生成上图中的代码工程。</p>
 <p>接下来，我们参考 02 讲中关于 Controller 的创建基本方法，来为这个代码工程添加一些支持 RESTful 风格的 HTTP 端点，在这里我们同样创建一个 CustomerController 类，如下所示：</p>
@@ -201,7 +201,7 @@ public class CustomerController {
 <p>那么，如何验证服务是否启动成功，以及 HTTP 请求是否得到正确响应呢？在 03 讲中，我们引入 Postman 来演示如何通过 HTTP 协议暴露的端点进行远程服务访问。</p>
 <p>Postman 提供了强大的 Web API 和 HTTP 请求调试功能，界面简洁明晰，操作也比较方便快捷和人性化。Postman 能够发送任何类型的 HTTP 请求（如 GET、HEAD、POST、PUT 等），并能附带任何数量的参数和 HTTP 请求头（Header）。</p>
 <p>这时我们通过 Postman 访问“<a href="http://localhost:8083/customers/1">http://localhost:8083/customers/1</a>”端点，可以得到如下图所示的HTTP响应结果，说明整个服务已经启动成功。</p>
-<p><img src="assets/Ciqc1F-83_CAMxyvAABNmxMQRXc212.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-83_CAMxyvAABNmxMQRXc212.png" alt="png" /></p>
 <p>好了，现在我们已经明白如何构建、打包以及运行一个简单的 Web 应用程序了，这是一切开发工作的起点，后续所有的案例代码我们都将通过这种方式展现在你面前，包括接下来要介绍的 Spring Boot 配置体系也是一样。</p>
 <h3>Spring Boot 中的配置体系</h3>
 <p>在 Spring Boot 中，其核心设计理念是对配置信息的管理采用约定优于配置。在这一理念下，则意味着开发人员所需要设置的配置信息数量比使用传统 Spring 框架时还大大减少。当然，今天我们关注的主要是如何理解并使用 Spring Boot 中的配置信息组织方式，这里就需要引出一个核心的概念，即 Profile。</p>
@@ -229,7 +229,7 @@ spring.datasource.username=root
 spring.datasource.password=root
 </code></pre>
 <p>显然，类似这样的数据源通常会根据环境的不同而存在很多套配置。假设我们存在如下所示的配置文件集合：</p>
-<p><img src="assets/CgqCHl-83_2AOKfAAAAKdvXQRn8485.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl-83_2AOKfAAAAKdvXQRn8485.png" alt="png" /></p>
 <p>多配置文件示意图</p>
 <p>注意，这里有一个全局的 application.yml 配置文件以及多个局部的 profile 配置文件。那么，如何指定当前所使用的那一套配置信息呢？在 Spring Boot 中，我们可以在主 application.properties 中使用如下的配置方式来激活当前所使用的 Profile：</p>
 <pre><code>spring.profiles.active = test

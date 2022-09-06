@@ -288,7 +288,7 @@ class Waiter:
 <h3>从剧情中思考命令模式</h3>
 <p>在上面的示例中，我们只要发一个订单就能吃到想要的加工方式的美味佳肴，而不用知道厨师是谁，更不用关心他是怎么做出来的。像点餐的订单一样，发送者（客户）与接收者（厨师）没有任何的依赖关系，我们只要发送订单就能完成想要的任务，这在程序中<strong>命令模式</strong>。</p>
 <p>在上面的示例中，我们可以用类图描述如下：</p>
-<p><img src="assets/7da4d370-7da5-11e8-8a07-2345656531ad.jpg" alt="enter image description here" /></p>
+<p><img src="assets/7da4d370-7da5-11e8-8a07-2345656531ad.jpg" alt="png" /></p>
 <h4>命令模式</h4>
 <blockquote>
 <p>Encapsulate a request as an object, thereby letting you parametrize clients with different requests, queue or log requests, and support undoable operations.</p>
@@ -331,7 +331,7 @@ def client():
 </code></pre>
 <h4>类图</h4>
 <p>命令模式可用类图表示如下：</p>
-<p><img src="assets/8be29bc0-7da5-11e8-8748-9f97e9dc7c3b.jpg" alt="enter image description here" /></p>
+<p><img src="assets/8be29bc0-7da5-11e8-8748-9f97e9dc7c3b.jpg" alt="png" /></p>
 <p>上面的类图中 Command 是核心类，表示一项任务一个动作，如示例中的订单，是所有命令的抽象类，定义了统一的执行方法 execute。具体的命令实现类 CommandA 和 CommandB 包装了命令的接收者（分别是 ReceiveA 和 ReceiveB），在执行 execute 方法时会调用接收者的实现（如 doSomething 和 function）。Receiver 是命令的接收者，也是任务的具体的执行者，如示例中的厨师。Invoker 负责命令的调用，如示例中的服务员。Client 的真正的用户，如示例中的顾客。</p>
 <h4>模型说明</h4>
 <p>（1）设计要点</p>

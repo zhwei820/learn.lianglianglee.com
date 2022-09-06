@@ -309,14 +309,14 @@ function hide_canvas() {
 <p>在进行网络 I/O 操作的时候，用什么样的方式读写数据将在很大程度上决定了 I/O 的性能。作为一款优秀的网络基础库，Netty 就采用了 NIO 的 I/O 模型，这也是其高性能的重要原因之一。</p>
 <h4>1. 传统阻塞 I/O 模型</h4>
 <p>在传统阻塞型 I/O 模型（即我们常说的 BIO）中，如下图所示，每个请求都需要独立的线程完成读数据、业务处理以及写回数据的完整操作。</p>
-<p><img src="assets/CgqCHl9EvKaAF18_AACJ4Y62QAY004.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl9EvKaAF18_AACJ4Y62QAY004.png" alt="png" /></p>
 <p>一个线程在同一时刻只能与一个连接绑定，如下图所示，当请求的并发量较大时，就需要创建大量线程来处理连接，这就会导致系统浪费大量的资源进行线程切换，降低程序的性能。我们知道，网络数据的传输速度是远远慢于 CPU 的处理速度，连接建立后，并不总是有数据可读，连接也并不总是可写，那么线程就只能阻塞等待，CPU 的计算能力不能得到充分发挥，同时还会导致大量线程的切换，浪费资源。</p>
-<p><img src="assets/CgqCHl9EvLSAQzfFAACIPU0Pqkg586.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl9EvLSAQzfFAACIPU0Pqkg586.png" alt="png" /></p>
 <h4>2. I/O 多路复用模型</h4>
 <p>针对传统的阻塞 I/O 模型的缺点，I/O 复用的模型在性能方面有不小的提升。I/O 复用模型中的多个连接会共用一个 Selector 对象，由 Selector 感知连接的读写事件，而此时的线程数并不需要和连接数一致，只需要很少的线程定期从 Selector 上查询连接的读写状态即可，无须大量线程阻塞等待连接。当某个连接有新的数据可以处理时，操作系统会通知线程，线程从阻塞状态返回，开始进行读写操作以及后续的业务逻辑处理。I/O 复用的模型如下图所示：</p>
-<p><img src="assets/Ciqc1F9EvNOACOC5AADhkXKnAFg681.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F9EvNOACOC5AADhkXKnAFg681.png" alt="png" /></p>
 <p>Netty 就是采用了上述 I/O 复用的模型。由于多路复用器 Selector 的存在，可以同时并发处理成百上千个网络连接，大大增加了服务器的处理能力。另外，Selector 并不会阻塞线程，也就是说当一个连接不可读或不可写的时候，线程可以去处理其他可读或可写的连接，这就充分提升了 I/O 线程的运行效率，避免由于频繁 I/O 阻塞导致的线程切换。如下图所示：</p>
-<p><img src="assets/Ciqc1F9EvOOADRMzAACeQMLGfbs278.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1F9EvOOADRMzAACeQMLGfbs278.png" alt="png" /></p>
 <p>从数据处理的角度来看，传统的阻塞 I/O 模型处理的是字节流或字符流，也就是以流式的方式顺序地从一个数据流中读取一个或多个字节，并且不能随意改变读取指针的位置。而在 NIO 中则抛弃了这种传统的 I/O 流概念，引入了 Channel 和 Buffer 的概念，可以从 Channel 中读取数据到 Buffer 中或将数据从 Buffer 中写入到 Channel。Buffer 不像传统 I/O 中的流那样必须顺序操作，在 NIO 中可以读写 Buffer 中任意位置的数据。</p>
 <h3>Netty 线程模型设计</h3>
 <p>服务器程序在读取到二进制数据之后，首先需要通过编解码，得到程序逻辑可以理解的消息，然后将消息传入业务逻辑进行处理，并产生相应的结果，返回给客户端。编解码逻辑、消息派发逻辑、业务处理逻辑以及返回响应的逻辑，是放到一个线程里面串行执行，还是分配到不同的线程中执行，会对程序的性能产生很大的影响。所以，优秀的线程模型对一个高性能网络库来说是至关重要的。</p>
@@ -324,23 +324,23 @@ function hide_canvas() {
 <p>为了帮助你更好地了解 Netty 线程模型的设计理念，我们将从最基础的单 Reactor 单线程模型开始介绍，然后逐步增加模型的复杂度，最终到 Netty 目前使用的非常成熟的线程模型设计。</p>
 <h4>1. 单 Reactor 单线程</h4>
 <p>Reactor 对象监听客户端请求事件，收到事件后通过 Dispatch 进行分发。如果是连接建立的事件，则由 Acceptor 通过 Accept 处理连接请求，然后创建一个 Handler 对象处理连接建立之后的业务请求。如果不是连接建立的事件，而是数据的读写事件，则 Reactor 会将事件分发对应的 Handler 来处理，由这里唯一的线程调用 Handler 对象来完成读取数据、业务处理、发送响应的完整流程。当然，该过程中也可能会出现连接不可读或不可写等情况，该单线程会去执行其他 Handler 的逻辑，而不是阻塞等待。具体情况如下图所示：</p>
-<p><img src="assets/CgqCHl9EvVGAPXATAAEj0pK8ONM000.png" alt="7.png" /></p>
+<p><img src="assets/CgqCHl9EvVGAPXATAAEj0pK8ONM000.png" alt="png" /></p>
 <p>单 Reactor 单线程的优点就是：线程模型简单，没有引入多线程，自然也就没有多线程并发和竞争的问题。</p>
 <p>但其缺点也非常明显，那就是<strong>性能瓶颈问题</strong>，一个线程只能跑在一个 CPU 上，能处理的连接数是有限的，无法完全发挥多核 CPU 的优势。一旦某个业务逻辑耗时较长，这唯一的线程就会卡在上面，无法处理其他连接的请求，程序进入假死的状态，可用性也就降低了。正是由于这种限制，一般只会在<strong>客户端</strong>使用这种线程模型。</p>
 <h4>2. 单 Reactor 多线程</h4>
 <p>在单 Reactor 多线程的架构中，Reactor 监控到客户端请求之后，如果连接建立的请求，则由Acceptor 通过 accept 处理，然后创建一个 Handler 对象处理连接建立之后的业务请求。如果不是连接建立请求，则 Reactor 会将事件分发给调用连接对应的 Handler 来处理。到此为止，该流程与单 Reactor 单线程的模型基本一致，<strong>唯一的区别就是执行 Handler 逻辑的线程隶属于一个线程池</strong>。</p>
-<p><img src="assets/CgqCHl9EvWqAJ5jpAAFbymUVJ8o272.png" alt="8.png" /></p>
+<p><img src="assets/CgqCHl9EvWqAJ5jpAAFbymUVJ8o272.png" alt="png" /></p>
 <p>单 Reactor 多线程模型</p>
 <p>很明显，单 Reactor 多线程的模型可以充分利用多核 CPU 的处理能力，提高整个系统的吞吐量，但引入多线程模型就要考虑线程并发、数据共享、线程调度等问题。在这个模型中，只有一个线程来处理 Reactor 监听到的所有 I/O 事件，其中就包括连接建立事件以及读写事件，当连接数不断增大的时候，这个唯一的 Reactor 线程也会遇到瓶颈。</p>
 <h4>3. 主从 Reactor 多线程</h4>
 <p>为了解决单 Reactor 多线程模型中的问题，我们可以引入多个 Reactor。其中，Reactor 主线程负责通过 Acceptor 对象处理 MainReactor 监听到的连接建立事件，当Acceptor 完成网络连接的建立之后，MainReactor 会将建立好的连接分配给 SubReactor 进行后续监听。</p>
 <p>当一个连接被分配到一个 SubReactor 之上时，会由 SubReactor 负责监听该连接上的读写事件。当有新的读事件（OP_READ）发生时，Reactor 子线程就会调用对应的 Handler 读取数据，然后分发给 Worker 线程池中的线程进行处理并返回结果。待处理结束之后，Handler 会根据处理结果调用 send 将响应返回给客户端，当然此时连接要有可写事件（OP_WRITE）才能发送数据。</p>
-<p><img src="assets/CgqCHl9EvXuARvm7AAF3raiQza8716.png" alt="9.png" /></p>
+<p><img src="assets/CgqCHl9EvXuARvm7AAF3raiQza8716.png" alt="png" /></p>
 <p>主从 Reactor 多线程模型</p>
 <p>主从 Reactor 多线程的设计模式解决了单一 Reactor 的瓶颈。<strong>主从 Reactor 职责明确，主 Reactor 只负责监听连接建立事件，SubReactor只负责监听读写事件</strong>。整个主从 Reactor 多线程架构充分利用了多核 CPU 的优势，可以支持扩展，而且与具体的业务逻辑充分解耦，复用性高。但不足的地方是，在交互上略显复杂，需要一定的编程门槛。</p>
 <h4>4. Netty 线程模型</h4>
 <p>Netty 同时支持上述几种线程模式，Netty 针对服务器端的设计是在主从 Reactor 多线程模型的基础上进行的修改，如下图所示：</p>
-<p><img src="assets/Ciqc1F9EvZyAZsQlAAMdGh4CXMI139.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9EvZyAZsQlAAMdGh4CXMI139.png" alt="png" /></p>
 <p><strong>Netty 抽象出两组线程池：BossGroup 专门用于接收客户端的连接，WorkerGroup 专门用于网络的读写</strong>。BossGroup 和 WorkerGroup 类型都是 NioEventLoopGroup，相当于一个事件循环组，其中包含多个事件循环 ，每一个事件循环是 NioEventLoop。</p>
 <p>NioEventLoop 表示一个不断循环的、执行处理任务的线程，每个 NioEventLoop 都有一个Selector 对象与之对应，用于监听绑定在其上的连接，这些连接上的事件由 Selector 对应的这条线程处理。每个 NioEventLoopGroup 可以含有多个 NioEventLoop，也就是多个线程。</p>
 <p>每个 Boss NioEventLoop 会监听 Selector 上连接建立的 accept 事件，然后处理 accept 事件与客户端建立网络连接，生成相应的 NioSocketChannel 对象，一个 NioSocketChannel 就表示一条网络连接。之后会将 NioSocketChannel 注册到某个 Worker NioEventLoop 上的 Selector 中。</p>

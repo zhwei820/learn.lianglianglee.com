@@ -269,7 +269,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 <ul>
 <li>veth 与 bridge 的关系</li>
 </ul>
-<p><img src="assets/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png" alt="Lark20200929-162853.png" /></p>
+<p><img src="assets/Ciqc1F9y8IKAa-1NAABjDM-2kBk665.png" alt="png" /></p>
 <p>通过图 1 ，我们可以看到，bridge 就像一台交换机，而 veth 就像一根网线，通过交换机和网线可以把两个不同 Net Namespace 的容器连通，使得它们可以互相通信。</p>
 <p>Docker 的 bridge 模式也是这种原理。Docker 启动时，libnetwork 会在主机上创建 docker0 网桥，docker0 网桥就相当于图 1 中的交换机，而 Docker 创建出的 brige 模式的容器则都会连接 docker0 上，从而实现网络互通。</p>
 <p><strong>bridge 桥接模式是 Docker 的默认网络模式，当我们创建容器时不指定任何网络模式，Docker 启动容器默认的网络模式为 bridge。</strong></p>
@@ -354,7 +354,7 @@ RX bytes:0 (0.0 B) TX bytes:0 (0.0 B)
 </code></pre>
 <p>可以看到 busybox2 容器的网络 IP 也为 172.17.0.2，与 busybox1 的网络一致。</p>
 <p>以上就是 Libnetwork 常见的四种网络模式，它们的作用及业务场景帮你总结如下：</p>
-<p><img src="assets/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png" alt="Lark20200929-162901.png" /></p>
+<p><img src="assets/Ciqc1F9y8HGAaH1iAAClKDUq5FY736.png" alt="png" /></p>
 <h3>结语</h3>
 <p>我上面有说到 Libnetwork 的工作流程是完全围绕 CNM 的三个要素进行的，CNM 制定标准之初不仅仅是为了单台主机上的容器互通，更多的是为了定义跨主机之间的容器通信标准。但是后来由于 Kubernetes 逐渐成为了容器编排的标准，而 Kubernetes 最终选择了 CNI 作为容器网络的定义标准（具体原因可以参考<a href="https://kubernetes.io/blog/2016/01/why-kubernetes-doesnt-use-libnetwork/">这里</a>），很遗憾 CNM 最终没有成为跨主机容器通信的标准，但是CNM 却为推动容器网络标准做出了重大贡献，且 Libnetwork 也是 Docker 的默认网络实现，提供了单独使用 Docker 容器时的多种网络接入功能。</p>
 </div>

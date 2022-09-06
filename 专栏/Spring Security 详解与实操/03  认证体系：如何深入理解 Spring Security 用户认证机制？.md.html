@@ -166,7 +166,7 @@ function hide_canvas() {
 <li>UserDetailsManager：扩展 UserDetailsService，添加了创建用户、修改用户密码等功能。</li>
 </ul>
 <p>这四个对象之间的关联关系如下图所示，显然，对于由 UserDetails 对象所描述的一个用户而言，它应该具有 1 个或多个能够执行的 GrantedAuthority：</p>
-<p><img src="assets/CioPOWC5_ryAZ3qSAABXNOe10bU172.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWC5_ryAZ3qSAABXNOe10bU172.png" alt="png" /></p>
 <p>Spring Security 中的四大核心用户对象</p>
 <p>结合上图，我们先来看承载用户详细信息的 UserDetails 接口，如下所示：</p>
 <pre><code>public interface UserDetails extends Serializable {
@@ -284,7 +284,7 @@ public final C withUser(UserDetails userDetails) {
 </code></pre>
 <p>而 withUser 方法返回的是一个 UserDetailsBuilder 对象，该对象内部使用了前面介绍的 UserBuilder 对象，因此可以实现类似 .withUser(&quot;spring_user&quot;).password(&quot;password1&quot;).roles(&quot;USER&quot;) 这样的链式语法，完成用户信息的设置。这也是上一讲中，我们在介绍基于内存的用户信息存储方案时使用的方法。</p>
 <p>作为总结，我们也梳理了 Spring Security 中与用户对象相关的一大批实现类，它们之间的关系如下图所示：</p>
-<p><img src="assets/Cgp9HWC5_sqAC7SUAACLftd0SYc321.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWC5_sqAC7SUAACLftd0SYc321.png" alt="png" /></p>
 <p>Spring Security 中用户对象相关类结构图</p>
 <h4>Spring Security 中的认证对象</h4>
 <p>有了用户对象，我们就可以讨论具体的认证过程了，首先来看认证对象 Authentication，如下所示：</p>
@@ -353,7 +353,7 @@ public final C withUser(UserDetails userDetails) {
 </code></pre>
 <p>可以看到，这里使用了 AuthenticationManager 而不是 AuthenticationProvider 中的 authenticate() 方法来执行认证。同时，我们也注意到这里出现了 UsernamePasswordAuthenticationToken 类，这就是 Authentication 接口的一个具体实现类，用来<strong>存储用户认证所需的用户名和密码信息</strong>。</p>
 <p>同样作为总结，我们也梳理了 Spring Security 中与认证对象相关的一大批核心类，它们之间的关系如下所示：</p>
-<p><img src="assets/CioPOWC5_tmAEUuLAABqhhFbRIw821.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWC5_tmAEUuLAABqhhFbRIw821.png" alt="png" /></p>
 <p>Spring Security 中认证的对象相关类结构图</p>
 <h3>实现定制化用户认证方案</h3>
 <p>通过前面的分析，我们明确了用户信息存储的实现过程实际上是可以定制化的。Spring Security 所做的工作只是把常见的、符合一般业务场景的实现方式嵌入到了框架中。如果有特殊的场景，开发人员完全可以实现自定义的用户信息存储方案。</p>
@@ -436,7 +436,7 @@ public class SpringUserDetailsService
 <p>我们知道 UserDetailsService 接口只有一个 loadUserByUsername 方法需要实现。因此，我们基于 SpringUserRepository 的 findByUsername 方法，根据用户名从数据库中查询数据。</p>
 <h4>扩展 AuthenticationProvider</h4>
 <p>扩展 AuthenticationProvider 的过程就是提供一个自定义的 AuthenticationProvider 实现类。这里我们以最常见的用户名密码认证为例，梳理自定义认证过程所需要实现的步骤，如下所示：</p>
-<p><img src="assets/CioPOWC5_uiAEATKAACWyEa75HA969.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWC5_uiAEATKAACWyEa75HA969.png" alt="png" /></p>
 <p>自定义 AuthenticationProvider 的实现流程图</p>
 <p>上图中的流程并不复杂，首先我们需要通过 UserDetailsService 获取一个 UserDetails 对象，然后根据该对象中的密码与认证请求中的密码进行匹配，如果一致则认证成功，反之抛出一个 BadCredentialsException 异常。示例代码如下所示：</p>
 <pre><code>@Component
@@ -492,7 +492,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 <h3>小结与预告</h3>
 <p>这一讲我们基于 Spring Security 提供的用户认证功能分析了其背后的实现过程。我们的切入点在于分析与用户和认证相关的各个核心类，并梳理它们之间的交互过程。另一方面，我们还通过扩展 UserDetailsService 和 AuthenticationProvider 接口的方式来实现定制化的用户认证方案。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWC5_wKAct0XAACvS5HbogQ525.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWC5_wKAct0XAACvS5HbogQ525.png" alt="png" /></p>
 <p>最后给你留一道思考题：基于 Spring Security，如何根据用户名和密码实现一套定制化的用户认证解决方案？欢迎在留言区和我分享你的想法。</p>
 </div>
                     </div>

@@ -209,7 +209,7 @@ function hide_canvas() {
 <p>虽然 Redis 一直是单线程模型，但是在 Redis 6.0 版本之后，也采用了多个 I/O 线程来处理网络请求，这是因为随着网络硬件的性能提升，Redis 的性能瓶颈有时会出现在网络 I/O 的处理上，所以为了提高网络请求处理的并行度，Redis 6.0 对于网络请求采用多线程来处理。但是对于读写命令，Redis 仍然使用单线程来处理。</p>
 </blockquote>
 <p>当然了， “Redis 的线程模型”只是 Redis 原理中的一个考点，如果你想做足准备，回答好 Redis 相关的问题，还需前提掌握 Redis 的主线知识点。我从高性能、高可用的角度出发，把 Redis 的核心原理考点梳理成一张图（之所以整理这样的体系结构，是因为你最容易在以下的考点中出错、踩坑，也是为了便于你的记忆）：</p>
-<p><img src="assets/CioPOWAilT-APxAQAAEnyK2noPo384.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWAilT-APxAQAAEnyK2noPo384.png" alt="png" /></p>
 <p>Redis 高性能和高可用的核心考点</p>
 <p>从图中，你可以看到，线程模型只是高性能考点中的一环，而高可用考点中，包括了持久化、数据复制（主从复制，哨兵复制）等内容。所以在讲完 Redis 的线程模型的考点之后，接下来咱们再来了解持久化和数据复制的考点。</p>
 <p>关于持久化和数据复制，面试官不会问得很直白，比如“Redis 的持久化是怎么做的？”而是立足在某一个问题点：</p>
@@ -230,7 +230,7 @@ function hide_canvas() {
 <p><strong>AOF 日志是如何实现的？</strong></p>
 <p>通常情况下，关系型数据库（如 MySQL）的日志都是“写前日志”（Write Ahead Log, WAL），也就是说，在实际写数据之前，先把修改的数据记到日志文件中，以便当出现故障时进行恢复，比如 MySQL 的 redo log（重做日志），记录的就是修改后的数据。</p>
 <p>而 AOF 里记录的是 Redis 收到的每一条命令，这些命令是以文本形式保存的，不同的是，Redis 的 AOF 日志的记录顺序与传统关系型数据库正好相反，它是写后日志，“写后”是指 Redis 要先执行命令，把数据写入内存，然后再记录日志到文件。</p>
-<p><img src="assets/CioPOWAk5lGAT9s5AAAVmURIggo694.png" alt="1.png" /></p>
+<p><img src="assets/CioPOWAk5lGAT9s5AAAVmURIggo694.png" alt="png" /></p>
 <p>AOF 执行过程</p>
 <p>那么面试的考察点来了：<strong>Reids 为什么先执行命令，在把数据写入日志呢</strong>？为了方便你理解，我整理了关键的记忆点：</p>
 <ul>
@@ -267,7 +267,7 @@ function hide_canvas() {
 <li>如果主线程执行读操作，则主线程和 bgsave 子进程互相不影响；</li>
 <li>如果主线程执行写操作，则被修改的数据会复制一份副本，然后 bgsave 子进程会把该副本数据写入 RDB 文件，在这个过程中，主线程仍然可以直接修改原来的数据。</li>
 </ul>
-<p><img src="assets/CioPOWAk5yuAfEMrAAAu9jODvIo259.png" alt="2.png" /></p>
+<p><img src="assets/CioPOWAk5yuAfEMrAAAu9jODvIo259.png" alt="png" /></p>
 <p>Redis 是如何保证执行快照期间数据可修改</p>
 <p>要注意，Redis 对 RDB 的执行频率非常重要，因为这会影响快照数据的完整性以及 Redis 的稳定性，所以在 Redis 4.0 后，<strong>增加了 AOF 和 RDB 混合的数据持久化机制：</strong> 把数据以 RDB 的方式写入文件，再将后续的操作命令以 AOF 的格式存入文件，既保证了 Redis 重启速度，又降低数据丢失风险。</p>
 <p>我们来总结一下，当面试官问你“Redis 是如何实现数据不丢失的”时，你首先要意识到这是在考察你对 Redis 数据持久化知识的掌握程度，那么你的回答思路是：先说明 Redis 有几种持久化的方式，然后分析 AOF 和 RDB 的原理以及存在的问题，最后分析一下 Redis 4.0 版本之后的持久化机制。</p>
@@ -282,13 +282,13 @@ function hide_canvas() {
 <li><strong>Redis Sentinel（哨兵模式）</strong></li>
 </ul>
 <p>在使用 Redis 主从服务的时候，会有一个问题，就是当 Redis 的主从服务器出现故障宕机时，需要手动进行恢复，为了解决这个问题，Redis 增加了哨兵模式（因为哨兵模式做到了可以监控主从服务器，并且提供自动容灾恢复的功能）。</p>
-<p><img src="assets/Cgp9HWAk59aAB93xAAAX-TOtE8g551.png" alt="3.png" /></p>
+<p><img src="assets/Cgp9HWAk59aAB93xAAAX-TOtE8g551.png" alt="png" /></p>
 <p>哨兵模式</p>
 <ul>
 <li><strong>Redis Cluster（集群）</strong></li>
 </ul>
 <p>Redis Cluster 是一种分布式去中心化的运行模式，是在 Redis 3.0 版本中推出的 Redis 集群方案，它将数据分布在不同的服务器上，以此来降低系统对单主节点的依赖，从而提高 Redis 服务的读写性能。</p>
-<p><img src="assets/CioPOWAk5-aAJDTQAAAbf8xdGfQ328.png" alt="4.png" /></p>
+<p><img src="assets/CioPOWAk5-aAJDTQAAAbf8xdGfQ328.png" alt="png" /></p>
 <p>集群</p>
 <p>Redis Cluster 方案采用哈希槽（Hash Slot），来处理数据和实例之间的映射关系。在 Redis Cluster 方案中，一个切片集群共有 16384 个哈希槽，这些哈希槽类似于数据分区，每个键值对都会根据它的 key，被映射到一个哈希槽中，具体执行过程分为两大步。</p>
 <ul>
@@ -300,7 +300,7 @@ function hide_canvas() {
 <li><strong>平均分配：</strong> 在使用 cluster create 命令创建 Redis 集群时，Redis 会自动把所有哈希槽平均分布到集群实例上。比如集群中有 9 个实例，则每个实例上槽的个数为 16384/9 个。</li>
 <li><strong>手动分配：</strong> 可以使用 cluster meet 命令手动建立实例间的连接，组成集群，再使用 cluster addslots 命令，指定每个实例上的哈希槽个数，为了方便你的理解，我通过一张图来解释数据、哈希槽，以及实例三者的映射分布关系。</li>
 </ul>
-<p><img src="assets/CioPOWAk53KARwe_AAAnmo0Qh7E642.png" alt="5.png" /></p>
+<p><img src="assets/CioPOWAk53KARwe_AAAnmo0Qh7E642.png" alt="png" /></p>
 <p>Redis 手动分配哈希槽</p>
 <p>示意图中的分片集群一共有 3 个实例，假设有 4 个哈希槽时，我们就可以通过命令手动分配哈希槽，比如实例 1 保存哈希槽 0 和 1，实例 2 保存哈希槽 2 和 3。</p>
 <p>然后在集群运行的过程中，key1 和 key2 计算完 CRC16 值后，对哈希槽总个数 5 进行取模，再根据各自的模数结果，就可以被映射到对应的实例 1 和实例 3 上了。</p>

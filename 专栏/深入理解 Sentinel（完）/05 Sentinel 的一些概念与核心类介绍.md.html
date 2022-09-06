@@ -254,7 +254,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>它的几个实现类：DefaultNode、ClusterNode、EntranceNode、StatisticNode 的关系如下图所示。</p>
-<p><img src="assets/e3082850-e0b0-11ea-860c-27aeccb4bc5b" alt="05-00-nodes" /></p>
+<p><img src="assets/e3082850-e0b0-11ea-860c-27aeccb4bc5b" alt="png" /></p>
 <h4><strong>StatisticNode</strong></h4>
 <p>Statistic 即统计的意思，StatisticNode 是 Node 接口的实现类，是实现实时指标数据统计 Node。</p>
 <pre><code class="language-java">public class StatisticNode implements Node {
@@ -384,7 +384,7 @@ try {
     }
 </code></pre>
 <p>EntranceNode、DefaultNode、ClusterNode 与滑动窗口的关系如下图所示：</p>
-<p><img src="assets/7b4516a0-e0b1-11ea-8111-1feecf2da711" alt="05-01-node" /></p>
+<p><img src="assets/7b4516a0-e0b1-11ea-8111-1feecf2da711" alt="png" /></p>
 <h3>Sentinel 中的 Context 与 Entry</h3>
 <p>理解 Context 与 Entry 也是理解 Sentinel 整个工作流程的关键，其中 Entry 还会涉及到“调用树”这一概念。</p>
 <h4><strong>Context</strong></h4>
@@ -442,12 +442,12 @@ try {
 </code></pre>
 <p>CtEntry 用于维护父子 Entry，每一次调用 SphU#entry 方法都会创建一个 CtEntry。如果服务 B 在处理一个请求的路径上会多次调用 SphU#entry，那么这些 CtEntry 会构成一个双向链表。在每次创建 CtEntry，都会将 Context.curEntry 设置为这个新的 CtEntry，双向链表的作用就是在调用 CtEntry#exit 方法时，能够将 Context.curEntry 还原为上一个资源的 CtEntry。</p>
 <p>例如，在服务 B 接收到服务 A 的请求时，会调用 SphU#entry 方法创建一个 CtEntry，我们取个代号 ctEntry1，此时的 ctEntry1 的父节点（parent）为空。当服务 B 向服务 C 发起调用时，OpenFeign 适配器调用 SphU#entry 的方法会创建一个 CtEntry，我们取个代号 ctEntry2，此时 ctEntry2 的父节点（parent）就是 ctEntry1，ctEntry1 的子节点（child）就是 ctEntry2，如下图所示。</p>
-<p><img src="assets/d93083d0-e0b1-11ea-b45a-99f77a1eea3e" alt="05-02-ctentry" /></p>
+<p><img src="assets/d93083d0-e0b1-11ea-b45a-99f77a1eea3e" alt="png" /></p>
 <h4><strong>ROOT 与调用树</strong></h4>
 <p>Constants 常量类用于声明全局静态常量，Constants 有一个 ROOT 静态字段，类型为 EntranceNode。</p>
 <p>在调用 ContextUtil#enter 方法时，如果还没有为当前入口创建 EntranceNode，则会为当前入口创建 EntranceNode，将其赋值给 Context.entranceNode，同时也会将这个 EntranceNode 添加到 Constants.ROOT 的子节点（childList）。资源对应的 DefaultNode 则是在 NodeSelectorSlot 中创建，并赋值给 Context.curEntry.curNode。</p>
 <p>Constants.ROOT、Context.entranceNode 与 Entry.curNode 三者关系如下图所示。</p>
-<p><img src="assets/e5343aa0-e0b1-11ea-8111-1feecf2da711" alt="05-03-root-context-resource" /></p>
+<p><img src="assets/e5343aa0-e0b1-11ea-8111-1feecf2da711" alt="png" /></p>
 <h3>Sentinel 中的 ProcessorSlot</h3>
 <p>ProcessorSlot 直译就是处理器插槽，是 Sentinel 实现限流降级、熔断降级、系统自适应降级等功能的切入点。Sentinel 提供的 ProcessorSlot 可以分为两类，一类是辅助完成资源指标数据统计的切入点，一类是实现降级功能的切入点。</p>
 <p>辅助资源指标数据统计的 ProcessorSlot：</p>

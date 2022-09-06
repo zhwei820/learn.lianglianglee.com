@@ -210,7 +210,7 @@ function hide_canvas() {
 <li>垂直分片：在不同的数据库节点中存储表不同的表列。</li>
 </ol>
 <p>如下图所示，水平和垂直这两个概念来自原关系型数据库表模式的可视化直观视图。</p>
-<p><img src="assets/CgpVE2ABUUmAL3H4AAGTDb7sQOQ568.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgpVE2ABUUmAL3H4AAGTDb7sQOQ568.png" alt="png" /></p>
 <p>图 1 可视化直观视图</p>
 <p>分片理念其实来源于经济学的边际收益理论：如果投资持续增加，但收益的增幅开始下降时，被称为边际收益递减状态。而刚好要开始下降的那个点被称为边际平衡点。</p>
 <p>该理论应用在数据库计算能力上往往被表述为：如果数据库处理能力遇到瓶颈，最简单的方式是持续提高系统性能，如更换更强劲的 CPU、更大内存等，这种模式被称为垂直扩展。当持续增加资源以提升数据库能力时，垂直扩展有其自身的限制，最终达到边际平衡，收益开始递减。</p>
@@ -224,11 +224,11 @@ function hide_canvas() {
 <h4>哈希分片</h4>
 <p>哈希分片，首先需要获取分片键，然后根据特定的哈希算法计算它的哈希值，最后使用哈希值确定数据应被放置在哪个分片中。数据库一般对所有数据使用统一的哈希算法（例如 ketama），以促成哈希函数在服务器之间均匀地分配数据，从而降低了数据不均衡所带来的热点风险。通过这种方法，数据不太可能放在同一分片上，从而使数据被随机分散开。</p>
 <p>这种算法非常适合随机读写的场景，能够很好地分散系统负载，但弊端是不利于范围扫描查询操作。下图是这一算法的工作原理。</p>
-<p><img src="assets/Cip5yGABUVOANTI_AACPCvFkQMQ491.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yGABUVOANTI_AACPCvFkQMQ491.png" alt="png" /></p>
 <p>图 2 哈希分片</p>
 <h4>范围分片</h4>
 <p>范围分片根据数据值或键空间的范围对数据进行划分，相邻的分片键更有可能落入相同的分片上。每行数据不像哈希分片那样需要进行转换，实际上它们只是简单地被分类到不同的分片上。下图是范围分片的工作原理。</p>
-<p><img src="assets/Cip5yGABUXSATworAABCLehE-pM870.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yGABUXSATworAABCLehE-pM870.png" alt="png" /></p>
 <p>图 3 范围分片</p>
 <p>范围分片需要选择合适的分片键，这些分片键需要尽量不包含重复数值，也就是其候选数值尽可能地离散。同时数据不要单调递增或递减，否则，数据不能很好地在集群中离散，从而造成热点。</p>
 <p>范围分片非常适合进行范围查找，但是其随机读写性能偏弱。</p>
@@ -261,7 +261,7 @@ function hide_canvas() {
 <p>ShardingShpere 首先提供了分布式的主键生成，这是生成分片键的关键。由于分布式数据库内一般由多个数据库节点参与，因此基于数据库实例的主键生成并不适合分布式场景。</p>
 <p>常用的算法有 UUID 和 Snowfalke 两种无状态生成算法。</p>
 <p>UUID 是最简单的方式，但是生成效率不高，且数据离散度一般。因此目前生产环境中会采用后一种算法。下图就是用该算法生成的分片键的结构。</p>
-<p><img src="assets/Cip5yGABUWmAW6olAAECEkYbH8U406.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yGABUWmAW6olAAECEkYbH8U406.png" alt="png" /></p>
 <p>图 4 分片键结构</p>
 <p>其中有效部分有三个。</p>
 <ol>
@@ -280,21 +280,21 @@ function hide_canvas() {
 <p>用户通过以上多种分片工具，可以灵活和统一地制定数据库分片策略。</p>
 <h4>自动分片</h4>
 <p>ShardingShpere 提供了 Sharding-Scale 来支持数据库节点弹性伸缩，该功能就是其对自动分片的支持。下图是自动分片功能展示图，可以看到经过 Sharding-Scale 的特性伸缩，原有的两个数据库扩充为三个。</p>
-<p><img src="assets/CgqCHmABUYSAb4GHAAQVlwbl-X4314.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHmABUYSAb4GHAAQVlwbl-X4314.png" alt="png" /></p>
 <p>图 5 自动分片功能展示</p>
 <p>自动分片包含下图所示的四个过程。</p>
-<p><img src="assets/Ciqc1GABUY2ACpn4AAM1n2uEO-A067.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1GABUY2ACpn4AAM1n2uEO-A067.png" alt="png" /></p>
 <p>图 6 自动分片过程</p>
 <p>从图 6 中可以看到，通过该工作量，ShardingShpere 可以支持复杂的基于哈希的自动分片。同时我们也应该看到，没有专业和自动化的弹性扩缩容工具，想要实现自动化分片是非常困难的。</p>
 <p>以上就是分片算法的实际案例，使用的是经典的水平分片模式。而目前水平和垂直分片有进一步合并的趋势，下面要介绍的 TiDB 正代表着这种融合趋势。</p>
 <h3>垂直与水平分片融合案例</h3>
 <p>TiDB 就是一个垂直与水平分片融合的典型案例，同时该方案也是 HATP 融合方案。</p>
 <p>其中水平扩展依赖于底层的 TiKV，如下图所示。</p>
-<p><img src="assets/Ciqc1GABUZWAF6UYAACmuUoCK3Y948.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1GABUZWAF6UYAACmuUoCK3Y948.png" alt="png" /></p>
 <p>图 7 TiKV</p>
 <p>TiKV 使用范围分片的模式，数据被分配到 Region 组里面。一个分组保持三个副本，这保证了高可用性（相关内容会在“05 | 一致性与 CAP 模型：为什么需要分布式一致性？”中详细介绍）。当 Region 变大后，会被拆分，新分裂的 Region 也会产生多个副本。</p>
 <p>TiDB 的水平扩展依赖于 TiFlash，如下图所示。</p>
-<p><img src="assets/Ciqc1GABUZ-AAH-KAAJGbLaxtiI142.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1GABUZ-AAH-KAAJGbLaxtiI142.png" alt="png" /></p>
 <p>图 8 TiFlash</p>
 <p>从图 8 中可以看到 TiFlash 是 TiKV 的列扩展插件，数据异步从 TiKV 里面复制到 TiFlash，而后进行列转换，其中要使用 MVCC 技术来保证数据的一致性。</p>
 <p>上文所述的 Region 会增加一个新的异步副本，而后该副本进行了数据切分，并以列模式组合到 TiFlash 中，从而达到了水平和垂直扩展在同一个数据库的融合。这是两种数据库引擎的融合。</p>

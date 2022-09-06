@@ -278,20 +278,20 @@ function hide_canvas() {
 <p><strong>apt</strong></p>
 <p>接下来我们来重点说说<code>apt</code>，然后再一起尝试使用。因为我这次是用<code>ubuntu</code>Linux 给你教学，所以我以 apt 为例子，yum 的用法是差不多的，你可以自己 man 一下。</p>
 <p><code>apt</code>全名是 Advanced Packaging Tools，是一个<code>debian</code>及其衍生 Linux 系统下的包管理器。由于<code>advanced</code>（先进）是相对于<code>dpkg</code>而言的，因此它也能够提供和<code>yum</code>类似的下载和依赖管理能力。比如在没有<code>vim</code>的机器上，我们可以用下面的指令安装<code>vim</code>。如下图所示：</p>
-<p><img src="assets/CgqCHl99kUCAc2xOAAHulKDtr4U742.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl99kUCAc2xOAAHulKDtr4U742.png" alt="png" /></p>
 <p>然后用<code>dpkg</code>指令查看 vim 的状态是<code>ii</code>。第一个<code>i</code>代表期望状态是已安装，第二个<code>i</code>代表实际状态是已安装。</p>
 <p>下面我们卸载<code>vim</code>，再通过<code>dpkg</code>查看，如下图所示：</p>
-<p><img src="assets/CgqCHl99kUuAJZSuAAW-FE-CgIY627.png" alt="Drawing 1.png" /></p>
-<p><img src="assets/CgqCHl99kVCAT9-sAAJPZUhXt9k401.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl99kUuAJZSuAAW-FE-CgIY627.png" alt="png" /></p>
+<p><img src="assets/CgqCHl99kVCAT9-sAAJPZUhXt9k401.png" alt="png" /></p>
 <p>我们看到 vim 的状态从<code>ii</code>变成了<code>rc</code>，<code>r</code>是期望删除，<code>c</code>是实际上还有配置文件遗留。 如果我们想彻底删除配置文件，可以使用<code>apt purge</code>，就是彻底清除的意思，如下图所示：</p>
-<p><img src="assets/Ciqc1F99kViANbVLAAPQJy3qAX8926.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F99kViANbVLAAPQJy3qAX8926.png" alt="png" /></p>
 <p>再使用<code>dpkg -l</code>时，<code>vim</code>已经清除了。</p>
-<p><img src="assets/Ciqc1F99kV-ACJvxAAIopnvusfs472.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F99kV-ACJvxAAIopnvusfs472.png" alt="png" /></p>
 <p>期待结果是<code>u</code>就是 unkonw（未知）说明已经没有了。实际结果是<code>n</code>，就是 not-installed（未安装）。</p>
 <p>如果想查询<code>mysql</code>相关的包，可以使用<code>apt serach mysql</code>，这样会看到很多和<code>mysql</code>相关的包，如下图所示：</p>
-<p><img src="assets/CgqCHl99kWeANmD6AAUugWzWDUE531.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl99kWeANmD6AAUugWzWDUE531.png" alt="png" /></p>
 <p>如果我们想精确查找一个叫作<code>mysql-server</code>的包，可以用<code>apt list</code>。</p>
-<p><img src="assets/Ciqc1F99kWyAf1pzAAFI7ot6YSY175.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F99kWyAf1pzAAFI7ot6YSY175.png" alt="png" /></p>
 <p>这里我们找到了<code>mysql-server</code>包。</p>
 <p>另外有时候国内的<code>apt</code>服务器速度比较慢，你可以尝试使用阿里云的镜像服务器。具体可参考我下面的操作：</p>
 <pre><code>cat /etc/apt/sources.list
@@ -308,57 +308,57 @@ deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted univers
 deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
 </code></pre>
 <p>镜像地址可以通过<code>/etc/apt/sources.list</code>配置，注意<code>focal</code>是我用的<code>ubuntu</code>版本，你可以使用<code>sudo lsb_release</code>查看自己的 Ubuntu 版本。如果你想用我上面给出的内容覆盖你的<code>sources.list</code>，只需把版本号改成你自己的。注意，每个<code>ubuntu</code>版本都有自己的代号。</p>
-<p><img src="assets/CgqCHl99kYCARaKvAAGzk1pe8DY132.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl99kYCARaKvAAGzk1pe8DY132.png" alt="png" /></p>
 <p>通过上面的学习，相信你已经逐渐了解了包管理器的基本概念和使用。如果你是<code>centos</code>或者<code>fedora</code>，需要自己<code>man</code>一下<code>yum</code>。</p>
 <h3>编译安装 Nginx</h3>
 <p>接下来我们说说编译安装 Nginx（发音是 engine X），是一个家喻户晓的 Web 服务器。 它的发明者是俄国的伊戈尔·赛索耶夫。赛索耶夫 2002 年开始写 Nginx，主要目的是解决同一个互联网节点同时进入大量并发请求的问题。注意，大量并发请求不是大量 QPS 的意思，QPS 是吞吐量大，需要快速响应，而高并发时则需要合理安排任务调度。</p>
 <p>后来塞索耶夫成立了 Nginx 公司， 2018 年估值到达到 4.3 亿美金。现在基本上国内大厂的 Web 服务器都是基于 Nginx，只不过进行了特殊的修改，比如淘宝用 Tengine。</p>
 <p>下面我们再来看看源码安装，在 Linux 上获取<code>nginx</code>源码，可以去搜索 <a href="https://nginx.org/en/docs/">Nginx 官方网站</a>，一般都会提供源码包。</p>
-<p><img src="assets/CgqCHl99kYmAXQUyAADGX8gwStA669.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl99kYmAXQUyAADGX8gwStA669.png" alt="png" /></p>
 <p>如上图所示，可以看到 nginx-1.18.0 的网址是：<a href="https://nginx.org/download/nginx-1.19.2.tar.gz">http://nginx.org/download/nginx-1.19.2.tar.gz</a>。然后我们用 wget 去下载这个包。 wget 是 GNU 项目下的下载工具，GNU 是早期<code>unix</code>项目的一个变种。<code>linux</code>下很多工具都是从<code>unix</code>继承来的，这就是开源的好处，很多工具不用再次开发了。你可能很难想象<code>windows</code>下的命令工具可以在<code>linux</code>下用，但是<code>linux</code>下的工具却可以在任何系统中用。 因此，<code>linux</code>下面的工具发展速度很快，如今已成为最受欢迎的服务器操作系统。</p>
 <p>当然也有同学的机器上没有<code>wget</code>，那么你可以用<code>apt</code>安装一下。</p>
 <ul>
 <li>第一步：下载源码。我们使用<code>wget</code>下载<code>nginx</code>源码包：</li>
 </ul>
-<p><img src="assets/Ciqc1F99kZWABdtDAAPejhy3vW4914.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F99kZWABdtDAAPejhy3vW4914.png" alt="png" /></p>
 <p>可以像我这样使用<code>cd</code>先切换到家目录。</p>
 <ul>
 <li>第二步：解压。我们解压下载好的<code>nginx</code>源码包。</li>
 </ul>
-<p><img src="assets/CgqCHl99kZ2AaXuiAAH8DdruTtI020.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl99kZ2AaXuiAAH8DdruTtI020.png" alt="png" /></p>
 <p>用<code>ls</code>发现包已经存在了，然后使用<code>tar</code>命令解压。</p>
 <p><code>tar</code>是用来打包和解压用的。之所以叫作<code>tar</code>是有一些历史原因：<code>t</code>代表<code>tape</code>（磁带）；<code>ar</code>是 archive（档案）。因为早期的存储介质很小，人们习惯把文件打包然后存储到磁带上，那时候<code>unix</code>用的命令就是<code>tar</code>。因为<code>linux</code>是个开源生态，所以就沿袭下来继续使用<code>tar</code>。</p>
 <p><code>-x</code>代表 extract（提取）。-z代表<code>gzip</code>，也就是解压<code>gz</code>类型的文件。<code>-v</code>代表 verbose（显示细节），如果你不输入<code>-v</code>，就不会打印解压过程了。<code>-f</code>代表 file，这里指的是要操作文件，而不是磁带。 所以<code>tar</code>解压通常带有<code>x</code>和<code>f</code>，打包通常是<code>c</code>就是 create 的意思。</p>
 <ul>
 <li>第三步：配置和解决依赖。解压完，我们进入<code>nginx</code>的目录看一看。 如下图所示：</li>
 </ul>
-<p><img src="assets/CgqCHl99kaWALMdgAAD3nrZGCkk000.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl99kaWALMdgAAD3nrZGCkk000.png" alt="png" /></p>
 <p>可以看到一个叫作<code>configure</code>的文件是绿色的，也就是可执行文件。然后我们执行 configure 文件进行配置，这个配置文件来自一款叫作<code>autoconf</code>的工具，也是 GNU 项目下的，说白了就是<code>bash</code>（Bourne Shell）下的安装打包工具（就是个安装程序）。这个安装程序支持很多配置，你可以用<code>./configure --help</code>看到所有的配置项，如下图所示：</p>
-<p><img src="assets/Ciqc1F99kayAZu1TAAJeaol9wiw800.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/Ciqc1F99kayAZu1TAAJeaol9wiw800.png" alt="png" /></p>
 <p>这里有几个非常重要的配置项，叫作<code>prefix</code>。<code>prefix</code>配置项决定了软件的安装目录。如果不配置这个配置项，就会使用默认的安装目录。<code>sbin-path</code>决定了<code>nginx</code>的可执行文件的位置。<code>conf-path</code>决定了<code>nginx</code>配置文件的位置。我们都使用默认，然后执行<code>./configure</code>，如下图所示：</p>
-<p><img src="assets/Ciqc1F99kbKAYqiXAAEc3ZFDVtE635.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/Ciqc1F99kbKAYqiXAAEc3ZFDVtE635.png" alt="png" /></p>
 <p><code>autoconf</code>进行依赖检查的时候，报了一个错误，cc 没有找到。这是因为机器上没有安装<code>gcc</code>工具，gcc 是家喻户晓的工具套件，全名是 GNU Compiler Collection——里面涵盖了包括 c/c++ 在内的多门语言的编译器。</p>
 <p>我们用包管理器，安装<code>gcc</code>，如下图所示。安装<code>gcc</code>通常是安装<code>build-essential</code>这个包。</p>
-<p><img src="assets/CgqCHl99kbqAG6m9AARoq2Xsv_8899.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/CgqCHl99kbqAG6m9AARoq2Xsv_8899.png" alt="png" /></p>
 <p>安装完成之后，再执行<code>./configure</code>，如下图所示：</p>
-<p><img src="assets/CgqCHl99kcOAAUTtAAS2nlzDoGk494.png" alt="Drawing 15.png" /></p>
+<p><img src="assets/CgqCHl99kcOAAUTtAAS2nlzDoGk494.png" alt="png" /></p>
 <p>我们看到配置程序开始执行。但是最终报了一个错误，如下图所示：</p>
-<p><img src="assets/CgqCHl99kcqAGqIuAAHKhlCMtYs244.png" alt="Drawing 16.png" /></p>
+<p><img src="assets/CgqCHl99kcqAGqIuAAHKhlCMtYs244.png" alt="png" /></p>
 <p>报错的内容是，<code>nginx</code>的<code>HTTP rewrite</code>模块，需要<code>PCRE</code>库。 PCRE 是<code>perl</code>语言的兼容正则表达式库。<code>perl</code>语言一直以支持原生正则表达式，而受到广大编程爱好者的喜爱。我曾经看到过一个 IBM 的朋友用<code>perl</code>加上<code>wget</code>就实现了一个简单的爬虫。接下来，我们开始安装<code>PCRE</code>。</p>
 <p>一般这种依赖库，会叫<code>pcre-dev</code>或者<code>libpcre</code>。用<code>apt</code>查询了一下，然后<code>grep</code>。</p>
-<p><img src="assets/CgqCHl99kdKATX0xAAgMkowaX1E974.png" alt="Drawing 17.png" /></p>
+<p><img src="assets/CgqCHl99kdKATX0xAAgMkowaX1E974.png" alt="png" /></p>
 <p>我们看到有<code>pcre2</code>也有<code>pcre3</code>。这个时候可以考虑试试<code>pcre3</code>。</p>
-<p><img src="assets/CgqCHl99kdqACqo1AAfnaBqjC1Y752.png" alt="Drawing 18.png" /></p>
+<p><img src="assets/CgqCHl99kdqACqo1AAfnaBqjC1Y752.png" alt="png" /></p>
 <p>安装完成之后再试试<code>./configure</code>，提示还需要<code>zlib</code>。然后我们用类似的方法解决<code>zlib</code>依赖。</p>
-<p><img src="assets/CgqCHl99keKACHklAAVMkWAY8Es203.png" alt="Drawing 19.png" /></p>
+<p><img src="assets/CgqCHl99keKACHklAAVMkWAY8Es203.png" alt="png" /></p>
 <p><code>zlib</code>包的名字叫<code>zlib1g</code>不太好找，需要查资料才能确定是这个名字。</p>
 <p>我们再尝试配置，终于配置成功了。</p>
-<p><img src="assets/Ciqc1F99ke2AFl_pAAcxoAUgdw0867.png" alt="Drawing 20.png" /></p>
+<p><img src="assets/Ciqc1F99ke2AFl_pAAcxoAUgdw0867.png" alt="png" /></p>
 <ul>
 <li>第四步：编译和安装。</li>
 </ul>
 <p>通常配置完之后，我们输入<code>make &amp;&amp; sudo make install</code>进行编译和安装。<code>make</code>是<code>linux</code>下面一个强大的构建工具。<code>autoconf</code>也就是<code>./configure</code>会在当前目录下生成一个 MakeFile 文件。<code>make</code>会根据<code>MakeFile</code>文件编译整个项目。编译完成后，能够形成和当前操作系统以及 CPU 指令集兼容的二进制可执行文件。然后再用<code>make install</code>安装。<code>&amp;&amp;</code>符号代表执行完<code>make</code>再去执行<code>make installl</code>。</p>
-<p><img src="assets/Ciqc1F99kfaAFXguAAr_SGo4e8E213.png" alt="Drawing 21.png" /></p>
+<p><img src="assets/Ciqc1F99kfaAFXguAAr_SGo4e8E213.png" alt="png" /></p>
 <p>你可以看到编译是个非常慢的活。等待了差不多 1 分钟，终于结束了。<code>nginx</code>被安装到了<code>/usr/local/nginx</code>中，如果需要让<code>nginx</code>全局执行，可以设置一个软连接到<code>/usr/local/bin</code>，具体如下：</p>
 <pre><code>ln -sf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
 </code></pre>

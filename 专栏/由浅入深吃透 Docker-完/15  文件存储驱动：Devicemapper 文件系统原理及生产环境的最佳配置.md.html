@@ -191,7 +191,7 @@ function hide_canvas() {
 <li>目标设备（target device）：目标设备是映射设备对应的物理设备或者物理设备的某一个逻辑分段，是真正存在于物理机上的设备。</li>
 <li>映射表（map table）：映射表记录了映射设备到目标设备的映射关系，它记录了映射设备在目标设备的起始地址、范围和目标设备的类型等变量。</li>
 </ul>
-<p><img src="assets/CgqCHl-GyFOAG6TPAACE_8cMjoQ585.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl-GyFOAG6TPAACE_8cMjoQ585.png" alt="png" /></p>
 <p>图 1 Devicemapper 核心概念关系图</p>
 <p>Devicemapper 三个核心概念之间的关系如图 1，<strong>映射设备通过映射表关联到具体的物理目标设备。事实上，映射设备不仅可以通过映射表关联到物理目标设备，也可以关联到虚拟目标设备，然后虚拟目标设备再通过映射表关联到物理目标设备。</strong></p>
 <p>Devicemapper 在内核中通过很多模块化的映射驱动（target driver）插件实现了对真正 IO 请求的拦截、过滤和转发工作，比如 Raid、软件加密、瘦供给（Thin Provisioning）等。其中瘦供给模块是 Docker 使用 Devicemapper 技术框架中非常重要的模块，下面我们来详细了解下瘦供给（Thin Provisioning）。</p>
@@ -223,7 +223,7 @@ function hide_canvas() {
 </ul>
 <p>当我们需要读取数据时，如果数据存在底层快照中，则向底层快照查询数据并读取。当我们需要写数据时，则向瘦供给池动态申请存储空间生成读写层，然后把数据复制到读写层进行修改。Devicemapper 默认每次申请的大小是 64K 或者 64K 的倍数，因此每次新生成的读写层的大小都是 64K 或者 64K 的倍数。</p>
 <p>以下是一个运行中的 Ubuntu 容器示意图。</p>
-<p><img src="assets/CgqCHl-GyHeAX_zKAABoNW4U26c205.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl-GyHeAX_zKAABoNW4U26c205.png" alt="png" /></p>
 <p>图 2 Devicemapper 存储模型</p>
 <p>这个 Ubuntu 镜像一共有四层，每一层镜像都是下一层的快照，镜像的最底层是基础设备的快照。当容器运行时，容器是基于镜像的快照。综上，Devicemapper 实现镜像分层的根本原理就是快照。</p>
 <p>接下来，我们看下如何配置 Docker 的 Devicemapper 模式。</p>

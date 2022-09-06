@@ -202,7 +202,7 @@ function hide_canvas() {
 <p>现在我就和你一起，把一致性模型的知识体系补充完整。</p>
 <h3>完整的一致性模型</h3>
 <p>完整的一致性模型如下图所示。</p>
-<p><img src="assets/Cgp9HWBCAs-AXQ4kAABf1EJoKHo006.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWBCAs-AXQ4kAABf1EJoKHo006.png" alt="png" /></p>
 <p>图中不同的颜色代表了可用性的程度，下面我来具体说说。</p>
 <ol>
 <li>粉色代表网络分区后完全不可用。也就是 CP 类的数据库。</li>
@@ -265,7 +265,7 @@ function hide_canvas() {
 <p>由于目前 CRDT 算法仍然处于高速发展的阶段，为了方便你理解，我这里选取携程网内部 Redis 集群一致性方案，它的技术选型相对实用。如果你对 CRDT 有兴趣，可以进一步研究，这里就不对诸如 PN-Counter、G-Set 等做进一步说明了。</p>
 <p>由于 Redis 最常用的处理手段是设置字符串数据，故需要使用 CRDT 中的 register 进行处理。携程团队选择了经典的 LWW Regsiter，也就是最后写入胜利的冲突处理方案。</p>
 <p>这种方案，最重要的是数据上需要携带时间戳。我们用下图来说明它的流程。</p>
-<p><img src="assets/Cgp9HWBCAuiAPfgGAABs8POB6vo270.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWBCAuiAPfgGAABs8POB6vo270.png" alt="png" /></p>
 <p>从图中可以看到，每个节点的数据是一个二元组，分别是 value 和 timestamp。可以看到节点间合并数据是根据 timestamp，也就是谁的 timestamp 大，合并的结果就以哪个值为准。使用 LWW Register 可以保证高并发下合并结果最终一致。</p>
 <p>而删除时，就需要另外一种算法了。那就是 Observed-Remove SET（OR Set），其主要的目的是解决一般算法无法删除后重新增加该值的情况。</p>
 <p>它相较于 LWW-Register 会复杂一些，除了时间戳以外，还需要给每个值标记一个唯一的 tag。比如上图中 P1 设置（1，3），实际需要设置（1α，3）；而后如果删除 1，集合就为空；再添加 1 时，标签就需要与一开始不同，为（1β，5）。这样就保证步骤 2 中的删除操作不会影响步骤 3 中的增加操作。因为它们虽然数值相同，但是标签不同，所以都是唯一的。</p>

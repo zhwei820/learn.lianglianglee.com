@@ -363,13 +363,13 @@ store R2 -&gt; $r
 <li>返回值如何传递给调用者？</li>
 </ol>
 <p>为了解决这 2 个问题，我们就需要用到前面提到的一个叫作栈的数据结构。栈的英文是 Stack，意思是码放整齐的一堆东西。首先在调用方，我们将参数传递给栈；然后在函数执行过程中，我们从栈中取出参数。</p>
-<p><img src="assets/Ciqc1F9h5mWAGqrjAABpcF79u8M632.png" alt="Lark20200916-181251.png" /></p>
+<p><img src="assets/Ciqc1F9h5mWAGqrjAABpcF79u8M632.png" alt="png" /></p>
 <p>函数执行过程中，先将执行结果写入栈中，然后在返回前把之前压入的参数出栈，调用方再从栈中取出执行结果。</p>
-<p><img src="assets/CgqCHl9h5m2ALcHaAABs3s6zJkQ202.png" alt="Lark20200916-181255.png" /></p>
+<p><img src="assets/CgqCHl9h5m2ALcHaAABs3s6zJkQ202.png" alt="png" /></p>
 <p>将参数传递给 Stack 的过程，叫作压栈。取出结果的过程，叫作出栈。栈就好像你书桌上的一摞书，压栈就是把参数放到书上面，出栈就是把顶部的书拿下来。</p>
 <p>因为栈中的每个数据大小都一样，所以在函数执行的过程中，我们可以通过参数的个数和参数的序号去计算参数在栈中的位置。</p>
 <p>接下来我们来看看函数执行的整体过程：假设要计算 11 和 15 的和，我们首先在内存中开辟一块单独的空间，也就是栈。</p>
-<p><img src="assets/Ciqc1F9h5nWAFY-ZAAAwk_1T41E731.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9h5nWAFY-ZAAAwk_1T41E731.png" alt="png" /></p>
 <p>就如前面所讲，栈的使用方法是不断往上堆数据，所以需要一个栈指针（Stack Pointer， SP）指向栈顶（也就是下一个可以写入的位置）。每次将数据写入栈时，就把数据写到栈指针指向的位置，然后将 SP 的值增加。</p>
 <p>为了提高效率，我们通常会用一个特殊的寄存器来存储栈指针，这个寄存器就叫作 Stack Pointer，在大多数芯片中都有这个特殊的寄存器。一开始，SP 指向 0x100 位置，而 0x100 位置还没有数据。</p>
 <ul>
@@ -383,18 +383,18 @@ add SP, 4, SP  // 栈指针增加4（32位机器）
 <p>第二条指令将栈指针自增 4。</p>
 <p>这里用美元符号代表将 11 存入的是 SP 寄存器指向的内存地址，这是一次间接寻址。存入后，栈指针不是自增 1 而是自增了 4，因为我在这里给你讲解时，用的是一个 32 位宽的 CPU 。如果是 64 位宽的 CPU，那么栈指针就需要自增 8。</p>
 <p>压栈完成后，内存变成下图中所示的样子。11 被写入内存，并且栈指针指向了 0x104 位置。</p>
-<p><img src="assets/Ciqc1F9h5n-APEFtAAAy3ahEVnE846.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9h5n-APEFtAAAy3ahEVnE846.png" alt="png" /></p>
 <ul>
 <li><strong>压栈参数15</strong></li>
 </ul>
 <p>然后我们用同样的方法将参数 15 压栈。</p>
-<p><img src="assets/CgqCHl9h5oWAejVOAAA-DX72fJI426.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9h5oWAejVOAAA-DX72fJI426.png" alt="png" /></p>
 <p>压栈后，11 和 15 都被放入了对应的内存位置，并且栈指针指向了 0x108。</p>
 <ul>
 <li><strong>将返回值压栈</strong></li>
 </ul>
 <p>接下来，我们将返回值压栈。到这里你可能会问，返回值还没有计算呢，怎么就压栈了？其实这相当于一个占位，后面我们会改写这个地址。</p>
-<p><img src="assets/CgqCHl9h5o2ARmc3AABEUYqLaKo705.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9h5o2ARmc3AABEUYqLaKo705.png" alt="png" /></p>
 <ul>
 <li><strong>调用函数</strong></li>
 </ul>
@@ -414,7 +414,7 @@ load $(SP - 8) -&gt; R1
 </code></pre>
 <p>上面我们用到了一种间接寻址的方式来进行加和运算，也就是利用 SP 中的地址做加减法操作内存。</p>
 <p>经过函数调用的结果如下图所示，运算结果 26 已经被写入了返回值的位置：</p>
-<p><img src="assets/Ciqc1F9h5pWAQ-8nAABHqkFWy4k580.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9h5pWAQ-8nAABHqkFWy4k580.png" alt="png" /></p>
 <ul>
 <li><strong>发现-解决问题</strong></li>
 </ul>
@@ -424,7 +424,7 @@ load $(SP - 8) -&gt; R1
 <li>栈不可以被无限使用，11和 15 作为参数，计算出了结果 26，那么它们就可以清空了。如果用调整栈指针的方式去清空，我们就会先清空 26。此时就会出现顺序问题，因此我们需要调整压栈的顺序。</li>
 </ol>
 <p>具体顺序你可以看下图。首先，我们将函数参数和返回值换位，这样在清空数据的时候，就会先清空参数，再清空返回值。</p>
-<p><img src="assets/CgqCHl_lhT6AP75kAAD-cUrMUNg773.png" alt="Lark20201225-140329.png" /></p>
+<p><img src="assets/CgqCHl_lhT6AP75kAAD-cUrMUNg773.png" alt="png" /></p>
 <p>然后我们在调用函数前，还需要将返回地址压栈。这样在函数计算完成前，就能跳转回对应的返回地址。翻译成指令，就是下面这样：</p>
 <pre><code>## 压栈返回值
 add SP, 4  -&gt; SP
@@ -447,11 +447,11 @@ add SP, -(参数个数+1)*4， SP
 }
 </code></pre>
 <p>递归的时候，我们每次执行函数都形成一个如下所示的栈结构：</p>
-<p><img src="assets/CgqCHl_lhQKAIVTlAAD-cUrMUNg043.png" alt="Lark20201225-140329.png" /></p>
+<p><img src="assets/CgqCHl_lhQKAIVTlAAD-cUrMUNg043.png" alt="png" /></p>
 <p>比如执行 sum(100)，我们就会形成一个复杂的栈，第一次调用 n = 100，第二次递归调用 n = 99：</p>
-<p><img src="assets/CgqCHl9kbw6AEGmQAADNH1dIS2Q053.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl9kbw6AEGmQAADNH1dIS2Q053.png" alt="png" /></p>
 <p>它们堆在了一起，就形成了一个很大的栈，简化一下就是这样的一个模型，如下所示：</p>
-<p><img src="assets/Ciqc1F9kcBCAalP8AACq_zc_LfM551.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F9kcBCAalP8AACq_zc_LfM551.png" alt="png" /></p>
 <p>到这里，递归消耗了更多空间，但是也保证了中间计算的独立性。当递归执行到 100 次的时候，就会执行下面的语句：</p>
 <pre><code> if(n == 1) {return 1;}
 </code></pre>
@@ -469,7 +469,7 @@ add SP, -(参数个数+1)*4， SP
 <li>函数调用需要压栈参数、返回值和返回地址。</li>
 </ul>
 <p>最后，我们来说说类型是如何实现的，也就是很多语言都支持的 class 如何被翻译成指令。其实 class 实现非常简单，首先一个 class 会分成两个部分，一部分是数据（也称作属性），另一部分是函数（也称作方法）。</p>
-<p><img src="assets/Ciqc1F9h5rmANakFAACFALCOZaU910.png" alt="Lark20200916-181235.png" /></p>
+<p><img src="assets/Ciqc1F9h5rmANakFAACFALCOZaU910.png" alt="png" /></p>
 <p>class 有一个特殊的方法叫作构造函数，它会为 class 分配内存。构造函数执行的时候，开始扫描类型定义中所有的属性和方法。</p>
 <ul>
 <li>如果遇到属性，就为属性分配内存地址；</li>

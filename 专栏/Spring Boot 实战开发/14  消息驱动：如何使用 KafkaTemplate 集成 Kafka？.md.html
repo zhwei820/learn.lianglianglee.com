@@ -179,12 +179,12 @@ function hide_canvas() {
 <p>在用户账户信息变更时，account-service 首先会发送一个消息告知某个用户账户信息已经发生变化，然后通知所有对该消息感兴趣的服务。而在 SpringCSS 案例中，这个服务就是 customer-service，相当于是这个消息的订阅者和消费者。</p>
 <p>通过这种方式，customer-service 就可以快速获取用户账户变更消息，从而正确且高效地处理本地的用户账户数据。</p>
 <p>整个场景的示意图见下图：</p>
-<p><img src="assets/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl_ivJ2AZMUlAABJyFFnmMc174.png" alt="png" /></p>
 <p>用户账户更新场景中的消息通信机制</p>
 <p>上图中我们发现，消息通信机制使得我们不必花费太大代价即可实现整个交互过程，简单而方便。</p>
 <h4>消息通信机制简介</h4>
 <p>消息通信机制的整体工作流程如下图所示：</p>
-<p><img src="assets/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_ivKyAXQR_AABdUOvR5RQ298.png" alt="png" /></p>
 <p>消息通信机制示意图</p>
 <p>上图中位于流程中间的就是各种消息中间件，<strong>消息中间件</strong>一般提供了消息的发送客户端和接收客户端组件，这些客户端组件会嵌入业务服务中。</p>
 <p><strong>消息的生产者</strong>负责产生消息，在实际业务中一般由业务系统充当生产者；而<strong>消息的消费者</strong>负责消费消息，在实际业务中一般是后台系统负责异步消费。</p>
@@ -196,7 +196,7 @@ function hide_canvas() {
 <p>在讨论如何使用 KafkaTemplate 实现与 Kafka 之间的集成方法之前，我们先来简单了解 Kafka 的基本架构，再引出 Kafka 中的几个核心概念。</p>
 <h4>Kafka 基本架构</h4>
 <p>Kafka 基本架构参考下图，从中我们可以看到 Broker、Producer、Consumer、Push、Pull 等消息通信系统常见概念在 Kafka 中都有所体现，生产者使用 Push 模式将消息发布到 Broker，而消费者使用 Pull 模式从 Broker 订阅消息。</p>
-<p><img src="assets/Ciqc1F_ivLaAVULIAABdyI31l0s036.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F_ivLaAVULIAABdyI31l0s036.png" alt="png" /></p>
 <p>Kafka 基本架构图</p>
 <p><strong>在上图中我们注意到，Kafka 架构图中还使用了 Zookeeper。</strong></p>
 <p>Zookeeper 中存储了 Kafka 的元数据及消费者消费偏移量（Offset），其作用在于实现 Broker 和消费者之间的负载均衡。因此，如果我们想要运行 Kafka，首先需要启动 Zookeeper，再启动 Kafka 服务器。</p>
@@ -271,7 +271,7 @@ public @interface KafkaListener {
 <p>设计消费者组的目的是应对集群环境下的多服务实例问题。显然，如果采用发布-订阅模式会导致一个服务的不同实例可能会消费到同一条消息。</p>
 <p>为了解决这个问题，Kafka 中提供了消费者组的概念。一旦我们使用了消费组，一条消息只能被同一个组中的某一个服务实例所消费。</p>
 <p>消费者组的基本结构如下图所示：</p>
-<p><img src="assets/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yF_ivMqAG6llAAA6iqKiy-M353.png" alt="png" /></p>
 <p>Kafka 消费者组示意图</p>
 <p>使用 @KafkaListener 注解时，我们把它直接添加在处理消息的方法上即可，如下代码所示：</p>
 <pre><code>@KafkaListener(topics = “demo.topic”)

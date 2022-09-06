@@ -165,7 +165,7 @@ function hide_canvas() {
 <h3>并行获取数据</h3>
 <p>考虑到下面一种场景。有一个用户数据接口，要求在 50ms 内返回数据。它的调用逻辑非常复杂，打交道的接口也非常多，需要从 20 多个接口汇总数据。这些接口，最小的耗时也要 20ms，哪怕全部都是最优状态，算下来也需要 20*20 = 400ms。</p>
 <p>如下图，解决的方式只有并行，通过多线程同时去获取计算结果，最后进行结果拼接。</p>
-<p><img src="assets/CgqCHl8856-AdSNPAACjNbY02o4445.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8856-AdSNPAACjNbY02o4445.png" alt="png" /></p>
 <p>但这种编程模型太复杂了，如果使用原始的线程 API，或者使用 wait、notify 等函数，代码的复杂度可以想象有多大。但幸运的是，现在 Java 中的大多数并发编程场景，都可以使用 concurrent 包的一些工具类来实现。</p>
 <p>在这种场景中，我们就可以使用 <strong>CountDownLatch</strong> 完成操作。CountDownLatch 本质上是一个计数器，我们把它初始化为与执行任务相同的数量。当一个任务执行完时，就将计数器的值减 1，直到计数器值达到 0 时，表示完成了所有的任务，在 await 上等待的线程就可以继续执行下去。</p>
 <p>下面这段代码，是我专门为这个场景封装的一个工具类。它传入了两个参数：一个是要计算的 job 数量，另外一个是整个大任务超时的毫秒数。</p>
@@ -258,7 +258,7 @@ function hide_canvas() {
 </code></pre>
 <p>前几个参数没有什么好说的，相对于普通对象池而言，由于线程资源总是有效，它甚至少了非常多的 Idle 配置参数（与对象池比较），我们主要来看一下 workQueue 和 handler。</p>
 <p>关于任务的创建过程，可以说是多线程每次必问的问题了。如下图所示，任务被提交后，首先判断它是否达到了最小线程数（coreSize），如果达到了，就将任务缓存在任务队列里。如果队列也满了，会判断线程数量是否达到了最大线程数（maximumPoolSize），如果也达到了，就会进入任务的拒绝策略（handler）。</p>
-<p><img src="assets/Ciqc1F8858qAEUHZAACDI8Y5Ehc385.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8858qAEUHZAACDI8Y5Ehc385.png" alt="png" /></p>
 <p>我们来看一下 Executors 工厂类中默认的几个快捷线程池代码。</p>
 <p><strong>1.固定大小线程池</strong></p>
 <pre><code>public static ExecutorService newFixedThreadPool(int nThreads) {
@@ -290,7 +290,7 @@ function hide_canvas() {
 <p>SpringBoot 中可以非常容易地实现异步任务。</p>
 <p>首先，我们需要在启动类上加上 @EnableAsync 注解，然后在需要异步执行的方法上加上 @Async 注解。一般情况下，我们的任务直接在后台运行就可以，但有些任务需要返回一些数据，这个时候，就可以使用 Future 返回一个代理，供其他的代码使用。</p>
 <p>关键代码如下：</p>
-<p><img src="assets/CgqCHl88596AfI6BAAQTo7l7qJs148.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl88596AfI6BAAQTo7l7qJs148.png" alt="png" /></p>
 <p>默认情况下，Spring 将启动一个默认的线程池供异步任务使用。这个线程池也是无限大的，资源使用不可控，所以强烈建议你使用代码设置一个适合自己的。</p>
 <pre><code>@Bean
 public ThreadPoolTaskExecutor getThreadPoolTaskExecutor() {
@@ -317,7 +317,7 @@ public ThreadPoolTaskExecutor getThreadPoolTaskExecutor() {
 </ul>
 <p>下面以一个经常发生问题的案例，来说一下线程安全的重要性。</p>
 <p>SimpleDateFormat 是我们经常用到的日期处理类，但它本身不是线程安全的，在多线程运行环境下，会产生很多问题，在以往的工作中，通过 sonar 扫描，我发现这种误用的情况特别的多。<strong>在面试中，我也会专门问到 SimpleDateFormat，用来判断面试者是否具有基本的多线程编程意识。</strong></p>
-<p><img src="assets/CgqCHl885-eAAm9sAACoGWQZ14E564.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl885-eAAm9sAACoGWQZ14E564.png" alt="png" /></p>
 <p>执行上图的代码，可以看到，时间已经错乱了。</p>
 <pre><code>Thu May 01 08:56:40 CST 618104
 Thu May 01 08:56:40 CST 618104
@@ -329,7 +329,7 @@ Wed Dec 25 08:56:40 CST 2019
 Sun Jul 13 01:55:40 CST 20220200
 </code></pre>
 <p>解决方式就是使用 ThreadLocal 局部变量，代码如下图所示，可以有效地解决线程安全问题。</p>
-<p><img src="assets/CgqCHl885-6AEAKjAADZkiqqLtY077.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl885-6AEAKjAADZkiqqLtY077.png" alt="png" /></p>
 <p><strong>2.线程的同步方式</strong></p>
 <p>Java 中实现线程同步的方式有很多，大体可以分为以下 8 类。</p>
 <ul>
@@ -343,7 +343,7 @@ Sun Jul 13 01:55:40 CST 20220200
 <li>使用 Thread 类的 join 方法，可以让多线程按照指定的顺序执行。</li>
 </ul>
 <p>下面的截图，是使用 LinkedBlockingQueue 实现的一个简单生产者和消费者实例，<strong>在很多互联网的笔试环节，这个题目会经常出现。</strong> 可以看到，我们还使用了一个 volatile 修饰的变量，来决定程序是否继续运行，这也是 volatile 变量的常用场景。</p>
-<p><img src="assets/Ciqc1F885_aAbF8qAAEC6dLMPo0828.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F885_aAbF8qAAEC6dLMPo0828.png" alt="png" /></p>
 <h3>FastThreadLocal</h3>
 <p>在我们平常的编程中，使用最多的就是 ThreadLocal 类了。拿最常用的 Spring 来说，它事务管理的传播机制，就是使用 ThreadLocal 实现的。因为 ThreadLocal 是线程私有的，所以 Spring 的事务传播机制是不能够跨线程的。<strong>在问到 Spring 事务管理是否包含子线程时，要能够想到面试官的真实意图。</strong></p>
 <pre><code>/**
@@ -368,10 +368,10 @@ ThreadLocalMap getMap(Thread t) {
 }
 </code></pre>
 <p>问题就出在 ThreadLocalMap 类上，它虽然叫 Map，但却没有实现 Map 的接口。如下图，ThreadLocalMap 在 rehash 的时候，并没有采用类似 HashMap 的数组+链表+红黑树的做法，它只使用了一个数组，使用<strong>开放寻址</strong>（遇到冲突，依次查找，直到空闲位置）的方法，这种方式是非常低效的。</p>
-<p><img src="assets/CgqCHl886AKAV0BAAAOn46tA-8c161.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl886AKAV0BAAAOn46tA-8c161.png" alt="png" /></p>
 <p>由于 Netty 对 ThreadLocal 的使用非常频繁，Netty 对它进行了专项的优化。它之所以快，是因为在底层数据结构上做了文章，使用常量下标对元素进行定位，而不是使用JDK 默认的探测性算法。</p>
 <p>还记得《03 | 深入剖析：哪些资源，容易成为瓶颈？》提到的伪共享问题吗？底层的 InternalThreadLocalMap对cacheline 也做了相应的优化。</p>
-<p><img src="assets/Ciqc1F886AqAGmwzAAJh0-ZJljI401.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F886AqAGmwzAAJh0-ZJljI401.png" alt="png" /></p>
 <h3>你在多线程使用中都遇到过哪些问题？</h3>
 <p>通过上面的知识总结，可以看到多线程相关的编程，是属于比较高阶的技能。面试中，<strong>面试官会经常问你在多线程使用中遇到的一些问题，以此来判断你实际的应用情况。</strong></p>
 <p>我们先总结一下文中已经给出的示例：</p>
@@ -398,7 +398,7 @@ executor.submit( ()-&gt; {
 executor.shutdown();
 </code></pre>
 <p>我们跟踪任务的执行，在 ThreadPoolExecutor 类中可以找到任务发生异常时的方法，它是抛给了 afterExecute 方法进行处理。</p>
-<p><img src="assets/Ciqc1F886BSASB_lAAC1lOQlBbE230.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F886BSASB_lAAC1lOQlBbE230.png" alt="png" /></p>
 <p>可惜的是，ThreadPoolExecutor 中的 afterExecute 方法是没有任何实现的，它是个空方法。</p>
 <pre><code>protected void afterExecute(Runnable r, Throwable t) { }
 </code></pre>
@@ -409,7 +409,7 @@ executor.shutdown();
 <p>其实这是部分同学对“异步作用”的错误理解。<strong>异步是一种编程模型，它通过将耗时的操作转移到后台线程运行，从而减少对主业务的堵塞，所以我们说异步让速度变快了</strong>。但如果你的系统资源使用已经到了极限，异步就不能产生任何效果了，它主要优化的是那些阻塞性的等待。</p>
 <p>在我们前面的课程里，缓冲、缓存、池化等优化方法，都是用到了异步。它能够起到转移冲突，优化请求响应的作用。由于合理地利用了资源，我们的系统响应确实变快了， 之后的《15 | 案例分析：从 BIO 到 NIO，再到 AIO》会对此有更多讲解。</p>
 <p>异步还能够对业务进行解耦，如下图所示，它比较像是生产者消费者模型。主线程负责生产任务，并将它存放在待执行列表中；消费线程池负责任务的消费，进行真正的业务逻辑处理。</p>
-<p><img src="assets/CgqCHl886B6ADAe8AAFW13_eF1Q541.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl886B6ADAe8AAFW13_eF1Q541.png" alt="png" /></p>
 <h3>小结</h3>
 <p>多线程的话题很大，本课时的内容稍微多，我们简单总结一下课时重点。</p>
 <p>本课时默认你已经有了多线程的基础知识（否则看起来会比较吃力），所以我们从 CountDownLatch 的一个实际应用场景说起，谈到了线程池的两个重点：<strong>阻塞队列</strong>和<strong>拒绝策略</strong>。</p>

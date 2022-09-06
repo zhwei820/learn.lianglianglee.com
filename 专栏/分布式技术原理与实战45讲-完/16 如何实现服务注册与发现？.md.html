@@ -259,7 +259,7 @@ function hide_canvas() {
 <p>有了服务注册和发现机制，消费者不需要知道具体服务提供者的真实物理地址就可以进行调用，也无须知道具体有多少个服务者可用；而服务提供者只需要注册到注册中心，就可以对外提供服务，在对外服务时不需要知道具体是哪些服务调用了自己。</p>
 <h3>服务注册和发现原理</h3>
 <p>服务注册和发现的基本流程如下图所示：</p>
-<p><img src="assets/Ciqc1F7GKL2AdvDaAAGP_eJ6zd0194.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7GKL2AdvDaAAGP_eJ6zd0194.png" alt="png" /></p>
 <p>首先，在服务启动时，服务提供者会向注册中心注册服务，暴露自己的地址和端口等，注册中心会更新服务列表。服务消费者启动时会向注册中心请求可用的服务地址，并且在本地缓存一份提供者列表，这样在注册中心宕机时仍然可以正常调用服务。</p>
 <p>如果提供者集群发生变更，注册中心会将变更推送给服务消费者，更新可用的服务地址列表。</p>
 <h3>典型服务发现组件的选型</h3>
@@ -272,13 +272,13 @@ function hide_canvas() {
 <h4>Eureka</h4>
 <p>在 Spring Cloud 中，提供了 Eureka 来实现服务发现功能。Eureka 采用的是 Server 和 Client 的模式进行设计，Eureka Server 扮演了服务注册中心的角色，为 Client 提供服务注册和发现的功能。</p>
 <p>Eureka Client 通过客户端注册的方式暴露服务，通过注解等方式嵌入到服务提供者的代码中，当服务启动时，服务发现组件会向注册中心注册自身提供的服务，并周期性地发送心跳来更新服务。</p>
-<p><img src="assets/CgqCHl7GKNCAURouAAFzGomu7Gs531.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7GKNCAURouAAFzGomu7Gs531.png" alt="png" /></p>
 <p>如果连续多次心跳不能够发现服务，那么 Eureka Server 就会将这个服务节点从服务注册表中移除，各个服务之间会通过注册中心的注册信息来实现调用。</p>
 <p>Euerka 在 Spring Cloud 中广泛应用，目前社区中集成的是 1.0 版本，在后续的版本更新中，Netflix 宣布 Euerka 2.0 闭源，于是开源社区中也出现了许多新的服务发现组件，比如 Spring Cloud Alibaba Nacos。</p>
 <h4>Nacos</h4>
 <p>Nacos 是阿里巴巴推出来的一个开源项目，提供了服务注册和发现功能，使用 Nacos 可以方便地集成 Spring Cloud 框架。如果正在使用 Eureka 或者 Consul，可以通过少量的代码就能迁移到 Nacos 上。</p>
 <p>Nacos 的应用和 Eureka 类似，独立于系统架构，需要部署 Nacos Server。除了服务注册和发现之外，Nacos 还提供了配置管理、元数据管理和流量管理等功能，并且提供了一个可视化的控制台管理界面。</p>
-<p><img src="assets/Ciqc1F7GKNyASZrcAAY4CF3B8qE355.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7GKNyASZrcAAY4CF3B8qE355.png" alt="png" /></p>
 <p>关于 Nacos 的更多应用，可以在 <a href="https://nacos.io/zh-cn/">Nacos 官网</a>找到相关的文档。</p>
 <h4>一致性对比</h4>
 <p>在讨论分布式系统时，一致性是一个绕不开的话题，在服务发现中也是一样。CP 模型优先保证一致性，可能导致注册中心可用性降低，AP 模型优先保证可用性，可能出现服务错误。</p>

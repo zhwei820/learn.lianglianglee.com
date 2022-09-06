@@ -294,7 +294,7 @@ function hide_canvas() {
 <h3>FileRouterFactory</h3>
 <p><strong>FileRouterFactory 是 ScriptRouterFactory 的装饰器</strong>，其扩展名为 file，FileRouterFactory 在 ScriptRouterFactory 基础上<strong>增加了读取文件的能力</strong>。我们可以将 ScriptRouter 使用的路由规则保存到文件中，然后在 URL 中指定文件路径，FileRouterFactory 从中解析到该脚本文件的路径并进行读取，调用 ScriptRouterFactory 去创建相应的 ScriptRouter 对象。</p>
 <p>下面我们来看 FileRouterFactory 对 getRouter() 方法的具体实现，其中完成了 file 协议的 URL 到 script 协议 URL 的转换，如下是一个转换示例，首先会将 file:// 协议转换成 script:// 协议，然后会添加 type 参数和 rule 参数，其中 type 参数值根据文件后缀名确定，该示例为 js，rule 参数值为文件内容。</p>
-<p><img src="assets/Ciqc1F-zkA2AduheAAGQTzCOwl8784.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F-zkA2AduheAAGQTzCOwl8784.png" alt="png" /></p>
 <p>我们可以再结合接下来这个示例分析 getRouter() 方法的具体实现：</p>
 <pre><code>public Router getRouter(URL url) {
     // 默认使用script协议
@@ -329,21 +329,21 @@ function hide_canvas() {
 <p>目前，Dubbo 提供了动态和静态两种方式给 Provider 打标签，其中动态方式就是通过服务治理平台动态下发标签，静态方式就是在 XML 等静态配置中打标签。Consumer 端可以在 RpcContext 的 attachment 中添加 request.tag 附加属性，注意<strong>保存在 attachment 中的值将会在一次完整的远程调用中持续传递</strong>，我们只需要在起始调用时进行设置，就可以达到标签的持续传递。</p>
 <p>了解了 Tag 的基本概念和功能之后，我们再简单介绍一个 Tag 的使用示例。</p>
 <p>在实际的开发测试中，一个完整的请求会涉及非常多的 Provider，分属不同团队进行维护，这些团队每天都会处理不同的需求，并在其负责的 Provider 服务中进行修改，如果所有团队都使用一套测试环境，那么测试环境就会变得很不稳定。如下图所示，4 个 Provider 分属不同的团队管理，Provider 2 和 Provider 4 在测试环境测试，部署了有 Bug 的版本，这样就会导致整个测试环境无法正常处理请求，在这样一个不稳定的测试环境中排查 Bug 是非常困难的，因为可能排查到最后，发现是别人的 Bug。</p>
-<p><img src="assets/CgqCHl-zkBuACzVCAABuM5-1_s4317.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl-zkBuACzVCAABuM5-1_s4317.png" alt="png" /></p>
 <p>不同状态的 Provider 节点</p>
 <p>为了解决上述问题，我们可以针对每个需求分别独立出一套测试环境，但是这个方案会占用大量机器，前期的搭建成本以及后续的维护成本也都非常高。</p>
 <p>下面是一个通过 Tag 方式实现环境隔离的架构图，其中，需求 1 对 Provider 2 的请求会全部落到有需求 1 标签的 Provider 上，其他 Provider 使用稳定测试环境中的 Provider；需求 2 对 Provider 4 的请求会全部落到有需求 2 标签的 Provider 4 上，其他 Provider 使用稳定测试环境中的 Provider。</p>
-<p><img src="assets/CgqCHl-zkCyANtuuAADgH2I1upA475.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl-zkCyANtuuAADgH2I1upA475.png" alt="png" /></p>
 <p>依赖 Tag 实现的测试环境隔离方案</p>
 <p>在一些特殊场景中，会有 Tag 降级的场景，比如找不到对应 Tag 的 Provider，会按照一定的规则进行降级。如果在 Provider 集群中不存在与请求 Tag 对应的 Provider 节点，则默认将降级请求 Tag 为空的 Provider；如果希望在找不到匹配 Tag 的 Provider 节点时抛出异常的话，我们需设置 request.tag.force = true。</p>
 <p>如果请求中的 request.tag 未设置，只会匹配 Tag 为空的 Provider，也就是说即使集群中存在可用的服务，若 Tag 不匹配也就无法调用。一句话总结，<strong>携带 Tag 的请求可以降级访问到无 Tag 的 Provider，但不携带 Tag 的请求永远无法访问到带有 Tag 的 Provider</strong>。</p>
 <h4>TagRouter</h4>
 <p>下面我们再来看 TagRouter 的具体实现。在 TagRouter 中持有一个 TagRouterRule 对象的引用，在 TagRouterRule 中维护了一个 Tag 集合，而在每个 Tag 对象中又都维护了一个 Tag 的名称，以及 Tag 绑定的网络地址集合，如下图所示：</p>
-<p><img src="assets/CgqCHl-zkEGALTHPAADFZZM7Y2A139.png" alt="5.png" /></p>
+<p><img src="assets/CgqCHl-zkEGALTHPAADFZZM7Y2A139.png" alt="png" /></p>
 <p>TagRouter、TagRouterRule、Tag 与 address 映射关系图</p>
 <p>另外，在 TagRouterRule 中还维护了 addressToTagnames、tagnameToAddresses 两个集合（都是 Map&lt;String, List<code>&lt;String&gt;</code>&gt; 类型），分别记录了 Tag 名称到各个 address 的映射以及 address 到 Tag 名称的映射。在 TagRouterRule 的 init() 方法中，会根据 tags 集合初始化这两个集合。</p>
 <p>了解了 TagRouterRule 的基本构造之后，我们继续来看 TagRouter 构造 TagRouterRule 的过程。TagRouter 除了实现了 Router 接口之外，还实现了 ConfigurationListener 接口，如下图所示：</p>
-<p><img src="assets/Ciqc1F-zkEyAMNXQAAF_oit25-o273.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1F-zkEyAMNXQAAF_oit25-o273.png" alt="png" /></p>
 <p>TagRouter 继承关系图</p>
 <p><strong>ConfigurationListener 用于监听配置的变化，其中就包括 TagRouterRule 配置的变更</strong>。当我们通过动态更新 TagRouterRule 配置的时候，就会触发 ConfigurationListener 接口的 process() 方法，TagRouter 对 process() 方法的实现如下：</p>
 <pre><code>public synchronized void process(ConfigChangedEvent event) {
@@ -370,10 +370,10 @@ tags:
     addresses: []
 </code></pre>
 <p>经过 TagRuleParser 解析得到的 TagRouterRule 结构，如下所示：</p>
-<p><img src="assets/Ciqc1F-zkF6AHgUEAAE3K8dR6QQ826.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F-zkF6AHgUEAAE3K8dR6QQ826.png" alt="png" /></p>
 <p>TagRouterRule 结构图</p>
 <p>除了上图展示的几个集合字段，TagRouterRule 还从 AbstractRouterRule 抽象类继承了一些控制字段，后面介绍的 ConditionRouterRule 也继承了 AbstractRouterRule。</p>
-<p><img src="assets/CgqCHl-zkGmAYDBMAAFODGWwRfo125.png" alt="9.png" /></p>
+<p><img src="assets/CgqCHl-zkGmAYDBMAAFODGWwRfo125.png" alt="png" /></p>
 <p>AbstractRouterRule继承关系图</p>
 <p>AbstractRouterRule 中核心字段的具体含义大致可总结为如下。</p>
 <ul>
@@ -455,10 +455,10 @@ tags:
 </code></pre>
 <h3>ServiceRouter &amp; AppRouter</h3>
 <p>除了前文介绍的 TagRouterFactory 继承了 CacheableRouterFactory 之外，<strong>ServiceRouterFactory 也继承 CachabelRouterFactory，具有了缓存的能力</strong>，具体继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F-zkHqAH3diAAGWl6aQJy8860.png" alt="8.png" /></p>
+<p><img src="assets/Ciqc1F-zkHqAH3diAAGWl6aQJy8860.png" alt="png" /></p>
 <p>CacheableRouterFactory 继承关系图</p>
 <p>ServiceRouterFactory 创建的 Router 实现是 ServiceRouter，与 ServiceRouter 类似的是 AppRouter，<strong>两者都继承了 ListenableRouter 抽象类</strong>（虽然 ListenableRouter 是个抽象类，但是没有抽象方法留给子类实现），继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F-zkISAPopjAAH9Njd3pOE049.png" alt="7.png" /></p>
+<p><img src="assets/Ciqc1F-zkISAPopjAAH9Njd3pOE049.png" alt="png" /></p>
 <p>ListenableRouter 继承关系图</p>
 <p><strong>ListenableRouter 在 ConditionRouter 基础上添加了动态配置的能力</strong>，ListenableRouter 的 process() 方法与 TagRouter 中的 process() 方法类似，对于 ConfigChangedEvent.DELETE 事件，直接清空 ListenableRouter 中维护的 ConditionRouterRule 和 ConditionRouter 集合的引用；对于 ADDED、UPDATED 事件，则通过 ConditionRuleParser 解析事件内容，得到相应的 ConditionRouterRule 对象和 ConditionRouter 集合。这里的 ConditionRuleParser 同样是以 yaml 文件的格式解析 ConditionRouterRule 的相关配置。ConditionRouterRule 中维护了一个 conditions 集合（List<code>&lt;String&gt;</code> 类型），记录了多个 Condition 路由规则，对应生成多个 ConditionRouter 对象。</p>
 <p>整个解析 ConditionRouterRule 的过程，与前文介绍的解析 TagRouterRule 的流程类似，这里不再赘述。</p>

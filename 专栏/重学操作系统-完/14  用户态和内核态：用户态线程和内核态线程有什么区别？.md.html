@@ -264,7 +264,7 @@ function hide_canvas() {
 <p>用户空间中的代码被限制了只能使用一个局部的内存空间，我们说这些程序在<strong>用户态（User Mode）</strong> 执行。内核空间中的代码可以访问所有内存，我们称这些程序在<strong>内核态（Kernal Mode）</strong> 执行。</p>
 <h4>系统调用过程</h4>
 <p>如果用户态程序需要执行系统调用，就需要切换到内核态执行。下面我们来讲讲这个过程的原理。</p>
-<p><img src="assets/CgqCHl-Sm3mAG_x-AAC5MxhOcCc621.png" alt="Lark20201023-165439.png" /></p>
+<p><img src="assets/CgqCHl-Sm3mAG_x-AAC5MxhOcCc621.png" alt="png" /></p>
 <p>如上图所示：内核程序执行在内核态（Kernal Mode），用户程序执行在用户态（User Mode）。当发生系统调用时，用户态的程序发起系统调用。因为系统调用中牵扯特权指令，用户态程序权限不足，因此会中断执行，也就是 Trap（Trap 是一种中断）。</p>
 <p>发生中断后，当前 CPU 执行的程序会中断，跳转到中断处理程序。内核程序开始执行，也就是开始处理系统调用。内核处理完成后，主动触发 Trap，这样会再次发生中断，切换回用户态工作。关于中断，我们将在“<strong>15 课时</strong>”进行详细讨论。</p>
 <h3>线程模型</h3>
@@ -275,7 +275,7 @@ function hide_canvas() {
 <p><strong>那么用户态进程如果要执行程序，是否也要向内核申请呢</strong>？</p>
 <p>程序在现代操作系统中并不是以进程为单位在执行，而是以一种轻量级进程（Light Weighted Process），也称作线程（Thread）的形式执行。</p>
 <p>一个进程可以拥有多个线程。进程创建的时候，一般会有一个主线程随着进程创建而创建。</p>
-<p><img src="assets/Ciqc1F-SmgGAJVo6AAFL0OwiOWE251.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F-SmgGAJVo6AAFL0OwiOWE251.png" alt="png" /></p>
 <p>如果进程想要创造更多的线程，就需要思考一件事情，这个线程创建在用户态还是内核态。</p>
 <p>你可能会问，难道不是用户态的进程创建用户态的线程，内核态的进程创建内核态的线程吗？</p>
 <p>其实不是，进程可以通过 API 创建用户态的线程，也可以通过系统调用创建内核态的线程，接下来我们说说用户态的线程和内核态的线程。</p>
@@ -315,16 +315,16 @@ function hide_canvas() {
 <h4>多对一（Many to One）</h4>
 <p>用户态进程中的多线程复用一个内核态线程。这样，极大地减少了创建内核态线程的成本，但是线程不可以并发。因此，这种模型现在基本上用的很少。我再多说一句，这里你可能会有疑问，比如：用户态线程怎么用内核态线程执行程序？</p>
 <p>程序是存储在内存中的指令，用户态线程是可以准备好程序让内核态线程执行的。后面的几种方式也是利用这样的方法。</p>
-<p><img src="assets/CgqCHl-SmhGAfpLmAAD_dFRlK_o009.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl-SmhGAfpLmAAD_dFRlK_o009.png" alt="png" /></p>
 <h4>一对一（One to One）</h4>
 <p>该模型为每个用户态的线程分配一个单独的内核态线程，在这种情况下，每个用户态都需要通过系统调用创建一个绑定的内核线程，并附加在上面执行。 这种模型允许所有线程并发执行，能够充分利用多核优势，Windows NT 内核采取的就是这种模型。但是因为线程较多，对内核调度的压力会明显增加。</p>
-<p><img src="assets/CgqCHl-SmhyAF5x4AADdzPHEVjg818.png" alt="5.png" /></p>
+<p><img src="assets/CgqCHl-SmhyAF5x4AADdzPHEVjg818.png" alt="png" /></p>
 <h4>多对多（Many To Many）</h4>
 <p>这种模式下会为 n 个用户态线程分配 m 个内核态线程。m 通常可以小于 n。一种可行的策略是将 m 设置为核数。这种多对多的关系，减少了内核线程，同时也保证了多核心并发。Linux 目前采用的就是该模型。</p>
-<p><img src="assets/CgqCHl-Smj2AUNBFAAEUlu4ZjIY978.png" alt="6.png" /></p>
+<p><img src="assets/CgqCHl-Smj2AUNBFAAEUlu4ZjIY978.png" alt="png" /></p>
 <h4>两层设计（Two Level）</h4>
 <p>这种模型混合了多对多和一对一的特点。多数用户态线程和内核线程是 n 对 m 的关系，少量用户线程可以指定成 1 对 1 的关系。</p>
-<p><img src="assets/Ciqc1F-SmieAL_v4AAFMiFmCAbM160.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F-SmieAL_v4AAFMiFmCAbM160.png" alt="png" /></p>
 <p>上图所展现的是一个非常经典的设计。</p>
 <p>我们这节课讲解的问题、考虑到的情况以及解决方法，将为你今后解决实际工作场景中的问题打下坚实的基础。比如处理并发问题、I/O 性能瓶颈、思考数据库连接池的配置等，要想完美地解决问题，就必须掌握这些模型，了解问题的本质上才能更好地思考问题衍生出来的问题。</p>
 <h3>总结</h3>

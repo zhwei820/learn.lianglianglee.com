@@ -159,28 +159,28 @@ function hide_canvas() {
 <p>根据 Raft 协议，一个应用 Raft 协议的集群在刚启动时，所有节点的状态都是 Follower。由于没有 Leader，Followers 无法与 Leader 保持心跳（Heart Beat），因此，Followers 会认为 Leader 已经下线，进而转为 Candidate 状态。然后，Candidate 将向集群中其它节点请求投票，同意自己升级为 Leader。如果 Candidate 收到超过半数节点的投票（N/2 + 1），它将获胜成为 Leader。</p>
 <p><strong>第一阶段：所有节点都是 Follower。</strong></p>
 <p>上面提到，一个应用 Raft 协议的集群在刚启动（或 Leader 宕机）时，所有节点的状态都是 Follower，初始 Term（任期）为 0。同时启动选举定时器，每个节点的选举定时器超时时间都在 100~500 毫秒之间且并不一致（避免同时发起选举）。</p>
-<p><img src="assets/0e6c7fa0-b831-11e8-9da0-3bed0a166513" alt="enter image description here" /></p>
+<p><img src="assets/0e6c7fa0-b831-11e8-9da0-3bed0a166513" alt="png" /></p>
 <p><strong>第二阶段：Follower 转为 Candidate 并发起投票。</strong></p>
 <p>没有 Leader，Followers 无法与 Leader 保持心跳（Heart Beat），节点启动后在一个选举定时器周期内未收到心跳和投票请求，则状态转为候选者 Candidate 状态，且 Term 自增，并向集群中所有节点发送投票请求并且重置选举定时器。</p>
 <p>注意，由于每个节点的选举定时器超时时间都在 100-500 毫秒之间，且彼此不一样，以避免所有 Follower 同时转为 Candidate 并同时发起投票请求。换言之，最先转为 Candidate 并发起投票请求的节点将具有成为 Leader 的“先发优势”。</p>
-<p><img src="assets/192d60c0-b832-11e8-9da0-3bed0a166513" alt="enter image description here" /></p>
+<p><img src="assets/192d60c0-b832-11e8-9da0-3bed0a166513" alt="png" /></p>
 <p><strong>第三阶段：投票策略。</strong></p>
 <p>节点收到投票请求后会根据以下情况决定是否接受投票请求：</p>
 <ol>
 <li>请求节点的 Term 大于自己的 Term，且自己尚未投票给其它节点，则接受请求，把票投给它；</li>
 <li>请求节点的 Term 小于自己的 Term，且自己尚未投票，则拒绝请求，将票投给自己。</li>
 </ol>
-<p><img src="assets/cf56fbe0-b832-11e8-9da0-3bed0a166513" alt="enter image description here" /></p>
+<p><img src="assets/cf56fbe0-b832-11e8-9da0-3bed0a166513" alt="png" /></p>
 <p><strong>第四阶段：Candidate 转为 Leader。</strong></p>
 <p>一轮选举过后，正常情况下，会有一个 Candidate 收到超过半数节点（N/2 + 1）的投票，它将胜出并升级为 Leader。然后定时发送心跳给其它的节点，其它节点会转为 Follower 并与 Leader 保持同步，到此，本轮选举结束。</p>
 <p>注意：有可能一轮选举中，没有 Candidate 收到超过半数节点投票，那么将进行下一轮选举。</p>
-<p><img src="assets/206d5880-b833-11e8-9469-d363e3097731" alt="enter image description here" /></p>
+<p><img src="assets/206d5880-b833-11e8-9469-d363e3097731" alt="png" /></p>
 <h3>3. Raft 算法之 Log Replication 原理</h3>
 <p>在一个 Raft 集群中，只有 Leader 节点能够处理客户端的请求（如果客户端的请求发到了 Follower，Follower 将会把请求重定向到 Leader），客户端的每一个请求都包含一条被复制状态机执行的指令。Leader 把这条指令作为一条新的日志条目（Entry）附加到日志中去，然后并行得将附加条目发送给 Followers，让它们复制这条日志条目。</p>
 <p>当这条日志条目被 Followers 安全复制，Leader 会将这条日志条目应用到它的状态机中，然后把执行的结果返回给客户端。如果 Follower 崩溃或者运行缓慢，再或者网络丢包，Leader 会不断得重复尝试附加日志条目（尽管已经回复了客户端）直到所有的 Follower 都最终存储了所有的日志条目，确保强一致性。</p>
 <p><strong>第一阶段：客户端请求提交到 Leader。</strong></p>
 <p>如下图所示，Leader 收到客户端的请求，比如存储数据 5。Leader 在收到请求后，会将它作为日志条目（Entry）写入本地日志中。需要注意的是，此时该 Entry 的状态是未提交（Uncommitted），Leader 并不会更新本地数据，因此它是不可读的。</p>
-<p><img src="assets/46017c00-b835-11e8-9469-d363e3097731" alt="enter image description here" /></p>
+<p><img src="assets/46017c00-b835-11e8-9469-d363e3097731" alt="png" /></p>
 <p><strong>第二阶段：Leader 将 Entry 发送到其它 Follower</strong></p>
 <p>Leader 与 Floolwers 之间保持着心跳联系，随心跳 Leader 将追加的 Entry（AppendEntries）并行地发送给其它的 Follower，并让它们复制这条日志条目，这一过程称为复制（Replicate）。</p>
 <p>有几点需要注意：</p>
@@ -192,7 +192,7 @@ function hide_canvas() {
 <p>在正常情况下，Leader 和 Follower 的日志保持一致，所以追加日志的一致性检查从来不会失败。然而，Leader 和 Follower 一系列崩溃的情况会使它们的日志处于不一致状态。Follower可能会丢失一些在新的 Leader 中有的日志条目，它也可能拥有一些 Leader 没有的日志条目，或者两者都发生。丢失或者多出日志条目可能会持续多个任期。</p>
 <p>要使 Follower 的日志与 Leader 恢复一致，Leader 必须找到最后两者达成一致的地方（说白了就是回溯，找到两者最近的一致点），然后删除从那个点之后的所有日志条目，发送自己的日志给 Follower。所有的这些操作都在进行附加日志的一致性检查时完成。</p>
 <p>Leader 为每一个 Follower 维护一个 nextIndex，它表示下一个需要发送给 Follower 的日志条目的索引地址。当一个 Leader 刚获得权力的时候，它初始化所有的 nextIndex 值，为自己的最后一条日志的 index 加 1。如果一个 Follower 的日志和 Leader 不一致，那么在下一次附加日志时一致性检查就会失败。在被 Follower 拒绝之后，Leader 就会减小该 Follower 对应的 nextIndex 值并进行重试。最终 nextIndex 会在某个位置使得 Leader 和 Follower 的日志达成一致。当这种情况发生，附加日志就会成功，这时就会把 Follower 冲突的日志条目全部删除并且加上 Leader 的日志。一旦附加日志成功，那么 Follower 的日志就会和 Leader 保持一致，并且在接下来的任期继续保持一致。</p>
-<p><img src="assets/87e3fb10-b836-11e8-a627-cbcd94258d1d" alt="enter image description here" /></p>
+<p><img src="assets/87e3fb10-b836-11e8-a627-cbcd94258d1d" alt="png" /></p>
 <p><strong>第三阶段：Leader 等待 Followers 回应。</strong></p>
 <p>Followers 接收到 Leader 发来的复制请求后，有两种可能的回应：</p>
 <ol>
@@ -200,14 +200,14 @@ function hide_canvas() {
 <li>一致性检查失败，拒绝写入，返回 False，原因和解决办法上面已做了详细说明。</li>
 </ol>
 <p>需要注意的是，此时该 Entry 的状态也是未提交（Uncommitted）。完成上述步骤后，Followers 会向 Leader 发出 Success 的回应，当 Leader 收到大多数 Followers 的回应后，会将第一阶段写入的 Entry 标记为提交状态（Committed），并把这条日志条目应用到它的状态机中。</p>
-<p><img src="assets/1802d130-b837-11e8-9d9d-aba50ff29480" alt="enter image description here" /></p>
+<p><img src="assets/1802d130-b837-11e8-9d9d-aba50ff29480" alt="png" /></p>
 <p><strong>第四阶段：Leader 回应客户端。</strong></p>
 <p>完成前三个阶段后，Leader会向客户端回应 OK，表示写操作成功。</p>
-<p><img src="assets/6ea4b440-b837-11e8-9469-d363e3097731" alt="enter image description here" /></p>
+<p><img src="assets/6ea4b440-b837-11e8-9469-d363e3097731" alt="png" /></p>
 <p><strong>第五阶段，Leader 通知 Followers Entry 已提交</strong></p>
 <p>Leader 回应客户端后，将随着下一个心跳通知 Followers，Followers 收到通知后也会将 Entry 标记为提交状态。至此，Raft 集群超过半数节点已经达到一致状态，可以确保强一致性。</p>
 <p>需要注意的是，由于网络、性能、故障等各种原因导致“反应慢”、“不一致”等问题的节点，最终也会与 Leader 达成一致。</p>
-<p><img src="assets/080b5580-b838-11e8-9469-d363e3097731" alt="enter image description here" /></p>
+<p><img src="assets/080b5580-b838-11e8-9469-d363e3097731" alt="png" /></p>
 <h3>4. Raft 算法之安全性</h3>
 <p>前面描述了 Raft 算法是如何选举 Leader 和复制日志的。然而，到目前为止描述的机制并不能充分地保证每一个状态机会按照相同的顺序执行相同的指令。例如，一个 Follower 可能处于不可用状态，同时 Leader 已经提交了若干的日志条目；然后这个 Follower 恢复（尚未与 Leader 达成一致）而 Leader 故障；如果该 Follower 被选举为 Leader 并且覆盖这些日志条目，就会出现问题，即不同的状态机执行不同的指令序列。</p>
 <p>鉴于此，在 Leader 选举的时候需增加一些限制来完善 Raft 算法。这些限制可保证任何的 Leader 对于给定的任期号（Term），都拥有之前任期的所有被提交的日志条目（所谓 Leader 的完整特性）。关于这一选举时的限制，下文将详细说明。</p>
@@ -225,7 +225,7 @@ function hide_canvas() {
 <p>在 Unix 系统中，<code>/etc</code> 目录用于存放系统管理和配置文件。分布式系统（Distributed System）第一个字母是“d”。两者看上去并没有直接联系，但它们加在一起就有点意思了：分布式的关键数据（系统管理和配置文件）存储系统，这便是 Etcd 命名的灵感之源。</p>
 <h4>5.1 Etcd 架构</h4>
 <p>Etcd 的架构图如下，从架构图中可以看出，Etcd 主要分为四个部分：HTTP Server、Store、Raft 以及 WAL。</p>
-<p><img src="assets/4577c8b0-b82c-11e8-b3f0-6503db3b148e" alt="enter image description here" /></p>
+<p><img src="assets/4577c8b0-b82c-11e8-b3f0-6503db3b148e" alt="png" /></p>
 <ul>
 <li>HTTP Server：用于处理客户端发送的 API 请求以及其它 Etcd 节点的同步与心跳信息请求。</li>
 <li>Store：用于处理 Etcd 支持的各类功能的事务，包括数据索引、节点状态变更、监控与反馈、事件处理与执行等等，是 Etcd 对用户提供的大多数 API 功能的具体实现。</li>

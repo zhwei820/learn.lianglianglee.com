@@ -485,7 +485,7 @@ function hide_canvas() {
 <p>豆瓣介绍：<a href="https://book.douban.com/subject/30333948/">https://book.douban.com/subject/30333948/</a> 京东地址：<a href="https://item.jd.com/31288905323.html">https://item.jd.com/31288905323.html</a> 当当地址：<a href="http://product.dangdang.com/25346848.html">http://product.dangdang.com/25346848.html</a></p>
 <p>下面开始展开正文。</p>
 <h1>为什么禁止工程师直接使用日志系统(Log4j、Logback)中的 API</h1>
-<p><img src="assets/a5f68f40-63f4-11e9-a3c7-cd698ad2fb06.jpg" alt="enter image description here" /></p>
+<p><img src="assets/a5f68f40-63f4-11e9-a3c7-cd698ad2fb06.jpg" alt="png" /></p>
 <p>作为 Java 程序员，我想很多人都知道日志对于一个程序的重要性，尤其是 Web 应用。很多时候，日志可能是我们了解应用程序如何执行的唯一方式。</p>
 <p>所以，日志在 Java Web 应用中至关重要，但是，很多人却以为日志输出只是一件简单的事情，所以会经常忽略和日志相关的问题。在接下来的几篇文章中，我会来介绍介绍这个容易被大家忽视，但同时也容易导致故障的知识点。</p>
 <p>Java 语言之所以强大，就是因为他很成熟的生态体系。包括日志这一功能，就有很多成熟的开源框架可以被直接使用。</p>
@@ -506,7 +506,7 @@ function hide_canvas() {
 <p>关于 Log4j2 解决了 Log4j 的哪些问题，Log4j2 相比较于 Log4j、j.u.l 和 logback 有哪些优势，我们在后续的文章中介绍。</p>
 <p>前面介绍了四种日志框架，也就是说，我们想要在应用中打印日志的时候，可以使用以上四种类库中的任意一种。比如想要使用 Log4j，那么只要依赖 Log4j 的 jar 包，配置好配置文件并且在代码中使用其 API 打印日志就可以了。</p>
 <p>不知道有多少人看过《阿里巴巴 Java 开发手册》，其中有一条规范做了『强制』要求：</p>
-<p><img src="assets/15430457243811.jpg" alt="-w922" />￼</p>
+<p><img src="assets/15430457243811.jpg" alt="png" />￼</p>
 <p>说好了以上四种常用的日志框架是给 Java 应用提供的方便进行记录日志的，那为什么又不让在应用中直接使用其 API 呢？这里面推崇使用的 SLF4J 是什么呢？所谓的门面模式又是什么东西呢？</p>
 <h2>什么是日志门面</h2>
 <p>日志门面，是门面模式的一个典型的应用。</p>
@@ -562,7 +562,7 @@ function hide_canvas() {
 <p>这样做的最大好处，就是业务层的开发不需要关心底层日志框架的实现及细节，在编码的时候也不需要考虑日后更换框架所带来的成本。这也是门面模式所带来的好处。</p>
 <p>综上，请不要在你的 Java 代码中出现任何 Log4j 等日志框架的 API 的使用，而是应该直接使用 SLF4J 这种日志门面。</p>
 <h1>为什么禁止开发人员使用 isSuccess 作为变量名</h1>
-<p><img src="assets/15449439364854.jpg" alt="-w656" />￼</p>
+<p><img src="assets/15449439364854.jpg" alt="png" />￼</p>
 <p>在日常开发中，我们会经常要在类中定义布尔类型的变量，比如在给外部系统提供一个 RPC 接口的时候，我们一般会定义一个字段表示本次请求是否成功的。</p>
 <p>关于这个&quot;本次请求是否成功&quot;的字段的定义，其实是有很多种讲究和坑的，稍有不慎就会掉入坑里，作者在很久之前就遇到过类似的问题，本文就来围绕这个简单分析一下。到底该如何定一个布尔类型的成员变量。</p>
 <p>一般情况下，我们可以有以下四种方式来定义一个布尔类型的成员变量：</p>
@@ -578,7 +578,7 @@ Boolean isSuccess
 <h2>success 还是 isSuccess</h2>
 <p>到底应该是用 success 还是 isSuccess 来给变量命名呢？从语义上面来讲，两种命名方式都可以讲的通，并且也都没有歧义。那么还有什么原则可以参考来让我们做选择呢。</p>
 <p>在阿里巴巴 Java 开发手册中关于这一点，有过一个『强制性』规定：</p>
-<p><img src="assets/15449439364854-1584374811825.jpg" alt="-w656" />￼</p>
+<p><img src="assets/15449439364854-1584374811825.jpg" alt="png" />￼</p>
 <p>那么，为什么会有这样的规定呢？我们看一下 POJO 中布尔类型变量不同的命名有什么区别吧。</p>
 <pre><code>    class Model1  {
         private Boolean isSuccess;
@@ -633,7 +633,7 @@ public void set&lt;PropertyName&gt;(&lt;PropertyType&gt; a);
 <pre><code>public boolean is&lt;PropertyName&gt;();
 public void set&lt;PropertyName&gt;(boolean m);
 </code></pre>
-<p><img src="assets/15449455942045.jpg" alt="-w687" />￼</p>
+<p><img src="assets/15449455942045.jpg" alt="png" />￼</p>
 <p>通过对照这份 JavaBeans 规范，我们发现，在 Model4 中，变量名为 isSuccess，如果严格按照规范定义的话，他的 getter 方法应该叫 isIsSuccess。但是很多 IDE 都会默认生成为 isSuccess。</p>
 <p>那这样做会带来什么问题呢。</p>
 <p>在一般情况下，其实是没有影响的。但是有一种特殊情况就会有问题，那就是发生序列化的时候。</p>
@@ -717,7 +717,7 @@ Serializable Result With jackson :{&quot;success&quot;:true}
 <p>但是，一旦以上代码发生在生产环境，这绝对是一个致命的问题。</p>
 <p>所以，作为开发者，我们应该想办法尽量避免这种问题的发生，对于 POJO 的设计者来说，只需要做简单的一件事就可以解决这个问题了，那就是把 isSuccess 改为 success。这样，该类里面的成员变量时 success， getter 方法是 isSuccess，这是完全符合 JavaBeans 规范的。无论哪种序列化框架，执行结果都一样。就从源头避免了这个问题。</p>
 <p>引用以下 R 大关于阿里巴巴 Java 开发手册这条规定的评价（https://www.zhihu.com/question/55642203）：</p>
-<p><img src="assets/15449492627754.jpg" alt="-w665" />￼</p>
+<p><img src="assets/15449492627754.jpg" alt="png" />￼</p>
 <p>所以，<strong>在定义 POJO 中的布尔类型的变量时，不要使用 isSuccess 这种形式，而要直接使用 success！</strong></p>
 <h2>Boolean 还是 boolean？</h2>
 <p>前面我们介绍完了在 success 和 isSuccess 之间如何选择，那么排除错误答案后，备选项还剩下：</p>
@@ -787,13 +787,13 @@ Boolean success
 <h2>小结</h2>
 <p>本文围绕布尔类型的变量定义的类型和命名展开了介绍，最终我们可以得出结论，在定义一个布尔类型的变量，尤其是一个给外部提供的接口返回值时，要使用 success 来命名，阿里巴巴 Java 开发手册建议使用封装类来定义 POJO 和 RPC 返回值中的变量。但是这不意味着可以随意的使用 null，我们还是要尽量避免出现对 null 的处理的。</p>
 <h1>为什么禁止开发人员修改 serialVersionUID 字段的值</h1>
-<p><img src="assets/15455608799770.jpg" alt="-w934" />￼</p>
+<p><img src="assets/15455608799770.jpg" alt="png" />￼</p>
 <p>序列化是一种对象持久化的手段。普遍应用在网络传输、RMI 等场景中。类通过实现 <code>java.io.Serializable</code> 接口以启用其序列化功能。</p>
 <p>在我的博客中，其实已经有多篇文章介绍过序列化了，对序列化的基础知识不够了解的朋友可以参考以下几篇文章：</p>
 <p><a href="https://www.hollischuang.com/archives/1150">Java 对象的序列化与反序列化</a> <a href="https://www.hollischuang.com/archives/1140">深入分析 Java 的序列化与反序列化</a> <a href="https://www.hollischuang.com/archives/1144">单例与序列化的那些事儿</a></p>
 <p>在这几篇文章中，我分别介绍过了序列化涉及到的类和接口、如何自定义序列化策略、transient 关键字和序列化的关系等，还通过学习 ArrayList 对序列化的实现源码深入学习了序列化。并且还拓展分析了一下序列化对单例的影响等。</p>
 <p>但是，还有一个知识点并未展开介绍，那就是关于<code>serialVersionUID</code> 。这个字段到底有什么用？如果不设置会怎么样？为什么《阿里巴巴 Java 开发手册》中有以下规定：</p>
-<p><img src="assets/15455608799770-1590419303239.jpg" alt="-w934" />￼</p>
+<p><img src="assets/15455608799770-1590419303239.jpg" alt="png" />￼</p>
 <h2>背景知识</h2>
 <p><strong>Serializable 和 Externalizable</strong></p>
 <p>类通过实现 <code>java.io.Serializable</code> 接口以启用其序列化功能。**未实现此接口的类将无法进行序列化或反序列化。**可序列化类的所有子类型本身都是可序列化的。</p>
@@ -1210,7 +1210,7 @@ System.out.println((new StringBuilder()).append(&quot;+ cost:&quot;).append(t2 -
 <li>如果在并发场景中进行字符串拼接的话，要使用<code>StringBuffer</code>来代替<code>StringBuilder</code>。</li>
 </ol>
 <h1>为什么禁止在 foreach 循环里进行元素的 remove/add 操作</h1>
-<p><img src="assets/15497724883532-1.jpg" alt="-w1191" />￼</p>
+<p><img src="assets/15497724883532-1.jpg" alt="png" />￼</p>
 <h2>foreach 循环</h2>
 <p>Foreach 循环（Foreach loop）是计算机编程语言中的一种控制流程语句，通常用来循环遍历数组或集合中的元素。</p>
 <p>Java 语言从 JDK 1.5.0 开始引入 foreach 循环。在遍历数组、集合方面， foreach 为开发人员提供了极大的方便。</p>
@@ -1326,7 +1326,7 @@ H
     }
 </code></pre>
 <p>然后运行以上代码，同样会抛出异常。我们来看一下 ConcurrentModificationException 的完整堆栈：</p>
-<p><img src="assets/15515088749690-1.jpg" alt="-w738" />￼</p>
+<p><img src="assets/15515088749690-1.jpg" alt="png" />￼</p>
 <p>通过异常堆栈我们可以到，异常发生的调用链 ForEachDemo 的第 23 行，<code>Iterator.next</code> 调用了 <code>Iterator.checkForComodification</code>方法 ，而异常就是 checkForComodification 方法中抛出的。</p>
 <p>其实，经过 debug 后，我们可以发现，如果 remove 代码没有被执行过，iterator.next 这一行是一直没报错的。抛异常的时机也正是 remove 执行之后的的那一次 next 方法的调用。</p>
 <p>我们直接看下 checkForComodification 方法的代码，看下抛出异常的原因：</p>
@@ -1360,7 +1360,7 @@ H
 </code></pre>
 <p>其实，看到这里，大概很多人都能猜到为什么 remove/add 操作之后，会导致 expectedModCount 和 modCount 不想等了。</p>
 <p>通过翻阅代码，我们也可以发现，remove 方法核心逻辑如下：</p>
-<p><img src="assets/15515151811228-1.jpg" alt="-w764" />￼</p>
+<p><img src="assets/15515151811228-1.jpg" alt="png" />￼</p>
 <p>可以看到，它只修改了 modCount，并没有对 expectedModCount 做任何操作。</p>
 <p>简单总结一下，之所以会抛出 ConcurrentModificationException 异常，是因为我们的代码中使用了增强 for 循环，而在增强 for 循环中，集合遍历是通过 iterator 进行的，但是元素的 add/remove 却是直接使用的集合类自己的方法。这就导致 iterator 在遍历的时候，会发现有一个元素在自己不知不觉的情况下就被删除/添加了，就会抛出一个异常，用来提示用户，可能发生了并发修改！</p>
 <h2>正确姿势</h2>
@@ -1399,7 +1399,7 @@ H
         System.out.println(userNames);
 </code></pre>
 <p>如果直接使用 Iterator 提供的 remove 方法，那么就可以修改到 expectedModCount 的值。那么就不会再抛出异常了。其实现代码如下：</p>
-<p><img src="assets/15515125763808-1.jpg" alt="-w375" />￼</p>
+<p><img src="assets/15515125763808-1.jpg" alt="png" />￼</p>
 <p><strong>3、使用 Java 8 中提供的 filter 过滤</strong></p>
 <p>Java 8 中可以把集合转换成流，对于流有一种 filter 操作， 可以对原始 Stream 进行某项测试，通过测试的元素被留下来生成一个新 Stream。</p>
 <pre><code>        List&lt;String&gt; userNames = new ArrayList&lt;String&gt;() {{
@@ -1516,7 +1516,7 @@ H
 <p>上面的代码挺有意思的，一个简单的容量初始化，Java 的工程师也有很多考虑在里面。</p>
 <p>上面的算法目的挺简单，就是：根据用户传入的容量值（代码中的cap），通过计算，得到第一个比他大的 2 的幂并返回。</p>
 <p>聪明的读者们，如果让你设计这个算法你准备如何计算？如果你想到二进制的话，那就很简单了。举几个例子看一下：</p>
-<p><img src="assets/QQ20180527-173743.png" alt="QQ20180527-173743" /></p>
+<p><img src="assets/QQ20180527-173743.png" alt="png" /></p>
 <p>请关注上面的几个例子中，蓝色字体部分的变化情况，或许你会发现些规律。5-&gt;8、9-&gt;16、19-&gt;32、37-&gt;64 都是主要经过了两个阶段。</p>
 <blockquote>
 <p>Step 1，5-&gt;7</p>
@@ -1572,7 +1572,7 @@ n |= n &gt;&gt;&gt; 16;
 <h2>HashMap 中初始容量的合理值</h2>
 <p>当我们使用<code>HashMap(int initialCapacity)</code>来初始化容量的时候，jdk 会默认帮我们计算一个相对合理的值当做初始容量。那么，是不是我们只需要把已知的 HashMap 中即将存放的元素个数直接传给 initialCapacity 就可以了呢？</p>
 <p>关于这个值的设置，在《阿里巴巴 Java 开发手册》有以下建议：</p>
-<p><img src="assets/Demo.png" alt="Demo" /></p>
+<p><img src="assets/Demo.png" alt="png" /></p>
 <p>这个值，并不是阿里巴巴的工程师原创的，在 guava（21.0 版本）中也使用的是这个值。</p>
 <pre><code>    public static &lt;K, V&gt; HashMap&lt;K, V&gt; newHashMapWithExpectedSize(int expectedSize) {
         return new HashMap&lt;K, V&gt;(capacity(expectedSize));

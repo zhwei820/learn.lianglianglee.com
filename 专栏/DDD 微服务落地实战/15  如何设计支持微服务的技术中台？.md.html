@@ -156,7 +156,7 @@ function hide_canvas() {
 </ul>
 <h3>解决技术不确定性的问题</h3>
 <p>如今的微服务架构，基本已经形成了 Spring Cloud 一统天下的局势。然而，在 Spring Cloud 框架下的各种技术组件依然存在<strong>诸多不确定性</strong>，如：注册中心是否采用 Eureka、服务网关是采用 Zuul 还是 Gateway，等等。同时，服务网格 Service Mesh 方兴未艾，不排除今后所有的微服务都要切换到 Service Mesh 的可能。在这种情况下如何<strong>决策微服务的技术架构</strong>？代码尽量不要与 Spring Cloud 耦合，才能在将来更容易地切换到 Service Mesh。那么，具体又该如何做到呢？</p>
-<p><img src="assets/Cip5yF_q1GWABFvEAAK9qvAoHxc276.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_q1GWABFvEAAK9qvAoHxc276.png" alt="png" /></p>
 <p>单 Controller、单 Dao 的设计在微服务架构的应用</p>
 <p>如上图所示，当前端通过服务网关访问微服务时，首先要<strong>访问聚合层的微服务</strong>。这时，在聚合层的微服务中，采用单 Controller 接收前端请求。这样，只有该 Controller 与 MVC 框架耦合，后面所有的 Service 不会耦合，从而实现了<strong>业务代码与技术框架的分离</strong>。</p>
 <p>同样的，当 Service 执行各种操作调用原子服务层的微服务时，不是通过 Ribbon 进行远程调用，而是将原子服务层的微服务开放的接口，在聚合层微服务的本地编写一个 Feign 接口。那么，聚合层微服务在调用原子微服务时，实际调用的是<strong>自己本地的接口</strong>，再由这个接口通过加载 Feign 注解，去实现远程调用。</p>
@@ -171,11 +171,11 @@ function hide_canvas() {
 <h3>采用 Feign 接口实现远程调用</h3>
 <p>每个微服务都是一个独立的进程，运行在各自独立的 JVM，甚至不同的物理节点上，通过网络访问。因此，微服务与微服务之间的调用必然是<strong>远程调用</strong>。以往，我们对微服务间的调用采用 Ribbon 的方式，在程序中的任意一个位置，只要注入一个 restTemplate，就可以进行远程调用。</p>
 <p>这样的代码过于随意，会越来越难于阅读与变更维护。比如，原来某个微服务中有两个模块 A 与 B，都需要调用模块 C。随着业务变得越来越复杂，需要进行微服务拆分，将模块 C 拆分到了另外一个微服务中。这时，原来的模块 A 与 B 就不能像原来一样调用模块 C，否则就会报错。</p>
-<p><img src="assets/CgpVE1_q1HuAOBfeAAC9Nd34EOU948.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_q1HuAOBfeAAC9Nd34EOU948.png" alt="png" /></p>
 <p>Ribbon 的远程调用方式</p>
 <p>如何解决以上问题呢？需要同时改造模块 A 与 B，分别加入 restTemplate 实现远程调用，来调用模块 C。也就是说，这时所有调用模块 C 的程序都需要改造，改造的成本与风险就会比较高。</p>
 <p>因此，在实现微服务间调用时，我们通常会采用另外一个方案：Feign。Feign 不是另起炉灶，而是对 Ribbon 的封装，目的是使代码更加规范、变更更加易于维护。采用的方案是，不修改模块 A 与 B 的任何代码，而是在该微服务的本地再制作一个模块 C 的接口 C′。该接口与模块 C 一模一样，拥有模块 C 的所有方法，因此模块 A 与 B 还可以像以前一样在本地调用接口 C′。但接口 C′ 只是一个接口，什么都做不了，因此需要通过添加 Feign 的注解，实现远程调用，去调用模块 C。这个方案，既没有修改模块 A 与 B，又没有修改模块 C，而仅仅添加了一个接口 C′，使维护成本降到了最低。</p>
-<p><img src="assets/Cip5yF_q1IOAXztgAAC6-Yd2p84518.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yF_q1IOAXztgAAC6-Yd2p84518.png" alt="png" /></p>
 <p>Feign 的远程调用方式</p>
 <p>如何通过 Feign 实现微服务的远程调用呢？</p>
 <p>首先，创建项目时，在 POM.xml 文件中添加 Eureka Client、Hystrix 与 Actuator 等组件以外，将 ribbon 改为 feign：</p>

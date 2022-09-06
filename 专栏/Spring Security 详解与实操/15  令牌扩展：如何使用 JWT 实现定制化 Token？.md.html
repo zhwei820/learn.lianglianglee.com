@@ -276,7 +276,7 @@ public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws E
 <li>第三步，也是最关键的一步，就是在通过 RestTemplate 发起请求时，能够把这个 Token 自动嵌入到所发起的每一个 HTTP 请求中。</li>
 </ul>
 <p>整个实现思路如下图所示：</p>
-<p><img src="assets/Cgp9HWDwBeGACDQUAAFfi6HuFQU869.jpg" alt="1.png" />
+<p><img src="assets/Cgp9HWDwBeGACDQUAAFfi6HuFQU869.jpg" alt="png" />
 在服务调用链中传播 JWT Token 的三个实现步骤</p>
 <p>实现这一思路需要你对 HTTP 请求的过程和原理有一定的理解，在代码实现上也需要有一些技巧，下面我一一展开。</p>
 <p>首先，在 HTTP 请求过程中，我们可以通过过滤器 Filter 对所有请求进行过滤。Filter 是 Servlet 中的一个核心组件，其基本原理就是构建一个过滤器链并对经过该过滤器链的请求和响应添加定制化的处理机制。Filter 接口的定义如下所示：</p>

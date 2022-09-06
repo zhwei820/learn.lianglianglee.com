@@ -167,7 +167,7 @@ function hide_canvas() {
 <p>那么除了热更新以外，项目的开发环境还有哪些在影响着我们的开发效率呢？在过去的工作中，公司同事就曾问过我一个问题：为什么我的项目在开发环境下每次构建还是很卡？每次保存完代码都要过 1~2 秒才能看到效果，这是怎么回事呢？其实这里面的原因主要是这位同事在开发时选择的 Source Map 设定不对。今天我们就来具体讨论下这个问题。首先，什么是 <strong>Source Map</strong> 呢？</p>
 <h3>什么是 Source Map</h3>
 <p>在前端开发过程中，通常我们编写的源代码会经过多重处理（编译、封装、压缩等），最后形成产物代码。于是在浏览器中调试产物代码时，我们往往会发现代码变得面目全非，例如：</p>
-<p><img src="assets/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F85_FmAA4UeAABWNiHqsWQ595.png" alt="png" /></p>
 <p>因此，我们需要一种在调试时将产物代码显示回源代码的功能，<strong>source map</strong> 就是实现这一目标的工具。</p>
 <p>source-map 的基本原理是，在编译处理的过程中，在生成产物代码的同时生成产物代码中被转换的部分与源代码中相应部分的映射关系表。有了这样一张完整的映射表，我们就可以通过 Chrome 控制台中的&quot;Enable Javascript source map&quot;来实现调试时的显示与定位源代码功能。</p>
 <p>对于同一个源文件，根据不同的目标，可以生成不同效果的 source map。它们在<strong>构建速度</strong>、<strong>质量</strong>（反解代码与源代码的接近程度以及调试时行号列号等辅助信息的对应情况）、<strong>访问方式</strong>（在产物文件中或是单独生成 source map 文件）和<strong>文件大小</strong>等方面各不相同。在开发环境和生产环境下，我们对于 source map 功能的期望也有所不同：</p>
@@ -230,7 +230,7 @@ if (options.devtool.includes(&quot;source-map&quot;)) {
 <p>通过上面的代码分析，我们了解了不同参数在 Webpack 运行时起到的作用。那么这些不同参数组合下的各种预设对我们的 source map 生成又各自会产生什么样的效果呢？下面我们通过示例来看一下。</p>
 <h3>不同预设的示例结果对比</h3>
 <p>下面，以课程示例代码 <a href="https://github.com/fe-efficiency/lessons_fe_efficiency/tree/master/03_develop_environment">03_develop_environment</a> 为例，我们来对比下几种常用预设的差异（为了使时间差异更明显，示例中引入了几个大的类库文件）：</p>
-<p><img src="assets/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png" alt="12.png" /></p>
+<p><img src="assets/Ciqc1F87kyiAZvHdAAIGvohk2F4144.png" alt="png" /></p>
 <blockquote>
 <p>*注1：“/”前后分别表示产物 js 大小和对应 .map 大小。
 *注2：“/”前后分别表示初次构建时间和开启 watch 模式下 rebuild 时间。对应统计的都是 development 模式下的笔者机器环境下几次构建时间的平均值，只作为相对快慢与量级的比较。</p>
@@ -251,19 +251,19 @@ if (options.devtool.includes(&quot;source-map&quot;)) {
 <ul>
 <li>源码且包含列信息</li>
 </ul>
-<p><img src="assets/CgqCHl85_KuANSVfAADSE8VO7Qg572.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl85_KuANSVfAADSE8VO7Qg572.png" alt="png" /></p>
 <ul>
 <li>源码不包含列信息</li>
 </ul>
-<p><img src="assets/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F85_LCAMTlgAADhqpZ4v9o628.png" alt="png" /></p>
 <ul>
 <li>Loader转换后代码</li>
 </ul>
-<p><img src="assets/CgqCHl85_LqAPrYzAADfmUwS_JE006.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl85_LqAPrYzAADfmUwS_JE006.png" alt="png" /></p>
 <ul>
 <li>生成后的产物代码</li>
 </ul>
-<p><img src="assets/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl85_MGAHhmMAAKGwvDeXIM418.png" alt="png" /></p>
 <h4>开发环境下 Source Map 推荐预设</h4>
 <p>在这里我们对开发环境下使用的推荐预设做一个总结（生产环境的预设我们将在之后的构建效率篇中再具体分析）：</p>
 <ul>
@@ -295,7 +295,7 @@ if (options.devtool.includes(&quot;source-map&quot;)) {
   ...
 </code></pre>
 <p>在上面的示例中，我们将 devtool 设为 false，而直接使用 EvalSourceMapDevToolPlugin，通过传入 module: true 和 column:false，达到和预设 eval-cheap-module-source-map 一样的质量，同时传入 exclude 参数，排除第三方依赖包的 source map 生成。保存设定后通过运行可以看到，在文件体积减小（尽管开发环境并不关注文件大小）的同时，再次构建的速度相比上面表格中的速度提升了将近一倍，达到了最快一级。</p>
-<p><img src="assets/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl85_N2AUkcpAAEqvMKhgVQ549.png" alt="png" /></p>
 <p>类似这样的优化可以帮助我们在一些大型项目中，通过自定义设置来获取比预设更好的开发体验。</p>
 <h3>总结</h3>
 <p>在今天这一课时中，我们主要了解了提升开发效率的另一个重要工具——source map 的用途和使用方法。我们分析了 Webpack 中 devtool 的各种参数预设的组合规则、使用效果及其背后的原理。对于开发环境，我们根据一组示例对比分析来了解通常情况下的最佳选择，也知道了如何直接使用插件来达到更细致的优化。</p>

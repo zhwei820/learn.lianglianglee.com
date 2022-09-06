@@ -288,7 +288,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>在 ShardingSphere 中，继承 DatabaseTypeAwareSPI 接口的就只有 XADataSourceDefinition 接口，而后者存在一批实现类，整体的类层结构如下所示：</p>
-<p><img src="assets/Ciqc1F9jCmiAI4cLAAE2ATnYWp4900.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9jCmiAI4cLAAE2ATnYWp4900.png" alt="png" /></p>
 <p>XADataSourceDefinition 的实现类</p>
 <p>这里以 MySQLXADataSourceDefinition 为例展开讨论，该类分别实现了 DatabaseTypeAwareSPI 和 XADataSourceDefinition 这两个接口中所定义的三个方法：</p>
 <pre><code>public final class MySQLXADataSourceDefinition implements XADataSourceDefinition {
@@ -327,7 +327,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>同样，在 sharding-transaction-xa-core 工程中，我们也发现了如下所示的 SPI 配置信息：</p>
-<p><img src="assets/Ciqc1F9jCoWAOFRpAACUXKjEF6o633.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9jCoWAOFRpAACUXKjEF6o633.png" alt="png" /></p>
 <p>sharding-transaction-xa-core 工程中的 SPI 配置</p>
 <p>当根据数据库类型获取了对应的 XADataSourceDefinition 之后，我们就可以根据 XADriverClassName 来创建具体的 XADataSource：</p>
 <pre><code>private static XADataSource loadXADataSource(final String xaDataSourceClassName) {
@@ -360,7 +360,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>DataSourcePropertyProvider 的实现类有两个，一个是 DefaultDataSourcePropertyProvider，另一个是 HikariCPPropertyProvider。ShardingSphere 默认使用的是 HikariCPPropertyProvider，这点可以从如下所示的 SPI 配置文件中得到确认：</p>
-<p><img src="assets/Ciqc1F9jCpSAGChUAAB8-cv8fCU688.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9jCpSAGChUAAB8-cv8fCU688.png" alt="png" /></p>
 <p>DataSourcePropertyProvider 的 SPI 配置</p>
 <p>HikariCPPropertyProvider 实现了 DataSourcePropertyProvider 接口，并包含了对这些基础信息的定义：</p>
 <pre><code>public final class HikariCPPropertyProvider implements DataSourcePropertyProvider {
@@ -398,7 +398,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>至此，我们对 XADataSource 的构建过程描述完毕。这个过程不算复杂，但涉及的类比较多，值得我们以 XADataSourceFactory 为中心画一张类图作为总结：</p>
-<p><img src="assets/Ciqc1F9jCqGAYmlZAACYlVXsQ44048.png" alt="image.png" /></p>
+<p><img src="assets/Ciqc1F9jCqGAYmlZAACYlVXsQ44048.png" alt="png" /></p>
 <h4>2.XAConnection</h4>
 <p>讲完 XADataSource，我们接着来讲 XAConnection，XAConnection 同样是 JDBC 规范中的接口。</p>
 <p>负责创建 XAConnection 的工厂类 XAConnectionFactory 如下所示：</p>
@@ -429,7 +429,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>XAConnectionWrapper 接口只有一个方法，即根据传入的 XADataSource 和一个普通 Connection 对象创建出一个新的 XAConnection 对象。XAConnectionWrapper 接口的类层结构如下所示：</p>
-<p><img src="assets/Ciqc1F9jCrCAXTkWAAD4zJLBg8I622.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9jCrCAXTkWAAD4zJLBg8I622.png" alt="png" /></p>
 <p>XAConnectionWrapper 接口的实现类</p>
 <p>MySQLXAConnectionWrapper 中的 warp 方法如下所示：</p>
 <pre><code>@Override

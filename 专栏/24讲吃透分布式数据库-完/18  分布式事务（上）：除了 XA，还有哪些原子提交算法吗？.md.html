@@ -239,15 +239,15 @@ function hide_canvas() {
 <li>bal:lock 存 start_ts=&gt;(primary cell)，Primary cell 是 Rowkey 和列名的组合，它在提交容错处理和事务冲突时使用，用来清理由于协调器失败导致的事务失败留下的锁信息。</li>
 </ol>
 <p>我们现在用一个例子来介绍一下整个过程，请看下图。</p>
-<p><img src="assets/Cgp9HWBPCKiAbXCoAAB0tHTHvis535.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWBPCKiAbXCoAAB0tHTHvis535.png" alt="png" /></p>
 <p>一个账户表中，Bob 有 10 美元，Joe 有 2 美元。我们可以看到 Bob 的记录在 write 字段中最新的数据是 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f793968396b7c2">[email&#160;protected]</a>，它表示当前最新的数据是 ts=5 那个版本的数据，ts=5 版本中的数据是 10 美元，这样读操作就会读到这个 10 美元。同理，Joe 的账号是 2 美元。</p>
-<p><img src="assets/Cgp9HWBPCK-ABB4wAAC8TLGF6II238.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWBPCK-ABB4wAAC8TLGF6II238.png" alt="png" /></p>
 <p>现在我们要做一个转账操作，从 Bob 账户转 7 美元到 Joe 账户。这需要操作多行数据，这里是两行。首先需要加锁，Percolator 从要操作的行中随机选择一行作为 Primary Row，其余为 Secondary Row。对 Primary Row 加锁，成功后再对 Secondary Row 加锁。从上图我们看到，在 ts=7 的行 lock 列写入了一个锁：I am primary，该行的 write 列是空的，数据列值为 3（10-7=3）。 此时 ts=7 为 start_ts。</p>
-<p><img src="assets/Cgp9HWBPCLqAAl_ZAAE417OCMCw175.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWBPCLqAAl_ZAAE417OCMCw175.png" alt="png" /></p>
 <p>然后对 Joe 账户加锁，同样是 ts=7，在 Joe 账户的加锁信息中包含了指向 Primary lock 的引用，如此这般处于同一个事务的行就关联起来了。Joe 的数据列写入 9(2+7=9)，write 列为空，至此完成 Prewrite 阶段。</p>
-<p><img src="assets/Cgp9HWBPCMKAR9C1AAEYmGw4fnE874.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWBPCMKAR9C1AAEYmGw4fnE874.png" alt="png" /></p>
 <p>接下来事务就要 Commit 了。Primary Row 首先执行 Commit，只要 Primary Row Commit 成功了，事务就成功了。Secondary Row 失败了也不要紧，后续会有补救措施。Commit 操作首先清除 Primary Row 的锁，然后写入 ts=8 的行（因为时间是单向递增的，这里是 commit_ts），该行可以称为 Commit Row，因为它不包含数据，只是在 write 列中写入 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2b2e3b2e0f78">[email&#160;protected]</a>，标识 ts=7 的数据已经可见了，此刻以后的读操作可以读到版本 ts=7 的数据了。</p>
-<p><img src="assets/CioPOWBPCMmARbSjAAC7HQrDF0I862.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWBPCMmARbSjAAC7HQrDF0I862.png" alt="png" /></p>
 <p>接下来就是 commit Secondary Row 了，和 Primary Row 的逻辑是一样的。Secondary Row 成功 commit，事务就完成了。</p>
 <p>如果 Primary Row commit 成功，Secondary Row commit 失败会怎么样，数据的一致性如何保障？由于 Percolator 没有中心化的事务管理器组件，处理这种异常，只能在下次读操作发起时进行。如果一个读请求发现要读的数据存在 Secondary 锁，它会根据 Secondary Row 锁去检查其对应的 Primary Row 的锁是不是还存在，若存在说明事务还没有完成；若不存在则说明，Primary Row 已经 Commit 了，它会清除 Secondary Row 的锁，使该行数据变为可见状态（commit）。这是一个 Roll forward 的概念。</p>
 <p>我们可以看到，在这样一个存储系统中，并非所有的行都是数据，还包含了一些事务控制行，或者称为 Commit Row。它的数据 Column 为空，但 write 列包含了可见数据的 TS。它的作用是标示事务完成，并指引读请求读到新的数据。随着时间的推移，会产生大量冗余的数据行，无用的数据行会被 GC 线程定时清理。</p>

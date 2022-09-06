@@ -180,14 +180,14 @@ function hide_canvas() {
 <hr />
 <p><strong>请注意，只要我们在代码工程中添加了上述依赖，包含在该工程中的所有 HTTP 端点都将被保护起来。</strong></p>
 <p>例如，在 SpringCSS 案例的 account-service 中，我们知道存在一个 AccountController ，且它暴露了一个“accounts/ /{accountId}”端点。现在，我们启动 account-service 服务并访问上述端点，弹出了如下图所示的界面内容：</p>
-<p><img src="assets/CgqCHmABN02AZfgTAAAR0uEiE5U744.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHmABN02AZfgTAAAR0uEiE5U744.png" alt="png" /></p>
 <p>添加 Spring Security 之后自动出现的登录界面</p>
 <p>同时，在系统的启动控制台日志中，我们发现了如下所示的新的日志信息。</p>
 <pre><code>Using generated security password: 17bbf7c4-456a-48f5-a12e-a680066c8f80
 </code></pre>
 <p>在这里可以看到，Spring Security 为我们自动生成了一个密码，我们可以基于“user”这个账号及上述密码登录这个界面，抽空你也可以尝试下。</p>
 <p>如果我们使用了 Postman 可视化 HTTP 请求工具，可以设置授权类型为“Basic Auth”并输入对应的用户名和密码完成对 HTTP 端点的访问，设置界面如下图所示：</p>
-<p><img src="assets/CgqCHmABN1uAC5vsAAA3VhGEBJY812.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHmABN1uAC5vsAAA3VhGEBJY812.png" alt="png" /></p>
 <p>使用 Postman 来完成认证信息的设置</p>
 <p>事实上，在引入 spring-boot-starter-security 依赖之后，Spring Security 会默认创建一个用户名为“user”的账号。很显然，每次启动应用时，通过 Spring Security 自动生成的密码都会有所变化，因此它不适合作为一种正式的应用方法。</p>
 <p>如果我们想设置登录账号和密码，最简单的方式是通过配置文件。例如，我们可以在 account-service 的 application.yml 文件中添加如下代码所示的配置项：</p>
@@ -336,7 +336,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 }
 </code></pre>
 <p>Spring Security 中内置了一大批 PasswordEncoder 接口的实现类，如下图所示：</p>
-<p><img src="assets/CgqCHmABN4qACniMAAB2uCwQA6M741.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHmABN4qACniMAAB2uCwQA6M741.png" alt="png" /></p>
 <p>Spring Security 中的 PasswordEncoder 实现类</p>
 <p>上图中，比较常用的算法如 SHA-256 算法的 StandardPasswordEncoder、bcrypt 强哈希算法的 BCryptPasswordEncoder 等。而在实际案例中，我们使用的是 BCryptPasswordEncoder，它的 encode 方法如下代码所示：</p>
 <pre><code>public String encode(CharSequence rawPassword) {

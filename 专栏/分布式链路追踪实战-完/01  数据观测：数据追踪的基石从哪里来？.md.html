@@ -201,12 +201,12 @@ function hide_canvas() {
 <h4>日志（Logging）</h4>
 <p><strong>日志</strong>是系统中的常见功能，我们前面说的数据来源的各个部分都有可能产生日志。日志一般的描述是：在特定时间发生的事件，被以结构化的形式记录并产生的文本数据。</p>
 <p>日志可以为我们展现系统在任意时间的运行状态，又因为它是结构化的文本，所以我们很容易通过某种格式来进行检索，比如下图就是对 7 月 24 日用户支付下单操作的记录：</p>
-<p><img src="assets/Ciqc1F8n2O6AXUU_AACiGPnzHJ0060.png" alt="4.png" /></p>
+<p><img src="assets/Ciqc1F8n2O6AXUU_AACiGPnzHJ0060.png" alt="png" /></p>
 <p>由于日志是最容易生成的，如果它大量地输出，会占据比较大的存储空间，进而影响整个应用程序的性能，比如 Java 中 logback 的日志框架，就算使用了异步线程来执行，也会对磁盘和 I/O 的使用率造成影响。</p>
 <p>当然，也有一部分系统是利用日志可追溯、结构化的特点，来实现相关功能的，比如我们最常见的 WAL（Write-Ahead Logging）。WAL 就是在操作之前先进行日志写入，再执行操作；如果没有执行操作，那么在下次启动时就可以通过日志中结构化的，有时间标记的信息恢复操作，其中最典型的就是 MySQL 中的 Redo log。</p>
 <h4>统计指标（Metrics）</h4>
 <p><strong>统计指标</strong>也是我们经常使用的。它是一种可累加的聚合的数值结果，具有原子性。因此，我们可以通过各种数学计算方式来获取一段时间内的数值。</p>
-<p><img src="assets/CgqCHl8nrU6AQfBSAACjSdwOzUQ263.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8nrU6AQfBSAACjSdwOzUQ263.png" alt="png" /></p>
 <p>统计指标针对数据的存储、处理、压缩和检索进行了优化，所以一般可以长期存储并以很简单的方式（聚合）查询。但由于涉及数据的处理（数学计算方式）和压缩，所以它也会占用一定的 CPU 资源。</p>
 <p>统计指标是一个压缩后的数值，因此如果指标出现异常，我们很难得知是什么原因导致的异常。此外，如果我们使用了一个高基数的指标来作为统计的维度，那么统计就很容易给机器带来高性能损耗，比如，在基于用户 ID 的维度去做数据统计时，因为在统计的时候需要一段时间范围，如果数据过多就必然会造成内存上的占用。</p>
 <p>讲到这里，你应该对指标有了一定的认识。我们后端经常说的 QPS、TPS、SLA 都是计算后得到的指标；基础设施中的 CPU 使用率、负载情况也可以认为是指标。</p>
@@ -225,7 +225,7 @@ function hide_canvas() {
 </ol>
 <p>根据这 2 个级别，我们可以对上面的 3 个内容加以细化，其中<strong>链路追踪</strong>是请求级别，因为它和每个请求都挂钩；<strong>日志</strong>和<strong>统计指标</strong>可以是请求级别，也可以是聚合级别，因为它们可能是真实的请求，也可能是系统在对自身诊断时记录下来的信息。</p>
 <p>那么当它们两两组合之后又是什么关系呢？我们可以从下图中看到：</p>
-<p><img src="assets/CgqCHl8n0peAVsZsAAIx_TZards535.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl8n0peAVsZsAAIx_TZards535.png" alt="png" /></p>
 <ol>
 <li><strong>链路追踪+统计指标</strong>（Request-scoped metrics）<strong>，请求级别的统计</strong>：在链路追踪的基础上，与相关的统计数据结合，从而得知数据与数据、应用与应用之间的关系。</li>
 <li><strong>链路追踪+日志</strong>（Request-scoped events）<strong>，请求级别的事件</strong>：这是链路中一个比较常见的组合模式。日志本身是每一条单独存在的，将链路追踪收集到的信息集成在日志中，可以让日志之间具备关联性，使其具有除了事件维度以外的另一个新的维度，上下文信息。</li>

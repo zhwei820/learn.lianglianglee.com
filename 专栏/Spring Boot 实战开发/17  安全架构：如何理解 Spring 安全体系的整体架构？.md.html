@@ -178,22 +178,22 @@ function hide_canvas() {
 <p><strong>所谓认证</strong>，即首先需要明确“你是谁”这个问题，也就是说系统能针对每次访问请求判断出访问者是否具有合法的身份标识。</p>
 <p>一旦明确了 “你是谁”，我们就能判断出“你能做什么”，这个步骤就是<strong>授权</strong>。一般来说，通用的授权模型都是基于权限管理体系，即对资源、权限、角色和用户的进行组合处理的一种方案。</p>
 <p>当我们把认证与授权结合起来后，即先判断资源访问者的有效身份，然后确定其对这个资源进行访问的合法权限，整个过程就形成了对系统进行安全性管理的一种常见解决方案，如下图所示：</p>
-<p><img src="assets/Cip5yF_9eRGAaOFAAACdJ5DTEOU093.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yF_9eRGAaOFAAACdJ5DTEOU093.png" alt="png" /></p>
 <p>基于认证和授权机制的资源访问安全性示意图</p>
 <p>上图就是一种通用方案，而在不同的应用场景及技术体系下，系统可以衍生出很多具体的实现策略，比如 Web 应用系统中的认证和授权模型虽然与上图类似，但是在具体设计和实现过程中有其特殊性。</p>
 <p>在 Web 应用体系中，因为认证这部分的需求相对比较明确，所以我们需要构建一套完整的存储体系来保存和维护用户信息，并且确保这些用户信息在处理请求的过程中能够得到合理利用。</p>
 <p>而授权的情况相对来说复杂些，比如对某个特定的 Web 应用程序而言，我们面临的第一个问题是如何判断一个 HTTP 请求具备访问自己的权限。解决完这个第一个问题后，就算这个请求具备访问该应用程序的权限，并不意味着它能够访问其所具有的所有 HTTP 端点，比如业务上的某些核心功能还是需要具备较高的权限才能访问，这就涉及我们需要解决的第二个问题——如何对访问的权限进行精细化管理？如下图所示：</p>
-<p><img src="assets/Ciqc1F_9eRqANunuAAB5IYtX-6s596.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_9eRqANunuAAB5IYtX-6s596.png" alt="png" /></p>
 <p>Web 应用程序访问授权效果示意图</p>
 <p>在上图中，假设该请求具备对 Web 应用程序的访问权限，但不具备访问应用程序中端点 1 的权限，如果想实现这种效果，一般我们的做法是引入角色体系：首先对不同的用户设置不同等级的角色（即角色等级不同对应的访问权限也不同），再把每个请求绑定到某个角色（即该请求具备了访问权限）。</p>
 <p>接下来我们把认证和授权进行结合，梳理出了 Web 应用程序访问场景下的安全性实现方案，如下图所示：</p>
-<p><img src="assets/CgqCHl_9eSOANBbmAACWXd-B08c635.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl_9eSOANBbmAACWXd-B08c635.png" alt="png" /></p>
 <p>认证和授权整合示意图</p>
 <p>从上图我们可以看到，用户首先通过请求传递用户凭证完成用户认证，然后根据该用户信息中所具备的角色信息获取访问权限，最终完成对 HTTP 端点的访问授权。</p>
 <p>对一个 Web 应用程序进行安全性设计时，我们首先需要考虑认证和授权，因为它们是核心考虑点。在技术实现场景中，只要涉及用户认证，势必会涉及用户密码等敏感信息的加密。针对用户密码的场景，我们主要使用单向散列加密算法对敏感信息进行加密。</p>
 <p>关于单向散列加密算法，它常用于生成消息摘要（Message Digest），主要特点为单向不可逆和密文长度固定，同时具备“碰撞”少的优点，即明文的微小差异会导致生成的密文完全不同。其中，常见的单向散列加密实现算法为 MD5（Message Digest 5）和 SHA（Secure Hash Algorithm）。而在 JDK 自带的 MessageDigest 类中，因为它已经包含了这些算法的默认实现，所以我们直接调用方法即可。</p>
 <p>在日常开发过程中，对于密码进行加密的典型操作时序图如下所示：</p>
-<p><img src="assets/CgpVE1_24-6ACO9pAABbleIQe14786.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgpVE1_24-6ACO9pAABbleIQe14786.png" alt="png" /></p>
 <p>单向散列加密与加盐机制</p>
 <p>上图中，我们引入了加盐（Salt）机制，进一步提升了加密数据的安全性。所谓加盐就是在初始化明文数据时，系统自动往明文中添加一些附加数据，然后再进行散列。</p>
 <p>目前，单向散列加密及加盐思想已被广泛用于系统登录过程中的密码生成和校验过程中，比如接下来我们将要引入的 Spring Security 框架。</p>
@@ -203,11 +203,11 @@ function hide_canvas() {
 <p>这一讲我们先不对如何使用 Spring Security 框架展开说明，而是先从高层次梳理该框架对前面提到的各项安全性需求提供的架构设计。</p>
 <h4>Spring Security 中的过滤器链</h4>
 <p>与业务中大多数处理 Web 请求的框架对比后，我们发现 Spring Security 中采用的是管道-过滤器（Pipe-Filter）架构模式，如下图所示：</p>
-<p><img src="assets/CgqCHl_9eTCACoPnAACF6H2W2KI357.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl_9eTCACoPnAACF6H2W2KI357.png" alt="png" /></p>
 <p>管道-过滤器架构模式示意图</p>
 <p>在上图中我们可以看到，处理业务逻辑的组件称为过滤器，而处理结果的相邻过滤器之间的连接件称为管道，它们构成了一组过滤器链，即 Spring Security 的核心。</p>
 <p>项目一旦启动，过滤器链将会实现自动配置，如下图所示：</p>
-<p><img src="assets/Ciqc1F_9eTmAM6OYAAD0pSOc1Xg188.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F_9eTmAM6OYAAD0pSOc1Xg188.png" alt="png" /></p>
 <p>Spring Security 中的过滤器链</p>
 <p>在上图中，我们看到了 BasicAuthenticationFilter、UsernamePasswordAuthenticationFilter 等几个常见的 Filter，这些类可以直接或间接实现 Servlet 类中的 Filter 接口，并完成某一项具体的认证机制。例如，上图中的 BasicAuthenticationFilter 用来认证用户的身份，而 UsernamePasswordAuthenticationFilter 用来检查输入的用户名和密码，并根据认证结果来判断是否将结果传递给下一个过滤器。</p>
 <p>这里请注意，整个 Spring Security 过滤器链的末端是一个 FilterSecurityInterceptor，本质上它也是一个 Filter，但它与其他用于完成认证操作的 Filter 不同，因为它的核心功能是用来实现权限控制，即判定该请求是否能够访问目标 HTTP 端点。因为我们可以把 FilterSecurityInterceptor 对权限控制的粒度划分到方法级别，所以它能够满足前面提到的精细化访问控制。</p>
@@ -250,7 +250,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>围绕上述方法，通过翻阅 Spring Security 源代码，我们引出了该框架中一系列核心类，并梳理了它们之间的交互结构，如下图所示：</p>
-<p><img src="assets/Cip5yF_9edmAN_FuAAD0M-rwB1I928.png" alt="Lark20210112-182830.png" /></p>
+<p><img src="assets/Cip5yF_9edmAN_FuAAD0M-rwB1I928.png" alt="png" /></p>
 <p>Spring Security 核心类图</p>
 <p>上图中的很多类，通过名称我们就能明白它的含义和作用。</p>
 <p>以位于左下角的 SecurityContextHolder 为例，它是一个典型的 Holder 类，存储了应用的安全上下文对象 SecurityContext，包含系统请求中最近使用的认证信息。这里我们大胆猜想它的内部肯定使用了 ThreadLocal 来确保线程访问的安全性。</p>

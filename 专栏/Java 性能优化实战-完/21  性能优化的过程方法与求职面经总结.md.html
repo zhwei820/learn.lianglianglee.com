@@ -191,7 +191,7 @@ function hide_canvas() {
 <h4>5.通用</h4>
 <p>lsof 命令可以查看当前进程所关联的所有资源；sysctl 命令可以查看当前系统内核的配置参数； dmesg 命令可以显示系统级别的一些信息，比如被操作系统的 oom-killer 杀掉的进程就可以在这里找到。</p>
 <p>整理了一幅脑图，可供你参考：</p>
-<p><img src="assets/Ciqc1F9obKuAe7CEAAEshp5LbOA665.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9obKuAe7CEAAEshp5LbOA665.png" alt="png" /></p>
 <h3>常用工具集合</h3>
 <p>为了找到系统的问题，我们会采用类似于神农尝百草的方式，用多个工具、多种手段获取系统的运行状况。</p>
 <h4>1.信息收集</h4>
@@ -208,7 +208,7 @@ function hide_canvas() {
 <p>skywalking 可以用来分析分布式环境下的调用链问题，可以详细地看到每一步执行的耗时。但如果你没有这样的环境，就可以使用命令行工具 arthas 对方法进行 trace，最终也能够深挖找到具体的慢逻辑。</p>
 <p>jvm-profiling-tools，可以生成火焰图，辅助我们分析问题。另外，更加底层的，针对操作系统的性能测评和调优工具，还有perf和SystemTap，感兴趣的同学可以自行研究一下。</p>
 <p>关于工具方面的内容，你可以回顾“04 | 工具实践：如何获取代码性能数据？”和“05｜工具实践：基准测试 JMH，精确测量方法性能”进行回忆复习，我整理了一幅脑图，可供你参考。</p>
-<p><img src="assets/Ciqc1F9obL2AJTQPAAFOXihBiAA696.png" alt="2.png" /></p>
+<p><img src="assets/Ciqc1F9obL2AJTQPAAFOXihBiAA696.png" alt="png" /></p>
 <h3>基本解决方式</h3>
 <p>找到了具体的性能瓶颈点，就可以针对性地进行优化。</p>
 <h4>1.CPU 问题</h4>
@@ -241,7 +241,7 @@ function hide_canvas() {
 <p>网络 I/O 的另外一个问题就是频繁的网络交互，通过将结果集合并，使用批量的方式，可以显著增加性能，但这种方式的使用场景有限，比较适合异步的任务处理。</p>
 <p>使用 netstat 命令，或者 lsof 命令，可以获取进程所关联的，TIME_WAIT 和 CLOSE_WAIT 网络状态的数量，前者可以通过调整内核参数来解决，但后者多是应用程序的 BUG。</p>
 <p>我整理了一幅脑图，可供你参考。</p>
-<p><img src="assets/CgqCHl9obM2AUI9qAAFueXY-U4s279.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl9obM2AUI9qAAFueXY-U4s279.png" alt="png" /></p>
 <p>有了上面的信息收集和初步优化，我想你脑海里应该对要优化的系统已经有了非常详细的了解，是时候改变一些现有代码的设计了。</p>
 <p><strong>可以说如果上面的基本解决方式面向的是“面”，那么代码层面的优化，面向的就是具体的“性能瓶颈点”。</strong></p>
 <h3>代码层面</h3>
@@ -277,10 +277,10 @@ function hide_canvas() {
 <p>并不是说系统的资源利用率越低，我们的代码写得就越好。作为一个编码者，我们要想方设法压榨系统的剩余价值，让所有的资源都轮转起来。尤其在高并发场景下，这种轮转就更加重要——属于在一定压力下系统的最优状态。</p>
 <p>资源不能合理的利用，就是一种浪费。比如，业务应用多属于 I/O 密集型业务，如果让请求都阻塞在 I/O 上，就造成了 CPU 资源的浪费。这时候使用并行，就可以在同一时刻承担更多的任务，并发量就能够增加；再比如，我们监控到 JVM 的堆空闲空间，长期处于高位，那就可以考虑加大堆内缓存的容量，或者缓冲区的容量。</p>
 <p>我整理了一幅脑图，可供你参考。</p>
-<p><img src="assets/CgqCHl9obNuAOt-nAAGiF2SGIDY158.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl9obNuAOt-nAAGiF2SGIDY158.png" alt="png" /></p>
 <h3>PDCA 循环方法论</h3>
 <p>性能优化是一个循环的过程，需要根据数据反馈进行实时调整。有时候，测试结果表明，有些优化的效果并不好，就需要回滚到优化前的版本，重新寻找突破点。</p>
-<p><img src="assets/CgqCHl9obOqAFQ2CAABk4i6nXkU801.png" alt="5.png" /></p>
+<p><img src="assets/CgqCHl9obOqAFQ2CAABk4i6nXkU801.png" alt="png" /></p>
 <p>如上图，<strong>PDCA 循环</strong>的方法论可以支持我们管理性能优化的过程，它有 4 个步骤：</p>
 <ul>
 <li>P（Planning）计划阶段，找出存在的性能问题，收集性能指标信息，确定要改进的目标，准备达到这些目标的具体措施；</li>
@@ -289,7 +289,7 @@ function hide_canvas() {
 <li>A（act）处理阶段，将成功的优化经验进行推广，由点及面进行覆盖，为负面影响提供解决方案，将错误的方法形成经验。</li>
 </ul>
 <p>如此周而复始，应用的性能将会逐步提高，如下图，对于性能优化来说，就可以抽象成下面的方式。</p>
-<p><img src="assets/Ciqc1F9obPiANviwAAB2amhgXUU818.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1F9obPiANviwAAB2amhgXUU818.png" alt="png" /></p>
 <p>既然叫作循环，就说明这个过程是可以重复执行的。事实上，在我们的努力下，应用性能会螺旋式上升，最终达到我们的期望。</p>
 <h3>求职面经</h3>
 <h4>1. 关注“性能优化”的副作用问题</h4>

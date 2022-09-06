@@ -276,7 +276,7 @@ CommandLine flags:
 <p>通过这么分析下来，同学们应该发现，我们关注的主要是两个数据：GC 暂停时间，以及 GC 之后的内存使用量/使用率。</p>
 </blockquote>
 <p>此次 GC 事件的示意图如下所示：</p>
-<p><img src="assets/3966e430-62f7-11ea-a4da-8f4f1ea47eee" alt="57974076.png" /></p>
+<p><img src="assets/3966e430-62f7-11ea-a4da-8f4f1ea47eee" alt="png" /></p>
 <h4><strong>Full GC 日志分析</strong></h4>
 <p>分析完第一次 GC 事件之后，我们心中应该有个大体的模式了。一起来看看另一次 GC 事件的日志：</p>
 <pre><code class="language-shell">2019-12-15T15:18:37.081-0800: 0.908:
@@ -306,7 +306,7 @@ CommandLine flags:
 <p>FullGC，我们主要关注 GC 之后内存使用量是否下降，其次关注暂停时间。简单估算，GC 后老年代使用量为 220MB 左右，耗时 50ms。如果内存扩大 10 倍，GC 后老年代内存使用量也扩大 10 倍，那耗时可能就是 500ms 甚至更高，就会系统有很明显的影响了。这也是我们说串行 GC 性能弱的一个原因，服务端一般是不会采用串行 GC 的。</p>
 </blockquote>
 <p>此次 GC 事件的内存变化情况，可以表示为下面的示意图：</p>
-<p><img src="assets/e0272f50-62f7-11ea-ae67-634092bbcd70" alt="839273.png" /></p>
+<p><img src="assets/e0272f50-62f7-11ea-ae67-634092bbcd70" alt="png" /></p>
 <p>年轻代看起来数据几乎没变化，怎么办？因为上下文其实还有其他的 GC 日志记录，我们照着这个格式去解读即可。</p>
 <h3>Parallel GC 日志解读</h3>
 <p>并行垃圾收集器对年轻代使用“标记—复制（mark-copy）”算法，对老年代使用“标记—清除—整理（mark-sweep-compact）”算法。</p>
@@ -383,7 +383,7 @@ demo.jvm0204.GCLogAnalysis
 <p>年轻代 GC，我们可以关注暂停时间，以及 GC 后的内存使用率是否正常，但不用特别关注 GC 前的使用量，而且只要业务在运行，年轻代的对象分配就少不了，回收量也就不会少。</p>
 </blockquote>
 <p>此次 GC 的内存变化示意图为：</p>
-<p><img src="assets/f3e388f0-62fb-11ea-9b06-5f146ad63a8a" alt="8353526.png" /></p>
+<p><img src="assets/f3e388f0-62fb-11ea-9b06-5f146ad63a8a" alt="png" /></p>
 <h4><strong>Full GC 日志分析</strong></h4>
 <p>前面介绍了并行 GC 清理年轻代的 GC 日志，下面来看看清理整个堆内存的 GC 日志：</p>
 <pre><code class="language-shell">2019-12-18T00:37:47.486-0800: 0.713:
@@ -412,7 +412,7 @@ demo.jvm0204.GCLogAnalysis
 <p>Full GC 时我们更关注老年代的使用量有没有下降，以及下降了多少。如果 FullGC 之后内存不怎么下降，使用率还很高，那就说明系统有问题了。</p>
 </blockquote>
 <p>此次 GC 的内存变化示意图为：</p>
-<p><img src="assets/73861870-62fc-11ea-af20-4f6854ce034d" alt="85130696.png" /></p>
+<p><img src="assets/73861870-62fc-11ea-af20-4f6854ce034d" alt="png" /></p>
 <p>细心的同学可能会发现，此次 FullGC 事件和前一次 MinorGC 事件是紧挨着的：0.690+0.02secs~0.713。因为 Minor GC 之后老年代使用量达到了 93%，所以接着就触发了 Full GC。</p>
 <p>本节到此就结束了，下节我们接着分析 CMS GC 日志。</p>
 </div>

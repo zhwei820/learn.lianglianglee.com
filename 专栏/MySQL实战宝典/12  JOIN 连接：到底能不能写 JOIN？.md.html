@@ -207,7 +207,7 @@ ON R.x = S.x
 WHERE R.y = ? AND S.z = ?
 </code></pre>
 <p>上面这条 SQL 语句是对表 R 和表 S 进行 INNER JOIN，其中关联的列是 x，WHERE 过滤条件分别过滤表 R 中的列 y 和表 S 中的列 z。那么这种情况下可以有以下两种选择：</p>
-<p><img src="assets/CioPOWC4Ph-AGSrLAADxjcjIP_0350.png" alt="2.png" /></p>
+<p><img src="assets/CioPOWC4Ph-AGSrLAADxjcjIP_0350.png" alt="png" /></p>
 <p>优化器一般认为，通过索引进行查询的效率都一样，所以 Nested Loop Join 算法主要要求驱动表的数量要尽可能少。</p>
 <p>所以，如果 WHERE R.y = ?过滤出的数据少，那么这条 SQL 语句会先使用表 R 上列 y 上的索引，筛选出数据，然后再使用表 S 上列 x 的索引进行关联，最后再通过 WHERE S.z = ?过滤出最后数据。</p>
 <p><strong>为了深入理解优化器驱动表的选择</strong>，咱们先来看下面这条 SQL：</p>
@@ -302,7 +302,7 @@ WHERE
 <p>上面这条 SQL 语句是要找出商品类型为 %BRASS，尺寸为 15 的欧洲供应商信息。</p>
 <p>因为商品表part 不包含地区信息，所以要从关联表 partsupp 中得到商品供应商信息，然后再从供应商元数据表中得到供应商所在地区信息，最后在外表 region 连接，才能得到最终的结果。</p>
 <p>最后的执行计划如下图所示：</p>
-<p><img src="assets/Cgp9HWC4PhGAQh1HAAL9Tg1Sl9k848.png" alt="3.png" /></p>
+<p><img src="assets/Cgp9HWC4PhGAQh1HAAL9Tg1Sl9k848.png" alt="png" /></p>
 <p>从上图可以发现，其实最早进行连接的是表 supplier 和 nation，接着再和表 partsupp 连接，然后和 part 表连接，再和表 part 连接。上述左右连接算法都是 Nested Loop Join。这时的结果集记录大概有 79,330 条记录</p>
 <p>最后和表 region 进行关联，表 region 过滤得到结果5条，这时可以有 2 种选择：</p>
 <ol>

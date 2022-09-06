@@ -539,7 +539,7 @@ function hide_canvas() {
 <li>一个微服务就是一个六边形，微服务之间的协作就是限界上下文之间的协作。</li>
 </ul>
 <p>显然，在将限界上下文的代码模型边界视为物理边界时，限界上下文、六边形与微服务之间就成了“三位一体”的关系。我们可以将三者的设计原则与思想结合起来，如下图所示：</p>
-<p><img src="assets/3501b3a0-b66b-11e8-825a-a31adc0db7e6" alt="enter image description here" /></p>
+<p><img src="assets/3501b3a0-b66b-11e8-825a-a31adc0db7e6" alt="png" /></p>
 <p>该图清晰地表达了这种“三位一体”的关系。</p>
 <ul>
 <li>限界上下文即微服务：我们可以利用领域驱动设计对限界上下文的定义，以及根据前述识别限界上下文的方法来设计微服务。</li>
@@ -549,7 +549,7 @@ function hide_canvas() {
 <li>六边形即限界上下文：通过六边形架构的端口确定限界上下文之间的集成关系。</li>
 </ul>
 <p>我们试以电商系统的购物流程来说明这种“三位一体”的关系。首先，我们通过领域场景分析的用例图来分析该购物流程：</p>
-<p><img src="assets/43d07150-b66b-11e8-a11e-1594b1f38679" alt="enter image description here" /></p>
+<p><img src="assets/43d07150-b66b-11e8-a11e-1594b1f38679" alt="png" /></p>
 <p>通过对各个用例的语义相关性与功能相关性，结合这些用例的业务能力，可以确定用例的边界。当我们为这些边界进行命名时，就初步获得了如下六个限界上下文：</p>
 <ul>
 <li>Product Context</li>
@@ -565,7 +565,7 @@ function hide_canvas() {
 <li>微服务之间是如何协作的？这个问题牵涉到通信机制的决策、同步或异步协作的选择、上游与下游服务的确定。我们可以结合<strong>上下文映射</strong>与<strong>六边形架构</strong>来思考这些问题。<strong>上下文映射</strong>帮助我们确定这种协作模式，并在确定了上下游关系后，通过六边形架构来定义端口。</li>
 </ul>
 <p>现在我们可以将六边形架构与限界上下文结合起来，即通过端口确定限界上下文之间的协作关系，绘制上下文映射。如果采用客户方—供应商开发模式，则各个限界上下文六边形的端口就是上游（Upstream，简称 U）或下游（Downstream，简称 D）。由于这些限界上下文都是独立部署的微服务，因此，它们的上游端口应实现为 OHS 模式（下图以绿色端口表示），下游端口应实现为 ACL 模式（下图以蓝色端口表示）：</p>
-<p><img src="assets/0043a830-b66b-11e8-a11e-1594b1f38679" alt="enter image description here" /></p>
+<p><img src="assets/0043a830-b66b-11e8-a11e-1594b1f38679" alt="png" /></p>
 <p>每个微服务都是一个独立的应用，我们可以针对每个微服务规划自己的分层架构，进而确定微服务内的领域建模方式。微服务的协作也有三种机制，分别为命令、查询和事件。Ben Stopford 在文章 <a href="https://www.confluent.io/blog/build-services-backbone-events/">Build Services on a Backbone of Events</a> 中总结了这三种机制，具体如下。</p>
 <ul>
 <li><strong>命令</strong>：是一个动作，是一个要求其他服务完成某些操作的请求，它会改变系统的状态，命令会要求响应。</li>
@@ -574,7 +574,7 @@ function hide_canvas() {
 </ul>
 <p>发出命令或查询请求的为下游服务，而服务的定义则处于上游。如上图所示，我以菱形端口代表“命令”，矩形端口代表“查询”，这样就能直观地通过上下文映射以及六边形的端口清晰地表达微服务的服务定义以及服务之间的协作方式。例如，Product Context 同时作为 Basket Context 与 Order Context 的上游限界上下文，其查询端口提供的是商品查询服务。Basket Context 作为 Order Context 的上游限界上下文，其命令端口提供了清除购物篮的命令服务。</p>
 <p>如果微服务的协作采用事件机制，则上下文映射的模式为发布/订阅事件模式。这时，限界上下文之间的关系有所不同，我们需要识别在这个流程中发生的关键事件。传递关键事件的就是六边形的<strong>端口</strong>，具体实现为消息队列，<strong>适配器</strong>则负责发布事件。于是，系统的整体架构就演变为以<strong>事件驱动架构（Event-Driven Architecture，EDA）风格</strong>构建的微服务系统。Vaughn Vernon 在《实现领域驱动设计》一书中使用六边形架构形象地展现了这一架构风格。</p>
-<p><img src="assets/0f5b07a0-b66b-11e8-a11e-1594b1f38679" alt="enter image description here" /></p>
+<p><img src="assets/0f5b07a0-b66b-11e8-a11e-1594b1f38679" alt="png" /></p>
 <p>六边形之间传递的三角形就是导致限界上下文切换的关键事件，在领域驱动设计中，作为领域事件（Domain Event）被定义在领域层。为了与限界上下文内部传递的领域事件区分开，我们可以名其为“关键领域事件”，又或者称为“应用事件”，它仍然属于领域模型中的一部分。在前面所示的上下文映射中，我们可以用三角形端口来代表“事件”，事件端口所在的限界上下文为发布者，该事件对应的下游端口则为订阅者。然而，当我们采用“事件”的协作机制时，上下文映射中的上下游语义却发生了变化，原来作为“命令”或“查询”提供者的上游，却成为了“事件”机制下处于下游的订阅者。以购物篮为例，“清除购物篮”命令服务被定义在 Basket Context 中。当提交订单成功后，Order Context 就会发起对该服务的调用。倘若将“提交订单”视为一个内部命令（Command），在订单被提交成功后，就会触发 OrderConfirmed 事件，此时，Order Context 反而成为了该事件的发布者，Basket Context 则会订阅该事件，一旦侦听到该事件触发，就会在 Basket Context 内部执行“清除购物篮”命令。显然，“清除购物篮”不再作为服务发布，而是在事件的 handler 中作为内部功能被调用。</p>
 <p>采用“事件”协作机制会改变我们习惯的顺序式服务调用形式，整个调用链会随着事件的发布而产生跳转，尤其是暴露在六边形端口的“关键事件”，更是会产生跨六边形（即限界上下文）的协作。仍以电商系统的购买流程为例，我们只考虑正常流程。在 Basket Context 中，一旦购物篮中的商品准备就绪，买家就会请求下订单，此时开始了事件流。</p>
 <ol>
@@ -587,7 +587,7 @@ function hide_canvas() {
 <li>Basket Context、Notification Context 与 Shipment Context 上下文都将订阅该事件。Basket Context 会清除购物篮，Notification Context 会发起对买家和卖家的通知，而 Shipment Context 会发起配送流程，在交付商品给买家后，发布 ShipmentDelivered 事件并被 Order Context 订阅。</li>
 </ol>
 <p>整个协作过程如下图所示（图中的序号对应事件流的编号）：</p>
-<p><img src="assets/2072a3e0-b66b-11e8-825a-a31adc0db7e6" alt="enter image description here" /></p>
+<p><img src="assets/2072a3e0-b66b-11e8-825a-a31adc0db7e6" alt="png" /></p>
 <p>与订单流程相关的事件包括：</p>
 <ul>
 <li>OrderRequested</li>

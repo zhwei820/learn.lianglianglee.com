@@ -160,7 +160,7 @@ function hide_canvas() {
 <h4>多因素认证设计</h4>
 <p>多因素认证是一种安全访问控制的方法，基本的设计理念在于<strong>用户想要访问最终的资源，至少需要通过两种以上的认证机制</strong>。</p>
 <p>那么，我们如何实现多种认证机制呢？一种常见的做法是分成两个步骤，第一步通过用户名和密码获取一个认证码（Authentication Code），第二步基于用户名和这个认证码进行安全访问。基于这种多因素认证的基本执行流程如下图所示：</p>
-<p><img src="assets/Cgp9HWDcHxyASKleAAC5AmJ3Hwc285.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWDcHxyASKleAAC5AmJ3Hwc285.png" alt="png" /></p>
 <p>多因素认证的实现方式示意图</p>
 <h4>系统初始化</h4>
 <p>为了实现多因素认证，我们需要构建一个独立的认证服务 Auth-Service，该服务<strong>同时提供了基于用户名+密码以及用户名+认证码的认证形式</strong>。当然，实现认证的前提是构建用户体系，因此我们需要提供如下所示的 User 实体类：</p>
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `spring_security_demo`.`auth_code` (
     PRIMARY KEY (`id`));
 </code></pre>
 <p>有了认证服务，接下来我们需要构建一个业务服务 Business-Service，该业务服务通过集成认证服务，完成具体的认证操作，并返回访问令牌（Token）给到客户端系统。因此，从依赖关系上讲，Business-Service 会调用 Auth-Service，如下图所示：</p>
-<p><img src="assets/Cgp9HWDcHyuAT3auAACddvz56Cc067.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWDcHyuAT3auAACddvz56Cc067.png" alt="png" /></p>
 <p>Business-Service 调用 Auth-Service 关系图</p>
 <p>接下来，我们分别从这两个服务入手，实现多因素认证机制。</p>
 <h3>实现多因素认证机制</h3>
@@ -431,7 +431,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 </code></pre>
 <p>CustomAuthenticationFilter 的实现过程比较简单，代码也都是自解释的，唯一需要注意的是<strong>在基于认证码的认证过程通过之后，我们会在响应中添加一个“Authorization”消息头，并使用 UUID 值作为 Token 进行返回</strong>。</p>
 <p>针对上述代码，我们可以通过如下所示的类图进行总结：</p>
-<p><img src="assets/CioPOWDcH0SAWPjtAAB7UfIfAyk803.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWDcH0SAWPjtAAB7UfIfAyk803.png" alt="png" /></p>
 <p>多因素认证执行核心类图</p>
 <p>最后，我们需要通过 Spring Security 中的配置体系确保各个类之间的有效协作。为此，我们构建了如下所示的 SecurityConfig 类：</p>
 <pre><code>@Configuration
@@ -475,17 +475,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 <p>关于案例的完整代码你可以在这里进行下载：<a href="https://github.com/lagouEdAnna/SpringSecurity-jianxiang/tree/main/MultiFactorAuthenticationDemo">https://github.com/lagouEdAnna/SpringSecurity-jianxiang/tree/main/MultiFactorAuthenticationDemo</a>。</p>
 <h3>案例演示</h3>
 <p>现在，让我们分别在本地启动认证服务和业务服务，请注意：认证服务的启动端口是 8080，而业务服务的启动端口是 9090。然后我们打开模拟 HTTP 请求的 Postman 并输入相关参数，如下所示：</p>
-<p><img src="assets/CioPOWDcH1CAWsVIAACxvLoOLdE765.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CioPOWDcH1CAWsVIAACxvLoOLdE765.png" alt="png" /></p>
 <p>多因素认证的第一步认证示意图：基于用户名+密码</p>
 <p>显然，该请求只传入了用户名和密码，所以会基于 UsernamePasswordAuthenticationProvider 执行认证过程，从而为用户“jianxiang”生成认证码。<strong>认证码是动态生成的，所以每次请求对应的结果都是不一样的</strong>，我通过查询数据库，获取该认证码为“9750”，你也可以自己做一些尝试。</p>
 <p>有了认证码，相当于完成了多因素认证机制的第一步。接下来，我们再次基于这个认证码构建请求并获取响应结果，如下所示：</p>
-<p><img src="assets/Cgp9HWDcH1mACUXeAADWBUPX0po513.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Cgp9HWDcH1mACUXeAADWBUPX0po513.png" alt="png" /></p>
 <p>多因素认证的第二步认证示意图：基于用户名+认证码</p>
 <p>可以看到，通过传入正确的认证码，我们基于 AuthCodeAuthenticationProvider 完成了多因素认证机制中的第二步认证，并最终在 HTTP 响应中生成了一个“Authorization”消息头。</p>
 <h3>小结与预告</h3>
 <p>这一讲我们基于多因素认证机制展示了如何利用 Spring Security 中的一些高级主题保护 Web 应用程序的实现方法。多因素认证机制的实现需要构建多个自定义的 AuthenticationProvider，并通过拦截器完成对请求的统一处理。相信案例中展示的这些开发技巧会给你的日常开发工作带来帮助。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/Cgp9HWDcH2KAfoU3AAHK941R6Dk155.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Cgp9HWDcH2KAfoU3AAHK941R6Dk155.png" alt="png" /></p>
 <p>这里给你留一道思考题：在 Spring Security 中，如何利用过滤器实现对用户请求的定制化认证？</p>
 </div>
                     </div>

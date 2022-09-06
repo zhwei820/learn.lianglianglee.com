@@ -188,7 +188,7 @@ function hide_canvas() {
 <p>Docker 的镜像仓库类似于代码仓库，用来存储和分发 Docker 镜像。镜像仓库分为公共镜像仓库和私有镜像仓库。</p>
 <p>目前，<a href="https://hub.docker.com/">Docker Hub</a> 是 Docker 官方的公开镜像仓库，它不仅有很多应用或者操作系统的官方镜像，还有很多组织或者个人开发的镜像供我们免费存放、下载、研究和使用。除了公开镜像仓库，你也可以构建自己的私有镜像仓库，在第 5 课时，我会带你搭建一个私有的镜像仓库。</p>
 <h4>镜像、容器、仓库，三者之间的联系</h4>
-<p><img src="assets/Ciqc1F9PYryALHVmAABihjRzo4c527.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9PYryALHVmAABihjRzo4c527.png" alt="png" /></p>
 <p>从图 1 可以看到，镜像是容器的基石，容器是由镜像创建的。一个镜像可以创建多个容器，容器是镜像运行的实体。仓库就非常好理解了，就是用来存放和分发镜像的。</p>
 <p>了解了 Docker 的三大核心概念，接下来认识下 Docker 的核心架构和一些重要的组件。</p>
 <h3>Docker 架构</h3>
@@ -198,7 +198,7 @@ function hide_canvas() {
 <p>在这样的背景下，最终爆发了容器大战，<code>OCI</code>也正是在这样的背景下应运而生。</p>
 <p><code>OCI</code>全称为开放容器标准（Open Container Initiative），它是一个轻量级，开放的治理结构。<code>OCI</code>组织在 Linux 基金会的大力支持下，于 2015 年 6 月份正式注册成立。基金会旨在为用户围绕工业化容器的格式和镜像运行时，制定一个开放的容器标准。目前主要有两个标准文档：<strong>容器运行时标准 （runtime spec）和容器镜像标准（image spec）</strong>。</p>
 <p>正是由于容器的战争，才导致 Docker 不得不在战争中改变一些技术架构。最终形成了下图所示的技术架构。</p>
-<p><img src="assets/Ciqc1F9PYtCAC1GSAADIK4E6wrc368.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9PYtCAC1GSAADIK4E6wrc368.png" alt="png" /></p>
 <p>图2 Docker 架构图</p>
 <p>我们可以看到，Docker 整体架构采用 C/S（客户端 / 服务器）模式，主要由客户端和服务端两大部分组成。客户端负责发送操作指令，服务端负责接收和处理指令。客户端和服务端通信有多种方式，即可以在同一台机器上通过<code>UNIX</code>套接字通信，也可以通过网络连接远程通信。</p>
 <p>下面我逐一介绍客户端和服务端。</p>
@@ -225,7 +225,7 @@ function hide_canvas() {
 <li><code>runC</code>是 Docker 官方按照 OCI 容器运行时标准的一个实现。通俗地讲，runC 是一个用来运行容器的轻量级工具，是真正用来运行容器的。</li>
 <li><code>containerd</code>是 Docker 服务端的一个核心组件，它是从<code>dockerd</code>中剥离出来的 ，它的诞生完全遵循 OCI 标准，是容器标准化后的产物。<code>containerd</code>通过 containerd-shim 启动并管理 runC，可以说<code>containerd</code>真正管理了容器的生命周期。</li>
 </ul>
-<p><img src="assets/Ciqc1F9PYuuAQINxAAA236heaL0459.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9PYuuAQINxAAA236heaL0459.png" alt="png" /></p>
 <p>图3 Docker 服务端组件调用关系图</p>
 <p>通过上图，可以看到，<code>dockerd</code>通过 gRPC 与<code>containerd</code>通信，由于<code>dockerd</code>与真正的容器运行时，<code>runC</code>中间有了<code>containerd</code>这一 OCI 标准层，使得<code>dockerd</code>可以确保接口向下兼容。</p>
 <blockquote>

@@ -214,10 +214,10 @@ function hide_canvas() {
 gitlab/gitlab-ce:13.3.8-ce.0
 </code></pre>
 <p>这个启动过程可能需要几分钟的时间。当服务启动后我们就可以通过 <a href="http://localhost:8080/">http://localhost:8080</a> 访问到我们的 GitLab 服务了。</p>
-<p><img src="assets/CgqCHl-05ceAOEtOAAC7xTjpRgo536.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-05ceAOEtOAAC7xTjpRgo536.png" alt="png" /></p>
 <p>图1 GitLab 设置密码界面</p>
 <p>第一次登陆，GitLab 会要求我们设置管理员密码，我们输入管理员密码后点击确认即可，之后 GitLab 会自动跳转到登录页面。</p>
-<p><img src="assets/CgqCHl-05eKAftEiAACO_hts6R8497.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl-05eKAftEiAACO_hts6R8497.png" alt="png" /></p>
 <p>图2 GitLab 登录界面</p>
 <p>然后输入默认管理员用户名：<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6b7b2bbbfb896b3aeb7bba6bab3f8b5b9bb">[email&#160;protected]</a>，密码为我们上一步设置的密码。点击登录即可登录到系统中，至此，GitLab 已经安装成功。</p>
 <h4>第三步：安装 Jenkins</h4>
@@ -259,23 +259,23 @@ This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 2020-10-31 16:17:07.589+0000 [id=21]	INFO	hudson.WebAppMain$3#run: Jenkins is fully up and running
 </code></pre>
 <p>之后，我们通过访问 <a href="http://localhost:8888/">http://localhost:8888</a> 就可以访问到 Jenkins 服务了。</p>
-<p><img src="assets/Ciqc1F-05giAJYDhAADCpDZzl2M065.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F-05giAJYDhAADCpDZzl2M065.png" alt="png" /></p>
 <p>图3 Jenkins 登录界面</p>
 <p>然后将日志中的密码粘贴到密码框即可，之后 Jenkins 会自动初始化，我们根据引导，安装推荐的插件即可。</p>
-<p><img src="assets/Ciqc1F-05hSAHd7VAAEpFeu4qfY218.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F-05hSAHd7VAAEpFeu4qfY218.png" alt="png" /></p>
 <p>图4 Jenkins 引导页面</p>
 <p>选择好安装推荐的插件后，Jenkins 会自动开始初始化一些常用插件。界面如下：</p>
-<p><img src="assets/Ciqc1F-05h-AUSiFAAEAxHFCt30058.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-05h-AUSiFAAEAxHFCt30058.png" alt="png" /></p>
 <p>图5 Jenkins 插件初始化</p>
 <p>插件初始化完后，创建管理员账户和密码，输入用户名、密码和邮箱等信息，然后点击保存并完成即可。</p>
-<p><img src="assets/Ciqc1F-05iaANJXNAABXftlfsvQ115.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F-05iaANJXNAABXftlfsvQ115.png" alt="png" /></p>
 <p>图6 Jenkins 创建管理员</p>
 <p>这里，确认 Jenkins 地址，我们就可以进入到 Jenkins 主页了。</p>
-<p><img src="assets/Ciqc1F-05i2AR2lRAADHULl7Ysk145.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F-05i2AR2lRAADHULl7Ysk145.png" alt="png" /></p>
 <p>图7 Jenkins 主页</p>
 <p>然后在系统管理 -&gt; 插件管理 -&gt; 可选插件处，搜索 GitLab 和 Docker ，分别安装相关插件即可，以便我们的 Jenkins 服务和 GitLab 以及 Docker 可以更好地交互。</p>
-<p><img src="assets/Ciqc1F-05j2AfmTUAAGVJGSmG1g804.png" alt="Drawing 7.png" />
-<img src="assets/Ciqc1F-05kKAMr27AAGh4SQTNsU299.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F-05j2AfmTUAAGVJGSmG1g804.png" alt="png" />
+<img src="assets/Ciqc1F-05kKAMr27AAGh4SQTNsU299.png" alt="png" /></p>
 <p>图8 Jenkins 插件安装</p>
 <p>等待插件安装完成， 重启 Jenkins ，我们的 Jenkins 环境就准备完成了。</p>
 <p>现在，我们的 Docker+Jenkins+GitLab 环境已经准备完成，后面只需要把我们的代码推送到 GitLab 中，并做相关的配置即可实现推送代码自动构建镜像和发布。</p>

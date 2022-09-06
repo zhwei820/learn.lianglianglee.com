@@ -161,7 +161,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>18  高级进阶：JIT 如何影响 JVM 的性能？</h1>
 <p>我们在上一课时，我们了解到 Java 虚拟机栈，其实是一个双层的栈，如下图所示，第一层就是针对 method 的栈帧，第二层是针对字节码指令的操作数栈。</p>
-<p><img src="assets/CgqCHl9YevCARjawAAC9Bvf_IoE321.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9YevCARjawAAC9Bvf_IoE321.png" alt="png" /></p>
 <p>Java 虚拟机栈图</p>
 <p>栈帧的创建是需要耗费资源的，尤其是对于 Java 中常见的 getter、setter 方法来说，这些代码通常只有一行，每次都创建栈帧的话就太浪费了。</p>
 <p>另外，Java 虚拟机栈对代码的执行，采用的是字节码解释的方式，考虑到下面这段代码，变量 a 声明之后，就再也不被使用，要是按照字节码指令解释执行的话，就要做很多无用功。</p>
@@ -194,7 +194,7 @@ function hide_canvas() {
 <p>另外，我们了解到垃圾回收器回收的目标区域主要是堆，堆上创建的对象越多，GC 的压力就越大。要是能把一些变量，直接在栈上分配，那 GC 的压力就会小一些。</p>
 <p>其实，我们说的这几个优化的可能性，JVM 已经通过 JIT 编译器（Just In Time Compiler）去做了，JIT 最主要的目标是把解释执行变成编译执行。</p>
 <p>为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化，这就是 JIT 编译器的功能。</p>
-<p><img src="assets/CgqCHl9YeyCAWROAAABdUyAOP5E893.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9YeyCAWROAAABdUyAOP5E893.png" alt="png" /></p>
 <p>如上图，JVM 会将调用次数很高，或者在 for 循环里频繁被使用的代码，编译成机器码，然后缓存在 CodeCache 区域里，下次调用相同方法的时候，就可以直接使用。</p>
 <p>那 JIT 编译都有哪些手段呢？接下来我们详细介绍。</p>
 <h3>方法内联</h3>
@@ -230,7 +230,7 @@ JMHSample_16_CompilerControl.dontinline  avgt    3   1.934 ± 3.112  ns/op
 JMHSample_16_CompilerControl.exclude     avgt    3  57.603 ± 4.435  ns/op
 JMHSample_16_CompilerControl.inline      avgt    3   0.483 ± 1.520  ns/op
 </code></pre>
-<p><img src="assets/CgqCHl9Ye0KASdaPAAFd8UGlCRY151.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9Ye0KASdaPAAFd8UGlCRY151.png" alt="png" /></p>
 <p>JIT 编译之后的二进制代码，是放在 Code Cache 区域里的。这个区域的大小是固定的，而且一旦启动无法扩容。如果 Code Cache 满了，JVM 并不会报错，但会停止编译。所以编译执行就会退化为解释执行，性能就会降低。不仅如此，JIT 编译器会一直尝试去优化你的代码，造成 CPU 占用上升。</p>
 <p>通过参数 -XX:ReservedCodeCacheSize 可以指定 Code Cache 区域的大小，如果你通过监控发现空间达到了上限，就要适当的增加它的大小。</p>
 <h3>编译层次</h3>
@@ -308,7 +308,7 @@ BuilderVsBufferBenchmark.builder  thrpt   10  103280.200 ± 76172.538  ops/ms
 <pre><code> -XX:+UnlockDiagnosticVMOptions -XX:+TraceClassLoading  -XX:+PrintAssembly -XX:+LogCompilation -XX:LogFile=jitdemo.log
 </code></pre>
 <p>使用 jitwatch 工具，可打开这个文件，看到详细的编译结果。</p>
-<p><img src="assets/Ciqc1F9Ye36AMYIDAAcn4iSavAY997.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9Ye36AMYIDAAcn4iSavAY997.png" alt="png" /></p>
 <p>下面是一段测试代码：</p>
 <pre><code>public class SimpleInliningTest {
     public SimpleInliningTest() {
@@ -329,7 +329,7 @@ BuilderVsBufferBenchmark.builder  thrpt   10  103280.200 ± 76172.538  ops/ms
 }
 </code></pre>
 <p>从执行后的结果可以看到，热点 for 循环已经使用 JIT 进行了编译，而里面应用的 add 方法，也已经被内联。</p>
-<p><img src="assets/CgqCHl9Ye4eAaVmXAATwlN8rh4w940.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl9Ye4eAaVmXAATwlN8rh4w940.png" alt="png" /></p>
 <h3>小结</h3>
 <p>JIT 是现代 JVM 主要的优化点，能够显著地提升程序的执行效率。从解释执行到最高层次的 C2，一个数量级的性能提升也是有可能的。但即时编译的过程是非常缓慢的，既耗时间也费空间，所以这些优化操作会和解释执行同时进行。</p>
 <p>值得注意的是，JIT 在某些情况下还会出现逆优化。比如一些热部署方式触发的 redefineClass，就会造成 JIT 编译结果的失效，相关的内联代码也需要重新生成。</p>

@@ -234,17 +234,17 @@ function hide_canvas() {
 <p>为什么 CMS 不管年轻代了呢？前面不是刚刚完成 minor GC 嘛，再去收集年轻代估计也没什么效果。</p>
 </blockquote>
 <p>看看示意图：</p>
-<p><img src="assets/caf715d0-32ed-11ea-8c11-e7b43c5f4201" alt="54201932.png" /></p>
+<p><img src="assets/caf715d0-32ed-11ea-8c11-e7b43c5f4201" alt="png" /></p>
 <h4><strong>阶段 2：Concurrent Mark（并发标记）</strong></h4>
 <p>在此阶段，CMS GC 遍历老年代，标记所有的存活对象，从前一阶段“Initial Mark”找到的根对象开始算起。“并发标记”阶段，就是与应用程序同时运行，不用暂停的阶段。请注意，并非所有老年代中存活的对象都在此阶段被标记，因为在标记过程中对象的引用关系还在发生变化。</p>
-<p><img src="assets/f30d6240-32ed-11ea-aa6e-a7e7fcb8af6c" alt="80365661.png" /></p>
+<p><img src="assets/f30d6240-32ed-11ea-aa6e-a7e7fcb8af6c" alt="png" /></p>
 <p>在上面的示意图中，“当前处理的对象”的一个引用就被应用线程给断开了，即这个部分的对象关系发生了变化（下面会讲如何处理）。</p>
 <h4><strong>阶段 3：Concurrent Preclean（并发预清理）</strong></h4>
 <p>此阶段同样是与应用线程并发执行的，不需要停止应用线程。</p>
 <p>因为前一阶段“并发标记”与程序并发运行，可能有一些引用关系已经发生了改变。如果在并发标记过程中引用关系发生了变化，JVM 会通过“Card（卡片）”的方式将发生了改变的区域标记为“脏”区，这就是所谓的“卡片标记（Card Marking）”。</p>
-<p><img src="assets/12b5efe0-32ee-11ea-9390-6160376f1fda" alt="82347169.png" /></p>
+<p><img src="assets/12b5efe0-32ee-11ea-9390-6160376f1fda" alt="png" /></p>
 <p>在预清理阶段，这些脏对象会被统计出来，它们所引用的对象也会被标记。此阶段完成后，用以标记的 card 也就会被清空。</p>
-<p><img src="assets/3d254780-32ee-11ea-9e4a-871af6a0c6b3" alt="82835555.png" /></p>
+<p><img src="assets/3d254780-32ee-11ea-9e4a-871af6a0c6b3" alt="png" /></p>
 <p>此外，本阶段也会进行一些必要的细节处理，还会为 Final Remark 阶段做一些准备工作。</p>
 <h4><strong>阶段 4：Concurrent Abortable Preclean（可取消的并发预清理）</strong></h4>
 <p>此阶段也不停止应用线程。本阶段尝试在 STW 的 Final Remark 阶段 之前尽可能地多做一些工作。本阶段的具体时间取决于多种因素，因为它循环做同样的事情，直到满足某个退出条件（如迭代次数，有用工作量，消耗的系统时间等等）。</p>
@@ -256,7 +256,7 @@ function hide_canvas() {
 <p>在 5 个标记阶段完成之后，老年代中所有的存活对象都被标记了，然后 GC 将清除所有不使用的对象来回收老年代空间。</p>
 <h4><strong>阶段 6：Concurrent Sweep（并发清除）</strong></h4>
 <p>此阶段与应用程序并发执行，不需要 STW 停顿。JVM 在此阶段删除不再使用的对象，并回收它们占用的内存空间。</p>
-<p><img src="assets/4b92f970-32ee-11ea-8c11-e7b43c5f4201" alt="85886580.png" /></p>
+<p><img src="assets/4b92f970-32ee-11ea-8c11-e7b43c5f4201" alt="png" /></p>
 <h4><strong>阶段 7：Concurrent Reset（并发重置）</strong></h4>
 <p>此阶段与应用程序并发执行，重置 CMS 算法相关的内部数据，为下一次 GC 循环做准备。</p>
 <p>总之，CMS 垃圾收集器在减少停顿时间上做了很多复杂而有用的工作，用于垃圾回收的并发线程执行的同时，并不需要暂停应用线程。当然，CMS 也有一些缺点，其中最大的问题就是老年代内存碎片问题（因为不压缩），在某些情况下 GC 会造成不可预测的暂停时间，特别是堆内存较大的情况下。</p>
@@ -269,9 +269,9 @@ function hide_canvas() {
 <h4><strong>G1 GC 的特点</strong></h4>
 <p>为了达成可预期停顿时间的指标，G1 GC 有一些独特的实现。</p>
 <p>首先，堆不再分成年轻代和老年代，而是划分为多个（通常是 2048 个）可以存放对象的 小块堆区域（smaller heap regions）。每个小块，可能一会被定义成 Eden 区，一会被指定为 Survivor 区或者 Old 区。在逻辑上，所有的 Eden 区和 Survivor 区合起来就是年轻代，所有的 Old 区拼在一起那就是老年代，如下图所示：</p>
-<p><img src="assets/60da5cb0-32ee-11ea-8c11-e7b43c5f4201" alt="4477357.png" /></p>
+<p><img src="assets/60da5cb0-32ee-11ea-8c11-e7b43c5f4201" alt="png" /></p>
 <p>这样划分之后，使得 G1 不必每次都去收集整个堆空间，而是以增量的方式来进行处理：每次只处理一部分内存块，称为此次 GC 的回收集（collection set）。每次 GC 暂停都会收集所有年轻代的内存块，但一般只包含部分老年代的内存块，见下图带对号的部分：</p>
-<p><img src="assets/69d8c2c0-32ee-11ea-8c11-e7b43c5f4201" alt="36113613.png" /></p>
+<p><img src="assets/69d8c2c0-32ee-11ea-8c11-e7b43c5f4201" alt="png" /></p>
 <p>G1 的另一项创新是，在并发阶段估算每个小堆块存活对象的总数。构建回收集的原则是：<strong>垃圾最多的小块会被优先收集</strong>。这也是 G1 名称的由来。</p>
 <p>通过以下选项来指定 G1 垃圾收集器：</p>
 <pre><code>-XX:+UseG1GC -XX:MaxGCPauseMillis=50
@@ -334,13 +334,13 @@ function hide_canvas() {
 <p>Remembered Sets（历史记忆集）用来支持不同的小堆块进行独立回收。</p>
 <p>例如，在回收小堆块 A、B、C 时，我们必须要知道是否有从 D 区或者 E 区指向其中的引用，以确定它们的存活性. 但是遍历整个堆需要相当长的时间，这就违背了增量收集的初衷，因此必须采取某种优化手段。类似于其他 GC 算法中的“卡片”方式来支持年轻代的垃圾收集，G1 中使用的则是 Remembered Sets。</p>
 <p>如下图所示，每个小堆块都有一个 <strong>Remembered Set</strong>，列出了从外部指向本块的所有引用。这些引用将被视为附加的 GC 根。注意，在并发标记过程中，老年代中被确定为垃圾的对象会被忽略，即使有外部引用指向它们：因为在这种情况下引用者也是垃圾（如垃圾对象之间的引用或者循环引用）。</p>
-<p><img src="assets/a8fc6560-32ee-11ea-a438-7fd5b76593d7" alt="79450295.png" /></p>
+<p><img src="assets/a8fc6560-32ee-11ea-a438-7fd5b76593d7" alt="png" /></p>
 <p>接下来的行为，和其他垃圾收集器一样：多个 GC 线程并行地找出哪些是存活对象，确定哪些是垃圾：</p>
-<p><img src="assets/b0140a10-32ee-11ea-b32d-892c82ec4027" alt="79469787.png" /></p>
+<p><img src="assets/b0140a10-32ee-11ea-b32d-892c82ec4027" alt="png" /></p>
 <p>最后，存活对象被转移到存活区（survivor regions），在必要时会创建新的小堆块。现在，空的小堆块被释放，可用于存放新的对象了。</p>
-<p><img src="assets/b806cc80-32ee-11ea-96bc-d1519da8f09a" alt="79615062.png" /></p>
+<p><img src="assets/b806cc80-32ee-11ea-96bc-d1519da8f09a" alt="png" /></p>
 <h3>GC 选择的经验总结</h3>
-<p><img src="assets/bf6df0c0-32ee-11ea-b0e0-6da2f5afc39e" alt="72433648.png" /></p>
+<p><img src="assets/bf6df0c0-32ee-11ea-b0e0-6da2f5afc39e" alt="png" /></p>
 <p>通过本节内容的学习，你应该对 G1 垃圾收集器有了一定了解。当然，为了简洁我们省略了很多实现细节，例如如何处理“巨无霸对象（humongous objects）”。</p>
 <p>综合来看，G1 是 JDK11 之前 HotSpot JVM 中最先进的<strong>准产品级（production-ready）</strong> 垃圾收集器。重要的是，HotSpot 工程师的主要精力都放在不断改进 G1 上面。在更新的 JDK 版本中，将会带来更多强大的功能和优化。</p>
 <p>可以看到，G1 作为 CMS 的代替者出现，解决了 CMS 中的各种疑难问题，包括暂停时间的可预测性，并终结了堆内存的碎片化。对单业务延迟非常敏感的系统来说，如果 CPU 资源不受限制，那么 G1 可以说是 HotSpot 中最好的选择，特别是在最新版本的 JVM 中。当然这种降低延迟的优化也不是没有代价的：由于额外的写屏障和守护线程，G1 的开销会更大。如果系统属于吞吐量优先型的，又或者 CPU 持续占用 100%，而又不在乎单次 GC 的暂停时间，那么 CMS 是更好的选择。</p>

@@ -480,7 +480,7 @@ function hide_canvas() {
                         <div><h1>深入浅出Cache</h1>
 <h2>① 什么是Cache? Cache的目标?</h2>
 <ul>
-<li>在说这个之前我们先看下典型Web 2.0的一些架构演变(这里不用”演进”). 从简单的到复杂的通用架构.<img src="assets/Cache-001-1.jpeg" alt="Arch1" /><img src="assets/Cache-002-2.jpeg" alt="Arch2" /><img src="assets/Cache-003-1.jpeg" alt="Arch3" /><img src="assets/Cache-004-2.jpeg" alt="Arch4" /></li>
+<li>在说这个之前我们先看下典型Web 2.0的一些架构演变(这里不用”演进”). 从简单的到复杂的通用架构.<img src="assets/Cache-001-1.jpeg" alt="png" /><img src="assets/Cache-002-2.jpeg" alt="png" /><img src="assets/Cache-003-1.jpeg" alt="png" /><img src="assets/Cache-004-2.jpeg" alt="png" /></li>
 <li>首先, 诚然说Cache在互联网公司里,是一个好东西. Cache化,可以显著地提高应用程序的性能和便于提供应用程序的伸缩性(可以消除不必要请求落到外在的不频繁改变数据的DataSource上). 那么Cache化目的非常明显, 就是有且只有一个: 提高应用程序的性能.</li>
 <li>再者, Cache化, 以in-memory为组织形式, 作为外部的持久化系统的数据的副本(可能数据结构不同), 仅仅为了提高性能. 那么Cache化的数据应当是短暂停留在Distributed Cache中 — 它们可能(可以)随时的消失(即使断电不保证立马就有数据-这一点类似CPU的L1/L2 Cache), 那么应用在用到Cache时候仅当Cache系统可用时候使用不应当完全依赖于Cache数据 — 就是说在Distributed Cache中个别的Cache实例失效,那么DataSource(持久化)可以临时性完成数据被访问的工作.</li>
 <li>最后, 我们可以假定如果各种DataSource自有的系统性能非常高, 那么Cache所能解决的领域就变得非常的少.</li>

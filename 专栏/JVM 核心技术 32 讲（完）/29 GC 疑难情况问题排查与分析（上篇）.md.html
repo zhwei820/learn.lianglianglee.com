@@ -411,7 +411,7 @@ function hide_canvas() {
 <p>请注意，<strong>只能根据 Minor GC 计算提升速率</strong>。Full GC 的日志不能用于计算提升速率，因为 Major GC 会清理掉老年代中的一部分对象。</p>
 <h4><strong>提升速率的意义</strong></h4>
 <p>和分配速率一样，提升速率也会影响 GC 暂停的频率。但分配速率主要影响 <a href="http://blog.csdn.net/renfufei/article/details/54144385#t8">minor GC</a>，而提升速率则影响 <a href="http://blog.csdn.net/renfufei/article/details/54144385#t8">major GC</a> 的频率。有大量的对象提升，自然很快将老年代填满。老年代填充的越快，则 Major GC 事件的频率就会越高。</p>
-<p><img src="assets/a7aac9d0-7e76-11ea-b43f-a740880350b3" alt="how-java-garbage-collection-works" /></p>
+<p><img src="assets/a7aac9d0-7e76-11ea-b43f-a740880350b3" alt="png" /></p>
 <p>前面章节提到过，Full GC 通常需要更多的时间，因为需要处理更多的对象，还要执行碎片整理等额外的复杂过程。</p>
 <h4><strong>示例</strong></h4>
 <p>让我们看一个<a href="https://github.com/gvsmirnov/java-perv/blob/master/labs-8/src/main/java/ru/gvsmirnov/perv/labs/gc/PrematurePromotion.java">过早提升的示例</a>。这个程序创建/获取大量的对象/数据，并暂存到集合之中，达到一定数量后进行批处理：</p>

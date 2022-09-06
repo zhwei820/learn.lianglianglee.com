@@ -196,7 +196,7 @@ function hide_canvas() {
 <p>在上节课中我们学习了在生产环境中，如何部署 ZooKeeper 集群服务。为了我们的程序服务能够持续稳定地对外提供服务，除了在部署的时候尽量采用分布式、集群服务等方式提高 ZooKeeper 服务的可靠性外，在服务上线运行的时候，我们还可以通过对 ZooKeeper 服务的运行状态进行监控，如运行 ZooKeeper 服务的生产服务器的 CPU 、内存、磁盘等使用情况来达到目的。在系统性能达到瓶颈的时候，可以增加服务器资源，以保证服务的稳定性。</p>
 <h3>JConsole 介绍</h3>
 <p>通常使用 Java 语言进行开发的技术人员对 JConsole 并不陌生。JConsole 是 JDK 自带的工具，用来监控程序运行的状态信息。如下图所示，我们打开系统的控制终端，输入 JConsole 就会弹出一个这样的监控界面。</p>
-<p><img src="assets/CgqCHl8kAy2ANt38AADolBOTa2s256.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl8kAy2ANt38AADolBOTa2s256.png" alt="png" /></p>
 <h3>JConsole 使用</h3>
 <p>介绍完 JConsole 的基本信息后，接下来我们来了解如何利用 JConsole 对远程 ZooKeeper 集群服务进行监控。之所以能够通过 JConsole 连接 ZooKeeper 服务进行监控，是因为 ZooKeeper 支持 JMX（Java Management Extensions），即 Java 管理扩展，它是一个为应用程序、设备、系统等植入管理功能的框架。</p>
 <p>JMX 可以跨越一系列异构操作系统平台、系统体系结构和网络传输协议，灵活地开发无缝集成的系统、网络和服务管理应用。我们可以通过 JMX 来访问和管理 ZooKeeper 服务集群。接下来我们就来介绍一下监控 ZooKeeper 集群服务的相关配置操作。</p>
@@ -209,7 +209,7 @@ function hide_canvas() {
 </code></pre>
 <h4>连接 ZooKeeper</h4>
 <p>配置完 JMX 的开启功能后，接下来我们通过系统终端启动 JConsole ，再在弹出的对话框中选择远程连接，然后在远程连接的地址中输入要监控的 ZooKeeper 服务器地址，之后就可以通过 JConsole 监控 ZooKeeper 服务器了。</p>
-<p><img src="assets/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8kA0CAF9c9AACQw_N29Fg373.png" alt="png" /></p>
 <h3>四字母命令</h3>
 <p>除了上面介绍的 JConsole 监控控制台之外，ZooKeeper 还提供了一些命令，可使我们更加灵活地统计监控 ZooKeeper 服务的状态信息。 ZooKeeper 提供的这些命令也叫作四字母命令，如它们的名字一样，每一个命令都是由四个字母组成的。如下代码所示，在操作时，我们会打开系统的控制台，并输入相关的命令来查询 ZooKeeper 服务，比如我们可以输入 stat 命令来查看数据节点等信息。</p>
 <pre><code>echo {command} | nc 127.0.0.1 2181

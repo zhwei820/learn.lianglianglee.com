@@ -229,7 +229,7 @@ function hide_canvas() {
 </blockquote>
 <h3>Redis Sentinel 搭建</h3>
 <p>Redis 官方提供了 Redis Sentinel 的功能，它的运行程序保存在 src 目录下，如图所示：</p>
-<p><img src="assets/1342e380-8575-11ea-8405-779d62018a7f" alt="image.png" /></p>
+<p><img src="assets/1342e380-8575-11ea-8405-779d62018a7f" alt="png" /></p>
 <p>我们需要使用命令 <code>./src/redis-sentinel sentinel.conf</code> 来启动 Sentinel，可以看出我们在启动它时必须设置一个 sentinel.conf 文件，这个配置文件中必须包含监听的主节点信息：</p>
 <pre><code>sentinel monitor master-name ip port quorum
 </code></pre>
@@ -249,7 +249,7 @@ function hide_canvas() {
 sentinel auth-pass mymaster pwd654321
 </code></pre>
 <p>当我们配置好 sentinel.conf 并执行启动命令 <code>./src/redis-sentinel sentinel.conf</code> 之后，Redis Sentinel 就会被启动，如下图所示：</p>
-<p><img src="assets/b8339430-8574-11ea-ab1b-af991e0896fe" alt="image.png" /></p>
+<p><img src="assets/b8339430-8574-11ea-ab1b-af991e0896fe" alt="png" /></p>
 <p>从上图可以看出 Sentinel 只需配置监听主节点的信息，它会自动监听对应的从节点。</p>
 <h3>启动 Sentinel 集群</h3>
 <p>上面我们演示了单个 Sentinel 的启动，但生产环境我们不会只启动一台 Sentinel，因为如果启动一台 Sentinel 假如它不幸宕机的话，就不能提供自动容灾的服务了，不符合我们高可用的宗旨，所以我们会在不同的物理机上启动多个 Sentinel 来组成 Sentinel 集群，来保证 Redis 服务的高可用。</p>

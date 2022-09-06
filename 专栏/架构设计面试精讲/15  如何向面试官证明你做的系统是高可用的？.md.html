@@ -186,7 +186,7 @@ function hide_canvas() {
 <p>而你在讲解架构设计时，也是在向面试官逐步证明，自己负责的系统是如何做到高可用的。这会涉及一个公认的论证——SLA。服务等级协议（Service-Level Agreement，SLA）最根本的形式是协议双方（服务提供者和用户）签订的一个合约或协议。这个合约规范了双方的商务关系或部分商务关系。简单点儿说，你可以认为 SLA 是服务可用性一个重要衡量指标。</p>
 <p>业界一般用几个 9 的 SLA 服务等级来衡量互联网应用的可用性。比如京东的可用性是 4 个 9（京东的服务 99.99% 可用）：京东的服务要保证在所有的运行时间里只有 0.01% 不可用，也就是说一年大概有 52.6 分钟不可用，这个 99.99% 就叫作系统的可用性指标。</p>
 <p>52.6 分钟是怎么计算出来的呢？</p>
-<p><img src="assets/CioPOWAs3d-AU1jSAAAJ1V9HKdE826.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWAs3d-AU1jSAAAJ1V9HKdE826.png" alt="png" /></p>
 <p>SLA 的计算公式</p>
 <p>从公式中可以看出， SLA 等于 4 个 9，也就是可用时长达到了 99.99% ，不可用时长则为是0.01%，一年是 365 天， 8760 个小时，一年的不可用时长就是 52.6 分钟，那么：</p>
 <ul>
@@ -194,7 +194,7 @@ function hide_canvas() {
 <li>SLA 等于 5 个 9，就相当于一年不可用时长等于 5.26 分钟。</li>
 </ul>
 <p>可以发现，用 SLA 等于 4 个9 作为参照物，少个 9 相当于小数点往后移一位，多个 9 相当于小数点往前移一位（我把系统可用性指标总结成一张表格）。</p>
-<p><img src="assets/Cgp9HWAuYU2ANzYsAADiIW0-zW8205.png" alt="1.png" /></p>
+<p><img src="assets/Cgp9HWAuYU2ANzYsAADiIW0-zW8205.png" alt="png" /></p>
 <p>系统可用性指标</p>
 <p><strong>那么问题就来了：</strong> 既然 SLA 是服务可用性的一个衡量指标，那么你在面试时，怎么设置这个指标的阈值才合理呢？</p>
 <ul>
@@ -209,7 +209,7 @@ function hide_canvas() {
 <p>给你 10 秒钟的时间思考一下，当面试官听到你按照时间指标度量系统可用性，会不会满意？</p>
 <p>要知道，任何一家互联网公司，都有流量的低峰期和高峰期，你在低峰期停机 1 分钟和高峰期停机 1 分钟，对业务影响的结果完全不同。<strong>如果认识不到这一点，面试官很容易认为你很业余，并没有实践经验。</strong></p>
 <p>所以，仅凭理论指标在有些情况下是不能满足实际需求的，那有没有更加科学的度量方式呢？答案就是基于一段时间（比如 1 年）的停机影响的请求量占比，进行评估，公式如下：</p>
-<p><img src="assets/CioPOWAs3f-ARcGTAAAKDhhS0CU196.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWAs3f-ARcGTAAAKDhhS0CU196.png" alt="png" /></p>
 <p>这样一来，你就可以评估，业务在高峰期停机和在低峰期停机分别造成多少的损失了。<strong>所以，如果你再回答系统高可用指标的时候，我建议你可以遵循这样的套路：先摆明度量的两种方式，“N 个 9” 和 “影响请求量占比”，然后再结合实际业务场景表明第二种方式的科学性。</strong></p>
 <p>总的来说，作为候选人，要立足业务价值去回答问题，不是仅停留于技术概念的堆砌，这才能体现你的思考。</p>
 <p>当然了，以上的内容基本可以满足你应聘初中级研发工程师的需求，如果你要面试高级研发工程师或者是架构师，你还要有一个思路的闭环。<strong>为了方便你的记忆，我把这个思路总结为：“可评估”“可监控”“可保证”。</strong></p>
@@ -232,20 +232,20 @@ function hide_canvas() {
 <li>网络要素指标：主要有带宽、网络 I/O、CDN、DNS、安全策略、和负载策略。</li>
 </ol>
 <p>为什么我们要监控这些指标？因为它们是判断系统的基础环境是否为高可用的重要核心指标。</p>
-<p><img src="assets/Cgp9HWAuYWyATkxVAABau7vw5jQ035.png" alt="2.png" /></p>
+<p><img src="assets/Cgp9HWAuYWyATkxVAABau7vw5jQ035.png" alt="png" /></p>
 <p>监控报警指标</p>
 <p><strong>监控工具常用的有</strong>ZABBIX（Alexei Vladishev 开源的监控系统，覆盖市场最多的老牌监控系统，资料很多）、Open-Falcon（小米开源的监控系统，小米、滴滴、美团等公司内部都在用）、Prometheus（SoundCloud 开源监控系统，对 K8S 的监控支持更好）。这些工具基本都能监控所有系统的 CPU、内存、磁盘、网络带宽、网络 I/O 等基础关键指标，再结合一些运营商提供的监控平台，就可以覆盖整个基础设施监控。</p>
 <p><strong>监控报警策略一般由时间维度</strong>、<strong>报警级别</strong>、<strong>阈值设定三部分组成</strong>。</p>
-<p><img src="assets/CioPOWAuYX-APgb5AABCnrQ8zLc613.png" alt="3.png" /></p>
+<p><img src="assets/CioPOWAuYX-APgb5AABCnrQ8zLc613.png" alt="png" /></p>
 <p>监控报警策略</p>
 <p>为了方便你理解监控报警策略，我举个例子。假设系统的监控指标有CPU、内存和磁盘，监控的时间维度是分钟级，监控的阈值设置为占比。那么你可以定义出如下的监控报警策略：</p>
-<p><img src="assets/CioPOWAuYZKAaViEAACdg3MBCqE160.png" alt="4.png" /></p>
+<p><img src="assets/CioPOWAuYZKAaViEAACdg3MBCqE160.png" alt="png" /></p>
 <p>为了第一时间监测到指标的健康度，报警级别可以分为紧急、重要，以及一般。当 CPU、内存，以及磁盘使用率这三项指标的每分钟采集的指标达到 90% 使用率时，就触发“紧急报警”；达到 80% 触发“重要报警”；70% 触发“一般报警”。</p>
 <ul>
 <li><strong>系统应用监控</strong></li>
 </ul>
 <p>业务状态监控报警，关注点在于系统自身状态的监控报警。和基础设施监控一样，它也是由监控指标，监控工具，报警策略组成，不同的是，系统应用监控报警的核心监控指标主要有流量、耗时、错误、心跳、客户端数、连接数等 6 个核心指标，监控工具有 CAT、SkyWalking、Pinpoint、Zipkin 等。</p>
-<p><img src="assets/Cgp9HWAuYaSAOg3MAABlYMloePk508.png" alt="5.png" /></p>
+<p><img src="assets/Cgp9HWAuYaSAOg3MAABlYMloePk508.png" alt="png" /></p>
 <p>系统应用监控</p>
 <ul>
 <li><strong>存储服务监控</strong></li>
@@ -256,14 +256,14 @@ function hide_canvas() {
 <p>总的来说，<strong>让面试官认可你有一个全局的监控视角，比掌握很多监控指标更为重要。</strong></p>
 <p>当然，很多互联网公司都很重视系统服务稳定性的工作，因为服务的稳定性直接影响用户的体验和口碑，线上服务稳定性是研发工程师必须要重点关注的问题。所以当你回答完上述问题后，有的面试官为了考察候选人的责任意识，一般还会追问：“如果线上出现告警，你作为核心研发，该怎么做呢？”</p>
 <p>对于线上故障，要有应急响应机制，我总结以下几点供你参考：</p>
-<p><img src="assets/CioPOWAuYbuAaS3EAAFIiTdJNEg195.png" alt="6.png" /></p>
+<p><img src="assets/CioPOWAuYbuAaS3EAAFIiTdJNEg195.png" alt="png" /></p>
 <h3>总结</h3>
 <p>我们来回顾一下今天的重点内容。</p>
 <p>为了在面试中更好地回答怎么评估系统高可用，我们讲解了 SLA 的概念以及评估方法，并得出“以停机时间影响的系统请求量作为评估指标”比较科学。</p>
 <p>为了确保线上服务的稳定运行，在设计监控系统时，要考虑三个核心点，基础设施监控、系统应用监控，以及存储服务监控。</p>
 <p>另外，我强调了故障处理是研发工程师在进阶过程中必须经历的，而故障处理能力也是面试官最为看重的能力之一，所以对于怎么处理各类故障，你要形成一套体系化的知识框架。</p>
 <p>为了方便你的记忆，我将今天的内容总结如下。</p>
-<p><img src="assets/CioPOWAs3luAbbhpAAEjKaU8JLg460.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CioPOWAs3luAbbhpAAEjKaU8JLg460.png" alt="png" /></p>
 </div>
                     </div>
                     <div>

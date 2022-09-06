@@ -173,7 +173,7 @@ function hide_canvas() {
 <p>数据访问层的构建可能会涉及多种不同形式的数据存储媒介，本课程关注的是最基础也是最常用的数据存储媒介，即关系型数据库，针对关系型数据库，Java 中应用最广泛的就是 JDBC 规范，今天我们将对这个经典规范展开讨论。</p>
 <p>JDBC 是 Java Database Connectivity 的全称，它的设计初衷是提供一套能够应用于各种数据库的统一标准，这套标准需要不同数据库厂家之间共同遵守，并提供各自的实现方案供 JDBC 应用程序调用。</p>
 <p>作为一套统一标准，JDBC 规范具备完整的架构体系，如下图所示：</p>
-<p><img src="assets/CgqCHl_J3f2AMaTEAADODtTLjeA995.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_J3f2AMaTEAADODtTLjeA995.png" alt="png" /></p>
 <p>JDBC 规范整体架构图</p>
 <p>从上图中可以看到，Java 应用程序通过 JDBC 所提供的 API 进行数据访问，而这些 API 中包含了开发人员所需要掌握的各个核心编程对象，下面我们一起来看下。</p>
 <h3>JDBC 规范中有哪些核心编程对象？</h3>
@@ -311,7 +311,7 @@ connection.close();
 </code></pre>
 <p>这段代码中完成了对基于前面介绍的 JDBC API 中的各个核心编程对象的数据访问。上述代码主要面向查询场景，而针对用于插入数据的处理场景，我们只需要在上述代码中替换几行代码，即将“执行查询”和“获取查询结果进行处理”部分的查询操作代码替换为插入操作代码就行。</p>
 <p>最后，我们梳理一下基于 JDBC 规范进行数据库访问的整个开发流程，如下图所示：</p>
-<p><img src="assets/Ciqc1F_J3jmANBxqAADebgJ5BdU438.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F_J3jmANBxqAADebgJ5BdU438.png" alt="png" /></p>
 <p>基于 JDBC 规范进行数据库访问的开发流程图</p>
 <p>针对前面所介绍的代码示例，我们明确地将基于 JDBC 规范访问关系型数据库的操作分成两大部分：一部分是准备和释放资源以及执行 SQL 语句，另一部分则是处理 SQL 执行结果。</p>
 <p>而对于任何数据访问而言，前者实际上都是重复的。在上图所示的整个开发流程中，事实上只有“处理 ResultSet ”部分的代码需要开发人员根据具体的业务对象进行定制化处理。这种抽象为整个执行过程提供了优化空间。诸如 Spring 框架中 JdbcTemplate 这样的模板工具类就应运而生了，我们会在 07 讲中会详细介绍这个模板工具类。</p>

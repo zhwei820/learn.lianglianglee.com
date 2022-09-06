@@ -253,12 +253,12 @@ function hide_canvas() {
 <p><em><strong>可以回答：进程是应用的执行副本；而不要回答进程是操作系统分配资源的最小单位。前者是定义，后者是作用</strong></em>*。*</p>
 <p><strong>ps</strong></p>
 <p>如果你要看当前的进程，可以用<code>ps</code>指令。p 代表 processes，也就是进程；s 代表 snapshot，也就是快照。所谓快照，就是像拍照一样。</p>
-<p><img src="assets/CgqCHl9twJSAZMbHAADiXX3JRVw649.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9twJSAZMbHAADiXX3JRVw649.png" alt="png" /></p>
 <p>如上图所示，我启动了两个进程，<code>ps</code>和<code>bash</code>。ps 就是我刚刚启动的，被<code>ps</code>自己捕捉到了；<code>bash</code>是因为我开了这个控制台，执行的<code>shell</code>是<code>bash</code>。</p>
 <p>当然操作系统也不可能只有这么几个进程，这是因为不带任何参数的<code>ps</code>指令显示的是同一个电传打字机（TTY上）的进程。TTY 这个概念是一个历史的概念，过去用来传递信息，现在已经被传真、邮件、微信等取代。</p>
 <p>操作系统上的 TTY 是一个输入输出终端的概念，比如用户打开 bash，操作系统就为用户分配了一个输入输出终端。没有加任何参数的<code>ps</code>只显示在同一个 TTY 的进程。</p>
 <p>如果想看到所有的进程，可以用<code>ps -e</code>，<code>-e</code>没有特殊含义，只是为了和<code>-A</code>区分开。我们通常不直接用<code>ps -e</code>而是用<code>ps -ef</code>，这是因为<code>-f</code>可以带上更多的描述字段，如下图所示：</p>
-<p><img src="assets/Ciqc1F9twKuAcx9KAAMttqMWk0U603.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9twKuAcx9KAAMttqMWk0U603.png" alt="png" /></p>
 <ul>
 <li>UID 指进程的所有者；</li>
 <li>PID 是进程的唯一标识；</li>
@@ -270,11 +270,11 @@ function hide_canvas() {
 <li>CMD 是进程启动时的命令，如果不是一个 Shell 命令，而是用方括号括起来，那就是系统进程或者内核过程。</li>
 </ul>
 <p>另外一个用得比较多的是<code>ps aux</code>，它和<code>ps -ef</code>能力差不多，但是是 BSD 风格的。就是加州伯克利分校研发的 Unix 分支版本的衍生风格，这种风格其实不太好描述，我截了一张图，你可以体会一下：</p>
-<p><img src="assets/CgqCHl9twMGAAl8XAAOd-4G_G6U649.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9twMGAAl8XAAOd-4G_G6U649.png" alt="png" /></p>
 <p>在 BSD 风格中有些字段的叫法和含义变了，如果你感兴趣，可以作为课后延伸学习的内容。</p>
 <h4>top</h4>
 <p>另外还有一个和<code>ps</code>能力差不多，但是显示的不是快照而是实时更新数据的<code>top</code>指令。因为自带的<code>top</code>显示的内容有点少， 所以我喜欢用一个叫作<code>htop</code>的指令，具体的安装全方法我会在 10 | 软件的安装： 编译安装和包管理器安装有什么优势和劣势？中给你介绍。本课时，我们先看一下使用效果，如下图所示：</p>
-<p><img src="assets/Ciqc1F9twNKAbWUxAAjBKXaXn90775.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9twNKAbWUxAAjBKXaXn90775.png" alt="png" /></p>
 <p>以上，我们一起把进程学了一个皮毛，更多关于进程的内容我们会在模块四：进程和线程中讨论。</p>
 <h3>管道（Pipeline）</h3>
 <p>现在你已经掌握了一点点进程的基础，下面我们来学习管道，管道（Pipeline）的作用是在命令和命令之间，传递数据。比如说一个命令的结果，就可以作为另一个命令的输入。我们了解了进程，所以这里说的命令就是进程。更准确地说，管道在进程间传递数据。</p>
@@ -288,7 +288,7 @@ function hide_canvas() {
 </ul>
 <p><strong>重定向</strong></p>
 <p>我们执行一个指令，比如<code>ls -l</code>，结果会写入标准输出流，进而被打印。这时可以用重定向符将结果重定向到一个文件，比如说<code>ls -l &gt; out</code>，这样<code>out</code>文件就会有<code>ls -l</code>的结果；而屏幕上也不会再打印<code>ls -l</code>的结果。</p>
-<p><img src="assets/Ciqc1F9twOiAWhAGAAU25o5Gb_s323.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9twOiAWhAGAAU25o5Gb_s323.png" alt="png" /></p>
 <p>具体来说<code>&gt;</code>符号叫作覆盖重定向；<code>&gt;&gt;</code>叫作追加重定向。<code>&gt;</code>每次都会把目标文件覆盖，<code>&gt;&gt;</code>会在目标文件中追加。比如你每次启动一个程序日志都写入<code>/var/log/somelogfile</code>中，可以这样操作，如下所示：</p>
 <pre><code>start.sh &gt;&gt; /var/log/somelogfile
 </code></pre>
@@ -302,7 +302,7 @@ function hide_canvas() {
 <p>这个写法等价于：</p>
 <pre><code>ls1 &gt; out 2&gt;&amp;1
 </code></pre>
-<p><img src="assets/CgqCHl9twP2AefIFAAL1fMsTbHk961.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9twP2AefIFAAL1fMsTbHk961.png" alt="png" /></p>
 <p>相当于把<code>ls1</code>的标准输出流重定向到<code>out</code>，因为<code>ls1 &gt; out</code>出错了，所以标准错误流被定向到了标准输出流。<code>&amp;</code>代表一种引用关系，具体代表的是<code>ls1 &gt;out</code>的标准输出流。</p>
 <h4>管道的作用和分类</h4>
 <p>有了进程和重定向的知识，接下来我们梳理下管道的作用。管道（Pipeline）将一个进程的输出流定向到另一个进程的输入流，就像水管一样，作用就是把这两个文件接起来。如果一个进程输出了一个字符 X，那么另一个进程就会获得 X 这个输入。</p>
@@ -318,7 +318,7 @@ function hide_canvas() {
 <p>接下来我们以多个场景举例帮助你深入学习管道。</p>
 <h4>排序</h4>
 <p>比如我们用<code>ls</code>，希望按照文件名排序倒序，可以使用匿名管道，将<code>ls</code>的结果传递给<code>sort</code>指令去排序。你看，这样<code>ls</code>的开发者就不用关心排序问题了。</p>
-<p><img src="assets/Ciqc1F9twQmAUpYzAADI43WGK9A660.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9twQmAUpYzAADI43WGK9A660.png" alt="png" /></p>
 <h4>去重</h4>
 <p>另一个比较常见的场景是去重，比如有一个字典文件，里面都是词语。如下所示：</p>
 <pre><code>Apple
@@ -328,7 +328,7 @@ Banana
 ……
 </code></pre>
 <p>如果我们想要去重可以使用<code>uniq</code>指令，<code>uniq</code>指令能够找到文件中相邻的重复行，然后去重。但是我们上面的文件重复行是交替的，所以不可以直接用<code>uniq</code>，因此可以先<code>sort</code>这个文件，然后利用管道将<code>sort</code>的结果重定向到<code>uniq</code>指令。指令如下：</p>
-<p><img src="assets/CgqCHl9twRGAXmhPAACPjv2JnVo451.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl9twRGAXmhPAACPjv2JnVo451.png" alt="png" /></p>
 <h4>筛选</h4>
 <p>有时候我们想根据正则模式筛选对应的内容。比如说我们想找到项目文件下所有文件名中含有<code>Spring</code>的文件。就可以利用<code>grep</code>指令，操作如下：</p>
 <pre><code>find ./ | grep Spring
@@ -340,9 +340,9 @@ Banana
 <p><code>grep -v</code>是匹配不包含 MyBatis 的结果。</p>
 <h4>数行数</h4>
 <p>还有一个比较常见的场景是数行数。比如你写了一个 Java 文件想知道里面有多少行，就可以使用<code>wc -l</code>指令，如下所示：</p>
-<p><img src="assets/Ciqc1F9twRqAH6ezAAD5iEQBhxE628.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F9twRqAH6ezAAD5iEQBhxE628.png" alt="png" /></p>
 <p>但是如果你想知道当前目录下有多少个文件，可以用<code>ls | wc -l</code>，如下所示：</p>
-<p><img src="assets/Ciqc1F9twSCAN0h-AABgIcsEgKI655.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F9twSCAN0h-AABgIcsEgKI655.png" alt="png" /></p>
 <p><strong>接下来请你思考一个问题：我们如何知道当前</strong><code>java</code><strong>的项目目录下有多少行代码</strong>？</p>
 <p>提示一下。你可以使用下面这个指令：</p>
 <pre><code>find -i &quot;.java&quot; ./ | wc -l
@@ -361,9 +361,9 @@ Banana
 <p><code>xargs</code>指令从标准数据流中构造并执行一行行的指令。<code>xargs</code>从输入流获取字符串，然后利用空白、换行符等切割字符串，在这些字符串的基础上构造指令，最后一行行执行这些指令。</p>
 <p>举个例子，如果我们重命名当前目录下的所有 .a 的文件，想在这些文件前面加一个前缀<code>prefix_</code>。比如说<code>x.a</code>文件需要重命名成<code>prefix_x.a</code>，我们就可以用<code>xargs</code>指令构造模块化的指令。</p>
 <p>现在我们有<code>x.a``y.a``z.a</code>三个文件，如下图所示：</p>
-<p><img src="assets/CgqCHl9twTWALpuzAABnixlvrS8980.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl9twTWALpuzAABnixlvrS8980.png" alt="png" /></p>
 <p>然后使用下图中的指令构造我们需要的指令：</p>
-<p><img src="assets/CgqCHl9twT-AOUALAAE5FDR8Tiw234.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHl9twT-AOUALAAE5FDR8Tiw234.png" alt="png" /></p>
 <ul>
 <li>我们用<code>ls</code>找到所有的文件；</li>
 <li><code>-I</code>参数是查找替换符，这里我们用<code>GG</code>替代<code>ls</code>找到的结果；<code>-I GG</code>后面的字符串 GG 会被替换为<code>x.a``x.b</code>或<code>x.z</code>；</li>
@@ -371,18 +371,18 @@ Banana
 </ul>
 <p>我们用<code>xargs</code>构造了 3 条指令。这里我再多讲一个词，叫作样板代码。如果你没有用<code>xargs</code>指令，而是用一条条<code>mv</code>指令去敲，这样就构成了样板代码。</p>
 <p>最后去掉 echo，就是我们想要的结果，如下所示：</p>
-<p><img src="assets/Ciqc1F9twUiAOcNlAAEsaaMV4DI747.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/Ciqc1F9twUiAOcNlAAEsaaMV4DI747.png" alt="png" /></p>
 <h3>管道文件</h3>
 <p>上面我们花了较长的一段时间讨论匿名管道，用<code>|</code>就可以创造和使用。匿名管道也是利用了文件系统的能力，是一种文件结构。当你学到模块六文件系统的内容，会知道匿名管道拥有一个自己的<code>inode</code>，但不属于任何一个文件夹。</p>
 <p>还有一种管道叫作命名管道（Named Pipeline）。命名管道是要挂到文件夹中的，因此需要创建。用<code>mkfifo</code>指令可以创建一个命名管道，下面我们来创建一个叫作<code>pipe1</code>的命名管道，如下图所示：</p>
-<p><img src="assets/CgqCHl9twU-ASY8bAAC7_lc6Pr8814.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/CgqCHl9twU-ASY8bAAC7_lc6Pr8814.png" alt="png" /></p>
 <p>命名管道和匿名管道能力类似，可以连接一个输出流到另一个输入流，也是 First In First Out。</p>
 <p>当执行<code>cat pipe1</code>的时候，你可以观察到，当前的终端处于等待状态。因为我们<code>cat pipe1</code>的时候<code>pipe1</code>中没有内容。</p>
 <p>如果这个时候我们再找一个终端去写一点东西到<code>pipe</code>中，比如说:</p>
 <pre><code>echo &quot;XXX&quot; &gt; pipe1
 </code></pre>
 <p>这个时候，<code>cat pipe1</code>就会返回，并打印出<code>xxx</code>，如下所示：</p>
-<p><img src="assets/CgqCHl9twViAT-M2AADtPsSTV5c658.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/CgqCHl9twViAT-M2AADtPsSTV5c658.png" alt="png" /></p>
 <p>我们可以像上图那样演示这段程序，在<code>cat pipe1</code>后面增加了一个<code>&amp;</code>符号。这个<code>&amp;</code>符号代表指令在后台执行，不会阻塞用户继续输入。然后我们通过<code>echo</code>指令往<code>pipe1</code>中写入东西，接着就会看到<code>xxx</code>被打印出来。</p>
 <h3>总结</h3>
 <p>这节课我们为了学习管道，先简单接触了进程的概念，然后学习了重定向。之后我们学习了匿名管道的应用场景，匿名管道帮助我们把 Linux 指令串联起来形成很强的计算能力。特别是<code>xargs</code>指令支持模板化的生成指令，拓展了指令的能力。最后我们还学习了命名管道，命名管道让我们可以真实拿到一个管道文件，让多个程序之间可以方便地进行通信。</p>

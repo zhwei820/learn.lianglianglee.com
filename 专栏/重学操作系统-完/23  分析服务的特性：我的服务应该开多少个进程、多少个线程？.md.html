@@ -252,12 +252,12 @@ function hide_canvas() {
 <p>再看看 <strong>I/O 密集型</strong>，I/O 本质是对设备的读写。读取键盘的输入是 I/O，读取磁盘（SSD）的数据是 I/O。通常 CPU 在设备 I/O 的过程中会去做其他的事情，当 I/O 完成，设备会给 CPU 一个中断，告诉 CPU 响应 I/O 的结果。比如说从硬盘读取数据完成了，那么硬盘给 CPU 一个中断。如果操作对 I/O 的依赖强，比如频繁的文件操作（写日志、读写数据库等），可以看作<strong>I/O 密集型</strong>。</p>
 <p>你可能会有一个疑问，<strong>读取硬盘数据到内存中这个过程，CPU 需不需要一个个字节处理</strong>？</p>
 <p>通常是不用的，因为在今天的计算机中有一个叫作 Direct Memory Access（DMA）的模块，这个模块允许硬件设备直接通过 DMA 写内存，而不需要通过 CPU（占用 CPU 资源）。</p>
-<p><img src="assets/Ciqc1F--MyKAQSfQAABs29xFyFQ392.png" alt="5.png" /></p>
+<p><img src="assets/Ciqc1F--MyKAQSfQAABs29xFyFQ392.png" alt="png" /></p>
 <p>很多情况下我们没法使用 DMA，比如说你想把一个数组拷贝到另一个数组内，执行的 memcpy 函数内部实现就是一个个 byte 拷贝，这种情况也是一种<strong>CPU 密集的操作</strong>。</p>
 <p>可见，区分是计算密集型还是 I/O 密集型这件事比较复杂。按说查询数据库是一件 I/O 密集型的事情，但是如果存储设备足够好，比如用了最好的固态硬盘阵列，I/O 速度很快，反而瓶颈会在计算上（对缓存的搜索耗时成为主要部分）。因此，需要一些可衡量指标，来帮助我们确认应用的特性。</p>
 <h3>衡量 CPU 的工作情况的指标</h3>
 <p>我们先来看一下 CPU 关联的指标。如下图所示：CPU 有 2 种状态，忙碌和空闲。此外，CPU 的时间还有一种被偷走的情况。</p>
-<p><img src="assets/Ciqc1F--MyyAGUJkAACsJU_MgVg506.png" alt="7.png" /></p>
+<p><img src="assets/Ciqc1F--MyyAGUJkAACsJU_MgVg506.png" alt="png" /></p>
 <p>忙碌就是 CPU 在执行有意义的程序，空闲就是 CPU 在执行让 CPU 空闲（空转）的指令。通常让 CPU 空转的指令能耗更低，因此让 CPU 闲置时，我们会使用特别的指令，最终效果和让 CPU 计算是一样的，都可以把 CPU 执行时间填满，只不过这类型指令能耗低一些而已。除了忙碌和空闲，CPU 的时间有可能被宿主偷走，比如一台宿主机器上有 10 个虚拟机，宿主可以偷走给任何一台虚拟机的时间。</p>
 <p>如上图所示，CPU 忙碌有 3 种情况：</p>
 <ol>
@@ -271,7 +271,7 @@ function hide_canvas() {
 <li>CPU 因为需要等待 I/O 而空闲，比如在等待磁盘回传数据的中断，这种我们称为 I/O Wait。</li>
 </ol>
 <p>下图是我们执行 top 指令看到目前机器状态的快照，接下来我们仔细研究一下这些指标的含义：</p>
-<p><img src="assets/CgqCHl--MzuAVvG-AAMVu_JwSyA231.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl--MzuAVvG-AAMVu_JwSyA231.png" alt="png" /></p>
 <p>如上图所示，你可以细看下 <strong>%CPU(s)</strong> 开头那一行（第 3 行）：</p>
 <ol>
 <li>us（user），即用户空间 CPU 使用占比。</li>
@@ -284,7 +284,7 @@ function hide_canvas() {
 <li>st（stolen），如果当前机器是虚拟机，这个指标代表了宿主偷走的 CPU 时间占比。对于一个宿主多个虚拟机的情况，宿主可以偷走任何一台虚拟机的 CPU 时间。</li>
 </ol>
 <p>上面我们用 top 看的是一个平均情况，如果想看所有 CPU 的情况可以 top 之后，按一下<code>1</code>键。结果如下图所示：</p>
-<p><img src="assets/Ciqc1F--M0uAGZ1pAAmKNbPhB9A282.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F--M0uAGZ1pAAmKNbPhB9A282.png" alt="png" /></p>
 <p>当然，对性能而言，CPU 数量也是一个重要因素。可以看到我这台虚拟机一共有 16 个核心。</p>
 <h3>负载指标</h3>
 <p>上面的指标非常多，在排查问题的时候，需要综合分析。其实还有一些更简单的指标，比如上图中 top 指令返回有一项叫作<code>load average</code>——平均负载。 负载可以理解成某个时刻正在排队执行的进程数除以 CPU 核数。平均负载需要多次采样求平均值。 如果这个值大于<code>1</code>，说明 CPU 相当忙碌。因此如果你想发现问题，可以先检查这个指标。</p>
@@ -293,7 +293,7 @@ function hide_canvas() {
 <p>如果想看更多<code>load average</code>，你可以看<code>/proc/loadavg</code>文件。</p>
 <h3>通信量（Traffic）</h3>
 <p>如果怀疑瓶颈发生在网络层面，或者想知道当前网络状况。可以查看<code>/proc/net/dev</code>，下图是在我的虚拟机上的查询结果：</p>
-<p><img src="assets/CgqCHl--M1aALjSiAALKG4QzX18230.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl--M1aALjSiAALKG4QzX18230.png" alt="png" /></p>
 <p>我们来一起看一下上图中的指标。表头分成了 3 段：</p>
 <ul>
 <li>Interface（网络接口），可以理解成网卡</li>
@@ -312,10 +312,10 @@ function hide_canvas() {
 <p>如果你怀疑自己系统的网络有故障，可以查一下通信量部分的参数，相信会有一定的收获。</p>
 <h3>衡量磁盘工作情况</h3>
 <p>有时候 I/O 太频繁导致磁盘负载成为瓶颈，这个时候可以用<code>iotop</code>指令看一下磁盘的情况，如图所示：</p>
-<p><img src="assets/CgqCHl--M2OAJezyAAkRwbdJVmk356.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl--M2OAJezyAAkRwbdJVmk356.png" alt="png" /></p>
 <p>上图中是磁盘当前的读写速度以及排行较靠前的进程情况。</p>
 <p>另外，如果磁盘空间不足，可以用<code>df</code>指令：</p>
-<p><img src="assets/CgqCHl--M22AY0VPAAaPk8du-CY254.png" alt="6.png" /></p>
+<p><img src="assets/CgqCHl--M22AY0VPAAaPk8du-CY254.png" alt="png" /></p>
 <p>其实 df 是按照挂载的文件系统计算空间。图中每一个条目都是一个文件系统。有的文件系统直接挂在了一个磁盘上，比如图中的<code>/dev/sda5</code>挂在了<code>/</code>上，因此这样可以看到各个磁盘的使用情况。</p>
 <p>如果想知道更细粒度的磁盘 I/O 情况，可以查看<code>/proc/diskstats</code>文件。 这里有 20 多个指标我就不细讲了，如果你将来怀疑自己系统的 I/O 有问题，可以查看这个文件，并阅读相关手册。</p>
 <h3>监控平台</h3>

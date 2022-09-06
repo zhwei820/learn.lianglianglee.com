@@ -529,7 +529,7 @@ function hide_canvas() {
 <p>资源库（Repository）是对数据访问的一种业务抽象，使其具有业务意义。利用资源库抽象，就可以解耦领域层与外部资源，使领域层变得更为纯粹，能够脱离外部资源而单独存在。在设计资源库时，我们想到的不应该是数据库，而是作为“资源”的聚合对象在一个抽象的仓库中是如何管理的。于是，资源库可以代表任何可以获取资源的地方，而不仅限于数据库：</p>
 <p><img src="assets/69c96d30-dd3e-11e9-bd36-7f7c003fb3d0" alt="img" /></p>
 <p>在《领域驱动设计实践-战略篇》课程中，我介绍了版本升级系统的先启过程。在这个系统中，后台需要与前台的基站（NodeB）以及基站的 BBU 板和 RRU 板进行通信，以获得这些终端设备的软件信息，如 Version、Configure、Software、Package、File 等。我在设计过程中引入了领域驱动设计，将获取的这些软件信息建模为领域模型对象，并根据其概念完整性等设计原则定义了聚合。要获得聚合，并非通过访问数据库，而是借由 TELNET 通信协议与前台设备通信，获得的信息以文件形式传输到后端，再由 FileReader 读取其内容后实例化对应的实体或值对象。当我们将这些软件信息建立的领域模型视为资源时，通信采用的 TELNET 协议，以及读取文件后的对象实例化都可以通过抽象的资源库隐藏起来，领域层就无需操心底层的繁琐细节了：</p>
-<p><img src="assets/716758e0-dd3e-11e9-91f1-1f062dd96300" alt="75901236.png" /></p>
+<p><img src="assets/716758e0-dd3e-11e9-91f1-1f062dd96300" alt="png" /></p>
 <h3>资源库的设计原则</h3>
 <p>之所以引入资源库，主要目的还是为了管理聚合的生命周期。工厂负责聚合实例的生，垃圾回收负责聚合实例的死，资源库就负责聚合记录的查询与状态变更，即记录的“增删改查”操作。不同于活动记录（Active Record）模式，资源库分离了聚合的领域行为和持久化行为。为了更好地管理聚合，领域驱动设计对资源库的设计做了一定程度的限制与规范。</p>
 <h4>一个聚合对应一个资源库</h4>
@@ -538,7 +538,7 @@ function hide_canvas() {
 <p>既然如此，为何 Eric Evans 还要引入<strong>资源库</strong>的概念呢？Eric Evans 说：“我们可以通过对象之间的关联来找到对象。但当它处于生命周期的中间时，必须要有一个起点，以便从这个起点遍历到一个实体或者对象。”</p>
 <p>怎么来理解生命周期的“中间”和“起点”？这就需要注意对象与数据记录之间的区别与联系。单从对象的角度看，生命周期代表了一个实例从创建到最后被回收，体现了生命的诞生到死亡；而数据记录呢？生命周期的起点是指插入一条新纪录，直到该记录被删除为生命的终点。</p>
 <p>Eric Evans 提及的生命周期其实是<strong>领域模型对象的生命周期</strong>，需要将对象与数据记录二者结合起来，换言之就是要将内存（堆与栈）管理的对象与数据库（持久化）管理的数据记录结合起来，共同表达了聚合领域模型的整体生命周期：</p>
-<p><img src="assets/c2116580-dd46-11e9-bd36-7f7c003fb3d0" alt="59448394.png" /></p>
+<p><img src="assets/c2116580-dd46-11e9-bd36-7f7c003fb3d0" alt="png" /></p>
 <p>通过上图，可以清晰地看出 Eric 所谓的“起点”，就是通过资源库查询或重建后得到聚合对象的那个点，因为只有在这个时候，我们才能获得聚合对象，然后以此为起点去遍历聚合的根实体及内部的实体和值对象。这个“起点”实际处于领域模型对象生命周期的“中间”。这也正好解释了资源库的职能，就是执行对聚合的“增删改查”。</p>
 <p>虽然增删改查同样是 DAO 的职责，但资源库的不同之处在于：</p>
 <ul>
@@ -581,7 +581,7 @@ orderRepo.update(order);
 }
 </code></pre>
 <p>如何使用这样的 Repository 通用接口呢？既然该接口使用了泛型的类型参数，且接口定义的方法涵盖了与聚合生命周期有关的所有增删改查操作，我们就可以享受重用的福利，无需再为各个聚合定义单独的资源库了。例如，Order 聚合的资源就可以用 Repository<Order> 来管理其生命周期。至于 Repository<T> 接口的实现，则根据 ORM 框架的不同，可以提供不同的实现：</p>
-<p><img src="assets/67192b30-dd47-11e9-a45e-f337da342125" alt="72794507.png" /></p>
+<p><img src="assets/67192b30-dd47-11e9-a45e-f337da342125" alt="png" /></p>
 <p>这样的设计看似很美好，实际并不可行。首先，Repository 通用接口定义了全生命周期的资源库方法，但并非所有聚合都需要这些方法，实现机制又无法控制这些方法。例如，Order 聚合不需要真正的删除方法，又或者对外虽然公开为 delete()，内部却按照需求仅仅是修改订单的状态为 DELETED，该如何让 Repository<Order> 满足这一需求呢？</p>
 <p>其次，聚合资源库对外暴露了根据条件进行查询或删除的方法，其目的是为了满足各种不同的查询/删除需求。但对条件的组装又会加重调用者的负担，例如查询指定顾客所有正在处理中的订单：</p>
 <pre><code class="language-java">Criteria customerIdCriteria = new EquationCriteria(&quot;customerId&quot;, customerId);
@@ -651,7 +651,7 @@ public class PersistenceOrderRepository implements OrderRepository {
 }
 </code></pre>
 <p>设计类图如下所示：</p>
-<p><img src="assets/9d2a4380-dd47-11e9-a584-59c5758c1abc" alt="72042857.png" /></p>
+<p><img src="assets/9d2a4380-dd47-11e9-a584-59c5758c1abc" alt="png" /></p>
 <p>领域服务调用 OrderRepository 管理 Order 聚合，但在执行时，调用的其实是通过依赖注入的实现类 PersistenceOrderRepository。为了避免重复实现，在 PersistenceOrderRepository 类的内部，操作数据库的工作又委派给了通用接口 Repository<T>，进而委派给具体实现了 Repository<T> 接口的类，如前所述的 MybatisRepository<T> 等。</p>
 <p><strong>委派方式显然要优于继承</strong>。如此一来，聚合的资源库接口可不受通用接口的限制，明确定义满足真实业务场景的调用需求。例如，业务需求不允许删除订单，OrderRepository 接口就无需提供 remove() 等移除方法，定义的诸如 allOrdersOfCustomer() 与 allInProgressOrdersOfCustomer() 等特定的查询方法，更能表达领域逻辑。</p>
 <p>不过针对资源库的条件查询方法的接口设计，社区存在争议，大致分为如下两派：</p>
@@ -670,7 +670,7 @@ public class PersistenceOrderRepository implements OrderRepository {
 <p>从软件工程学的角度看，我们不可能不使用框架，重用是必须的。许多持久化框架都会提供通用的类或接口，你只需要继承它就可以享受框架带来的强大威力，但同时也意味着你将受制于它。Neal Ford 将这种模式称之为<strong>耦合的毒贩模式</strong>：“如果你服从这些诱导，你就只能永远受制于框架。”假设有一个 JpaFramework 提供了持久化的通用接口 Repository，为了重用框架，自定义的订单聚合资源库继承了该接口：</p>
 <p><img src="assets/42baa4b0-dd49-11e9-8134-9900814ad853" alt="img" /></p>
 <p>虽然 OrderRepository 通过继承框架的 Repository 得到了持久化便利，但领域模型也无法轻易甩开 JpaFramework。继承关系就好像胶水，把二者紧紧粘在了一起，这就使得领域模型失去了纯粹性。正确的做法是转移对框架的依赖，交给资源库的实现类。实现类属于基础设施层，本就负责与外部资源和框架的适配工作，将它与框架耦合，并不会干扰到领域层：</p>
-<p><img src="assets/512b3cd0-dd49-11e9-8134-9900814ad853" alt="39903508.png" /></p>
+<p><img src="assets/512b3cd0-dd49-11e9-8134-9900814ad853" alt="png" /></p>
 <p>上图中的 PersistenceOrderRepository 是一个类，它通过组合方式重用了 JpaFramework 的 Repository 接口。其实不仅限于组合方式，即使让资源库的实现类去继承框架的类型或实现框架的接口都无关紧要，因为通过依赖注入，领域层的领域模型根本就不知晓 PersistenceOrderRepository 类的存在，更不用提框架了。</p>
 <p>似乎看中了资源库接口的抽象性与隔离性，许多持久化框架也在向这个方向迈进，力图在保证抽象性的同时，做到最大程度的封装以减轻开发人员的工作量。针对具有元数据的语言如 Java，多数框架采用动态代理的方式完成具体实现代码的混入。以 Spring Data JPA 为例，它定义了如下的标记接口 Repository：</p>
 <pre><code class="language-java">package org.springframework.data.repository;

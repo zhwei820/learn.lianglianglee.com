@@ -232,9 +232,9 @@ function hide_canvas() {
 </ul>
 <p>那么这里又涉及一个概念，什么是内存碎片呢？Linux 中物理内存会被划分成若干个 4K 大小的内存页 Page，物理内存的分配和回收都是基于 Page 完成的，Page 内产生的内存碎片称为内部碎片，Page 之间产生的内存碎片称为外部碎片。</p>
 <p>首先讲下内部碎片，因为内存是按 Page 进行分配的，即便我们只需要很小的内存，操作系统至少也会分配 4K 大小的 Page，单个 Page 内只有一部分字节都被使用，剩余的字节形成了内部碎片，如下图所示。</p>
-<p><img src="assets/CgqCHl--HxSAH5EGAANWzZRA9Kg017.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl--HxSAH5EGAANWzZRA9Kg017.png" alt="png" /></p>
 <p>外部碎片与内部碎片相反，是在分配较大内存块时产生的。我们试想一下，当需要分配大内存块的时候，操作系统只能通过分配连续的 Page 才能满足要求，在程序不断运行的过程中，这些 Page 被频繁的回收并重新分配，Page 之间就会出现小的空闲内存块，这样就形成了外部碎片，如下图所示。</p>
-<p><img src="assets/Ciqc1F--HxyAbK3CAAQ1Tsz2fsY135.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F--HxyAbK3CAAQ1Tsz2fsY135.png" alt="png" /></p>
 <p>上述我们介绍了内存分配器的一些背景知识，它们是操作系统以及高性能组件的必备神器，如果你对内存管理有兴趣，jemalloc 和 tcmalloc 都是非常推荐学习的。</p>
 <h3>常用内存分配器算法</h3>
 <p>在学习 jemalloc 的实现原理之前，我们先了解下最常用的内存分配器算法：<strong>动态内存分配</strong>、<strong>伙伴算法</strong>和<strong>Slab 算法</strong>，这将对于我们理解 jemalloc 大有裨益。</p>
@@ -250,7 +250,7 @@ function hide_canvas() {
 <h4>伙伴算法</h4>
 <p>伙伴算法是一种非常经典的内存分配算法，它采用了分离适配的设计思想，将物理内存按照 2 的次幂进行划分，内存分配时也是按照 2 的次幂大小进行按需分配，例如 4KB、 8KB、16KB 等。假设我们请求分配的内存大小为 10KB，那么会按照 16KB 分配。</p>
 <p>伙伴算法相对比较复杂，我们结合下面这张图来讲解它的分配原理。</p>
-<p><img src="assets/Ciqc1F--HzqAdUBdAANa3t7uXSk503.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F--HzqAdUBdAANa3t7uXSk503.png" alt="png" /></p>
 <p>伙伴算法把内存划分为 11 组不同的 2 次幂大小的内存块集合，每组内存块集合都用双向链表连接。链表中每个节点的内存块大小分别为 1、2、4、8、16、32、64、128、256、512 和 1024 个连续的 Page，例如第一组链表的节点为 2^0 个连续 Page，第二组链表的节点为 2^1 个连续 Page，以此类推。</p>
 <p>假设我们需要分配 10K 大小的内存块，看下伙伴算法的具体分配过程：</p>
 <ol>
@@ -264,14 +264,14 @@ function hide_canvas() {
 <h4>Slab 算法</h4>
 <p>因为伙伴算法都是以 Page 为最小管理单位，在小内存的分配场景，伙伴算法并不适用，如果每次都分配一个 Page 岂不是非常浪费内存，因此 Slab 算法应运而生了。Slab 算法在伙伴算法的基础上，对小内存的场景专门做了优化，采用了内存池的方案，解决内部碎片问题。</p>
 <p>Linux 内核使用的就是 Slab 算法，因为内核需要频繁地分配小内存，所以 Slab 算法提供了一种高速缓存机制，使用缓存存储内核对象，当内核需要分配内存时，基本上可以通过缓存中获取。此外 Slab 算法还可以支持通用对象的初始化操作，避免对象重复初始化的开销。下图是 Slab 算法的结构图，Slab 算法实现起来非常复杂，本文只做一个简单的了解。</p>
-<p><img src="assets/Ciqc1F--H2KAIoZ_AAcYUn319Hc822.png" alt="image.png" /></p>
+<p><img src="assets/Ciqc1F--H2KAIoZ_AAcYUn319Hc822.png" alt="png" /></p>
 <p>在 Slab 算法中维护着大小不同的 Slab 集合，在最顶层是 cache_chain，cache_chain 中维护着一组 kmem_cache 引用，kmem_cache 负责管理一块固定大小的对象池。通常会提前分配一块内存，然后将这块内存划分为大小相同的 slot，不会对内存块再进行合并，同时使用位图 bitmap 记录每个 slot 的使用情况。</p>
 <p>kmem_cache 中包含三个 Slab 链表：<strong>完全分配使用 slab_full</strong>、<strong>部分分配使用 slab_partial</strong>和<strong>完全空闲 slabs_empty</strong>，这三个链表负责内存的分配和释放。每个链表中维护的 Slab 都是一个或多个连续 Page，每个 Slab 被分配多个对象进行存储。Slab 算法是基于对象进行内存管理的，它把相同类型的对象分为一类。当分配内存时，从 Slab 链表中划分相应的内存单元；当释放内存时，Slab 算法并不会丢弃已经分配的对象，而是将它保存在缓存中，当下次再为对象分配内存时，直接会使用最近释放的内存块。</p>
 <p>单个 Slab 可以在不同的链表之间移动，例如当一个 Slab 被分配完，就会从 slab_partial 移动到 slabs_full，当一个 Slab 中有对象被释放后，就会从 slab_full 再次回到 slab_partial，所有对象都被释放完的话，就会从 slab_partial 移动到 slab_empty。</p>
 <p>至此，三种最常用的内存分配算法已经介绍完了，优秀的内存分配算法都是在性能和内存利用率之间寻找平衡点，我们今天的主角 jemalloc 就是非常典型的例子。</p>
 <h3>jemalloc 架构设计</h3>
 <p>在了解了常用的内存分配算法之后，再理解 jemalloc 的架构设计会相对轻松一些。下图是 jemalloc 的架构图，我们一起学习下它的核心设计理念。</p>
-<p><img src="assets/Ciqc1F--H3KAEYJFAAp4aFcW83A719.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F--H3KAEYJFAAp4aFcW83A719.png" alt="png" /></p>
 <p>上图中涉及 jemalloc 的几个核心概念，例如 arena、bin、chunk、run、region、tcache 等，我们下面逐一进行介绍。</p>
 <p><strong>arena 是 jemalloc 最重要的部分</strong>，内存由一定数量的 arenas 负责管理。每个用户线程都会被绑定到一个 arena 上，线程采用 round-robin 轮询的方式选择可用的 arena 进行内存分配，为了减少线程之间的锁竞争，默认每个 CPU 会分配 4 个 arena。</p>
 <p><strong>bin 用于管理不同档位的内存单元</strong>，每个 bin 管理的内存大小是按分类依次递增。因为 jemalloc 中小内存的分配是基于 Slab 算法完成的，所以会产生不同类别的内存块。</p>

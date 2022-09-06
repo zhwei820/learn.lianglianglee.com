@@ -267,7 +267,7 @@ function hide_canvas() {
 </code></pre>
 <p>可以看到，当 loadBalanceStrategyConfiguration 配置不存在时，会直接使用 serviceLoader.newService() 方法完成 SPI 实例的创建。我们回顾 <strong>“13 | 微内核架构：ShardingSphere 如何实现系统的扩展性？”</strong> 中的介绍，就会知道该方法会获取系统中第一个可用的 SPI 实例。</p>
 <p>我们同样在 sharding-core-common 工程中找到了 SPI 的配置信息，如下所示：</p>
-<p><img src="assets/Ciqc1F9Z3gGABwnKAAB1KuzlwD4571.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F9Z3gGABwnKAAB1KuzlwD4571.png" alt="png" /></p>
 <p>针对 MasterSlaveLoadBalanceAlgorithm 的 SPI 配置</p>
 <p>按照这里的配置信息，第一个获取的 SPI 实例应该是 RoundRobinMasterSlaveLoadBalanceAlgorithm，即<strong>轮询策略</strong>，它的 getDataSource 方法实现如下：</p>
 <pre><code>@Override
@@ -395,7 +395,7 @@ public int executeUpdate() throws SQLException {
 </code></pre>
 <p>至此，ShardingSphere 中与读写分离相关的核心类以及主要流程介绍完毕。总体而言，这部分的内容因为不涉及分片操作，所以整体结构还是比较直接和明确的。尤其是我们在了解了分片相关的 ShardingDataSource、ShardingConnection、ShardingStatement 和 ShardingPreparedStatement 之后再来理解今天的内容就显得特别简单，很多底层的适配器模式等内容前面都介绍过。</p>
 <p>作为总结，我们还是简单梳理一下读写分离相关的类层结构，如下所示：</p>
-<p><img src="assets/CgqCHl9Z3jGAH6CLAAByFyKIpQ0068.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl9Z3jGAH6CLAAByFyKIpQ0068.png" alt="png" /></p>
 <h3>从源码解析到日常开发</h3>
 <p>在今天的内容中，我们接触到了分布式系统开发过程中非常常见的一个话题，即<strong>负载均衡</strong>。负载均衡的场景就类似于在多个从库中选择一个目标库进行路由一样，通常需要依赖于一定的负载均衡算法，ShardingSphere 中就提供了<strong>随机</strong>和<strong>轮询</strong>这两种常见的实现，我们可以在日常开发过程中参考它的实现方法。</p>
 <p>当然，因为 MasterSlaveLoadBalanceAlgorithm 接口是一个 SPI，所以我们也可以定制化新的负载均衡算法并动态加载到 ShardingSphere。</p>

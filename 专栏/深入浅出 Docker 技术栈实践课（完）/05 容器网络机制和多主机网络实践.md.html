@@ -116,7 +116,7 @@ function hide_canvas() {
 <p>容器网络不是新技术，它是云计算虚拟化技术互联互通的基础核心技术。一般意义的网络都是主机与主机之间的通信，颗粒度局限在物理层面的网卡接口。随着虚拟化技术的发展，以应用为中心的新网络结构逐渐明朗清晰。容器技术就是让依赖环境可以跟着应用绑定打包，并随需启动并互联。容器技术的特点也对网络技术的发展起到了互推的作用，当网络不在持久化存在的时候，软件定义网络（SDN）技术的能力就会体现的更充分。</p>
 <h3>容器主机网络模型</h3>
 <p>Docker 内建的网络模型是 Bridge Network。这种网络是基于主机内部模型的网络，设计之初也是为了解决单机模式下容器之间的互联互通问题。如图：</p>
-<p><img src="assets/20e5c040-c374-11e7-91b9-cb02ca6acdf9" alt="enter image description here" /></p>
+<p><img src="assets/20e5c040-c374-11e7-91b9-cb02ca6acdf9" alt="png" /></p>
 <p>Veth pair 技术源于 Linux 网络模型的虚拟设备，比如 TAP 设备，方便主机上应用程序接收网络数据而创建。TAP 设备只能监听到网卡接口上的数据流量，如果想连接多个网络命名空间，就需要用到 Veth pair 技术来打通连接。容器网络之间的互通就是通过这个做到的，但是细心的读者可以看到，图上主机网卡和 docker0 网桥是没有连接的，不能数据互联。为了让容器与外界网络相连，首先要保证主机能允许转发 IP 数据包，另外需要让 iptables 能指定特定的 IP 链路。通过系统参数 ip_forward 来调节开关，如：</p>
 <pre><code class="language-bash">$ sysctl net.ipv4.conf.all.forwarding
   net.ipv4.conf.all.forwarding = 0
@@ -171,13 +171,13 @@ RETURN     all  --  anywhere             anywhere
 <li>Linux kernel v3.9–3.19 and 4.0+才内置支持Macvlan 驱动</li>
 </ul>
 <p>Macvlan 技术是一种真实的网络虚拟化技术，比其他Linux Bridge 更加轻量级。相比 Linux Bridge，性能更高。因为它跳过了主机网卡和容器网络直接的转发过程，容器网卡接口直接对接主机网口，可以视作为主机网络的延伸。这样的网络，让外部访问容器变的非常简便，不在需要端口映射，如下图所示：</p>
-<p><img src="assets/2ae28e10-c375-11e7-a275-4181d09742c4" alt="enter image description here" /></p>
+<p><img src="assets/2ae28e10-c375-11e7-a275-4181d09742c4" alt="png" /></p>
 <p>为了让容器网络支持多个分组，可以考虑采用802.1q 的 VALN tagging 技术实现。这种技术的好处对于小规模主机网络下容器网络的搭建非常合适。这块通过如下图可以解释清楚：</p>
-<p><img src="assets/42a355c0-c375-11e7-a205-2352264f3cb6" alt="enter image description here" /></p>
+<p><img src="assets/42a355c0-c375-11e7-a205-2352264f3cb6" alt="png" /></p>
 <h3>容器网络标准 CNI</h3>
 <p>容器网络接口（CNI）是云原生基金会支持项目，属于云计算领域容器行业标准。它包含了定义容器网络插件规范和示范。因为 CNI 仅仅聚焦在容器之间的互联和容器销毁后的网络配置清理，所以它的标准简洁并容易实现。</p>
 <p>标准包含两部分，CNI Plugin 旨在配置网络信息，另外定义了 IPAM Plugin 旨在分配 IP，管理 IP。这个接口有更广泛的适用性，适应多种容器标准。如图：</p>
-<p><img src="assets/6d8a9c80-c375-11e7-a205-2352264f3cb6" alt="enter image description here" /></p>
+<p><img src="assets/6d8a9c80-c375-11e7-a205-2352264f3cb6" alt="png" /></p>
 <p>网络插件是独立的可执行文件，被上层的容器管理平台调用。网络插件只有两件事情要做：把容器加入到网络以及把容器从网络中删除。</p>
 <p>调用插件的数据通过两种方式传递：环境变量和标准输入。</p>
 <p>一般插件需要三种类型的数据：容器相关的信息，比如 ns 的文件、容器 id 等；网络配置的信息，包括网段、网关、DNS 以及插件额外的信息等；还有就是 CNI 本身的信息，比如 CNI 插件的位置、添加网络还是删除网络等。</p>
@@ -209,7 +209,7 @@ RETURN     all  --  anywhere             anywhere
 <p>当然，开源的 overlay 方案中有比较优秀的方案比如 Calico 方案，它借用了 BGP 协议作为主机与主机之间边界的路由通信，可以很好的解决小集群模式下的高效网络传输。Calico 的背后公司也是借用此技术在社区中推出商业硬件解决方案。从国内的中小型企业的网络规模来说，此种网络完全可以满足网络需要。</p>
 <h3>展望网络发展趋势</h3>
 <p>容器网络互联已经不在是棘手的问题，可行的实现就在手边。目前用户进一步的使用中，对网络的限流和安全策略有了更多的需求。这也催生了如 <strong>cilium</strong> 这样的开源项目，旨在利用 Linux 原生的伯克利包过滤（Berkeley Packet Filter，BPF）技术实现网络流量的安全审计和流量导向。如图：</p>
-<p><img src="assets/f6c14cf0-c376-11e7-b829-1b3c00065ae2" alt="enter image description here" /></p>
+<p><img src="assets/f6c14cf0-c376-11e7-b829-1b3c00065ae2" alt="png" /></p>
 <p>所以，容器网络的发展正在接近应用生命周期的循环中，从限流，到安全策略，再到可能的虚拟网络 NFV 的构建都有可能改变我们的容器世界。</p>
 <p>参考：</p>
 <p><a href="https://github.com/containernetworking/cni/blob/master/SPEC.md.html">容器网络接口标准</a></p>

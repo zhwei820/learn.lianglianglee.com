@@ -219,7 +219,7 @@ function hide_canvas() {
 <h4>状态收集</h4>
 <p>首先我们来实现网络中服务器运行状态的收集功能，利用 ZooKeeper 中的临时节点作为标记网络中服务器的状态点位。在网络中服务器上线运行的时候，通过在 ZooKeeper 服务器中创建临时节点，向 ZooKeeper 的服务列表进行注册，表示本台服务器已经上线可以正常工作。通过删除临时节点或者在与 ZooKeeper 服务器断开连接后，删除该临时节点。</p>
 <p>最后，通过统计临时节点的数量，来了解网络中服务器的运行情况。<strong>如下图所示，建立的 ZooKeeper 数据模型中 Severs 节点可以作为存储服务器列表的父节点</strong>。用于之后通过负载均衡算法在该列表中选择服务器。在它下面创建 servers_host1、servers_host2、servers_host3等临时节点来存储集群中的服务器运行状态信息。</p>
-<p><img src="assets/Ciqc1F8X5l-APWIjAAAsDI_4m_Q833.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F8X5l-APWIjAAAsDI_4m_Q833.png" alt="png" /></p>
 <p>在代码层面的实现中，我们首先定义一个 BlanceSever 接口类。该类规定在 ZooKeeper 服务器启动后，向服务器地址列表中，注册或注销信息以及根据接收到的会话请求，动态更新负载均衡情况等功能。如下面的代码所示：</p>
 <pre><code>public class BlanceSever{
   public void register()
@@ -257,7 +257,7 @@ function hide_canvas() {
 <h4>负载算法</h4>
 <p>实现服务器列表后，接下来我们就进入负载均衡最核心的内容：如何选择服务器。这里我们通过采用“最小连接数”算法，来确定究竟如何均衡地分配网络会话请求给后台客户端。</p>
 <p>整个实现的过程如下图所示。首先，在接收到客户端的请求后，通过 getData 方法获取服务端 Severs 节点下的服务器列表，其中每个节点信息都存储有当前服务器的连接数。通过判断选择最少的连接数作为当前会话的处理服务器，并通过 setData 方法将该节点连接数加 1。最后，当客户端执行完毕，再调用 setData 方法将该节点信息减 1。</p>
-<p><img src="assets/Ciqc1F8X5n6AGCBQAABSbLOIuWA010.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F8X5n6AGCBQAABSbLOIuWA010.png" alt="png" /></p>
 <p>首先，我们定义当服务器接收到会话请求后。在 ZooKeeper 服务端增加连接数的 addBlance 方法。如下面的代码所示，首先我们通过 readData 方法获取服务器最新的连接数，之后将该连接数加 1，再通过 writeData 方法将新的连接数信息写入到服务端对应节点信息中。</p>
 <pre><code>public void addBlance() throws Exception{
   InetAddress address = InetAddress.getLocalHost();

@@ -291,7 +291,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>46  加餐：深入服务自省方案中的服务发布订阅（下）</h1>
 <p>在课程第二部分（13~15 课时）中介绍 Dubbo 传统框架中的注册中心部分实现时，我们提到了 Registry、RegistryFactory 等与注册中心交互的接口。<strong>为了将 ServiceDiscovery 接口的功能与 Registry 融合，Dubbo 提供了一个 ServiceDiscoveryRegistry 实现</strong>，继承关系如下所示：</p>
-<p><img src="assets/Ciqc1F_pe3KAQs8SAAPkHLoWbUM655.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_pe3KAQs8SAAPkHLoWbUM655.png" alt="png" /></p>
 <p>ServiceDiscoveryRegistry 、ServiceDiscoveryRegistryFactory 继承关系图</p>
 <p>由图我们可以看到：ServiceDiscoveryRegistryFactory（扩展名称是 service-discovery-registry）是 ServiceDiscoveryRegistry 对应的工厂类，继承了 AbstractRegistryFactory 提供的公共能力。</p>
 <p><strong>ServiceDiscoveryRegistry 是一个面向服务实例（ServiceInstance）的注册中心实现</strong>，其底层依赖前面两个课时介绍的 ServiceDiscovery、WritableMetadataService 等组件。</p>
@@ -476,7 +476,7 @@ public interface ServiceInstanceCustomizer extends Prioritized {
 </code></pre>
 <p>关于 ServiceInstanceCustomizer 接口，这里需要关注三个点：①该接口被 @SPI 注解修饰，是一个扩展点；②该接口继承了 Prioritized 接口；③该接口中定义的 customize() 方法可以用来自定义 ServiceInstance 信息，其中就包括控制 metadata 集合中的数据。</p>
 <p>也就说，<strong>ServiceInstanceCustomizer 的多个实现可以按序调用，实现 ServiceInstance 的自定义</strong>。下图展示了 ServiceInstanceCustomizer 接口的所有实现类：</p>
-<p><img src="assets/CgpVE1_pe6SAT90SAAC2xP9_c7c171.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_pe6SAT90SAAC2xP9_c7c171.png" alt="png" /></p>
 <p>ServiceInstanceCustomizer 继承关系图</p>
 <p>我们首先来看 ServiceInstanceMetadataCustomizer 这个抽象类，它主要是对 ServiceInstance 中 metadata 这个 KV 集合进行自定义修改，这部分逻辑在 customize() 方法中，如下所示：</p>
 <pre><code>public final void customize(ServiceInstance serviceInstance) {
@@ -624,7 +624,7 @@ public interface ServiceInstanceCustomizer extends Prioritized {
 }
 </code></pre>
 <p>这里涉及一个新的接口——<strong>MetadataServiceProxyFactory，它是用来创建 MetadataService 本地代理的工厂类</strong>，继承关系如下所示：</p>
-<p><img src="assets/CgpVE1_pe72AFUTPAADh6TOy_Ak061.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgpVE1_pe72AFUTPAADh6TOy_Ak061.png" alt="png" /></p>
 <p>MetadataServiceProxyFactory 继承关系图</p>
 <p>在 BaseMetadataServiceProxyFactory 中提供了缓存 MetadataService 本地代理的公共功能，其中维护了一个 proxies 集合（HashMap&lt;String, MetadataService&gt; 类型），Key 是 Service Name 与一个 ServiceInstance 的 revision 值的组合，Value 是该 ServiceInstance 对应的 MetadataService 服务的本地代理对象。创建 MetadataService 本地代理的功能是在 createProxy() 抽象方法中实现的，这个方法由 BaseMetadataServiceProxyFactory 的子类具体实现。</p>
 <p><strong>下面来看 BaseMetadataServiceProxyFactory 的两个实现——DefaultMetadataServiceProxyFactory 和 RemoteMetadataServiceProxyFactory。</strong></p>
@@ -650,7 +650,7 @@ public interface ServiceInstanceCustomizer extends Prioritized {
 }
 </code></pre>
 <p>这里我们来看 MetadataServiceURLBuilder 接口中创建 MetadataService 服务对应的 URL 的逻辑，下图展示了 MetadataServiceURLBuilder 接口的实现：</p>
-<p><img src="assets/Ciqc1F_pe8eARHUJAACyQ5kof-I149.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_pe8eARHUJAACyQ5kof-I149.png" alt="png" /></p>
 <p>MetadataServiceURLBuilder 继承关系图</p>
 <p>其中，SpringCloudMetadataServiceURLBuilder 是兼容 Spring Cloud 的实现，这里就不深入分析了。我们重点来看 StandardMetadataServiceURLBuilder 的实现，其中会根据 ServiceInstance.metadata 携带的 URL 参数、Service Name、ServiceInstance 的 host 等信息构造 MetadataService 服务对应 URL，如下所示：</p>
 <pre><code>public List&lt;URL&gt; build(ServiceInstance serviceInstance) {
@@ -680,7 +680,7 @@ public interface ServiceInstanceCustomizer extends Prioritized {
 }
 </code></pre>
 <p>接下来我们看 RemoteMetadataServiceProxyFactory 这个实现类，其中的 createProxy() 方法会直接创建一个 RemoteMetadataServiceProxy 对象并返回。在前面第 44 课时介绍 MetadataService 接口的时候，我们重点介绍的是 WritableMetadataService 这个子接口下的实现，并没有提及 RemoteMetadataServiceProxy 这个实现。下图是 RemoteMetadataServiceProxy 在继承体系中的位置：</p>
-<p><img src="assets/Ciqc1F_pe9GAEnNjAAA4bEzwZzw039.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F_pe9GAEnNjAAA4bEzwZzw039.png" alt="png" /></p>
 <p>RemoteMetadataServiceProxy 继承关系图</p>
 <p>RemoteMetadataServiceProxy 作为 RemoteWritableMetadataService 的本地代理，其 getExportedURLs()、getServiceDefinition() 等方法的实现，完全依赖于 MetadataReport 进行实现。这里以 getExportedURLs() 方法为例：</p>
 <pre><code>public SortedSet&lt;String&gt; getExportedURLs(String serviceInterface, String group, String version, String protocol) {

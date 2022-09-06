@@ -252,7 +252,7 @@ private static int fun(int n) {
 <p>在利用二分查找时，更多的是判断，基本没有数据的增删操作，因此不需要太多地定义复杂的数据结构。</p>
 <p>分析到这里，解决方案已经非常明朗了，就是采用二分查找的方法，在 O(logn) 的时间复杂度下去解决这个问题。二分查找可以通过递归来实现。<strong>而每次递归的关键点在于，根据切分的点（最中间的那个数字），确定是向左走还是向右走。这也是这个例题中唯一的难点了</strong>。</p>
 <p>试想一下，在一个旋转后的有序数组中，利用中间元素作为切分点得到的两个子数组有什么样的性质。经过枚举不难发现，这两个子数组中，一定存在一个数组是有序的。也可能出现一个极端情况，二者都是有序的。如下图所示：</p>
-<p><img src="assets/CgqCHl8Fi6eAVyX3AAAnk9vJF3c337.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8Fi6eAVyX3AAAnk9vJF3c337.png" alt="png" /></p>
 <p>对于有序的一边，我们是很容易判断目标值，是否在这个区间内的。如果在其中，也说明了目标值不在另一边的旋转有序组里；反之亦然。</p>
 <p>当我们知道了目标值在左右哪边之后，就可以递归地调用旋转有序的二分查找了。之所以可以递归调用，是因为，对于旋转有序组，这个问题和原始问题完全一致，可以调用。对于有序组，它是旋转有序的特殊情况（即旋转 0 位），也一定是可以通过递归的方法去实现查找的。直到不断二分后，搜索空间只有 1 位数字，直接判断是否找到即可。</p>
 <ul>
@@ -345,14 +345,14 @@ private static int bs(int[] arr, int target, int begin, int end) {
 <p>这段分析对于初学者来说会非常难懂，接下来我们给一个实现的流程来辅助你理解。</p>
 <p><strong>我们在最短路径问题中，曾重点提到的一个难点是，对于输入的图，采用什么样的数据结构予以保存。最终我们选择了二维数组</strong>。</p>
 <p>在这个例子中也可以采用二维数组。每一行或每一列就对应了输入字符串 a 和 b 的每个字符，即 6 x 8 的二维数组（矩阵）为：</p>
-<p><img src="assets/Ciqc1F8Fkz6APcxAAAAepje1Jv8882.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8Fkz6APcxAAAAepje1Jv8882.png" alt="png" /></p>
 <p>接着，每个可能的起点字符，都应该同时出现在字符串 a 和 b 中，例如&quot;1&quot;就是一个可能的起点。如果以&quot;1&quot;作为起点，那么它后面的字符就是阶段，显然下个阶段就是 a[1] = 3 和 b[1] = 2。而此时的状态就是当前的公共子串，即 &quot;1&quot;。</p>
 <p>决策的结果是，下一个阶段是否进入到公共子串中。很显然 a[1] 不等于 b[1]，因此决策的结果是不进入。这也同时命中了终止条件。如果以&quot;3&quot;起点，则因为它之后的 a[2] 等于 b[3]，则决策结果是进入到公共子串。</p>
 <p>因此状态转移方程 sk+1 = uk(sk)，含义是在&quot;3&quot;的状态下决策&quot;4&quot;进入子串，结果得到&quot;34&quot;。我们的目标是寻找最大的公共子串，因此可以用从 1 开始的数字定义距离（子串的长度）。具体步骤如下：</p>
 <p>对于每个可能的起点，距离都是 1 （不可能的起点置为 0，图中忽略未写）。则有：</p>
-<p><img src="assets/CgqCHl8Fk3OAO0i4AAAfVRzJAfw184.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl8Fk3OAO0i4AAAfVRzJAfw184.png" alt="png" /></p>
 <p>接着利用状态转移方程，去寻找最优子结构。也就是，如果 b[i] = a[j]，则 m[i,j] = m[i-1,j-1] + 1。含义为，如果决策结果是相等，则状态增加一个新的字符，进行更新。可以得到：</p>
-<p><img src="assets/CgqCHl8Fk32AEA7dAAAgSbzrdRM560.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8Fk32AEA7dAAAgSbzrdRM560.png" alt="png" /></p>
 <p>最终，检索这个矩阵，得到的最大数字就是最大公共子串的长度。根据其所在的位置，就能从 a 或 b 中找到最大公共子串。</p>
 <p>代码如下：</p>
 <pre><code>public static void main(String[] args) {
@@ -390,7 +390,7 @@ public static void getCommenStr(String a, String b) {
 <p>主函数中定义了字符串 a 和字符串 b，随后调用动态规划代码。</p>
 <p>进入 getCommenStr() 函数中之后，首先在第 10 行定义了二维数组。此时二维数组的维数是 7 x 9 的。这主要的原因是，后续会需要用到第一行和第一列的全零向量，作为起始条件。</p>
 <p>接着，在第 11～16 行，利用双重循环去完成状态转移的计算。此时就得到了最关键的矩阵，如下所示：</p>
-<p><img src="assets/CgqCHl8Fk32AEA7dAAAgSbzrdRM560.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8Fk32AEA7dAAAgSbzrdRM560.png" alt="png" /></p>
 <p>随后的 17～26 行，我们从矩阵 m 中，找到了最大值为 3，在字符串 b 中的索引值为 4（此时 index 为 5，但别忘了我们之前额外定义了一行/一列的全零向量）。</p>
 <p>最后，27～30 行，我们根据终点字符串索引值 4 和最大公共子串长度 3，就能找到最大公共子串在 b 中的 2～4 的位置。即 &quot;345&quot;。</p>
 <h3>总结</h3>

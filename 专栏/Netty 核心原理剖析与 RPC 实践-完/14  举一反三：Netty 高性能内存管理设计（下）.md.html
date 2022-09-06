@@ -222,7 +222,7 @@ function hide_canvas() {
 <p>本节课会侧重于详细分析不同场景下 Netty 内存分配和回收的实现过程，让你对 Netty 内存池的整体设计有一个更加清晰的认识。</p>
 <h3>内存分配实现原理</h3>
 <p>Netty 中负责线程分配的组件有两个：<strong>PoolArena</strong>和<strong>PoolThreadCache</strong>。PoolArena 是多个线程共享的，每个线程会固定绑定一个 PoolArena，PoolThreadCache 是每个线程私有的缓存空间，如下图所示。</p>
-<p><img src="assets/Ciqc1F_HVVWANQ2JAASi2VFvKEg368.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_HVVWANQ2JAASi2VFvKEg368.png" alt="png" /></p>
 <p>在上节课中，我们介绍了 PoolChunk、PoolSubpage、PoolChunkList，它们都是 PoolArena 中所用到的概念。PoolArena 中管理的内存单位为 PoolChunk，每个 PoolChunk 会被划分为 2048 个 8K 的 Page。在申请的内存大于 8K 时，PoolChunk 会以 Page 为单位进行内存分配。当申请的内存大小小于 8K 时，会由 PoolSubpage 管理更小粒度的内存分配。</p>
 <p>PoolArena 分配的内存被释放后，不会立即会还给 PoolChunk，而且会缓存在本地私有缓存 PoolThreadCache 中，在下一次进行内存分配时，会优先从 PoolThreadCache 中查找匹配的内存块。</p>
 <p>由此可见，Netty 中不同的内存规格采用的分配策略是不同的，我们主要分为以下三个场景逐一进行分析。</p>
@@ -233,7 +233,7 @@ function hide_canvas() {
 </ul>
 <h4>PoolChunk 中 Page 级别的内存分配</h4>
 <p>每个 PoolChunk 默认大小为 16M，PoolChunk 是通过伙伴算法管理多个 Page，每个 PoolChunk 被划分为 2048 个 Page，最终通过一颗满二叉树实现，我们再一起回顾下 PoolChunk 的二叉树结构，如下图所示。</p>
-<p><img src="assets/Ciqc1F_HVV2AAm7jAAkM7nU1E0A130.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F_HVV2AAm7jAAkM7nU1E0A130.png" alt="png" /></p>
 <p>假如用户需要依次申请 8K、16K、8K 的内存，通过这里例子我们详细描述下 PoolChunk 如何分配 Page 级别的内存，方便大家理解伙伴算法的原理。</p>
 <p>首先看下分配逻辑 allocateRun 的源码，如下所示。PoolChunk 分配 Page 主要分为三步：首先根据分配内存大小计算二叉树所在节点的高度，然后查找对应高度中是否存在可用节点，如果分配成功则减去已分配的内存大小得到剩余可用空间。</p>
 <pre><code>private long allocateRun(int normCapacity) {
@@ -314,7 +314,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>PoolSubpage 通过位图 bitmap 记录每个内存块是否已经被使用。在上述的示例中，8K/32B = 256，因为每个 long 有 64 位，所以需要 256/64 = 4 个 long 类型的即可描述全部的内存块分配状态，因此 bitmap 数组的长度为 4，从 bitmap[0] 开始记录，每分配一个内存块，就会移动到 bitmap[0] 中的下一个二进制位，直至 bitmap[0] 的所有二进制位都赋值为 1，然后继续分配 bitmap[1]，以此类推。当我们使用 2049 节点进行内存分配时，bitmap[0] 中的二进制位如下图所示：</p>
-<p><img src="assets/Ciqc1F_HVYCALlpoAAIr-7_6X50667.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F_HVYCALlpoAAIr-7_6X50667.png" alt="png" /></p>
 <p>当 bitmap 分成成功后，PoolSubpage 会将可用节点的个数 numAvail 减 1，当 numAvail 降为 0 时，表示 PoolSubpage 已经没有可分配的内存块，此时需要从 PoolArena 中 tinySubpagePools[1] 的双向链表中删除。</p>
 <p>至此，整个 PoolChunk 中 Subpage 的内存分配过程已经完成了，可见 PoolChunk 的伙伴算法几乎贯穿了整个流程，位图 bitmap 的设计也是非常巧妙的，不仅节省了内存空间，而且加快了定位内存块的速度。</p>
 <h4>PoolThreadCache 的内存分配</h4>

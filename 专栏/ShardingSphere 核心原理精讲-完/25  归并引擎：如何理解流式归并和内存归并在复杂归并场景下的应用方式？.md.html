@@ -213,7 +213,7 @@ function hide_canvas() {
 </code></pre>
 <p>显然，上述 SQL 的分组项与排序项完全一致，都是用到了 task_name 列，所以取得的数据是连续的。这样，分组所需的数据全部存在于各个数据结果集的当前游标所指向的数据值，因此可以采用流式归并。</p>
 <p>如下图所示，我们在每个 health_task 结果集中，根据 task_name 进行了排序：</p>
-<p><img src="assets/CgqCHl9V6UOALvzxAAB7G9wGDzY482.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9V6UOALvzxAAB7G9wGDzY482.png" alt="png" /></p>
 <p>我们先来看一些代码的初始化工作，回到 DQLMergeEngine，找到用于分组归并的 getGroupByMergedResult 方法，如下所示：</p>
 <pre><code>private MergedResult getGroupByMergedResult(final Map&lt;String, Integer&gt; columnLabelIndexMap) throws SQLException {
           return selectSQLStatementContext.isSameGroupByAndOrderByItems()
@@ -229,13 +229,13 @@ function hide_canvas() {
 </ul>
 <p>这样当进行第一次 next 调用时，排在队列首位的 health_task0 将会被弹出队列，并且将分组值同为“task1”其他结果集中的数据一同弹出队列。然后，在获取了所有的 task_name 为“task1”的 health_point 之后，我们进行了累加操作。</p>
 <p>所以在第一次 next 调用结束后，取出的结果集是 <strong>“task1”</strong> 的分数总和，即 46+43+40=129，如下图所示：</p>
-<p><img src="assets/CgqCHl9V6V6AO3mBAAB_3I9Nrm8196.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9V6V6AO3mBAAB_3I9Nrm8196.png" alt="png" /></p>
 <ul>
 <li><strong>第二次 next 调用</strong></li>
 </ul>
 <p>与此同时，所有数据结果集中的游标都将下移至“task1”的下一个不同的数据值，并且根据数据结果集当前游标指向的值进行重排序。在上图中，我们看到第二个“task2”同时存在于 health_task0 和 health_task1 中，这样包含名字为“task2”的相关数据结果集则排在的队列的前列。</p>
 <p>当再次执行 next 调用时，我们获取了 <strong>“task2”</strong> 的分数并进行了累加，即 42+50=92，如下图中所示：</p>
-<p><img src="assets/Ciqc1F9V8tmAFpx-AAB_pY0rk9I059.png" alt="Lark20200907-164326.png" /></p>
+<p><img src="assets/Ciqc1F9V8tmAFpx-AAB_pY0rk9I059.png" alt="png" /></p>
 <p>对于接下去的 next 方法，我们也是采用类似的处理机制，分别找到这三种 health_task 表中的“task3”“task4”“task5”等数据记录，并依次类推。</p>
 <p>有了对流式分组归并的感性认识之后，让我们回到源代码。我们先来看代表结果的 GroupByStreamMergedResult，我们发现 GroupByStreamMergedResult 实际上是继承了上一课时中介绍的用于排序归并的 OrderByStreamMergedResult，因此也用到了前面介绍的优先级队列 PriorityQueue 和 OrderByValue 对象。</p>
 <p>但考虑到需要保存一些中间变量以管理运行时状态，GroupByStreamMergedResult 中添加了如下所示的代表当前结果记录的 currentRow 和代表当前分组值的 currentGroupByValues 变量：</p>

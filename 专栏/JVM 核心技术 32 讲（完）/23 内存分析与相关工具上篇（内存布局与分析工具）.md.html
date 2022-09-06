@@ -195,7 +195,7 @@ function hide_canvas() {
 <p>请思考一个问题： 一个对象具有 100 个属性，与 100 个对象每个具有 1 个属性，哪个占用的内存空间更大？</p>
 </blockquote>
 <p>为了回答这个问题，我们来看看 JVM 怎么表示一个对象：</p>
-<p><img src="assets/918dfb60-6ea2-11ea-97af-c3b20af12573" alt="742441.png" /></p>
+<p><img src="assets/918dfb60-6ea2-11ea-97af-c3b20af12573" alt="png" /></p>
 <p><strong>说明</strong></p>
 <ul>
 <li>alignment（外部对齐）：比如 8 字节的数据类型 long，在内存中的起始地址必须是 8 字节的整数倍。</li>
@@ -484,16 +484,16 @@ public class ClearRequestCacheFilter implements Filter{
 </code></pre>
 <p>双击打开 MemoryAnalyzer.exe，打开 MAT 分析工具，选择菜单 File –&gt; Open File… 选择对应的 dump 文件。</p>
 <p>选择 Leak Suspects Report 并确定，分析内存泄露方面的报告。</p>
-<p><img src="assets/fed3ce00-6eae-11ea-83c3-675e02f948ee" alt="bd3d81d4-d928-4081-a2f7-96c11de76178.png" /></p>
+<p><img src="assets/fed3ce00-6eae-11ea-83c3-675e02f948ee" alt="png" /></p>
 <p><strong>3. 内存报告</strong></p>
 <p>然后等待，分析完成后，汇总信息如下：</p>
-<p><img src="assets/7bc10970-6f1b-11ea-ab1a-832c54b4f266" alt="07acbdb7-0c09-40a5-b2c3-e7621a36870f.png" /></p>
+<p><img src="assets/7bc10970-6f1b-11ea-ab1a-832c54b4f266" alt="png" /></p>
 <p>分析报告显示，占用内存最大的问题根源 1：</p>
-<p><img src="assets/1c41ade0-6eaf-11ea-83c3-675e02f948ee" alt="345818b9-9323-4025-b23a-8f279a99eb84.png" /></p>
+<p><img src="assets/1c41ade0-6eaf-11ea-83c3-675e02f948ee" alt="png" /></p>
 <p>占用内存最大的问题根源 2：</p>
-<p><img src="assets/249ca800-6eaf-11ea-9d5e-29b50a74a9eb" alt="07bbe993-5139-416a-9e6d-980131b649bf.png" /></p>
+<p><img src="assets/249ca800-6eaf-11ea-9d5e-29b50a74a9eb" alt="png" /></p>
 <p>占用内存最大的问题根源 3：</p>
-<p><img src="assets/2dd61b40-6eaf-11ea-a6e5-c1244b77f602" alt="7308f1b5-35aa-43e0-bbb4-05cb2e3131be.png" /></p>
+<p><img src="assets/2dd61b40-6eaf-11ea-a6e5-c1244b77f602" alt="png" /></p>
 <p>可以看到，总的内存占用才 2GB 左右。问题根源 1 和根源 2，每个占用 800MB，问题很可能就在他们身上。</p>
 <p>当然，根源 3 也有一定的参考价值，表明这时候有很多 JDBC 操作。</p>
 <p>查看问题根源 1，其说明信息如下：</p>
@@ -532,12 +532,12 @@ http-nio-8086-exec-8
 <p>当然，还可以分析这个根源下持有的各个类的对象数量。</p>
 <p>点击根源 1 说明信息下面的 <code>Details »</code> 链接，进入详情页面。</p>
 <p>查看其中的 “Accumulated Objects in Dominator Tree”：</p>
-<p><img src="assets/5ef3a760-6eaf-11ea-a6e5-c1244b77f602" alt="b5ff6319-a5d9-426f-99ef-19bd100fd80a.png" /></p>
+<p><img src="assets/5ef3a760-6eaf-11ea-a6e5-c1244b77f602" alt="png" /></p>
 <p>可以看到占用内存最多的是 2 个 ArrayList 对象。</p>
 <p>鼠标左键点击第一个 ArrayList 对象，在弹出的菜单中选择 Show objects by class –&gt; by outgoing references。</p>
-<p><img src="assets/6e41a730-6eaf-11ea-9d98-f7fceb2428d3" alt="6dbbb72d-ec2b-485f-bc8e-9de044b21b7d.png" /></p>
+<p><img src="assets/6e41a730-6eaf-11ea-9d98-f7fceb2428d3" alt="png" /></p>
 <p>打开 class_references 标签页：</p>
-<p><img src="assets/767c2100-6eaf-11ea-97af-c3b20af12573" alt="28fe37ed-36df-482a-bc58-231c9552638d.png" /></p>
+<p><img src="assets/767c2100-6eaf-11ea-97af-c3b20af12573" alt="png" /></p>
 <p>展开后发现 PO 类对象有 113 万个。加载的确实有点多，直接占用 170MB 内存（每个对象约 150 字节）。</p>
 <p>事实上，这是将批处理任务，放到实时的请求中进行计算，导致的问题。</p>
 <p>MAT 还提供了其他信息，都可以点开看看，也可以为我们诊断问题提供一些依据。</p>

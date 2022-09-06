@@ -577,7 +577,7 @@ function hide_canvas() {
 <li>如果某个指针在节点node的左右相邻key分别是keyi和keyi+1且不为null，则其指向节点的所有key小于v(keyi+1)且大于v(keyi)。</li>
 </ol>
 <p>B-Tree中的每个节点根据实际情况可以包含大量的关键字信息和分支，例：</p>
-<p><img src="assets/90dffd20-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="enter image description here" /></p>
+<p><img src="assets/90dffd20-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="png" /></p>
 <p>每个节点占用一个盘块的磁盘空间，一个节点上有两个升序排序的关键字和三个指向子树根节点的指针，指针存储的是子节点所在磁盘块的地址。两个关键词划分成的三个范围域对应三个指针指向的子树的数据的范围域。以根节点为例，关键字为17和35，P1指针指向的子树的数据范围为小于17，P2指针指向的子树的数据范围为17~35，P3指针指向的子树的数据范围为大于35。</p>
 <p>模拟查找关键字29的过程：</p>
 <ol>
@@ -598,17 +598,17 @@ function hide_canvas() {
 <li>数据节点之间是有指针指向的</li>
 </ol>
 <p>由于B+Tree的非叶子节点只存储键值信息，假设每个磁盘块能存储4个键值及指针信息，则变成B+Tree后其结构如下图所示：</p>
-<p><img src="assets/a446b980-d70b-11e7-b220-5560d16c6b7b.jpg" alt="enter image description here" /></p>
+<p><img src="assets/a446b980-d70b-11e7-b220-5560d16c6b7b.jpg" alt="png" /></p>
 <p>通常在B+Tree上有两个头指针，一个指向根节点，另一个指向关键字最小的叶子节点，而且所有叶子节点（即数据节点）之间是一种链式环结构。因此可以对B+Tree进行两种查找运算：一种是对于主键的范围查找和分页查找，另一种是从根节点开始，进行随机查找。</p>
 <h4>8. Myisam中的B+Tree</h4>
 <p>Myisam引擎也是采用的B+Tree结构来作为索引结构。</p>
 <p>由于Myisam中的索引和数据分别存放在不同的文件，所以在索引树中的叶子节点中存的数据是该索引对应的数据记录的地址，由于数据与索引不在一起，所以Myisam是非聚簇索引。</p>
-<p><img src="assets/ceb83400-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="enter image description here" /></p>
+<p><img src="assets/ceb83400-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="png" /></p>
 <h4>9. InnoDB中的B+Tree</h4>
 <p>InnoDB是以ID为索引的数据存储。</p>
 <p>采用InnoDB引擎的数据存储文件有两个，一个定义文件，一个是数据文件。</p>
 <p>InnoDB通过B+Tree结构对ID建索引，然后在叶子节点中存储记录。</p>
-<p><img src="assets/f6c3f920-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="enter image description here" /></p>
+<p><img src="assets/f6c3f920-d70b-11e7-8164-fd1fda6a5e9f.jpg" alt="png" /></p>
 <p>若建索引的字段不是主键ID，则对该字段建索引，然后在叶子节点中存储的是该记录的主键，然后通过主键索引找到对应的记录。</p>
 <h3>MySQL的相关优化</h3>
 <h4>1. MySQL性能优化：组成、表的设计</h4>

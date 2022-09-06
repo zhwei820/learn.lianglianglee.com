@@ -316,7 +316,7 @@ function hide_canvas() {
 <p><strong>Protobuf（Google Protocol Buffers）是 Google 公司开发的一套灵活、高效、自动化的、用于对结构化数据进行序列化的协议</strong>。但相比于常用的 JSON 格式，Protobuf 有更高的转化效率，时间效率和空间效率都是 JSON 的 5 倍左右。Protobuf 可用于通信协议、数据存储等领域，它本身是语言无关、平台无关、可扩展的序列化结构数据格式。目前 Protobuf提供了 C++、Java、Python、Go 等多种语言的 API，gRPC 底层就是使用 Protobuf 实现的序列化。</p>
 <h3>dubbo-serialization</h3>
 <p>Dubbo 为了支持多种序列化算法，单独抽象了一层 Serialize 层，在整个 Dubbo 架构中处于最底层，对应的模块是 dubbo-serialization 模块。 dubbo-serialization 模块的结构如下图所示：</p>
-<p><img src="assets/Ciqc1F9gbIiAdyaqAAB4bHnToKs832.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9gbIiAdyaqAAB4bHnToKs832.png" alt="png" /></p>
 <p>dubbo-serialization-api 模块中定义了 Dubbo 序列化层的核心接口，其中最核心的是 Serialization 这个接口，它是一个扩展接口，被 @SPI 接口修饰，默认扩展实现是 Hessian2Serialization。Serialization 接口的具体实现如下：</p>
 <pre><code>@SPI(&quot;hessian2&quot;) // 被@SPI注解修饰，默认是使用hessian2序列化算法
 public interface Serialization {
@@ -335,7 +335,7 @@ public interface Serialization {
 }
 </code></pre>
 <p>Dubbo 提供了多个 Serialization 接口实现，用于接入各种各样的序列化算法，如下图所示：</p>
-<p><img src="assets/CgqCHl9gbJKAFOslAAFjEeB7nf0890.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9gbJKAFOslAAFjEeB7nf0890.png" alt="png" /></p>
 <p>这里我们<strong>以默认的 hessian2 序列化方式为例</strong>，介绍 Serialization 接口的实现以及其他相关实现。 Hessian2Serialization 实现如下所示：</p>
 <pre><code>public class Hessian2Serialization implements Serialization {
     public byte getContentTypeId() {
@@ -353,11 +353,11 @@ public interface Serialization {
 }
 </code></pre>
 <p>Hessian2Serialization 中的 serialize() 方法创建的 ObjectOutput 接口实现为 Hessian2ObjectOutput，继承关系如下图所示：</p>
-<p><img src="assets/CgqCHl9gbOiAG_1mAABH4c18z9c011.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9gbOiAG_1mAABH4c18z9c011.png" alt="png" /></p>
 <p>在 DataOutput 接口中定义了序列化 Java 中各种数据类型的相应方法，如下图所示，其中有序列化 boolean、short、int、long 等基础类型的方法，也有序列化 String、byte[] 的方法。</p>
-<p><img src="assets/Ciqc1F9gbO6AExKqAAB_Dm_zMt0793.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9gbO6AExKqAAB_Dm_zMt0793.png" alt="png" /></p>
 <p>ObjectOutput 接口继承了 DataOutput 接口，并在其基础之上，添加了序列化对象的功能，具体定义如下图所示，其中的 writeThrowable()、writeEvent() 和 writeAttachments() 方法都是调用 writeObject() 方法实现的。</p>
-<p><img src="assets/CgqCHl9gbPOATpsmAABH5ZuVc6E438.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9gbPOATpsmAABH5ZuVc6E438.png" alt="png" /></p>
 <p>Hessian2ObjectOutput 中会封装一个 Hessian2Output 对象，需要注意，这个对象是 ThreadLocal 的，与线程绑定。在 DataOutput 接口以及 ObjectOutput 接口中，序列化各类型数据的方法都会委托给 Hessian2Output 对象的相应方法完成，实现如下：</p>
 <pre><code>public class Hessian2ObjectOutput implements ObjectOutput {
     private static ThreadLocal&lt;Hessian2Output&gt; OUTPUT_TL = ThreadLocal.withInitial(() -&gt; {
@@ -378,7 +378,7 @@ public interface Serialization {
 }
 </code></pre>
 <p>Hessian2Serialization 中的 deserialize() 方法创建的 ObjectInput 接口实现为 Hessian2ObjectInput，继承关系如下所示：</p>
-<p><img src="assets/CgqCHl9gbQ6AXSDeAABIcO3u8aY906.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9gbQ6AXSDeAABIcO3u8aY906.png" alt="png" /></p>
 <p>Hessian2ObjectInput 具体的实现与 Hessian2ObjectOutput 类似：在 DataInput 接口中实现了反序列化各种类型的方法，在 ObjectInput 接口中提供了反序列化 Java 对象的功能，在 Hessian2ObjectInput 中会将所有反序列化的实现委托为 Hessian2Input。</p>
 <p>了解了 Dubbo Serialize 层的核心接口以及 Hessian2 序列化算法的接入方式之后，你就可以亲自动手，去阅读其他序列化算法对应模块的代码。</p>
 <h3>总结</h3>

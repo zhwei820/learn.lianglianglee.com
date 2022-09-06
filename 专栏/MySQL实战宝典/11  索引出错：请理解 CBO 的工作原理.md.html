@@ -202,7 +202,7 @@ function hide_canvas() {
 <p>在查询字段 o_custkey 时，理论上可以使用三个相关的索引：ORDERS_FK1、idx_custkey_orderdate、idx_custkey_orderdate_totalprice。<strong>那 MySQL 优化器是怎么从这三个索引中进行选择的呢？</strong></p>
 <p>在关系型数据库中，B+ 树索引只是存储的一种数据结构，具体怎么使用，还要依赖数据库的优化器，优化器决定了具体某一索引的选择，也就是常说的执行计划。</p>
 <p><strong>而优化器的选择是基于成本（cost），哪个索引的成本越低，优先使用哪个索引。</strong></p>
-<p><img src="assets/Cgp9HWCvUQGAR_xXAACOy0gME7Q765.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWCvUQGAR_xXAACOy0gME7Q765.png" alt="png" /></p>
 <p>MySQL 执行过程</p>
 <p>如上图所示，MySQL 数据库由 Server 层和 Engine 层组成：</p>
 <ul>
@@ -217,7 +217,7 @@ function hide_canvas() {
 <p>其中，CPU Cost 表示计算的开销，比如索引键值的比较、记录值的比较、结果集的排序……这些操作都在 Server 层完成；</p>
 <p>IO Cost 表示引擎层 IO 的开销，MySQL 8.0 可以通过区分一张表的数据是否在内存中，分别计算读取内存 IO 开销以及读取磁盘 IO 的开销。</p>
 <p>数据库 mysql 下的表 server_cost、engine_cost 则记录了对于各种成本的计算，如：</p>
-<p><img src="assets/CioPOWCvUQuALARKAASaAs1r1GE632.png" alt="image" /></p>
+<p><img src="assets/CioPOWCvUQuALARKAASaAs1r1GE632.png" alt="png" /></p>
 <p>表 server_cost 记录了 Server 层优化器各种操作的成本，这里面包括了所有 CPU Cost，其具体含义如下。</p>
 <ul>
 <li>disk_temptable_create_cost：创建磁盘临时表的成本，默认为20。</li>

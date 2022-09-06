@@ -181,10 +181,10 @@ function hide_canvas() {
 <h3>组合索引</h3>
 <p>组合索引（Compound Index）是指由多个列所组合而成的 B+树索引，这和我们之前介绍的B+ 树索引的原理完全一样，只是之前是对一个列排序，现在是对多个列排序。</p>
 <p>组合索引既可以是主键索引，也可以是二级索引，下图显示的是一个二级组合索引：</p>
-<p><img src="assets/CioPOWCuFduAFMnmAABxfj6SZnc858.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWCuFduAFMnmAABxfj6SZnc858.png" alt="png" /></p>
 <p>组合索引的 B+ 树结构</p>
 <p>从上图可以看到，组合索引只是排序的键值从 1 个变成了多个，本质还是一颗 B+ 树索引。但是你一定要意识到（a，b）和（b，a）这样的组合索引，其排序结果是完全不一样的。而索引的字段变多了，设计上更容易出问题，如：</p>
-<p><img src="assets/Cgp9HWCuFfiAO9wZAABSJmrYlpE547.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWCuFfiAO9wZAABSJmrYlpE547.png" alt="png" /></p>
 <p>对组合索引（a，b）来说，因为其对列 a、b 做了排序，所以它可以对下面两个查询进行优化：</p>
 <pre><code>SELECT * FROM table WHERE a = ?
 SELECT * FROM table WHERE a = ？ AND b = ？
@@ -204,7 +204,7 @@ SELECT * FROM table WHERE a = ？ AND b = ？
 <h4>避免额外排序</h4>
 <p>在真实的业务场景中，你会遇到根据某个列进行查询，然后按照时间排序的方式逆序展示。</p>
 <p>比如在微博业务中，用户的微博展示的就是根据用户 ID 查询出用户订阅的微博，然后根据时间逆序展示；又比如在电商业务中，用户订单详情页就是根据用户 ID 查询出用户的订单数据，然后根据购买时间进行逆序展示。</p>
-<p><img src="assets/Cgp9HWCuFgmAZmwXAARQXltKg0Y715.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWCuFgmAZmwXAARQXltKg0Y715.png" alt="png" /></p>
 <p>上图是 05 节中的淘宝订单详情，根据时间进行了逆序展示。</p>
 <p>接着我们用 TPC-H 定义的一组测试表，来展示索引相关示例的展示（TPC-H 定义的库请关注公众号 InsideMySQL，并回复 tpch，获得库表的下载链接）。</p>
 <p>TPC-H 是美国交易处理效能委员会( TPC：Transaction Processing Performance Council ) 组织制定的，用来模拟决策支持类应用的一个测试集的规范定义，其模拟的就是一个类似电商业务，看一下其对核心业务表 rders 的设计：</p>

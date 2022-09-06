@@ -326,11 +326,11 @@ spec:
 </code></pre>
 <p>这样的灰度发布效果应用场景是有限的，往往企业内部的应用发布的时候包含十几二十个组件，这些组建直接还有很多网关进行细分，如何有效给细分组件的流量管理才是现在的迫切需求。这种流量策略按照当前的架构方向，是在往微服务网格方向发展，比较出名的开源框架就是 Istio。笔者认为使用服务网格来实现应用的流量观测和引导才更具弹性。</p>
 <p>一谈到 Istio，相信大家一定部署过 Bookinfo 项目，其中最体现业务价值的就是业务流量的标记和切换：</p>
-<p><img src="assets/54f84c90-d65e-11ea-aefa-4fa1d18dcf14.jpg" alt="bookinfo" /></p>
+<p><img src="assets/54f84c90-d65e-11ea-aefa-4fa1d18dcf14.jpg" alt="png" /></p>
 <p>Istio 通过控制 Header 实现蓝绿示例：</p>
-<p><img src="assets/605f0010-d65e-11ea-b558-cd3c105f83ae.jpg" alt="blue green" /></p>
+<p><img src="assets/605f0010-d65e-11ea-b558-cd3c105f83ae.jpg" alt="png" /></p>
 <p>Istio 通过更改 Header 值实现灰度发布示例：</p>
-<p><img src="assets/73f16050-d65e-11ea-8a75-23aebf65f18c.jpg" alt="canary deployment" /></p>
+<p><img src="assets/73f16050-d65e-11ea-8a75-23aebf65f18c.jpg" alt="png" /></p>
 <p><strong>笔者建议</strong>：使用服务网格来实现应用流量的切换是比较自然的设计实现方式，它所依赖的底层技术确实就是 Kubernetes 的经典滚动更新技术。但是比原生 Kubernetes 更好的地方是，服务网格在通过 Header 引导流量的特性中，还加入了熔断、黑名单、限流等更高级的应用保障特性，值得使用。</p>
 <h3>练习-4：配置合理的网络方案并让流量数据可视化</h3>
 <p>应用在部署到 Kubernetes 集群后，我们最急手的需求就是业务数据的可视化。当前，仍然有很多用户在纠结使用哪种网络方案是最好的，从笔者来看，这个选型是需要依据你的硬件网络基础设施来决定的。并且当前主流的容器网络插件的损耗非常接近原生网络，早期用户网络的糟糕体验已经一去不复返。</p>

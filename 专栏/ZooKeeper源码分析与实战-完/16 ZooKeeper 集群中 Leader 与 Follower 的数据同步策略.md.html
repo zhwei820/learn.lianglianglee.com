@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>同步条件是指在 ZooKeeper 集群中何时触发数据同步的机制。与上一课时中 Leader 选举首先要判断集群中 Leader 服务器是否存在不同，<strong>要想进行集群中的数据同步，首先需要 ZooKeeper 集群中存在用来进行数据同步的 Learning 服务器。</strong> 也就是说，当 ZooKeeper 集群中选举出 Leader 节点后，除了被选举为 Leader 的服务器，其他服务器都作为 Learnning 服务器，并向 Leader 服务器注册。之后系统就进入到数据同步的过程中。</p>
 <h4>同步过程</h4>
 <p>在数据同步的过程中，ZooKeeper 集群的主要工作就是将那些没有在 Learnning 服务器上执行过的事务性请求同步到 Learning 服务器上。<strong>这里请你注意，事务性的会话请求会被同步，而像数据节点的查询等非事务性请求则不在数据同步的操作范围内。</strong> 而在具体实现数据同步的时候，ZooKeeper 集群又提供四种同步方式，如下图所示：</p>
-<p><img src="assets/CgqCHl7zLYaASBk3AAA-I033owc988.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7zLYaASBk3AAA-I033owc988.png" alt="png" /></p>
 <h4>DIFF 同步</h4>
 <p>DIFF 同步即差异化同步的方式，在 ZooKeeper 集群中，Leader 服务器探测到 Learnning 服务器的存在后，首先会向该 Learnning 服务器发送一个 DIFF 不同指令。在收到该条指令后，Learnning 服务器会进行差异化方式的数据同步操作。在这个过程中，Leader 服务器会将一些 Proposal 发送给 Learnning 服务器。之后 Learnning 服务器在接收到来自 Leader 服务器的 commit 命令后执行数据持久化的操作。</p>
 <h4>TRUNC+DIFF 同步</h4>

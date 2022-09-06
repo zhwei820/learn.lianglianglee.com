@@ -290,20 +290,20 @@ madvise(mymemory, size, MADV_HUGEPAGE);
 <p><strong>搜索树模拟 LRU</strong></p>
 <p>最后我再介绍一个巧妙的方法——用搜索树模拟 LRU。</p>
 <p>对于一个 8 路组相联缓存，这个方法需要 8-1 = 7bit 去构造一个树。如下图所示：</p>
-<p><img src="assets/CgqCHl_cbWiANygpAAChKW14Ffw720.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl_cbWiANygpAAChKW14Ffw720.png" alt="png" /></p>
 <p>8 个缓存条目用 7 个节点控制，每个节点是 1 位。0 代表节点指向左边，1 代表节点指向右边。</p>
 <p>初始化的时候，所有节点都指向左边，如下图所示：</p>
-<p><img src="assets/CgpVE1_cbZaAOEVvAACaMkDXYtc665.png" alt="2.png" /></p>
+<p><img src="assets/CgpVE1_cbZaAOEVvAACaMkDXYtc665.png" alt="png" /></p>
 <p>接下来每次写入，会从根节点开始寻找，顺着箭头方向（0 向左，1 向右），找到下一个更新方向。比如现在图中下一个要更新的位置是 0。更新完成后，所有路径上的节点箭头都会反转，也就是 0 变成 1，1 变成 0。</p>
-<p><img src="assets/CgpVE1_cbbmAOIQDAACdnlwZGVE658.png" alt="3.png" /></p>
+<p><img src="assets/CgpVE1_cbbmAOIQDAACdnlwZGVE658.png" alt="png" /></p>
 <p>上图是<code>read a</code>后的结果，之前路径上所有的箭头都被反转，现在看到下一个位置是 4，我用橘黄色进行了标记。</p>
-<p><img src="assets/Ciqc1F_gP2WAScBQAACgqJrvexo168.png" alt="Lark20201221-142046.png" /></p>
+<p><img src="assets/Ciqc1F_gP2WAScBQAACgqJrvexo168.png" alt="png" /></p>
 <p>上图是发生操作<code>read b</code>之后的结果，现在橘黄色可以更新的位置是 2。</p>
-<p><img src="assets/CgqCHl_cbg-ABn7-AACe6aOsslk632.png" alt="5.png" /></p>
+<p><img src="assets/CgqCHl_cbg-ABn7-AACe6aOsslk632.png" alt="png" /></p>
 <p>上图是读取 c 后的情况。后面我不一一绘出，假设后面的读取顺序是<code>d,e,f,g,h</code>，那么缓存会变成如下图所示的结果：</p>
-<p><img src="assets/CgqCHl_cbj-ATxdgAACsKCmX118121.png" alt="6.png" /></p>
+<p><img src="assets/CgqCHl_cbj-ATxdgAACsKCmX118121.png" alt="png" /></p>
 <p>这个时候用户如果读取了已经存在的值，比如说<code>c</code>，那么指向<code>c</code>那路箭头会被翻转，下图是<code>read c</code>的结果：</p>
-<p><img src="assets/CgpVE1_cbnmAMnbJAACm2EGytKM521.png" alt="8.png" /></p>
+<p><img src="assets/CgpVE1_cbnmAMnbJAACm2EGytKM521.png" alt="png" /></p>
 <p>这个结果并没有改变下一个更新的位置，但是翻转了指向 c 的路径。 如果要读取<code>x</code>，那么这个时候就会覆盖橘黄色的位置。</p>
 <p><strong>因此，本质上这种树状的方式，其实是在构造一种先入先出的顺序。任何一个节点箭头指向的子节点，应该被先淘汰（最早被使用）</strong>。</p>
 <p>这是一个我个人觉得非常天才的设计，因为如果在这个地方构造一个队列，然后每次都把命中的元素的当前位置移动到队列尾部。就至少需要构造一个链表，而链表的每个节点都至少要有当前的值和 next 指针，这就需要创建复杂的数据结构。在内存中创建复杂的数据结构轻而易举，但是在 CPU 中就非常困难。 所以这种基于 bit-tree，就轻松地解决了这个问题。当然，这是一个模拟 LRU 的情况，你还是可以构造出违反 LRU 缓存的顺序。</p>
@@ -313,7 +313,7 @@ madvise(mymemory, size, MADV_HUGEPAGE);
 <p><strong>【问题】如果内存太大了，无论是标记还是清除速度都很慢，执行一次完整的 GC 速度下降该如何处理</strong>？</p>
 <p>【<strong>解析</strong>】当应用申请到的内存很大的时候，如果其中内部对象太多。只简单划分几个生代，每个生代占用的内存都很大，这个时候使用 GC 性能就会很糟糕。</p>
 <p>一种参考的解决方案就是将内存划分成很多个小块，类似在应用内部再做一个虚拟内存层。 每个小块可能执行不同的内存回收策略。</p>
-<p><img src="assets/Cip5yF_cbrCAZqANAABmyPzf-Zs709.png" alt="9.png" /></p>
+<p><img src="assets/Cip5yF_cbrCAZqANAABmyPzf-Zs709.png" alt="png" /></p>
 <p>上图中绿色、蓝色和橘黄色代表 3 种不同的区域。绿色区域中对象存活概率最低（类似 Java 的 Eden），蓝色生存概率上升，橘黄色最高（类似 Java 的老生代）。灰色区域代表应用从操作系统中已经申请了，但尚未使用的内存。通过这种划分方法，每个区域中进行 GC 的开销都大大减少。Java 目前默认的内存回收器 G1，就是采用上面的策略。</p>
 <h3>总结</h3>
 <p>这个模块我们学习了内存管理。<strong>通过内存管理的学习，我希望你开始理解虚拟化的价值，内存管理部分的虚拟化，是一种应对资源稀缺、增加资源流动性的手段</strong>（听起来那么像银行印的货币）。</p>

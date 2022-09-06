@@ -221,7 +221,7 @@ function hide_canvas() {
 </ul>
 <h4>论述 ID3 建模的过程 案例 1</h4>
 <p>假设有以下数据集，每一行是一个样本，每一列一个特征变量，最后一列是样本的真实类别。试着去建立 ID3 决策树。
-<img src="assets/Ciqc1F_yin-AM7DrAABm_gQS4Ss061.png" alt="WechatIMG1513.png" />
+<img src="assets/Ciqc1F_yin-AM7DrAABm_gQS4Ss061.png" alt="png" />
 <strong>1.首先，计算信息熵。</strong></p>
 <p>数据集中，类别为“1”的样本有 1 个，类别为“0”的样本有 3 个；这样，类别“1”出现的概率就是 1/4，类别“0”出现的概率就是 3/4。</p>
 <p>根据公式可以知道，信息熵为
@@ -248,29 +248,29 @@ function hide_canvas() {
 <p>也就是没有信息增益，等同于是个废话。从数据中也能看出，第三个变量的值对于所有数据样本而言都是一样的，可见它是没有任何区分度的。</p>
 <p><strong>3.变量分裂与决策树</strong></p>
 <p>基于这个过程，我们选取出信息增益最大的变量为第一个变量，标记为 x1（但若信息增益都一样，随机选择一个就可以了）。根据 x1 以及 x1 可能的取值，可以把决策树暂时建立如下图所示。</p>
-<p><img src="assets/CgpVE1_lymqAcPlvAAA5o6I0_vQ040.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_lymqAcPlvAAA5o6I0_vQ040.png" alt="png" /></p>
 <p>根据当前的决策树，可以把原数据集切分为两个子集，分别是 D1 和 D2。</p>
 <p><strong>X</strong>1**= 0 时，子数据集是 D**1</p>
-<p><img src="assets/Ciqc1F_q5tKAO7TMAABDmYKSNK0106.png" alt="Lark20201229-160955.png" />
+<p><img src="assets/Ciqc1F_q5tKAO7TMAABDmYKSNK0106.png" alt="png" />
 在 D1 中，所有样本的类别标签都是“0”，满足了决策树建模的终止条件，则直接输出类别标签“0”，决策树更新为</p>
-<p><img src="assets/Cip5yF_lynCAPm2iAAAl-o0va9M449.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yF_lynCAPm2iAAAl-o0va9M449.png" alt="png" /></p>
 <p><strong>X</strong>1**= 1 时，子数据集是 D**2</p>
-<p><img src="assets/Ciqc1F_q5uOAZn6sAAA_T_aOZE4543.png" alt="Lark20201229-161001.png" /></p>
+<p><img src="assets/Ciqc1F_q5uOAZn6sAAA_T_aOZE4543.png" alt="png" /></p>
 <p>对于 D2 而言，还需要重复计算熵和信息增益。在D2中，类别“1”和类别“0”各有一个样本，即出现的概率都是 1/2，因此熵为
-<img src="assets/CgpVE1_q5yGAHP4zAAAogkrcJ6k145.jpg" alt="111.jpg" /></p>
+<img src="assets/CgpVE1_q5yGAHP4zAAAogkrcJ6k145.jpg" alt="png" /></p>
 <ul>
 <li>而对于三个变量而言，第一个变量和第三个变量的信息增益都是零。这是因为，两个样本在第一个变量和第三个变量的值是相等的，没有任何信息量；</li>
 <li>对于第二个变量而言，条件熵为 H(y|x2) = (1/2)×0 + (1/2)×0 = 0，信息增益为 g(x2,y) = H(p) - H(y|x2) = 1。</li>
 </ul>
 <p>因此，应该采用第二个变量进行分裂，则有下面的决策树</p>
-<p><img src="assets/Cip5yF_lynmAefPmAABCjJ8vz-U348.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cip5yF_lynmAefPmAABCjJ8vz-U348.png" alt="png" /></p>
 <p>基于这个决策树，如果 x2 为 0，则得到子集 D3；如果 x2 为 1，则得到子集 D4。</p>
 <ul>
 <li>同时，在 D3 中，只剩下 [1,0,1,0] 这条样本，直接输出类别标签“0”；</li>
 <li>在 D4 中，只剩下 [1,1,1,1] 这条样本，直接输出类别标签“1”。</li>
 </ul>
 <p>二者都满足了停止条件，这样决策树就建立完成了，结果如下：</p>
-<p><img src="assets/CgqCHl_lyoCACXjYAABFsFcIBrk020.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl_lyoCACXjYAABFsFcIBrk020.png" alt="png" /></p>
 <h4>论述 ID3 建模的过程 案例 2</h4>
 <p>我们再看一个数据集，如下所示，这也是上一讲中，逻辑回归没有建立出模型的非线性问题的数据集。</p>
 <blockquote>
@@ -280,28 +280,28 @@ function hide_canvas() {
 我们还是可以根据 ID3 决策树的流程来建立模型。</p>
 <p><strong>1.首先，计算信息熵</strong></p>
 <p>我们发现在数据集中，类别为“1”的样本有两个，类别为“0”的样本也有两个；这样，他们二者出现的概率就都是 1/2。</p>
-<p><img src="assets/CgqCHl_q6ISAWT1LAABnxl4UPqE890.png" alt="9.png" /></p>
+<p><img src="assets/CgqCHl_q6ISAWT1LAABnxl4UPqE890.png" alt="png" /></p>
 <p><strong>2.接着，对每个变量计算条件熵和信息增益</strong></p>
 <p>对于第一个变量 x1 的值有 1 和 0 两个可能性，出现的概率都是 2/4。</p>
-<p><img src="assets/Cip5yF_q6QWASKkQAAGB8GDbqqE903.png" alt="10.png" /></p>
+<p><img src="assets/Cip5yF_q6QWASKkQAAGB8GDbqqE903.png" alt="png" /></p>
 <p><strong>3.变量分裂与决策树</strong></p>
 <p>当信息增益完全一致的时候，我们随机选择一个作为分裂变量。假设选 x1，则根据 x1 的不同，可以得到下面的决策树。</p>
-<p><img src="assets/Ciqc1F_lyouAEIX-AAAjk2gZiFs803.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F_lyouAEIX-AAAjk2gZiFs803.png" alt="png" /></p>
 <p>根据当前的决策树，可以将数据集分割为 D1 和 D2 两部分，并建立决策树。</p>
 <p><strong>X1 为 0 时，子数据集为 D1</strong></p>
-<p><img src="assets/CgqCHl_q6USARgYZAABBkd-FmD0667.png" alt="Lark20201229-161007.png" /></p>
-<p><img src="assets/Ciqc1F_q6VaAIHAuAAA4MCT2o0g658.png" alt="Lark20201229-161010.png" /></p>
+<p><img src="assets/CgqCHl_q6USARgYZAABBkd-FmD0667.png" alt="png" /></p>
+<p><img src="assets/Ciqc1F_q6VaAIHAuAAA4MCT2o0g658.png" alt="png" /></p>
 <ul>
 <li>不难发现，在 D1 中，第一个变量 x1 和第三个变量 x3 的信息增益都是 0；</li>
 <li></li>
 </ul>
-<p><img src="assets/Ciqc1F_q7EWARz2DAAA7OEkAWV8268.png" alt="Lark20201229-164322.png" /></p>
+<p><img src="assets/Ciqc1F_q7EWARz2DAAA7OEkAWV8268.png" alt="png" /></p>
 <p>可见，需要用 x2 对 D1 进行拆分，这样就得到了下面的决策树。</p>
-<p><img src="assets/CgqCHl_lypOAA_3YAABDonV9NLU584.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl_lypOAA_3YAABDonV9NLU584.png" alt="png" /></p>
 <p><strong>x</strong>1<strong>为 1 时，子数据集是 D</strong>2</p>
-<p><img src="assets/CgpVE1_q6ayAOUvvAABBfCLOlU8611.png" alt="Lark20201229-161012.png" /></p>
+<p><img src="assets/CgpVE1_q6ayAOUvvAABBfCLOlU8611.png" alt="png" /></p>
 <p>对于 D2 子集，也用同样的方法，我们直接给出建树的结果如下：</p>
-<p><img src="assets/CgpVE1_lypqAGGukAABa0m8jZLc584.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgpVE1_lypqAGGukAABa0m8jZLc584.png" alt="png" /></p>
 <p>所剩特征为 0，分裂结束。</p>
 <h4>ID3 决策树的代码实现</h4>
 <p>对于这种像 ID3 这种成型的算法而言，已经有很多被封装好的工具包（如 sklearn）可以直接调用，并不需要自己来自主开发。</p>

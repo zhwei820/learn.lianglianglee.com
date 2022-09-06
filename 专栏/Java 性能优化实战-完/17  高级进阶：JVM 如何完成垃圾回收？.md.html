@@ -165,7 +165,7 @@ function hide_canvas() {
 <p><strong>另外，本课时的知识点，全部是面试的高频题目，这也从侧面看出 JVM 理论知识的重要性。</strong></p>
 <h3>JVM 内存区域划分</h3>
 <p>学习 JVM，内存区域划分是绕不过去的知识点，这几乎是面试必考的题目。如下图所示，内存区域划分主要包括堆、Java 虚拟机栈、程序计数器、本地方法栈、元空间和直接内存这五部分，我将逐一介绍。</p>
-<p><img src="assets/Ciqc1F9V1s-ACFuJAACTNmJefTc741.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9V1s-ACFuJAACTNmJefTc741.png" alt="png" /></p>
 <p>JVM 内存区域划分图</p>
 <h4>1.堆</h4>
 <p>如 JVM 内存区域划分图所示，JVM 中占用内存最大的区域，就是堆（Heap），我们平常编码创建的对象，大多数是在这上面分配的，也是垃圾回收器回收的主要目标区域。</p>
@@ -173,7 +173,7 @@ function hide_canvas() {
 <p>JVM 的解释过程是基于栈的，程序的执行过程也就是入栈出栈的过程，这也是 Java 虚拟机栈这个名称的由来。</p>
 <p>Java 虚拟机栈是和线程相关的。当你启动一个新的线程，Java 就会为它分配一个虚拟机栈，之后所有这个线程的运行，都会在栈里进行。</p>
 <p>Java 虚拟机栈，从方法入栈到具体的字节码执行，其实是一个双层的栈结构，也就是栈里面还包含栈。</p>
-<p><img src="assets/CgqCHl9V1tiACYPGAACVVpU1HCY374.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9V1tiACYPGAACVVpU1HCY374.png" alt="png" /></p>
 <p>Java 虚拟机栈图</p>
 <p>如上图，Java 虚拟机栈里的每一个元素，叫作栈帧。每一个栈帧，包含四个区域： 局部变量表 、操作数栈、动态连接和返回地址。</p>
 <p>其中，<strong>操作数栈</strong>就是具体的字节码指令所操作的栈区域，考虑到下面这段代码：</p>
@@ -256,7 +256,7 @@ function hide_canvas() {
 </ul>
 <p>这个假设我们称之为弱代假设（weak generational hypothesis）。</p>
 <p>如下图，分代垃圾回收器会在逻辑上，把堆空间分为两部分：年轻代（Young generation）和老年代（Old generation）。</p>
-<p><img src="assets/CgqCHl9V1xiADnRJAAGDq44CQZc346.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9V1xiADnRJAAGDq44CQZc346.png" alt="png" /></p>
 <p>堆空间划分图：年轻代和老年代</p>
 <h4>1.年轻代</h4>
 <p>年轻代中又分为一个伊甸园空间（Eden），两个幸存者空间（Survivor）。对象会首先在年轻代中的 Eden 区进行分配，当 Eden 区分配满的时候，就会触发年轻代的 GC。</p>
@@ -282,7 +282,7 @@ function hide_canvas() {
 <p>有的垃圾回收算法，并不要求 age 必须达到 15 才能晋升到老年代，它会使用一些动态的计算方法。比如 G1，通过 TargetSurvivorRatio 这个参数，动态更改对象提升的阈值。</p>
 <p>老年代的空间一般比较大，回收的时间更长，当老年代的空间被占满了，将发生老年代垃圾回收。</p>
 <p>目前，被广泛使用的是 G1 垃圾回收器。G1 的目标是用来干掉 CMS 的，它同样有年轻代和老年代的概念。不过，G1 把整个堆切成了很多份，把每一份当作一个小目标，部分上目标很容易达成。</p>
-<p><img src="assets/CgqCHl9V1y-APldqAABR3cE-qV0698.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl9V1y-APldqAABR3cE-qV0698.png" alt="png" /></p>
 <p>如上图，G1 也是有 Eden 区和 Survivor 区的概念的，只不过它们在内存上不是连续的，而是由一小份一小份组成的。G1 在进行垃圾回收的时候，将会根据最大停顿时间（MaxGCPauseMillis）设置的值，动态地选取部分小堆区进行垃圾回收。</p>
 <p>G1 的配置非常简单，我们只需要配置三个参数，一般就可以获取优异的性能：</p>
 <p>① MaxGCPauseMillis 设置最大停顿的预定目标，G1 垃圾回收器会自动调整，选取特定的小堆区；</p>

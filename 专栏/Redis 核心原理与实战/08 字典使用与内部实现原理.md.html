@@ -306,7 +306,7 @@ public class HashExample {
 } dictEntry;
 </code></pre>
 <p>字典类型的数据结构，如下图所示：</p>
-<p><img src="assets/2020-02-28-031217.png" alt="Redis-HashType-02.png" /></p>
+<p><img src="assets/2020-02-28-031217.png" alt="png" /></p>
 <p>通常情况下字典类型会使用数组的方式来存储相关的数据，但发生哈希冲突时才会使用链表的结构来存储数据。</p>
 <h3>4.哈希冲突</h3>
 <p>字典类型的存储流程是先将键值进行 Hash 计算，得到存储键值对应的数组索引，再根据数组索引进行数据存储，但在小概率事件下可能会出完全不相同的键值进行 Hash 计算之后，得到相同的 Hash 值，这种情况我们称之为<strong>哈希冲突</strong>。</p>
@@ -317,7 +317,7 @@ public class HashExample {
 <li>判断元素和查找的键值是否相等，相等则成功返回数据，否则需要查看 next 指针是否还有对应其他元素，如果没有，则返回 null，如果有的话，重复此步骤。</li>
 </ul>
 <p>键值查询流程，如下图所示：</p>
-<p><img src="assets/2020-02-28-031218.png" alt="Redis-HashType-03.png" /></p>
+<p><img src="assets/2020-02-28-031218.png" alt="png" /></p>
 <h3>5.渐进式rehash</h3>
 <p>Redis 为了保证应用的高性能运行，提供了一个重要的机制——渐进式 rehash。 渐进式 rehash 是用来保证字典缩放效率的，也就是说在字典进行扩容或者缩容是会采取渐进式 rehash 的机制。</p>
 <h4>1）扩容</h4>

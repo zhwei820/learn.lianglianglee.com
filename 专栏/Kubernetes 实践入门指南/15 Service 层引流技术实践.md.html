@@ -217,9 +217,9 @@ spec:
 </code></pre>
 <p>对于以 hostNetwork 方式运行的 Pod 需要显式设置其 DNS 策略 ClusterFirstWithHostNet，只有这样 Pod 才会走集群 DNS 查询服务。这个范例也提醒了我们 Service IP 并不是唯一引流的方案，一定要结合实际场景来应用 Kubernetes 的特性。</p>
 <p>接下来我们在来刨析下 Service IP，它是由 iptables 创建的虚拟 IP 地址。根据 iptables 定义规则，统称这类 IP 为 DNAT 模式：</p>
-<p><img src="assets/68015df0-f89f-11ea-9926-2b08df6c26e2.jpg" alt="service-dnat-ip" /></p>
+<p><img src="assets/68015df0-f89f-11ea-9926-2b08df6c26e2.jpg" alt="png" /></p>
 <p>通过 kube-proxy 生成的 iptables 规则（最新版本采用 IPVS 模块生成代理规则，这里不在赘述，原理类似），每当一个数据包的目的地是服务 IP 时，它就会被 DNAT 化（DNAT = 目的地网络地址转换），也就是说目的地 IP 从服务 IP 变成了 iptables 随机选择的一个端点 Pod IP。这样可以保证负载流量可以在后端 Pod 中均匀分布。当 DNAT 发生时，这些信息会被存储在 conntrack 即 Linux 连接跟踪表中（存储 5 元组数据记录集：协议、srcIP、srcPort、dstIP、dstPort）。当数据回复回来的时候，就可以取消 DNAT，也就是把源 IP 从 Pod IP 改成 Service IP。这样一来，客户端就不需要知道后面的数据包流是如何处理的。</p>
-<p><img src="assets/7ca72a00-f89f-11ea-bdae-77091ca4470c.jpg" alt="13-3-dnat-5-tuple" /></p>
+<p><img src="assets/7ca72a00-f89f-11ea-bdae-77091ca4470c.jpg" alt="png" /></p>
 <p>对于从 Pod 发起并出站的数据流量，也是需要 NAT 转换的。一般来说，节点可以同时拥有私有虚拟 IP 和公有 IP。在节点与外部 IP 的正常通信中，对于出站数据包，源 IP 由节点的私有虚拟 IP 变为其公有 IP，对于入站数据包的回复则反过来。但是当连接到外部 IP 是由 Pod 发起时，源 IP 是 Pod 的 IP，kube-proxy 会多加一些 iptables 规则，做 SNAT（Source Network Address Translation）也就是 IP MASQUERADE。SNAT 规则告诉内核出站数据包需要使用节点的外网 IP 来代替源 Pod 的 IP。系统还需要保留一个 conntrack 条目来解除 SNAT 的回复。</p>
 <p>注意这里的性能问题，由于集群容器规模的增加，conntrack 会暴增，后由华为容器团队引入的 IPVS 方案也是在做大规模容器负载的压测中发现这个瓶颈，并提出引入 IPVS 来解决这个问题。在笔者实际应用中发现，iptables 方案在小规模集群场景下性能和 IPVS 持平，所以 IPVS 方案从本质上来讲还只是一个临时方案，它只解决了入站流量数据包的 DNAT 转换，SNAT 转换还是需要 iptables 来维护。去 iptables 化相信在不久的将来会被 eBPF 技术取代，并最终实现最优的流量引流设计方案。</p>
 <h3>Ingress 的高级策略</h3>

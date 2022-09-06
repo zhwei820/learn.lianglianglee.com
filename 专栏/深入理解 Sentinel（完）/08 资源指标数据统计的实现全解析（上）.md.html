@@ -231,9 +231,9 @@ public class WebMvcTestController {
 }
 </code></pre>
 <p>我们不需要添加任何规则，只是为了调试 Sentinel 的源码。将 demo 启动起来后，在浏览器访问“/hello”接口，在 NodeSelectorSlot#entry 方法的绑定调用树这一行代码下断点，观察此时 Context 的字段信息。正常情况下我们可以看到如下图所示的结果。</p>
-<p><img src="assets/474e2790-e0b8-11ea-b6a2-55d68b770f3d" alt="08-01-one01" /></p>
+<p><img src="assets/474e2790-e0b8-11ea-b6a2-55d68b770f3d" alt="png" /></p>
 <p>从上图中可以看出，此时的 Context.entranceNode 的子节点为空（childList 的大小为 0），并且当前 CtEntry 父、子节点都是 Null（curEntry 字段）。当绑定调用树这一行代码执行完成后，Context 的字段信息如下图所示：</p>
-<p><img src="assets/529237e0-e0b8-11ea-b45a-99f77a1eea3e" alt="08-02-one02" /></p>
+<p><img src="assets/529237e0-e0b8-11ea-b45a-99f77a1eea3e" alt="png" /></p>
 <p>从上图可以看出，NodeSelectorSlot 为当前资源创建的 DefaultNode 被添加到了 Context.entranceNode 的子节点。entranceNode 类型为 EntranceNode，在调用 ContextUtil#enter 方法时创建，在第一次创建名为“sentinel_spring_web_context”的 Context 时创建，相同名称的 Context 都使用同一个 EntranceNode。并且该 EntranceNode 在创建时会被添加到 Constant.ROOT。</p>
 <p>此时，Constant.ROOT、Context.entranceNode、当前访问资源的 DefaultNode 构造成的调用树如下：</p>
 <pre><code class="language-java">           ROOT (machine-root)
@@ -282,7 +282,7 @@ public class WebMvcTestController {
 </code></pre>
 <p>我们可将 doBusiness 方法看成是远程调用，例如调用第三方的接口，接口名称为“http://wujiuye.com/hello2”，使用 POST 方式调用，那么我们可以使用“POST:http://wujiuye.com/hello2”作为资源名称，并将流量类型设置为 OUT 类型。上下文名称取名为&quot;my_context&quot;。</p>
 <p>现在启动 demo，使用浏览器访问“/hello”接口。当代码执行到 apiHello 方法时，在 NodeSelectorSlot#entry 方法的绑定调用树这一行代码下断点。当绑定调用树这行代码执行完成后，Context 的字段信息如下图所示。</p>
-<p><img src="assets/7e9fd630-e0b8-11ea-8111-1feecf2da711" alt="08-03-two01" /></p>
+<p><img src="assets/7e9fd630-e0b8-11ea-8111-1feecf2da711" alt="png" /></p>
 <p>如图所示，Sentinel 并没有创建名称为 my_context 的 Context，还是使用应用接收到请求时创建名为“sentinel_spring_web_context”的 Context，所以处理浏览器发送过来的请求的“GET:/hello”资源是本次调用链路的入口资源，Sentinel 在调用链路入口处创建 Context 之后不再创建新的 Context。</p>
 <p>由于之前并没有为名称为“POST:http://wujiuye.com/hello2”的资源创建 ProcessorSlotChain，所以 SphU#entry 会为该资源创建一个 ProcessorSlotChain，也就会为该 ProcessorSlotChain 创建一个 NodeSelectorSlot。在执行到 NodeSelectorSlot#entry 方法时，就会为该资源创建一个 DefaultNode，而将该资源的 DefaultNode 绑定到节点树后，该资源的 DefaultNode 就会成为“GET:/hello”资源的 DefaultNode 的子节点，调用树如下。</p>
 <pre><code class="language-java">                    ROOT (machine-root)
@@ -294,7 +294,7 @@ public class WebMvcTestController {
          DefaultNode  (POST:/hello2)
 </code></pre>
 <p>此时，当前调用链路上也已经存在两个 CtEntry，这两个 CtEntry 构造一个双向链表，如下图所示。</p>
-<p><img src="assets/91d06760-e0b8-11ea-9345-e7c4c4dd55f7" alt="08-04-two02" /></p>
+<p><img src="assets/91d06760-e0b8-11ea-9345-e7c4c4dd55f7" alt="png" /></p>
 <p>虽然存在两个 CtEntry，但此时 Context.curEntry 指向第二个 CtEntry，第二个 CtEntry 在 apiHello 方法中调用 SphU#entry 方法时创建，当执行完 doBusiness 方法后，调用当前 CtEntry#exit 方法，由该 CtEntry 将 Context.curEntry 还原为该 CtEntry 的父 CtEntry。这有点像入栈和出栈操作，例如栈帧在 Java 虚拟机栈的入栈和出栈，调用方法时方法的栈帧入栈，方法执行完成栈帧出栈。</p>
 <p>NodeSelectorSlot#entry 方法我们还有一行代码没有分析，就是将当前创建的 DefaultNode 设置为 Context 的当前节点，代码如下：</p>
 <pre><code class="language-java">// 替换 Context.curNode 为当前 DefaultNode
@@ -359,7 +359,7 @@ context.setCurNode(node);
 </code></pre>
 <p>ClusterBuilderSlot 使用一个 Map 缓存资源的 ClusterNode，并且用一个非静态的字段维护当前资源的 ClusterNode。因为一个资源只会创建一个 ProcessorSlotChain，意味着 ClusterBuilderSlot 也只会创建一个，那么让 ClusterBuilderSlot 持有该资源的 ClusterNode 就可以省去每次都从 Map 中获取的步骤，这当然也是 Sentinel 为性能做出的努力。</p>
 <p>ClusterBuilderSlot#entry 方法的 node 参数由前一个 ProcessorSlot 传递过来，也就是 NodeSelectorSlot 传递过来的 DefaultNode。ClusterBuilderSlot 将 ClusterNode 赋值给 DefaultNode.clusterNode，那么后续的 ProcessorSlot 就能从 node 参数中取得 ClusterNode。DefaultNode 与 ClusterNode 的关系如下图所示。</p>
-<p><img src="assets/c90597e0-e0b9-11ea-87f8-01fab3b387f8" alt="08-05-default-cluster" /></p>
+<p><img src="assets/c90597e0-e0b9-11ea-87f8-01fab3b387f8" alt="png" /></p>
 <p>ClusterNode 有一个 Map 类型的字段用来缓存 origin 与 StatisticNode 的映射，代码如下：</p>
 <pre><code class="language-java">public class ClusterNode extends StatisticNode {
     private final String name;

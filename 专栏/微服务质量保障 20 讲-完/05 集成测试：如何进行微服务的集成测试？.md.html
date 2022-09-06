@@ -164,7 +164,7 @@ function hide_canvas() {
 <p>微服务架构下也需要集成测试，<strong>需要针对不同服务的不同方法之间的通信情况进行相关测试。</strong> 因为在对微服务进行单元测试时，单元测试用例只会验证被测单元的内部逻辑，并不验证其依赖的模块。即使对于服务 A 和服务 B 的单元测试分别通过，并不能说明服务 A 和服务 B 的交互是正常的。</p>
 <p>对于微服务架构来说，<strong>集成测试通常关注于验证那些与外部组件（例如数据存储或其他微服务）通信的子系统或模块。</strong> 目标是验证这些子系统或模块是否可以正确地与外部组件进行通信，而不是测试外部组件是否正常工作。因此，微服务架构下的集成测试，应该验证要集成的子系统之间与外部组件之间的基本通信路径，包括正确路径和错误路径。</p>
 <h3>微服务架构下的集成测试</h3>
-<p><img src="assets/CgqCHl8iem-AFErwAAUV3BnSpVE692.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8iem-AFErwAAUV3BnSpVE692.png" alt="png" /></p>
 <p>微服务结构图与集成测试边界</p>
 <p>如上图所示，网关组件层（Gateways+Http Client+External Service）包含了访问外部服务的逻辑，通常包含一个 HTTP/S 的客户端，客户端会连接到系统中另一个微服务或外部服务。数据持久层（Date Mappers/ORM）用于连接外部数据存储。</p>
 <p>即，微服务架构下的集成测试主要包括两部分：</p>
@@ -175,7 +175,7 @@ function hide_canvas() {
 <p>这里请注意，因为需要测试微服务下子系统之间的通信和外部服务的通信是否正确，所以<strong>理想情况下不应该对外部组件使用测试替身（Test Double）。</strong></p>
 <p>下面我们逐一来看这两部分是如何进行集成测试的：</p>
 <h4>（1）网关组件层集成测试</h4>
-<p><img src="assets/CgqCHl8ieoeAGpreAABlJ9Cf-_M925.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8ieoeAGpreAABlJ9Cf-_M925.png" alt="png" /></p>
 <p>假设有个登录服务，该服务需要知道当前时间，而时间是由一个外部的<a href="http://worldclockapi.com/">时间服务</a>提供的。当向<a href="http://worldclockapi.com/api/json/cet/now"> /api/json/cet/now </a>发出 GET 请求时，状态码为 200，并返回如下完整的时间信息。</p>
 <pre><code>{
 $id: &quot;1&quot;,
@@ -203,7 +203,7 @@ serviceResponse: null,
 <li>进行相关的测试；</li>
 <li>循环上述这个过程。</li>
 </ol>
-<p><img src="assets/Ciqc1F8ieqeAa4YoAABZtUlBe2M988.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F8ieqeAa4YoAABZtUlBe2M988.png" alt="png" /></p>
 <h3>常见问题及解决策略</h3>
 <p>然而，有很多时候外部服务不可用（服务尚未开发完成、服务有 block 级别的缺陷未修复），或其异常行为（如外部组件的超时、响应变慢等）很难去验证。外部组件不能使用测试替身，外部服务又不可用或异常场景难构造，看似无解，实际上都是有替代方案的。</p>
 <h4>服务不可用</h4>

@@ -324,7 +324,7 @@ private static final String PROPS_NODE = &quot;props&quot;;
 private final String name;
 </code></pre>
 <p>基于 ShardingSphere 中对这些配置项的管理方式，我们可以将这些配置项与具体的存储结构相对应，如下所示：</p>
-<p><img src="assets/Ciqc1F90KZeARJhmAACZRODYuiA394.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F90KZeARJhmAACZRODYuiA394.png" alt="png" /></p>
 <p>有了配置项之后，我们就需要对其进行保存，ConfigurationService 的 persistConfiguration 方法完成了这一目的，如下所示：</p>
 <pre><code>public void persistConfiguration(final String shardingSchemaName, final Map&lt;String, DataSourceConfiguration&gt; dataSourceConfigs, final RuleConfiguration ruleConfig,
                                      final Authentication authentication, final Properties props, final boolean isOverwrite) {
@@ -359,7 +359,7 @@ private final String name;
 <h4>2.StateService</h4>
 <p>介绍完 ConfigurationService 类之后，我们来关注 ShardingOrchestrationFacade 类中的另一个核心变量 StateService。</p>
 <p>从命名上讲，StateService 这个类名有点模糊，更合适的叫法应该是 InstanceStateService，用于管理数据库实例的状态，即创建数据库运行节点并区分不同数据库访问实例。存放在注册中心中的数据结构包括 instances 和 datasources 节点，存储结构如下所示：</p>
-<p><img src="assets/CgqCHl90KaaAYI5wAABQK1SKfyo990.png" alt="image" /></p>
+<p><img src="assets/CgqCHl90KaaAYI5wAABQK1SKfyo990.png" alt="png" /></p>
 <p>StateService 中保存着 StateNode 对象，StateNode 中的变量与上面的数据结构示例相对应，如下所示：</p>
 <pre><code>private static final String ROOT = &quot;state&quot;;
 private static final String INSTANCES_NODE_PATH = &quot;instances&quot;;

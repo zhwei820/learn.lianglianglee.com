@@ -291,7 +291,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>13  本地缓存：降低 ZooKeeper 压力的一个常用手段</h1>
 <p>从这一课时开始，我们就进入了第二部分：注册中心。注册中心（Registry）在微服务架构中的作用举足轻重，有了它，<strong>服务提供者（Provider）</strong> 和<strong>消费者（Consumer）</strong> 就能感知彼此。从下面的 Dubbo 架构图中可知：</p>
-<p><img src="assets/CgqCHl9W91KABCfoAAB7_C-aKWA893.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9W91KABCfoAAB7_C-aKWA893.png" alt="png" /></p>
 <p>Dubbo 架构图</p>
 <ul>
 <li>Provider 从容器启动后的初始化阶段便会向注册中心完成注册操作；</li>
@@ -301,27 +301,27 @@ function hide_canvas() {
 <p>Registry 只是 Consumer 和 Provider 感知彼此状态变化的一种便捷途径而已，它们彼此的实际通讯交互过程是直接进行的，对于 Registry 来说是透明无感的。Provider 状态发生变化了，会由 Registry 主动推送订阅了该 Provider 的所有 Consumer，这保证了 Consumer 感知 Provider 状态变化的及时性，也将和具体业务需求逻辑交互解耦，提升了系统的稳定性。</p>
 <p>Dubbo 中存在很多概念，但有些理解起来就特别费劲，如本文的 Registry，翻译过来的意思是“注册中心”，但它其实是应用本地的注册中心客户端，<strong>真正的“注册中心”服务是其他独立部署的进程，或进程组成的集群，比如 ZooKeeper 集群</strong>。本地的 Registry 通过和 ZooKeeper 等进行实时的信息同步，维持这些内容的一致性，从而实现了注册中心这个特性。另外，就 Registry 而言，Consumer 和 Provider 只是个用户视角的概念，它们被抽象为了一条 URL 。</p>
 <p>从本课时开始，我们就真正开始分析 Dubbo 源码了。首先看一下本课程第二部分内容在 Dubbo 架构中所处的位置（如下图红框所示），可以看到这部分内容在整个 Dubbo 体系中还是相对独立的，没有涉及 Protocol、Invoker 等 Dubbo 内部的概念。等介绍完这些概念之后，我们还会回看图中 Registry 红框之外的内容。</p>
-<p><img src="assets/CgqCHl9W92uAEdHNAC1YtFrPHGA595.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl9W92uAEdHNAC1YtFrPHGA595.png" alt="png" /></p>
 <p>整个 Dubbo 体系图</p>
 <h3>核心接口</h3>
 <p>作为“注册中心”部分的第一课时，我们有必要介绍下 dubbo-registry-api 模块中的核心抽象接口，如下图所示：</p>
-<p><img src="assets/Ciqc1F9W94aAIB3iAAE7RxqxFDw401.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9W94aAIB3iAAE7RxqxFDw401.png" alt="png" /></p>
 <p>在 Dubbo 中，一般使用 Node 这个接口来抽象节点的概念。<strong>Node</strong>不仅可以表示 Provider 和 Consumer 节点，还可以表示注册中心节点。Node 接口中定义了三个非常基础的方法（如下图所示）：</p>
-<p><img src="assets/Ciqc1F9W942AJdaYAAAlxcqD4vE542.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9W942AJdaYAAAlxcqD4vE542.png" alt="png" /></p>
 <ul>
 <li>getUrl() 方法返回表示当前节点的 URL；</li>
 <li>isAvailable() 检测当前节点是否可用；</li>
 <li>destroy() 方法负责销毁当前节点并释放底层资源。</li>
 </ul>
 <p><strong>RegistryService 接口</strong>抽象了注册服务的基本行为，如下图所示：</p>
-<p><img src="assets/CgqCHl9W95SAEiTBAABRqhrI6ig390.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9W95SAEiTBAABRqhrI6ig390.png" alt="png" /></p>
 <ul>
 <li>register() 方法和 unregister() 方法分别表示<strong>注册</strong>和<strong>取消注册</strong>一个 URL。</li>
 <li>subscribe() 方法和 unsubscribe() 方法分别表示<strong>订阅</strong>和<strong>取消订阅</strong>一个 URL。订阅成功之后，当订阅的数据发生变化时，注册中心会主动通知第二个参数指定的 NotifyListener 对象，NotifyListener 接口中定义的 notify() 方法就是用来接收该通知的。</li>
 <li>lookup() 方法能够<strong>查询</strong>符合条件的注册数据，它与 subscribe() 方法有一定的区别，subscribe() 方法采用的是 push 模式，lookup() 方法采用的是 pull 模式。</li>
 </ul>
 <p><strong>Registry 接口</strong>继承了 RegistryService 接口和 Node 接口，如下图所示，它表示的就是一个拥有注册中心能力的节点，其中的 reExportRegister() 和 reExportUnregister() 方法都是委托给 RegistryService 中的相应方法。</p>
-<p><img src="assets/Ciqc1F9W952Aesi9AAAjKOjjN0I785.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9W952Aesi9AAAjKOjjN0I785.png" alt="png" /></p>
 <p><strong>RegistryFactory 接口</strong>是 Registry 的工厂接口，负责创建 Registry 对象，具体定义如下所示，其中 @SPI 注解指定了默认的扩展名为 dubbo，@Adaptive 注解表示会生成适配器类并根据 URL 参数中的 protocol 参数值选择相应的实现。</p>
 <pre><code>@SPI(&quot;dubbo&quot;)
 public interface RegistryFactory {
@@ -330,9 +330,9 @@ public interface RegistryFactory {
 }
 </code></pre>
 <p>通过下面两张继承关系图可以看出，每个 Registry 实现类都有对应的 RegistryFactory 工厂实现，每个 RegistryFactory 工厂实现只负责创建对应的 Registry 对象。</p>
-<p><img src="assets/CgqCHl9W96aAbyVRAAIzHNPLhSM843.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl9W96aAbyVRAAIzHNPLhSM843.png" alt="png" /></p>
 <p>RegistryFactory 继承关系图</p>
-<p><img src="assets/Ciqc1F9W97CAdPcXAAG1fsVxaeI019.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F9W97CAdPcXAAG1fsVxaeI019.png" alt="png" /></p>
 <p>Registry 继承关系图</p>
 <p>其中，RegistryFactoryWrapper 是 RegistryFactory 接口的 Wrapper 类，它在底层 RegistryFactory 创建的 Registry 对象外层封装了一个 ListenerRegistryWrapper ，ListenerRegistryWrapper 中维护了一个 RegistryServiceListener 集合，会将 register()、subscribe() 等事件通知到 RegistryServiceListener 监听器。</p>
 <p>AbstractRegistryFactory 是一个实现了 RegistryFactory 接口的抽象类，提供了规范 URL 的操作以及缓存 Registry 对象的公共能力。其中，缓存 Registry 对象是使用 HashMap&lt;String, Registry&gt; 集合实现的（REGISTRIES 静态字段）。在规范 URL 的实现逻辑中，AbstractRegistryFactory 会将 RegistryService 的类名设置为 URL path 和 interface 参数，同时删除 export 和 refer 参数。</p>
@@ -404,7 +404,7 @@ protected void notify(URL url, NotifyListener listener,
 <p>subscribe() 方法会将当前节点作为 Consumer 的 URL 以及相关的 NotifyListener 记录到 subscribed 集合，unsubscribe() 方法会将当前节点的 URL 以及关联的 NotifyListener 从 subscribed 集合删除。</p>
 <p>这四个方法都是简单的集合操作，这里我们就不再展示具体代码了。</p>
 <p>单看 AbstractRegistry 的实现，上述四个基础的注册、订阅方法都是内存操作，但是 Java 有继承和多态的特性，AbstractRegistry 的子类会覆盖上述四个基础的注册、订阅方法进行增强。</p>
-<p><img src="assets/Ciqc1F9W9-eAHUVPAACO6kbGAbU855.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F9W9-eAHUVPAACO6kbGAbU855.png" alt="png" /></p>
 <h4>3. 恢复/销毁</h4>
 <p>AbstractRegistry 中还有另外两个需要关注的方法：<strong>recover() 方法</strong>和<strong>destroy() 方法</strong>。</p>
 <p>在 Provider 因为网络问题与注册中心断开连接之后，会进行重连，重新连接成功之后，会调用 recover() 方法将 registered 集合中的全部 URL 重新走一遍 register() 方法，恢复注册数据。同样，recover() 方法也会将 subscribed 集合中的 URL 重新走一遍 subscribe() 方法，恢复订阅监听器。recover() 方法的具体实现比较简单，这里就不再展示，你若感兴趣的话，可以参考源码进行学习。</p>

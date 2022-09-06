@@ -193,7 +193,7 @@ function hide_canvas() {
 <h3>基于消息的领域事件发布</h3>
 <p>前面讲解了领域溯源的设计思路，最后要落地到项目实践中，依然需要<strong>技术中台的相应支持</strong>。譬如，业务系统的发布者只负责事件的发布，订阅者只负责事件的后续操作。但这个过程该如何发布事件呢？发布事件到底要做什么呢？又如何实现事件的订阅呢？这就需要下沉到技术中台去设计。</p>
 <p>首先，事件的发布方在发布事件的同时，需要在<strong>数据库中予以记录</strong>。数据库可以进行如下设计：</p>
-<p><img src="assets/Cip5yF_9BX6AHn0MAABKrvbrCO8701.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_9BX6AHn0MAABKrvbrCO8701.png" alt="png" /></p>
 <p>接着，领域事件还需要通过<strong>消息队列进行发布</strong>，这里可以采用 Spring Cloud Stream 的设计方案。Spring Cloud Stream 是 Spring Cloud 技术框架中一个实现<strong>消息驱动的技术框架</strong>。它的底层可以支持 RabbitMQ、Kafka 等主流消息队列，通过它的封装实现统一的设计编码。</p>
 <p>譬如，以 RabbitMQ 为例，首先需要在项目的 POM.xml 中加入依赖：</p>
 <pre><code>  &lt;dependencies&gt;

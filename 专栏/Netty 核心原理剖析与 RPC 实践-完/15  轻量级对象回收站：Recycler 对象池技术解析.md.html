@@ -269,10 +269,10 @@ true
 <h3>Recycler 的设计理念</h3>
 <p>对象池与内存池的都是为了提高 Netty 的并发处理能力，我们知道 Java 中频繁地创建和销毁对象的开销是很大的，所以很多人会将一些通用对象缓存起来，当需要某个对象时，优先从对象池中获取对象实例。通过重用对象，不仅避免频繁地创建和销毁所带来的性能损耗，而且对 JVM GC 是友好的，这就是对象池的作用。</p>
 <p>Recycler 是 Netty 提供的自定义实现的轻量级对象回收站，借助 Recycler 可以完成对象的获取和回收。既然 Recycler 是 Netty 自己实现的对象池，那么它是如何设计的呢？首先看下 Recycler 的内部结构，如下图所示：</p>
-<p><img src="assets/CgqCHl_OCESAR1UWAAaA8pFs2bg205.png" alt="333.png" /></p>
+<p><img src="assets/CgqCHl_OCESAR1UWAAaA8pFs2bg205.png" alt="png" /></p>
 <p>通过 Recycler 的 UML 图可以看出，一共包含四个核心组件：<strong>Stack</strong>、<strong>WeakOrderQueue</strong>、<strong>Link</strong>、<strong>DefaultHandle</strong>，接下来我们逐一进行介绍。</p>
 <p>首先我们先看下整个 Recycler 的内部结构中各个组件的关系，可以通过下面这幅图进行描述。</p>
-<p><img src="assets/CgqCHl_OCJmABlSHAATi6fhCKaA360.png" alt="111.png" /></p>
+<p><img src="assets/CgqCHl_OCJmABlSHAATi6fhCKaA360.png" alt="png" /></p>
 <p>第一个核心组件是 Stack，Stack 是整个对象池的顶层数据结构，描述了整个对象池的构造，用于存储当前本线程回收的对象。在多线程的场景下，Netty 为了避免锁竞争问题，每个线程都会持有各自的对象池，内部通过 FastThreadLocal 来实现每个线程的私有化。FastThreadLocal 你可以理解为 Java 里的 ThreadLocal，后续会有专门的课程介绍它。</p>
 <p>我们有必要先学习下 Stack 的数据结构，先看下 Stack 的源码定义：</p>
 <pre><code>static final class Stack&lt;T&gt; {
@@ -394,7 +394,7 @@ boolean scavengeSome() {
 }
 </code></pre>
 <p>scavenge 的源码中首先会从 cursor 指针指向的 WeakOrderQueue 节点回收部分对象到 Stack 的 elements 数组中，如果没有回收到数据就会将 cursor 指针移到下一个 WeakOrderQueue，重复执行以上过程直至回到到对象实例为止。具体的流程可以结合下图来理解。</p>
-<p><img src="assets/CgqCHl_OCMCAAxGsAAQC8Q_DU54209.png" alt="222.png" />
+<p><img src="assets/CgqCHl_OCMCAAxGsAAQC8Q_DU54209.png" alt="png" />
 此外，每次移动 cursor 时，都会检查 WeakOrderQueue 对应的线程是否已经退出了，如果线程已经退出，那么线程中的对象实例都会被回收，然后将 WeakOrderQueue 节点从链表中移除。</p>
 <p>还有一个问题，每次 Stack 从 WeakOrderQueue 链表会回收多少数据呢？我们依然结合上图讲解，每个 WeakOrderQueue 中都包含一个 Link 链表，Netty 每次会回收其中的一个 Link 节点所存储的对象。从图中可以看出，Link 内部会包含一个读指针 readIndex，每个 Link 节点默认存储 16 个对象，读指针到链表尾部就是可以用于回收的对象实例，每次回收对象时，readIndex 都会从上一次记录的位置开始回收。</p>
 <p>在回收对象实例之前，Netty 会计算出可回收对象的数量，加上 Stack 中已有的对象数量后，如果超过 Stack 的当前容量且小于 Stack 的最大容量，会对 Stack 进行扩容。为了防止回收对象太多导致 Stack 的容量激增，在每次回收时 Netty 会调用 dropHandle 方法控制回收频率，具体源码如下：</p>
@@ -511,7 +511,7 @@ void push(DefaultHandle&lt;?&gt; item) {
 <p>到此为止，Recycler 如何回收对象的实现原理就全部分析完了，在多线程的场景下，Netty 考虑的还是非常细致的，Recycler 回收对象时向 WeakOrderQueue 中存放对象，从 Recycler 获取对象时，WeakOrderQueue 中的对象会作为 Stack 的储备，而且有效地解决了跨线程回收的问题，是一个挺新颖别致的设计。</p>
 <h3>Recycler 在 Netty 中的应用</h3>
 <p>Recycler 在 Netty 里面使用也是非常频繁的，我们直接看下 Netty 源码中 newObject 相关的引用，如下图所示。</p>
-<p><img src="assets/CgqCHl_OCNuAIe4BAAy9l8765xw221.png" alt="444.png" /></p>
+<p><img src="assets/CgqCHl_OCNuAIe4BAAy9l8765xw221.png" alt="png" /></p>
 <p>其中比较常用的有 PooledHeapByteBuf 和 PooledDirectByteBuf，分别对应的堆内存和堆外内存的池化实现。例如我们在使用 PooledDirectByteBuf 的时候，并不是每次都去创建新的对象实例，而是从对象池中获取预先分配好的对象实例，不再使用 PooledDirectByteBuf 时，被回收归还到对象池中。</p>
 <p>此外，可以看到内存池的 MemoryRegionCache 也有使用到对象池，MemoryRegionCache 中保存着一个队列，队列中每个 Entry 节点用于保存内存块，Entry 节点在 Netty 中就是以对象池的形式进行分配和释放，在这里我就不展开了，建议你翻阅下源码，学习下 Entry 节点是何时被分配和释放的，从而加深下对 Recycler 对象池的理解。</p>
 <h3>总结</h3>

@@ -203,21 +203,21 @@ function hide_canvas() {
 <h3>Leader 事务处理分析</h3>
 <p>上面我们介绍了 ZooKeeper 集群在处理事务性会话请求时的内部原理。接下来我们就以客户端发起的创建节点请求 setData 为例，具体看看 ZooKeeper 集群的底层处理过程。</p>
 <p>在 ZooKeeper 集群接收到来自客户端的一个 setData 会话请求后，其内部的处理逻辑基本可以分成四个部分。如下图所示，分别是预处理阶段、事务处理阶段、事务执行阶段、响应客户端。</p>
-<p><img src="assets/CgqCHl78TTKAVHIcAABFlvJZKxw198.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl78TTKAVHIcAABFlvJZKxw198.png" alt="png" /></p>
 <h4>预处理阶段：</h4>
 <p>在预处理阶段，主要工作是通过网络 I/O 接收来自客户端的会话请求。判断该条会话请求的类型是否是事务性的会话请求，之后将该请求提交给</p>
 <p>PrepRequestProcessor 处理器进行处理。封装请求事务头并检查会话是否过期，最后反序列化事务请求信息创建 setDataRequest 请求，在 setDataRequest 记录中包含了要创建数据的节点的路径、数据节点的内容信息以及数据节点的版本信息。最后将该请求存放在 outstandingChanges 队列中等待之后的处理。</p>
-<p><img src="assets/CgqCHl78TUKAfJjuAAB5F0dP0Yk087.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl78TUKAfJjuAAB5F0dP0Yk087.png" alt="png" /></p>
 <h4>事务处理阶段：</h4>
 <p>在事务处理阶段，ZooKeeper 集群内部会将该条会话请求提交给 ProposalRequestProcessor 处理器进行处理。本阶段内部又分为提交、同步、统计三个步骤。其具体的处理过程我们在之前的课程中已经介绍过了，这里不再赘述。</p>
-<p><img src="assets/CgqCHl78TVGAK4VLAACDtg8BUbg363.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl78TVGAK4VLAACDtg8BUbg363.png" alt="png" /></p>
 <h4>事务执行阶段：</h4>
 <p>在经过预处理阶段和事务会话的投票发起等操作后，一个事务性的会话请求都已经准备好了，接下来就是在 ZooKeeper 的数据库中执行该条会话的数据变更操作。</p>
 <p>在处理数据变更的过程中，ZooKeeper 内部会将该请求会话的事务头和事务体信息直接交给内存数据库 ZKDatabase 进行事务性的持久化操作。之后返回 ProcessTxnResult 对象表明操作结果是否成功。</p>
-<p><img src="assets/CgqCHl78TWOAcPwoAABCnE5qDAc777.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl78TWOAcPwoAABCnE5qDAc777.png" alt="png" /></p>
 <h4>响应客户端：</h4>
 <p>在 ZooKeeper 集群处理完客户端 setData 方法发送的数据节点创建请求后，会将处理结果发送给客户端。而在响应客户端的过程中，ZooKeeper 内部首先会创建一个 setDataResponse 响应体类型，该对象主要包括当前会话请求所创建的数据节点，以及其最新状态字段信息 stat。之后创建请求响应头信息，响应头作为客户端请求响应的重要信息，客户端在接收到 ZooKeeper 集群的响应后，通过解析响应头信息中的事务 ZXID 和请求结果标识符 err 来判断该条会话请求是否成功执行。</p>
-<p><img src="assets/CgqCHl78TXCAM65nAAB2mZDf_jw385.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl78TXCAM65nAAB2mZDf_jw385.png" alt="png" /></p>
 <h3>事务处理底层实现</h3>
 <p>介绍完 ZooKeeper 集群处理事务性会话请求的理论方法和内部过程后。接下来我们从代码层面来进一步分析 ZooKeeper 在处理事务性请求时的底层核心代码实现。</p>
 <p>首先，ZooKeeper 集群在收到客户端发送的事务性会话请求后，会对该请求进行预处理。在代码层面，ZooKeeper 通过调用 PrepRequestProcessor 类来实现预处理阶段的全部逻辑。可以这样理解：<strong>在处理客户端会话请求的时候，首先调用的就是 PrepRequestProcessor 类</strong>。而在 PrepRequestProcessor 内部，是通过 pRequest 方法判断客户端发送的会话请求类型。如果是诸如 setData 数据节点创建等事务性的会话请求，就调用 pRequest2Txn 方法进一步处理。</p>

@@ -227,7 +227,7 @@ CREATE TABLE `t_customer` ( # 创建t_customer表
 <pre><code>java -jar mybatis-generator-core-1.4.0.jar -configfile generatorConfig.xml
 </code></pre>
 <p>命令正常执行完成之后，可以看到 src 目录下生成的文件如下图所示：</p>
-<p><img src="assets/CioPOWBtTDqAYagkAABmeFv2Z84519.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWBtTDqAYagkAABmeFv2Z84519.png" alt="png" /></p>
 <p>MyBatis-Generator 工具类生成结果图</p>
 <p>生成的 Customer.java 类是一个 Model 类（或者说 Domain 类），包含了 id、name、password、account 属性；CustomerMapper.xml 是 Customer 对应的 Mapper.xml 配置文件，其中定义了按照 id 进行查询和删除的 select、delete 语句，以及全字段写入和更新的 insert、update 语句；CustomerMapper 接口中包含了与 CustomerMapper.xml 对应的方法。该示例中生成的代码并不复杂，在你生成代码之后，也希望你能够自己分析一下。</p>
 <h3>MyBatis 分页插件</h3>
@@ -268,7 +268,7 @@ if (!dialect.skip(ms, parameter, rowBounds)) {
 return dialect.afterPage(resultList, parameter, rowBounds);
 </code></pre>
 <p>通过对 PageInterceptor 的分析我们看到，<strong>核心的分页逻辑都是在 Dialect 中完成的</strong>，PageHelper 针对每个数据库都提供了一个 Dialect 接口实现。下图展示了 MySQL 数据库对应的 Dialect 接口实现：</p>
-<p><img src="assets/Cgp9HWBtTFKAVlWCAACyAbYHCQg938.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWBtTFKAVlWCAACyAbYHCQg938.png" alt="png" /></p>
 <p>MySqlDialect 的继承关系图</p>
 <p>在上图中，PageHelper 是一个通用的 Dialect 实现，会将上述分页操作委托给当前线程绑定的 Dialect 实现进行处理，这主要是靠其中的 autoDialect 字段（PageAutoDialect 类型）实现的。AbstractDialect 中只提供了一个生成“查询总记录数”SQL 语句（即 select count(*) 语句）的功能。</p>
 <p>AbstractRowBoundsDialect 这条继承线是针对 RowBounds 进行分页的 Dialect 实现，其中会根据 RowBounds 实现 Dialect 接口，例如，在 MySqlRowBoundsDialect 中的 getPageSql() 方法实现中会改写 SQL 语句，添加 limit 子句，其中的 offset、limit 参数均来自传入的 RowBounds 参数。</p>
@@ -286,7 +286,7 @@ return dialect.afterPage(resultList, parameter, rowBounds);
 </ul>
 <p>既然 MyBatis-Plus 在 MyBatis 之上提供了这么多的扩展，那么我们就来快速上手体验一下 MyBatis-Plus。这里我们依旧选用 MySQL 数据库，复用上面介绍 MyBatis-Generator 示例时用到的 test 库和 t_customer 表。</p>
 <p>首先，新建一个 Spring Boot 项目，这里我们可以使用 Spring 官网提供的<a href="https://start.spring.io/?fileGuid=xxQTRXtVcqtHK6j8">项目生成器</a>快速生成，导入 IDEA 之后会发现 Spring Boot 的配置和启动类都已经生成好了，如下图所示：</p>
-<p><img src="assets/Cgp9HWBtTGCAB50qAADaNi9sMew051.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWBtTGCAB50qAADaNi9sMew051.png" alt="png" /></p>
 <p>Spring Boot 示例项目的结构图</p>
 <p>接下来我们打开 pom.xml 文件，看到其中已经自动添加了 Spring Boot 的全部依赖，此时只需要添加 mysql-connector-java 依赖以及 MyBatis-Plus 依赖即可（目前 MyBatis-Plus 最新版本是 3.4.2）：</p>
 <pre><code>&lt;dependency&gt;

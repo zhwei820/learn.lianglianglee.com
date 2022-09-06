@@ -217,7 +217,7 @@ Server:
 <h3>AUFS 工作原理</h3>
 <h4>AUFS 是如何存储文件的？</h4>
 <p>AUFS 是联合文件系统，意味着它在主机上使用多层目录存储，<strong>每一个目录在 AUFS 中都叫作分支，而在 Docker 中则称之为层（layer），但最终呈现给用户的则是一个普通单层的文件系统，我们把多层以单一层的方式呈现出来的过程叫作联合挂载。</strong></p>
-<p><img src="assets/CgqCHl-GwcCAOu4aAABzKSlpRlI180.png" alt="Lark20201014-171313.png" /></p>
+<p><img src="assets/CgqCHl-GwcCAOu4aAABzKSlpRlI180.png" alt="png" /></p>
 <p>图 1 AUFS 工作原理示意图</p>
 <p>如图 1 所示，每一个镜像层和容器层都是 /var/lib/docker 下的一个子目录，镜像层和容器层都在 aufs/diff 目录下，每一层的目录名称是镜像或容器的 ID 值，联合挂载点在 aufs/mnt 目录下，mnt 目录是真正的容器工作目录。</p>
 <p>下面我们针对 aufs 文件夹下的各目录结构，在创建容器前后的变化做详细讲述。</p>

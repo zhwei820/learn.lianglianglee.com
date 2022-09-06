@@ -257,12 +257,12 @@ Option -XX:+UseZGC not supported
 <p>官方介绍说停顿时间在 10ms 以下，其实这个数据是非常保守的值。</p>
 <p>根据基准测试（见参考材料里的 PDF 链接），在 128G 的大堆下，最大停顿时间只有 1.68ms，远远低于 10ms；和 G1 算法比起来相比，改进非常明显。</p>
 <p>请看下图：</p>
-<p><img src="assets/92814ed0-4da2-11ea-a221-c1e42d9b4512" alt="9324cf7d-ab45-4620-9661-2035e3f1b3d2.png" /></p>
+<p><img src="assets/92814ed0-4da2-11ea-a221-c1e42d9b4512" alt="png" /></p>
 <p>左边的图是线性坐标，右边是指数坐标。</p>
 <p>可以看到，不管是平均值、95 线、99 线还是最大暂停时间，ZGC 都优胜于 G1 和并行 GC 算法。</p>
 <p>根据我们在生产环境的监控数据来看（16G~64G 堆内存），每次暂停都不超过 3ms。</p>
 <p>比如下图是一个低延迟网关系统的监控信息，几十 GB 的堆内存环境中，ZGC 表现得毫无压力，暂停时间非常稳定。</p>
-<p><img src="assets/c798ebf0-4da2-11ea-9765-e162b5bc6395" alt="68469069.png" /></p>
+<p><img src="assets/c798ebf0-4da2-11ea-9765-e162b5bc6395" alt="png" /></p>
 <p>像 G1 和 ZGC 之类的现代 GC 算法，只要空闲的堆内存足够多，基本上不触发 FullGC。</p>
 <p>所以很多时候，只要条件允许，加内存才是最有效的解决办法。</p>
 <p>既然低延迟是 ZGC 的核心看点，而 JVM 低延迟的关键是 GC 暂停时间，那么我们来看看有哪些方法可以减少 GC 暂停时间：</p>
@@ -284,7 +284,7 @@ Option -XX:+UseZGC not supported
 </blockquote>
 <h4><strong>ZGC 的原理</strong></h4>
 <p>ZCG 的 GC 周期如图所示：</p>
-<p><img src="assets/3011a720-4da4-11ea-bf6a-a70b6b051b63" alt="37037772.png" /></p>
+<p><img src="assets/3011a720-4da4-11ea-bf6a-a70b6b051b63" alt="png" /></p>
 <p>每个 GC 周期分为 6 个小阶段：</p>
 <ol>
 <li>暂停—标记开始阶段：第一次暂停，标记根对象集合指向的对象；</li>
@@ -305,11 +305,11 @@ Option -XX:+UseZGC not supported
 <p>ZGC 使用着色指针来标记所处的 GC 阶段。</p>
 <p>着色指针是从 64 位的指针中，挪用了几位出来标识表示 Marked0、Marked1、Remapped、Finalizable。所以不支持 32 位系统，也不支持指针压缩技术，堆内存的上限是 4TB。</p>
 <p>从这些标记上就可以知道对象目前的状态，判断是不是可以执行清理压缩之类的操作。</p>
-<p><img src="assets/c5a2af50-4da4-11ea-aeb5-6d255c028296" alt="0.21570593705169117.png" /></p>
+<p><img src="assets/c5a2af50-4da4-11ea-aeb5-6d255c028296" alt="png" /></p>
 <h4><strong>读屏障</strong></h4>
 <p>对于 GC 线程与用户线程并发执行时，业务线程修改对象的操作可能带来的不一致问题，ZGC 使用的是读屏障，这点与其他 GC 使用写屏障不同。</p>
 <p>有读屏障在，就可以留待之后的其他阶段，根据指针颜色快速的处理。并且不是所有的读操作都需要屏障，例如下面只有第一种语句（加载指针时）需要读屏障，后面三种都不需要，又或者是操作原生类型的时候也不需要。</p>
-<p><img src="assets/d5ea2a50-4da4-11ea-9765-e162b5bc6395" alt="73cd6f97-8730-4aff-ae48-b8a30f3eaae0.jpg" /></p>
+<p><img src="assets/d5ea2a50-4da4-11ea-9765-e162b5bc6395" alt="png" /></p>
 <p>著名的 JVM 技术专家 RednaxelaFX 提到：ZGC 的 Load Value Barrier，与 Red Hat 的 Shenandoah 收集器使用的屏障不同，后者选择了 70 年代比较基础的 Brooks Pointer，而 ZGC 则是在古老的 Baker barrier 基础上增加了 self healing 特性。</p>
 <p>可以把“读屏障”理解为一段代码，或者是一个指令，后面挂着对应的处理函数。</p>
 <p>比如下面的代码：</p>
@@ -321,7 +321,7 @@ Object b = obj.x;
 <p>着色指针和读屏障，相当于在内存管理和应用程序代码之间加了一个中间层，通过这个中间层就可以实现更多的功能。但是也可以看到算法本身有一定的开销，也带来了很多复杂性。</p>
 <h4><strong>ZGC 的参数介绍</strong></h4>
 <p>除了上面提到的 <code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code> 参数可以用来启用 ZGC 以外，ZGC 可用的参数见下表：</p>
-<p><img src="assets/1f908910-4da5-11ea-bb27-bdb4967fc6e0" alt="62790527.png" /></p>
+<p><img src="assets/1f908910-4da5-11ea-bb27-bdb4967fc6e0" alt="png" /></p>
 <p>一些常用的参数介绍：</p>
 <ul>
 <li><code>-XX:ZCollectionInterval</code>：固定时间间隔进行 GC，默认值为0。</li>
@@ -364,7 +364,7 @@ Object b = obj.x;
 <p>Shenandoah 团队对外宣称 Shenandoah GC 的暂停时间与堆大小无关，无论是 200 MB 还是 200 GB 的堆内存，都可以保障具有很低的暂停时间（注意：并不像 ZGC 那样保证暂停时间在 10ms 以内）。</p>
 <h4><strong>Shenandoah GC 原理介绍</strong></h4>
 <p>Shenandoah GC 的原理，跟 ZGC 非常类似。</p>
-<p><img src="assets/3fabe040-4da6-11ea-a221-c1e42d9b4512" alt="28583d44-89ad-4196-b96c-dd747dc43c42.png" /></p>
+<p><img src="assets/3fabe040-4da6-11ea-a221-c1e42d9b4512" alt="png" /></p>
 <p>部分日志内容如下：</p>
 <pre><code>GC(3) Pause Init Mark 0.771ms
 GC(3) Concurrent marking 76480M-&gt;77212M(102400M) 633.213ms
@@ -394,7 +394,7 @@ GC(3) Concurrent cleanup 76244M-&gt;56620M(102400M) 12.242ms
 <p>需要提醒，并非只有 GC 停顿会导致应用程序响应时间变长。 除了GC长时间停顿会导致系统响应变慢，其他诸如 消息队列延迟、网络延迟、计算逻辑过于复杂、以及外部服务的延时，操作提供的调度程序抖动等都可能导致响应变慢。</p>
 </blockquote>
 <p>使用 Shenandoah 时需要全面了解系统运行情况，综合分析系统响应时间。下图是官方给出的各种 GC 工作负载对比：</p>
-<p><img src="assets/a5b45430-4da6-11ea-bb27-bdb4967fc6e0" alt="b319f998-e955-4a1e-8091-9371866633e1.jpg" /></p>
+<p><img src="assets/a5b45430-4da6-11ea-bb27-bdb4967fc6e0" alt="png" /></p>
 <p>可以看到，相对于 CMS、G1、Parallel GC，Shenandoah 在系统负载增加的情况下，延迟时间稳定在非常低的水平，而其他几种 GC 都会迅速上升。</p>
 <h4><strong>常用参数介绍</strong></h4>
 <p>推荐几个配置或调试 Shenandoah 的 JVM 参数：</p>
@@ -437,7 +437,7 @@ GC(3) Concurrent cleanup 76244M-&gt;56620M(102400M) 12.242ms
 <p>同时针对于内存分配失败时的策略，可以通过调节 <code>ShenandoahPacing</code> 和 <code>ShenandoahDegeneratedGC</code> 参数，对线程进行一定的调节控制。如果还是没有足够的内存，最坏的情况下可能会产生 Full GC，以使得系统有足够的内存不至于发生 OOM。</p>
 <p>更多有关如何配置、调试 Shenandoah 的参数信息，请参阅 Shenandoah 官方 Wiki 页面。</p>
 <h4><strong>各版本 JDK 对 Shenandoah 的集成情况</strong></h4>
-<p><img src="assets/cef34cb0-4da7-11ea-9f6e-1bdc6229ab3f" alt="9b62765c-d0ac-436e-999c-53d964e1ca33.png" /></p>
+<p><img src="assets/cef34cb0-4da7-11ea-9f6e-1bdc6229ab3f" alt="png" /></p>
 <p>这张图展示了 Shenandoah GC 目前在各个 JDK 版本上的进展情况，可以看到 OpenJDK 12 和 13 上都可以用。</p>
 <p>在 Red Hat Enterprise Linux、Fedora 系统中则可以在 JDK 8 和 JDK 11 版本上使用（肯定的，这两个 Linux 发行版都是 Red Hat 的，谁让这个 GC 也是 Red Hat 开发维护的呢）。</p>
 <ul>

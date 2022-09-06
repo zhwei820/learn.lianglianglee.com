@@ -223,7 +223,7 @@ function hide_canvas() {
 <blockquote>
 <p>Redis 的读写都是在内存中，所以它的性能较高，但在内存中的数据会随着服务器的重启而丢失，为了保证数据不丢失，我们需要将内存中的数据存储到磁盘，以便 Redis 重启时能够从磁盘中恢复原有的数据，而整个过程就叫做 Redis 持久化。</p>
 </blockquote>
-<p><img src="assets/2020-02-24-122623.png" alt="image.png" /> Redis 持久化也是 Redis 和 Memcached 的主要区别之一，因为 Memcached 不具备持久化功能。</p>
+<p><img src="assets/2020-02-24-122623.png" alt="png" /> Redis 持久化也是 Redis 和 Memcached 的主要区别之一，因为 Memcached 不具备持久化功能。</p>
 <h3>1 持久化的几种方式</h3>
 <p>Redis 持久化拥有以下三种方式：</p>
 <ul>
@@ -240,9 +240,9 @@ function hide_canvas() {
 <p>手动触发持久化的操作有两个： <code>save</code> 和 <code>bgsave</code> ，它们主要区别体现在：是否阻塞 Redis 主线程的执行。</p>
 <h5>① save 命令</h5>
 <p>在客户端中执行 <code>save</code> 命令，就会触发 Redis 的持久化，但同时也是使 Redis 处于阻塞状态，直到 RDB 持久化完成，才会响应其他客户端发来的命令，所以<strong>在生产环境一定要慎用</strong>。</p>
-<p><code>save</code> 命令使用如下： <img src="assets/2020-02-24-122625.png" alt="image.png" /> 从图片可以看出，当执行完 <code>save</code> 命令之后，持久化文件 <code>dump.rdb</code> 的修改时间就变了，这就表示 <code>save</code> 成功的触发了 RDB 持久化。 <code>save</code> 命令执行流程，如下图所示： <img src="assets/2020-02-24-122626.png" alt="image.png" /></p>
+<p><code>save</code> 命令使用如下： <img src="assets/2020-02-24-122625.png" alt="png" /> 从图片可以看出，当执行完 <code>save</code> 命令之后，持久化文件 <code>dump.rdb</code> 的修改时间就变了，这就表示 <code>save</code> 成功的触发了 RDB 持久化。 <code>save</code> 命令执行流程，如下图所示： <img src="assets/2020-02-24-122626.png" alt="png" /></p>
 <h5>② bgsave 命令</h5>
-<p>bgsave（background save）既后台保存的意思， 它和 <code>save</code> 命令最大的区别就是 <code>bgsave</code> 会 fork() 一个子进程来执行持久化，整个过程中只有在 fork() 子进程时有短暂的阻塞，当子进程被创建之后，Redis 的主进程就可以响应其他客户端的请求了，相对于整个流程都阻塞的 <code>save</code> 命令来说，显然 <code>bgsave</code> 命令更适合我们使用。 <code>bgsave</code> 命令使用，如下图所示： <img src="assets/2020-02-24-122627.png" alt="image.png" /> <code>bgsave</code> 执行流程，如下图所示： <img src="assets/2020-02-24-122628.png" alt="image.png" /></p>
+<p>bgsave（background save）既后台保存的意思， 它和 <code>save</code> 命令最大的区别就是 <code>bgsave</code> 会 fork() 一个子进程来执行持久化，整个过程中只有在 fork() 子进程时有短暂的阻塞，当子进程被创建之后，Redis 的主进程就可以响应其他客户端的请求了，相对于整个流程都阻塞的 <code>save</code> 命令来说，显然 <code>bgsave</code> 命令更适合我们使用。 <code>bgsave</code> 命令使用，如下图所示： <img src="assets/2020-02-24-122627.png" alt="png" /> <code>bgsave</code> 执行流程，如下图所示： <img src="assets/2020-02-24-122628.png" alt="png" /></p>
 <h4>2）自动触发</h4>
 <p>说完了 RDB 的手动触发方式，下面来看如何自动触发 RDB 持久化？ RDB 自动持久化主要来源于以下几种情况。</p>
 <h5>① save m n</h5>
@@ -253,7 +253,7 @@ function hide_canvas() {
 </ul>
 <p>当 60s 内如果有 10 次 Redis 键值发生改变，就会触发持久化；如果 60s 内 Redis 的键值改变次数少于 10 次，那么 Redis 就会判断 600s 内，Redis 的键值是否至少被修改了一次，如果满足则会触发持久化。</p>
 <h5>② flushall</h5>
-<p><code>flushall</code> 命令用于清空 Redis 数据库，在生产环境下一定慎用，当 Redis 执行了 <code>flushall</code> 命令之后，则会触发自动持久化，把 RDB 文件清空。 执行结果如下图所示： <img src="assets/2020-02-24-122629.png" alt="image.png" /></p>
+<p><code>flushall</code> 命令用于清空 Redis 数据库，在生产环境下一定慎用，当 Redis 执行了 <code>flushall</code> 命令之后，则会触发自动持久化，把 RDB 文件清空。 执行结果如下图所示： <img src="assets/2020-02-24-122629.png" alt="png" /></p>
 <h5>③ 主从同步触发</h5>
 <p>在 Redis 主从复制中，当从节点执行全量复制操作时，主节点会执行 <code>bgsave</code> 命令，并将 RDB 文件发送给从节点，该过程会自动触发 Redis 持久化。</p>
 <h3>4 配置说明</h3>
@@ -282,7 +282,7 @@ dir ./
 </ul>
 <p><strong>② rdbcompression 参数</strong> 它的默认值是 <code>yes</code> 表示开启 RDB 文件压缩，Redis 会采用 LZF 算法进行压缩。如果不想消耗 CPU 性能来进行文件压缩的话，可以设置为关闭此功能，这样的缺点是需要更多的磁盘空间来保存文件。 <strong>③ rdbchecksum 参数</strong> 它的默认值为 <code>yes</code> 表示写入文件和读取文件时是否开启 RDB 文件检查，检查是否有无损坏，如果在启动是检查发现损坏，则停止启动。</p>
 <h3>5 配置查询</h3>
-<p>Redis 中可以使用命令查询当前配置参数。查询命令的格式为：<code>config get xxx</code> ，例如，想要获取 RDB 文件的存储名称设置，可以使用 <code>config get dbfilename</code> ，执行效果如下图所示： <img src="assets/2020-02-24-122630.png" alt="image.png" /> 查询 RDB 的文件目录，可使用命令 <code>config get dir</code> ，执行效果如下图所示： <img src="assets/2020-02-24-122633.png" alt="image.png" /></p>
+<p>Redis 中可以使用命令查询当前配置参数。查询命令的格式为：<code>config get xxx</code> ，例如，想要获取 RDB 文件的存储名称设置，可以使用 <code>config get dbfilename</code> ，执行效果如下图所示： <img src="assets/2020-02-24-122630.png" alt="png" /> 查询 RDB 的文件目录，可使用命令 <code>config get dir</code> ，执行效果如下图所示： <img src="assets/2020-02-24-122633.png" alt="png" /></p>
 <h3>6 配置设置</h3>
 <p>设置 RDB 的配置，可以通过以下两种方式：</p>
 <ul>
@@ -294,7 +294,7 @@ dir ./
 <p>小贴士：Redis 的配置文件位于 Redis 安装目录的根路径下，默认名称为 redis.conf。</p>
 </blockquote>
 <h3>7 RDB 文件恢复</h3>
-<p>当 Redis 服务器启动时，如果 Redis 根目录存在 RDB 文件 dump.rdb，Redis 就会自动加载 RDB 文件恢复持久化数据。 如果根目录没有 dump.rdb 文件，请先将 dump.rdb 文件移动到 Redis 的根目录。 <strong>验证 RDB 文件是否被加载</strong> Redis 在启动时有日志信息，会显示是否加载了 RDB 文件，我们执行 Redis 启动命令：<code>src/redis-server redis.conf</code> ，如下图所示： <img src="assets/2020-02-24-122634.png" alt="image.png" /> 从日志上可以看出， Redis 服务在启动时已经正常加载了 RDB 文件。</p>
+<p>当 Redis 服务器启动时，如果 Redis 根目录存在 RDB 文件 dump.rdb，Redis 就会自动加载 RDB 文件恢复持久化数据。 如果根目录没有 dump.rdb 文件，请先将 dump.rdb 文件移动到 Redis 的根目录。 <strong>验证 RDB 文件是否被加载</strong> Redis 在启动时有日志信息，会显示是否加载了 RDB 文件，我们执行 Redis 启动命令：<code>src/redis-server redis.conf</code> ，如下图所示： <img src="assets/2020-02-24-122634.png" alt="png" /> 从日志上可以看出， Redis 服务在启动时已经正常加载了 RDB 文件。</p>
 <blockquote>
 <p>小贴士：Redis 服务器在载入 RDB 文件期间，会一直处于阻塞状态，直到载入工作完成为止。</p>
 </blockquote>
@@ -312,7 +312,7 @@ dir ./
 <li>RDB 需要经常 fork() 才能使用子进程将其持久化在磁盘上。如果数据集很大，fork() 可能很耗时，并且如果数据集很大且 CPU 性能不佳，则可能导致 Redis 停止为客户端服务几毫秒甚至一秒钟。</li>
 </ul>
 <h3>9 禁用持久化</h3>
-<p>禁用持久化可以提高 Redis 的执行效率，如果对数据丢失不敏感的情况下，可以在连接客户端的情况下，执行 <code>config set save &quot;&quot;</code> 命令即可禁用 Redis 的持久化，如下图所示： <img src="assets/2020-02-24-122636.png" alt="image.png" /></p>
+<p>禁用持久化可以提高 Redis 的执行效率，如果对数据丢失不敏感的情况下，可以在连接客户端的情况下，执行 <code>config set save &quot;&quot;</code> 命令即可禁用 Redis 的持久化，如下图所示： <img src="assets/2020-02-24-122636.png" alt="png" /></p>
 <h3>10 小结</h3>
 <p>通过本文我们可以得知，RDB 持久化分为手动触发和自动触发两种方式，它的优点是存储文件小，Redis 启动	时恢复数据比较快，缺点是有丢失数据的风险。RDB 文件的恢复也很简单，只需要把 RDB 文件放到 Redis 的根目录，在 Redis 启动时就会自动加载并恢复数据。 最后给大家留一个思考题：如果 Redis 服务器 CPU 占用过高，可能是什么原因导致的？欢迎各位在评论区，写下你们的答案。</p>
 <p><strong>参考&amp;鸣谢</strong> <a href="https://redis.io/topics/persistence">https://redis.io/topics/persistence</a> <a href="https://blog.csdn.net/qq_36318234/article/details/79994133">https://blog.csdn.net/qq_36318234/article/details/79994133</a> <a href="https://www.cnblogs.com/ysocean/p/9114268.html">https://www.cnblogs.com/ysocean/p/9114268.html</a> <a href="https://www.cnblogs.com/wdliu/p/9377278.html">https://www.cnblogs.com/wdliu/p/9377278.html</a></p>

@@ -200,7 +200,7 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>22  执行引擎：如何把握 ShardingSphere 中的 Executor 执行模型？（上）</h1>
 <p>在上一课时中，我们对 ShardingGroupExecuteCallback 和 SQLExecuteTemplate 做了介绍。从设计上讲，前者充当 ShardingExecuteEngine 的回调入口；而后者则是一个模板类，完成对 ShardingExecuteEngine 的封装并提供了对外的统一入口，这些类都位于底层的 sharding-core-execute 工程中。</p>
-<p><img src="assets/CgqCHl9HalOAccqPAACp0Ky_Tl8886.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl9HalOAccqPAACp0Ky_Tl8886.png" alt="png" /></p>
 <p>从今天开始，我们将进入到 sharding-jdbc-core 工程，来看看 ShardingSphere 中执行引擎上层设计中的几个核心类。</p>
 <h3>AbstractStatementExecutor</h3>
 <p>如上图所示，根据上一课时中的执行引擎整体结构图，可以看到<strong>SQLExecuteTemplate</strong>的直接使用者是<strong>AbstractStatementExecutor 类</strong>，今天我们就从这个类开始展开讨论，该类的变量比较多，我们先来看一下：</p>
@@ -269,7 +269,7 @@ private final Collection&lt;ShardingExecuteGroup&lt;StatementExecuteUnit&gt;&gt;
 </code></pre>
 <p>显然，在这里应该使用 SQLExecuteTemplate 模板类来完成具体回调的执行过程。同时，我可以看到这里还有一个 refreshMetaDataIfNeeded 辅助方法用来刷选元数据。</p>
 <p>AbstractStatementExecutor 有两个实现类：一个是普通的 StatementExecutor，一个是 PreparedStatementExecutor，接下来我将分别进行讲解。</p>
-<p><img src="assets/Ciqc1F9HamWACCzmAABPdP2Sna8714.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F9HamWACCzmAABPdP2Sna8714.png" alt="png" /></p>
 <h3>StatementExecutor</h3>
 <p>我们来到 StatementExecutor，先看它的用于执行初始化操作的 init 方法：</p>
 <pre><code>public void init(final SQLRouteResult routeResult) throws SQLException {
@@ -341,7 +341,7 @@ private final Collection&lt;ShardingExecuteGroup&lt;StatementExecuteUnit&gt;&gt;
 <pre><code>ConnectionMode connectionMode = maxConnectionsSizePerQuery &lt; sqlUnits.size() ? ConnectionMode.CONNECTION_STRICTLY : ConnectionMode.MEMORY_STRICTLY;
 </code></pre>
 <p>关于这个判断条件，我们可以使用一张简单的示意图来进行说明，如下所示：</p>
-<p><img src="assets/Ciqc1F9HaoaAYskMAACJIb5G6C8859.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F9HaoaAYskMAACJIb5G6C8859.png" alt="png" /></p>
 <p>如上图所示，我们可以看到如果每个数据库连接所指向的 SQL 数多于一条时，走的是内存限制模式，反之走的是连接限制模式。</p>
 <h4>3.StreamQueryResult VS MemoryQueryResult</h4>
 <p>在了解了 ConnectionMode（连接模式） 的设计理念后，我们再来看 StatementExecutor 的 executeQuery 方法返回的是一个 QueryResult。</p>

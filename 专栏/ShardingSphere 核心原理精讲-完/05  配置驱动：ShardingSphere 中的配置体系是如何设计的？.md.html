@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>在引入配置体系的学习之前，我们先来介绍 ShardingSphere 框架为开发人员提供的一个辅助功能，这个功能就是行表达式。</p>
 <p><strong>行表达式是 ShardingSphere 中用于实现简化和统一配置信息的一种工具，在日常开发过程中应用得非常广泛。</strong> 它的使用方式非常直观，只需要在配置中使用 ${expression} 或 $-&gt;{expression} 表达式即可。</p>
 <p>例如上一课时中使用的&quot;ds${0..1}.user${0..1}&quot;就是一个行表达式，用来设置可用的数据源或数据表名称。基于行表达式语法，${begin..end} 表示的是一个从&quot;begin&quot;到&quot;end&quot;的范围区间，而多个 ${expression} 之间可以用&quot;.&quot;符号进行连接，代表多个表达式数值之间的一种笛卡尔积关系。这样，如果采用图形化的表现形式，&quot;ds${0..1}.user${0..1}&quot;表达式最终会解析成这样一种结果：</p>
-<p><img src="assets/CgqCHl75rReAY_fbAACRt1sYKS0524.png" alt="image" /></p>
+<p><img src="assets/CgqCHl75rReAY_fbAACRt1sYKS0524.png" alt="png" /></p>
 <p>当然，类似场景也可以使用枚举的方式来列举所有可能值。行表达式也提供了 ${[enum1, enum2,…, enumx]} 语法来表示枚举值，所以&quot;ds${0..1}.user${0..1}&quot;的效果等同于&quot;ds${[0,1]}.user${[0,1]}&quot;。</p>
 <p>同样，在上一课时中使用到的 ds${age % 2} 表达式，它表示根据 age 字段进行对 2 取模，从而自动计算目标数据源是 ds0 还是 ds1。所以，除了配置数据源和数据表名称之外，行表达式在 ShardingSphere 中另一个常见的应用场景就是配置各种分片算法，我们会在后续的示例中大量看到这种使用方法。</p>
 <p>由于 ${expression} 与 Spring 本身的属性文件占位符冲突，而 Spring 又是目前主流的开发框架，因此在正式环境中建议你使用 $-&gt;{expression} 来进行配置。</p>
@@ -213,7 +213,7 @@ function hide_canvas() {
 <h4>ShardingRuleConfiguration</h4>
 <p>我们在上一课时中已经了解了如何通过框架之间的集成方法来创建一个 DataSource，这个 DataSource 就是我们使用 ShardingSphere 的入口。我们也看到在创建 DataSource 的过程中使用到了一个 ShardingDataSourceFactory 类，这个工厂类的构造函数中需要传入一个 ShardingRuleConfiguration 对象。显然，从命名上看，这个 ShardingRuleConfiguration 就是用于分片规则的配置入口。</p>
 <p>ShardingRuleConfiguration 中所需要配置的规则比较多，我们可以通过一张图例来进行简单说明，在这张图中，我们列举了每个配置项的名称、类型以及个数关系：</p>
-<p><img src="assets/Ciqc1F75rTaADRO6AAD5MCLrohA562.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F75rTaADRO6AAD5MCLrohA562.png" alt="png" /></p>
 <p>这里引入了一些新的概念，包括绑定表、广播表等，这些概念在下一课时介绍到 ShardingSphere 的分库分表操作时都会详细展开，这里不做具体介绍。<strong>事实上，对于 ShardingRuleConfiguration 而言，必须要设置的只有一个配置项，即 TableRuleConfiguration。</strong></p>
 <h4>TableRuleConfiguration</h4>
 <p>从命名上看，TableRuleConfiguration 是表分片规则配置，但事实上，这个类同时包含了对分库和分表两种场景的设置。TableRuleConfiguration 包含很多重要的配置项：</p>
@@ -235,7 +235,7 @@ function hide_canvas() {
 <p>keyGeneratorConfig 代表分布式环境下的自增列生成器配置，ShardingSphere 中集成了雪花算法等分布式 ID 的生成器实现。</p>
 <h4>ShardingStrategyConfiguration</h4>
 <p>我们注意到，databaseShardingStrategyConfig 和 tableShardingStrategyConfig 的类型都是一个 ShardingStrategyConfiguration 对象。在 ShardingSphere 中，ShardingStrategyConfiguration 实际上是一个空接口，存在一系列的实现类，其中的每个实现类都代表一种分片策略：</p>
-<p><img src="assets/CgqCHl75rUiACYZ1AAA8JV6ve54396.png" alt="3.png" />
+<p><img src="assets/CgqCHl75rUiACYZ1AAA8JV6ve54396.png" alt="png" />
 　ShardingStrategyConfiguration 的类层结构图</p>
 <p>在这些具体的分片策略中，通常需要指定一个分片列 shardingColumn 以及一个或多个分片算法 ShardingAlgorithm。当然也有例外，例如 HintShardingStrategyConfiguration 直接使用数据库的 Hint 机制实现强制路由，所以不需要分片列。我们会在《路由引擎：如何在路由过程中集成多种分片策略和分片算法？》中对这些策略的实现过程做详细的剖析。</p>
 <h4>KeyGeneratorConfiguration</h4>
@@ -440,7 +440,7 @@ spring.shardingsphere.masterslave.slave-data-source-names=dsslave0,dsslave1
 }
 </code></pre>
 <p>可以看到 createDataSource 方法的输入参数是一个 File 对象，我们通过这个 File 对象构建出 YamlRootShardingConfiguration 对象，然后再通过 YamlRootShardingConfiguration 对象获取了 ShardingRuleConfiguration 对象，并交由 ShardingDataSourceFactory 完成目标 DataSource 的构建。这里的调用关系有点复杂，我们来梳理整个过程的类层结构，如下图所示：</p>
-<p><img src="assets/Ciqc1F75rqaAGL8qAABR8QxogB0683.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F75rqaAGL8qAABR8QxogB0683.png" alt="png" /></p>
 <p>显然，这里引入了两个新的工具类，YamlEngine 和 YamlSwapper。我们来看一下它们在整个流程中起到的作用。</p>
 <h4>YamlEngine 和 YamlSwapper</h4>
 <p>YamlEngine 的作用是将各种形式的输入内容转换成一个 Yaml 对象，这些输入形式包括 File、字符串、byte[] 等。YamlEngine 包含了一批 unmarshal/marshal 方法来完成数据的转换。以 File 输入为例，unmarshal 方法通过加载 FileInputStream 来完成 Yaml 对象的构建：</p>

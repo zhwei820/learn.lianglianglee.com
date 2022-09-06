@@ -213,7 +213,7 @@ function hide_canvas() {
 <h3>TiDB：使用乐观事务打造悲观事务</h3>
 <p>在分布式事务那一讲，我提到 TiDB 的乐观事务使用了 Google 的 Percolator 模式，同时 TiDB 也对该模式进行了改进。可以说一提到 Percolator 模式事务的数据库，国内外都绕不过 TiDB。</p>
 <p>TiDB 在整体架构上基本参考了 Google Spanner 和 F1 的设计，分两层为 TiDB 和 TiKV。 TiDB 对应的是 Google F1，是一层无状态的 SQL Layer，兼容绝大多数 MySQL 语法，对外暴露 MySQL 网络协议，负责解析用户的 SQL 语句，生成分布式的 Query Plan，翻译成底层 Key Value 操作发送给 TiKV。TiKV 是真正的存储数据的地方，对应的是 Google Spanner，是一个分布式 Key Value 数据库，支持弹性水平扩展，自动地灾难恢复和故障转移，以及 ACID 跨行事务。下面的图展示了 TiDB 的架构。</p>
-<p><img src="assets/CioPOWBbAfyAX5EPAAHEn31cNYM835.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWBbAfyAX5EPAAHEn31cNYM835.png" alt="png" /></p>
 <p>对于事务部分，TiDB 实现悲观事务的方式是非常简洁的。其团队在仔细研究了 Percolator 的模型后发现，其实只要将在客户端调用 Commit 时候进行两阶段提交这个行为稍微改造一下，将第一阶段上锁和等锁提前到事务中执行 DML 的过程中，就可以简单高效地支持悲观事务场景。</p>
 <p>TiDB 的悲观锁实现的原理是，在一个事务执行 DML（UPDATE/DELETE）的过程中，TiDB 不仅会将需要修改的行在本地缓存，同时还会对这些行直接上悲观锁，这里的悲观锁的格式和乐观事务中的锁几乎一致，但是锁的内容是空的，只是一个占位符，等到 Commit 的时候，直接将这些悲观锁改写成标准的 Percolator 模型的锁，后续流程和原来保持一致即可。</p>
 <p>这个方案在很大程度上兼容了原有的事务实现，其扩展性、高可用和灵活性都有保证。同时该方案尽最大可能复用了原有 Percolator 的乐观事务方案，减少了事务模型整体的复杂度。</p>
@@ -239,11 +239,11 @@ function hide_canvas() {
 <p>Cassandra 的可调节一致性如我在本模块一致性那一讲介绍的一样，分为写一致性与读一致性。</p>
 <h4>写一致性</h4>
 <p>写一致性声明了需要写入多少个节点才算一次成功的写入。Cassandra 的写一致性是可以在强一致到弱一致之间进行调整的。我总结了下面的表格来为你说明。</p>
-<p><img src="assets/CioPOWBbAgqAAj2MAACioCvzYAU571.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWBbAgqAAj2MAACioCvzYAU571.png" alt="png" /></p>
 <p>我们可以看到 ANY 级别实际上对应了最终一致性。Cassandra 使用了反熵那一讲提到的暗示切换技术来保障写入的数据的可靠，也就是写入节点一旦失败，数据会暂存在暗示切换队列中，等到节点恢复后数据可以被还原出来。</p>
 <h4>读一致性</h4>
 <p>对于读操作，一致性级别指定了返回数据之前必须有多少个副本节点响应这个读查询。这里同样给你整理了一个表格。</p>
-<p><img src="assets/CioPOWBbAhKAF13EAACR3twAd-Q592.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWBbAhKAF13EAACR3twAd-Q592.png" alt="png" /></p>
 <p>Cassandra 在读取的时候使用了读修复来修复副本上的过期数据，该修复过程是一个后台线程，故不会阻塞读取。</p>
 <p>以上就是 Apache Cassandra 实现可调节一致性的一些细节。AWS 的 DynamoDB、Azure 的 CosmosDB 都有类似的可调节一致性供用户进行选择。你可以比照 Cassandra 的模式和这些数据库的文档进行学习。</p>
 <h3>总结</h3>

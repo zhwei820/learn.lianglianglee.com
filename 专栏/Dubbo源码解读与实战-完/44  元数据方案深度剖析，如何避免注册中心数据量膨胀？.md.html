@@ -338,12 +338,12 @@ function hide_canvas() {
 <li>methods（List 类型）：接口中定义的全部方法描述信息。在 MethodDefinition 中记录了方法的名称、参数类型、返回值类型以及方法参数涉及的所有 TypeDefinition。</li>
 <li>types（List 类型）：接口定义中涉及的全部类型描述信息，包括方法的参数和字段，如果遇到复杂类型，TypeDefinition 会递归获取复杂类型内部的字段。在 dubbo-metadata-api 模块中，提供了多种类型对应的 TypeBuilder 用于创建对应的 TypeDefinition，对于没有特定 TypeBuilder 实现的类型，会使用 DefaultTypeBuilder。</li>
 </ul>
-<p><img src="assets/CgqCHl_lrYOAIzjeAAFEk3cUdpg570.png" alt="6.png" /></p>
+<p><img src="assets/CgqCHl_lrYOAIzjeAAFEk3cUdpg570.png" alt="png" /></p>
 <p>TypeBuilder 接口实现关系图</p>
 <p><strong>在服务发布的时候，会将服务的 URL 中的部分数据封装为 FullServiceDefinition 对象，然后作为元数据存储起来</strong>。FullServiceDefinition 继承了 ServiceDefinition，并在 ServiceDefinition 基础之上扩展了 params 集合（Map&lt;String, String&gt; 类型），用来存储 URL 上的参数。</p>
 <h3>MetadataService</h3>
 <p>接下来看 MetadataService 接口，在上一讲我们提到<strong>Dubbo 中的每个 ServiceInstance 都会发布 MetadataService 接口供 Consumer 端查询元数据</strong>，下图展示了 MetadataService 接口的继承关系：</p>
-<p><img src="assets/CgpVE1_lrZGANC4vAAGdcllZU9o940.png" alt="1.png" /></p>
+<p><img src="assets/CgpVE1_lrZGANC4vAAGdcllZU9o940.png" alt="png" /></p>
 <p>MetadataService 接口继承关系图</p>
 <p>在 MetadataService 接口中定义了查询当前 ServiceInstance 发布的元数据的相关方法，具体如下所示：</p>
 <pre><code>public interface MetadataService {
@@ -481,7 +481,7 @@ private boolean doFunction(BiFunction&lt;WritableMetadataService, URL, Boolean&g
 <p>元数据中心是 Dubbo 2.7.0 版本之后新增的一项优化，其主要目的是将 URL 中的一部分内容存储到元数据中心，从而减少注册中心的压力。</p>
 <p><strong>元数据中心的数据只是给本端自己使用的，改动不需要告知对端</strong>，例如，Provider 修改了元数据，不需要实时通知 Consumer。这样，在注册中心存储的数据量减少的同时，还减少了因为配置修改导致的注册中心频繁通知监听者情况的发生，很好地减轻了注册中心的压力。</p>
 <p><strong>MetadataReport 接口是 Dubbo 节点与元数据中心交互的桥梁</strong>，其继承关系如下图所示：</p>
-<p><img src="assets/Cip5yF_lramAYf82AAFkkbA0N2g785.png" alt="2.png" /></p>
+<p><img src="assets/Cip5yF_lramAYf82AAFkkbA0N2g785.png" alt="png" /></p>
 <p>MetadataReport 继承关系图</p>
 <p>我们先来看一下 MetadataReport 接口的核心定义：</p>
 <pre><code>public interface MetadataReport {
@@ -675,10 +675,10 @@ private boolean doHandleMetadataCollection(Map&lt;MetadataIdentifier, Object&gt;
 </code></pre>
 <p>在 AbstractMetadataReport 的构造方法中，会根据 reportServerURL（也就是后面的 metadataReportURL）参数启动一个“天”级别的定时任务，该定时任务会执行 publishAll() 方法，其中会通过 doHandleMetadataCollection() 方法将 allMetadataReports 集合中的全部元数据重新进行上报。该定时任务默认是在凌晨 02:00~06:00 启动，每天执行一次。</p>
 <p>到此为止，AbstractMetadataReport 为子类实现的公共能力就介绍完了，其他方法都是委托给了相应的 do*() 方法，这些 do*() 方法都是在 AbstractMetadataReport 子类中实现的。</p>
-<p><img src="assets/CgqCHl_hcauAR9AQAAG7kMJSlc8827.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl_hcauAR9AQAAG7kMJSlc8827.png" alt="png" /></p>
 <h4>2. BaseMetadataIdentifier</h4>
 <p>在 AbstractMetadataReport 上报元数据的时候，元数据对应的 Key 都是BaseMetadataIdentifier 类型的对象，其继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F_lrb-Ad3a5AAGJ2ySdyBE643.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F_lrb-Ad3a5AAGJ2ySdyBE643.png" alt="png" /></p>
 <p>BaseMetadataIdentifier 继承关系图</p>
 <ul>
 <li>MetadataIdentifier 中包含了服务接口、version、group、side 和 application 五个核心字段。</li>
@@ -695,7 +695,7 @@ public interface MetadataReportFactory {
 </code></pre>
 <p>MetadataReportFactory 是个扩展接口，从 @SPI 注解的默认值可以看出<strong>Dubbo 默认使用 Redis 实现元数据中心</strong>。
 Dubbo 提供了针对 ZooKeeper、Redis、Consul 等作为元数据中心的 MetadataReportFactory 实现，如下图所示：</p>
-<p><img src="assets/CgqCHl_lrcmAEIYBAAFSOVpEU1Y779.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHl_lrcmAEIYBAAFSOVpEU1Y779.png" alt="png" /></p>
 <p>MetadataReportFactory 继承关系图</p>
 <p>这些 MetadataReportFactory 实现都继承了 AbstractMetadataReportFactory，在 AbstractMetadataReportFactory 提供了缓存 MetadataReport 实现的功能，并定义了一个 createMetadataReport() 抽象方法供子类实现。另外，AbstractMetadataReportFactory 实现了 MetadataReportFactory 接口的 getMetadataReport() 方法，下面我们就来简单看一下该方法的实现：</p>
 <pre><code>public MetadataReport getMetadataReport(URL url) {
@@ -763,7 +763,7 @@ String getNodePath(BaseMetadataIdentifier metadataIdentifier) {
 }
 </code></pre>
 <p><strong>MetadataServiceExporter 只有 ConfigurableMetadataServiceExporter 这一个实现</strong>，如下图所示：</p>
-<p><img src="assets/Cip5yF_hcfmAMtHdAABVR_mzQyg047.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Cip5yF_hcfmAMtHdAABVR_mzQyg047.png" alt="png" /></p>
 <p>MetadataServiceExporter 继承关系图</p>
 <p>ConfigurableMetadataServiceExporter 的核心实现是 export() 方法，其中会创建一个 ServiceConfig 对象完成 MetadataService 服务的发布：</p>
 <pre><code>public ConfigurableMetadataServiceExporter export() {

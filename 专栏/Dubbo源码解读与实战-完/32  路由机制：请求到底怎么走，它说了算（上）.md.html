@@ -342,10 +342,10 @@ public interface RouterFactory {
 }
 </code></pre>
 <p>RouterFactory 接口有很多实现类，如下图所示：</p>
-<p><img src="assets/CgqCHl-qOLWAf_G5AACv9PqZOrc667.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-qOLWAf_G5AACv9PqZOrc667.png" alt="png" /></p>
 <p>RouterFactory 继承关系图</p>
 <p>下面我们就来深入介绍下每个 RouterFactory 实现类以及对应的 Router 实现对象。<strong>Router 决定了一次 Dubbo 调用的目标服务，Router 接口的每个实现类代表了一个路由规则</strong>，当 Consumer 访问 Provider 时，Dubbo 根据路由规则筛选出合适的 Provider 列表，之后通过负载均衡算法再次进行筛选。Router 接口的继承关系如下图所示：</p>
-<p><img src="assets/Ciqc1F-qOL2AAXYIAACMVPC1qW0732.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F-qOL2AAXYIAACMVPC1qW0732.png" alt="png" /></p>
 <p>Router 继承关系图</p>
 <p>接下来我们就开始介绍 RouterFactory 以及 Router 的具体实现。</p>
 <h3>ConditionRouterFactory&amp;ConditionRouter</h3>
@@ -453,7 +453,7 @@ public interface RouterFactory {
 <pre><code>host = 2.2.2.2,1.1.1.1,3.3.3.3 &amp; method !=get =&gt; host = 1.2.3.4
 </code></pre>
 <p>经过 ROUTE_PATTERN 正则表达式的分组之后，我们得到如下分组：</p>
-<p><img src="assets/CgqCHl-uM9aALLGaAAFMMnXRAPw685.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl-uM9aALLGaAAFMMnXRAPw685.png" alt="png" /></p>
 <p>Rule 分组示意图</p>
 <p>我们先来看 <code>=&gt;</code> 之前的 Consumer 匹配规则的处理。</p>
 <ol>
@@ -464,10 +464,10 @@ public interface RouterFactory {
 <li>分组 5 中，separator 为 &quot;!=&quot; 字符串，content 为 &quot;get&quot; 字符串。处理该分组时，会进入 parseRule() 方法中（5）处的分支，向步骤 4 新建的 MatchPair 对象中的 mismatches 集合添加 &quot;get&quot; 字符串。</li>
 </ol>
 <p>最后，我们得到的 whenCondition 集合如下图所示：</p>
-<p><img src="assets/Ciqc1F-uM-OABiPoAADt1lcbl7U975.png" alt="3.png" /></p>
+<p><img src="assets/Ciqc1F-uM-OABiPoAADt1lcbl7U975.png" alt="png" /></p>
 <p>whenCondition 集合示意图</p>
 <p>同理，parseRule() 方法解析上述表达式 <code>=&gt;</code> 之后的规则得到的 thenCondition 集合，如下图所示：</p>
-<p><img src="assets/CgqCHl-uM-6AXnrOAAB6hJLFL50095.png" alt="1.png" /></p>
+<p><img src="assets/CgqCHl-uM-6AXnrOAAB6hJLFL50095.png" alt="png" /></p>
 <p>thenCondition 集合示意图</p>
 <p>了解了 ConditionRouter 解析规则的流程以及 MatchPair 内部的匹配原则之后，ConditionRouter 中最后一个需要介绍的内容就是它的 route() 方法了。</p>
 <p>ConditionRouter.route() 方法首先会尝试前面创建的 whenCondition 集合，判断此次发起调用的 Consumer 是否符合表达式中 <code>=&gt;</code> 之前的 Consumer 过滤条件，若不符合，直接返回整个 invokers 集合；若符合，则通过 thenCondition 集合对 invokers 集合进行过滤，得到符合 Provider 过滤条件的 Invoker 集合，然后返回给上层调用方。ConditionRouter.route() 方法的核心实现如下：</p>

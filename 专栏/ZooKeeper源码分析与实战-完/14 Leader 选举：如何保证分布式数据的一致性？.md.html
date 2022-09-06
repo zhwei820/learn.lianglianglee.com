@@ -199,12 +199,12 @@ function hide_canvas() {
 <p>在分布式系统中有一个著名的 CAP 定理，是说一个分布式系统不能同时满足一致性、可用性，以及分区容错性。今天我们要讲的就是一致性。其实 ZooKeeper 中实现的一致性也不是强一致性，即集群中各个服务器上的数据每时每刻都是保持一致的特性。在 ZooKeeper 中，采用的是最终一致的特性，<strong>即经过一段时间后，ZooKeeper 集群服务器上的数据最终保持一致的特性</strong>。</p>
 <p>在 ZooKeeper 集群中，Leader 服务器主要负责处理事物性的请求，而在接收到一个客户端的事务性请求操作时，Leader 服务器会先向集群中的各个机器针对该条会话发起投票询问。</p>
 <p>要想实现 ZooKeeper 集群中的最终一致性，我们先要确定什么情况下会对 ZooKeeper 集群服务产生不一致的情况。如下图所示：</p>
-<p><img src="assets/CgqCHl7siPqAEgUiAAAsZnldQKA321.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl7siPqAEgUiAAAsZnldQKA321.png" alt="png" /></p>
 <p>在集群初始化启动的时候，首先要同步集群中各个服务器上的数据。而在集群中 Leader 服务器崩溃时，需要选举出新的 Leader 而在这一过程中会导致各个服务器上数据的不一致，所以当选举出新的 Leader 服务器后需要进行数据的同步操作。</p>
 <h3>底层实现</h3>
 <p>与上面介绍的一样，我们的底层实现讲解主要围绕 ZooKeeper 集群中数据一致性的底层实现。ZooKeeper 在集群中采用的是多数原则方式，即<strong>当一个事务性的请求导致服务器上的数据发生改变时，ZooKeeper 只要保证集群上的多数机器的数据都正确变更了，就可以保证系统数据的一致性。</strong> 这是因为在一个 ZooKeeper 集群中，每一个 Follower 服务器都可以看作是 Leader 服务器的数据副本，需要保证集群中大多数机器数据是一致的，这样在集群中出现个别机器故障的时候，ZooKeeper 集群依然能够保证稳定运行。</p>
 <p>在 ZooKeeper 集群服务的运行过程中，数据同步的过程如下图所示。当执行完数据变更的会话请求时，需要对集群中的服务器进行数据同步。</p>
-<p><img src="assets/CgqCHl7siSSAGaKOAABaTR2X0Wo408.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7siSSAGaKOAABaTR2X0Wo408.png" alt="png" /></p>
 <h3>广播模式</h3>
 <p>ZooKeeper 在代码层的实现中定义了一个 HashSet 类型的变量，用来管理在集群中的 Follower 服务器，之后调用</p>
 <p>getForwardingFollowers 函数获取在集群中的 Follower 服务器，如下面这段代码所示：</p>

@@ -260,14 +260,14 @@ function hide_canvas() {
 <li>写权限（w）：控制写入文件。</li>
 <li>执行权限（x）：控制将文件执行，比如脚本、应用程序等。</li>
 </ol>
-<p><img src="assets/Ciqc1F91G6qACantAAC4GIUeips460.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1F91G6qACantAAC4GIUeips460.png" alt="png" /></p>
 <p>然后每个文件又可以从 3 个维度去配置上述的 3 种权限：</p>
 <ol>
 <li>用户维度。每个文件可以所属 1 个用户，用户维度配置的 rwx 在用户维度生效；</li>
 <li>组维度。每个文件可以所属 1 个分组，组维度配置的 rwx 在组维度生效；</li>
 <li>全部用户维度。设置对所有用户的权限。</li>
 </ol>
-<p><img src="assets/CgqCHl91G9aADTBZAADD7IOpjac809.png" alt="2.png" /></p>
+<p><img src="assets/CgqCHl91G9aADTBZAADD7IOpjac809.png" alt="png" /></p>
 <p>因此 Linux 中文件的权限可以用 9 个字符，3 组<code>rwx</code>描述：第一组是用户权限，第二组是组权限，第三组是所有用户的权限。然后用<code>-</code>代表没有权限。比如<code>rwxrwxrwx</code>代表所有维度可以读写执行。<code>rw--wxr-x</code>代表用户维度不可以执行，组维度不可以读取，所有用户维度不可以写入。</p>
 <p>通常情况下，如果用<code>ls -l</code>查看一个文件的权限，会有 10 个字符，这是因为第一个字符代表的是文件类型。我们在 06 课时讲解“几种常见的文件类型”时提到过，有管道文件、目录文件、链接文件等等。<code>-</code>代表普通文件、<code>d</code>代表目录、<code>p</code>代表管道。</p>
 <p><strong>学习了这套机制之后，请你跟着我的节奏一起思考以下 4 个问题</strong>。</p>
@@ -288,14 +288,14 @@ function hide_canvas() {
 <p>也就是用户、组维度不可以执行，所有用户可读。</p>
 <p><strong>问题二：公共执行文件的权限</strong></p>
 <p>前面提到过可以用<code>which</code>指令查看<code>ls</code>指令所在的目录，我们发现在<code>/usr/bin</code>中。然后用<code>ls -l</code>查看<code>ls</code>的权限，可以看到下图所示：</p>
-<p><img src="assets/Ciqc1F90SRuAAQCEAADdVOthCFw679.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F90SRuAAQCEAADdVOthCFw679.png" alt="png" /></p>
 <p>第一个<code>-</code>代表这是一个普通文件，后面的 rwx 代表用户维度可读写和执行；第二个<code>r-x</code>代表组维度不可以写；第三个<code>r-x</code>代表所有用户可以读和执行。后面的两个<code>root</code>，第一个是所属用户，第二个是所属分组。</p>
 <p>到这里你可能会有一个疑问：如果一个文件设置为不可读，但是可以执行，那么结果会怎样？</p>
 <p>答案当然是不可以执行，无法读取文件内容自然不可以执行。</p>
 <p><strong>问题三：执行文件</strong></p>
 <p>在 Linux 中，如~~果~~一个文件可以被执行，则可以直接通过输入文件路径（相对路径或绝对路径）的方式执行。如果想执行一个不可以执行的文件，Linux 则会报错。</p>
 <p>当用户输入一个文件名，如果没有指定完整路径，Linux 就会在一部分目录中查找这个文件。你可以通过<code>echo $PATH</code>看到 Linux 会在哪些目录中查找可执行文件，<code>PATH</code>是 Linux 的环境变量，关于环境变量，我将在 “12 | 高级技巧之集群部署中”和你详细讨论。</p>
-<p><img src="assets/CgqCHl90SSSACa4WAAFIEUypWH4904.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl90SSSACa4WAAFIEUypWH4904.png" alt="png" /></p>
 <p><strong>问题四：可不可以都 root</strong></p>
 <p>最后一个问题是，可不可以都<code>root</code>？</p>
 <p>答案当然是不行！这里先给你留个悬念，具体原因我们会在本课时最后来讨论。</p>
@@ -313,7 +313,7 @@ function hide_canvas() {
 <p>黑客可以利用 Mysql 的 Copy From Prgram 指令为所欲为，比如先备份你的关键文件，然后再删除他们，并要挟你通过指定账户打款。如果执行最小权限原则，那么黑客即便攻破我们的 Mysql 服务，他也只能获得最小的权限。当然，黑客拿到 Mysql 权限也是非常可怕的，但是相比拿到所有权限，这个损失就小多了。</p>
 <h4>分级保护</h4>
 <p>因为内核可以直接操作内存和 CPU，因此非常危险。驱动程序可以直接控制摄像头、显示屏等核心设备，也需要采取安全措施，比如防止恶意应用开启摄像头盗用隐私。通常操作系统都采取一种环状的保护模式。</p>
-<p><img src="assets/CgqCHl91HB2AdNsAAAEpE6rtlHM754.png" alt="3.png" /></p>
+<p><img src="assets/CgqCHl91HB2AdNsAAAEpE6rtlHM754.png" alt="png" /></p>
 <p>如上图所示，内核在最里面，也就是 Ring 0。 应用在最外面也就是Ring 3。驱动在中间，也就是 Ring 1 和 Ring 2。对于相邻的两个 Ring，内层 Ring 会拥有较高的权限，可以改变外层的 Ring；而外层的 Ring 想要使用内层 Ring 的资源时，会有专门的程序（或者硬件）进行保护。</p>
 <p>比如说一个 Ring3 的应用需要使用内核，就需要发送一个系统调用给内核。这个系统调用会由内核进行验证，比如验证用户有没有足够的权限，以及这个行为是否安全等等。</p>
 <p><strong>权限包围（Privilege Bracking）</strong></p>
@@ -323,7 +323,7 @@ function hide_canvas() {
 <p>上面我们讨论了 Linux 权限的架构，接下来我们学习一些具体的指令。</p>
 <h4>查看</h4>
 <p>如果想查看当前用户的分组可以使用<code>groups</code>指令。</p>
-<p><img src="assets/CgqCHl90SU6AUJrLAADmRyiiAig313.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl90SU6AUJrLAADmRyiiAig313.png" alt="png" /></p>
 <p>上面指令列出当前用户的所有分组。第一个是同名的主要分组，后面从<code>adm</code>开始是次级分组。</p>
 <p>我先给你介绍两个分组，其他分组你可以去查资料：</p>
 <ul>
@@ -331,16 +331,16 @@ function hide_canvas() {
 <li>sudo 分组用户可以通过 sudo 指令提升权限。</li>
 </ul>
 <p>如果想查看当前用户，可以使用<code>id</code>指令，如下所示：</p>
-<p><img src="assets/CgqCHl90SVSALssXAAGhSpF-cWY440.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl90SVSALssXAAGhSpF-cWY440.png" alt="png" /></p>
 <ul>
 <li>uid 是用户 id；</li>
 <li>gid 是组 id；</li>
 <li>groups 后面是每个分组和分组的 id。</li>
 </ul>
 <p>如果想查看所有的用户，可以直接看<code>/etc/passwd</code>。</p>
-<p><img src="assets/CgqCHl90SVqAIja7AAXBj3lebBQ651.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl90SVqAIja7AAXBj3lebBQ651.png" alt="png" /></p>
 <p><code>/etc/passwd</code>这个文件存储了所有的用户信息，如下图所示：</p>
-<p><img src="assets/CgqCHl91HIGAWXWVAACI9cgafaM295.png" alt="WechatIMG144.png" /></p>
+<p><img src="assets/CgqCHl91HIGAWXWVAACI9cgafaM295.png" alt="png" /></p>
 <h4>创建用户</h4>
 <p>创建用户用<code>useradd</code>指令。</p>
 <pre><code>sudo useradd foo

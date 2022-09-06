@@ -168,7 +168,7 @@ function hide_canvas() {
 <p>SecurityMetadataSource 接口定义了一组方法来操作这些权限配置，具体权限配置的表现形式是<strong>ConfigAttribute 接口</strong>。通过 ExpressionInterceptUrlRegistry 和 AuthorizedUrl，我们能够把配置信息转变为具体的 ConfigAttribute。</p>
 <p>当我们获取了权限配置信息后，就可以根据这些配置决定 HTTP 请求是否具有访问权限，也就是执行授权决策。Spring Security 专门提供了一个 AccessDecisionManager 接口完成该操作。而在 AccessDecisionManager 接口中，又把具体的决策过程委托给了 AccessDecisionVoter 接口。<strong>AccessDecisionVoter 可以被认为是一种投票器，负责对授权决策进行表决</strong>。</p>
 <p>以上三个步骤构成了 Spring Security 的授权整体工作流程，可以用如下所示的时序图表示：</p>
-<p><img src="assets/CioPOWC99xWAASrVAABnJyNceVM498.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWC99xWAASrVAABnJyNceVM498.png" alt="png" /></p>
 <p>Spring Security 的授权整体工作流程</p>
 <p>接下来，我们基于这张类图分别对拦截请求、获取权限配置、执行授权决策三个步骤逐一展开讲解。</p>
 <h3>拦截请求</h3>
@@ -385,12 +385,12 @@ List&lt;AccessDecisionVoter&lt;?&gt;&gt; getDecisionVoters(H http) {
 </code></pre>
 <p>显然，最终的评估过程只是简单使用了 Spring 所提供的 SpEL 表达式语言。</p>
 <p>作为总结，我们把这一流程中涉及的核心组件以类图的形式进行了梳理，如下图所示：</p>
-<p><img src="assets/Cgp9HWC99zqAGUOYAACtn7EjrO0914.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWC99zqAGUOYAACtn7EjrO0914.png" alt="png" /></p>
 <p>Spring Security 授权相关核心类图</p>
 <h3>小结与预告</h3>
 <p>这一讲我们关注的是 Spring Security 授权机制的实现原理，我们把整个授权过程拆分成<strong>拦截请求、获取访问策略和执行授权决策</strong>这三大步骤。针对每一个步骤，都涉及了一组核心类及其它们之间的交互关系。针对这些核心类的讲解思路是围绕着上一讲介绍的基本配置方法展开讨论的，确保实际应用能与源码分析衔接在一起。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWC990GAfLaXAACI8-bD1xs493.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWC990GAfLaXAACI8-bD1xs493.png" alt="png" /></p>
 <p>最后给你留一道思考题：在 Spring Security 中，你能简要描述整个授权机制的执行过程吗？</p>
 </div>
                     </div>

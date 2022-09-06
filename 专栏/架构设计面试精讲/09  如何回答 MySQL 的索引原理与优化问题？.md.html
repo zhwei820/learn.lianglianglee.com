@@ -189,7 +189,7 @@ function hide_canvas() {
 <h3>案例解答</h3>
 <h4>MySQL InnoDB 的索引原理</h4>
 <p><strong>从数据结构的角度来看，</strong> MySQL 常见索引有 B+Tree 索引、HASH 索引、Full-Text 索引。我在表中总结了 MySQL 常见的存储引擎 InnoDB、MyISAM 和 Memory 分别支持的索引类型。（后两个存储引擎在实际工作和面试中很少提及，所以本讲我只讲 InnoDB） 。</p>
-<p><img src="assets/Ciqc1GARAb2AeSnCAAF73_MTZck998.png" alt="1.png" /></p>
+<p><img src="assets/Ciqc1GARAb2AeSnCAAF73_MTZck998.png" alt="png" /></p>
 <p>索引类型</p>
 <p>在实际应用中，InnoDB 是 MySQL 建表时默认的存储引擎，B+Tree 索引类型也是 MySQL 存储引擎采用最多的索引类型。</p>
 <p>在创建表时，InnoDB 存储引擎默认使用表的主键作为主键索引，该主键索引就是聚簇索引（Clustered Index），如果表没有定义主键，InnoDB 就自己产生一个隐藏的 6 个字节的主键 ID 值作为主键索引，而创建的主键索引默认使用的是 B+Tree 索引。</p>
@@ -204,7 +204,7 @@ function hide_canvas() {
 ) CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 </code></pre>
 <p>然后新增几行数据：
-<img src="assets/Cip5yGARAfSAAeR4AAJlafpM_D0118.png" alt="2.png" /></p>
+<img src="assets/Cip5yGARAfSAAeR4AAJlafpM_D0118.png" alt="png" /></p>
 <p>商品数据表</p>
 <ul>
 <li><strong>通过主键查询（主键索引）商品数据的过程</strong></li>
@@ -214,7 +214,7 @@ function hide_canvas() {
 </code></pre>
 <p>我们可以通过数据手动构建一个 B+Tree，它的每个节点包含 3 个子节点（B+Tree 每个节点允许有 M 个子节点，且 M&gt;2），根节点中的数据值 1、18、36 分别是子节点（1，6，12），（18，24，30）和（36，41，52）中的最小值。</p>
 <p>每一层父节点的数据值都会出现在下层子节点的数据值中，因此在叶子节点中，包括了所有的数据值信息，并且每一个叶子节点都指向下一个叶子节点，形成一个链表。如图所示：</p>
-<p><img src="assets/CgpVE2ARAp2AKn1rAAuwHY1j7B4280.png" alt="3.png" /></p>
+<p><img src="assets/CgpVE2ARAp2AKn1rAAuwHY1j7B4280.png" alt="png" /></p>
 <p>主键索引查询过程</p>
 <p>我们举例讲解一下 B+Tree 的查询流程，比如想要查找数据值 15，B+Tree 会自顶向下逐层进行查找：</p>
 <ul>
@@ -264,7 +264,7 @@ function hide_canvas() {
 ) CHARACTER SET = utf8 COLLATE = utf8_general_ci
 </code></pre>
 <p>表中包含了主键索引、name 字段上的普通索引，以及 id 和 name 两个字段的联合索引。现在我们来看一条简单查询语句的执行计划：</p>
-<p><img src="assets/CgqCHmARAz-AEslxAAFQoCZRpY4822.png" alt="4.png" /></p>
+<p><img src="assets/CgqCHmARAz-AEslxAAFQoCZRpY4822.png" alt="png" /></p>
 <p>执行计划</p>
 <p>对于执行计划，参数有 possible_keys 字段表示可能用到的索引，key 字段表示实际用的索引，key_len 表示索引的长度，rows 表示扫描的数据行数。</p>
 <p><strong>这其中需要你重点关注 type 字段，</strong> 表示数据扫描类型，也就是描述了找到所需数据时使用的扫描方式是什么，常见扫描类型的执行效率从低到高的顺序为（考虑到查询效率问题，全表扫描和全索引扫描要尽量避免）：</p>
@@ -279,7 +279,7 @@ function hide_canvas() {
 <p>总的来说，执行计划是研发工程师分析索引详情必会的技能（很多大厂公司招聘 JD 上写着“SQL 语句调优” ），所以你在面试时也要知道执行计划核心参数的含义，如 type。在回答时，也要以重点参数为切入点，再扩展到其他参数，然后再说自己是怎么做 SQL 优化工作的。</p>
 <h4>索引失效的常见情况</h4>
 <p>在工作中，我们经常会碰到 SQL 语句不适用已有索引的情况，来看一个索引失效的例子：</p>
-<p><img src="assets/CgqCHmARBA-AQThqAAE5tk3towI139.png" alt="5.png" /></p>
+<p><img src="assets/CgqCHmARBA-AQThqAAE5tk3towI139.png" alt="png" /></p>
 <p>这条带有 like 查询的 SQL 语句，没有用到 product 表中的 index_name 索引。</p>
 <p><strong>我们结合普通索引的 B+Tree 结构看一下索引失效的原因：</strong> 当 MySQL 优化器根据 name like ‘%路由器’ 这个条件，到索引 index_name 的 B+Tree 结构上进行查询评估时，发现当前节点的左右子节点上的值都有可能符合 '%路由器' 这个条件，于是优化器判定当前索引需要扫描整个索引，并且还要回表查询，不如直接全表扫描。</p>
 <p>当然，还有其他类似的索引失效的情况：</p>
@@ -305,7 +305,7 @@ function hide_canvas() {
 </ul>
 <p>联合索引时，存在<strong>最左匹配原则</strong>，也就是按照最左优先的方式进行索引的匹配。比如联合索引 (userpin, username)，如果查询条件是 WHERE userpin=1 AND username=2，就可以匹配上联合索引；或者查询条件是 WHERE userpin=1，也能匹配上联合索引，但是如果查询条件是 WHERE username=2，就无法匹配上联合索引。</p>
 <p>另外，建立联合索引时的字段顺序，对索引效率也有很大影响。越靠前的字段被用于索引过滤的概率越高，实际开发工作中建立联合索引时，要把区分度大的字段排在前面，这样区分度大的字段越有可能被更多的 SQL 使用到。</p>
-<p><img src="assets/Ciqc1GARBC6AOagLAACKmpN6OcM499.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1GARBC6AOagLAACKmpN6OcM499.png" alt="png" /></p>
 <p>区分度就是某个字段 column 不同值的个数除以表的总行数，比如性别的区分度就很小，不适合建立索引或不适合排在联合索引列的靠前的位置，而 uuid 这类字段就比较适合做索引或排在联合索引列的靠前的位置。</p>
 <h3>总结</h3>
 <p>今天，我们讲了 MySQL 的索引原理，介绍了 InnoDB 为什么会采用 B+Tree 结构。因为 B+Tree 能够减少单次查询的磁盘访问次数，做到查询效率最大化。另外，我们还讲了如何查看 SQL 的执行计划，从而找到索引失效的问题，并有针对性的做索引优化。</p>

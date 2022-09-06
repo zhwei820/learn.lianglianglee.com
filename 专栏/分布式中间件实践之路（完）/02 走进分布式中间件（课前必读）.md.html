@@ -172,7 +172,7 @@ function hide_canvas() {
 <p>Availability = MTBF / (MTBF + MTTR)*100%</p>
 </blockquote>
 <p>其中，MTBF（Mean Time Between Failure）是指相邻两次故障之间的平均工作时间，MTTR（Mean Time To Repair）是指系统由故障状态转为工作状态所需修复时间的平均值。通常，用 N 个9来表征系统可用性，比如99.9%（3-nines Availability），99.999%（5-nines Availability）。</p>
-<p><img src="assets/0ed5f4d0-90ea-11e8-a17a-affb06b38793" alt="enter image description here" /></p>
+<p><img src="assets/0ed5f4d0-90ea-11e8-a17a-affb06b38793" alt="png" /></p>
 <p>图片出自：<a href="https://blog.csdn.net/zyhlwzy/article/details/78658002">CSDN 博客</a></p>
 <h4>2.4 可靠性</h4>
 <p>与可用性不同，可靠性是指在给定的时间间隔和给定条件下，系统能正确执行其功能的概率。可靠性的量化指标是周期内系统平均无故障运行时间，可用性的量化指标是周期内系统无故障运行的总时间。这种“官方定义”比较晦涩，下面举一个简单的例子。</p>
@@ -299,15 +299,15 @@ str.toUpperCase();//指令3
 <p>支持异步通信协议，消息的发送者将消息发送到消息队列后可以立即返回，不用等待接收者的响应。消息会被保存在队列中，直到被接收者取出。消息的发送与处理是完全异步的。下面通过一个例子来说明。</p>
 <p>对于大多数应用，在用户注册后，都需要发注册邮件和注册短信。传统的做法有两种：</p>
 <p><strong>1.</strong> 串行方式：将注册信息写入数据库成功后，发送注册邮件，再发送注册短信。以上三个任务全部完成后，返回给客户端，如下图示:</p>
-<p><img src="assets/b4d236f0-966c-11e8-bd60-15398afc36e1" alt="enter image description here" /></p>
+<p><img src="assets/b4d236f0-966c-11e8-bd60-15398afc36e1" alt="png" /></p>
 <p><strong>2.</strong> 并行方式：将注册信息写入数据库成功后，发送注册邮件的同时，发送注册短信。以上三个任务完成后，返回给客户端。与串行的差别是，并行的方式可以提高处理的效率。</p>
-<p><img src="assets/cd60d5f0-966c-11e8-bd60-15398afc36e1" alt="enter image description here" /></p>
+<p><img src="assets/cd60d5f0-966c-11e8-bd60-15398afc36e1" alt="png" /></p>
 <p>接下来，我们引入消息队列，来实现异步处理。</p>
 <p>将注册信息写入数据库成功后，将消息写入消息队列，然后立即返回成功；此后，邮件系统和短信系统分别从消息队列中获取注册信息，再发送注册邮件和短信。很明显，借助消息队列的异步处理能力，将极大的提高响应速度。</p>
-<p><img src="assets/de0257d0-966c-11e8-bd60-15398afc36e1" alt="enter image description here" /></p>
+<p><img src="assets/de0257d0-966c-11e8-bd60-15398afc36e1" alt="png" /></p>
 <h5><strong>应用解耦</strong></h5>
 <p>以电商 IT 架构为例，在传统紧耦合订单场景里，客户在电商网站下订单，订单系统接收到请求后，立即调用库存系统接口，库存减一，如下图所示：</p>
-<p><img src="assets/13138c50-966d-11e8-9c35-b59aad3fef8b" alt="enter image description here" /></p>
+<p><img src="assets/13138c50-966d-11e8-9c35-b59aad3fef8b" alt="png" /></p>
 <p>上述模式存在巨大风险：</p>
 <ol>
 <li>假如库存系统无法访问（升级、业务变更、故障等），则订单减库存将失败，从而导致订单失败；</li>
@@ -316,7 +316,7 @@ str.toUpperCase();//指令3
 <p>我们引入消息队列，解除强耦合性，处理流程又会怎样呢？</p>
 <p>订单系统中，用户下单后，订单系统完成持久化处理，将消息写入消息队列，返回用户订单下单成功，此时客户可以认为下单成功。消息队列提供异步的通信协议，消息的发送者将消息发送到消息队列后可以立即返回，不用等待接收者的响应。消息会被保存在队列中，直到被接收者取出。</p>
 <p>库存系统中，从消息队列中获取下单信息，库存系统根据下单信息进行库存操作。</p>
-<p><img src="assets/2ef43c80-966d-11e8-bd60-15398afc36e1" alt="enter image description here" /></p>
+<p><img src="assets/2ef43c80-966d-11e8-bd60-15398afc36e1" alt="png" /></p>
 <h5><strong>流量削锋</strong></h5>
 <p>像双11秒杀、预约抢购等活动，通常会出现流量暴增，当外部请求超过系统处理能力时，如果系统没有做相应保护，可能因不堪重负而挂掉。</p>
 <p>这时，我们可以引入消息队列，缓解短时间内高流量压力：</p>
@@ -324,7 +324,7 @@ str.toUpperCase();//指令3
 <li>用户的秒杀请求，服务器接收后，首先写入消息队列，然后返回成功。假如消息队列长度超过最大数量，则直接抛弃用户请求或跳转到失败页面；</li>
 <li>秒杀业务根据消息队列中的请求信息，再做后续处理（根据数据库实际的select、insert、update 能力处理注册、预约申请）。</li>
 </ol>
-<p><img src="assets/3b1edc40-966d-11e8-9f67-05ec09da262a" alt="enter image description here" /></p>
+<p><img src="assets/3b1edc40-966d-11e8-9f67-05ec09da262a" alt="png" /></p>
 <h5><strong>消息通讯</strong></h5>
 <p>消息通讯很好理解，以微信群聊为例：</p>
 <ol>

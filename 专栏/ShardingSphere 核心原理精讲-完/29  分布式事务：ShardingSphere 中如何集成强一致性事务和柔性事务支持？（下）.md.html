@@ -328,7 +328,7 @@ public void rollback() {
 </code></pre>
 <p>对上述代码的理解也依赖与对 bitronix 框架的熟悉程度，整个封装过程简单明了。我们无意对 bitronix 框架做过多展开，而是更多关注于 ShardingSphere 中对 XATransactionManager 的抽象过程。</p>
 <p>作为总结，我们在上一课时的基础上，进一步梳理了 XA 两阶段提交相关的核心类之间的关系，如下图所示：</p>
-<p><img src="assets/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl9oXe6AK8JkAAByEfwPBs0489.png" alt="png" /></p>
 <h4>2.ShardingConnection</h4>
 <p>上图展示了整个流程的源头是在 ShardingConnection 类。我们在 ShardingConnection 的构造函数中发现了创建 ShardingTransactionManager 的过程，如下所示：</p>
 <pre><code>shardingTransactionManager = runtimeContext.getShardingTransactionManagerEngine().getTransactionManager(transactionType);
@@ -403,7 +403,7 @@ private void initSeataRPCClient() {
 <p>回想我们在“09 | 分布式事务：如何使用强一致事务与柔性事务？”中关于 Seata 使用方式的介绍，不难理解这里通过 seata.conf 配置文件中所配置的 application.id 和 transaction.service.group 这两个配置项来执行初始化操作。</p>
 <p>同时，对于 Seata 而言，它也提供了一套构建在 JDBC 规范之上的实现策略，这点和“03 | 规范兼容：JDBC 规范与 ShardingSphere 是什么关系？”中介绍的 ShardingSphere 与 JDBC 规范之间的兼容性类似。</p>
 <p>而在命名上，Seata 更为直接明了，使用 DataSourceProxy 和 ConnectionProxy 这种代理对象。以 DataSourceProxy 为例，我们可以梳理它的类层结构如下：</p>
-<p><img src="assets/CgqCHl9oXgKACi15AAA7sb7XKlo735.png" alt="image" /></p>
+<p><img src="assets/CgqCHl9oXgKACi15AAA7sb7XKlo735.png" alt="png" /></p>
 <p>可以看到 DataSourceProxy 实现了自己定义的 Resource 接口，然后继承了抽象类 AbstractDataSourceProxy，而后者则实现了 JDBC 中的 DataSource 接口。</p>
 <p>所以，在我们初始化 Seata 框架时，同样需要根据输入的 DataSource 对象来构建 DataSourceProxy，并通过 DataSourceProxy 获取 ConnectionProxy。SeataATShardingTransactionManager 类中的相关代码如下所示：</p>
 <pre><code>@Override

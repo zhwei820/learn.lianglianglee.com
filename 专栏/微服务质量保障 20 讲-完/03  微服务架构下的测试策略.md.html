@@ -166,24 +166,24 @@ function hide_canvas() {
 <li>测试需要分层，每一层的测试颗粒度有所不同；</li>
 <li>不同层次的测试比重有差异，通常来说，层次越高，测试比重应越少。</li>
 </ul>
-<p><img src="assets/CgqCHl8ZQp2AA2yKAADyJvMVUks187.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8ZQp2AA2yKAADyJvMVUks187.png" alt="png" /></p>
 <p>需要说明的是，传统意义下的测试金字塔，在微服务架构下不再完全奏效。因为微服务中最大的复杂性不在于服务本身，而在于微服务之间的交互方式，这一点值得特别注意。</p>
 <p>因此，<strong>针对微服务架构，常见的测试策略模型</strong>有如下几种。</p>
 <p>（1） <strong>微服务“测试金字塔”</strong></p>
 <p>基于微服务架构的特点和测试金字塔的原理，Toby Clemson 有一篇关于<a href="https://www.martinfowler.com/articles/microservice-testing/">“微服务架构下的测试策略”</a>的文章，其中通过分析阐述了微服务架构下的通用测试策略。</p>
-<p><img src="assets/Ciqc1F8ZQrSACTc9AAB65lA45vc729.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F8ZQrSACTc9AAB65lA45vc729.png" alt="png" /></p>
 <p>如图，该策略模型依然是金字塔形状，从下到上依次为单元测试、集成测试、组件测试、端到端测试、探索式测试。</p>
 <p>（2） <strong>微服务“测试蜂巢”</strong></p>
 <p>这种策略模型是蜂巢形状，它强调重点关注服务间的集成测试，而单元测试和端到端测试的占比较少。</p>
-<p><img src="assets/CgqCHl8ZQsGAZti7AABGRbBNFY8164.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl8ZQsGAZti7AABGRbBNFY8164.png" alt="png" /></p>
 <p>（3） <strong>微服务“测试钻石”</strong></p>
 <p>这种策略模型是钻石形状的，组件测试和契约测试是重点，单元测试比率减少，另外增加了安全和性能等非功能的测试类型。</p>
-<p><img src="assets/CgqCHl8ZQs-AByNAAACgJaZwyyU241.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8ZQs-AByNAAACgJaZwyyU241.png" alt="png" /></p>
 <p>我想，有多少个基于微服务架构的测试团队大概就有多少个测试策略模型吧。<strong>“测试金字塔”是一种测试策略模型和抽象框架</strong>，当技术架构、系统特点、质量痛点、团队阶段不同时，每种测试的比例也不尽相同，而且最关键的，并不一定必须是金字塔结构。</p>
 <p>理解了测试策略模型的思考框架，我们看下应如何保障测试活动的全面性和有效性。</p>
 <h4>全面性</h4>
 <p>微服务架构下，既需要保障各服务内部每个模块的完整性，又需要关注模块间、服务间的交互。只有这样才能提升测试覆盖率和全面性，因此，可以通过如下的分层测试来保证微服务的全面性。</p>
-<p><img src="assets/CgqCHl8ZSrqAVjqcAAVCHyjoRMg887.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8ZSrqAVjqcAAVCHyjoRMg887.png" alt="png" /></p>
 <ul>
 <li>单元测试（Unit Test） ：从服务中最小可测试单元视角验证代码行为符合预期，以便测试出方法、类级别的缺陷。</li>
 <li>集成测试（Integration Test）：验证当前服务与外部模块之间的通信方式或者交互符合预期，以便测试出接口缺陷。</li>
@@ -198,7 +198,7 @@ function hide_canvas() {
 <p>测试策略如同测试技术、技术架构一样，并不是一成不变，它会随着业务或项目所处的阶段，以及基于此的其他影响因素的变化而不断演进。但归根结底，还是要从质量保障的目标出发，制定出适合当时的测试策略，并阶段性地对策略进行评估和度量，进而不断改进和优化测试策略。因此，<strong>选取测试策略一定要基于现实情况的痛点出发，结果导向，通过调整测试策略来解决痛点。</strong></p>
 <p>比如，在项目早期阶段或某 MVP 项目中，业务的诉求是尽快发布到线上，对功能的质量要求不太高，但对发布的时间节点要求非常严格。那这种情况下快速地用端到端这种能模拟用户真实价值的测试方法保障项目质量也未尝不可；随着项目逐渐趋于平稳后，时间要求渐渐有了节奏，对功能的质量要求会逐渐变高，那么这时候可以再根据实际情况引入其他测试方法，如契约测试或组件测试等。</p>
 <p>你要永远记住，<strong>适合自身项目阶段和团队的测试策略才是“完美”的策略。</strong></p>
-<p><img src="assets/CgqCHl8ZSvOAK06pAAVCHyjoRMg396.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8ZSvOAK06pAAVCHyjoRMg396.png" alt="png" /></p>
 <h3>如何建立质量保障体系？</h3>
 <p>上述分层的测试策略只是尽可能地对微服务进行全面的测试，确保系统的所有层次都被覆盖到，它更多体现在测试活动本身的全面性和有效性方面。要想将质量保障内化为企业的组织能力，就需要通过技术和管理手段形成系统化、标准化和规范化的机制，这就需要建设质量保障体系。</p>
 <p><strong>质量保障体系：通过一定的流程规范、测试技术和方法，借助于持续集成/持续交付等技术把质量保障活动有效组合，进而形成系统化、标准化和规范化的保障体系。</strong> 同时，还需要相应的度量、运营手段以及组织能力的保障。</p>

@@ -216,7 +216,7 @@ function hide_canvas() {
 <li>快照读：顾名思义，Spanner 实现了 MVCC 和快照隔离，故读取操作在整个事务内部是一致的。同时这也暗示了，Spanner 可以保存同一份数据的多个版本。</li>
 </ol>
 <p>了解了事务模型后，我们深入其内部，看看 Spanner 的核心组件都有哪些。下面是一张 Spanner 的架构图。</p>
-<p><img src="assets/Cgp9HWBRzJSAaOkIAAHp1kcPK04475.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWBRzJSAaOkIAAHp1kcPK04475.png" alt="png" /></p>
 <p>其中我们看到，每个 replica 保存了多个 tablet；同时这些 replica 组成了 Paxos Group。Paxos Group 选举出一个 leader 用来在多分片事务中与其他 Paxos Group 的 leader 进行协调（有关 Paxos 算法的细节我将在下一讲中介绍）。</p>
 <p>写入操作必须通过 leader 来进行，而读取操作可以在任何一个同步完成的 replica 上进行。同时我们看到 leader 中有锁管理器，用来实现并发控制中提到的锁管理。事务管理器用来处理多分片分布式事务。当进行同步写入操作时，必须要获取锁，而快照读取操作是无锁操作。</p>
 <p>我们可以看到，最复杂的操作就是多分片的写入操作。其过程就是由 leader 参与的两阶段提交。在准备阶段，提交的数据写入到协调器的 Paxos Group 中，这解决了如下两个问题。</p>
@@ -233,7 +233,7 @@ function hide_canvas() {
 <p>Spanner 引入了很多新技术去改善分布式事务的性能，但我们发现其流程整体还是传统的二阶段提交，并没有在结构上发生重大的改变，而 Calvin 却充满了颠覆性。让我们来看看它是怎么处理分布式事务的。</p>
 <p>首先，传统分布式事务处理使用到了锁来保证并发竞争的事务满足隔离级别的约束。比如，序列化级别保证了事务是一个接一个运行的。而每个副本的执行顺序是无法预测的，但结果是可以预测的。Calvin 的方案是让事务在每个副本上的执行顺序达到一致，那么执行结果也肯定是一致的。这样做的好处是避免了众多事务之间的锁竞争，从而大大提高了高并发度事务的吞吐量。同时，节点崩溃不影响事务的执行。因为事务执行步骤已经分配，节点恢复后从失败处接着运行该事务即可，<strong>这种模式使分布式事务的可用性也大大提高</strong>。目前实现了 Calvin 事务模式的数据库是 FaunaDB。</p>
 <p>其次，将事务进行排序的组件被称为 sequencer。它搜集事务信息，而后将它们拆解为较小的 epoch，这样做的目的是减小锁竞争，并提高并行度。一旦事务被准备好，sequencer 会将它们发送给 scheduler。scheduler 根据 sequencer 处理的结果，适时地并行执行部分事务步骤，同时也保证顺序执行的步骤不会被并行。因为这些步骤已经排好了顺序，scheduler 执行的时候不需要与 sequencer 进行交互，从而提高了执行效率。Calvin 事务的处理组件如下图所示。</p>
-<p><img src="assets/Cgp9HWBRzJ-AHNkNAAIDRYF-wko605.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWBRzJ-AHNkNAAIDRYF-wko605.png" alt="png" /></p>
 <p>Calvin 也使用了 Paxos 算法，不同于 Spanner 每个分片有一个 Paxos Group。Calvin 使用 Paxos 或者异步复制来决定哪个事务需要进入哪个 epoch 里面。</p>
 <p>同时 Calvin 事务有 read set 和 write set 的概念。前者表示事务需要读取的数据，后者表示事务影响的数据。这两个集合需要在事务开始前就进行确定，故<strong>Calvin 不支持在事务中查询动态数据而后影响最终结果集的行为。这一点很重要，是这场战争的核心</strong>。</p>
 <p>在你了解了两种事务模型之后，我就要带你进入“刺激战场”了。在两位实力相当的选手中，Calvin 一派首先挑起了战争。</p>

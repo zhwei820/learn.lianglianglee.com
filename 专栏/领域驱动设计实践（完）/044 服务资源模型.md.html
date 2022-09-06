@@ -543,9 +543,9 @@ function hide_canvas() {
 <p><img src="assets/17013010-8b27-11e9-8761-5be5e930d8ab" alt="img" /></p>
 <p>既然 REST 的核心思想将“超媒体作为应用状态的引擎”，因而在面向资源进行分析建模时，需要重点把握业务流程中资源状态的变化。状态的变更是针对资源的一个操作（Action）触发的，在满足某个业务规则之后，当前资源就会因为状态变更而链接到另外一个资源。为了体现资源状态的变化，以及资源与操作及链接资源之间的关系，我们可以针对业务流程绘制状态机。</p>
 <p>以咖啡店为例，我们可以梳理出分别以顾客和咖啡师为视角的业务流程。顾客在选定了饮品之后，首先会点单和付款。在点单到付款之间，顾客还可以修改订单。顾客付款成功之后，订单就被确认，顾客会等待直到获得咖啡师制作的饮品。当顾客获取饮品后，当前订单就算完成：</p>
-<p><img src="assets/340f8ad0-8b27-11e9-8ada-d1fb8c4d56bd" alt="59765062.png" /></p>
+<p><img src="assets/340f8ad0-8b27-11e9-8ada-d1fb8c4d56bd" alt="png" /></p>
 <p>咖啡师的业务流程是一个循环流程，他（她）会不断地接受下一个订单，然后在收取费用之后开始制作饮品，最后将制作好的饮品交到顾客手中：</p>
-<p><img src="assets/3c770810-8b27-11e9-a76b-fb08a6f11f67" alt="39248012.png" /></p>
+<p><img src="assets/3c770810-8b27-11e9-a76b-fb08a6f11f67" alt="png" /></p>
 <p>状态机里的每一个状态迁移，都代表着与 Web 资源的一次交互。每一次迁移，都是用户针对资源的操作触发的。因此，利用状态图中的状态与触发状态迁移的操作可以帮助我们驱动出<strong>资源</strong>的定义。例如下订单操作与 OrderPlaced 状态可以驱动出 Orders 资源，付款操作与 Paid 状态可以驱动出 Payments 资源，制作饮品操作和 DrinkMade 状态可以驱动出 Drinks 资源：</p>
 <p><img src="assets/59337240-8b27-11e9-8761-5be5e930d8ab" alt="img" /></p>
 <p>仅仅识别出资源并不足以建立服务资源模型，因为建立服务资源模型的最终目的是设计 REST 服务。一个 REST 服务实际上是对客户端与资源之间交互协作的抽象，它利用了<strong>关注点分离</strong>原则分离了资源、访问资源的动作及表示资源的形式：</p>
@@ -569,7 +569,7 @@ function hide_canvas() {
 </code></pre>
 <p>客户端请求的定义差异可以说明这是两个完全不同的服务，使得在对请求进行路由时可以正确地完成对资源的操作，但由于请求自身缺乏业务语义，因此并不能直观体现该服务代表的行为到底是什么。因此，这些信息或许足以支持服务的路由，却不足以说明服务 API。</p>
 <p>对于一个 REST 服务而言，设计服务的 API 自有其规矩，例如微软定义了《<a href="https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md.html">REST API 指南</a>》，就规定了状态码的正确使用、URL 的结构、HTTP 动词的选择规范、请求头（Request Header）的定义、响应头（Response Header）的定义、请求与响应的格式、JSON 标准与服务版本管理等内容。Swagger 也定义了《<a href="https://swagger.io/specification">OpenAPI 规格说明书</a>》，对 API 的各个组成部分给出了设计约束。同时，Swagger 还提供了 SwaggerHub 工具管理 API，下图就是一个 REST 服务 API 的管理页面（来自 Swagger 默认创建的 Demo）：</p>
-<p><img src="assets/18317d40-8b28-11e9-8761-5be5e930d8ab" alt="81331873.png" /></p>
+<p><img src="assets/18317d40-8b28-11e9-8761-5be5e930d8ab" alt="png" /></p>
 <p>通过以上文档可以看到 REST 服务为“添加库存项（adds an inventory item）”，HTTP 动词为 POST，URI 为 /inventory，客户端请求的协议则被定义在 components 的schemas中：</p>
 <pre><code class="language-json">  schemas:
     InventoryItem:

@@ -373,7 +373,7 @@ class PenFactory:
 <h4>简单工厂模式</h4>
 <p>这是最简单的一个版本，只有一个工厂类 SimpleFactory，类中有一个静态创的建方法 createProduct，该方法通过参数传递的类型值（type）或名称（name）来创建具体的产品（子类）对象。</p>
 <p>类图如下：</p>
-<p><img src="assets/51315b10-71f7-11e8-be4d-f5aac07d9486.jpg" alt="enter image description here" /></p>
+<p><img src="assets/51315b10-71f7-11e8-be4d-f5aac07d9486.jpg" alt="png" /></p>
 <p><strong>优点：</strong></p>
 <ul>
 <li>实现简单、结构浅析</li>
@@ -387,7 +387,7 @@ class PenFactory:
 <h4>工厂方法模式</h4>
 <p>工厂方法模式是简单工厂模式的一个升级版本，为解决简单工厂模式中不符合开放-封闭原则的问题，我们对 SimpleFactory 进行了一个拆分，抽象出一个父类 Factory，并增加多个子类分别负责创建不同的具体产品。</p>
 <p>类图如下：</p>
-<p><img src="assets/7c1ce790-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="enter image description here" /></p>
+<p><img src="assets/7c1ce790-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="png" /></p>
 <p><strong>优点：</strong></p>
 <ul>
 <li>解决了简单工厂模式中不符合 开放—封闭原则 的问题，使程序更容易拓展。</li>
@@ -405,10 +405,10 @@ class PenFactory:
 <h4>抽象工厂模式</h4>
 <p>抽象工厂模式又是工厂方法模式的升级版本，工厂方法模式不能解决具有二级分类的产品的创建，抽象工厂模式就是用来解决这一缺陷的。</p>
 <p>我们来看一下上面的家电工厂的实现类图如下：</p>
-<p><img src="assets/95306e00-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="enter image description here" /></p>
+<p><img src="assets/95306e00-71f7-11e8-89a0-a176c63a6bd8.jpg" alt="png" /></p>
 <p>AppliancesFactory 是一个抽象的工厂类，定义了三个方法，分别用来生产冰箱（Refrigerator）、空调（Air-conditioner）、洗衣机（WashingMachine）。EfficientFactory 和 EnergySavingFactory 是两个具体的工厂类，分别用来生产高效型的家电和节能弄的家电。</p>
 <p>抽象工厂模式的类图：</p>
-<p><img src="assets/b466fff0-71f7-11e8-9e76-835574e7e257.jpg" alt="enter image description here" /></p>
+<p><img src="assets/b466fff0-71f7-11e8-9e76-835574e7e257.jpg" alt="png" /></p>
 <p>抽象工厂模式适合于有多个系列的产品，且每一个系列下有相同子分类的产品。我们定义一个抽象的工厂类 AbstractFactory，AbstractFactory 中定义生产每一个系列产品的方法；而两个具体的工厂实现类 Factory1 和 Factory2 分别生产子分类1的每一系列产品和子分类2的每一系列产品。</p>
 <p>如上面家电的例子中，有冰箱、空调、洗衣机三个系列的产品，而每一个系列都有相同的子分类高效型和节能型。通过抽象工厂模式的类图，我们知道 Refrigerator、AirConditioner、WashingMachine 其实也可以不用继承自 HomeAppliances，因为可以把它们看成是独立的系列。当然真实项目中要根据实际应用场景而定，如果这三种家电有很多相同的属性，可以抽象出一个父类 HomeAppliances，如果差别很大则没有必要。</p>
 <p><strong>优点：</strong></p>

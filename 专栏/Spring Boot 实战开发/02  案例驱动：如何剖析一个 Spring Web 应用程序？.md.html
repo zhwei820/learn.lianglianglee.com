@@ -172,26 +172,26 @@ function hide_canvas() {
 <p>在 01 讲中，我们提到 Spring 家族具备很多款开源框架，开发人员可以基于这些开发框架实现各种 Spring 应用程序。在 02 讲中，我们无意对所有这些 Spring 应用程序的类型和开发方式过多展开，而是主要集中在基于 Spring Boot 开发面向 Web 场景的服务，这也是互联网应用程序最常见的表现形式。在介绍基于 Spring Boot 的开发模式之前，让我们先将它与传统的 Spring MVC 进行简单对比。</p>
 <h3>Spring MVC VS Spring Boot</h3>
 <p>在典型的 Web 应用程序中，前后端通常采用基于 HTTP 协议完成请求和响应，开发过程中需要完成 URL 地址的映射、HTTP 请求的构建、数据的序列化和反序列化以及实现各个服务自身内部的业务逻辑，如下图所示：</p>
-<p><img src="assets/CgqCHl-7WIiAQimVAABHwO_CPqU821.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-7WIiAQimVAABHwO_CPqU821.png" alt="png" /></p>
 <p>HTTP 请求响应过程</p>
 <p>我们先来看基于 Spring MVC 完成上述开发流程所需要的开发步骤，如下图所示：</p>
-<p><img src="assets/CgqCHl-7WI2AaDcrAABBSHVyAdE329.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl-7WI2AaDcrAABBSHVyAdE329.png" alt="png" /></p>
 <p>基于 Spring MVC 的 Web 应用程序开发流程</p>
 <p>上图中包括使用 web.xml 定义 Spring 的 DispatcherServlet、完成启动 Spring MVC 的配置文件、编写响应 HTTP 请求的 Controller 以及将服务部署到 Tomcat Web 服务器等步骤。事实上，基于传统的 Spring MVC 框架开发 Web 应用逐渐暴露出一些问题，比较典型的就是配置工作过于复杂和繁重，以及缺少必要的应用程序管理和监控机制。</p>
 <p>如果想优化这一套开发过程，有几个点值得我们去挖掘，比方说减少不必要的配置工作、启动依赖项的自动管理、简化部署并提供应用监控等。而这些优化点恰巧推动了以 Spring Boot 为代表的新一代开发框架的诞生，基于 Spring Boot 的开发流程见下图：</p>
-<p><img src="assets/Ciqc1F-7WJeAHD-nAABRAXax5k4419.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F-7WJeAHD-nAABRAXax5k4419.png" alt="png" /></p>
 <p>基于 Spring Boot 的 Web 应用程序开发流程</p>
 <p>从上图中可以看到，它与基于 Spring MVC 的开发流程在配置信息的管理、服务部署和监控等方面有明显不同。作为 Spring 家族新的一员，Spring Boot 提供了令人兴奋的特性，这些特性的核心价值在于确保了开发过程的简单性，具体体现在编码、配置、部署、监控等多个方面。</p>
 <p>首先，Spring Boot 使编码更简单。我们只需要在 Maven 中添加一项依赖并实现一个方法就可以提供微服务架构中所推崇的 RESTful 风格接口。</p>
 <p>其次，Spring Boot 使配置更简单。它把 Spring 中基于 XML 的功能配置方式转换为 Java Config，同时提供了 .yml 文件来优化原有基于 .properties 和 .xml 文件的配置方案，.yml 文件对配置信息的组织更为直观方便，语义也更为强大。同时，基于 Spring Boot 的自动配置特性，对常见的各种工具和框架均提供了默认的 starter 组件来简化配置。</p>
 <p>最后，在部署方案上，Spring Boot 也创造了一键启动的新模式。Spring Boot 部署包结构参考下图：</p>
-<p><img src="assets/Ciqc1F-7WKCALlK_AAAvL2X5nlU081.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F-7WKCALlK_AAAvL2X5nlU081.png" alt="png" /></p>
 <p>Spring Boot部署包结构</p>
 <p>从图中我们可以看到，相较于传统模式下的 war 包，Spring Boot 部署包既包含了业务代码和各种第三方类库，同时也内嵌了 HTTP 容器。这种包结构支持 java –jar application.jar 方式的一键启动，不需要部署独立的应用服务器，通过默认内嵌 Tomcat 就可以运行整个应用程序。</p>
 <p>最后，基于 Spring Boot 新提供的 Actuator 组件，开发和运维人员可以通过 RESTful 接口获取应用程序的当前运行时状态并对这些状态背后的度量指标进行监控和报警。例如可以通过“/env/{name}”端点获取系统环境变量、通过“/mapping”端点获取所有 RESTful 服务、通过“/dump”端点获取线程工作状态以及通过“/metrics/{name}”端点获取 JVM 性能指标等。</p>
 <h3>剖析一个 Spring Web 应用程序</h3>
 <p>针对一个基于 Spring Boot 开发的 Web 应用程序，其代码组织方式需要遵循一定的项目结构。在 02 讲中，如果不做特殊说明，我们都将使用 Maven 来管理项目工程中的结构和包依赖。一个典型的 Web 应用程序的项目结构如下图所示：</p>
-<p><img src="assets/CgqCHl-7WKuAE6hIAABP4_ORBpU588.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl-7WKuAE6hIAABP4_ORBpU588.png" alt="png" /></p>
 <p>Spring Boot Web 项目结构图</p>
 <p>在上图中，有几个地方需要特别注意，我也在图中做了专门的标注，分别是包依赖、启动类、控制器类以及配置，让我们讲此部分内容分别做一些展开。</p>
 <h4>包依赖</h4>
@@ -206,7 +206,7 @@ function hide_canvas() {
 </ul>
 <p>可以看到，这里包括了传统 Spring MVC 应用程序中会使用到的 spring-web 和 spring-webmvc 组件，因此 Spring Boot 在底层实现上还是基于这两个组件完成对 Web 请求响应流程的构建。</p>
 <p>如果我们使用 Spring Boot 2.2.4 版本，你会发现它所依赖的 Spring 组件都升级到了 5.X 版本，如下图所示：</p>
-<p><img src="assets/Ciqc1F-7WLOAHBZ_AABP1erBa_k988.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F-7WLOAHBZ_AABP1erBa_k988.png" alt="png" /></p>
 <p>Spring Boot 2.2.4 版本的包依赖示意图</p>
 <p>在应用程序中引入 spring-boot-starter-web 组件就像引入一个普通的 Maven 依赖一样，如下所示。</p>
 <pre><code>&lt;dependency&gt;
@@ -267,7 +267,7 @@ spring:
 <h4>SpringCSS 整体架构</h4>
 <p>在 SpringCSS 中，存在一个 customer-service，这是一个 Spring Boot 应用程序，也是整个案例系统中的主体服务。在该服务中，我们可以将采用经典的分层架构，即将服务分成 Web 层、Service 层和 Repository 层。</p>
 <p>在客服系统中，我们知道其核心业务是生成客户工单。为此，customer-service 一般会与用户服务 account-service 进行交互，但因为用户账户信息的更新属于低频事件，所以我们设计的实现方式是 account-service 通过消息中间件的方式将用户账户变更信息主动推送给 customer–service，从而完成用户信息的获取操作。而针对 order-service，其定位是订单系统，customer-service 也需要从该服务中查询订单信息。SpringCSS 的整个系统交互过程如下图所示：</p>
-<p><img src="assets/CgqCHl-7WMKAR1x_AACL4oIyVgU534.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl-7WMKAR1x_AACL4oIyVgU534.png" alt="png" /></p>
 <p>SpringCSS 系统的整体架构图</p>
 <p>在上图中，引出了构建 SpringCSS 的多项技术组件，在后续课程中我们会对这些技术组件做专题介绍。</p>
 <h4>从案例实战到原理剖析</h4>

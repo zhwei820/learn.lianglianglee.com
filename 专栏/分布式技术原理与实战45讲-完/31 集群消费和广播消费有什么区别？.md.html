@@ -255,20 +255,20 @@ function hide_canvas() {
 <p>先来看一下消息队列的两种基础模型，也就是<strong>点对点</strong>和<strong>发布订阅方式。</strong></p>
 <p>这两种模型来源于消息队列的 JMS 实现标准，消息队列有不同的实现标准，比如 AMQP 和 JMS，其中 JMS（Java Message Service）是 Java 语言平台的一个消息队列规范，上一课时中讲过的 ActiveMQ 就是其典型实现。</p>
 <p>AMQP 和 JMS 的区别是，AMQP 额外引入了 Exchange 的 Binding 的角色，生产者首先将消息发送给 Exchange，经过 Binding 分发给不同的队列。</p>
-<p><img src="assets/CgqCHl8EUu-AB8ALAAB5n2wSUOY133.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8EUu-AB8ALAAB5n2wSUOY133.png" alt="png" /></p>
 <p>和 JMS 一样，AMQP 也定义了几种不同的消息模型，包括 direct exchange、topic change、headers exchange、system exchange 等。其中 direct exchange 可以类比点对点，其他的模型可以类比发布订阅，这里不做展开介绍了，具体可参考 AMPQ 的其他资料查阅。</p>
 <h4>点到点模型</h4>
 <p>在点对点模型下，生产者向一个特定的队列发布消息，消费者从该队列中读取消息，每条消息只会被一个消费者处理。</p>
-<p><img src="assets/Ciqc1F8EUvqAayF0AAAzEeraHJI842.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8EUvqAayF0AAAzEeraHJI842.png" alt="png" /></p>
 <h4>发布/订阅模型</h4>
 <p>大部分人在浏览资讯网站时会订阅喜欢的频道，比如人文社科，或者娱乐新闻，消息队列的发布订阅也是这种机制。在发布订阅模型中，消费者通过一个 Topic 来订阅消息，生产者将消息发布到指定的队列中。如果存在多个消费者，那么一条消息就会被多个消费者都消费一次。</p>
-<p><img src="assets/Ciqc1F8EUwOAO103AACu31NRT3E753.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8EUwOAO103AACu31NRT3E753.png" alt="png" /></p>
 <p>点对点模型和发布订阅模型，主要区别是消息能否被多次消费，发布订阅模型实现的是广播机制。如果只有一个消费者，则可以认为是点对点模型的一个特例。</p>
 <p>现代消息队列基本都支持上面的两种消费模型，但由于消息队列自身的一些特性，以及不同的应用场景，具体实现上还有许多的区别。下面看一下几种代表性的消息队列。</p>
 <h3>Kafka 的消费模式</h3>
 <p>先来看一下 Kafka，在分析 Kafka 消费模式之前，先来了解一下 Kafka 的应用设计。</p>
 <p>Kafka 系统中的角色可以分为以下几种：</p>
-<p><img src="assets/Ciqc1F8EUw6AckKuAAB5H8u_u4w504.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F8EUw6AckKuAAB5H8u_u4w504.png" alt="png" /></p>
 <ul>
 <li>Producer：消息生产者，负责发布消息到 broker。</li>
 <li>Consumer：消息消费者，从 broker 中读取消息。</li>
@@ -280,7 +280,7 @@ function hide_canvas() {
 <p>从上面的分析中可以看到，Kafka 的消费是基于 Topic 的，属于发布订阅机制，它会持久化消息，消息消费完后不会立即删除，会保留历史消息，可以比较好地支持多消费者订阅。</p>
 <h3>RocketMQ 的消费模式</h3>
 <p>RocketMQ 实现的也是典型的发布订阅模型，在细节上和 Kafka 又有一些区别。RocketMQ 的系统设计主要由 NameServer、Broker、Producer 及 Consumer 几部分构成。</p>
-<p><img src="assets/CgqCHl8EUxeAeYzBAAM3YwJnQnM271.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl8EUxeAeYzBAAM3YwJnQnM271.png" alt="png" /></p>
 <p>NameServer 在 RocketMQ 集群中作为节点的路由中心，可以管理 Broker 集群，以及节点间的通信，在后面的消息队列高可用课时，我会进一步分析集群下的高可用实现。</p>
 <p>具体的消费模式中，RocketMQ 和 Kafka 类似，除了 Producer 和 Consumer，主要分为 Message、Topic、Queue 及 ConsumerGroup 这几部分，同时，RocketMQ 额外支持 Tag 类型的划分。</p>
 <ul>
@@ -292,7 +292,7 @@ function hide_canvas() {
 <p>在上一课时中提过， Kafka 使用 Scala 实现、RabbitMQ 使用 Erlang 实现，而 RokcetMQ 是使用 Java 语言实现的。从编程语言的角度，RocketMQ 的源码学习起来比较方便，也推荐你看一下 RokcetMQ 的源码，<a href="https://github.com/apache/rocketmq">点击这里查看源码</a>。</p>
 <p>RocketMQ 的消费模式分为<strong>集群消费</strong>和<strong>广播消费</strong>两种，默认是集群消费。那么，在 RocketMQ 中这两种模式有什么区别呢?</p>
 <p>集群消费实现了对点对点模型的扩展，任意一条消息只需要被集群内的任意一个消费者处理即可，同一个消费组下的各个消费端，会使用负载均衡的方式消费。对应 Topic 下的信息，集群消费模式的示意图如下。</p>
-<p><img src="assets/Ciqc1F8EUyOAGys6AACa-1Mqcd8323.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F8EUyOAGys6AACa-1Mqcd8323.png" alt="png" /></p>
 <p>广播消费实现的是发布订阅模式，发送到消费组中的消息，会被多个消费者分别处理一次。在集群消费中，为了将消息分发给消费组中的多个实例，需要实现消息的路由，也就是我们常说的负载均衡，在 RocketMQ 中，支持多种负载均衡的策略，主要包括以下几种：</p>
 <ul>
 <li>平均分配策略，默认的策略</li>
@@ -302,7 +302,7 @@ function hide_canvas() {
 <li>一致性哈希分配策略</li>
 </ul>
 <p>以上的几种策略，可以在 RocketMQ 的源码中 AllocateMessageQueueStrategy 接口相关的实现中：</p>
-<p><img src="assets/Ciqc1F8EUyqAYTXgAAHer2qwRpk987.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/Ciqc1F8EUyqAYTXgAAHer2qwRpk987.png" alt="png" /></p>
 <h3>总结</h3>
 <p>这一课时分析了消息队列中的两种消息模型，以及不同消息模型在 Kafka 和 RocketMQ 等消息队列中的具体实现。</p>
 <p>消息模型的概念是分布式消息的基础知识，不同的消息模型会影响消息队列的设计，进而影响消息队列在消息一致性、时序性，以及传输可靠性上的实现方式。了解了这些，才能更好地展开关于消息队列各种特性的讨论。</p>

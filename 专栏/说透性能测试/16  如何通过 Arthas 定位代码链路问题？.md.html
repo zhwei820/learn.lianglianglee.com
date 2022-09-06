@@ -221,10 +221,10 @@ pid 10694
     }
 </code></pre>
 <p>把以上代码放到服务器中执行，然后我们可以使用 Arthas 的 jvm 命令查看到线程死锁数目为 2，说明程序发生了死锁，如下图所示：</p>
-<p><img src="assets/Cgp9HWA9DKuAMzKWAABTDaKlSO0241.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWA9DKuAMzKWAABTDaKlSO0241.png" alt="png" /></p>
 <p>图 1：死锁示意图</p>
 <p>接下来我们输入 thread -b 命令查看当前阻塞其他线程的线程，然后我们可以看到 Lock 1 被阻塞了，访问的资源被 Lock 2 占用，如图 2 所示，根据提示的行数我们便能找到死锁位置，对代码进行优化。</p>
-<p><img src="assets/CioPOWA9fFWAHUHaAAApcGDj53c885.png" alt="image" /></p>
+<p><img src="assets/CioPOWA9fFWAHUHaAAApcGDj53c885.png" alt="png" /></p>
 <p>图 2：thread 演示死锁详情图</p>
 <h4>2.使用 trace 命令查看耗时</h4>
 <p>我们写几个不同循环次数的方法，分别代表方法耗时不同，代码如下：</p>
@@ -250,7 +250,7 @@ private void cost1() {
 com.cctest.arthas_demo.controller.StressSceneController timeCost
 </code></pre>
 <p>输完命令后回车，然后 arthas 程序就进入了等待访问状态。这时候访问接口 /timeCost，我们就可以看到被测程序台在疯狂打印日志，等结束之后，arthas 命令窗口便输出了各方法耗时时间，如图 3 所示：</p>
-<p><img src="assets/CioPOWA9fHeACowAAABtN4Cdlac932.png" alt="image" /></p>
+<p><img src="assets/CioPOWA9fHeACowAAABtN4Cdlac932.png" alt="png" /></p>
 <p>图 3：方法耗时详情</p>
 <p>我们可以看到 timeCost 方法总耗时 258391ms：</p>
 <ul>
@@ -276,7 +276,7 @@ public String login(@RequestParam(value=&quot;userName&quot;) String userName, @
 <pre><code>watch com.cctest.arthas_demo.controller.StressSceneController login &quot;{params[0],params[1],returnObj}&quot;
 </code></pre>
 <p>你可以看到输入上述命令后的返回信息如下：</p>
-<p><img src="assets/CioPOWA9DNqARGyPAAA2hv8N8DA381.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWA9DNqARGyPAAA2hv8N8DA381.png" alt="png" /></p>
 <p>图 4：watch 返回信息</p>
 <h4>4.使用 tt 命令定位异常调用</h4>
 <p>tt 与上面的 watch 的命令有些类似，都可以排查函数的调用情况。但是对于函数调用 n 次中有几次是异常情况，用 watch 就没有那么方便，使用 tt 命令就可以很方便地查看异常的调用及其信息。</p>
@@ -284,7 +284,7 @@ public String login(@RequestParam(value=&quot;userName&quot;) String userName, @
 <pre><code>tt -t com.cctest.arthas_demo.controller.StressSceneController login
 </code></pre>
 <p>然后我们访问接口，每次访问的状态和结果显示如图 5 所示：</p>
-<p><img src="assets/Cgp9HWA9fMiAXBhHAABdFH1m-Fk917.png" alt="image" /></p>
+<p><img src="assets/Cgp9HWA9fMiAXBhHAABdFH1m-Fk917.png" alt="png" /></p>
 <p>图 5：tt 的返回信息</p>
 <p>从图中可以看出，tt 显示的信息比 watch 全面。其中 IS-RET 项如果为 false，即为错误的调用。</p>
 <p>以上部分介绍了 Arthas 命令在实际例子中的使用，我是通过命令行的方式来演示的，所以你需要登上服务器。之前有提到过，并不是所有的同学都有权限直接进行服务器的操作，那面对这样的情况如何使用 Arthas 呢？其实也是有解决方法的，接下来我们将介绍通过 Web 的方式操作 Arthas。</p>
@@ -301,7 +301,7 @@ public String login(@RequestParam(value=&quot;userName&quot;) String userName, @
 <li>目标服务器即 Arthas Tunnel Server 启动的服务器，端口号默认是 8080。</li>
 </ul>
 <p>（4）在浏览器中输入 <a href="http://xn--ip-fr5c86lx7z3kb880d:目标服务器port就可以访问到WebConsole/">http://目标服务器ip:目标服务器port</a>，就可以访问 WebConsole，如图 6 所示：</p>
-<p><img src="assets/Cgp9HWA9DPOARvDFAAHh5zegLvs919.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cgp9HWA9DPOARvDFAAHh5zegLvs919.png" alt="png" /></p>
 <p>图 6：Web 方式 Arthas 启动</p>
 <p>然后我们输入 ip、port 和 agentid 就可以连上被测程序，并且可以开始对被测程序输入 Arthas 命令。接下来的 Arthas 的使用和命令行方式是一样的，不再赘述。</p>
 <h4>2.Arthas Tunnel Server 的操作原理</h4>

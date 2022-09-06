@@ -362,10 +362,10 @@ public @interface EnableOAuth2Sso {
 <h3>案例演示</h3>
 <p>最后，让我们演示一下整个单点登录过程。依次启动 SSO 服务器以及 app1 和 app2，然后在浏览器中访问 app1 地址<a href="http://localhost:8080/app1/system/profile">http://localhost:8080/app1/system/profile</a>，这时候浏览器就会重定向到 SSO 服务器登录页面。</p>
 <p>请注意，如果我们在访问上述地址时打开了浏览器的“网络”标签并查看其访问路径，就可以看到确实是先跳转到了app1的登录页面（<a href="http://localhost:8080/app1/login">http://localhost:8080/app1/login</a>），然后又重定向到 SSO 服务器。由于用户处于未登录状态，所以最后又重定向到 SSO 服务器的登录界面（<a href="http://localhost:8888/login">http://localhost:8888/login</a>），整个请求的跳转过程如下图所示：</p>
-<p><img src="assets/Cgp9HWD2g5SAV9ZCAACNhBC8lAY290.png" alt="17-2.png" /></p>
+<p><img src="assets/Cgp9HWD2g5SAV9ZCAACNhBC8lAY290.png" alt="png" /></p>
 <p>未登录状态访问 app1 时的网络请求跳转流程图</p>
 <p>我们在 SSO 服务器的登录界面输入正确的用户名和密码之后就可以认证成功了，这时候我们再看网络请求的过程，如下所示：</p>
-<p><img src="assets/Cgp9HWD2g4OAY_pLAACZ0h8qrkQ895.png" alt="17-3png.png" /></p>
+<p><img src="assets/Cgp9HWD2g4OAY_pLAACZ0h8qrkQ895.png" alt="png" /></p>
 <p>登录 app1 过程的网络请求跳转流程图</p>
 <p>可以看到，在成功登录之后，授权系统重定向到 app1 中配置的回调地址（<a href="http://localhost:8080/app1/login">http://localhost:8080/app1/logi</a><a href="http://localhost:8080/app1/login">n</a>）。与此同时，我们在请求地址中还发现了两个新的参数 code 和 state。app1 客户端就会根据这个 code 来访问 SSO 服务器的/oauth/token 接口来申请 token。申请成功后，重定向到 app1 配置的回调地址。</p>
 <p>现在，如果你访问 app2，与第一次访问 app1 相同，浏览器先重定向到 app2 的登录页面，然后又重定向到 SSO 服务器的授权链接，最后直接就重新重定向到 app2 的登录页面。不同之处在于，此次访问并不需要再次重定向到 SSO 服务器进行登录，而是成功访问 SSO 服务器的授权接口，并携带着 code 重定向到 app2 的回调路径。然后 app2 根据 code 再次访问 /oauth/token 接口拿到 token，这样就可以正常访问受保护的资源了。</p>

@@ -164,7 +164,7 @@ function hide_canvas() {
 <p>和缓冲类似，缓存可能是软件中使用最多的优化技术了，比如：在最核心的 CPU 中，就存在着多级缓存；为了消除内存和存储之间的差异，各种类似 Redis 的缓存框架更是层出不穷。</p>
 <p>缓存的优化效果是非常好的，它既可以让原本载入非常缓慢的页面，瞬间秒开，也能让本是压力山大的数据库，瞬间清闲下来。</p>
 <p><strong>缓存</strong>，<strong>本质</strong>上是为了协调两个速度差异非常大的组件，如下图所示，通过加入一个中间层，将常用的数据存放在相对高速的设备中。</p>
-<p><img src="assets/CgqCHl8nuCKAad7oAAAk6v90xvo900.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8nuCKAad7oAAAk6v90xvo900.png" alt="png" /></p>
 <p>在我们平常的应用开发中，根据缓存所处的物理位置，一般分为<strong>进程内</strong>缓存和<strong>进程外</strong>缓存。</p>
 <p>本课时我们主要聚焦在进程内缓存上，在 Java 中，进程内缓存，就是我们常说的堆内缓存。Spring 的默认实现里，就包含 Ehcache、JCache、Caffeine、Guava Cache 等。</p>
 <h3>Guava 的 LoadingCache</h3>
@@ -182,7 +182,7 @@ function hide_canvas() {
 &lt;/dependency&gt;
 </code></pre>
 <p>下面介绍一下 LC 的常用操作：</p>
-<p><img src="assets/Ciqc1F8nuDmAJcstAABnG73x05M360.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8nuDmAJcstAABnG73x05M360.png" alt="png" /></p>
 <h4>1.缓存初始化</h4>
 <p>首先，我们可以通过下面的参数设置一下 LC 的大小。一般，我们只需给缓存提供一个上限。</p>
 <ul>
@@ -212,7 +212,7 @@ static String slowMethod(String key) throws Exception {
 }
 </code></pre>
 <p>上面是主动触发的示例代码，你可以使用 <strong>get</strong> 方法<strong>获取</strong>缓存的值。比如，当我们执行 lc.get(&quot;a&quot;) 时，第一次会比较缓慢，因为它需要到数据源进行获取；第二次就瞬间返回了，也就是缓存命中了。具体时序可以参见下面这张图。</p>
-<p><img src="assets/CgqCHl8nuFGACX8vAABYHt8o1wc201.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl8nuFGACX8vAABYHt8o1wc201.png" alt="png" /></p>
 <p>除了靠 LC 自带的回收策略，我们也可以<strong>手动删除</strong>某一个元素，这就是 <strong>invalidate</strong> 方法。当然，数据的这些删除操作，也是可以监听到的，只需要设置一个监听器就可以了，代码如下：</p>
 <pre><code>.removalListener(notification -&gt; System.out.println(notification))
 </code></pre>
@@ -259,7 +259,7 @@ static String slowMethod(String key) throws Exception {
             boolean accessOrder)
 </code></pre>
 <p>accessOrder 参数是实现 LRU 的关键。当 accessOrder 的值为 true 时，将按照对象的访问顺序排序；当 accessOrder 的值为 false 时，将按照对象的插入顺序排序。我们上面提到过，按照访问顺序排序，其实就是 LRU。</p>
-<p><img src="assets/CgqCHl8nuJeAQCW4AABgBDKI74g880.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8nuJeAQCW4AABgBDKI74g880.png" alt="png" /></p>
 <p>如上图，按照缓存的一般设计方式，和 LC 类似，当你向 LinkedHashMap 中添加新对象的时候，就会调用 removeEldestEntry 方法。这个方法默认返回 false，表示永不过期。我们只需要覆盖这个方法，当超出容量的时候返回 true，触发移除动作就可以了。关键代码如下：</p>
 <pre><code>public class LRU extends LinkedHashMap {
     int capacity;
@@ -276,7 +276,7 @@ static String slowMethod(String key) throws Exception {
 <p>相比较 LC，这段代码实现的功能是比较简陋的，它甚至不是线程安全的，但它体现了缓存设计的一般思路，是 Java 中最简单的 LRU 实现方式。</p>
 <h3>进一步加速</h3>
 <p>在 Linux 系统中，通过 free 命令，能够看到系统内存的使用状态。其中，有一块叫作 <strong>cached</strong> 的区域，占用了大量的内存空间。</p>
-<p><img src="assets/Ciqc1F8nuKqAJaGZAAF4FboRD9E367.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F8nuKqAJaGZAAF4FboRD9E367.png" alt="png" /></p>
 <p>如图所示，这个区域，其实就是存放了操作系统的文件缓存，当应用再次用到它的时候，就不用再到磁盘里走一圈，能够从内存里快速载入。</p>
 <p>在文件读取的缓存方面，操作系统做得更多。由于磁盘擅长顺序读写，在随机读写的时候，效率很低，所以，操作系统使用了智能的<strong>预读算法</strong>（readahead），将数据从硬盘中加载到缓存中。</p>
 <p>预读算法有三个关键点：</p>
@@ -307,7 +307,7 @@ static String slowMethod(String key) throws Exception {
 <p><strong>（3）缓存失效策略</strong></p>
 <p>缓存算法也会影响命中率和性能，目前效率最高的算法是 Caffeine 使用的 <strong>W-TinyLFU 算法</strong>，它的命中率非常高，内存占用也更小。新版本的 spring-cache，已经默认支持 Caffeine。</p>
 <p>下图展示了这个算法的性能，<a href="https://github.com/ben-manes/caffeine">从官网的 github 仓库</a>就可以找到 JMH 的测试代码。</p>
-<p><img src="assets/CgqCHl8nuQWAKsjIAAG1hzHS76Q255.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8nuQWAKsjIAAG1hzHS76Q255.png" alt="png" /></p>
 <p>推荐使用 Guava Cache 或者 Caffeine 作为堆内缓存解决方案，然后通过它们提供的一系列监控指标，来调整缓存的大小和内容，一般来说：</p>
 <ul>
 <li>缓存命中率达到 50% 以上，作用就开始变得显著；</li>

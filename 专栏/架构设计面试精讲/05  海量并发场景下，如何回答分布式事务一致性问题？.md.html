@@ -198,23 +198,23 @@ function hide_canvas() {
 </ul>
 <p>Java 程序员都知道，XA 是由 X/Open 组织提出的分布式事务的规范，规范主要定义了事务管理器（Transaction Manager）和资源管理器（Resource Manager）之间的接口，事务管理器负责全局事务的协调者，资源管理器负责管理实际资源（如 MySQL、Oracle 等数据库）。而Java 平台上事务规范 JTA（Java Transaction API）就是对 XA 分布式事务规范标准的实现。例如在 Spring 中就通过 JtaTransactionManager 来配置分布式事务，然后通过管理多个 ResourceManager 来管理多个数据源，进而操作多个数据库之间的事务。</p>
 <p><strong>那么 2PC 具体是如何运行的呢？</strong> 以课程开头的系统为例，订单数据、商品数据，以及促销数据被分别存储在多个数据库实例中，用户在执行下单的时候，交易主流程的业务逻辑则集中部署在一个应用服务器集群上，然后通过 Spring 容器访问底层的数据库实例，而容器中的 JTA 事务管理器在这里就作为事务管理器，Resource 资源管理器就作为底层的数据库实例的资源管理器。</p>
-<p><img src="assets/Ciqc1F_-ekKAVX8CAAD_lE98vHY368.png" alt="18.png" /></p>
+<p><img src="assets/Ciqc1F_-ekKAVX8CAAD_lE98vHY368.png" alt="png" /></p>
 <p>Spring事务管理</p>
 <p>我们假设订单数据，商品数据和促销数据分别保存在数据库 D1，数据库 D2 和数据库 D3 上。</p>
 <ul>
 <li><strong>准备阶段</strong>，事务管理器首先通知所有资源管理器开启事务，询问是否做好提交事务的准备。如资源管理器此时会将 undo 日志和 redo 日志计入事务日志中，并做出应答，当协调者接收到反馈 Yes 后，则准备阶段结束。
-<img src="assets/Cip5yF_-ek-AeszEAAGVNQOE9EQ982.png" alt="19.png" /></li>
+<img src="assets/Cip5yF_-ek-AeszEAAGVNQOE9EQ982.png" alt="png" /></li>
 </ul>
 <p>2PC 准备阶段</p>
 <ul>
 <li><strong>提交阶段</strong>，当收到所有数据库实例的 Yes 后，事务管理器会发出提交指令。每个数据库接受指令进行本地操作，正式提交更新数据，然后向协调者返回 Ack 消息，事务结束。
-<img src="assets/CgpVE1_-elyAMxAUAAGGnETIxqE263.png" alt="20.png" /></li>
+<img src="assets/CgpVE1_-elyAMxAUAAGGnETIxqE263.png" alt="png" /></li>
 </ul>
 <p>2PC 提交阶段</p>
 <ul>
 <li><strong>中断阶段</strong>，如果任何一个参与者向协调者反馈了 No 响应，例如用户 B 在数据库 D3 上面的余额在执行其他扣款操作，导致数据库 D3 的数据无法锁定，则只能向事务管理器返回失败。此时，协调者向所有参与者发出 Rollback 请求，参与者接收 Rollback 请求后，会利用其在准备阶段中记录的 undo 日志来进行回滚操作，并且在完成事务回滚之后向协调者发送 Ack 消息，完成事务回滚操作。</li>
 </ul>
-<p><img src="assets/Cip5yF_-emuANRvWAAJkZ2BNZ00511.png" alt="21.png" /></p>
+<p><img src="assets/Cip5yF_-emuANRvWAAJkZ2BNZ00511.png" alt="png" /></p>
 <p>2PC 中断阶段</p>
 <p>以上就是基于 2PC 实现分布式事务的原理。</p>
 <p>当你和面试官交流 2PC 的原理时，往往不止于此，就像我们开篇提到的，我们并不会基于 2PC 来实现分布式事务一致性，虽然 2PC 可以借助数据库的本地事务操作，实现起来较为简单，不用侵入业务逻辑，但是它也存在着很多问题。</p>
@@ -227,7 +227,7 @@ function hide_canvas() {
 <h4>基于 MQ 的可靠消息投递方案</h4>
 <p>基于 MQ 的可靠消息队列投递方案是目前互联网最为常用的方式，在应对高并发场景下的分布式事务问题时，种方案通过放弃强一致性，而选择最终一致性，来提高系统的可用性。</p>
 <p>还是拿下单场景举例，当订单系统调用优惠券系统时，将扣减优惠券的事件放入消息队列中，最终给优惠券系统来执行，然后只要保证事件消息能够在优惠券系统内被执行就可以了，因为消息已经持久化在消息中间件中，即使消息中间件发生了宕机，我们将它重启后也不会出现消息丢失的问题。
-<img src="assets/Cip5yF_-enyATCEeAACzkaFkExY342.png" alt="10.png" /></p>
+<img src="assets/Cip5yF_-enyATCEeAACzkaFkExY342.png" alt="png" /></p>
 <p>基于 MQ 的消息投递</p>
 <p>基于 MQ 的可靠消息投递的方案不仅可以解决由于业务流程的同步执行而造成的阻塞问题，还可以实现业务解耦合流量削峰。这种方案中的可选型的 MQ 也比较多，比如基于 RabbitMQ 或者 RocketMQ，但并不是引入了消息队列中间件就万事大吉了，通常情况下，<strong>面试官会着重通过以下两个知识点来考察你对这种方案的掌握程度</strong>。</p>
 <ul>
@@ -243,7 +243,7 @@ function hide_canvas() {
 <p>但实际上，你需要人工干预处理移入死信队列的消息，于是在这种场景下，事件消息大概率会被丢弃。而这个问题源于订单系统作为事件的生产者进行消息投递后，无法感知它下游（即优惠券系统）的所有操作，那么优惠券系统作为事件的消费者，是消费成功还是消费失败，订单系统并不知道。</p>
 <p>顺着这个思路，如果让订单知道消费执行结果的响应，即使出现了消息丢失的情况，订单系统也还是可以通过定时任务扫描的方式，将未完成的消息重新投递来进行消息补偿。<strong>这是基于消息队列实现分布式事务的关键</strong>，是一种双向消息确认的机制。</p>
 <p>那么如何落地实现呢？你可以先让订单系统把要发送的消息持久化到本地数据库里，然后将这条消息记录的状态设置为代发送，紧接着订单系统再投递消息到消息队列，优惠券系统消费成功后，也会向消息队列发送一个通知消息。当订单系统接收到这条通知消息后，再把本地持久化的这条消息的状态设置为完成。
-<img src="assets/Cip5yF_-epGAWFi1AAE-yrH59GA499.png" alt="11.png" /></p>
+<img src="assets/Cip5yF_-epGAWFi1AAE-yrH59GA499.png" alt="png" /></p>
 <p>队列双向确认</p>
 <p>这样做后，即使最终 MQ 出现了消息丢失，也可以通过定时任务从订单系统的本地数据库中扫描出一段时间内未完成的消息，进行重新投递，最终保证订单系统和优惠券系统的最终事务一致性。</p>
 <h3>总结</h3>

@@ -182,12 +182,12 @@ function hide_canvas() {
 <p>SQL 是访问数据库的一个通用接口，虽然数据库有很多种，但数据库中的 SQL 却是类似的，因为 SQL 有标准存在，如 SQL92、SQL2003 等。</p>
 <p>虽然有些数据库会扩展支持 SQL 标准外的语法，但 90% 的语法是兼容的，所以，不同数据库在 SQL 层面的学习成本是比较低的。也因为上述原因，从一种关系型数据库迁移到另一种关系型数据库，开发的迁移成本并不高。比如去 IOE，将 Oracle 数据库迁移到 MySQL 数据库，通常 SQL 语法并不是难题。</p>
 <p>MySQL 8.0 版本前，有不少同学会吐槽 MySQL 对于 SQL 标准的支持的程度。但是在当前 8.0 版本下，MySQL 对于 SQL 语法的支持度已经越来越好，甚至在某些方面超过了商业数据库 Oracle。</p>
-<p><img src="assets/Cgp9HWCeMqyAb4fUABDbOi8o_AI403.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWCeMqyAb4fUABDbOi8o_AI403.png" alt="png" /></p>
 <p>上图是专家评估的不同数据库对 SQL 的支持程度，可以看到，MySQL 8.0 在这一块非常完善，特别是对 JSON_TABLE 的支持功能。</p>
 <p>通常来说，MySQL 数据库用于 OLTP 的在线系统中，不用特别复杂的 SQL 语法支持。但 MySQL 8.0 完备的 SQL 支持意味着 MySQL 未来将逐渐补齐在 OLAP 业务方面的短板，让我们一起拭目以待。</p>
 <p>当然，通过 SQL 访问表，你肯定并不陌生，这也不是本讲的重点。<strong>接下来我重点带你了解 MySQL 怎么通过 NoSQL 的方式访问表中的数据。</strong></p>
 <p>我们先来看看当前 MySQL 版本中支持的不同表的访问方式：</p>
-<p><img src="assets/CioPOWCeMr2AbND9AAMtpbJCKIs777.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWCeMr2AbND9AAMtpbJCKIs777.png" alt="png" /></p>
 <p>MySQL 三种表的访问方式</p>
 <p>可以看到，除了标准的 SQL 访问，MySQL 5.6 版本开始还支持通过 Memcached 通信协议访问表中的数据，这时 MySQL 可以作为一个 KV 数据库使用。此外，MySQL 5.7 版本开始还支持通过新的 MySQL X 通信协议访问表中的数据，这时 MySQL 可以作为一个文档数据库使用。</p>
 <p>但无论哪种 NoSQL 的访问方式，其访问的数据都是以表的方式进行存储。SQL 和 NoSQL 之间通过某种映射关系进行绑定。</p>
@@ -223,7 +223,7 @@ VALUES ('User','test','user_id','user_id|cellphone|last_login','0','0','0','PRIA
 </code></pre>
 <p>上面的映射关系表示通过 Memcached 的 KV 方式访问，其本质是通过 PRIAMRY 索引访问 key 值，key 就是 user_id，value 值返回的是由列 user_id、cellphone、last_login 组合而成，分隔符为&quot;|&quot;的字符串。</p>
 <p>最后，通过 SQL 和 KV 的对比性能测试，可以发现通过 KV 的方式访问，性能要好非常多，在我的测试服务器上结果如下所示：</p>
-<p><img src="assets/Cgp9HWCeMtOAFN_LAAJjGPv67qw823.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cgp9HWCeMtOAFN_LAAJjGPv67qw823.png" alt="png" /></p>
 <p>从测试结果可以看到，<strong>基于 Memcached 的 KV 访问方式比传统的 SQL 方式要快54.33%</strong>，而且CPU 的开销反而还要低20%。</p>
 <p>当然了，上述操作只是将表 User 作为 KV 访问，如果想将其他表通过 KV 的方式访问，可以继续在表 Containers 中进行配置。但是在使用时，务必先通过 GET 命令指定要访问的表：</p>
 <pre><code># Python伪代码
@@ -243,7 +243,7 @@ mc.set('sb1_key1','aa|bbb|ccc')
 <h3>通过 X Protocol 访问表</h3>
 <p>MySQL 5.7 版本开始原生支持 JSON 二进制数据类型，同时也提供将表格映射为一个 JSON 文档。同时，MySQL 也提供了 X Protocol 这样的 NoSQL 访问方式，所以，现在我们 MySQL 打造成一个<strong>SQL &amp; NoSQL</strong>的文档数据库。</p>
 <p>对比 MongoDB 文档数据库，将 MySQL 打造为文档数据库与 MongoDB 的对比在于：</p>
-<p><img src="assets/CioPOWCeMuOAEmp2AAEcRizN53k843.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CioPOWCeMuOAEmp2AAEcRizN53k843.png" alt="png" /></p>
 <p>可以看到，除了 MySQL 目前还无法支持数据分片功能外，其他方面 MySQL 的优势会更大一些，特别是 MySQL 是通过二维表格存储 JSON 数据，从而实现文档数据库功能。这样可以通过 SQL 进行很多复杂维度的查询，特别是结合 MySQL 8.0 的 CTE（Common Table Expression）、窗口函数（Window Function）等功能，而这在 MongoDB 中是无法原生实现的。</p>
 <p>另外，和 Memcached Plugin 不同的是，MySQL 默认会自动启用 X Plugin 插件，接着就可以通过新的 X Protocol 协议访问 MySQL 中的数据，默认端口 33060，你可以通过下面命令查看有关 X Plugin 的配置：</p>
 <pre><code>mysql&gt; SHOW VARIABLES LIEK '%mysqlx%';
@@ -271,7 +271,7 @@ DEFLATE_STREAM,LZ4_MESSAGE,ZSTD_STREAM                   |
 <pre><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f1839e9e85b1bcb3a1dca6989f959e8682">[email&#160;protected]</a>:# mysqlsh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95e7fafae1d5f9faf6f4f9fdfae6e1">[email&#160;protected]</a>/test
 </code></pre>
 <p>X Protocol 协议支持通过 JS、Python、SQL 的方式管理和访问 MySQL，具体操作你可以参见官方文档。</p>
-<p><img src="assets/CioPOWCeMvKAB2VRAALFfWeJmnA003.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CioPOWCeMvKAB2VRAALFfWeJmnA003.png" alt="png" /></p>
 <p>开发同学若要通过 X Protocol 协议管理文档数据，也需要下载新的 MySQL Connector，并引入新的 X 驱动库，如 Python 驱动：</p>
 <pre><code>import mysqlx
 # Connect to server on localhost

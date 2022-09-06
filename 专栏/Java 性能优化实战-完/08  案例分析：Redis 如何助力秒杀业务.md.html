@@ -164,7 +164,7 @@ function hide_canvas() {
 <p>那什么叫<strong>分布式缓存</strong>呢？它其实是一种<strong>集中管理</strong>的思想。如果我们的服务有多个节点，堆内缓存在每个节点上都会有一份；而分布式缓存，所有的节点，共用一份缓存，既节约了空间，又减少了管理成本。</p>
 <p>在分布式缓存领域，使用最多的就是 Redis。<strong>Redis</strong> 支持非常丰富的数据类型，包括字符串（string）、列表（list）、集合（set）、有序集合（zset）、哈希表（hash）等常用的数据结构。当然，它也支持一些其他的比如位图（bitmap）一类的数据结构。</p>
 <p>说到 Redis，就不得不提一下另外一个分布式缓存 <strong>Memcached</strong>（以下简称 MC）。MC 现在已经很少用了，但<strong>面试的时候经常会问到它们之间的区别</strong>，这里简单罗列一下：</p>
-<p><img src="assets/CgqCHl8qaxiATTH1AAB10CrXXk8295.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8qaxiATTH1AAB10CrXXk8295.png" alt="png" /></p>
 <p>Redis 在互联网中，几乎是标配。我们接下来，先简单看一下 Redis 在 Spring 中是如何使用的，然后，再介绍一下在秒杀业务中，Redis是如何帮助我们承接瞬时流量的。</p>
 <h3>SpringBoot 如何使用 Redis</h3>
 <p>使用 SpringBoot 可以很容易地对 Redis 进行操作（<a href="https://gitee.com/xjjdog/tuning-lagou-res/tree/master/tuning-008/cache-redis">完整代码见仓库</a>）。Java 的 Redis的客户端，常用的有三个：jedis、redisson 和 lettuce，Spring 默认使用的是 lettuce。</p>
@@ -176,7 +176,7 @@ function hide_canvas() {
 &lt;/dependency&gt;
 </code></pre>
 <p>上面这种方式，我们主要是使用 RedisTemplate 这个类。它针对不同的数据类型，抽象了相应的方法组。</p>
-<p><img src="assets/CgqCHl8qa0CAF6eCAAHpRwXu93w738.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8qa0CAF6eCAAHpRwXu93w738.png" alt="png" /></p>
 <p>另外一种方式，就是使用 Spring 抽象的缓存包 spring-cache。它使用注解，采用 AOP的方式，对 Cache 层进行了抽象，可以在各种堆内缓存框架和分布式框架之间进行切换。这是它的 maven 坐标：</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
@@ -202,7 +202,7 @@ function hide_canvas() {
 <p>对于秒杀系统来说，仅仅使用这三个注解是有局限性的，需要使用更加底层的 API，比如 RedisTemplate，来完成逻辑开发，下面就来介绍一些比较重要的功能。</p>
 <h3>秒杀业务介绍</h3>
 <p>秒杀，是对正常业务流程的考验。因为它会产生突发流量，平常一天的请求，可能就集中在几秒内就要完成。比如，京东的某些抢购，可能库存就几百个，但是瞬时进入的流量可能是几十上百万。</p>
-<p><img src="assets/CgqCHl8qa06AXwgiAABlE7P5SV4914.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl8qa06AXwgiAABlE7P5SV4914.png" alt="png" /></p>
 <p>如果参与秒杀的人，等待很长时间，体验就非常差，想象一下拥堵的高速公路收费站，就能理解秒杀者的心情。同时，被秒杀的资源会成为热点，发生并发争抢的后果。比如 12306 的抢票，如果单纯使用数据库来接受这些请求，就会产生严重的锁冲突，这也是秒杀业务难的地方。</p>
 <p>大家可以回忆一下上一课时的内容，此时，秒杀前端需求与数据库之间的速度是严重不匹配的，而且秒杀的资源是热点资源。这种场景下，采用缓存是非常合适的。</p>
 <p><strong>处理秒杀业务有三个绝招：</strong></p>
@@ -219,7 +219,7 @@ function hide_canvas() {
 <li><strong>抢购阶段</strong>，就是我们通常说的秒杀，会产生瞬时的高并发流量，对资源进行集中操作；</li>
 <li><strong>结束清算</strong>，主要完成数据的一致性，处理一些异常情况和回仓操作。</li>
 </ul>
-<p><img src="assets/Ciqc1F8qa1eAfW9ZAADONsLsuh4160.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F8qa1eAfW9ZAADONsLsuh4160.png" alt="png" /></p>
 <p>下面，我将介绍一下最重要的秒杀阶段。</p>
 <p>我们可以设计一个 Hash 数据结构，来支持库存的扣减。</p>
 <pre><code>seckill:goods:${goodsId}{
@@ -273,13 +273,13 @@ return falseRet
 }
 </code></pre>
 <p>执行仓库里的 testSeckill 方法。启动 1000 个线程对 100 个资源进行模拟秒杀，可以看到生成了 100 条记录，同时其他的线程返回的是 0，表示没有秒杀到。</p>
-<p><img src="assets/CgqCHl8qa3KAHrjzAACfVjTuQ9c533.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl8qa3KAHrjzAACfVjTuQ9c533.png" alt="png" /></p>
 <h3>缓存穿透、击穿和雪崩</h3>
 <p>抛开秒杀场景，我们再来看一下分布式缓存系统会存在的三大问题： 缓存穿透、缓存击穿和缓存雪崩 。</p>
 <h4>1.缓存穿透</h4>
 <p>第一个比较大的问题就是缓存穿透。这个概念比较好理解，和我们上一课时提到的命中率有关。如果命中率很低，那么压力就会集中在数据库持久层。</p>
 <p>假如能找到相关数据，我们就可以把它缓存起来。但问题是，<strong>本次请求，在缓存和持久层都没有命中，这种情况就叫缓存的穿透。</strong></p>
-<p><img src="assets/CgqCHl8qa32AXy2GAACsgw1i8As520.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl8qa32AXy2GAACsgw1i8As520.png" alt="png" /></p>
 <p>举个例子，如上图，在一个登录系统中，有外部攻击，一直尝试使用不存在的用户进行登录，这些用户都是虚拟的，不能有效地被缓存起来，每次都会到数据库中查询一次，最后就会造成服务的性能故障。</p>
 <p>解决这个问题有多种方案，我们来简单介绍一下。</p>
 <p><strong>第一种</strong>就是把空对象缓存起来。不是持久层查不到数据吗？那么我们就可以把本次请求的结果设置为 null，然后放入到缓存中。通过设置合理的过期时间，就可以保证后端数据库的安全。</p>
@@ -292,7 +292,7 @@ return falseRet
 <h4>3.缓存雪崩</h4>
 <p>雪崩这个词看着可怕，实际情况也确实比较严重。缓存是用来对系统加速的，后端的数据库只是数据的备份，而不是作为高可用的备选方案。</p>
 <p>当缓存系统出现故障，流量会瞬间转移到后端的数据库。过不了多久，数据库将会被大流量压垮挂掉，这种级联式的服务故障，可以形象地称为雪崩。</p>
-<p><img src="assets/CgqCHl8qa5CAd61nAAG3-zdlhRw552.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8qa5CAd61nAAG3-zdlhRw552.png" alt="png" /></p>
 <p>缓存的高可用建设是非常重要的。Redis 提供了主从和 Cluster 的模式，其中 Cluster 模式使用简单，每个分片也能单独做主从，可以保证极高的可用性。</p>
 <p>另外，我们对数据库的性能瓶颈有一个大体的评估。如果缓存系统当掉，那么流向数据库的请求，就可以使用限流组件，将请求拦截在外面。</p>
 <h3>缓存一致性</h3>
@@ -314,7 +314,7 @@ return falseRet
 <p>但这样还是有问题。<strong>接下来介绍的场景，也是面试中经常提及的问题。</strong></p>
 <p>我们上面提到的缓存删除动作，和数据库的更新动作，明显是不在一个事务里的。如果一个请求删除了缓存，同时有另外一个请求到来，此时发现没有相关的缓存项，就从数据库里加载了一份到缓存系统。接下来，数据库的更新操作也完成了，此时数据库的内容和缓存里的内容，就产生了不一致。</p>
 <p>下面这张图，直观地解释了这种不一致的情况，此时，缓存读取 B 操作以及之后的读取操作，都会读到错误的缓存值。</p>
-<p><img src="assets/CgqCHl8qa5-AWDbqAACK1Itu_Wc954.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl8qa5-AWDbqAACK1Itu_Wc954.png" alt="png" /></p>
 <p><strong>在面试中，只要你把这个问题给点出来，面试官都会跷起大拇指。</strong></p>
 <p>可以使用分布式锁来解决这个问题，将缓存操作和数据库删除操作，与其他的缓存读操作，使用锁进行资源隔离即可。一般来说，读操作是不需要加锁的，它会在遇到锁的时候，重试等待，直到超时。</p>
 <h3>小结</h3>

@@ -262,7 +262,7 @@ for(byte x in bytes) {
 }
 </code></pre>
 <p><code>xor</code>是异或运算。上面的程序在计算字节数组 bytes 的校验和。<code>c</code>是最终的结果。你可以看到将所有<code>bytes</code>两两异或，最终的结果就是校验和。假设我们要传输 bytes，如果在传输过程中<code>bytes</code>发生了变化，校验和有<strong>很大概率</strong>也会跟着变化。当然也可能存在<code>bytes</code>发生变化，校验和没有变化的特例，不过校验和可以很大程度上帮助我们识别数据是否损坏了。</p>
-<p><img src="assets/CgpVE1_-o5GADgRkAABcTgxXiyw544.png" alt="Lark20210113-153833.png" /></p>
+<p><img src="assets/CgpVE1_-o5GADgRkAABcTgxXiyw544.png" alt="png" /></p>
 <p>当要传输数据的时候，数据会被分片，我们把每个分片看作一个字节数组。然后在分片中，预留几个字节去存储校验和。校验和随着数据分片一起传输到目的地，目的地会用同样的算法再次计算校验和。如果二者校验和不一致，代表中途数据发生了损坏。</p>
 <p><strong>对于 TCP 和 UDP，都实现了校验和算法，但二者的区别是，TCP 如果发现校验核对不上，也就是数据损坏，会主动丢失这个封包并且重发。而 UDP 什么都不会处理，UDP 把处理的权利交给使用它的程序员</strong>。</p>
 <h4>请求/应答/连接模型</h4>
@@ -274,7 +274,7 @@ for(byte x in bytes) {
 <p>在 TCP 协议当中。我们假设 Alice 和 Bob 是两个通信进程。当 Alice 想要和 Bob 建立连接的时候，Alice 需要发送一个请求建立连接的消息给 Bob。这种请求建立连接的消息在 TCP 协议中称为<strong>同步</strong>（<strong>Synchronization， SYN</strong>）。而 Bob 收到 SYN，必须马上给 Alice 一个响应。这个响应在 TCP 协议当中称为<strong>响应</strong>（<strong>Acknowledgement，ACK</strong>）。请你务必记住这两个单词。不仅是 TCP 在用，其他协议也会复用这样的概念，来描述相同的事情。</p>
 <p>当 Alice 给 Bob SYN，Bob 给 Alice ACK，这个时候，对 Alice 而言，连接就建立成功了。但是 TCP 是一个双工协议。所谓双工协议，代表数据可以双向传送。虽然对 Alice 而言，连接建立成功了。但是对 Bob 而言，连接还没有建立。为什么这么说呢？你可以这样思考，如果这个时候，Bob 马上给 Alice 发送信息，信息可能先于 Bob 的 ACK 到达 Alice，但这个时候 Alice 还不知道连接建立成功。 所以解决的办法就是 Bob 再给 Alice 发一次 SYN ，Alice 再给 Bob 一个 ACK。以上就是 TCP 的三次握手内容。</p>
 <p>你可能会问，这明明是<strong>四次握手，哪里是三次握手</strong>呢？这是因为，Bob 给 Alice 的 ACK ，可以和 Bob 向 Alice 发起的 SYN 合并，称为一条 SYN-ACK 消息。TCP 协议以此来减少握手的次数，减少数据的传输，于是 TCP 就变成了三次握手。下图中绿色标签状是 Alice 和 Bob 的状态，完整的 TCP 三次握手的过程如下图所示：</p>
-<p><img src="assets/CgpVE1_-o7OAHQP4AADkdEFtGfI902.png" alt="Lark20210113-153831.png" /></p>
+<p><img src="assets/CgpVE1_-o7OAHQP4AADkdEFtGfI902.png" alt="png" /></p>
 <p><strong>2. TCP 的四次挥手</strong></p>
 <p>四次挥手（TCP 断开连接）的原理类似。中断连接的请求我们称为 Finish（用 FIN 表示）；和三次握手过程一样，需要分析成 4 步：</p>
 <ul>
@@ -284,7 +284,7 @@ for(byte x in bytes) {
 <li>第 4 步是 Alice 给 ACK</li>
 </ul>
 <p>之所以是四次挥手，是因为第 2 步和 第 3 步在挥手的过程中不能合并为 FIN-ACK。原因是在挥手的过程中，Alice 和 Bob 都可能有未完成的工作。比如对 Bob 而言，可能还存在之前发给 Alice 但是还没有收到 ACK 的请求。因此，Bob 收到 Alice 的 FIN 后，就马上给 ACK。但是 Bob 会在自己准备妥当后，再发送 FIN 给 Alice。完整的过程如下图所示：</p>
-<p><img src="assets/Ciqc1F_-o7uASykoAAD1Eo7HnP4749.png" alt="Lark20210113-153824.png" /></p>
+<p><img src="assets/Ciqc1F_-o7uASykoAAD1Eo7HnP4749.png" alt="png" /></p>
 <p><strong>3. 连接</strong></p>
 <p>连接是一个虚拟概念，连接的目的是让连接的双方达成默契，倾尽资源，给对方最快的响应。经历了三次握手，Alice 和 Bob 之间就建立了连接。<strong>连接也是一个很好的编程模型。当连接不稳定的时候，可以中断连接后再重新连接。这种模式极大地增加了两个应用之间的数据传输的可靠性</strong>。</p>
 <p>以上就是 TCP 中存在的，而 UDP 中没有的机制，你可以仔细琢磨琢磨。</p>

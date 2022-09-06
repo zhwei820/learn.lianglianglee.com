@@ -340,7 +340,7 @@ function hide_canvas() {
 </code></pre>
 <h3>ArrayMerger</h3>
 <p>在 Dubbo 中提供了处理不同类型返回值的 Merger 实现，其中不仅有处理 boolean[]、byte[]、char[]、double[]、float[]、int[]、long[]、short[] 等<strong>基础类型数组</strong>的 Merger 实现，还有处理 List、Set、Map 等<strong>集合类</strong>的 Merger 实现，具体继承关系如下图所示：</p>
-<p><img src="assets/CgqCHl_PFWiAbmfPAAPxSnmLN4s499.png" alt="Lark20201208-135542.png" /></p>
+<p><img src="assets/CgqCHl_PFWiAbmfPAAPxSnmLN4s499.png" alt="png" /></p>
 <p>Merger 继承关系图</p>
 <p>我们首先来看 ArrayMerger 实现：<strong>当服务接口的返回值为数组的时候，会使用 ArrayMerger 将多个数组合并成一个数组，也就是将二维数组拍平成一维数组</strong>。ArrayMerger.merge() 方法的具体实现如下：</p>
 <pre><code>public Object[] merge(Object[]... items) {

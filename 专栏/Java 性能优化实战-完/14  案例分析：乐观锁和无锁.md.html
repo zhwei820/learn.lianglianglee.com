@@ -166,7 +166,7 @@ function hide_canvas() {
 <h3>CAS</h3>
 <p>CAS 是 Compare And Swap 的缩写，意思是<strong>比较并替换</strong>。</p>
 <p>如下图，CAS 机制当中使用了 3 个基本操作数：内存地址V、期望值E、要修改的新值N。更新一个变量的时候，只有当变量的预期值E 和内存地址V 的真正值相同时，才会将内存地址V 对应的值修改为 N。</p>
-<p><img src="assets/CgqCHl9GGnmABhbVAAB4RWCMsX0107.png" alt="image.png" /></p>
+<p><img src="assets/CgqCHl9GGnmABhbVAAB4RWCMsX0107.png" alt="png" /></p>
 <p>如果本次修改不成功，怎么办？很多情况下，它将一直重试，直到修改为期望的值。</p>
 <p>拿 AtomicInteger 类来说，相关的代码如下：</p>
 <pre><code>public final boolean compareAndSet(int expectedValue, int newValue) {
@@ -201,7 +201,7 @@ inline T Atomic::PlatformCmpxchg&lt;4&gt;::operator()(T exchange_value,
 </code></pre>
 <p>那 CAS 实现的原子类，性能能提升多少呢？我们开启了 20 个线程，对共享变量进行自增操作。</p>
 <p>从测试结果得知，针对频繁的写操作，原子类的性能是 synchronized 方式的 3 倍。</p>
-<p><img src="assets/Ciqc1F9GGpOActO6AACqgh2NBj0192.png" alt="chart.png" /></p>
+<p><img src="assets/Ciqc1F9GGpOActO6AACqgh2NBj0192.png" alt="png" /></p>
 <p><strong>CAS 原理，在近几年面试中的考察率越来越高，主要是由于乐观锁在读多写少的互联网场景中，使用频率愈发频繁。</strong></p>
 <p>你可能发现有一些乐观锁的变种，但最基础的思想是一样的，都是基于<strong>比较替换并替换</strong>的基本操作。</p>
 <p>关于 Atomic 类，还有一个小细节，那就是它的主要变量，使用了 volatile 关键字进行修饰。代码如下，你知道它是用来干什么的吗？</p>
@@ -347,7 +347,7 @@ try {
 }
 </code></pre>
 <p>使用 redis 的 monitor 命令，可以看到具体的执行步骤，这个过程还是比较复杂的。</p>
-<p><img src="assets/CgqCHl9GGvuAY0otAAKk-rNnRjQ444.jpg" alt="15963703738863.jpg" /></p>
+<p><img src="assets/CgqCHl9GGvuAY0otAAKk-rNnRjQ444.jpg" alt="png" /></p>
 <h3>无锁</h3>
 <p>无锁（Lock-Free），指的是在多线程环境下，在访问共享资源的时候，不会阻塞其他线程的执行。</p>
 <p>在 Java 中，最典型的无锁队列实现，就是 ConcurrentLinkedQueue，但它是无界的，不能够指定它的大小。ConcurrentLinkedQueue 使用 CAS 来处理对数据的并发访问，这是无锁算法得以实现的基础。</p>

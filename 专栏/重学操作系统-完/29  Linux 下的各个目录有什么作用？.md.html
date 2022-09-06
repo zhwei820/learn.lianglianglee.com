@@ -251,20 +251,20 @@ function hide_canvas() {
 </ul>
 <p>特别是近年来分布式系统的普及，学习分布式文件系统，也是理解分布式架构最核心的一个环节。其实文件系统最精彩的还是虚拟文件系统的设计，比如 Linux 可以支持每个目录用不同的文件系统。这些文件看上去是一个个目录和文件，实际上可能是磁盘、内存、网络文件系统、远程磁盘、网卡、随机数产生器、输入输出设备等，这样虚拟文件系统就成了整合一切设备资源的平台。大量的操作都可以抽象成对文件的操作，程序的书写就会完整而统一，且扩展性强。</p>
 <p>这一讲，我会从 Linux 的目录结构和用途开始，带你认识 Linux 的文件系统。Linux 所有的文件都建立在虚拟文件系统（Virtual File System ，VFS）之上，如下图所示：</p>
-<p><img src="assets/Cip5yF_jAd-APzhvAADyJAEGLTc170.png" alt="Lark20201223-163616.png" /></p>
+<p><img src="assets/Cip5yF_jAd-APzhvAADyJAEGLTc170.png" alt="png" /></p>
 <p>当你访问一个目录或者文件，虽然用的是 Linux 标准的文件 API 对文件进行操作，但实际操作的可能是磁盘、内存、网络或者数据库等。<strong>因此，Linux 上不同的目录可能是不同的磁盘，不同的文件可能是不同的设备</strong>。</p>
 <h3>分区结构</h3>
 <p>在 Linux 中，<code>/</code>是根目录。之前我们在“<strong>08 讲</strong>”提到过，每个目录可以是不同的文件系统（不同的磁盘或者设备）。你可能会问我，<code>/</code>是对应一个磁盘还是多个磁盘呢？在<code>/</code>创建目录的时候，目录属于哪个磁盘呢？</p>
-<p><img src="assets/CgpVE1_jAeqAern4AAH5hspmQ0Y638.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgpVE1_jAeqAern4AAH5hspmQ0Y638.png" alt="png" /></p>
 <p>你可以用<code>df -h</code>查看上面两个问题的答案，在上图中我的<code>/</code>挂载到了<code>/dev/sda5</code>上。如果你想要看到更多信息，可以使用<code>df -T</code>，如下图所示：</p>
-<p><img src="assets/CgpVE1_jAfGAf6BqAAGJaAmhd0Q927.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgpVE1_jAfGAf6BqAAGJaAmhd0Q927.png" alt="png" /></p>
 <p><code>/</code>的文件系统类型是<code>ext4</code>。这是一种常用的日志文件系统。关于日志文件系统，我会在“**30 讲”**为你介绍。然后你可能还会有一个疑问，<code>/dev/sda5</code>究竟是一块磁盘还是别的什么？这个时候你可以用<code>fdisk -l</code>查看，结果如下图：</p>
-<p><img src="assets/CgqCHl_jAf-AGBtKAANDnVrYDh0934.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl_jAf-AGBtKAANDnVrYDh0934.png" alt="png" /></p>
 <p>你可以看到我的 Linux 虚拟机上，有一块 30G 的硬盘（当然是虚拟的）。然后这块硬盘下有 3 个设备（Device）：/dev/sda1, /dev/sda2 和 /dev/sda5。在 Linux 中，数字 1~4 结尾的是主分区，通常一块磁盘最多只能有 4 个主分区用于系统启动。主分区之下，还可以再分成若干个逻辑分区，4 以上的数字都是逻辑分区。因此<code>/dev/sda2</code>和<code>/dev/sda5</code>是主分区包含逻辑分区的关系。</p>
 <h3>挂载</h3>
 <p>分区结构最终需要最终挂载到目录上。上面例子中<code>/dev/sda5</code>分区被挂载到了<code>/</code>下。 这样在<code>/</code>创建的文件都属于这个<code>/dev/sda5</code>分区。 另外，<code>/dev/sda5</code>采用<code>ext4</code>文件系统。可见<strong>不同的目录可以采用不同的文件系统</strong>。</p>
 <p>将一个文件系统映射到某个目录的过程叫作挂载（Mount）。当然这里的文件系统可以是某个分区、某个 USB 设备，也可以是某个读卡器等。你可以用<code>mount -l</code>查看已经挂载的文件系统。</p>
-<p><img src="assets/Cip5yF_jAfeAIaUWAANFrmAEXQM991.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yF_jAfeAIaUWAANFrmAEXQM991.png" alt="png" /></p>
 <p>上图中的<code>sysfs``proc``devtmpfs``tmpfs``ext4</code>都是不同的文件系统，下面我们来说说它们的作用。</p>
 <ul>
 <li><code>sysfs</code>让用户通过文件访问和设置设备驱动信息。</li>
@@ -279,7 +279,7 @@ function hide_canvas() {
 <p>上面这个命令将<code>/dev/sda6</code>挂载到目录<code>abc</code>。</p>
 <h3>目录结构</h3>
 <p>因为 Linux 内文件系统较多，用途繁杂，Linux 对文件系统中的目录进行了一定的归类，如下图所示：</p>
-<p><img src="assets/Ciqc1F_jAhGADnWLAAFf1qd349k816.png" alt="Lark20201223-163621.png" /></p>
+<p><img src="assets/Ciqc1F_jAhGADnWLAAFf1qd349k816.png" alt="png" /></p>
 <p><strong>最顶层的目录称作根目录，</strong> 用<code>/</code>表示。<code>/</code>目录下用户可以再创建目录，但是有一些目录随着系统创建就已经存在，接下来我会和你一起讨论下它们的用途。</p>
 <p><strong>/bin（二进制</strong>）包含了许多所有用户都可以访问的可执行文件，如 ls, cp, cd 等。这里的大多数程序都是二进制格式的，因此称作<code>bin</code>目录。<code>bin</code>是一个命名习惯，比如说<code>nginx</code>中的可执行文件会在 Nginx 安装目录的 bin 文件夹下面。</p>
 <p><strong>/dev（设备文件）</strong> 通常挂载在<code>devtmpfs</code>文件系统上，里面存放的是设备文件节点。通常直接和内存进行映射，而不是存在物理磁盘上。</p>

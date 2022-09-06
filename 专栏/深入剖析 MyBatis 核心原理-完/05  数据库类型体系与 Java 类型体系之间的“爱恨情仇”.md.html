@@ -164,11 +164,11 @@ function hide_canvas() {
                         <p id="tip" align="center"></p>
                         <div><h1>05  数据库类型体系与 Java 类型体系之间的“爱恨情仇”</h1>
 <p>作为一个 Java 程序员，你应该已经具备了使用 JDBC 操作数据库的基础技能。在使用 JDBC 的时候，你会发现 JDBC 的数据类型与 Java 语言中的数据类型虽然有点对应关系，如下图所示，但还是无法做到一一对应，也自然无法做到自动映射。</p>
-<p><img src="assets/Cgp9HWAeMiSAcga0AAEpsa9onlg651.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWAeMiSAcga0AAEpsa9onlg651.png" alt="png" /></p>
 <p>数据库类型与 Java 类型对应图表</p>
 <p>在使用 PreparedStatement 执行 SQL 语句之前，都是需要手动调用 setInt()、setString() 等 set 方法绑定参数，这不仅仅是告诉 JDBC 一个 SQL 模板中哪个占位符需要使用哪个实参，还会将数据从 Java 类型转换成 JDBC 类型。当从 ResultSet 中获取数据的时候，则是一个逆过程，数据会从 JDBC 类型转换为 Java 类型。</p>
 <p>可以使用 MyBatis 中的<strong>类型转换器</strong>，完成上述两次类型转换，如下图所示：</p>
-<p><img src="assets/CioPOWAeMi6AdTRAAAENMX_HsyU054.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWAeMi6AdTRAAAENMX_HsyU054.png" alt="png" /></p>
 <p>JDBC 类型数据与 Java 类型数据转换示意图</p>
 <h3>深入 TypeHandler</h3>
 <p>说了这么多，类型转换器到底是怎么定义的呢？其实，<strong>MyBatis 中的类型转换器就是 TypeHandler 这个接口</strong>，其定义如下：</p>
@@ -182,7 +182,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p><strong>MyBatis 中定义了 BaseTypeHandler 抽象类来实现一些 TypeHandler 的公共逻辑</strong>，BaseTypeHandler 在实现 TypeHandler 的同时，还实现了 TypeReference 抽象类。其继承关系如下图所示：</p>
-<p><img src="assets/CioPOWAeMkCANy6LAABJPBfXPJY527.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWAeMkCANy6LAABJPBfXPJY527.png" alt="png" /></p>
 <p>TypeHandler 继承关系图</p>
 <p>在 BaseTypeHandler 中，简单实现了 TypeHandler 接口的 setParameter() 方法和 getResult() 方法。</p>
 <ul>
@@ -191,7 +191,7 @@ function hide_canvas() {
 </ul>
 <p>BaseTypeHandler 的具体实现比较简单，这里就不再展示，你若感兴趣的话可以参考<a href="https://github.com/xxxlxy2008/mybatis">源码</a>进行学习。</p>
 <p>下图展示了 BaseTypeHandler 的全部实现类，虽然实现类比较多，但是它们的实现方式大同小异。</p>
-<p><img src="assets/Cgp9HWAeMkuAI22uAApwhcDLfQ4596.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWAeMkuAI22uAApwhcDLfQ4596.png" alt="png" /></p>
 <p>BaseTypeHandler 实现类示意图</p>
 <p>这里我们以 LongTypeHandler 为例进行分析，具体实现如下：</p>
 <pre><code>public class LongTypeHandler extends BaseTypeHandler&lt;Long&gt; {

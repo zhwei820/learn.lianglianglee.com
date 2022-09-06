@@ -294,7 +294,7 @@ function hide_canvas() {
 <p>本课时我们主要从基础知识开始讲起，首先介绍代理模式的基本概念，之后重点介绍 JDK 动态代理的使用以及底层实现原理，同时还会说明 JDK 动态代理的一些局限性，最后再介绍基于字节码生成的动态代理。</p>
 <h3>代理模式</h3>
 <p>代理模式是 23 种面向对象的设计模式中的一种，它的类图如下所示：</p>
-<p><img src="assets/CgqCHl8_hxqAY6vaAAGcUb0A8A4971.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8_hxqAY6vaAAGcUb0A8A4971.png" alt="png" /></p>
 <p>图中的 Subject 是程序中的<strong>业务逻辑接口</strong>，RealSubject 是实现了 Subject 接口的<strong>真正业务类</strong>，Proxy 是实现了 Subject 接口的<strong>代理类</strong>，封装了一个 RealSubject 引用。<strong>在程序中不会直接调用 RealSubject 对象的方法，而是使用 Proxy 对象实现相关功能。</strong></p>
 <p>Proxy.operation() 方法的实现会调用其中封装的 RealSubject 对象的 operation() 方法，执行真正的业务逻辑。代理的作用不仅仅是正常地完成业务逻辑，还会在业务逻辑前后添加一些代理逻辑，也就是说，Proxy.operation() 方法会在 RealSubject.operation() 方法调用前后进行一些预处理以及一些后置处理。这就是我们常说的“<strong>代理模式</strong>”。</p>
 <p><strong>使用代理模式可以控制程序对 RealSubject 对象的访问</strong>，如果发现异常的访问，可以直接限流或是返回，也可以在执行业务处理的前后进行相关的预处理和后置处理，帮助上层调用方屏蔽底层的细节。例如，在 RPC 框架中，代理可以完成序列化、网络 I/O 操作、负载均衡、故障恢复以及服务发现等一系列操作，而上层调用方只感知到了一次本地调用。</p>
@@ -443,7 +443,7 @@ function hide_canvas() {
 </ul>
 <p>这两个组件的使用与 JDK 动态代理中的 Proxy 和 InvocationHandler 相似。</p>
 <p>下面我们通过一个示例简单介绍 CGLib 的使用。在使用 CGLib 创建动态代理类时，首先需要定义一个 Callback 接口的实现， CGLib 中也提供了多个Callback接口的子接口，如下图所示：</p>
-<p><img src="assets/CgqCHl8_h1uAcXB-AAKCT9cNDBw713.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8_h1uAcXB-AAKCT9cNDBw713.png" alt="png" /></p>
 <p>这里以 MethodInterceptor 接口为例进行介绍，首先我们引入 CGLib 的 maven 依赖：</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;cglib&lt;/groupId&gt;

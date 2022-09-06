@@ -190,9 +190,9 @@ module.exports = {
   ...
 }
 </code></pre>
-<p><img src="assets/Ciqc1F9sT2WAI_vnAAGUeALmmZo570.png" alt="Drawing 0.png" />
-<img src="assets/CgqCHl9sT2qAexnjAADgsW9ijYU168.png" alt="Drawing 1.png" />
-<img src="assets/Ciqc1F9sT26AIkKYAAEVjcm9aeY144.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9sT2WAI_vnAAGUeALmmZo570.png" alt="png" />
+<img src="assets/CgqCHl9sT2qAexnjAADgsW9ijYU168.png" alt="png" />
+<img src="assets/Ciqc1F9sT26AIkKYAAEVjcm9aeY144.png" alt="png" /></p>
 <p>可以看到，初次构建完整花费了 3282ms，而在不修改代码进行再次构建的情况下，只花费了不到原先时间的 1/10。在修改代码文件的新情况下也只花费了 628ms，多花费的时间体现在构建被修改的文件的编译上，这就实现了上一课时所寻求的<strong>生产环境下的增量构建</strong>。</p>
 <h4>Cache 基本配置</h4>
 <p>在 Webpack 4 中，cache 只是单个属性的配置，所对应的赋值为 true 或 false，用来代表是否启用缓存，或者赋值为对象来表示在构建中使用的缓存对象。而在 Webpack 5 中，<a href="https://webpack.js.org/configuration/other-options/#cache">cache</a> 配置除了原本的 true 和 false 外，还增加了许多子配置项，例如：</p>
@@ -282,8 +282,8 @@ console.log(a)
 <p>可以看到产物代码中只有被引入的属性 a 和 console 语句，而其他两个导出属性 b 和 c 已经在产物中被排除了。</p>
 <h3>Logs</h3>
 <p>第三个要提到的 Webpack 5 的效率优化点是，它增加了许多内部处理过程的日志，可以通过 stats.logging 来访问。下面两张图是使用相同配置*stats: {logging: &quot;verbose&quot;}*的情况下，Webpack 4 和 Webpack 5 构建输出的日志：</p>
-<p><img src="assets/CgqCHl9sT6WAWzGiAACp4k0mjjw366.png" alt="Drawing 3.png" />
-<img src="assets/Ciqc1F9sT6qAeQs4AAMWioPCn4s820.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9sT6WAWzGiAACp4k0mjjw366.png" alt="png" />
+<img src="assets/Ciqc1F9sT6qAeQs4AAMWioPCn4s820.png" alt="png" /></p>
 <p>可以看到，Webpack 5 构建输出的日志要丰富完整得多。通过这些日志能够很好地反映构建各阶段的处理过程、耗费时间，以及缓存使用的情况。在大多数情况下，它已经能够代替之前人工编写的统计插件功能了。</p>
 <h3>其他功能优化项</h3>
 <p>除了上面介绍的和构建效率相关的几项变化外，Webpack 5 中还有许多大大小小的功能变化，例如新增了改变微前端构建运行流程的 <a href="https://webpack.js.org/concepts/module-federation/">Module Federation</a> 和对产物代码进行优化处理的 Runtime Modules，优化了处理模块的工作队列，在生命周期 Hooks 中增加了 stage 选项等。感兴趣的话，你可以通过文章顶部的文档链接或官方网站来进一步了解。</p>

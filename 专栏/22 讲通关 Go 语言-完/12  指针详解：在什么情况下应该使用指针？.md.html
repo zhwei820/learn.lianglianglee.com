@@ -194,7 +194,7 @@ name变量的内存地址为: 0xc000010200
 </blockquote>
 <p>以上示例中 nameP 指针的类型是 *string，用于指向 string 类型的数据。在 Go 语言中使用类型名称前加 * 的方式，即可表示一个对应的指针类型。比如 int 类型的指针类型是 *int，float64 类型的指针类型是 *float64，自定义结构体 A 的指针类型是 *A。总之，指针类型就是在对应的类型前加 * 号。</p>
 <p>下面我通过一个图让你更好地理解普通类型变量、指针类型变量、内存地址、内存等之间的关系。</p>
-<p><img src="assets/Ciqc1F_OA06AI435AADN1ZPvtvs400.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F_OA06AI435AADN1ZPvtvs400.png" alt="png" /></p>
 <p>（指针变量、内存地址指向示意图）</p>
 <p>上图就是我刚举的例子所对应的示意图，从图中可以看到普通变量 name 的值“飞雪无情”被放到内存地址为 0xc000010200 的内存块中。指针类型变量也是变量，它也需要一块内存用来存储值，这块内存对应的地址就是 0xc00000e028，存储的值是 0xc000010200。相信你已经看到关键点了，指针变量 nameP 的值正好是普通变量 name 的内存地址，所以就建立指向关系。</p>
 <blockquote>
@@ -272,7 +272,7 @@ func modifyAge(age *int)  {
 <li>可以修改指向数据的值；</li>
 <li>在变量赋值，参数传值的时候可以节省内存。</li>
 </ol>
-<p><img src="assets/CgqCHl_OA2eANW2SAAU88P9foow113.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_OA2eANW2SAAU88P9foow113.png" alt="png" /></p>
 <p>不过 Go 语言作为一种高级语言，在指针的使用上还是比较克制的。它在设计的时候就对指针进行了诸多限制，比如指针不能进行运行，也不能获取常量的指针。所以在思考是否使用时，我们也要保持克制的心态。</p>
 <p>我根据实战经验总结了以下几点使用指针的建议，供你参考：</p>
 <ol>

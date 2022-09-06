@@ -222,7 +222,7 @@ function hide_canvas() {
 <h3>传统 Linux 中的零拷贝技术</h3>
 <p>在介绍 Netty 零拷贝特性之前，我们有必要学习下传统 Linux 中零拷贝的工作原理。所谓零拷贝，就是在数据操作时，不需要将数据从一个内存位置拷贝到另外一个内存位置，这样可以减少一次内存拷贝的损耗，从而节省了 CPU 时钟周期和内存带宽。</p>
 <p>我们模拟一个场景，从文件中读取数据，然后将数据传输到网络上，那么传统的数据拷贝过程会分为哪几个阶段呢？具体如下图所示。</p>
-<p><img src="assets/Ciqc1F_Qbz2AD4uMAARnlgeSFc4993.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F_Qbz2AD4uMAARnlgeSFc4993.png" alt="png" /></p>
 <p>从上图中可以看出，从数据读取到发送一共经历了<strong>四次数据拷贝</strong>，具体流程如下：</p>
 <ol>
 <li>当用户进程发起 read() 调用后，上下文从用户态切换至内核态。DMA 引擎从文件中读取数据，并存储到内核态缓冲区，这里是<strong>第一次数据拷贝</strong>。</li>
@@ -250,10 +250,10 @@ function hide_canvas() {
 }
 </code></pre>
 <p>在使用了 FileChannel#transferTo() 传输数据之后，我们看下数据拷贝流程发生了哪些变化，如下图所示：</p>
-<p><img src="assets/CgqCHl_Qb0mANyjrAATEtVu9f6c390.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_Qb0mANyjrAATEtVu9f6c390.png" alt="png" /></p>
 <p>比较大的一个变化是，DMA 引擎从文件中读取数据拷贝到内核态缓冲区之后，由操作系统直接拷贝到 Socket 缓冲区，不再拷贝到用户态缓冲区，所以数据拷贝的次数从之前的 4 次减少到 3 次。</p>
 <p>但是上述的优化离达到零拷贝的要求还是有差距的，能否继续减少内核中的数据拷贝次数呢？在 Linux 2.4 版本之后，开发者对 Socket Buffer 追加一些 Descriptor 信息来进一步减少内核数据的复制。如下图所示，DMA 引擎读取文件内容并拷贝到内核缓冲区，然后并没有再拷贝到 Socket 缓冲区，只是将数据的长度以及位置信息被追加到 Socket 缓冲区，然后 DMA 引擎根据这些描述信息，直接从内核缓冲区读取数据并传输到协议引擎中，从而消除最后一次 CPU 拷贝。</p>
-<p><img src="assets/CgqCHl_Qb2eASFBJAAT4WPf__Us976.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl_Qb2eASFBJAAT4WPf__Us976.png" alt="png" /></p>
 <p>通过上述 Linux 零拷贝技术的介绍，你也许还会存在疑问，最终使用零拷贝之后，不是还存在着数据拷贝操作吗？其实从 Linux 操作系统的角度来说，零拷贝就是为了避免用户态和内存态之间的数据拷贝。无论是传统的数据拷贝还是使用零拷贝技术，其中有 2 次 DMA 的数据拷贝必不可少，只是这 2 次 DMA 拷贝都是依赖硬件来完成，不需要 CPU 参与。所以，在这里我们讨论的零拷贝是个广义的概念，只要能够减少不必要的 CPU 拷贝，都可以被称为零拷贝。</p>
 <h3>Netty 的零拷贝技术</h3>
 <p>介绍完传统 Linux 的零拷贝技术之后，我们再来学习下 Netty 中的零拷贝如何实现。Netty 中的零拷贝和传统 Linux 的零拷贝不太一样。Netty 中的零拷贝技术除了操作系统级别的功能封装，更多的是面向用户态的数据操作优化，主要体现在以下 5 个方面：</p>
@@ -279,7 +279,7 @@ httpBuf.writeBytes(body);
 httpBuf.addComponents(true, header, body);
 </code></pre>
 <p>CompositeByteBuf 通过调用 addComponents() 方法来添加多个 ByteBuf，但是底层的 byte 数组是复用的，不会发生内存拷贝。但对于用户来说，它可以当作一个整体进行操作。那么 CompositeByteBuf 内部是如何存放这些 ByteBuf，并且如何进行合并的呢？我们先通过一张图看下 CompositeByteBuf 的内部结构：</p>
-<p><img src="assets/Ciqc1F_Qb3SAP4vUAAZG1WvALhY410.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_Qb3SAP4vUAAZG1WvALhY410.png" alt="png" /></p>
 <p>从图上可以看出，CompositeByteBuf 内部维护了一个 Components 数组。在每个 Component 中存放着不同的 ByteBuf，各个 ByteBuf 独立维护自己的读写索引，而 CompositeByteBuf 自身也会单独维护一个读写索引。由此可见，Component 是实现 CompositeByteBuf 的关键所在，下面看下 Component 结构定义：</p>
 <pre><code>private static final class Component {
     final ByteBuf srcBuf; // 原始的 ByteBuf
@@ -292,15 +292,15 @@ httpBuf.addComponents(true, header, body);
 }
 </code></pre>
 <p>为了方便理解上述 Component 中的属性含义，我同样以 HTTP 协议中 header 和 body 为示例，通过一张图来描述 CompositeByteBuf 组合后其中 Component 的布局情况，如下所示：</p>
-<p><img src="assets/Ciqc1F_Qb3yAUwbLAAVl7ZwmfJ0669.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F_Qb3yAUwbLAAVl7ZwmfJ0669.png" alt="png" /></p>
 <p>从图中可以看出，header 和 body 分别对应两个 ByteBuf，假设 ByteBuf 的内容分别为 &quot;header&quot; 和 &quot;body&quot;，那么 header ByteBuf 中 offset~endOffset 为 0~6，body ByteBuf 对应的 offset~endOffset 为 0~10。由此可见，Component 中的 offset 和 endOffset 可以表示当前 ByteBuf 可以读取的范围，通过 offset 和 endOffset 可以将每一个 Component 所对应的 ByteBuf 连接起来，形成一个逻辑整体。</p>
 <p>此外 Component 中 srcAdjustment 和 adjustment 表示 CompositeByteBuf 起始索引相对于 ByteBuf 读索引的偏移。初始 adjustment = readIndex - offset，这样通过 CompositeByteBuf 的起始索引就可以直接定位到 Component 中 ByteBuf 的读索引位置。当 header ByteBuf 读取 1 个字节，body ByteBuf 读取 2 个字节，此时每个 Component 的属性又会发生什么变化呢？如下图所示。</p>
-<p><img src="assets/CgqCHl_Qb4WAK864AAZiyrv77BY848.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl_Qb4WAK864AAZiyrv77BY848.png" alt="png" /></p>
 <p>至此，CompositeByteBuf 的基本原理我们已经介绍完了，关于具体 CompositeByteBuf 数据操作的细节在这里就不做展开了，有兴趣的同学可以自己深入研究 CompositeByteBuf 的源码。</p>
 <h4>Unpooled.wrappedBuffer 操作</h4>
 <p>介绍完 CompositeByteBuf 之后，再来理解 Unpooled.wrappedBuffer 操作就非常容易了，Unpooled.wrappedBuffer 同时也是创建 CompositeByteBuf 对象的另一种推荐做法。</p>
 <p>Unpooled 提供了一系列用于包装数据源的 wrappedBuffer 方法，如下所示：</p>
-<p><img src="assets/CgqCHl_Qb46AeweXAAV1hNnjjTQ381.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl_Qb46AeweXAAV1hNnjjTQ381.png" alt="png" /></p>
 <p>Unpooled.wrappedBuffer 方法可以将不同的数据源的一个或者多个数据包装成一个大的 ByteBuf 对象，其中数据源的类型包括 byte[]、ByteBuf、ByteBuffer。包装的过程中不会发生数据拷贝操作，包装后生成的 ByteBuf 对象和原始 ByteBuf 对象是共享底层的 byte 数组。</p>
 <h4>ByteBuf.slice 操作</h4>
 <p>ByteBuf.slice 和 Unpooled.wrappedBuffer 的逻辑正好相反，ByteBuf.slice 是将一个 ByteBuf 对象切分成多个共享同一个底层存储的 ByteBuf 对象。</p>

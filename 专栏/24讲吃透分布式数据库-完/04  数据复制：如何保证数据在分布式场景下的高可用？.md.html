@@ -204,7 +204,7 @@ function hide_canvas() {
 <p>现在让我们开始学习单主复制，其中不仅介绍了该技术本身，也涉及了一些复制领域的话题，如复制延迟、高可用和复制方式等。</p>
 <h3>单主复制</h3>
 <p>单主复制，也称主从复制。写入主节点的数据都需要复制到从节点，即存储数据库副本的节点。当客户要写入数据库时，他们必须将请求发送给主节点，而后主节点将这些数据转换为复制日志或修改数据流发送给其所有从节点。从使用者的角度来看，从节点都是只读的。下图就是经典的主从复制架构。</p>
-<p><img src="assets/Ciqc1GAJV6SADprzAACli5qqAMo678.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1GAJV6SADprzAACli5qqAMo678.png" alt="png" /></p>
 <p>这种模式是最早发展起来的复制模式，不仅被广泛应用在传统数据库中，如 PostgreSQL、MySQL、Oracle、SQL Server；它也被广泛应用在一些分布式数据库中，如 MongoDB、RethinkDB 和 Redis 等。</p>
 <p>那么接下来，我们就从复制同步模式、复制延迟、复制与高可用性以及复制方式几个方面来具体说说这个概念。</p>
 <h4>复制同步模式</h4>
@@ -292,7 +292,7 @@ function hide_canvas() {
 <p>下面我就从第一代复制技术开始说起。</p>
 <h4>MHA 复制控制</h4>
 <p>下图是 MHA 架构图。</p>
-<p><img src="assets/Cip5yGAJV9qAVnjXAAC85xLxhaU613.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cip5yGAJV9qAVnjXAAC85xLxhaU613.png" alt="png" /></p>
 <p>MHA 作为第一代复制架构，有如下适用场景：</p>
 <ol>
 <li>MySQL 的版本≤5.5，这一点说明它很古老；</li>
@@ -317,7 +317,7 @@ function hide_canvas() {
 <li>这一代开始需要支持跨 IDC 复制。需要引入监控 Monitor，配合 consul 注册中心。多个 IDC 中 Monitor 组成分布式监控，把健康的 MySQL 注册到 consul 中，同时将从库复制延迟情况也同步到 consul 中。</li>
 </ol>
 <p>下图就是带有 consul 注册中心与监控模块的半同步复制架构图。</p>
-<p><img src="assets/Cip5yGAJV-KAAg5HAAF8syZ9vQM483.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yGAJV-KAAg5HAAF8syZ9vQM483.png" alt="png" /></p>
 <p>第二代复制技术也有自身的一些缺陷。</p>
 <ol>
 <li>存在幻读的情况。当事务同步到从库但没有 ACK 时，主库发生宕机；此时主库没有该事务，而从库有。</li>
@@ -329,7 +329,7 @@ function hide_canvas() {
 <p>这一代复制技术采用的是增强半同步。首先主从的复制都是用独立的线程来运行；其次主库采用 binlog group commit，也就是组提交来提供数据库的写入性能；而从库采用并行复制，它是基于事务的，通过数据参数调整线程数量来提高性能。这样主库可以并行，从库也可以并行。</p>
 <p>这一代技术体系强依赖于增强半同步，利用半同步保证 RPO，对于 RTO，则取决于复制延迟。</p>
 <p>下面我们用 Xenon 来举例说明，请看下图（图片来自官网）。</p>
-<p><img src="assets/CgpVE2AJV-mAE6vWAAB_JZptW8Y497.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgpVE2AJV-mAE6vWAAB_JZptW8Y497.png" alt="png" /></p>
 <p>从图中可以看到。每个节点上都有一个独立的 agent，这些 agent 利用 raft 构建一致性集群，利用 GTID 做索引选举主节点；而后主节点对外提供写服务，从节点提供读服务。</p>
 <p>当主节点发生故障后，agent 会通过 ping 发现该故障。由于 GTID 和增强半同步的加持，从节点与主节点数据是一致的，因此很容易将从节点提升为主节点。</p>
 <p>第三代技术也有自身的缺点，如增强半同步中存在幽灵事务。这是由于数据写入 binlog 后，主库掉电。由于故障恢复流程需要从 binlog 中恢复，那么这份数据就在主库。但是如果它没有被同步到从库，就会造成从库不能切换为主库，只能去尝试恢复原崩溃的主库。</p>

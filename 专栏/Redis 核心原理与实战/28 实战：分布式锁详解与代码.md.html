@@ -228,7 +228,7 @@ function hide_canvas() {
 <p>上面说的锁指的是程序级别的锁，例如 Java 语言中的 synchronized 和 ReentrantLock 在单应用中使用不会有任何问题，但如果放到分布式环境下就不适用了，这个时候我们就要使用分布式锁。</p>
 <p>分布式锁比较好理解就是用于分布式环境下并发控制的一种机制，用于控制某个资源在同一时刻只能被一个应用所使用。</p>
 <p>分布式锁示意图，如下所示：</p>
-<p><img src="assets/0baf7ee0-74fd-11ea-9dae-5d0db1c26be7" alt="image.png" /></p>
+<p><img src="assets/0baf7ee0-74fd-11ea-9dae-5d0db1c26be7" alt="png" /></p>
 <h3>怎么实现分布式锁？</h3>
 <p>分布式锁比较常见的实现方式有三种：</p>
 <ol>
@@ -265,7 +265,7 @@ function hide_canvas() {
 <h4><strong>带参数的 Set</strong></h4>
 <p>因为 setnx 和 expire 存在原子性的问题，所以之后出现了很多类库用于解决此问题的，这样就增加了使用的成本，意味着你不但要添加 Redis 本身的客户端，并且为了解决 setnx 分布式锁的问题，还需要额外第三方类库。</p>
 <p>然而，这个问题到 Redis 2.6.12 时得到了解决，因为这个版本可以使用 set 并设置超时和非空判定等参数了。</p>
-<p><img src="assets/1d962af0-74fd-11ea-a691-fda85882301c" alt="image.png" /></p>
+<p><img src="assets/1d962af0-74fd-11ea-a691-fda85882301c" alt="png" /></p>
 <p>这样我们就可以使用 set 命令来设置分布式锁，并设置超时时间了，而且 set 命令可以保证原子性，实现命令如下所示：</p>
 <pre><code class="language-shell">127.0.0.1:6379&gt; set lock true ex 30 nx
 OK #创建锁成功

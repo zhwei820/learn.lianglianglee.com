@@ -535,7 +535,7 @@ function hide_canvas() {
 </ul>
 <p>同时，为了用户界面客户端或第三方服务的分布式调用，需要通过 OrderController 暴露 RESTful 服务。它本身不提供任何业务实现，而是通过将请求委派给应用层的 OrderAppService 来完成订单的提交。</p>
 <p>下图体现了前述三个流程在各层之间以及系统内外部之间的协作关系。<strong>注意，在这里我将牵涉到的类型放在了同一个限界上下文中，如果牵涉到多个限界上下文之间的协作，实现会略有不同，对应的代码模型也将有所调整</strong>。我会在后续内容中深入探讨限界上下文之间的协作对代码模型的影响。</p>
-<p><img src="assets/42e90700-c0bd-11e8-afc9-4db08e1ecfa6" alt="enter image description here" /></p>
+<p><img src="assets/42e90700-c0bd-11e8-afc9-4db08e1ecfa6" alt="png" /></p>
 <p>基础设施层的 OrderController 扮演了北向网关的角色，承担了与用户界面层或第三方服务交互的进出口职责。它通过 Spring Boot 来完成对 HTTP 请求的响应、路由和请求/响应消息的序列化与反序列化。它的自有职责仅仅是对请求/响应消息的验证，以及对 OrderAppService 的调用。或许有人会质疑处于后端顶层的控制器为何属于基础设施层？但我认为这样的分配是合理的，因为 Controller 要做的事情与基础设施层所要履行的职责完全匹配，即它提供的是 REST 服务的基础功能。</p>
 <p>基础设施层南向网关包括 OrderMapper、EmailSender 和 RabbitEventBus，它们对内为具体的某个业务提供支撑功能，对外则需要借助框架或驱动器访问外部资源。与北向网关不同，对它们的调用由属于内层的应用服务 OrderAppService 发起，因此需要为它们建立抽象来解除内层对外层的依赖。前面已经分析，由于 Repository 提供的方法分属领域逻辑，故而将 OrderMapper 所要实现的接口 OrderRepository 放到核心的领域层。至于 EmailSender 与 RabbitEventBus 各自的抽象 NotificationService 与 EventBus 并未代表领域逻辑，为了不污染领域层的纯洁性，放在应用层似乎更为合理。</p>
 <p>无论是北向网关还是南向网关，它们都要与外部资源进行协作，不管是对内/外协议的适配，还是对内部协作对象的封装，本质上它们只做与业务直接有关的基础功能。真正与业务无关的通用基础功能，是与具体某个软件系统无关的，属于更加基础和通用的框架。例如，OrderController 调用的 Spring Boot APIs，EmailSender 调用的 JavaMail APIs、OrderMapper 调用的 MyBatis APIs 以及 RabbitEventBus 调用的 RabbitMQ APIs，都是这样的通用框架。它们是系统代码边界外的外部框架，通常为第三方的开源框架或商业产品；即使是团队自行研发，也不应该属于当前业务系统的代码模型。</p>

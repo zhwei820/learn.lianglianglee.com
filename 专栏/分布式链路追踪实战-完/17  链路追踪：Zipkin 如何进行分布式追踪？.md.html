@@ -190,7 +190,7 @@ function hide_canvas() {
 <li>可扩展性：一个优秀的链路追踪系统，在链路采集层面一定会有良好的扩展性，而不是仅适用于单独的一个业务或者框架。因此，就需要这个链路追踪系统支持更多的框架，同时尽量不对系统的性能造成过高的影响。字节码增强因其实现方式的原因，可扩展性相对埋点会更高一些，但我们还是应该依据具体的实现方式和框架来选择。</li>
 </ol>
 <p>你可以通过下图更直观地看到二者之间的差别。</p>
-<p><img src="assets/Ciqc1F9sMXOAKAomAAB5R_3zHyM553.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9sMXOAKAomAAB5R_3zHyM553.png" alt="png" /></p>
 <p>这两种链路采集方案没有绝对的好坏之分，还要考虑项目的具体使用场景上。如果是使用开源或者商业方案时，还要考虑到与整个链路追踪系统的集成程度、支持的组件等。</p>
 <h4>数据收集</h4>
 <p><strong>从链路采集到数据之后，我们就可以对这些数据进行解析、分析等工作，并最终存储到相应的存储引擎中</strong>，常见的引擎有 ElasticSearch、HBase、MySQL 等。</p>
@@ -213,7 +213,7 @@ function hide_canvas() {
 <p>Zipkin 是一款开源的链路追踪系统，它是基于我们之前提到的<em><strong>Dapper</strong></em>论文设计的，由 Twitter 公司开发贡献。</p>
 <h4>系统架构</h4>
 <p>我们先来看 Zipkin 的系统架构图，它展现了 Zipkin 的整体工作流程：</p>
-<p><img src="assets/Ciqc1F9sMZyAE2w1AAFoissS5jA558.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F9sMZyAE2w1AAFoissS5jA558.png" alt="png" /></p>
 <p>这一部分对应我在原理中讲到的链路采集、数据收集和数据查看的步骤，我们从上往下依次来看。</p>
 <p><strong>首先是链路采集</strong>。紫色的部分代表业务系统和组件，图中是以一个典型的 RPC 请求作为所需要追踪的链路，其中 client 为请求的发起方，分别请求了两个服务端。其中被观测的客户端和服务端会在启动的实例中增加数据上报的功能，这里的数据上报就是指从本实例中观测到的链路数据，一并上报到 Zipkin 中，传输工具常见的有 Kafka 或者 HTTP 请求。</p>
 <p><strong>数据传输到 Zipkin 的收集器后，会经过 Zipkin 的存储模块，存储到数据库中</strong>。目前支持的数据库有 MySQL、ElasticSearch、Cassandra 这几种类型，具体的数据库选择可以根据公司内部运维的实力评估出最适合的。</p>
@@ -241,12 +241,12 @@ public OkHttpClient buildOkHttpClient(HttpTracing tracing) {
 <p><strong>消息传递是在链路追踪中保持上下游服务相同链路的关键，一般会通过消息透传的方式来做到</strong>。比如上下游是通过 HTTP 的方式进行数据交换的，此时就可以在上游准备发送时的 HTTP 请求头中增加链路的上下文信息；下游接收到请求后，解析相对应的 HTTP 请求头数据，确认是否有链路上下文信息。</p>
 <p>如果存在链路上下文信息则可以继续将链路信息传递，认定是相同链路，从而来实现链路追踪；如果没有，则可以认定为是一个全新的链路。</p>
 <p>以刚才的 OkHttp 框架为例，我们尝试发送一个请求，然后通过 WireShark 工具观测数据内容，就可以获取到如下信息：</p>
-<p><img src="assets/CgqCHl9sMaqATYvXAADJK-NCV7U599.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9sMaqATYvXAADJK-NCV7U599.png" alt="png" /></p>
 <p>在这张图中，我们可以清楚地看到请求时的详细数据。</p>
 <p>请求头中除了基础的 Header 信息以外，还会有很多以 &quot;X-B3&quot; 开头的内容，比如TraceId、SpanId 等关键信息，就是经由 Zipkin 产生的链路上下文信息。</p>
 <h4>数据展示</h4>
 <p>我们来看一张相对简单的链路数据展示图。图中主要模拟就是如项目架构图中类似的 client 端发送请求，server 端接收请求的链路逻辑。</p>
-<p><img src="assets/Ciqc1F9sMbOABg6OAAXsVfGd0-Q188.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9sMbOABg6OAAXsVfGd0-Q188.png" alt="png" /></p>
 <p>左侧部分展示的是 client 端接收到了上游的请求，然后交由 server 获取数据内容的链路信息。</p>
 <p>右侧上半部分分别显示的是客户端发送、服务端接收、服务端处理结束、客户端获取到数据中每一个节点的时间关系。</p>
 <p>右侧下半部分展示的是当前我们选中的 Span 的标签信息，和我在“<strong>10 链路分析：除了观测链路，还能做什么？</strong>”中所讲的自定义数据十分相似，在这里你可以通过自定义属性信息来完成信息的定制化。</p>

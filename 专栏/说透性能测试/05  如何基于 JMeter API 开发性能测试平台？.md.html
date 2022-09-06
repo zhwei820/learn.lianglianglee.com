@@ -170,10 +170,10 @@ function hide_canvas() {
 <li>结果追溯时，我们需要找一些历史数据却发现并没有<strong>存档或共享</strong>。</li>
 </ul>
 <p>这些场景使我们的性能测试平台具有了更多现实意义，我们希望有一个<strong>可以协作共享</strong>，并能够<strong>追溯历史数据的性能测试平台</strong>。基于这点我梳理了性能测试平台的基础功能，如下图所示：</p>
-<p><img src="assets/Ciqc1GAFPJ-ASd02AAB5h9Xz8Ok173.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1GAFPJ-ASd02AAB5h9Xz8Ok173.png" alt="png" /></p>
 <p>图 1：性能测试平台基础功能</p>
 <p>目前市面上的性能测试平台大多是基于 JMeter 提供的 API 开发的，核心流程如下图所示：</p>
-<p><img src="assets/CgqCHmAFPKaACL8lAACO4B5j9fY519.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHmAFPKaACL8lAACO4B5j9fY519.png" alt="png" /></p>
 <p>图 2：性能测试平台开发核心流程</p>
 <p>接下来我们根据这 4 个阶段来学习如何使用 JMeter 的 API 实现性能测试。</p>
 <h3>环境初始化</h3>
@@ -197,7 +197,7 @@ HashTree jmxTree = SaveService.loadTree(file);
 </code></pre>
 <p>由于本地脚本是 JMeter 客户端手动生成的，所以这里只需要做读取文件操作即可，loadTree 会把 jmx 文件转成内存对象，并返回内存对象中生成的 HashTree。</p>
 <p>那<strong>创建脚本文件</strong>是怎么做的呢？它是通过 API 构建测试计划，然后再保存为 JMeter 的 jmx 文件格式。核心步骤如下图所示：</p>
-<p><img src="assets/Cip5yGAFPLWAE3XRAAHi31Yd_oY766.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cip5yGAFPLWAE3XRAAHi31Yd_oY766.png" alt="png" /></p>
 <p>图 3：脚本文件创建步骤</p>
 <p>该方式需要自己构建 HashTree，我们可以参考 JMeter 客户端生成的 jmx 文件。</p>
 <p>通过观察 jmx 文件我们可以知道需要构建的 jmx 结构，最外层是 TestPlan，TestPlan 是 HashTree 结构，包含 ThreadGroup（线程组）、HTTPSamplerProxy、LoopController（可选）、ResultCollector（结果收集）等节点。</p>
@@ -282,7 +282,7 @@ engine.run();
 <h3>结果收集</h3>
 <p>性能实时数据采集可以更方便发现和分析出现的性能问题。我们在性能测试平台的脚本页面点击执行了性能测试脚本，当然希望能看到实时压测的性能测试数据，如果等测试完再生成测试报告，时效性就低了。</p>
 <p>性能测试平台结果收集的流程图如下：</p>
-<p><img src="assets/CgpVE2AFPMiAUfRUAAHZ0vk2YZg058.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgpVE2AFPMiAUfRUAAHZ0vk2YZg058.png" alt="png" /></p>
 <p>图 4：结果收集流程图</p>
 <p>上面流程图中与 JMeter 关联最密切的是第 1 步，获取 JMeter 结果数据。那我们如何获取这些数据呢？</p>
 <p>JMeter 性能测试用例执行完成之后会生成结果报告，既然生成了结果报告，那 JMeter 源码里一定有获取每次 loop 执行结果的地方。我们可以找到这个类，然后新建一个类去继承这个类，再重写每次结果获取的方法就能得到实时结果了。如果获取每次 loop 执行结果的是私有方法，我们也可以通过反射拿到它。</p>
@@ -350,7 +350,7 @@ while (true) {
         }
 </code></pre>
 <p>实现后的效果图如下：</p>
-<p><img src="assets/Cip5yGAFPNWAIzKMAACkBrnfdmY418.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yGAFPNWAIzKMAACkBrnfdmY418.png" alt="png" /></p>
 <p>图 5 ：效果图</p>
 <blockquote>
 <p>其中横坐标是时间，纵坐标是实时处理能力的展示，可以看到每秒请求次数在 400 ~ 600 之间波动。</p>

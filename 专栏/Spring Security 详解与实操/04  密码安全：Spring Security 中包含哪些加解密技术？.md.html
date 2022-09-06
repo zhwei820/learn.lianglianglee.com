@@ -157,7 +157,7 @@ function hide_canvas() {
 <p>通过前面两讲内容的学习，相信你已经掌握了 Spring Security 中的用户认证体系。用户认证的过程通常涉及密码的校验，因此密码的安全性也是我们需要考虑的一个核心问题。Spring Security 作为一款功能完备的安全性框架，一方面提供了<strong>用于完成认证操作的 PasswordEncoder 组件</strong>，另一方面也包含一个独立而完整的<strong>加密模块</strong>，方便在应用程序中单独使用。</p>
 <h3>PasswordEncoder</h3>
 <p>我们先来回顾一下整个用户认证流程。在 AuthenticationProvider 中，我们需要使用 PasswordEncoder 组件验证密码的正确性，如下图所示：</p>
-<p><img src="assets/Cgp9HWC5_4iAIGeQAABZX7ZLFlk655.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWC5_4iAIGeQAABZX7ZLFlk655.png" alt="png" /></p>
 <p>PasswordEncoder 组件与认证流程之间的关系</p>
 <p>在“用户认证：如何使用 Spring Security 构建用户认证体系？”一讲中我们也介绍了基于数据库的用户信息存储方案：</p>
 <pre><code>@Override
@@ -184,7 +184,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 }
 </code></pre>
 <p>Spring Security 内置了一大批 PasswordEncoder 接口的实现类，如下所示：</p>
-<p><img src="assets/CioPOWC5_5KAdkT3AAQNHWtae5I850.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWC5_5KAdkT3AAQNHWtae5I850.png" alt="png" /></p>
 <p>Spring Security 中的 PasswordEncoder 实现类</p>
 <p>我们对上图中比较常见的几个 PasswordEncoder 接口展开叙述。</p>
 <ul>
@@ -262,7 +262,7 @@ PasswordEncoder p = new SCryptPasswordEncoder(16384, 8, 1, 32, 64);
 <p>在前面的讨论中，我们都基于一个假设，即在对密码进行加解密过程中，只会使用到一个 PasswordEncoder，如果这个 PasswordEncoder 不满足我们的需求，那么就需要替换成另一个 PasswordEncoder。这就引出了一个问题，如何优雅地应对这种变化呢？</p>
 <p>在普通的业务系统中，由于业务系统也在不断地变化，替换一个组件可能并没有很高的成本。但对于 Spring Security 这种成熟的开发框架而言，在设计和实现上不能经常发生变化。因此，在新/旧 PasswordEncoder 的兼容性，以及框架自身的稳健性和可变性之间需要保持一种平衡。为了实现这种平衡性，Spring Security 提供了 DelegatingPasswordEncoder。</p>
 <p>虽然 DelegatingPasswordEncoder 也实现了 PasswordEncoder 接口，但事实上，它更多扮演了一种代理组件的角色，这点从命名上也可以看出来。DelegatingPasswordEncoder 将具体编码的实现根据要求代理给不同的算法，以此实现不同编码算法之间的兼容并协调变化，如下图所示：</p>
-<p><img src="assets/Cgp9HWC5_6aACid_AACGDa8mfic454.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWC5_6aACid_AACGDa8mfic454.png" alt="png" /></p>
 <p>DelegatingPasswordEncoder 的代理作用示意图</p>
 <p>下面我们来看一下 DelegatingPasswordEncoder 类的构造函数，如下所示：</p>
 <pre><code>public DelegatingPasswordEncoder(String idForEncode,
@@ -395,7 +395,7 @@ byte [] decrypted = e.decrypt(encrypted);
 <h3>小结与预告</h3>
 <p>对于一个 Web 应用程序而言，一旦需要实现用户认证，势必涉及用户密码等敏感信息的加密。为此，Spring Security 专门提供了 PasswordEncoder 组件对密码进行加解密。Spring Security 内置了一批即插即用的 PasswordEncoder，并通过代理机制完成了各个组件的版本兼容和统一管理。这种设计思想也值得我们学习和借鉴。当然，作为一款通用的安全性开发框架，Spring Security 也提供了一个高度独立的加密模块应对日常开发需求。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWC5_7OAC11AAABs6h6B9l8729.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWC5_7OAC11AAABs6h6B9l8729.png" alt="png" /></p>
 <p>这里给你留一道思考题：你能描述 DelegatingPasswordEncoder 所起到的代理作用吗？欢迎在留言区和我分享你的思考。</p>
 </div>
                     </div>

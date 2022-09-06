@@ -259,7 +259,7 @@ function hide_canvas() {
 <p>Kafka 的高可用实现主要依赖副本机制，我把 Kakfa 的高可用，拆分成几个小问题来讲解，一来是为了更好地理解，二来很多细节问题也可能出现在面试中，方便你更好地掌握。</p>
 <h4>Broker 和 Partition 的关系</h4>
 <p>在分析副本机制之前，先来看一下 Broker 和 Partition 之间的关系。Broker 在英文中是代理、经纪人的意思，对应到 Kafka 集群中，是一个 Kafka 服务器节点，Kafka 集群由多个 Broker 组成，也就是对应多个 Kafka 节点。</p>
-<p><img src="assets/CgqCHl8QFfaAcKqMAAB47dp3EG8537.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8QFfaAcKqMAAB47dp3EG8537.png" alt="png" /></p>
 <p>Kafka 是典型的发布订阅模式，存在 Topic 的概念，一个 Broker 可以容纳多个 Topic，也就是一台服务器可以传输多个 Topic 数据。</p>
 <p>不过 Topic 是一个逻辑概念，和物理上如何存储无关，Kafka 为了实现可扩展性，将一个 Topic 分散到多个 Partition 中，这里的 Partition 就是一个物理概念，对应的是具体某个 Broker 上的磁盘文件。</p>
 <p>从 Partition 的角度，Kafka 保证消息在 Partition 内部有序，所以 Partition 是一段连续的存储，不能跨多个 Broker 存在，如果是在同一个 Broker 上，也不能挂载到多个磁盘。从 Broker 的角度，一个 Broker 可以有多个 Topic，对应多个 Partition。</p>
@@ -270,7 +270,7 @@ function hide_canvas() {
 <p>假设现在有一个订单的 Topic，配置分区数为 3，如果配置 replication-factor 为 3，那么对应的有三个分区，每个分区都有 3 个副本，在有多个副本的情况下，不同副本之间如何分工呢？</p>
 <p>每个分区下配置多个副本，多个副本之间为了协调，就必须有一定的同步机制。Kafka 中同一个分区下的不同副本，有不同的角色关系，分为 Leader Replication 和 Follower Replication。Leader 负责处理所有 Producer、Consumer 的请求，进行读写处理，Follower 作为数据备份，不处理来自客户端的请求。</p>
 <p>Follower 不接受读写请求，那么数据来自哪里呢？它会通过 Fetch Request 方式，拉取 Leader 副本的数据进行同步。</p>
-<p><img src="assets/CgqCHl8QFgCAR8LmAAA-7McXNfg343.png" alt="image" /></p>
+<p><img src="assets/CgqCHl8QFgCAR8LmAAA-7McXNfg343.png" alt="png" /></p>
 <p>Fetch 这个词一般用于批量拉取场景，比如使用 Git 进行版本管理的 fetch 命令，在 Kafka 中，会为数据同步开辟一个单独的线程，称为 ReplicaFetcherThread，该线程会主动从 Leader 批量拉取数据，这样可以高性能的实现数据同步。</p>
 <h4>Replication 分配有哪些约定</h4>
 <p>Kafka 中分区副本数的配置，既要考虑提高系统可用性，又要尽量减少机器资源浪费。</p>

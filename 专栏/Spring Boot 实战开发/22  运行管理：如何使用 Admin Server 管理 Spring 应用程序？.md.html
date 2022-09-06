@@ -202,7 +202,7 @@ public class AdminApplication {
 </code></pre>
 <p>此时，我们会发现使用这种方式构建 Spring Boot Admin Server 就是这么简单。</p>
 <p>接下来我们启动这个 Spring Boot 应用程序，并打开 Web 界面，就能看到如下所示的效果：</p>
-<p><img src="assets/CgqCHmAKf-WAFILtAAAsRr3Jgfg085.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHmAKf-WAFILtAAAsRr3Jgfg085.png" alt="png" /></p>
 <p>Spring Boot Admin Server 启动效果图</p>
 <p>从图中我们可以看到，目前还没有一个应用程序与 Admin Server 有关联。如果想将应用程序与 Admin Server 进行关联，我们还需要对原有的 Spring Boot 应用程序做一定的改造。</p>
 <p>首先，我们在 Maven 依赖中引入对 Spring Boot Admin Client 组件的依赖，如下代码所示：</p>
@@ -220,7 +220,7 @@ public class AdminApplication {
 </code></pre>
 <p><strong>注意：这里的 9000 就是 Admin Server 的服务器端口。</strong></p>
 <p>现在我们启动这个应用程序，就会发现 Admin Server 中已经出现了这个应用的名称和地址，如下图所示：</p>
-<p><img src="assets/Ciqc1GAKf--ATR-aAAAxAFlSEVc094.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1GAKf--ATR-aAAAxAFlSEVc094.png" alt="png" /></p>
 <p>Spring Boot Admin Server 添加了应用程序之后的效果图</p>
 <p>在图中，我们看到 APPLICATIONS 和 INSTANCES 的数量都是 1，代表 Admin Server 管理着一个应用程序，而该应用程序只有一个运行实例。在界面的下方，我们还能看到这个应用的名称及实例地址。这里你可以尝试使用不同的端口启动应用程序的不同实例，然后观察这个列表的变化。</p>
 <h4>基于注册中心构建 Admin Server</h4>
@@ -249,7 +249,7 @@ public class EurekaServerApplication {
 </code></pre>
 <p>注意：在上面的代码中，我们在启动类上加了一个@EnableEurekaServer 注解。在 SpringCloud 中，包含 @EnableEurekaServer 注解的服务也就是一个 Eureka 服务器组件。这样，Eureka 服务就构建完毕了。</p>
 <p>同样，Eureka 服务还为我们提供了一个可视化的 UI 界面，它可以用来观察当前注册到 Eureka 中的应用程序信息，如下图所示：</p>
-<p><img src="assets/Cip5yGAKgDuAcMmLAAB_2n8YYlw199.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cip5yGAKgDuAcMmLAAB_2n8YYlw199.png" alt="png" /></p>
 <p>Eureka 服务监控页面</p>
 <p>接下来，我们需要 Admin Server 也做相应调整。首先，我们在 pom 文件中添加一个对 spring-cloud-starter-netflix-eureka-client 这个 Eureka 客户端组件的依赖：</p>
 <pre><code>&lt;dependency&gt;
@@ -279,7 +279,7 @@ public class EurekaServerApplication {
 <p>根据 Spring Boot Admin 官方 Github 上的介绍，Admin Server 监控系统提供了一套完整的可视化方案。基于 Admin Server，健康状态、JVM、内存、Micrometer 的度量、线程、HTTP 跟踪等核心功能都可以通过可视化的 UI 界面进行展示。</p>
 <h4>监控系统运行时关键指标</h4>
 <p>注意到 Admin Server 菜单中有一个“Wallboard”，点击该菜单，我们就可以看到一面应用墙，如下图所示：</p>
-<p><img src="assets/Cip5yGAKgE2AdGRqAABpdUogwxw880.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Cip5yGAKgE2AdGRqAABpdUogwxw880.png" alt="png" /></p>
 <p>Admin Server 应用墙</p>
 <p>点击应用墙中的某个应用，我们就能进入针对该应用的监控信息主界面。在该界面的左侧，包含了监控功能的各级目录，如下图所示：</p>
 <p><img src="assets/Ciqc1GATr3-ATLpGAAOgyIEu7Sk069.png" alt="图片6.png" /></p>
@@ -290,11 +290,11 @@ public class EurekaServerApplication {
 <p>Admin Server 中的 JVM 监控信息</p>
 <p>这些 JVM 数据都是通过可视化的方式进行展现，并随着运行时状态的变化而实时更新。</p>
 <p>在 21 讲中，我们详细讨论了 Spring Boot Actuator 中的度量指标。而在 Admin Server 中，同样存在一个“Metrics”菜单，展示效果如下图所示：</p>
-<p><img src="assets/CgqCHmAKgGSAaC9sAAA-CBnX4LI723.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHmAKgGSAaC9sAAA-CBnX4LI723.png" alt="png" /></p>
 <p>Admin Server 中的 Metrics 信息</p>
 <p>在“Metrics”菜单中，开发人员可以通过对各种条件进行筛选，然后添加对应的度量指标。比如上图中，我们针对 HTTP 请求中 /actuator/health 端点进行了过滤，从而得到了度量结果。</p>
 <p>接着我们一起看看系统环境方面的属性，因为这方面的属性非常之多，所以 Admin Server 也提供了一个过滤器，如下图所示：</p>
-<p><img src="assets/Ciqc1GAKgGuAaRNpAABIghaOFVg132.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1GAKgGuAaRNpAABIghaOFVg132.png" alt="png" /></p>
 <p>Admin Server 中的 Environment 信息</p>
 <p>在上图中，通过输入“spring.”参数，我们就能获取一系列与该参数相关的环境属性。</p>
 <p>日志也是我们监控系统的一个重要途径，在 Admin Server 的“Loggers”菜单中，可以看到该应用程序的所有日志信息，如下图所示：</p>
@@ -303,7 +303,7 @@ public class EurekaServerApplication {
 <p>通过”springcss”关键词对这些日志进行过滤，我们就可以获取 SpringCSS 案例中的日志详细了，图中也显示了每个日志记录器对应的日志级别。</p>
 <p>最后，我们来看一下 Admin Server 中的“JVM”菜单，该菜单下存在两个子菜单：“Thread Dump”和“Heap Dump”。</p>
 <p>以“Thread Dump”为例，尽管 Actuator 提供了 /threaddump 端点，但开发人员只能获取触发该端点时的 Dump 信息，而 Admin Server 则提供了一个连续性的可视化监控界面，如下图所示：</p>
-<p><img src="assets/CgqCHmAKgHuAcsFSAABDhuAgJBY760.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/CgqCHmAKgHuAcsFSAABDhuAgJBY760.png" alt="png" /></p>
 <p>Admin Server 中的 Thread Dump 信息</p>
 <p>点击图中的色条，我们就可以获取每一个线程的详细信息了，这里你可以尝试做一些分析。</p>
 <h4>控制访问安全性</h4>
@@ -323,7 +323,7 @@ public class EurekaServerApplication {
       password: &quot;springcss_password&quot;
 </code></pre>
 <p>重启 Admin Server 后，再次访问 Web 界面时，就需要我们输入用户名和密码了，如下图所示：</p>
-<p><img src="assets/CgpVE2AKgImAOicJAAAiQ2MCOts677.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgpVE2AKgImAOicJAAAiQ2MCOts677.png" alt="png" /></p>
 <p>Admin Server 的安全登录界面</p>
 <h3>小结与预告</h3>
 <p>可视化监控一直是开发和运维人员管理应用程序运行时状态的基础诉求，而 Spring Boot Admin 组件正是这样一款可视化的工具。它基于 Spring Boot Actuator 中各个端点所暴露的监控信息，并加以整合和集成。今天的内容首先介绍了构建 Admin Server 以及 Admin Client 的方法，并剖析了 Admin Server 中所具有的一整套的可视化解决方案。</p>

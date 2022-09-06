@@ -224,7 +224,7 @@ function hide_canvas() {
 <p>在正式开始 RPC 实战项目之前，我们先学习一下 RPC 的架构设计，这是项目前期规划非常重要的一步。</p>
 <h3>RPC 框架架构设计</h3>
 <p>RPC 又称远程过程调用（Remote Procedure Call），用于解决分布式系统中服务之间的调用问题。通俗地讲，就是开发者能够像调用本地方法一样调用远程的服务。下面我们通过一幅图来说说 RPC 框架的基本架构。</p>
-<p><img src="assets/Cip5yF_vL2GAftSLAAOCKnZEdrY576.png" alt="Lark20210101-221749.png" /></p>
+<p><img src="assets/Cip5yF_vL2GAftSLAAOCKnZEdrY576.png" alt="png" /></p>
 <p>RPC 框架包含三个最重要的组件，分别是客户端、服务端和注册中心。在一次 RPC 调用流程中，这三个组件是这样交互的：</p>
 <ul>
 <li>服务端在启动后，会将它提供的服务列表发布到注册中心，客户端向注册中心订阅服务地址；</li>
@@ -246,25 +246,25 @@ function hide_canvas() {
 <h3>RPC 调用方式</h3>
 <p>成熟的 RPC 框架一般会提供四种调用方式，分别为<strong>同步 Sync</strong>、<strong>异步 Future</strong>、<strong>回调 Callback</strong>和<strong>单向 Oneway</strong>。RPC 框架的性能和吞吐量与合理使用调用方式是息息相关的，下面我们逐一介绍下四种调用方式的实现原理。</p>
 <p>Sync 同步调用。客户端线程发起 RPC 调用后，当前线程会一直阻塞，直至服务端返回结果或者处理超时异常。Sync 同步调用一般是 RPC 框架默认的调用方式，为了保证系统可用性，客户端设置合理的超时时间是非常重要的。虽说 Sync 是同步调用，但是客户端线程和服务端线程并不是同一个线程，实际在 RPC 框架内部还是异步处理的。Sync 同步调用的过程如下图所示。</p>
-<p><img src="assets/Cip5yF_vL5iAAPg2AAU3x7WPF14178.png" alt="1.png" /></p>
+<p><img src="assets/Cip5yF_vL5iAAPg2AAU3x7WPF14178.png" alt="png" /></p>
 <ul>
 <li><strong>Future 异步调用</strong>。客户端发起调用后不会再阻塞等待，而是拿到 RPC 框架返回的 Future 对象，调用结果会被服务端缓存，客户端自行决定后续何时获取返回结果。当客户端主动获取结果时，该过程是阻塞等待的。Future 异步调用过程如下图所示。</li>
 </ul>
-<p><img src="assets/CgpVE1_vL6KAMtc4AAWsJs_OVcY000.png" alt="2.png" /></p>
+<p><img src="assets/CgpVE1_vL6KAMtc4AAWsJs_OVcY000.png" alt="png" /></p>
 <ul>
 <li><strong>Callback 回调调用</strong>。如下图所示，客户端发起调用时，将 Callback 对象传递给 RPC 框架，无须同步等待返回结果，直接返回。当获取到服务端响应结果或者超时异常后，再执行用户注册的 Callback 回调。所以 Callback 接口一般包含 onResponse 和 onException 两个方法，分别对应成功返回和异常返回两种情况。</li>
 </ul>
-<p><img src="assets/CgpVE1_vL6mAcikTAAYJgBAIkz4743.png" alt="3.png" /></p>
+<p><img src="assets/CgpVE1_vL6mAcikTAAYJgBAIkz4743.png" alt="png" /></p>
 <ul>
 <li><strong>Oneway 单向调用</strong>。客户端发起请求之后直接返回，忽略返回结果。Oneway 方式是最简单的，具体调用过程如下图所示。</li>
 </ul>
-<p><img src="assets/CgpVE1_vL6-AKGvaAAUZP14MgzM418.png" alt="4.png" /></p>
+<p><img src="assets/CgpVE1_vL6-AKGvaAAUZP14MgzM418.png" alt="png" /></p>
 <p>四种调用方式都各有优缺点，很难说异步方式一定会比同步方式效果好，在不用的业务场景可以按需选取更合适的调用方式。</p>
 <h3>线程模型</h3>
 <p>线程模型是 RPC 框架需要重点关注的部分，与我们之前介绍的 Netty Reactor 线程模型有什么区别和联系吗？</p>
 <p>首先我们需要明确 I/O 线程和业务线程的区别，以 Dubbo 框架为例，Dubbo 使用 Netty 作为底层的网络通信框架，采用了我们熟悉的主从 Reactor 线程模型，其中 Boss 和 Worker 线程池就可以看作 I/O 线程。I/O 线程可以理解为主要负责处理网络数据，例如事件轮询、编解码、数据传输等。如果业务逻辑能够立即完成，也可以使用 I/O 线程进行处理，这样可以省去线程上下文切换的开销。如果业务逻辑耗时较多，例如包含查询数据库、复杂规则计算等耗时逻辑，那么 I/O 必须将这些请求分发到业务线程池中进行处理，以免阻塞 I/O 线程。</p>
 <p>那么哪些请求需要在 I/O 线程中执行，哪些又需要在业务线程池中执行呢？Dubbo 框架的做法值得借鉴，它给用户提供了多种选择，它一共提供了 5 种分发策略，如下表格所示。</p>
-<p><img src="assets/Cip5yF_vL7eANr2BAAI2Xxyw-pg628.png" alt="Lark20210101-221822.png" /></p>
+<p><img src="assets/Cip5yF_vL7eANr2BAAI2Xxyw-pg628.png" alt="png" /></p>
 <h3>负载均衡</h3>
 <p>在分布式系统中，服务提供者和服务消费者都会有多台节点，如何保证服务提供者所有节点的负载均衡呢？客户端在发起调用之前，需要感知有多少服务端节点可用，然后从中选取一个进行调用。客户端需要拿到服务端节点的状态信息，并根据不同的策略实现负载均衡算法。负载均衡策略是影响 RPC 框架吞吐量很重要的一个因素，下面我们介绍几种最常用的负载均衡策略。</p>
 <ul>

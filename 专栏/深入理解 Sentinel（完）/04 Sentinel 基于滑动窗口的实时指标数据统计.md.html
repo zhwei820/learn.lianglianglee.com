@@ -194,7 +194,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>如上面代码所示，Bucket 记录一段时间内的各项指标数据用的是一个 LongAdder 数组，LongAdder 保证了数据修改的原子性，并且性能比 AtomicInteger 表现更好。数组的每个元素分别记录一个时间窗口内的请求总数、异常数、总耗时，如下图所示。</p>
-<p><img src="assets/1c69e7b0-e0b0-11ea-b45a-99f77a1eea3e" alt="04-01-counters" /></p>
+<p><img src="assets/1c69e7b0-e0b0-11ea-b45a-99f77a1eea3e" alt="png" /></p>
 <p>Sentinel 用枚举类型 MetricEvent 的 ordinal 属性作为下标，ordinal 的值从 0 开始，按枚举元素的顺序递增，正好可以用作数组的下标。在 qps-helper 中，LongAdder 被替换为 j.u.c 包下的 atomic 类了，并且只保留 EXCEPTION、SUCCESS、RT，代码如下。</p>
 <pre><code class="language-java">// 事件类型
 public enum MetricEvent {
@@ -220,11 +220,11 @@ public void add(MetricEvent event, long n) {
 <h3>滑动窗口</h3>
 <p>如果我们希望能够知道某个接口的每秒处理成功请求数（成功 QPS）、每秒处理失败请求数（失败 QPS），以及处理每个成功请求的平均耗时（avg RT），我们只需要控制 Bucket 统计一秒钟的指标数据即可。我们只需要控制 Bucket 统计一秒钟内的指标数据即可。但如何才能确保 Bucket 存储的就是精确到 1 秒内的数据呢？</p>
 <p>最 low 的做法就是启一个定时任务每秒创建一个 Bucket，但统计出来的数据误差绝对很大。Sentinel 是这样实现的，它定义一个 Bucket 数组，根据时间戳来定位到数组的下标。假设我们需要统计每 1 秒处理的请求数等数据，且只需要保存最近一分钟的数据。那么 Bucket 数组的大小就可以设置为 60，每个 Bucket 的 windowLengthInMs（窗口时间）大小就是 1000 毫秒（1 秒），如下图所示。</p>
-<p><img src="assets/3968d920-e0b0-11ea-8f3f-a12c78e9865c" alt="04-02-bucket" /></p>
+<p><img src="assets/3968d920-e0b0-11ea-8f3f-a12c78e9865c" alt="png" /></p>
 <p>由于每个 Bucket 存储的是 1 秒的数据，假设 Bucket 数组的大小是无限大的，那么我们只需要将当前时间戳去掉毫秒部分就能得到当前的秒数，将得到的秒数作为索引就能从 Bucket 数组中获取当前时间窗口的 Bucket。</p>
 <p>一切资源均有限，所以我们不可能无限的存储 Bucket，我们也不需要存储那么多历史数据在内存中。当我们只需要保留一分钟的数据时，Bucket 数组的大小就可以设置为 60，我们希望这个数组可以循环使用，并且永远只保存最近 1 分钟的数据，这样不仅可以避免频繁的创建 Bucket，也减少内存资源的占用。</p>
 <p>这种情况下如何定位 Bucket 呢？我们只需要将当前时间戳去掉毫秒部分得到当前的秒数，再将得到的秒数与数组长度取余数，就能得到当前时间窗口的 Bucket 在数组中的位置（索引），如下图所示：</p>
-<p><img src="assets/4223a680-e0b0-11ea-9345-e7c4c4dd55f7" alt="04-03-window" /></p>
+<p><img src="assets/4223a680-e0b0-11ea-9345-e7c4c4dd55f7" alt="png" /></p>
 <p>根据当前时间戳计算出当前时间窗口的 Bucket 在数组中的索引，算法实现如下：</p>
 <pre><code class="language-java">    private int calculateTimeIdx(long timeMillis) {
         /**
@@ -355,7 +355,7 @@ public void add(MetricEvent event, long n) {
 <h3>获取当前时间戳的前一个 Bucket</h3>
 <p>根据当前时间戳计算出当前 Bucket 的时间窗口开始时间，用当前 Bucket 的时间窗口开始时间减去一个窗口时间大小就能定位出前一个 Bucket。</p>
 <p>由于是使用数组实现滑动窗口，数组的每个元素都会被循环使用，因此当前 Bucket 与前一个 Bucket 会有相差一个完整的滑动窗口周期的可能，如下图所示。</p>
-<p><img src="assets/638d4510-e0b0-11ea-b1dc-4f04d04fa39d" alt="04-04-pre-cut-ptr" /></p>
+<p><img src="assets/638d4510-e0b0-11ea-b1dc-4f04d04fa39d" alt="png" /></p>
 <p>当前时间戳对应的 Bucket 的时间窗口开始时间戳为 1595974702000，而前一个 Bucket 的时间窗口开始时间戳可能是 1595974701000，也可能是一个滑动窗口周期之前的 1595974641000。所以，在获取到当前 Bucket 的前一个 Bucket 时，需要根据 Bucket 的时间窗口开始时间与当前时间戳比较，如果跨了一个周期就是无效的。</p>
 <h3>总结</h3>
 <ul>

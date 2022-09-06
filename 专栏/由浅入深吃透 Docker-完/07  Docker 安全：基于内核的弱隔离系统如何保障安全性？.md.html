@@ -175,7 +175,7 @@ function hide_canvas() {
 <p>在第 01 课时“Docker 安装：入门案例带你了解容器技术原理”中，我有介绍到 Docker 是基于 Linux 内核的 Namespace 技术实现资源隔离的，所有的容器都共享主机的内核。其实这与以虚拟机为代表的云计算时代还是有很多区别的，比如虚拟机有着更好的隔离性和安全性，而容器的隔离性和安全性则相对较弱。</p>
 <p>在讨论容器的安全性之前，我们先了解下容器与虚拟机的区别，这样可以帮助我们更好地了解容器的安全隐患以及如何加固容器安全。</p>
 <h3>Docker 与虚拟机区别</h3>
-<p><img src="assets/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg" alt="WechatIMG1632.jpeg" /></p>
+<p><img src="assets/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg" alt="png" /></p>
 <p>从图 1 可以看出，虚拟机是通过管理系统(Hypervisor)模拟出 CPU、内存、网络等硬件，然后在这些模拟的硬件上创建客户内核和操作系统。这样做的好处就是虚拟机有自己的内核和操作系统，并且硬件都是通过虚拟机管理系统模拟出来的，用户程序无法直接使用到主机的操作系统和硬件资源，因此虚拟机也对隔离性和安全性有着更好的保证。</p>
 <p>而 Docker 容器则是通过 Linux 内核的 Namespace 技术实现了文件系统、进程、设备以及网络的隔离，然后再通过 Cgroups 对 CPU、 内存等资源进行限制，最终实现了容器之间相互不受影响，由于容器的隔离性仅仅依靠内核来提供，因此容器的隔离性也远弱于虚拟机。</p>
 <p>你可能会问，既然虚拟机安全性这么好，为什么我们还要用容器呢？这是因为容器与虚拟机相比，容器的性能损耗非常小，并且镜像也非常小，而且在业务快速开发和迭代的今天，容器秒级的启动等特性也非常匹配业务快速迭代的业务场景。</p>
@@ -244,7 +244,7 @@ function hide_canvas() {
 <p>安全容器目前推荐的技术方案是 <a href="https://github.com/kata-containers">Kata Containers</a>，Kata Container 并不包含一个完整的操作系统，只有一个精简版的 Guest Kernel 运行着容器本身的应用，并且通过减少不必要的内存，尽量共享可以共享的内存来进一步减少内存的开销。另外，Kata Container 实现了 OCI 规范，可以直接使用 Docker 的镜像启动 Kata 容器，具有开销更小、秒级启动、安全隔离等许多优点。</p>
 <h3>结语</h3>
 <p>容器技术带来的技术革新是空前的，但是随之而来的容器安全问题也是我们必须要足够重视的。本课时解决 Docker 安全问题的精华我帮你总结如下：</p>
-<p><img src="assets/Ciqc1F9keVSAHuDTAADaB11MKbU710.png" alt="Lark20200918-170906.png" /></p>
+<p><img src="assets/Ciqc1F9keVSAHuDTAADaB11MKbU710.png" alt="png" /></p>
 <p>到此，相信你已经了解了 Docker 与虚拟机的本质区别，也知道了容器目前存在的一些安全隐患以及如何在生产环境中尽量避免这些安全隐患。</p>
 </div>
                     </div>

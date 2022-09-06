@@ -221,7 +221,7 @@ function hide_canvas() {
 <p>然后，我们又分别找到了 SQLExecuteTemplate 和 SQLExecutePrepareTemplate 类，这两个是典型的<strong>SQL 执行模板类</strong>。</p>
 <p>根据到目前为止对 ShardingSphere 组件设计和代码分层风格的了解，可以想象，在层次关系上，ShardingExecuteEngine 是底层对象，SQLExecuteTemplate 应该依赖于 ShardingExecuteEngine；而 StatementExecutor、PreparedStatementExecutor 和 BatchPreparedStatementExecutor 属于上层对象，应该依赖于 SQLExecuteTemplate。我们通过简单阅读这些核心类之前的引用关系，印证了这种猜想。</p>
 <p>基于以上分析，我们可以给出 SQL 执行引擎的整体结构图（如下图），其中横线以上部分位于 sharding-core-execute 工程，属于底层组件；而直线以下部分位于 sharding-jdbc-core 中，属于上层组件。这种分析源码的能力也是《12 | 从应用到原理：如何高效阅读 ShardingSphere 源码？》中提到的“基于分包设计原则阅读源码”的一种具体表现：</p>
-<p><img src="assets/CgqCHl9Dei6AMqoCAACpyMuj2MI683.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl9Dei6AMqoCAACpyMuj2MI683.png" alt="png" /></p>
 <p>ShardingSphere 执行引擎核心类的分层结构图</p>
 <p>另一方面，我们在上图中还看到 SQLExecuteCallback 和 SQLExecutePrepareCallback，显然，它们的作用是完成 SQL 执行过程中的回调处理，这也是一种非常典型的扩展性处理方式。</p>
 <h3>ShardingExecuteEngine</h3>

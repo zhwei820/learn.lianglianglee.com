@@ -324,7 +324,7 @@ private Collection&lt;ResourceDataSource&gt; getResourceDataSources(final Map&lt
 <p>要理解基于 XA 协议的 ShardingTransactionManager，我们同样需要具备一定的理论知识。XA 是由 X/Open 组织提出的两阶段提交协议，是一种分布式事务的规范，XA 规范主要定义了面向全局的事务管理器 TransactionManager（TM）和面向局部的资源管理器 ResourceManager（RM）之间的接口。</p>
 <p>XA 接口是双向的系统接口，在 TransactionManager，以及一个或多个 ResourceManager 之间形成通信桥梁。通过这样的设计，TransactionManager 控制着全局事务，管理事务生命周期，并协调资源，而 ResourceManager 负责控制和管理包括数据库相关的各种实际资源。</p>
 <p>XA 的整体结构以及 TransactionManager 和 ResourceManager 之间的交互过程参考下图：</p>
-<p><img src="assets/Ciqc1F9fO8mADc8eAAClhM8LyC0111.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9fO8mADc8eAAClhM8LyC0111.png" alt="png" /></p>
 <p>XA 协议组成结构图</p>
 <p>所有关于分布式事务的介绍中都必然会讲到两阶段提交，因为它是实现 XA 分布式事务的关键。我们知道在两阶段提交过程中，存在协调者和参与者两种角色。在上图中，XA 引入的 TransactionManager 充当着全局事务中的“协调者”角色，而图中的 ResourceManager 相当于“参与者”角色，对自身内部的资源进行统一管理。</p>
 <p>理解了这些概念之后，我们再来看 Java 中的实现。作为 Java 平台中的事务规范，JTA（Java Transaction API）也定义了对 XA 事务的支持。实际上，JTA 是基于 XA 架构进行建模的，在 JTA 中，事务管理器抽象为 javax.transaction.TransactionManager 接口，并通过底层事务服务进行实现。</p>
@@ -372,16 +372,16 @@ public void commit() {
 <p>这里的 XATransactionManager 就是对各种第三方 XA 事务管理器的一种抽象，封装了对</p>
 <p>Atomikos、Bitronix 等第三方工具的实现方式。我们会在下一课时中对这个 XATransactionManager 以及 XAShardingTransactionManager 进行具体展开。</p>
 <p>作为总结，我们梳理在 ShardingSphere 中与 XA 两阶段提交相关的核心类之间的关系，如下图所示：</p>
-<p><img src="assets/Ciqc1F9fO-GALidCAABl39blOv8975.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F9fO-GALidCAABl39blOv8975.png" alt="png" /></p>
 <h4>2.SeataATShardingTransactionManager</h4>
 <p>介绍完 XAShardingTransactionManager 之后，我们来看上图中 ShardingTransactionManager 接口的另一个实现类 SeataATShardingTransactionManager。因为基于不同技术体系和工作原理，所以 SeataATShardingTransactionManager 中的实现方法也完全不同，让我们来看一下。</p>
 <p>在介绍 SeataATShardingTransactionManager 之前，我们同样有必要对 Seata 本身做一些展开。与 XA 不同，<strong>Seata 框架</strong>中一个分布式事务包含三种角色，除了 XA 中同样具备的 TransactionManager（TM）和 ResourceManager（RM） 之外，还存在一个事务协调器 TransactionCoordinator (TC)，维护全局事务的运行状态，负责协调并驱动全局事务的提交或回滚。</p>
 <p>其中，TM 是一个分布式事务的发起者和终结者，TC 负责维护分布式事务的运行状态，而 RM 则负责本地事务的运行。</p>
 <p>Seata 的整体架构图如下所示：</p>
-<p><img src="assets/Ciqc1F9fO-uAZyMCAAEoW9aLAuQ436.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9fO-uAZyMCAAEoW9aLAuQ436.png" alt="png" /></p>
 <p>Seata 分布式事务组成结构图（来自 Seata 官网）</p>
 <p>基于Seata 框架，一个分布式事务的执行流程包含如下五个步骤：</p>
-<p><img src="assets/Ciqc1F9fO_WAHRyqAACL8p3Fa_E119.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9fO_WAHRyqAACL8p3Fa_E119.png" alt="png" /></p>
 <p>我们同样会在下一课时中对这些步骤，以及其中涉及的核心类进行具体展开。</p>
 <h3>从源码解析到日常开发</h3>
 <p>今天的内容我们主要关注于 ShardingSphere 中对分布式事务的抽象过程，本身没有涉及过多的源码分析。我们学习的关注点在于掌握 XA 协议的特点和核心类，以及基于 Seata 框架完成一次分布式事务执行的过程。</p>

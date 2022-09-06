@@ -212,7 +212,7 @@ The key's randomart image is:
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDljSlDNHnUr4ursYISKXK5j2mWTYnt100mvYeJCLpr6tpeSarGyr7FnTc6sLM721plU2xq0bqlFEU5/0SSvFdLTht7bcfm/Hf31EdAuIqZuy/guP06ijpidfX6lVDxLWx/sO3Wbj3t7xgj4sfCFTiv+OOFP0NxKr5wy+emojm6KIaXkhjbPeJDgph5bvluFnKAtesMUkdhceAdN9grE3nkBOnwWw6G4dCtbrKt2o9wSyzgkDwPjj2qjFhcE9571/61/Nr8v9iqSHvcb/d7WZ0Qq7a2LYds6hQkpBg2RCDDJA16fFVs8Q5eNCpDQwGG3IbhHMUwvpKDf0OYrS9iftc5 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6b636f67624e6b766f637e626b206d6163">[email&#160;protected]</a>
 </code></pre>
 <p>然后将公钥文件拷贝到 GitLab 的个人设置 -&gt; SSH Keys 中，点击添加按钮，将我们的公钥添加到 GitLab 中。</p>
-<p><img src="assets/CgqCHl-2P_qAO6VIAAIAcpA55IY226.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl-2P_qAO6VIAAIAcpA55IY226.png" alt="png" /></p>
 <h3>2. 上传服务代码到 GitLab</h3>
 <p>这里，我使用 Golang 编写了一个 HTTP 服务，代码如下：</p>
 <pre><code>package main
@@ -257,22 +257,22 @@ total 24
 <p>源码详见<a href="https://github.com/wilhelmguo/devops-demo">这里</a></p>
 </blockquote>
 <p>然后，我们在 GitLab 上创建一个 hello 项目，并将代码上传。</p>
-<p><img src="assets/CgqCHl-2QA2ARz39AADE_fukgio780.png" alt="Drawing 1.png" />
-<img src="assets/CgqCHl-2QQCAZUxWAAF7KHvN2DI582.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl-2QA2ARz39AADE_fukgio780.png" alt="png" />
+<img src="assets/CgqCHl-2QQCAZUxWAAF7KHvN2DI582.png" alt="png" /></p>
 <p>项目创建完成后，GitLab 会自动跳转到项目详情页面。</p>
-<p><img src="assets/Ciqc1F-2QQeAXsbVAAELrFGkphU008.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F-2QQeAXsbVAAELrFGkphU008.png" alt="png" /></p>
 <h3>3. 创建 Jenkins 任务</h3>
 <p>在 Jenkins 中添加一个自由风格的任务。</p>
-<p><img src="assets/Ciqc1F-2QRGAIS83AAGKHDb05xE232.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F-2QRGAIS83AAGKHDb05xE232.png" alt="png" /></p>
 <p>点击确定，然后到源码管理选择 Git，填写 GitLab 项目的 URL。此时 Jenkins 会提示没有访问 GitLab 的相关权限，我们需要点击添加按钮将私钥添加到 Jenkins 中用以鉴权。</p>
-<p><img src="assets/Ciqc1F-2QSWAceMNAADnnjcKzCo548.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F-2QSWAceMNAADnnjcKzCo548.png" alt="png" /></p>
 <blockquote>
 <p>由于部署 GitLab 的宿主机 ssh 默认端口为 22，为了避免与宿主机的 ssh 端口冲突，我们的 GitLab ssh 端口配置为 2222，因此 Jenkins 连接 GitLab 的 URL 中需要包含端口号 2222， 配置格式为 ssh://<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="70171904304147425e42405e415e46">[email&#160;protected]</a>:2222/root/hello.git。</p>
 </blockquote>
 <p>选择添加的密钥类型为 &quot;SSH Username with private key&quot;，Username 设置为 jenkins，然后将私钥粘贴到 Private Key 输入框中，点击添加即可。</p>
-<p><img src="assets/Ciqc1F-2QTSARpg5AAET_4BGb-0066.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F-2QTSARpg5AAET_4BGb-0066.png" alt="png" /></p>
 <p>添加完成后，认证名称选择 jenkins 后，红色报错提示就会消失。这证明此时 Jenkins 和 GitLab 已经认证成功，可以成功从 GitLab 拉取代码了。</p>
-<p><img src="assets/CgqCHl-2QTqAQf8RAACXxIBN-Z8663.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl-2QTqAQf8RAACXxIBN-Z8663.png" alt="png" /></p>
 <p>下面我们使用 shell 脚本来构建我们的应用镜像，在构建中增加一个 Shell 类型的构建步骤，并且填入以下信息，将 USER 替换为目标镜像仓库的用户名，将 PASSWORD 替换为镜像仓库的密码。</p>
 <pre><code># 第一步，登录镜像仓库
 $ docker login -u {USER} -p  {PASSWORD}
@@ -281,14 +281,14 @@ $ docker build -t lagoudocker/devops-demo .
 # 第三步, 使用 docker push 命令推送镜像
 $ docker push lagoudocker/devops-demo
 </code></pre>
-<p><img src="assets/CgqCHl-2QUKAJ-psAABwghmp76g949.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/CgqCHl-2QUKAJ-psAABwghmp76g949.png" alt="png" /></p>
 <p>完成后点击保存，此时任务已经成功添加到 Jenkins 中。回到任务首页，点击构建按钮即可开始构建。第一次构建需要下载依赖的基础镜像，这个过程可能比较慢。构建过程中，我们也可以点击控制台查看构建输出的内容：</p>
-<p><img src="assets/Ciqc1F-2QUuAEXcXAAGe5l9e2h0928.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F-2QUuAEXcXAAGe5l9e2h0928.png" alt="png" /></p>
 <h3>4. 配置自动构建</h3>
 <p>点击上一步创建的任务，点击配置进入任务配置界面，到构建触发器下勾选 GitLab 相关的选项，点击 Generate 按钮生成一个 GitLab 回调 Jenkins 的 token。记录下 Jenkins 的回调地址和生成的 token 信息。</p>
-<p><img src="assets/Ciqc1F-2QWCABHzrAAFQCgpFnLs787.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F-2QWCABHzrAAFQCgpFnLs787.png" alt="png" /></p>
 <p>在 GitLab 项目设置中，选择 Webhooks，将 Jenkins 的回调地址和 token 信息添加到 Webhooks 的配置中，点击添加即可。</p>
-<p><img src="assets/Ciqc1F-2QWiAFOVBAAI93Lelr38996.png" alt="Drawing 11.png" /></p>
+<p><img src="assets/Ciqc1F-2QWiAFOVBAAI93Lelr38996.png" alt="png" /></p>
 <p>后面我们的每次提交都会触发自动构建。</p>
 <p>为了实现根据 git 的 tag 自动构建相应版本的镜像，我们需要修改 Jenkins 构建步骤中的 shell 脚本为以下内容：</p>
 <pre><code># 需要推送的镜像名称
@@ -310,9 +310,9 @@ docker push $REPOSITORY
 <p>在镜像构建过程中，实际上 Jenkins 是通过执行我们编写的 shell 脚本完成的，要想实现镜像构建完成后自动在远程服务器上运行最新的镜像，我们需要借助一个 Jenkins 插件 Publish Over SSH，这个插件可以帮助我们自动登录远程服务器，并执行一段脚本将我们的服务启动。</p>
 <p>下面我们来实际操作下这个插件。</p>
 <p><strong>第一步，在 Jenkins 中安装 Publish Over SSH 插件。</strong> 在 Jenkins 系统管理，插件管理中，搜索 Publish Over SSH，然后点击安装并重启 Jenkins 服务。</p>
-<p><img src="assets/CgqCHl-2QfmAc4iBAACDzvOoPWI585.png" alt="Drawing 12.png" /></p>
+<p><img src="assets/CgqCHl-2QfmAc4iBAACDzvOoPWI585.png" alt="png" /></p>
 <p><strong>第二步，配置 Publish Over SSH 插件。</strong> 插件安装完成后，在 Jenkins 系统管理的系统设置下，找到 Publish Over SSH 功能模块，添加远程服务器节点，这里我使用密码验证的方式添加一台服务器。配置好后，我们可以使用测试按钮测试服务器是否可以正常连接，显示Success 代表服务器可以正常连接，测试连接成功后，点击保存按钮保存配置。</p>
-<p><img src="assets/CgqCHl-2QgSAVk0bAAC6abody2k836.png" alt="Drawing 13.png" /></p>
+<p><img src="assets/CgqCHl-2QgSAVk0bAAC6abody2k836.png" alt="png" /></p>
 <p><strong>第三步，修改之前 shell 任务中脚本，</strong> 添加部署相关的内容：</p>
 <pre><code># 需要推送的镜像名称
 IMAGE_NAME=&quot;lagoudocker/devops-demo&quot;
@@ -334,7 +334,7 @@ mkdir -p ./shell &amp;&amp; echo \
 </code></pre>
 <p>我们在 docker push 命令后，增加一个输出 shell 脚本到 release 文件的命令，这个脚本会发送到远端的服务器上并执行，通过执行这个脚本文件可以在远端服务器上，拉取最新镜像并且重新启动容器。</p>
 <p><strong>第四步，配置远程执行。在 Jenkins 的 hello 项目中，点击配置，在执行步骤中点击添加Send files or execute commands over SSH</strong>的步骤，选择之前添加的服务器，并且按照以下内容填写相关信息。</p>
-<p><img src="assets/Ciqc1F-2QhKAPblBAAC4Bp33K2Y632.png" alt="Drawing 14.png" /></p>
+<p><img src="assets/Ciqc1F-2QhKAPblBAAC4Bp33K2Y632.png" alt="png" /></p>
 <ul>
 <li>Source file 就是我们要传递的 shell 脚本信息，这里填写我们上面生成的 shell 脚本文件即可。</li>
 <li>Remove prefix 是需要过滤的目录，这里我们填写 shell。</li>

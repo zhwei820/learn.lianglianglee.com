@@ -529,7 +529,7 @@ function hide_canvas() {
 <p>聚合是领域驱动战术设计最为核心的概念，若能合理运用，就能极大地改善领域设计模型的质量。只有设计出高质量的聚合，才能充分利用聚合边界的控制力，达成领域逻辑与技术实现之间的平衡。下面，我将针对第 6-6 课给出的培训管理系统，为该系统的模型引入聚合。</p>
 <h3>数据设计模型</h3>
 <p>第 6-6 课，我们通过数据模型驱动设计的方式获得了如下的设计模型：</p>
-<p><img src="assets/2260ea30-d790-11e9-8797-4924c0d7c082" alt="77194560.png" /></p>
+<p><img src="assets/2260ea30-d790-11e9-8797-4924c0d7c082" alt="png" /></p>
 <p>正如我在第 6-4 课分析数据模型驱动设计的问题时所说：“在数据库和数据表之间，缺少合适粒度的概念去维护数据实体的边界。”我们获得的这个模型已经出现了复杂对象图的端倪，其中，最大的设计问题就是对象之间的遍历关系。例如 Training 类组合了 Student 类、Course 类和 Calendar 类：</p>
 <pre><code class="language-java">@Data
 public class Training {
@@ -581,23 +581,23 @@ public class OrderItem {
 <p>审视这些模型类之间的关系，我认为之前建模时定义的 Course 与 Administrator、Teacher 之间的关系应当弱化，虽然课程确实是由管理员创建，也必须指定授课教师，但它们并非课程的本质属性，生命周期也不一致，不应该被建模为“物理包容”的合成关系。</p>
 <p>课程可以被加入到不同学生的期望列表中，期望列表也可以加入多个课程，因此，WishList 与 Course 之间存在多对多关系。当学生将课程添加到期望列表时，可以认为是学生添加了对该门课程的收藏，于是可以引入 Favorite 类，由其关联 Course 类，而 WishList 与 Favorite 之间则形成一对多的合成关系。</p>
 <p>在确定 Course、Training 与 Calendar 三者之间关系时，可谓几经周折。一个课程在上架时，管理员可以设置多个日程，学生可以选择符合自己时间安排的合适课程，这时就会形成一个培训。这就意味着 Course 包含了多个 Calendar，而 Training 既指向了 Course，又指向了一个确定的 Calendar。如前所述，我认为 Calendar 是一个值对象，因此可以复制 Calendar 的副本，让它们分别与 Course 和 Training 产生关联：</p>
-<p><img src="assets/fcadd030-d791-11e9-8797-4924c0d7c082" alt="70344596.png" /></p>
+<p><img src="assets/fcadd030-d791-11e9-8797-4924c0d7c082" alt="png" /></p>
 <p>然而，Course 与 Calendar 之间存在一对多关系，在对象设计中需要定义一个集合属性来表示多个日程。该如何区分集合中的不同日程对象？当用户修改课程中指定日程的值时，又该通过什么值来确定目标日程呢？如果为日程引入身份标识，将 Calendar 改为实体，这些问题就迎刃而解了。</p>
 <p>一旦 Calendar 被定义为实体，就无法像值对象那样以复制副本的方式分别与 Training 和 Course 产生关联了。由于培训的日程必须是一个确定的日程，则意味着培训日程与课程日程是两个不同的领域概念，其中，培训日程仅仅是 Training 实体的一个组合属性，应被定义为值对象。由于这两个领域概念存在共同逻辑，因此可以建立继承体系，抽象出 Calendar 作为这两个领域概念的父类。其中，CourseCalendar 被定义为实体，TrainingCalendar 被定义为值对象：</p>
-<p><img src="assets/325af690-d792-11e9-8fae-816b29059b0c" alt="70361014.png" /></p>
+<p><img src="assets/325af690-d792-11e9-8fae-816b29059b0c" alt="png" /></p>
 <p>这样的设计既满足了 Course 和 Training 的不同需求，又避免了重复代码，左右逢源，看起来似乎很美好。然而，该设计实际上彻底地分开了课程日程与培训日程，除了重用逻辑之外，它们互不相干。那么，当用户修改了课程日程的值时，培训日程要不要同步变更呢？如果不响应此修改，就会导致培训日程和课程日程不一致。要让数据保持一致，又不希望进行同步变更，唯一的办法就是通过对象引用的方式建立 Training 与 Calendar 之间的关系：</p>
-<p><img src="assets/145a4c90-d792-11e9-8797-4924c0d7c082" alt="70379991.png" /></p>
+<p><img src="assets/145a4c90-d792-11e9-8797-4924c0d7c082" alt="png" /></p>
 <p>在确定了实体与值对象以及各个对象之间的关系后，接下来还需要明确对象间的导航方向。在理顺对象图的过程中，需要在模型中通过箭头标记导航方向。倘若现实世界对应的两个概念之间存在双向依赖，就需要去掉其中一个导航方向。例如，Student 与 Training 之间存在多对多关系，一个学生可以参加多次培训，一个培训也可以有多个学生参加。如果站在学生的角度，就应该为 Student 定义 List<Training> 属性；但反过来，Training 也需保持对 Student 的依赖，否则无法获知该培训究竟有哪些学生参加。对照现实世界，应该以 Student 为主类型，Training 为从类型，于是在标记导航方向时，应由 Training 指向 Student。模型中 Order 与 Student、Payment 与 Student 以及 WishList 与 Student 莫不如此。调整后的模型如下所示：</p>
-<p><img src="assets/ddb531a0-d791-11e9-8797-4924c0d7c082" alt="35346041.png" /></p>
+<p><img src="assets/ddb531a0-d791-11e9-8797-4924c0d7c082" alt="png" /></p>
 <h4>第二步：分解关系薄弱处</h4>
 <p>理清了各个对象之间的关系后，即可<strong>分解关系薄弱处</strong>。通过辨识合成和继承关系，就可以轻而易举寻找到关系薄弱处，然后分解之。当前模型并无继承关系，故而只需关注合成关系。让我们率先来一个干净利落的分解：</p>
-<p><img src="assets/42c45170-d792-11e9-ad2d-e1c058c00235" alt="35370690.png" /></p>
+<p><img src="assets/42c45170-d792-11e9-ad2d-e1c058c00235" alt="png" /></p>
 <p>分解时，务求斩钉截铁，不用担心聚合的边界识别有误，因为后面还要运用聚合设计原则审视这一设计。设计者能够承担的知识量有限，每一步只需要达成一个目标即可。显然，前面这两个步骤不过是除掉遍布模型四周的荒芜杂草，使得领域设计模型的真相能够清晰地浮现出来。</p>
 <h4>第三步：调整聚合边界</h4>
 <p>现在是运用聚合设计原则<strong>调整聚合边界</strong>的时候了。我们分别从完整性、独立性、不变量与事务逐一对每个聚合进行检查。如果没有不变量与事务的约束，应优先考虑聚合边界内的概念独立性。同时，我们还需要考察聚合之间的关系，不能让它们违背了<strong>聚合内外部之间协作的基本规则</strong>，这些规则都是设计的“红线”！</p>
 <p>模型中业已识别出来的大多数聚合没有争议，一目了然。Course 与 Administrator、Teacher 之间的关系稍微复杂一些，由于课程必须由管理员创建，且必须指定教师，从概念完整性看，似乎三者应该放在一个聚合中。但是，确定概念是否完整有一个判断依据，即<strong>聚合内的对象应该具有一致的生命周期</strong>。显然，Administrator 与 Teacher 的生命周期与 Course 完全无关。同时，Administrator 与 Teacher 也需要独立访问与管理，因而应为其建立独立的聚合。</p>
 <p>在检查聚合之间的协作关系时，我们发现 Course、Training 与 Calendar 三者之间的协作存在不当之处。按照聚合协作的规则，一个聚合的非聚合根实体不允许被聚合外部的对象直接引用，但 Training 到 Calendar 的导航却踩到了设计的“红线”：</p>
-<p><img src="assets/6b80a1e0-d792-11e9-ad2d-e1c058c00235" alt="73601165.png" /></p>
+<p><img src="assets/6b80a1e0-d792-11e9-ad2d-e1c058c00235" alt="png" /></p>
 <p>该怎么解决这一问题？一种简单地方法是将 Calendar 实体独立为一个聚合。然而分析需求，我们发现 Course 与 Calendar 之间存在着不变量的约束关系，例如同一个课程不能指定两个日期存在重叠的日程，两个相邻的日程必须间隔规定的天数。这个不变量需要通过 Course 聚合根来保障，防止被外部调用者破坏，因此需要将它们放在一个聚合中，实现代码如下：</p>
 <pre><code class="language-java">public class Calendar extends Entity&lt;CalendarId&gt;  implements Comparable&lt;Calendar&gt; {
     private final String place;
@@ -655,9 +655,9 @@ public class Course extends Entity&lt;CourseId&gt; implements AggregateRoot&lt;C
 </code></pre>
 <p>Calendar 实体提供了自给自足的验证能力，Course 聚合根与 Calendar 实体协作，调用了它的验证方法，对外则公开了添加 Calendar 实例的方法。该方法实现了不变量，可避免外部调用者添加破坏不变量的日程。</p>
 <p>如果将 Calendar 独立为一个专门的聚合，这一不变量就无法保障了。既然独立为聚合的路子走不通，去掉 Training 对 Calendar 的引用又势在必行，就回到了聚合协作的最佳实践：<strong>通过身份标识进行聚合之间的协作</strong>。虽然协作原则要求“聚合外部的对象不能引用除根实体之外的任何内部对象”，但并没有限制对这些内部对象身份标识的引用，即 Training 不引用 Calendar 实体，转而引用它的身份标识 CalendarId。同时，Training 与 Course 聚合之间的协作也将通过 CourseId：</p>
-<p><img src="assets/ae34be40-d792-11e9-ad2d-e1c058c00235" alt="46164994.png" /></p>
+<p><img src="assets/ae34be40-d792-11e9-ad2d-e1c058c00235" alt="png" /></p>
 <p>既然聚合之间的协作必须通过身份标识是我们的设计共识，领域设计模型就无需在聚合之间特别引入身份标识值对象来表达这种关系，故而上述模型可以省略为：</p>
-<p><img src="assets/b583edb0-d792-11e9-8797-4924c0d7c082" alt="46360780.png" /></p>
+<p><img src="assets/b583edb0-d792-11e9-8797-4924c0d7c082" alt="png" /></p>
 <p>Training 聚合通过 CourseId 与 Course 建立了关系，但它并不关心课程的所有日程，而仅限于学生订阅课程时选择的日程。这里隐含了一个不变量，即订阅课程时，需要选择课程的日程。由于订阅课程的业务含义就是生成一个培训，因此该不变量应由 Training 聚合实现：</p>
 <pre><code class="language-java">public class Training extends Entity&lt;TrainingId&gt; implements AggregateRoot&lt;Training&gt; {
     ...
@@ -700,7 +700,7 @@ public class Course extends Entity&lt;CourseId&gt; implements AggregateRoot&lt;C
 </code></pre>
 <p>从事务的角度看，WishList 与 Favorite，Order 与 OrderItem 都必须保证事务的一致性。Training、Order 与 Payment 之间则不然，学生在订阅了课程后，会生成一次培训。一旦学生决定购买此课程，才会将其加入到订单中，最后对订单进行支付。这三者之间并不要求所有记录的创建必须共同成功或者共同失败。既然对培训、订单与支付没有事务范围的要求，当然可以依据概念完整性与独立性分别为其建立三个单独的聚合了。</p>
 <p>经过这样的分析梳理之后，我们得到了如下的领域设计模型：</p>
-<p><img src="assets/dfa96b10-d792-11e9-ad2d-e1c058c00235" alt="34938529.png" /></p>
+<p><img src="assets/dfa96b10-d792-11e9-ad2d-e1c058c00235" alt="png" /></p>
 <p><strong>注意：</strong> 领域设计模型中关于聚合之间的协作，均采用身份标识建立关联。为保持精简，模型图中没有为每个聚合列出专有的 Identity 类。</p>
 <p>对比第二步获得的初步模型与最终获得的领域设计模型，你会发现二者的差异非常小。这是因为通过对对象图的梳理之后，依据依赖关系强弱分解的聚合边界已经相对合理了。但它的正确性缺乏验证，因而需要在第三步依据聚合设计的原则去分别验证每个聚合的边界。经历了这样的设计过程后，虽不能说最终获得的领域设计模型能够一劳永逸，但却能最大程度地保证模型的合理性。</p>
 </div>

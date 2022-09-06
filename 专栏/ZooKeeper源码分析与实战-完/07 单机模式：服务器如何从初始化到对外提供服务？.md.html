@@ -197,7 +197,7 @@ function hide_canvas() {
 <p>通过基础篇的学习我们已经掌握了 ZooKeeper 相关的基础知识，今天我们就开始进阶篇中的第一节课，本节课主要通过对单机版的 ZooKeeper 中的启动与服务的初始化过程进行分析，来学习 ZooKeeper 服务端相关的处理知识。现在我们就开始深入到服务器端看一看 ZooKeeper 是如何从初始化到对外提供服务的。</p>
 <h3>启动准备实现</h3>
 <p>在 ZooKeeper 服务的初始化之前，首先要对配置文件等信息进行解析和载入。也就是在真正开始服务的初始化之前需要对服务的相关参数进行准备，而 ZooKeeper 服务的准备阶段大体上可分为启动程序入口、zoo.cfg 配置文件解析、创建历史文件清理器等，如下图所示：</p>
-<p><img src="assets/Ciqc1F7OQ_uAU5yzAABbrnOyALM516.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F7OQ_uAU5yzAABbrnOyALM516.png" alt="png" /></p>
 <p>QuorumPeerMain 类是 ZooKeeper 服务的启动接口，可以理解为 Java 中的 main 函数。 通常我们在控制台启动 ZooKeeper 服务的时候，输入 zkServer.cm 或 zkServer.sh 命令就是用来启动这个 Java 类的。如下代码所示，QuorumPeerMain 类函数只有一个 initializeAndRun 方法，是作用为所有 ZooKeeper 服务启动逻辑的入口。</p>
 <pre><code class="language-java">package org.apache.zookeeper.server.quorum
 public class QuorumPeerMain {
@@ -228,7 +228,7 @@ public class QuorumPeerMain {
 <li>FileTxnSnapLog 类，可以用于数据管理。</li>
 <li>会话管理类，设置服务器 TickTime 和会话超时时间、创建启动会话管理器等操作。</li>
 </ol>
-<p><img src="assets/CgqCHl7ORB-AdNM1AABRbvNSlEE886.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7ORB-AdNM1AABRbvNSlEE886.png" alt="png" /></p>
 <p>下面我们就分别分析一下这几个关键步骤在 ZooKeeper 中的底层实现过程。</p>
 <h4>ServerStats创建</h4>
 <p>首先，我们来看一下统计工具类 ServerStats。ServerStats 类用于统计 ZooKeeper 服务运行时的状态信息统计。主要统计的数据有服务端向客户端发送的响应包次数、接收到的客户端发送的请求包次数、服务端处理请求的延迟情况以及处理客户端的请求次数。在日常运维工作中，监控服务器的性能以及运行状态等参数很多都是这个类负责收集的。</p>
@@ -272,7 +272,7 @@ final public void setZooKeeperServer(ZooKeeperServer zks) {
 Thread 类作为 ServerCnxnFactory 类的启动主线程。之后 ZooKeeper 服务再初始化具体的 NIO 类。这里请你注意的是，虽然初始化完相关的 NIO 类 ，比如已经设置好了服务端的对外端口，客户端也能通过诸如 2181 端口等访问到服务端，但是此时 ZooKeeper 服务器还是无法处理客户端的请求操作。<strong>这是因为 ZooKeeper 启动后，还需要从本地的快照数据文件和事务日志文件中恢复数据</strong>。这之后才真正完成了 ZooKeeper 服务的启动。</p>
 <h4>初始化请求处理链</h4>
 <p>在完成了 ZooKeeper 服务的启动后，ZooKeeper 会初始化一个请求处理逻辑上的相关类。这个操作就是初始化请求处理链。所谓的请求处理链是一种责任链模式的实现方式，根据不同的客户端请求，在 ZooKeeper 服务器上会采用不同的处理逻辑。而为了更好地实现这种业务场景，ZooKeeper 中采用多个请求处理器类一次处理客户端请求中的不同逻辑部分。这种处理请求的逻辑方式就是责任链模式。而本课时主要说的是单机版服务器的处理逻辑，主要分为PrepRequestProcessor、SyncRequestProcessor、FinalRequestProcessor 3 个请求处理器，而在一个请求到达 ZooKeeper 服务端进行处理的过程，则是严格按照这个顺序分别调用这 3 个类处理请求中的对应逻辑，如下图所示。具体的内容，我们会在后面的课程中详细讲解。</p>
-<p><img src="assets/CgqCHl7ORDiAIMqzAABBGUvvhFU739.png" alt="image" /></p>
+<p><img src="assets/CgqCHl7ORDiAIMqzAABBGUvvhFU739.png" alt="png" /></p>
 <h3>总结</h3>
 <p>本课时是我们进阶篇阶段的第一课，在整个进阶篇中，我们主要从 ZooKeeper 服务内部的实现逻辑来学习 ZooKeeper 中的相关知识，而本课时从单机版服务器的启动，到对外提供服务的整个过程，逐步分析 ZooKeeper 实现的每个步骤，理解 ZooKeeper 服务器的初始化、配置解析、服务实例化等过程对我们日后在工作中分析排查 ZooKeeper 产生的相关问题以及提高 ZooKeeper 服务器的稳定性或性能都有很大的帮助。</p>
 <p>通过本课时的学习我们知道了 ZooKeeper 服务单机版启动的关键步骤，下面我们来思考这个问题：在我们启动单机版服务器的时候，如果 ZooKeeper 服务通过 zoo.cfg 配置文件的相关参数，利用 FileTxnSnapLog 类来实现相关数据的本地化存储。那么我们在日常的开发维护中，如何才能知道当前存储 ZooKeeper 相关数据的磁盘容量应该设置多大的空间才能满足当前业务的发展？如何才能尽量减少磁盘空间的浪费？</p>

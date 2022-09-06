@@ -170,10 +170,10 @@ function hide_canvas() {
 <p>同样，在 02 讲中我们也已经看到过上述代码，这是 Spring Security 中作用于访问授权的默认实现方法。</p>
 <h4>基于权限进行访问控制</h4>
 <p>我们先来回顾一下 03 讲“账户体系：如何深入理解 Spring Security 的认证机制？”中介绍的用户对象以及它们之间的关联关系：</p>
-<p><img src="assets/Cgp9HWC99kyAPov7AABo-HUo8Yw816.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cgp9HWC99kyAPov7AABo-HUo8Yw816.png" alt="png" /></p>
 <p>Spring Security 中的核心用户对象</p>
 <p>上图中的 GrantedAuthority 对象代表的就是一种权限对象，而一个 UserDetails 对象具备一个或多个 GrantedAuthority 对象。通过这种关联关系，实际上我们就可以对用户的权限做一些限制，如下所示：</p>
-<p><img src="assets/Cgp9HWC99lqANmBNAACOAwFM9XI522.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWC99lqANmBNAACOAwFM9XI522.png" alt="png" /></p>
 <p>使用权限实现访问控制示意图</p>
 <p>如果用代码来表示这种关联关系，可以采用如下所示的实现方法：</p>
 <pre><code>UserDetails user = User.withUsername(&quot;jianxiang&quot;)
@@ -208,7 +208,7 @@ http.authorizeRequests().anyRequest().access(expression);
 <p>上述代码的效果是只有拥有“CREATE”权限且不拥有“Retrieve”权限的用户才能进行访问。</p>
 <h4>基于角色进行访问控制</h4>
 <p>讨论完权限，我们再来看角色，你可以把<strong>角色看成是拥有多个权限的一种数据载体</strong>，如下图所示，这里我们分别定义了两个不同的角色“User”和“Admin”，它们拥有不同的权限：</p>
-<p><img src="assets/Cgp9HWC99muADJAVAACViruybHQ086.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Cgp9HWC99muADJAVAACViruybHQ086.png" alt="png" /></p>
 <p>使用角色实现访问控制示意图</p>
 <p>讲到这里，你可能会认为 Spring Security 应该提供了一个独立的数据结构来承载角色的含义。但事实上，在 Spring Security 中，并没有定义类似“GrantedRole”这种专门用来定义用户角色的对象，而是<strong>复用了 GrantedAuthority 对象</strong>。事实上，以“ROLE_”为前缀的 GrantedAuthority 就代表了一种角色，因此我们可以使用如下方式初始化用户的角色：</p>
 <pre><code>UserDetails user = User.withUsername(&quot;jianxiang&quot;)
@@ -395,7 +395,7 @@ UserDetails user2 = User.withUsername(&quot;jianxiang2&quot;)
 <h3>小结与预告</h3>
 <p>这一讲我们关注的是对请求访问进行授权，而这个过程需要明确 Spring Security 中的用户、权限和角色之间的关联关系。一旦我们对某个用户设置了对应的权限和角色，那么就可以通过各种配置方法来有效控制访问权限。为此，Spring Security 也提供了 MVC 匹配器、Ant 匹配器以及正则表达式匹配器来实现复杂的访问控制。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWC99pCADnIuAAB0dOuXd6o323.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWC99pCADnIuAAB0dOuXd6o323.png" alt="png" /></p>
 <p>最后我想给你留一道思考题：在 Spring Security 中，你知道用户角色与用户权限之间有什么区别和联系吗？欢迎你在留言区和我分享自己的观点。</p>
 </div>
                     </div>

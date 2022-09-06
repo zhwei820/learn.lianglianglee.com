@@ -251,7 +251,7 @@ function hide_canvas() {
 <p>为了弄清楚高并发网络场景是如何处理的，我们先来看一个最基本的内容：<strong>当数据到达网卡之后，操作系统会做哪些事情</strong>？</p>
 <p>网络数据到达网卡之后，首先需要把数据拷贝到内存。拷贝到内存的工作往往不需要消耗 CPU 资源，而是通过 DMA 模块直接进行内存映射。之所以这样做，是因为网卡没有大量的内存空间，只能做简单的缓冲，所以必须赶紧将它们保存下来。</p>
 <p>Linux 中用一个双向链表作为缓冲区，你可以观察下图中的 Buffer，看上去像一个有很多个凹槽的线性结构，每个凹槽（节点）可以存储一个封包，这个封包可以从网络层看（IP 封包），也可以从传输层看（TCP 封包）。操作系统不断地从 Buffer 中取出数据，数据通过一个协议栈，你可以把它理解成很多个协议的集合。协议栈中数据封包找到对应的协议程序处理完之后，就会形成 Socket 文件。</p>
-<p><img src="assets/Cip5yGABb8uAECMGAAERrnFoSrI090.png" alt="1111.png" />!</p>
+<p><img src="assets/Cip5yGABb8uAECMGAAERrnFoSrI090.png" alt="png" />!</p>
 <p>如果高并发的请求量级实在太大，有可能把 Buffer 占满，此时，操作系统就会拒绝服务。网络上有一种著名的攻击叫作<strong>拒绝服务攻击</strong>，就是利用的这个原理。<strong>操作系统拒绝服务，实际上是一种保护策略。通过拒绝服务，避免系统内部应用因为并发量太大而雪崩</strong>。</p>
 <p>如上图所示，传入网卡的数据被我称为 Frames。一个 Frame 是数据链路层的传输单位（或封包）。现代的网卡通常使用 DMA 技术，将 Frame 写入缓冲区（Buffer），然后在触发 CPU 中断交给操作系统处理。操作系统从缓冲区中不断取出 Frame，通过协进栈（具体的协议）进行还原。</p>
 <p>在 UNIX 系的操作系统中，一个 Socket 文件内部类似一个双向的管道。因此，非常适用于进程间通信。在网络当中，本质上并没有发生变化。网络中的 Socket 一端连接 Buffer， 一端连接应用——也就是进程。网卡的数据会进入 Buffer，Buffer 经过协议栈的处理形成 Socket 结构。通过这样的设计，进程读取 Socket 文件，可以从 Buffer 中对应节点读走数据。</p>
@@ -259,19 +259,19 @@ function hide_canvas() {
 <p>以上就是我们对操作系统和网络接口交互的一个基本讨论。接下来，我们讨论一下作为一个编程模型的 Socket。</p>
 <h3>Socket 编程模型</h3>
 <p>通过前面讲述，我们知道 Socket 在操作系统中，有一个非常具体的从 Buffer 到文件的实现。但是对于进程而言，Socket 更多是一种编程的模型。接下来我们讨论作为编程模型的 Socket。</p>
-<p><img src="assets/Ciqc1GABP3OAHezqAABndlGAu9c457.png" alt="Lark20210115-150702.png" /></p>
+<p><img src="assets/Ciqc1GABP3OAHezqAABndlGAu9c457.png" alt="png" /></p>
 <p>如上图所示，Socket 连接了应用和协议，如果应用层的程序想要传输数据，就创建一个 Socket。应用向 Socket 中写入数据，相当于将数据发送给了另一个应用。应用从 Socket 中读取数据，相当于接收另一个应用发送的数据。而具体的操作就是由 Socket 进行封装。具体来说，<strong>对于 UNIX 系的操作系统，是利用 Socket 文件系统，Socket 是一种特殊的文件——每个都是一个双向的管道。一端是应用，一端是缓冲</strong>区。</p>
 <p>那么作为一个服务端的应用，如何知道有哪些 Socket 呢？也就是，哪些客户端连接过来了呢？这是就需要一种特殊类型的 Socket，也就是服务端 Socket 文件。</p>
-<p><img src="assets/Ciqc1GABP3qADKbBAAB564sk120429.png" alt="Lark20210115-150706.png" /></p>
+<p><img src="assets/Ciqc1GABP3qADKbBAAB564sk120429.png" alt="png" /></p>
 <p>如上图所示，当有客户端连接服务端时，服务端 Socket 文件中会写入这个客户端 Socket 的文件描述符。进程可以通过 accept() 方法，从服务端 Socket 文件中读出客户端的 Socket 文件描述符，从而拿到客户端的 Socket 文件。</p>
 <p>程序员实现一个网络服务器的时候，会先手动去创建一个服务端 Socket 文件。服务端的 Socket 文件依然会存在操作系统内核之中，并且会绑定到某个 IP 地址和端口上。以后凡是发送到这台机器、目标 IP 地址和端口号的连接请求，在形成了客户端 Socket 文件之后，文件的文件描述符都会被写入到服务端的 Socket 文件中。应用只要调用 accept 方法，就可以拿到这些客户端的 Socket 文件描述符，这样服务端的应用就可以方便地知道有哪些客户端连接了进来。</p>
 <p>而每个客户端对这个应用而言，都是一个文件描述符。如果需要读取某个客户端的数据，就读取这个客户端对应的 Socket 文件。如果要向某个特定的客户端发送数据，就写入这个客户端的 Socket 文件。</p>
 <p>以上就是 Socket 的编程模型。</p>
 <h3>I/O 多路复用</h3>
 <p>在上面的讨论当中，进程拿到了它关注的所有 Socket，也称作关注的集合（Intersting Set）。如下图所示，这种过程相当于进程从所有的 Socket 中，筛选出了自己关注的一个子集，但是这时还有一个问题没有解决：<strong>进程如何监听关注集合的状态变化，比如说在有数据进来，如何通知到这个进程</strong>？</p>
-<p><img src="assets/Ciqc1GABP4OAdKBcAACAbVkbI0g191.png" alt="Lark20210115-150708.png" /></p>
+<p><img src="assets/Ciqc1GABP4OAdKBcAACAbVkbI0g191.png" alt="png" /></p>
 <p>其实更准确地说，一个线程需要处理所有关注的 Socket 产生的变化，或者说消息。实际上一个线程要处理很多个文件的 I/O。<strong>所有关注的 Socket 状态发生了变化，都由一个线程去处理，构成了 I/O 的多路复用问题</strong>。如下图所示：</p>
-<p><img src="assets/Ciqc1GABP4uAW8-dAAB_SubmZ4Q301.png" alt="Lark20210115-150711.png" /></p>
+<p><img src="assets/Ciqc1GABP4uAW8-dAAB_SubmZ4Q301.png" alt="png" /></p>
 <p>处理 I/O 多路复用的问题，需要操作系统提供内核级别的支持。Linux 下有三种提供 I/O 多路复用的 API，分别是：</p>
 <ul>
 <li>select</li>
@@ -279,7 +279,7 @@ function hide_canvas() {
 <li>epoll</li>
 </ul>
 <p>如下图所示，内核了解网络的状态。因此不难知道具体发生了什么消息，比如内核知道某个 Socket 文件状态发生了变化。但是内核如何知道该把哪个消息给哪个进程呢？</p>
-<p><img src="assets/Ciqc1GABP5KAVSWVAAFSurtl2bU931.png" alt="Lark20210115-150654.png" /></p>
+<p><img src="assets/Ciqc1GABP5KAVSWVAAFSurtl2bU931.png" alt="png" /></p>
 <p><strong>一个 Socket 文件，可以由多个进程使用；而一个进程，也可以使用多个 Socket 文件</strong>。进程和 Socket 之间是多对多的关系。<strong>另一方面，一个 Socket 也会有不同的事件类型</strong>。因此操作系统很难判断，将哪样的事件给哪个进程。</p>
 <p>这样<strong>在进程内部就需要一个数据结构来描述自己会关注哪些 Socket 文件的哪些事件（读、写、异常等</strong>）。通常有两种考虑方向，<strong>一种是利用线性结构</strong>，比如说数组、链表等，这类结构的查询需要遍历。每次内核产生一种消息，就遍历这个线性结构。看看这个消息是不是进程关注的？<strong>另一种是索引结构</strong>，内核发生了消息可以通过索引结构马上知道这个消息进程关不关注。</p>
 <h4>select()</h4>

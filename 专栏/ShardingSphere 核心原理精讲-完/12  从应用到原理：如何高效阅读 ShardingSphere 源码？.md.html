@@ -202,15 +202,15 @@ function hide_canvas() {
 <p>从本课时开始，专栏将进入：“ShardingSphere 源码解析之基础设施”的模块。在介绍完 ShardingSphere 所具备的分库分表、读写分离、分布式事务、数据脱敏等各项核心功能之后，我将带领你全面剖析这些核心功能背后的实现原理和机制。我们将通过深入解析 ShardingSphere 源码这一途径来实现这一目标。</p>
 <h3>如何系统剖析 ShardingSphere 的代码结构？</h3>
 <p>在阅读开源框架时，我们碰到的一大问题在于，<strong>常常会不由自主地陷入代码的细节而无法把握框架代码的整体结构</strong>。市面上主流的、被大家所熟知而广泛应用的代码框架肯定考虑得非常周全，其代码结构不可避免存在一定的复杂性。对 ShardingSphere 而言，情况也是一样，我们发现 ShardingSphere 源码的一级代码结构目录就有 15 个，而这些目录内部包含的具体 Maven 工程则多达 50 余个：</p>
-<p><img src="assets/CgqCHl8ZTt2ASVxWAAAShIkwDl8738.png" alt="Drawing 0.png" />
+<p><img src="assets/CgqCHl8ZTt2ASVxWAAAShIkwDl8738.png" alt="png" />
 ShardingSphere 源码一级代码结构目录</p>
 <p><strong>如何快速把握 ShardingSphere 的代码结构呢？这是我们剖析源码时需要回答的第一个问题</strong>，为此我们需要梳理剖析 ShardingSphere 框架代码结构的系统方法。</p>
 <p>本课时我们将对如何系统剖析 ShardingSphere 代码结构这一话题进行抽象，梳理出应对这一问题的六大系统方法（如下图）：</p>
-<p><img src="assets/CgqCHl8ZTuuACx6KAACdjxhg0lw729.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl8ZTuuACx6KAACdjxhg0lw729.png" alt="png" /></p>
 <p>接下来，我们将结合 ShardingSphere 框架对这些方法进行展开。</p>
 <h4>基于可扩展性设计阅读源码</h4>
 <p>ShardingSphere 在设计上采用了微内核架构模式来确保系统具有高度的可扩展性，并使用了 JDK 提供的 SPI 机制来具体实现微内核架构。在 ShardingSphere 源代码的根目录下，存在一个独立工程 shardingsphere-spi。显然，从命名上看，这个工程中应该包含了 ShardingSphere 实现 SPI 的相关代码。该工程中存在一个 TypeBasedSPI 接口，它的类层结构比较丰富，课程后面将要讲到的很多核心接口都继承了该接口，包括实现配置中心的 ConfigCenter、注册中心的 RegistryCenter 等，如下所示：</p>
-<p><img src="assets/CgqCHl8ZTvyAET3QAABeRzWl3zI113.png" alt="Drawing 3.png" />
+<p><img src="assets/CgqCHl8ZTvyAET3QAABeRzWl3zI113.png" alt="png" />
 ShardingSphere 中 TypeBasedSPI 接口的类层结构</p>
 <p>这些接口的实现都遵循了 JDK 提供的 SPI 机制。在我们阅读 ShardingSphere 的各个代码工程时，<strong>一旦发现在代码工程中的 META-INF/services 目录里创建了一个以服务接口命名的文件，就说明这个代码工程中包含了用于实现扩展性的 SPI 定义</strong>。</p>
 <p>在 ShardingSphere 中，大量使用了微内核架构和 SPI 机制实现系统的扩展性。只要掌握了微内核架构的基本原理以及 SPI 的实现方式就会发现，原来在 ShardingSphere 中，很多代码结构上的组织方式就是为了满足这些扩展性的需求。ShardingSphere 中实现微内核架构的方式就是直接对 JDK 的 ServiceLoader 类进行一层简单的封装，并添加属性设置等自定义的功能，其本身并没有太多复杂的内容。</p>
@@ -219,7 +219,7 @@ ShardingSphere 中 TypeBasedSPI 接口的类层结构</p>
 <p>分包（Package）设计原则可以用来设计和规划开源框架的代码结构。<strong>对于一个包结构而言，最核心的设计要点就是高内聚和低耦合</strong>。我们刚开始阅读某个框架的源码时，为了避免过多地扎进细节而只关注某一个具体组件，同样可以使用这些原则来管理我们的学习预期。</p>
 <p>以 ShardingSphere 为例，我们在分析它的路由引擎时发现了两个代码工程，一个是 sharding-core-route，一个是 sharding-core-entry。从代码结构上讲，尽管这两个代码工程都不是直接面向业务开发人员，但 sharding-core-route 属于路由引擎的底层组件，包含了路由引擎的核心类 ShardingRouter。</p>
 <p>而 sharding-core-entry 则位于更高的层次，提供了 PreparedQueryShardingEngine 和 SimpleQueryShardingEngine 类，分包结构如下所示：</p>
-<p><img src="assets/Ciqc1F8ZTxWAcdkRAACUdiRq_TI476.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F8ZTxWAcdkRAACUdiRq_TI476.png" alt="png" /></p>
 <p>图中我们可以看到两个清晰的代码结构层次关系，这是 ShardingSphere 中普遍采用的分包原则中，具有代表性的一种，即根据类的所属层级来组织包结构。</p>
 <h4>基于基础开发规范阅读源码</h4>
 <p>对于 ShardingSphere 而言，在梳理它的代码结构时有一个非常好的切入点，那就是基于 JDBC 规范。我们知道 ShardingSphere 在设计上一开始就完全兼容 JDBC 规范，它对外暴露的一套分片操作接口与 JDBC 规范中所提供的接口完全一致。只要掌握了 JDBC 中关于 DataSource、Connection、Statement 等核心接口的使用方式，就可以非常容易地把握 ShardingSphere 中暴露给开发人员的代码入口，进而把握整个框架的代码结构。</p>
@@ -234,13 +234,13 @@ ShardingSphere 中 TypeBasedSPI 接口的类层结构</p>
 </code></pre>
 <p>通过这个工厂类，我们很容易就找到了创建支持分片机制的 DataSource 入口，从而引出其背后的 ShardingConnection、ShardingStatement 等类。</p>
 <p>事实上，在 ShardingSphere 中存在一批 DataSourceFactory 工厂类以及对应的 DataSource 类：</p>
-<p><img src="assets/Ciqc1F8ZTyqAEYJUAACZMuFSODk999.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8ZTyqAEYJUAACZMuFSODk999.png" alt="png" /></p>
 <p>在阅读 ShardingSphere 源码时，JDBC 规范所提供的核心接口及其实现类，为我们高效梳理代码入口和组织方式提供了一种途径。</p>
 <h4>基于核心执行流程阅读源码</h4>
 <p>事实上，还有一个比较容易理解和把握的方法可以帮我们梳理代码结构，这就是代码的执行流程。任何系统行为都可以认为是流程的组合。通过分析，看似复杂的代码结构一般都能梳理出一条贯穿全局的主流程。只要我们抓住这条主流程，就能把握框架的整体代码结构。</p>
 <p>那么，对于 ShardingSphere 框架而言，什么才是它的主流程呢？这个问题其实不难回答。事实上，JDBC 规范为我们实现数据存储和访问提供了基本的开发流程。我们可以从 DataSource 入手，逐步引入 Connection、Statement 等对象，并完成 SQL 执行的主流程。这是从框架提供的核心功能角度梳理的一种主流程。</p>
 <p>对于框架内部的代码组织结构而言，实际上也存在着核心流程的概念。最典型的就是 ShardingSphere 的分片引擎结构，整个分片引擎执行流程可以非常清晰的分成五个组成部分，<strong>分别是解析引擎、路由引擎、改写引擎、执行引擎和归并引擎</strong>：</p>
-<p><img src="assets/Ciqc1F8ZTzuASMVSAACEHFtHTxA442.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F8ZTzuASMVSAACEHFtHTxA442.png" alt="png" /></p>
 <p>ShardingSphere 对每个引擎都进行了明确地命名，在代码工程的组织结构上也做了对应的约定，例如 sharding-core-route 工程用于实现路由引擎；sharding-core-execute 工程用于实现执行引擎；sharding-core-merge 工程用于实现归并引擎等。这是从框架内部实现机制角度梳理的一种主流程。</p>
 <p>在软件建模领域，可以通过一些工具和手段对代码执行流程进行可视化，例如 UML 中的活动图和时序图。在后续的课时中，我们会基于这些工具帮你梳理 ShardingSphere 中很多有待挖掘的代码执行流程。</p>
 <h4>基于框架演进过程阅读源码</h4>
@@ -265,13 +265,13 @@ ShardingSphere 中 TypeBasedSPI 接口的类层结构</p>
 </code></pre>
 <p>注意，这里基于装饰器模式实现了两个 SQLRewriteContextDecorator，一个是 ShardingSQLRewriteContextDecorator，另一个是 EncryptSQLRewriteContextDecorator，而后者是在前者的基础上完成装饰工作。也就是说，我们首先可以单独使用 ShardingSQLRewriteContextDecorator 来完成对 SQL 的改写操作。</p>
 <p>随着架构的演进，我们也可以在原有 EncryptSQLRewriteContextDecorator 的基础上添加新的面向数据脱敏的功能，这就体现了一种架构演进的过程。通过阅读这两个装饰器类，以及 SQL 改写上下文对象 SQLRewriteContext，我们就能更好地把握代码的设计思想和实现原理：</p>
-<p><img src="assets/Ciqc1F8ZT32ASVKBAACFTeG0vcw337.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/Ciqc1F8ZT32ASVKBAACFTeG0vcw337.png" alt="png" /></p>
 <p>关于数据脱敏以及装饰器模式的具体实现细节我们会在《数据脱敏：如何基于改写引擎实现低侵入性数据脱敏方案？》中进行详细展开。</p>
 <h4>基于通用外部组件阅读源码</h4>
 <p>在《开篇寄语：如何正确学习一款分库分表开源框架？》中，我们提出了一种观点，即<strong>技术原理存在相通性</strong>。这点同样可以帮助我们更好地阅读 ShardingSphere 源码。</p>
 <p>在 ShardingSphere 中集成了一批优秀的开源框架，包括用于实现配置中心和注册中心的Zookeeper、Apollo、Nacos，用于实现链路跟踪的 SkyWalking，用于实现分布式事务的 Atomikos 和 Seata 等。</p>
 <p>我们先以分布式事务为例，ShardingSphere 提供了一个 sharding-transaction-core 代码工程，用于完成对分布式事务的抽象。然后又针对基于两阶段提交的场景，提供了 sharding-transaction-2pc 代码工程，以及针对柔性事务提供了 sharding-transaction-base 代码工程。而在 sharding-transaction-2pc 代码工程内部，又包含了如下所示的 5 个子代码工程。</p>
-<p><img src="assets/CgqCHl8ZT5KASWyUAAAJVU7jHKk131.png" alt="Drawing 12.png" />
+<p><img src="assets/CgqCHl8ZT5KASWyUAAAJVU7jHKk131.png" alt="png" />
 sharding-transaction-2pc 代码工程下的子工程</p>
 <p>在翻阅这些代码工程时，会发现每个工程中的类都很少，原因就在于，<strong>这些类都只是完成与第三方框架的集成而已</strong>。所以，只要我们对这些第三方框架有一定了解，阅读这部分代码就会显得非常简单。</p>
 <p>再举一个例子，我们知道 ZooKeeper 可以同时用来实现配置中心和注册中心。作为一款主流的分布式协调框架，基本的工作原理就是采用了它所提供的临时节点以及监听机制。基于 ZooKeeper 的这一原理，我们可以把当前 ShardingSphere 所使用的各个 DataSource 注册到 ZooKeeper 中，并根据 DataSource 的运行时状态来动态对数据库实例进行治理，以及实现访问熔断机制。<strong>事实上，ShardingSphere 能做到这一点，依赖的就是 ZooKeeper 所提供的基础功能</strong>。只要我们掌握了这些功能，理解这块代码就不会很困难，而 ShardingSphere 本身并没有使用 ZooKeeper 中任何复杂的功能。</p>

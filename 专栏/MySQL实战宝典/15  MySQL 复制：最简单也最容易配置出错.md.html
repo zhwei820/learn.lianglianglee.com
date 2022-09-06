@@ -189,14 +189,14 @@ WHERE o_orderdate = '1997-12-31';
 Query OK, 2482 rows affected (0.07 sec)
 </code></pre>
 <p>可以看到，上面这条 SQL 执行的是删除操作，一共删除了有 2482 行记录。可以在 mysql 命令行下使用命令 SHOW BINLOG EVENTS 查看某个二进制日志文件的内容，比如上述删除操作发生在二进制日志文件 binlog.000004 中，你可以看到：</p>
-<p><img src="assets/CioPOWDDJ7-ALugWAAFVUvkR12A461.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWDDJ7-ALugWAAFVUvkR12A461.png" alt="png" /></p>
 <p>通过 MySQL 数据库自带的命令 mysqlbinlog，可以解析二进制日志，观察到更为详细的每条记录的信息，比如：</p>
-<p><img src="assets/Cgp9HWDDJ8SAdkn3AAHCe2DoWIw720.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Cgp9HWDDJ8SAdkn3AAHCe2DoWIw720.png" alt="png" /></p>
 <p>从图中，你可以通过二进制日志记录看到被删除记录的完整信息，还有每个列的属性，比如列的类型，是否允许为 NULL 值等。</p>
 <p>如果是 UPDATE 操作，二进制日志中还记录了被修改记录完整的前项和后项，比如：</p>
-<p><img src="assets/CioPOWDDJ8qAUjIpAAIxj14V0cE562.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWDDJ8qAUjIpAAIxj14V0cE562.png" alt="png" /></p>
 <p>在有二进制日志的基础上，MySQL 数据库就可以通过数据复制技术实现数据同步了。而数据复制的本质就是把一台 MySQL 数据库上的变更同步到另一台 MySQL 数据库上。<strong>下面这张图显示了当前 MySQL 数据库的复制架构</strong>：</p>
-<p><img src="assets/CioPOWDDJ8-ALENTAADSwBdKoIk997.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CioPOWDDJ8-ALENTAADSwBdKoIk997.png" alt="png" /></p>
 <p>可以看到，在 MySQL 复制中，一台是数据库的角色是 Master（也叫 Primary），剩下的服务器角色是 Slave（也叫 Standby）：</p>
 <ul>
 <li>Master 服务器会把数据变更产生的二进制日志通过 Dump 线程发送给 Slave 服务器；</li>
@@ -204,7 +204,7 @@ Query OK, 2482 rows affected (0.07 sec)
 <li>SQL/Worker 线程负责并行执行中继日志，即在 Slave 服务器上回放 Master 产生的日志。</li>
 </ul>
 <p>得益于二进制日志，MySQL 的复制相比其他数据库，如 Oracle、PostgreSQL 等，非常灵活，用户可以根据自己的需要构建所需要的复制拓扑结构，比如：</p>
-<p><img src="assets/Cgp9HWDDJ9WAajowAABzC8-hoJA062.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Cgp9HWDDJ9WAajowAABzC8-hoJA062.png" alt="png" /></p>
 <p>在上图中，Slave1、Slave2、Slave3 都是 Master 的从服务器，而 Slave11 是 Slave1 的从服务器，Slave1 服务器既是 Master 的从机，又是 Slave11 的主机，所以 Slave1 是个级联的从机。同理，Slave3 也是台级联的从机。</p>
 <p>在了解完复制的基本概念后，我们继续看如何配置 MySQL 的复制吧。</p>
 <h3>MySQL 复制配置</h3>
@@ -228,7 +228,7 @@ relay_log_info_repository = TABLE
 <p>了解完复制的配置后，我们接下来看一下 MySQL 支持的复制类型。</p>
 <h3>MySQL复制类型及应用选项</h3>
 <p>MySQL 复制可以分为以下几种类型：</p>
-<p><img src="assets/CioPOWDDJ_aAMeY1AABfASRi428523.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CioPOWDDJ_aAMeY1AABfASRi428523.png" alt="png" /></p>
 <p>默认的复制是异步复制，而很多新同学因为不了解 MySQL 除了异步复制还有其他复制的类型，所以错误地在业务中使用了异步复制。为了解决这个问题，我们一起详细了解一下每种复制类型，以及它们在业务中的选型，方便你在业务做正确的选型。</p>
 <h4>异步复制</h4>
 <p>在异步复制（async replication）中，Master 不用关心 Slave 是否接收到二进制日志，所以 Master 与 Slave 没有任何的依赖关系。你可以认为 Master 和 Slave 是分别独自工作的两台服务器，数据最终会通过二进制日志达到一致。</p>
@@ -250,17 +250,17 @@ rpl_semi_sync_master_wait_no_slave = 1
 </ul>
 <p>在半同步复制中，有损半同步复制是 MySQL 5.7 版本前的半同步复制机制，这种半同步复制在Master 发生宕机时，<strong>Slave 会丢失最后一批提交的数据</strong>，若这时 Slave 提升（Failover）为Master，可能会发生已经提交的事情不见了，发生了回滚的情况。</p>
 <p>有损半同步复制原理如下图所示：</p>
-<p><img src="assets/Cgp9HWDDKAWAS2YNAACrlAHSwSA608.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Cgp9HWDDKAWAS2YNAACrlAHSwSA608.png" alt="png" /></p>
 <p>可以看到，有损半同步是在 Master 事务提交后，即步骤 4 后，等待 Slave 返回 ACK，表示至少有 Slave 接收到了二进制日志，如果这时二进制日志还未发送到 Slave，Master 就发生宕机，则此时 Slave 就会丢失 Master 已经提交的数据。</p>
 <p>而 MySQL 5.7 的无损半同步复制解决了这个问题，其原理如下图所示：</p>
-<p><img src="assets/CioPOWDDKAqAHHU9AADAKTzSR4Y264.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CioPOWDDKAqAHHU9AADAKTzSR4Y264.png" alt="png" /></p>
 <p>从上图可以看到，无损半同步复制 WAIT ACK 发生在事务提交之前，这样即便 Slave 没有收到二进制日志，但是 Master 宕机了，由于最后一个事务还没有提交，所以本身这个数据对外也不可见，不存在丢失的问题。</p>
 <p>所以，对于任何有数据一致性要求的业务，如电商的核心订单业务、银行、保险、证券等与资金密切相关的业务，务必使用无损半同步复制。这样数据才是安全的、有保障的、即使发生宕机，从机也有一份完整的数据。</p>
 <h4>多源复制</h4>
 <p>无论是异步复制还是半同步复制，都是 1 个 Master 对应 N 个 Slave。其实 MySQL 也支持 N 个 Master 对应 1 个 Slave，这种架构就称之为多源复制。</p>
 <p>多源复制允许在不同 MySQL 实例上的数据同步到 1 台 MySQL 实例上，方便在 1 台 Slave 服务器上进行一些统计查询，如常见的 OLAP 业务查询。</p>
 <p>多源复制的架构如下所示：</p>
-<p><img src="assets/Cgp9HWDDKBSAa76pAACAyeJ3YuE843.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Cgp9HWDDKBSAa76pAACAyeJ3YuE843.png" alt="png" /></p>
 <p>上图显示了订单库、库存库、供应商库，通过多源复制同步到了一台 MySQL 实例上，接着就可以通过 MySQL 8.0 提供的复杂 SQL 能力，对业务进行深度的数据分析和挖掘。</p>
 <h4>延迟复制</h4>
 <p>前面介绍的复制架构，Slave 在接收二进制日志后会尽可能快地回放日志，这样是为了避免主从之间出现延迟。而延迟复制却允许Slave 延迟回放接收到的二进制日志，为了避免主服务器上的误操作，马上又同步到了从服务器，导致数据完全丢失。</p>

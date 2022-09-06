@@ -210,7 +210,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>可以看到 ShardingStrategy 包含两个核心方法：一个用于指定分片的 Column，而另一个负责执行分片并返回目标 DataSource 和 Table。ShardingSphere 中为我们提供了一系列的分片策略实例，类层结构如下所示：</p>
-<p><img src="assets/Ciqc1F86ZlmARCBiAAEMHwjkZPk259.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F86ZlmARCBiAAEMHwjkZPk259.png" alt="png" /></p>
 <p>ShardingStrategy 实现类图</p>
 <p>如果我们翻阅这些具体 ShardingStrategy 实现类的代码，会发现每个 ShardingStrategy 中都会包含另一个与路由相关的核心概念，即<strong>分片算法 ShardingAlgorithm</strong>，我们发现 ShardingAlgorithm 是一个空接口，但包含了<strong>四个继承接口</strong>，即</p>
 <ul>
@@ -220,10 +220,10 @@ function hide_canvas() {
 <li>HintShardingAlgorithm</li>
 </ul>
 <p>而这四个接口又分别具有一批实现类，ShardingAlgorithm 的类层结构如下所示：</p>
-<p><img src="assets/Ciqc1F86ZmSAaVqsAACWpLDZQm8610.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F86ZmSAaVqsAACWpLDZQm8610.png" alt="png" /></p>
 <p>ShardingAlgorithm 子接口和实现类图</p>
 <p>请注意，ShardingStrategy 与 ShardingAlgorithm 之间并不是一对一的关系。<strong>在一个 ShardingStrategy 中，可以同时使用多个 ShardingAlgorithm 来完成具体的路由执行策略</strong>。因此，我们具有如下所示的类层结构关系图：</p>
-<p><img src="assets/Ciqc1F86Zm-AE3bOAACLylkVuks873.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F86Zm-AE3bOAACLylkVuks873.png" alt="png" /></p>
 <p>由于分片算法的独立性，ShardingSphere 将其进行单独抽离。从关系上讲，分片策略中包含了分片算法和分片键，我们可以把分片策略的组成结构简单抽象成如下所示的公式：</p>
 <p><strong>分片策略 = 分片算法 + 分片键</strong></p>
 <h3>ShardingSphere 分片策略详解</h3>
@@ -443,10 +443,10 @@ private final Closure&lt;?&gt; closure;
 }
 </code></pre>
 <p>最后，作为总结，我们要注意所有的 ShardingStrategy 相关类都位于 sharding-core-common 工程的 org.apache.shardingsphere.core.strategy 包下：</p>
-<p><img src="assets/CgqCHl86Zp-AOn75AAII97S_QVE429.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl86Zp-AOn75AAII97S_QVE429.png" alt="png" /></p>
 <p>ShardingStrategy 相关类的包结构</p>
 <p>而所有的 ShardingAlgorithm 相关类则位于 sharding-core-api 工程的 org.apache.shardingsphere.api.sharding 包下：</p>
-<p><img src="assets/CgqCHl86ZqeAEn76AAGjHlgYljM135.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl86ZqeAEn76AAGjHlgYljM135.png" alt="png" /></p>
 <p>ShardingAlgorithm 相关类的包结构</p>
 <p>我们在前面已经提到过 ShardingStrategy 的创建依赖于 ShardingStrategyConfiguration，ShardingSphere 也提供了一个 ShardingStrategyFactory 工厂类用于创建各种具体的 ShardingStrategy：</p>
 <pre><code>public final class ShardingStrategyFactory {
@@ -468,17 +468,17 @@ private final Closure&lt;?&gt; closure;
 }
 </code></pre>
 <p>而这里用到的各种 ShardingStrategyConfiguration 也都位于 sharding-core-api 工程的org.apache.shardingsphere.api.sharding.strategy 包下：</p>
-<p><img src="assets/CgqCHl86ZrGAJLi5AADslitwfjk537.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CgqCHl86ZrGAJLi5AADslitwfjk537.png" alt="png" /></p>
 <p>ShardingStrategyConfiguration 相关类的包结构</p>
 <p>这样，通过对路由引擎的介绍，我们又接触到了一大批 ShardingSphere 中的源代码。</p>
 <p>至此，关于 ShardingSphere 路由引擎部分的内容基本都介绍完毕。作为总结，我们在《17 | 路由引擎：如何理解分片路由核心类 ShardingRouter 的运作机制？》中所给出的时序图中添加了 ShardingStrategy 和 ShardingAlgorithm 部分的内容，如下所示：</p>
-<p><img src="assets/CgqCHl86ZrmAcGiLAADURjzyD4w363.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl86ZrmAcGiLAADURjzyD4w363.png" alt="png" /></p>
 <h3>从源码解析到日常开发</h3>
 <p>在我们设计软件系统的过程中，面对复杂业务场景时，<strong>职责分离</strong>始终是需要考虑的一个设计点。ShardingSphere 对于分片策略的设计和实现很好地印证了这一观点。</p>
 <p>分片策略在 ShardingSphere 中实际上是一个比较复杂的概念，但通过将分片的具体算法分离出去并提炼 ShardingAlgorithm 接口，并构建 ShardingStrategy 和 ShardingAlgorithm 之间一对多的灵活关联关系，我们可以更好地把握整个分片策略体系的类层结构，这种职责分离机制同样可以应用与日常开发过程中。</p>
 <h3>小结与预告</h3>
 <p>承接上一课时的内容，今天我们全面介绍了 ShardingSphere 中的五大分片策略和四种分片算法以及它们之间的组合关系。</p>
-<p><img src="assets/CgqCHl86ZsaAQx7cAABspIBuz1Y073.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl86ZsaAQx7cAABspIBuz1Y073.png" alt="png" /></p>
 <p>ShardingSphere 路由引擎中执行路由的过程正是依赖于这些分片策略和分片算法的功能特性。当然，作为一款具有高扩展性的开源框架，我们也可以基于自身的业务需求，实现特定的分片算法并嵌入到具体的分片策略中。</p>
 <p>这里给你留一道思考题：ShardingSphere 中分片策略与分片算法之间是如何协作的？ 欢迎你在留言区与大家讨论，我将一一点评解答。</p>
 <p>在路由引擎的基础上，下一课时将进入 ShardingSphere 分片引擎的另一个核心阶段，即改写引擎。</p>

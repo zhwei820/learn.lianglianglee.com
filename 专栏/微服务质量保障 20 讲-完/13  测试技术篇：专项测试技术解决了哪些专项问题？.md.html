@@ -169,7 +169,7 @@ function hide_canvas() {
 <p>对于微服务架构来说，非功能测试有很多，常见的有如下几类。</p>
 <h4>如何找出系统性能瓶颈？——全链路压力测试</h4>
 <p>对于服务端来说，性能测试尤为重要。通常情况下，会通过单接口性能测试来发现其性能问题并优化解决。常见的工具有 Apache Benchmark、Jmeter、LoadRunner 等。微服务架构下，单接口性能测试很难模拟出接近生产环境的场景和数据规模，因为**整个集群和系统的性能取决于接口的短板效应（如图短板效应）。**而短板的接口，在正常的流量下，是不会显现出来的。</p>
-<p><img src="assets/Ciqc1F9HhYKAbfm5AAH1tS8KaYw978.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9HhYKAbfm5AAH1tS8KaYw978.png" alt="png" /></p>
 <p>短板效应</p>
 <p>微服务架构下，系统及接口不是独立存在的，它们的相互调用关系复杂。当业务流量暴涨时，从网关接入层到各级后端服务都将面临巨大的请求压力，而且还受到公共资源的制约，如 CDN、网络带宽、消息队列、缓存、各类中间件、数据存储等，最终会体现为某个服务的处理能力出现瓶颈，引发宕机。当某个单点服务出现性能问题时，这种问题会快速累积放大，进而成为系统性问题，如果不及时解决，会造成雪崩效应，进一步引发整个系统集群的瘫痪。</p>
 <p>这样的情况下，可以引入全链路压测，它是基于生产环境的业务场景、系统环境，模拟海量的用户请求和数据对整个业务链进行压力测试，并持续调优的过程。通过压测确定系统的基准吞吐量，找到集群的短板，快速找到特定场景下的集群服务器配比和每个系统支撑该场景所需服务器的数量。因此，全链路压测起到了两层作用，一来可以发现整个系统的服务能力瓶颈，进行针对性地优化；二来可以获取合理的服务器数量配比，针对短板服务增加机器配置或数量，用容量来换取性能，极大地节省成本。</p>
@@ -193,10 +193,10 @@ function hide_canvas() {
 <p>相关的工具有 Chaos Monkey 和 ChaosBlade。Chaos Monkey 是 Netflix 开发的开源工具，它可以在生产环境随机选择并关闭服务。ChaosBlade 是阿里巴巴开源的一款混沌工程工具，可实现底层故障的注入和丰富的故障场景实现，从而帮助分布式系统提升容错性和可恢复性。</p>
 <h3>对专项测试技术的看法</h3>
 <p>作为测试人员，不要小看非功能性测试或专项测试。在招聘网站中也很常见，一些专项测试会设置固定的岗位，薪资可观，可见其稀缺性，且如果把它们做到高精尖，可以作为你职业发展路上的核心竞争力。</p>
-<p><img src="assets/Ciqc1F9HhZSABW9YAALI_I0DAAM161.png" alt="Drawing 1.png" />
-<img src="assets/Ciqc1F9HhZqANSByAADUhWjtQW0820.png" alt="Drawing 2.png" />
-<img src="assets/CgqCHl9HhZ-ANH89AADTLTRX-AM118.png" alt="Drawing 3.png" />
-<img src="assets/Ciqc1F9HhaOAJd84AAEuEQvaf-I032.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F9HhZSABW9YAALI_I0DAAM161.png" alt="png" />
+<img src="assets/Ciqc1F9HhZqANSByAADUhWjtQW0820.png" alt="png" />
+<img src="assets/CgqCHl9HhZ-ANH89AADTLTRX-AM118.png" alt="png" />
+<img src="assets/Ciqc1F9HhaOAJd84AAEuEQvaf-I032.png" alt="png" /></p>
 <h3>总结</h3>
 <p>本课时我讲解了微服务架构除了具有功能的质量属性，还具有很多非功能的质量属性，如可靠性、可测性、可用性、可扩展性等，而要验证这些属性，需要引入专项测试（非功能测试）技术。常见的专项测试技术如下：</p>
 <ul>

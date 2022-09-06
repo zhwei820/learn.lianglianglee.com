@@ -264,7 +264,7 @@ function hide_canvas() {
 <h3>竞争条件</h3>
 <p>竞争条件就是说多个线程对一个资源（内存地址）的读写存在竞争，在这种条件下，最后这个资源的值不可预测，而是取决于竞争时具体的执行顺序。</p>
 <p>举个例子，比如两个线程并发执行<code>i++</code>。那么可以有下面这个操作顺序，假设执行前<code>i=0</code>：</p>
-<p><img src="assets/CgqCHl-lBrSAKBmrAADNiS8bkAY490.png" alt="Lark20201106-161714.png" /></p>
+<p><img src="assets/CgqCHl-lBrSAKBmrAADNiS8bkAY490.png" alt="png" /></p>
 <p>虽然上面的程序执行了两次<code>i++</code>，但最终i的值为 1。</p>
 <p><code>i++</code>这段程序访问了共享资源，也就是变量<code>i</code>，这种访问共享资源的程序片段我们称为<strong>临界区</strong>。在临界区，程序片段会访问共享资源，造成竞争条件，也就是共享资源的值最终取决于程序执行的时序，因此这个值不是确定的。</p>
 <p>竞争条件是一件非常糟糕的事情，你可以把上面的程序想象成两个自动提款机。如果用户同时操作两个自动提款机，用户的余额就可能会被算错。</p>
@@ -292,7 +292,7 @@ cas(&amp;i, i, i+1)
 cas操作：比较期望值i和i的真实值的值是否相等，如果是，更新目标值
 </code></pre>
 <p>假设<code>i=0</code>，考虑两个线程分别执行一次这个程序，尝试构造竞争条件：</p>
-<p><img src="assets/Ciqc1F-lBr2ATIabAADce4zrAOw887.png" alt="Lark20201106-161708.png" /></p>
+<p><img src="assets/Ciqc1F-lBr2ATIabAADce4zrAOw887.png" alt="png" /></p>
 <p>你可以看到通过这种方式，cas 解决了一部分问题，找到了竞争条件，并返回了 false。但是还是无法计算出正确的结果。因为最后一次 cas 失败了。</p>
 <p>如果要完全解决可以考虑这样去实现：</p>
 <pre><code>while(!cas(&amp;i, i, i+1)){

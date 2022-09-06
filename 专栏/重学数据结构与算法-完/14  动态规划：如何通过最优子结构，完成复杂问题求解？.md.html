@@ -197,7 +197,7 @@ function hide_canvas() {
 <p>动态规划是候选人参加面试的噩梦，也是面试过程中的难点。虽然动态规划很难，但在实际的工作中，使用频率并不高，不是所有的岗位都会用到动态规划。</p>
 <h4>最短路径问题</h4>
 <p>接下来。<strong>我们来看一个非常典型的例子，最短路径问题</strong>。如下图所示：</p>
-<p><img src="assets/Ciqc1F78bdmAGdktAADnlpYQrHk607.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F78bdmAGdktAADnlpYQrHk607.png" alt="png" /></p>
 <p>每个结点是一个位置，每条边是两个位置之间的距离。现在需要求解出一条由 A 到 G 的最短距离是多少。</p>
 <p>不难发现，我们需要求解的路线是由 A 到 G，这就意味着 A 要先到 B，再到 C，再到 D，再到 E，再到 F。每一轮都需要做不同的决策，而每次的决策又依赖上一轮决策的结果。</p>
 <p>例如，做 D2 -&gt; E 的决策时，D2 -&gt; E2 的距离为 1，最短。但这轮的决策，基于的假设是从 D2 出发，这就意味着前面一轮的决策结果是 D2。由此可见，相邻两轮的决策结果并不是独立的。</p>
@@ -240,7 +240,7 @@ function hide_canvas() {
 <p>在这里，就是 <em>s**k</em>+1 = <em>u**k</em>(<em>s**k</em>)。</p>
 <h5>5. <strong>定目标</strong></h5>
 <p>别忘了，我们的目标是总距离最短。我们定义 <em>d**k</em>(<em>s**k</em>,<em>u**k</em>) 是在 sk 时，选择 uk 动作的距离。例如，<em>d</em>5(<em>E</em>1,<em>F</em>1) = 3。那么此时 n = 7，则有，</p>
-<p><img src="assets/CgqCHl78bqSAQBWuAAAmIGYXrUs078.png" alt="image" /></p>
+<p><img src="assets/CgqCHl78bqSAQBWuAAAmIGYXrUs078.png" alt="png" /></p>
 <p>就是最终要优化的目标。</p>
 <h5>6. <strong>寻找终止条件</strong></h5>
 <ul>
@@ -253,20 +253,20 @@ function hide_canvas() {
 </ul>
 <h4>计算过程详解</h4>
 <p>好了，为了让大家清晰地看到结果，我们给出详细的计算过程。为了书写简单，<strong>我们把函数 Vk,7(s1=A, s7=G) 精简为 V7(G)，含义为经过了 6 轮决策后，状态到达 G 后所使用的距离</strong>。我们把图片复制到这里一份，方便大家不用上下切换。</p>
-<p><img src="assets/CgqCHl78bpKAF2FWAADnlpYQrHk836.png" alt="image" /></p>
+<p><img src="assets/CgqCHl78bpKAF2FWAADnlpYQrHk836.png" alt="png" /></p>
 <p><strong>我们的优化目标为 min Vk,7(s1=A, s7=G)，因此精简后原问题为，min V7(G)</strong>。</p>
-<p><img src="assets/Ciqc1F78bvCAD2QkAABAo0Sezlc723.png" alt="image" /></p>
-<p><img src="assets/Ciqc1F79TfyAEbKKAAB2PY0Lb5U909.png" alt="5.png" /></p>
-<p><img src="assets/Ciqc1F78bx2AO3WTAACB1LuxHEo059.png" alt="imag" /></p>
-<p><img src="assets/Ciqc1F78bySAdLa-AACOk2cGokg643.png" alt="iage" /></p>
-<p><img src="assets/CgqCHl79TgmAfHtMAACROQbL6JE078.png" alt="2.png" /></p>
-<p><img src="assets/CgqCHl78bzKAQTrCAABoEJ4y5UM123.png" alt="imag" /></p>
+<p><img src="assets/Ciqc1F78bvCAD2QkAABAo0Sezlc723.png" alt="png" /></p>
+<p><img src="assets/Ciqc1F79TfyAEbKKAAB2PY0Lb5U909.png" alt="png" /></p>
+<p><img src="assets/Ciqc1F78bx2AO3WTAACB1LuxHEo059.png" alt="png" /></p>
+<p><img src="assets/Ciqc1F78bySAdLa-AACOk2cGokg643.png" alt="png" /></p>
+<p><img src="assets/CgqCHl79TgmAfHtMAACROQbL6JE078.png" alt="png" /></p>
+<p><img src="assets/CgqCHl78bzKAQTrCAABoEJ4y5UM123.png" alt="png" /></p>
 <p>因此，<strong>最终输出路径为 A -&gt; B1 -&gt; C2 -&gt; D1 -&gt; E2 -&gt; F2 -&gt; G，最短距离为 18</strong>。</p>
 <h4>代码实现过程</h4>
 <p>接下来，我们尝试用代码来实现上面的计算过程。对于输入的图，可以采用一个 m x m 的二维数组来保存。在这个二维数组里，m 等于全部的结点数，也就是结点与结点的关系图。而数组每个元素的数值，定义为结点到结点需要的距离。</p>
-<p><img src="assets/Ciqc1F78bz2ATtl4AADnlpYQrHk384.png" alt="imae" /></p>
+<p><img src="assets/Ciqc1F78bz2ATtl4AADnlpYQrHk384.png" alt="png" /></p>
 <p>在本例中，可以定义输入矩阵 m（空白处为0），如下图所示：</p>
-<p><img src="assets/CgqCHl78b0mALhRHAABQnqgjMYc406.png" alt="imae" /></p>
+<p><img src="assets/CgqCHl78b0mALhRHAABQnqgjMYc406.png" alt="png" /></p>
 <p>代码如下：</p>
 <pre><code>public class testpath {
     public static int minPath1(int[][] matrix) {

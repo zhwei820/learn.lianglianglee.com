@@ -186,13 +186,13 @@ function hide_canvas() {
 <li>ZooKeeper：Kafka 集群依赖 ZooKeeper，需根据 Kafka 的版本选择安装对应的 ZooKeeper 版本。</li>
 </ul>
 <h4>1.4 Kafka 架构</h4>
-<p><img src="assets/98af5490-cc99-11e8-b452-15eec1b99303" alt="enter image description here" /></p>
+<p><img src="assets/98af5490-cc99-11e8-b452-15eec1b99303" alt="png" /></p>
 <p>如上图所示，一个典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 Broker（Kafka 支持水平扩展，一般 Broker 数量越多，集群吞吐率越高），若干 Consumer（Group），以及一个 Zookeeper 集群。Kafka 通过 Zookeeper 管理集群配置，选举 Leader，以及在 Consumer Group 发生变化时进行 Rebalance。Producer 使用 Push（推）模式将消息发布到 Broker，Consumer 使用 Pull（拉）模式从 Broker 订阅并消费消息。</p>
 <p><strong>各个名词的解释请见下表：</strong></p>
-<p><img src="assets/67e36670-c5ec-11e8-94bc-4f9499501dff" alt="enter image description here" /></p>
+<p><img src="assets/67e36670-c5ec-11e8-94bc-4f9499501dff" alt="png" /></p>
 <h4>1.5 Kafka 高可用方案</h4>
 <p>Kafka 高可用性的保障来源于其健壮的副本（Replication）策略。为了提高吞吐能力，Kafka 中每一个 Topic 分为若干 Partitions；为了保证可用性，每一个 Partition 又设置若干副本（Replicas）；为了保障数据的一致性，Zookeeper 机制得以引入。基于 Zookeeper，Kafka 为每一个 Partition 找一个节点作为 Leader，其余备份作为 Follower，只有 Leader 才能处理客户端请求，而 Follower 仅作为副本同步 Leader 的数据，如下示意图：TopicA 分为两个 Partition，每个 Partition 配置两个副本。</p>
-<p><img src="assets/f02c1c10-c91c-11e8-8892-5b0a3ea2c61d" alt="enter image description here" /></p>
+<p><img src="assets/f02c1c10-c91c-11e8-8892-5b0a3ea2c61d" alt="png" /></p>
 <p>基于上图的架构，当 Producer Push 的消息写入 Partition（分区） 时，Leader 所在的 Broker（Kafka 节点）会将消息写入自己的分区，同时还会将此消息复制到各个 Follower，实现同步。如果某个 Follower 挂掉，Leader 会再找一个替代并同步消息；如果 Leader 挂了，将会从 Follower 中选举出一个新的 Leader 替代，继续业务，这些都是由 ZooKeeper 完成的。</p>
 <h4>1.6 Kafka 优缺点</h4>
 <p><strong>优点主要包括以下几点：</strong></p>
@@ -259,7 +259,7 @@ function hide_canvas() {
 </ul>
 <h4>2.4 ActiveMQ 架构</h4>
 <p>ActiveMQ 的主体架构如下图所示。</p>
-<p><img src="assets/18fba290-c96e-11e8-97d9-49b68de7724a" alt="enter image description here" /></p>
+<p><img src="assets/18fba290-c96e-11e8-97d9-49b68de7724a" alt="png" /></p>
 <p><strong>传输协议：</strong> 消息之间的传递，无疑需要协议进行沟通，启动一个 ActiveMQ 便打开一个监听端口。ActiveMQ 提供了广泛的连接模式，主要包括 SSL、STOMP、XMPP。ActiveMQ 默认的使用协议为 OpenWire，端口号为 61616。</p>
 <p><strong>通信方式：</strong> ActiveMQ 有两种通信方式，Point-to-Point Model（点对点模式），Publish/Subscribe Model （发布/订阅模式），其中在 Publich/Subscribe 模式下又有持久化订阅和非持久化订阅两种消息处理方式。</p>
 <p><strong>消息存储：</strong> 在实际应用中，重要的消息通常需要持久化到数据库或文件系统中，确保服务器崩溃时，信息不会丢失。</p>
@@ -277,7 +277,7 @@ function hide_canvas() {
 </ul>
 <h4>2.5 ActiveMQ 高可用方案</h4>
 <p>在生产环境中，高可用（High Availability，HA）可谓 “刚需”， ActiveMQ 的高可用性架构基于 Master/Slave 模型。ActiveMQ 总共提供了四种配置方案来配置 HA，其中 Shared Nothing Master/Slave 在 5.8 版本之后不再使用了，并在 ActiveMQ 5.9 版本中引入了基于 Zookeeper 的 Replicated LevelDB Store HA 方案。</p>
-<p><img src="assets/36564650-c7b2-11e8-89fa-6f2232e1f02e" alt="enter image description here" /></p>
+<p><img src="assets/36564650-c7b2-11e8-89fa-6f2232e1f02e" alt="png" /></p>
 <p>关于几种 HA 方案的详细介绍，读者可查看<a href="http://activemq.apache.org/masterslave.html">官网说明</a>，在此，我仅做简单介绍。</p>
 <p><strong>方案一：Shared Nothing Master/Slave</strong></p>
 <p>这是一种最简单最典型的 Master-Slave 模式，Master 与 Slave 有各自的存储系统，不共享任何数据。“Shared Nothing” 模式有很多局限性，存在丢失消息、“双主”等问题。目前，在要求严格的生产环境中几乎没有应用，是一种趋于淘汰的方案，因此，本文就不作介绍了。</p>
@@ -299,7 +299,7 @@ function hide_canvas() {
 <p>特别说明：ActiveMQ 官网警告，LevelDB 不再作为推荐的存储方案，取而代之的是 KahaDB。</p>
 <h4>2.6 ActiveMQ HA 方案之 Network Bridges 模式</h4>
 <p>在 2.5 节中介绍的几种 HA 方案，本质上都只有一个 Master 节点，无法满足高并发、大吞吐量的商用场景，因此，ActiveMQ 官方推出了 “网桥”架构模式，即真正的“分布式消息队列”。该模式可应对大规模 Clients、高密度的消息增量的场景；它以集群的模式，承载较大数据量的应用。</p>
-<p><img src="assets/c657fab0-c7b6-11e8-9830-8d538e1f1c90" alt="enter image description here" /></p>
+<p><img src="assets/c657fab0-c7b6-11e8-9830-8d538e1f1c90" alt="png" /></p>
 <p>如上图所示，集群由多个子 Groups 构成，每个 Group 为 M-S 模式、共享存储；多个 Groups 之间基于“Network Connector”建立连接（Master-Slave 协议），通常为双向连接，所有的 Groups 之间彼此相连，Groups 之间形成“订阅”关系，比如 G2 在逻辑上为 G1 的订阅者（订阅的策略是根据各个 Broker 上消费者的 Destination 列表进行分类），消息的转发原理也基于此。对于 Client 而言，仍然支持 Failover，Failover 协议中可以包含集群中“多数派”的节点地址。</p>
 <p>Topic 订阅者的消息，将会在所有 Group 中复制存储，对于 Queue 的消息，将会在 Brokers 之间转发，并最终到达 Consumer 所在的节点。</p>
 <p>Producers 和 Consumers 可以与任何 Group 中的 Master 建立连接并进行消息通信，当 Brokers 集群拓扑变化时，Producers 或 Consumers 的个数变化时，将会动态平衡 Clients 的连接位置。Brokers 之间通过“Advisory”机制来同步 Clients 的连接信息，比如新的 Consumers 加入，Broker 将会发送 Advisory 消息（内部的通道）通知其他 Brokers。</p>
@@ -354,7 +354,7 @@ function hide_canvas() {
 </ul>
 <h4>3.4 RabbitMQ 架构</h4>
 <p>根据官方文档说明，RabbitMQ 的架构图如下所示：</p>
-<p><img src="assets/7f30a890-c91d-11e8-a4d8-9df8310cdd48" alt="enter image description here" /></p>
+<p><img src="assets/7f30a890-c91d-11e8-a4d8-9df8310cdd48" alt="png" /></p>
 <p>接下来解释几个重要的概念。</p>
 <ul>
 <li>Broker：即消息队列服务器实体。</li>
@@ -448,7 +448,7 @@ function hide_canvas() {
 </ul>
 <h4>4.4 RocketMQ 架构</h4>
 <p>RocketMQ 是一个具有高性能、高可靠、低延迟、分布式的万亿级容量，且可伸缩的分布式消息和流平台。它由 Name Servers、Brokers、 Producers 和 Consumers 四个部分组成。其架构如下图所示（取自<a href="https://rocketmq.apache.org/docs/rmq-arc/">官网</a>）。</p>
-<p><img src="assets/0b881670-c91e-11e8-87ae-d94c3d83a2c9" alt="enter image description here" /></p>
+<p><img src="assets/0b881670-c91e-11e8-87ae-d94c3d83a2c9" alt="png" /></p>
 <p><strong>NameServer 集群</strong></p>
 <p>NameServer 是一个功能齐全的服务器，其角色类似 Kafka 中的 ZooKeeper，支持 Broker 的动态注册与发现。主要包括两个功能：</p>
 <ul>
@@ -507,11 +507,11 @@ function hide_canvas() {
 <h4>5.1 RocketMQ 官方评价</h4>
 <p>所谓实践是检验真理的唯一标准，实际应用中的表现比文字更具说服力。在 <a href="https://rocketmq.apache.org/docs/motivation/">RocketMQ 官方文档中</a>，关于 RocketMQ 的研发背景是这样说的：在我们的研究中，随着使用 Queue 和 Topic 的增加，ActiveMQ IO 模块很快达到了瓶颈。我们试图通过节流、断路器或降级来解决这个问题，但效果不佳。所以我们开始关注当时流行的消息解决方案 Kafka。不幸的是，Kafka 不能满足我们的要求，特别是在低延迟和高可靠性方面。</p>
 <p>简而言之，ActiveMQ 和 Kafka 的性能都不能满足阿里的超大规模应用场景。在此背景下，阿里自研了 RocketMQ，并捐赠给了开源社区，目前有超过 100 家企业在使用其开源版本。关于 ActiveMQ 、Kafka 以及 RocketMQ 的比较如下所示（取自 <a href="https://rocketmq.apache.org/docs/motivation/">RocketMQ 官网文档</a>）：</p>
-<p><img src="assets/7a907710-c91e-11e8-9c50-75ee2aa67033" alt="enter image description here" /></p>
+<p><img src="assets/7a907710-c91e-11e8-9c50-75ee2aa67033" alt="png" /></p>
 <h4>5.2 对比四大消息队列</h4>
 <p>消息队列利用高效可靠的消息传递机制进行平台无关的数据交流，并基于数据通信来进行分布式系统的集成。目前业界有很多的 MQ 产品，例如 RabbitMQ、RocketMQ、ActiveMQ、Kafka、ZeroMQ、MetaMq 等，也有直接使用数据库 Redis 充当消息队列的案例。而这些消息队列产品，各有侧重，在实际选型时，需要结合自身需求及 MQ 产品特征，综合考虑。</p>
 <p>以下是四种消息队列的差异对比（<a href="http://blog.51cto.com/caczjz/2141194?source=dra">图片源地址</a>）：</p>
-<p><img src="assets/cba21920-c968-11e8-bcac-99cd81fed45b" alt="enter image description here" /></p>
+<p><img src="assets/cba21920-c968-11e8-bcac-99cd81fed45b" alt="png" /></p>
 <h4>参考文献</h4>
 <ol>
 <li>RocketMQ 、RabbitMQ、Kafka 以及 ActiveMQ 官方文档；</li>

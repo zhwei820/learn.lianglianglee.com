@@ -174,7 +174,7 @@ function hide_canvas() {
 <h4>5.堆</h4>
 <p>堆区域是 JVM 调优最重要的区域，堆中存放的数据很多是对象实例，如 HelloTester 的对象存储。堆空间占据着 JVM 中最大的存储区域，存放了很多对象，所以大多数基于 JVM 的内存调优也是对堆空间的调优。</p>
 <p>堆空间并非取之不尽，如果一直存放总有用完的时候，所以对于有用的对象应当保存起来，无用的对象应当回收，为了更好地实现这一机制，JVM 将堆空间分成了新生代和老生代，如下图所示：</p>
-<p><img src="assets/CioPOWA2vFqAaIvdAAChz7EIEu0014.png" alt="4.png" /></p>
+<p><img src="assets/CioPOWA2vFqAaIvdAAChz7EIEu0014.png" alt="png" /></p>
 <p>图 3：GC 示意对比图</p>
 <p>通过图 3 可以看到新生代和老年代的对比，Minor GC 发生在新生代，而 Full GC 发生在老年代。新生代分为三个区，一个 Eden 区和两个 Survivor 区。</p>
 <p>先来看下 Eden 区的作用，大部分新生成的对象都是在 Eden 区，Eden 区满了之后便没有内存给新对象使用，Eden 区便会 Minor GC 回收无用内存，剩下的存活对象便会转移到 Survivor 区。</p>
@@ -262,15 +262,15 @@ root     18658     1  0 Dec09 ?后续省略
 </code></pre>
 <p>通过这样的方式可以启动暴露 1099 端口，且连接时不需要认证。</p>
 <p>然后在本机电脑 jdk 路径 bin 目录下找到 jvisualvm，双击打开，如下图所示：</p>
-<p><img src="assets/Cgp9HWAze7uAY4i0AAIY8AO0bo0055.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Cgp9HWAze7uAY4i0AAIY8AO0bo0055.png" alt="png" /></p>
 <p>我们再配置相应的 jmx 连接，如下图所示：</p>
-<p><img src="assets/CioPOWAze8GAEEsIAALCNqd4FCQ080.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CioPOWAze8GAEEsIAALCNqd4FCQ080.png" alt="png" /></p>
 <p>如果出现如下图所示的界面，就证明连接成功了。</p>
-<p><img src="assets/Cgp9HWA2vMaASqv3AAJ2rG-zf3U45.jpeg" alt="image" /></p>
+<p><img src="assets/Cgp9HWA2vMaASqv3AAJ2rG-zf3U45.jpeg" alt="png" /></p>
 <p>这样我们就能够概览 JVM 的 CPU 和内存的使用情况，如下图所示，通过点击抽样器，你可以分别获得对象在 CPU 和内存的占用。值得注意的是很多初学者把这部分 CPU 监控或者内存监控认为是服务器硬件级别的，这是不对的，这些都是基于 JVM 的监控。</p>
-<p><img src="assets/CioPOWAze9CAShx_AAG7jwD3hwI714.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/CioPOWAze9CAShx_AAG7jwD3hwI714.png" alt="png" /></p>
 <p>按照内存占用进行排序是非常清晰的，你可以看到随着性能测试的进行，User 类字节占用比例越来越高，如下图所示：</p>
-<p><img src="assets/CioPOWAze9aAZifIAANlYUMJTPQ367.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CioPOWAze9aAZifIAANlYUMJTPQ367.png" alt="png" /></p>
 <h3>总结</h3>
 <p>通过本讲的学习，你了解了 JVM 的内存结构，知道了 Java 内存对象经常活动的区域，同时列举了常见的排查手段诊断内存问题。</p>
 </div>

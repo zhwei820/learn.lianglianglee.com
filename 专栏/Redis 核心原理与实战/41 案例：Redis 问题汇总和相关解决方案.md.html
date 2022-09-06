@@ -268,7 +268,7 @@ jedis.setex(cacheKey, exTime+random.nextInt(1000) , value);
 <p>二级缓存指的是除了 Redis 本身的缓存，再设置一层缓存，当 Redis 失效之后，先去查询二级缓存。</p>
 <p>例如可以设置一个本地缓存，在 Redis 缓存失效的时候先去查询本地缓存而非查询数据库。</p>
 <p>加入二级缓存之后程序执行流程，如下图所示：</p>
-<p><img src="assets/dc14dc60-8ede-11ea-adbb-dd8e7664c503" alt="image.png" /></p>
+<p><img src="assets/dc14dc60-8ede-11ea-adbb-dd8e7664c503" alt="png" /></p>
 <h3>缓存穿透</h3>
 <p>缓存穿透是指查询数据库和缓存都无数据，因为数据库查询无数据，出于容错考虑，不会将结果保存到缓存中，因此每次请求都会去查询数据库，这种情况就叫做缓存穿透。</p>
 <p>缓存穿透执行流程如下图所示：</p>
@@ -282,7 +282,7 @@ jedis.setex(cacheKey, exTime+random.nextInt(1000) , value);
 <h3>缓存击穿</h3>
 <p>缓存击穿指的是某个热点缓存，在某一时刻恰好失效了，然后此时刚好有大量的并发请求，此时这些请求将会给数据库造成巨大的压力，这种情况就叫做缓存击穿。</p>
 <p>缓存击穿的执行流程如下图所示：</p>
-<p><img src="assets/008b1eb0-8edf-11ea-bf74-150f7ff6235d" alt="image.png" /></p>
+<p><img src="assets/008b1eb0-8edf-11ea-bf74-150f7ff6235d" alt="png" /></p>
 <p>它的解决方案有以下 2 个。</p>
 <h4><strong>加锁排队</strong></h4>
 <p>此处理方式和缓存雪崩加锁排队的方法类似，都是在查询数据库时加锁排队，缓冲操作请求以此来减少服务器的运行压力。</p>
@@ -292,7 +292,7 @@ jedis.setex(cacheKey, exTime+random.nextInt(1000) , value);
 <p>首先来说，缓存预热并不是一个问题，而是使用缓存时的一个优化方案，它可以提高前台用户的使用体验。</p>
 <p>缓存预热指的是在系统启动的时候，先把查询结果预存到缓存中，以便用户后面查询时可以直接从缓存中读取，以节约用户的等待时间。</p>
 <p>缓存预热的执行流程，如下图所示：</p>
-<p><img src="assets/10ce2ce0-8edf-11ea-a141-a13a4f8833dd" alt="image.png" /></p>
+<p><img src="assets/10ce2ce0-8edf-11ea-a141-a13a4f8833dd" alt="png" /></p>
 <p>缓存预热的实现思路有以下三种：</p>
 <ol>
 <li>把需要缓存的方法写在系统初始化的方法中，这样系统在启动的时候就会自动的加载数据并缓存数据；</li>

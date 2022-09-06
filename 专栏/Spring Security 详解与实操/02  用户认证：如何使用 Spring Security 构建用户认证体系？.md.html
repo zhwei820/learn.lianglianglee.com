@@ -197,7 +197,7 @@ function hide_canvas() {
 </code></pre>
 <p>显然，响应码 401 告诉我们没有访问该地址的权限。同时，在响应中出现了一个“WWW-Authenticate”消息头，其值为“Basic realm=&quot;Realm&quot;”，这里的 Realm 表示 Web 服务器中受保护资源的安全域。</p>
 <p>现在，让我们来执行 HTTP 基础认证，可以通过设置认证类型为“Basic Auth”并输入对应的用户名和密码来完成对 HTTP 端点的访问，设置界面如下所示：</p>
-<p><img src="assets/CioPOWC5_duASv7jAACBgx8x8WU605.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CioPOWC5_duASv7jAACBgx8x8WU605.png" alt="png" /></p>
 <p>使用 Postman 完成 HTTP 基础认证信息的设置</p>
 <p>现在查看 HTTP 请求，可以看到 Request Header 中添加了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization?fileGuid=xxQTRXtVcqtHK6j8">Authorization</a> 标头，格式为：Authorization:<code> &lt;type&gt;</code> <code>&lt;credentials</code>&gt;。这里的 type 就是“Basic”，而 credentials 则是这样一个字符串：</p>
 <pre><code>dXNlcjo5YjE5MWMwNC1lNWMzLTQ0YzctOGE3ZS0yNWNkMjY3MmVmMzk=
@@ -218,7 +218,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>formLogin() 方法的执行效果就是提供了一个默认的登录界面，如下所示：</p>
-<p><img src="assets/CioPOWC5_fmAOso9AAAqvMlklW8869.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CioPOWC5_fmAOso9AAAqvMlklW8869.png" alt="png" /></p>
 <p>Spring Security 默认的登录界面</p>
 <p>我们已经在上一讲中看到过这个登录界面。对于登录操作而言，这个登录界面通常都是定制化的，同时，我们也需要对登录的过程和结果进行细化控制。此时，我们就可以通过如下所示的配置内容来修改系统的默认配置：</p>
 <pre><code>@Override
@@ -293,7 +293,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 <h3>小结与预告</h3>
 <p>这一讲我们详细介绍了如何使用 Spring Security 构建用户认证体系的系统方法。在 Spring Security 中，认证相关的功能都是可以通过配置体系进行定制化开发和管理的。通过简单的配置方法，我们可以组合使用 HTTP 基础认证和表单登录认证，也可以分别基于内存以及基于数据库方案来存储用户信息，这些功能都是 Spring Security 内置的。</p>
 <p>本讲内容总结如下：</p>
-<p><img src="assets/CioPOWC5_g-AP68cAACSqF1r51g526.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CioPOWC5_g-AP68cAACSqF1r51g526.png" alt="png" /></p>
 <p>最后我想给你留一道思考题：你知道在 Spring Security 中有哪几种存储用户信息的实现方案吗？欢迎在留言区和我分享你的想法。</p>
 </div>
                     </div>

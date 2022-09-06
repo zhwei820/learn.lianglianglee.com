@@ -432,7 +432,7 @@ function hide_canvas() {
 <p>例如在确定数据项时，该如何考虑避免数据冗余？这就需要合理地设计表以及表之间的关系。</p>
 <p>假设一个公司的员工可能同时具有多个角色：运输科的张飞是科室的负责人，他又是供应科的客户，供应科会将运输的任务委托给他；同时，他还是一家大型超市的供应商，负责将货物运输给超市。显然，我们不能在一个数据库中为张飞创建三条冗余的数据记录。运输科主任、供应科客户和超市供应商都是张飞担任的角色，无论他担任了什么角色，他都是该公司的一名员工。</p>
 <p>在创建数据模型时，应该将角色属性从员工剥离出去，分别形成数据表 <code>t_employee</code> 与 <code>t_role</code>；又因为员工和角色之间存在多对多的关系，需要引入一个关联表 <code>t_employee_roles</code>。这个数据模型如下图所示：</p>
-<p><img src="assets/57bcb710-7fbe-11e9-ace0-ad297907c3be" alt="enter image description here" /></p>
+<p><img src="assets/57bcb710-7fbe-11e9-ace0-ad297907c3be" alt="png" /></p>
 <p>当数据模型出现多对多关系时，之所以要引入一个关联表，是因为多对多关系会引入数据表之间的<strong>交叉关联</strong>。这个数据项模型中的 <code>t_employee_role</code> 并无映射的业务概念，引入该表，纯粹是数据库实现细节对模型产生的影响。</p>
 <p>有时候，承载多对多关系的关联表也可以具有一些附加的属性，这样的关联表往往代表了业务逻辑中的一个业务概念，例如学生（Student）与课程（Course）之间的多对多关系，可以用课表（Curriculum）关联表来表达。Curriculum 属于学习领域的业务概念，但同时它又能有效解除 Student 与 Course 之间的交叉关联。</p>
 <p>有的数据建模者甚至建议针对一对多关系也建立关联表，因为关联表的引入使得这种关系更容易维护。例如产品（Product）和图片（Picture）是一对多关系，直接定义 <code>t_product</code> 和 <code>t_picture</code> 数据表即可，但如果引入 <code>t_product_picture</code> 关联表，就可以在数据库层面更好地维护二者之间的关系。有时，一对多关系体现了父—子关系，例如订单（Order）与订单项（OrderItem），它们之间的一对多关系其实代表了“每个订单项必须是一个也只是一个订单的一部分”。</p>
@@ -440,7 +440,7 @@ function hide_canvas() {
 <p><img src="assets/a1c42190-7fbe-11e9-8b24-8b44cf4ff051" alt="img" /></p>
 <p>数据模型却不能这样建立，因为我们需要考虑分开两张表带来的 I/O 开销。虽然家庭电话号码和工作电话号码都是相同的 <code>PhoneNumber</code> 类型，但却属于两个不同的属性，将它们合并放到 <code>t_employee</code> 数据表，并不会破坏数据库范式。</p>
 <p>当然，这种合并并非必然，有时候还需要考虑数据访问的频率。例如一个银行账户，账户地址、开户日期与余额都是规范化的，按理就应该合并到 <code>t_account</code> 物理表中。但是，余额与其他两项属性的访问频率差异极大，为了使 I/O 效率更高，数据的存储更加紧凑，就应该将规范化的表分解为两个独立的表：</p>
-<p><img src="assets/5faa61b0-7fc4-11e9-ace0-ad297907c3be" alt="enter image description here" /></p>
+<p><img src="assets/5faa61b0-7fc4-11e9-ace0-ad297907c3be" alt="png" /></p>
 <h4>NoSQL 的数据项模型</h4>
 <p>如果数据库选择了 NoSQL，数据项模型会有所不同。由于 NoSQL 数据库是一种无样式的数据结构（Schemaless Data Structures），这使得它对数据项模型的约束是最少的。诸如 MongoDB、Elasticsearch 这样的 NoSQL 数据库，它所存储的 JSON 文档，可以在属性中进行任意嵌套，形成一种能够自由存取的文档结构。所以 Martin Fowler 又将这样的 NoSQL 数据库称之为“文档型数据库”。</p>
 <p>当然，即使是没有样式的 NoSQL，也无法做到随心所欲地建立数据模型，尤其针对表之间的关系，同样要受到实现机制的约束。例如在 MongoDB 中，可以选择使用 Link 或 Embedded 来维护关联关系，这时就需要结合具体业务场景来选择正确的关联关系。</p>

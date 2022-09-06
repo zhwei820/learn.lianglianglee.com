@@ -294,7 +294,7 @@ function hide_canvas() {
 <p>在微服务架构中，服务是基本单位，而 Dubbo 架构中服务的基本单位是 Java 接口，这种架构上的差别就会带来一系列挑战。<strong>从 2.7.5 版本开始，Dubbo 引入了服务自省架构，来应对微服务架构带来的挑战</strong>。具体都有哪些挑战呢？下面我们就来详细说明一下。</p>
 <h3>注册中心面临的挑战</h3>
 <p>在开始介绍注册中心面临的挑战之前，我们先来回顾一下前面课时介绍过的 Dubbo 传统架构以及这个架构中最核心的组件：</p>
-<p><img src="assets/Cip5yF_hcH2AVI2PAAB7_C-aKWA247.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Cip5yF_hcH2AVI2PAAB7_C-aKWA247.png" alt="png" /></p>
 <p>Dubbo 核心架构图</p>
 <p>结合上面这张架构图，我们可以一起回顾一下这些核心组件的功能。</p>
 <ul>
@@ -315,7 +315,7 @@ function hide_canvas() {
 <h3>Dubbo 的改进方案</h3>
 <p>Dubbo 从 2.7.0 版本开始增加了<strong>简化 URL</strong>的特性，从 URL 中抽出的数据会被存放至元数据中心。但是这次优化只是缩短了 URL 的长度，从内存使用量以及降低通知频繁度的角度降低了注册中心的压力，并没有减少注册中心 URL 的数量，所以注册中心所承受的压力还是比较明显的。</p>
 <p>Dubbo 2.7.5 版本引入了<strong>服务自省架构</strong>，进一步降低了注册中心的压力。在此次优化中，Dubbo 修改成应用为粒度的服务注册与发现模型，最大化地减少了 Dubbo 服务元信息注册数量，其核心流程如下图所示：</p>
-<p><img src="assets/CgqCHl_hcJqACV_gAAEpu4IHuz4068.png" alt="Lark20201222-120323.png" /></p>
+<p><img src="assets/CgqCHl_hcJqACV_gAAEpu4IHuz4068.png" alt="png" /></p>
 <p>服务自省架构图</p>
 <p>上图展示了引入服务自省之后的 Dubbo 服务注册与发现的核心流程，Dubbo 会按照顺序执行这些操作（当其中一个操作失败时，后续操作不会执行）。</p>
 <p>我们首先来看 Provider 侧的执行流程：</p>
@@ -338,7 +338,7 @@ function hide_canvas() {
 <p>在有的场景中，我们会在线上部署两组不同配置的服务节点，来验证某些配置是否生效。例如，共有 100 个服务节点，平均分成 A、B 两组，A 组服务节点超时时间（即 timeout）设置为 3000 ms，B 组的超时时间（即 timeout）设置为 2000 ms，这样的话该服务就有了两组不同的元数据。</p>
 <p>按照前面介绍的优化方案，在订阅服务的时候，会得到 100 个 ServiceInstance，因为每个 ServiceInstance 发布的服务元数据都有可能不一样，所以我们需要调用每个 ServiceInstance 的 MetadataService 服务获取元数据。</p>
 <p>为了减少 MetadataService 服务的调用次数，Dubbo 提出了<strong>服务修订版本的优化方案</strong>，其核心思想是：将每个 ServiceInstance 发布的服务 URL 计算一个 hash 值（也就是 revision 值），并随 ServiceInstance 一起发布到注册中心；在 Consumer 端进行订阅的时候，对于 revision 值相同的 ServiceInstance，不再调用 MetadataService 服务，直接共用一份 URL 即可。下图展示了 Dubbo 服务修订的核心逻辑：</p>
-<p><img src="assets/Cip5yF_hcMyALC7UAAEPa7NIifA395.png" alt="Lark20201222-120318.png" /></p>
+<p><img src="assets/Cip5yF_hcMyALC7UAAEPa7NIifA395.png" alt="png" /></p>
 <p>引入 Dubbo 服务修订的 Consumer 端交互图</p>
 <p>通过该流程图，我们可以看到 Dubbo Consumer 端实现服务修订的流程如下。</p>
 <ol>

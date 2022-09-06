@@ -397,7 +397,7 @@ try {
 <p>Sentinel 的核心骨架是 ProcessorSlotChain，所以核心的流程是一次 SphU#entry 方法的调用以及一次 CtEntry#exit 方法的调用。</p>
 <p>SphU#entry 方法调用 CtSph#entry 方法，CtSph 负责为资源创建 ResourceWrapper 对象并为资源构造一个全局唯一的 ProcessorSlotChain、为资源创建 CtEntry 并将 CtEntry 赋值给当前调用链路的 Context.curEntry、最后调用 ProcessorSlotChain#entry 方法完成一次单向链表的 entry 方法调用。</p>
 <p>ProcessorSlotChain 的一次 entry 方法的调用过程如下图所示。</p>
-<p><img src="assets/43a296a0-e0b6-11ea-bf6b-993ba43d1a8c" alt="06-01-chian" /></p>
+<p><img src="assets/43a296a0-e0b6-11ea-bf6b-993ba43d1a8c" alt="png" /></p>
 <h4><strong>调用 Tracer 的 trace 方法</strong></h4>
 <p>只在抛出非 BlockException 异常时才会调用 Tracer#trace 方法，用于记录当前资源调用异常，为当前资源的 DefaultNode 自增异常数。</p>
 <pre><code class="language-java">public class Tracer {

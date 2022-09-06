@@ -190,16 +190,16 @@ function hide_canvas() {
 <h3>问题解答</h3>
 <h4>理解原理</h4>
 <p>现在有一个分布式系统 A，它有一个副本 A1，在正常情况下，客户端 Client 写数据到系统 A，然后数据从 A 节点同步到 A1 节点，再返回给 Client 成功状态。
-<img src="assets/CgqCHl_-eW2ALOs5AAFBvaYD4f8199.png" alt="6.png" />
+<img src="assets/CgqCHl_-eW2ALOs5AAFBvaYD4f8199.png" alt="png" />
 这时，客户端 Client 从任何节点 A 或 A1 读取数据，都能读取到最新写入的数据，说明 A 和 A1 的数据是一致的，并且 A 和 A1 也都是可用的。</p>
 <p>但由于网络是不可靠的，节点 A 和 A1 的网络随时会因为中断而出现分区。所谓网络分区就是由于网络不通导致节点 A 和 A1 被隔离在不同的网络子集中，此时节点 A 的数据就不能及时同步到节点 A1 中了。</p>
-<p><img src="assets/Ciqc1F_-eXaAcu6nAAE3Pk18sD8666.png" alt="7.png" /></p>
+<p><img src="assets/Ciqc1F_-eXaAcu6nAAE3Pk18sD8666.png" alt="png" /></p>
 <p>在分布式系统中，由于网络问题导致的网络分区是常态。也就是说出现网络分区时，根据 CAP 理论，需要在 A 和 C 中进行取舍，即要么保证系统的可用性，要么保证数据一致性。</p>
 <p>这里你要注意了，上面的例子有个大前提，就是系统出现了网络分区，但实际情况是，在绝大多数时间里并不存在网络分区（网络不会经常出现问题）。那么还要进行三选二吗（CP 或者 AP）？</p>
 <p>其实，不同的分布式系统要根据业务场景和业务需求在 CAP 三者中进行权衡。<strong>CAP 理论用于指导在系统设计时需要衡量的因素，而非进行绝对地选择</strong>。</p>
 <p>当网络没有出现分区时，CAP 理论并没有给出衡量 A 和 C 的因素，但如果你做过实际的分布式系统设计，一定会发现系统数据同步的时延（Latency），即例子中节点 A 同步数据到节点 A1 的时间才是衡量 A 和 C 最重要的因素，此时就不会有绝对的 AP 模型还是 CP 模型了，而是源于对实际业务场景的综合考量。</p>
 <p>因此，才会有如 <a href="http://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf">PACELC</a> 这样的新模型优化原有的 CAP 理论，理论指导实践，实践优化理论。根据 PACELC 模型的定义，如果有网络分区产生，系统就必须在 A 和 C 之间取得平衡，否则（Else，即 PACELC 中的 E）当系统运行在无网络分区情况下，系统需要在 L（延迟）和 C 之间取得平衡。</p>
-<p><img src="assets/CgqCHl_-eYOAT7NXAAFRFjVnR8E067.png" alt="8.png" /></p>
+<p><img src="assets/CgqCHl_-eYOAT7NXAAFRFjVnR8E067.png" alt="png" /></p>
 <p>PACELC</p>
 <p><strong>但理解到这个程度还不够，你还需要结合落地经验进行证明。</strong></p>
 <h4>实践经验</h4>
@@ -222,7 +222,7 @@ function hide_canvas() {
 <h4>技术认知</h4>
 <p>如果你应聘的是高级研发工程师或架构师，在回答时，<strong>还要尽可能地展示知识体系和技术判断力，这是这两个岗位的基本素质。</strong> 因为分布式技术错综复杂，各种技术又相互耦合，在面试中，如果你能通过一个 CAP 理论的知识点，扩展出一个脉络清晰的分布式核心技术知识体系，就会与其他人拉开差距。</p>
 <p>分布式系统看起来就像一个计算机。计算机包括五大体系结构（即冯诺依曼结构），它有五大部件：分别是控制器、运算器、存储器、输入及输出。你可以这么理解：一个分布式系统也包含这五大部件，其中最重要的是计算与存储。计算与存储由一系列网络节点组成，每个节点之间的通信就是输入与输出，各节点之间的调度管理就是控制器。</p>
-<p><img src="assets/Ciqc1F_-eY-AALaAAAGd9CXhZI4183.png" alt="9.png" /></p>
+<p><img src="assets/Ciqc1F_-eY-AALaAAAGd9CXhZI4183.png" alt="png" /></p>
 <p>分布式架构技术组成</p>
 <p>这么看来，分布式系统就像一个网络计算机，它的知识体系包括四个角度：</p>
 <ol>

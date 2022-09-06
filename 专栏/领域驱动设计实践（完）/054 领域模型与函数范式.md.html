@@ -651,7 +651,7 @@ send(List(Email(&quot;<a href="/cdn-cgi/l/email-protection" class="__cf_email__"
 send(List(Email(&quot;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3134283f38341d3939393e32302d3c3324733e3230">[email&#160;protected]</a>&quot;), Email(&quot;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82e5f7e3ecfbf7c2e6e6e6e1edeff2e3ecfbace1edef">[email&#160;protected]</a>&quot;)))
 </code></pre>
 <p>这意味着改进后的 parse() 可以根据输入结果推断出函数的计算结果，这正是引用透明的价值。**保持函数的引用透明，不产生任何副作用，是函数式编程的基本原则。**如果说面向对象设计需要将依赖尽可能向外推，最终采用依赖注入的方式来降低耦合；那么，函数式编程思想就是要利用纯函数来隔离变化与不变，内部由无副作用的纯函数组成，纯函数将副作用向外推，形成由不变的业务内核与可变的副作用外围组成的结构：</p>
-<p><img src="assets/040ce3f0-a657-11e9-b07d-9918990278bb" alt="35715185.png" /></p>
+<p><img src="assets/040ce3f0-a657-11e9-b07d-9918990278bb" alt="png" /></p>
 <p>具有引用透明特征的纯函数更加贴近数学中的函数概念：没有计算，只有转换。转换操作不会修改输入参数的值，只是基于某种规则把输入参数值转换为输出。输入值和输出值都是不变的（Immutable），只要给定的输入值相同，总会给出相同的输出结果。例如我们定义 add1() 函数：</p>
 <pre><code class="language-scala">def add1(x: Int):Int =&gt; x + 1
 </code></pre>
@@ -666,7 +666,7 @@ send(List(Email(&quot;<a href="/cdn-cgi/l/email-protection" class="__cf_email__"
 </code></pre>
 <p>我们看到的不是对变量 x 增加 1，而是根据x 的值进行模式匹配，然后基于业务规则返回确定的值。这就是纯函数的数学意义。</p>
 <p>引用透明、无副作用以及数学函数的转换本质，为纯函数提供了模块化的能力，再结合高阶函数的特性，使纯函数具备了强大的组合（Combinable）特性，而这正是函数式编程的核心原则。这种组合性如下图所示：</p>
-<p><img src="assets/3eca4640-a657-11e9-b07d-9918990278bb" alt="61929115.png" /></p>
+<p><img src="assets/3eca4640-a657-11e9-b07d-9918990278bb" alt="png" /></p>
 <p>图中的 andThen 是 Scala 语言提供的组合子，它可以组合两个函数形成一个新的函数。Scala 还提供了 compose 组合子，二者的区别在于组合函数的顺序不同。上图可以表现为如下 Scala 代码：</p>
 <pre><code class="language-scala">sealed trait Fruit {
     def weight: Int

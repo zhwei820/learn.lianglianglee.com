@@ -231,7 +231,7 @@ function hide_canvas() {
 <p>一个完备的网络协议需要具备的基本要素：魔数、协议版本号、序列化算法、报文类型、长度域字段、请求数据、保留字段。在实现协议编解码时经常用到两个重要的抽象类：<strong>MessageToByteEncoder 编码器</strong>和<strong>ByteToMessageDecoder 解码器</strong>。Netty 也提供了很多开箱即用的拆包器，推荐最广泛使用的 LengthFieldBasedFrameDecoder，它可以满足实际项目中的大部分场景。如果对 LengthFieldBasedFrameDecoder 的参数不够熟悉，实际直接使用 ByteBuf 反而更加直观，根据个人喜好按需选择。</p>
 <h4>ByteBuf</h4>
 <p>ByteBuf 是必须要掌握的核心工具类，并且能够理解 ByteBuf 的内部构造。ByteBuf 包含三个指针：<strong>读指针 readerIndex</strong>、<strong>写指针 writeIndex</strong>、<strong>最大容量 maxCapacity</strong>，根据指针的位置又可以将 ByteBuf 内部结构可以分为四个部分：废弃字节、可读字节、可写字节和可扩容字节。如下图所示。</p>
-<p><img src="assets/Ciqc1GAH8qKAQ69-AAL5JCNOFek288.png" alt="Lark20210120-170502.png" /></p>
+<p><img src="assets/Ciqc1GAH8qKAQ69-AAL5JCNOFek288.png" alt="png" /></p>
 <h4>Pipeline &amp; ChannelHandler</h4>
 <p>ChannelPipeline 和 ChannelHandler 也是我们在平时应用开发的过程中打交道最多的组件，这两个组件为用户提供了 I/O 事件的全部控制权。ChannelPipeline 是双向链表结构，包含 ChannelInboundHandler 和 ChannelOutboundHandler 两种处理器。Inbound 事件和 Outbound 事件的传播方向相反，Inbound 事件的传播方向为 Head -&gt; Tail，而 Outbound 事件传播方向是 Tail -&gt; Head。在设计之初一定要梳理清楚 Inbound 和 Outbound 处理的传递顺序，以及数据模型之间是如何转换的。</p>
 <h4>注册中心</h4>

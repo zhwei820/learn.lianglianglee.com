@@ -213,7 +213,7 @@ function hide_canvas() {
 </code></pre>
 <h4>XA 事务</h4>
 <p>XA 事务提供基于两阶段提交协议的实现机制。所谓两阶段提交，顾名思义分成两个阶段，一个是准备阶段，一个是执行阶段。在准备阶段中，协调者发起一个提议，分别询问各参与者是否接受。在执行阶段，协调者根据参与者的反馈，提交或终止事务。如果参与者全部同意则提交，只要有一个参与者不同意就终止。</p>
-<p><img src="assets/CgqCHl8MBruAHHnkAABo-3eRic0694.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/CgqCHl8MBruAHHnkAABo-3eRic0694.png" alt="png" /></p>
 <p>两阶段提交示意图</p>
 <p>目前，业界在实现 XA 事务时也存在一些主流工具库，包括 Atomikos、Narayana 和 Bitronix。ShardingSphere 对这三种工具库都进行了集成，并默认使用 Atomikos 来完成两阶段提交。</p>
 <h4>BASE 事务</h4>
@@ -386,14 +386,14 @@ public void insert(){
     }
 </code></pre>
 <p>现在让我们执行这个 processWithXA 方法，看看数据是否已经按照分库的配置写入到目标数据库表中。下面是 ds0 中的 health_record 表和 health_task 表：</p>
-<p><img src="assets/Ciqc1F8MB4yADpvNAAAn7gHRWyw024.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/Ciqc1F8MB4yADpvNAAAn7gHRWyw024.png" alt="png" /></p>
 <p>ds0 中的 health_record 表</p>
-<p><img src="assets/Ciqc1F8MCEuAUA1NAAAuoAPD9w4209.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F8MCEuAUA1NAAAuoAPD9w4209.png" alt="png" /></p>
 <p>ds0 中的 health_task 表</p>
 <p>下面则是 ds1 中的 health_record 表和 health_task 表：
-<img src="assets/CgqCHl8MB6SAOFIhAAAoGKuCLOw688.png" alt="Drawing 4.png" /></p>
+<img src="assets/CgqCHl8MB6SAOFIhAAAoGKuCLOw688.png" alt="png" /></p>
 <p>ds1 中的 health_record 表</p>
-<p><img src="assets/Ciqc1F8MCFiAH4szAAAvGNmTj1Y923.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F8MCFiAH4szAAAvGNmTj1Y923.png" alt="png" /></p>
 <p>ds1 中的 health_task 表</p>
 <p>我们也可以通过控制台日志来跟踪具体的 SQL 执行过程：</p>
 <pre><code>2020-06-01 20:11:52.043  INFO 10720 --- [           main] ShardingSphere-SQL                       : Rule Type: sharding
@@ -454,7 +454,7 @@ public void insert(){
 }
 </code></pre>
 <p>现在，在 src/main/resources 目录下的文件组织形式应该是这样：</p>
-<p><img src="assets/Ciqc1F8MB7aAL-kkAAAU1FYPsK0495.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F8MB7aAL-kkAAAU1FYPsK0495.png" alt="png" /></p>
 <p>当然，这里我们还是继续沿用前面介绍的分库配置。</p>
 <h3>实现 BASE 事务</h3>
 <p>基于 ShardingSphere 提供的分布式事务的抽象，我们从 XA 事务转到 BASE 事务唯一要做的事情就是重新设置 TransactionType，也就是修改一行代码：</p>

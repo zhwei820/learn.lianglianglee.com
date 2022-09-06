@@ -176,8 +176,8 @@ function hide_canvas() {
 <pre><code>./src/example-basic.js
 import _ from 'lodash'
 </code></pre>
-<p><img src="assets/Ciqc1F9kXKSADBZcAAE6sFADuy0456.png" alt="Drawing 0.png" />
-<img src="assets/CgqCHl9kXKmAUFg3AAErEUA8F2E549.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9kXKSADBZcAAE6sFADuy0456.png" alt="png" />
+<img src="assets/CgqCHl9kXKmAUFg3AAErEUA8F2E549.png" alt="png" /></p>
 <p>可以看到，在没有增加任何优化设置的情况下，初次构建时在 optimizeChunkAssets 阶段的耗时是 1000ms 左右，而再次构建时的耗时直接降到了 18ms，几乎可以忽略不计。</p>
 <p>这里的原因就在于，Webpack 4 内置了压缩插件 TerserWebpackPlugin，且默认开启了<a href="https://webpack.js.org/plugins/terser-webpack-plugin/#cache">缓存</a>参数。在初次构建的压缩代码过程中，就将这一阶段的结果写入了缓存目录（node_modules/.cache/terser-webpack-plugin/）中，当再次构建进行到压缩代码阶段时，即可对比读取已有缓存，如下面的代码所示（相关的代码逻辑在插件的<a href="https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/src/index.js">源代码</a>中可以看到）。</p>
 <pre><code>terser-webpack-plugin/src/index.js:
@@ -210,8 +210,8 @@ if (cache.isEnabled()) {
 <li><strong>cacheCompression</strong>：默认为 true，将缓存内容压缩为 gz 包以减小缓存目录的体积。在设为 false 的情况下将跳过压缩和解压的过程，从而提升这一阶段的速度。</li>
 </ul>
 <p>开启缓存选项前后的构建时长效果如图所示（示例中运行 npm run build:babel），可以看到，由于开启了 Babel 的缓存，再次构建的速度比初次构建时要快了许多。</p>
-<p><img src="assets/CgqCHl9kXL6AIfhNAAB0Ns1VzFM141.png" alt="Drawing 2.png" />
-<img src="assets/CgqCHl9kXMOAND8YAACPsQpEG1k472.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/CgqCHl9kXL6AIfhNAAB0Ns1VzFM141.png" alt="png" />
+<img src="assets/CgqCHl9kXMOAND8YAACPsQpEG1k472.png" alt="png" /></p>
 <h4>Cache-loader</h4>
 <p>在编译过程中利用缓存的第二种方式是使用<a href="https://webpack.js.org/loaders/cache-loader/"> Cache-loader</a>。在使用时，需要将 cache-loader 添加到对构建效率影响较大的 Loader（如 babel-loader 等）之前，如下面的代码所示：</p>
 <pre><code>./webpack.cache.config.js
@@ -227,8 +227,8 @@ module: {
 ...
 </code></pre>
 <p>执行两次构建后可以发现，使用 cache-loader 后，比使用 babel-loader 的开启缓存选项后的构建时间更短，如下图所示：</p>
-<p><img src="assets/CgqCHl9kXOqAGqBaAAB8XJNiH2c187.png" alt="Drawing 4.png" />
-<img src="assets/Ciqc1F9kXO-Ae1fcAABt0doSQD0218.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/CgqCHl9kXOqAGqBaAAB8XJNiH2c187.png" alt="png" />
+<img src="assets/Ciqc1F9kXO-Ae1fcAABt0doSQD0218.png" alt="png" /></p>
 <p>主要原因是 babel-loader 中的<strong>缓存信息较少</strong>，而 cache-loader 中存储的<strong>Buffer 形式的数据处理效率更高</strong>。下面的示例代码，是 babel-loader 和 cache-loader 入口模块的缓存信息对比：</p>
 <pre><code>//babel-loader中的缓存数据
 {&quot;ast&quot;:null,&quot;code&quot;:&quot;import _ from 'lodash';&quot;,&quot;map&quot;:null,&quot;metadata&quot;:{},&quot;sourceType&quot;:&quot;module&quot;}
@@ -241,8 +241,8 @@ module: {
 <h4>代码压缩时的缓存优化</h4>
 <p>在上一课时中曾提到，在代码压缩阶段，对于 JS 的压缩，TerserWebpackPlugin 和 UglifyJSPlugin 都是支持缓存设置的。而对于 CSS 的压缩，目前最新发布的 CSSMinimizerWebpackPlugin 支持且默认开启缓存，其他的插件如 OptimizeCSSAssetsPlugin 和 OptimizeCSSNanoPlugin 目前还不支持使用缓存。</p>
 <p>TerserWebpackPlugin 插件的效果在本节课的开头部分我们已经演示过了，这里再来看一下 CSSMinimizerWebpackPlugin 的缓存效果对比，如下面的图片所示，开启该插件的缓存后，再次构建的时长降低到了初次构建的 1/4。</p>
-<p><img src="assets/Ciqc1F9kXQGAWkf8AACuXoea9dE075.png" alt="Drawing 6.png" />
-<img src="assets/CgqCHl9kXQaAEle1AACx-Pmol-Q677.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/Ciqc1F9kXQGAWkf8AACuXoea9dE075.png" alt="png" />
+<img src="assets/CgqCHl9kXQaAEle1AACx-Pmol-Q677.png" alt="png" /></p>
 <p>以上就是 Webpack 4 中编译与优化打包阶段可用的几种缓存方案。接下来我们再来看下在构建过程中使用缓存的一些注意点。</p>
 <h3>缓存的失效</h3>
 <p>尽管上面示例所显示的再次构建时间要比初次构建时间快很多，但前提是两次构建没有任何代码发生变化，也就是说，最佳效果是在缓存完全命中的情况下。而现实中，通常需要重新构建的原因是代码发生了变化。因此<strong>如何最大程度地让缓存命中</strong>，成为我们选择缓存方案后首先要考虑的事情。</p>
@@ -253,8 +253,8 @@ module: {
 <p>编译阶段的执行时间由每个模块的编译时间相加而成。在开启缓存的情况下，代码发生变化的模块将被重新编译，但不影响它所依赖的及依赖它的其他模块，其他模块将继续使用缓存。因此，这一阶段不需要考虑缓存失效扩大化的问题。</p>
 <h4>优化打包阶段的缓存失效</h4>
 <p>优化打包阶段的缓存失效问题则需要引起注意。还是以课程开头的 example-basic 为例，在使用缓存快速构建后，当我们任意修改入口文件的代码后会发现，代码压缩阶段的时间再次变为和初次构建时相近，也就是说，这一 Chunk 的 Terser 插件的缓存完全失效了，如下面的图片所示。</p>
-<p><img src="assets/Ciqc1F9kXRGAUqisAAEy5POkOmg344.png" alt="Drawing 8.png" />
-<img src="assets/CgqCHl9kXRaAH-yTAAEq_mHfoPo473.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/Ciqc1F9kXRGAUqisAAEy5POkOmg344.png" alt="png" />
+<img src="assets/CgqCHl9kXRaAH-yTAAEq_mHfoPo473.png" alt="png" /></p>
 <p>之所以会出现这样的结果，是因为，尽管在模块编译阶段每个模块是单独执行编译的，但是当进入到代码压缩环节时，各模块已经被组织到了相关联的 Chunk 中。如上面的示例，4 个模块最后只生成了一个 Chunk，任何一个模块发生变化都会导致整个 Chunk 的内容发生变化，而使之前保存的缓存失效。</p>
 <p>在知道了失效原因后，<strong>对应的优化思路也就显而易见了</strong>：尽可能地把那些不变的处理成本高昂的模块打入单独的 Chunk 中。这就涉及了 Webpack 中的分包配置——<a href="https://webpack.js.org/configuration/optimization/#optimizationsplitchunks">splitChunks</a>。</p>
 <h4>使用 splitChunks 优化缓存利用率</h4>
@@ -268,7 +268,7 @@ optimization: {
 },
 ...
 </code></pre>
-<p><img src="assets/CgqCHl9kXSeAOtCSAAEiD0YND3g006.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl9kXSeAOtCSAAEiD0YND3g006.png" alt="png" /></p>
 <h3>其他使用缓存的注意事项</h3>
 <h4>CI/CD 中的缓存目录问题</h4>
 <p>在许多自动化集成的系统中，项目的构建空间会在每次构建执行完毕后，立即回收清理。在这种情况下，默认的项目构建缓存目录（node_mo dules/.cache）将无法留存，导致即使项目中开启了缓存设置，也无法享受缓存的便利性，反而因为需要写入缓存文件而浪费额外的时间。因此，在集成化的平台中构建部署的项目，如果需要使用缓存，则需要根据对应平台的规范，将缓存设置到公共缓存目录下。这类问题我们会在第三模块部署优化中再次展开。</p>

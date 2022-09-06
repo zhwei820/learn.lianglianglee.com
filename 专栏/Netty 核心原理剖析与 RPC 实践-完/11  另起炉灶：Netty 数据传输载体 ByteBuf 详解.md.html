@@ -190,7 +190,7 @@ function hide_canvas() {
 <p>在学习编解码章节的过程中，我们看到 Netty 大量使用了自己实现的 ByteBuf 工具类，ByteBuf 是 Netty 的数据容器，所有网络通信中字节流的传输都是通过 ByteBuf 完成的。然而 JDK NIO 包中已经提供了类似的 ByteBuffer 类，为什么 Netty 还要去重复造轮子呢？本节课我会详细地讲解 ByteBuf。</p>
 <h3>为什么选择 ByteBuf</h3>
 <p>我们首先介绍下 JDK NIO 的 ByteBuffer，才能知道 ByteBuffer 有哪些缺陷和痛点。下图展示了 ByteBuffer 的内部结构：</p>
-<p><img src="assets/Ciqc1F-3ukmAImo_AAJEEbA2rts301.png" alt="Netty11" /></p>
+<p><img src="assets/Ciqc1F-3ukmAImo_AAJEEbA2rts301.png" alt="png" /></p>
 <p>从图中可知，ByteBuffer 包含以下四个基本属性：</p>
 <ul>
 <li>mark：为某个读取过的关键位置做标记，方便回退到该位置；</li>
@@ -231,7 +231,7 @@ assert buffer.refCnt() == 0;
 <p>此外 Netty 可以利用引用计数的特点实现内存泄漏检测工具。JVM 并不知道 Netty 的引用计数是如何实现的，当 ByteBuf 对象不可达时，一样会被 GC 回收掉，但是如果此时 ByteBuf 的引用计数不为 0，那么该对象就不会释放或者被放入对象池，从而发生了内存泄漏。Netty 会对分配的 ByteBuf 进行抽样分析，检测 ByteBuf 是否已经不可达且引用计数大于 0，判定内存泄漏的位置并输出到日志中，你需要关注日志中 LEAK 关键字。</p>
 <h3>ByteBuf 分类</h3>
 <p>ByteBuf 有多种实现类，每种都有不同的特性，下图是 ByteBuf 的家族图谱，可以划分为三个不同的维度：<strong>Heap/Direct</strong>、<strong>Pooled/Unpooled</strong>和<strong>Unsafe/非 Unsafe</strong>，我逐一介绍这三个维度的不同特性。</p>
-<p><img src="assets/Ciqc1F-3h3WAMF4CAAe4IOav4SA876.png" alt="image" /></p>
+<p><img src="assets/Ciqc1F-3h3WAMF4CAAe4IOav4SA876.png" alt="png" /></p>
 <p><strong>Heap/Direct 就是堆内和堆外内存</strong>。Heap 指的是在 JVM 堆内分配，底层依赖的是字节数据；Direct 则是堆外内存，不受 JVM 限制，分配方式依赖 JDK 底层的 ByteBuffer。</p>
 <p><strong>Pooled/Unpooled 表示池化还是非池化内存</strong>。Pooled 是从预先分配好的内存中取出，使用完可以放回 ByteBuf 内存池，等待下一次分配。而 Unpooled 是直接调用系统 API 去申请内存，确保能够被 JVM GC 管理回收。</p>
 <p><strong>Unsafe/非 Unsafe 的区别在于操作方式是否安全。</strong> Unsafe 表示每次调用 JDK 的 Unsafe 对象操作物理内存，依赖 offset + index 的方式操作数据。非 Unsafe 则不需要依赖 JDK 的 Unsafe 对象，直接通过数组下标的方式操作数据。</p>

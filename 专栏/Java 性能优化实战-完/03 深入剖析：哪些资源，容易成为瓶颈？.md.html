@@ -173,7 +173,7 @@ function hide_canvas() {
 <p>具体情况如下。</p>
 <h2>1.top 命令 —— CPU 性能</h2>
 <p>如下图，当进入 top 命令后，按 1 键即可看到每核 CPU 的运行指标和详细性能。</p>
-<p><img src="assets/Ciqc1F8VRhOAOZZkAAIR0PdGn-M708.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F8VRhOAOZZkAAIR0PdGn-M708.png" alt="png" /></p>
 <p>CPU 的使用有多个维度的指标，下面分别说明：</p>
 <ul>
 <li>us 用户态所占用的 CPU 百分比，即引用程序所耗费的 CPU；</li>
@@ -188,7 +188,7 @@ function hide_canvas() {
 <p>一般地，我们比较关注空闲 CPU 的百分比，它可以从整体上体现 CPU 的利用情况。</p>
 <h2>2.负载 —— CPU 任务排队情况</h2>
 <p>如果我们评估 CPU 任务执行的排队情况，那么需要通过负载（load）来完成。除了 top 命令，使用 uptime 命令也能够查看负载情况，load 的效果是一样的，分别显示了最近 1min、5min、15min 的数值。</p>
-<p><img src="assets/Ciqc1F8VRlWAKi0UAABUtUrc7Ec737.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F8VRlWAKi0UAABUtUrc7Ec737.png" alt="png" /></p>
 <p>如上图所示，以单核操作系统为例，将 CPU 资源抽象成一条单向行驶的马路，则会发生以下三种情况：</p>
 <ul>
 <li>马路上的车只有 4 辆，车辆畅通无阻，load 大约是 0.5；</li>
@@ -205,7 +205,7 @@ function hide_canvas() {
 <p>所以，对于一个 load 到了 10，却是 16 核的机器，你的系统还远没有达到负载极限。</p>
 <h2>3.vmstat —— CPU 繁忙程度</h2>
 <p>要看 CPU 的繁忙程度，可以通过 vmstat 命令，下图是 vmstat 命令的一些输出信息。</p>
-<p><img src="assets/CgqCHl8VeDqAOXoUAAL5_mAD--A654.gif" alt="1111.gif" /></p>
+<p><img src="assets/CgqCHl8VeDqAOXoUAAL5_mAD--A654.gif" alt="png" /></p>
 <p>比较关注的有下面几列：</p>
 <ul>
 <li><strong>b</strong> 如果系统有负载问题，就可以看一下 b 列（Uninterruptible Sleep），它的意思是等待 I/O，可能是读盘或者写盘动作比较多；</li>
@@ -224,7 +224,7 @@ nonvoluntary_ctxt_switches: 171204
 <p>我们在平常写完代码后，比如写了一个 C++ 程序，去查看它的汇编，如果看到其中的内存地址，并不是实际的物理内存地址，那么应用程序所使用的，就是<strong>逻辑内存</strong>。学过计算机组成结构的同学应该都有了解。</p>
 <p>逻辑地址可以映射到两个内存段上：<strong>物理内存</strong>和<strong>虚拟内存</strong>，那么整个系统可用的内存就是两者之和。比如你的物理内存是 4GB，分配了 8GB 的 SWAP 分区，那么应用可用的总内存就是 12GB。</p>
 <h2>1. top 命令</h2>
-<p><img src="assets/Ciqc1F8VRpyAJEDBAAGXn95jReA806.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/Ciqc1F8VRpyAJEDBAAGXn95jReA806.png" alt="png" /></p>
 <p>如上图所示，我们看一下内存的几个参数，从 top 命令可以看到几列数据，注意方块框起来的三个区域，解释如下：</p>
 <ul>
 <li><strong>VIRT</strong> 这里是指虚拟内存，一般比较大，不用做过多关注；</li>
@@ -267,14 +267,14 @@ cache_alignment	: 64
 <p>这样，启动时虽然慢了些，但运行时的性能会增加。</p>
 <h1>I/O</h1>
 <p>I/O 设备可能是计算机里速度最慢的组件了，它指的不仅仅是硬盘，还包括外围的所有设备。那硬盘有多慢呢？我们不去探究不同设备的实现细节，直接看它的写入速度（数据未经过严格测试，仅作参考）。</p>
-<p><img src="assets/Ciqc1F8VRxaAK34SAAHTZp7R44c733.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F8VRxaAK34SAAHTZp7R44c733.png" alt="png" /></p>
 <p>如上图所示，可以看到普通磁盘的随机写与顺序写相差非常大，但顺序写与 CPU 内存依旧不在一个数量级上。</p>
 <p><strong>缓冲区依然是解决速度差异的唯一工具</strong>，但在极端情况下，比如断电时，就产生了太多的不确定性，这时这些缓冲区，都容易丢。由于这部分内容的篇幅比较大，我将在第 06 课时专门讲解。</p>
 <h2>1. iostat</h2>
 <p>最能体现 I/O 繁忙程度的，就是 top 命令和 vmstat 命令中的 wa%。如果你的应用写了大量的日志，I/O wait 就可能非常高。</p>
-<p><img src="assets/CgqCHl8VRzqALt_DAASmJQkN7Ro492.png" alt="Drawing 9.png" /></p>
+<p><img src="assets/CgqCHl8VRzqALt_DAASmJQkN7Ro492.png" alt="png" /></p>
 <p>很多同学反馈到，不知道有哪些便捷好用的查看磁盘 I/O 的工具，其实 iostat 就是。你可以通过 sysstat 包进行安装。</p>
-<p><img src="assets/CgqCHl8VR0KARZVeAAWCFxfk75s510.png" alt="Drawing 10.png" /></p>
+<p><img src="assets/CgqCHl8VR0KARZVeAAWCFxfk75s510.png" alt="png" /></p>
 <p>上图中的指标详细介绍如下所示。</p>
 <ul>
 <li><strong>%util</strong>：我们非常关注这个数值，通常情况下，这个数字超过 80%，就证明 I/O 的负荷已经非常严重了。</li>

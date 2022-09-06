@@ -536,7 +536,7 @@ function hide_canvas() {
 <p>考勤上下文的领域逻辑并不复杂，通过名词动词法即可从业务需求的描述中发现主要的领域概念。在确定领域分析模型时，需要确定统一语言，例如在需求分析中，已经阐述了打卡记录与出勤记录之间的差异，前者为 TimeCard，后者为 Attendance。员工每打一次卡，就会产生一条打卡记录，正常情况下，每位员工一天会形成两条打卡记录，分别记载了上班时间和下班时间，并由此确定员工的出勤状态。为了区分原始的打卡记录与处理后的打卡记录，经过咨询领域专家，为其确定了各自的统一语言。前者命名为 PunchedCard，如此可以更好地形容打卡的动作；后者命名为 TimeCard，用以记录员工的工作时间。</p>
 <p>员工请假时，从业务需求描述看来是一个请假申请，但事实上就是一个 Leave 领域概念，审批请假申请意味着修改它的状态（ApprovedStatus）。请假时，员工应指定请假的类型（LeaveType）。</p>
 <p>由于法定节假日可能出现因为周末与节日的重叠而导致的调休情况，为了简化领域模型，可以将全年的每一天分为假日（Holiday）和工作日（Workday）。在设置节假日时，只需设置具体的假日即可，故而只需定义 Holiday 领域类，它指定了节假日（包括周末）的期限。同理，工作时间规则（WorktimeRule）也可由管理人员进行配置。由此，可以得出如下领域分析模型：</p>
-<p><img src="assets/9032f9a0-3225-11ea-9c3e-cbf2baa3b166" alt="39084286.png" /></p>
+<p><img src="assets/9032f9a0-3225-11ea-9c3e-cbf2baa3b166" alt="png" /></p>
 <p>这个领域分析模型虽然简单，却具有一定的代表性。主要体现在：</p>
 <ul>
 <li>Holiday 与 Worktime 是两个完全独立的领域对象，与别的领域对象没有任何关联。在确定领域分析模型时，不要因为出现了这样“孤单”的领域对象，就认为出现了建模错误，非要给它寻找一个关联对象。</li>
@@ -546,7 +546,7 @@ function hide_canvas() {
 <h4><strong>领域设计模型</strong></h4>
 <p>领域分析模型已经清晰地展现了领域对象之间的关系，因此在设计建模时，只需确定实体和值对象，界定聚合的边界就能水到渠成。但是，这里需要考虑 TimeCard 的生命周期，它究竟是在处理打卡记录 PunchedCard 之后生成的瞬时对象，还是需要进行持久化，以便于系统对其进行生命周期的管理？由于出勤记录 Attendance 已经记录了员工上下班时间和出勤状态，弱化了 TimeCard 的上下班时间的管理功能，无需考虑它的生命周期，故而定义为瞬时对象（图中可标记为白色）。</p>
 <p>Holiday 与 WorktimeRule 的设计亦较特殊。本质上，它们应属于值对象，可通过值进行判等。例如，Holiday 对象通过 year、date 与 holidayType 的值即可确定 Holiday 的唯一性。然而，按照领域驱动设计的设计纪律，资源库只能管理聚合的生命周期，而聚合的根又只能是一个实体，因此需要将它们从值对象升级为实体。至于 PunchedCard、Attendance 等聚合根实体与 Employee 之间的关系只能通过 EmployeeId 进行关联，由此可以得到如下领域设计模型：</p>
-<p><img src="assets/d710c280-3225-11ea-a4f2-37e03842b3a7" alt="39121611.png" /></p>
+<p><img src="assets/d710c280-3225-11ea-a4f2-37e03842b3a7" alt="png" /></p>
 <p>同样采用场景驱动设计识别领域场景，并获得该场景对应的时序图。以“生成出勤记录”领域场景为例，分解的任务如下所示：</p>
 <ul>
 <li>生成出勤记录
@@ -571,7 +571,7 @@ function hide_canvas() {
 </li>
 </ul>
 <p>将领域场景分配给 AttendanceAppService，组合任务“生成出勤记录”分配给领域服务 AttendancesGenerator，然后将访问数据库的原子任务分配给相应聚合的资源库，然后将获得的信息作为方法参数传给聚合 Attendance，由其确定出勤状态。在为每位员工创建了具有正确出勤状态的 Attendance 对象后，由该聚合的资源库 AttendanceRepository 实现所有出勤记录的持久化。整个协作过程如下图所示：</p>
-<p><img src="assets/952d8b80-36d7-11ea-a3f2-df8dff95a3b3" alt="33367611.png" /></p>
+<p><img src="assets/952d8b80-36d7-11ea-a3f2-df8dff95a3b3" alt="png" /></p>
 <p>该时序图脚本如下所示：</p>
 <pre><code>AttendanceAppService.generate(day) {
     AttendancesGenerator.generate(day) {

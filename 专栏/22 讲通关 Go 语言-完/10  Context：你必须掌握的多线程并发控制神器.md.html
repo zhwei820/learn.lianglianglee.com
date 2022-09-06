@@ -322,7 +322,7 @@ func watchDog(ctx context.Context,name string) {
 <li><strong>值 Context</strong>：用于存储一个 key-value 键值对。</li>
 </ol>
 <p>从下图 Context 的衍生树可以看到，最顶部的是空 Context，它作为整棵 Context 树的根节点，在 Go 语言中，可以通过 context.Background() 获取一个根节点 Context。</p>
-<p><img src="assets/CgqCHl_EyHOARbBqAAKzKmhclWo807.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/CgqCHl_EyHOARbBqAAKzKmhclWo807.png" alt="png" /></p>
 <p>（四种 Context 的衍生树）</p>
 <p>有了根节点 Context 后，这颗 Context 树要怎么生成呢？需要使用 Go 语言提供的四个函数。</p>
 <ol>
@@ -347,7 +347,7 @@ go func() {
 </code></pre>
 <p>示例中增加了两个监控狗，也就是增加了两个协程，这样一个 Context 就同时控制了三个协程，一旦 Context 发出取消信号，这三个协程都会取消退出。</p>
 <p>以上示例中的 Context 没有子 Context，如果一个 Context 有子 Context，在该 Context 取消时会发生什么呢？下面通过一幅图说明：</p>
-<p><img src="assets/Ciqc1F_EyIyAAO_TAADuPjzGt5U321.png" alt="Drawing 3.png" /></p>
+<p><img src="assets/Ciqc1F_EyIyAAO_TAADuPjzGt5U321.png" alt="png" /></p>
 <p>（Context 取消）</p>
 <p>可以看到，当节点 Ctx2 取消时，它的子节点 Ctx4、Ctx5 都会被取消，如果还有子节点的子节点，也会被取消。也就是说根节点为 Ctx2 的所有节点都会被取消，其他节点如 Ctx1、Ctx3 和 Ctx6 则不会。</p>
 <h3>Context 传值</h3>

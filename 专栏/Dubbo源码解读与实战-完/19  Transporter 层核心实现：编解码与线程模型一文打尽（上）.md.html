@@ -293,7 +293,7 @@ function hide_canvas() {
 <p>在第 17 课时中，我们详细介绍了 dubbo-remoting-api 模块中 Transporter 相关的核心抽象接口，本课时将继续介绍 dubbo-remoting-api 模块的其他内容。这里我们依旧从 Transporter 层的 RemotingServer、Client、Channel、ChannelHandler 等核心接口出发，介绍这些核心接口的实现。</p>
 <h3>AbstractPeer 抽象类</h3>
 <p>首先，我们来看 AbstractPeer 这个抽象类，它同时实现了 Endpoint 接口和 ChannelHandler 接口，如下图所示，它也是 AbstractChannel、AbstractEndpoint 抽象类的父类。</p>
-<p><img src="assets/Ciqc1F9wb8eAHyD_AAFkwn8xp18694.png" alt="Drawing 0.png" /></p>
+<p><img src="assets/Ciqc1F9wb8eAHyD_AAFkwn8xp18694.png" alt="png" /></p>
 <p>AbstractPeer 继承关系</p>
 <blockquote>
 <p>Netty 中也有 ChannelHandler、Channel 等接口，但无特殊说明的情况下，这里的接口指的都是 Dubbo 中定义的接口。如果涉及 Netty 中的接口，会进行特殊说明。</p>
@@ -338,7 +338,7 @@ function hide_canvas() {
 </code></pre>
 <h3>Server 继承路线分析</h3>
 <p>AbstractServer 和 AbstractClient 都实现了 AbstractEndpoint 抽象类，我们先来看 AbstractServer 的实现。AbstractServer 在继承了 AbstractEndpoint 的同时，还实现了 RemotingServer 接口，如下图所示：</p>
-<p><img src="assets/Ciqc1F9wb-iAMAgtAACJWi59iSc812.png" alt="Drawing 1.png" /></p>
+<p><img src="assets/Ciqc1F9wb-iAMAgtAACJWi59iSc812.png" alt="png" /></p>
 <p>AbstractServer 继承关系图</p>
 <p><strong>AbstractServer 是对服务端的抽象，实现了服务端的公共逻辑</strong>。AbstractServer 的核心字段有下面几个。</p>
 <ul>
@@ -390,7 +390,7 @@ function hide_canvas() {
 }
 </code></pre>
 <p>在 createExecutor() 方法中，会通过 Dubbo SPI 查找 ThreadPool 接口的扩展实现，并调用其 getExecutor() 方法创建线程池。ThreadPool 接口被 @SPI 注解修饰，默认使用 FixedThreadPool 实现，但是 ThreadPool 接口中的 getExecutor() 方法被 @Adaptive 注解修饰，动态生成的适配器类会优先根据 URL 中的 threadpool 参数选择 ThreadPool 的扩展实现。ThreadPool 接口的实现类如下图所示：</p>
-<p><img src="assets/CgqCHl9wcBeAYMZ1AABRTGzl5uY627.png" alt="Drawing 2.png" /></p>
+<p><img src="assets/CgqCHl9wcBeAYMZ1AABRTGzl5uY627.png" alt="png" /></p>
 <p>ThreadPool 继承关系图</p>
 <p>不同实现会根据 URL 参数创建不同特性的线程池，这里以<strong>CacheThreadPool</strong>为例进行分析：</p>
 <pre><code>public Executor getExecutor(URL url) {
@@ -514,12 +514,12 @@ protected void afterExecute(Runnable r, Throwable t) {
 </code></pre>
 <p>看完 NettyServer 实现的 doOpen() 方法之后，你会发现它和简易版 RPC 框架中启动一个 Netty 的 Server 端基本流程类似：初始化 ServerBootstrap、创建 Boss EventLoopGroup 和 Worker EventLoopGroup、创建 ChannelInitializer 指定如何初始化 Channel 上的 ChannelHandler 等一系列 Netty 使用的标准化流程。</p>
 <p>其实在 Transporter 这一层看，功能的不同其实就是注册在 Channel 上的 ChannelHandler 不同，通过 doOpen() 方法得到的 Server 端结构如下：</p>
-<p><img src="assets/Ciqc1F9y4LaAIHSsAADBytWDQ3U695.png" alt="5.png" /></p>
+<p><img src="assets/Ciqc1F9y4LaAIHSsAADBytWDQ3U695.png" alt="png" /></p>
 <p>NettyServer 模型</p>
 <h4>核心 ChannelHandler</h4>
 <p>下面我们来逐个看看这四个 ChannelHandler 的核心功能。</p>
 <p>首先是<strong>decoder 和 encoder</strong>，它们都是 NettyCodecAdapter 的内部类，如下图所示，分别继承了 Netty 中的 ByteToMessageDecoder 和 MessageToByteEncoder：</p>
-<p><img src="assets/CgqCHl9wcESANfPCAABDUdzhtNU066.png" alt="Drawing 4.png" /></p>
+<p><img src="assets/CgqCHl9wcESANfPCAABDUdzhtNU066.png" alt="png" /></p>
 <p>还记得 AbstractEndpoint 抽象类中的 codec 字段（Codec2 类型）吗？InternalDecoder 和 InternalEncoder 会将真正的编解码功能委托给 NettyServer 关联的这个 Codec2 对象去处理，这里以 InternalDecoder 为例进行分析：</p>
 <pre><code>private class InternalDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf input, List&lt;Object&gt; out) throws Exception {
@@ -550,17 +550,17 @@ protected void afterExecute(Runnable r, Throwable t) {
 <p>InternalEncoder 的具体实现就不再展开讲解了，你若感兴趣可以翻看源码进行研究和分析。</p>
 <p>接下来是<strong>IdleStateHandler</strong>，它是 Netty 提供的一个工具型 ChannelHandler，用于定时心跳请求的功能或是自动关闭长时间空闲连接的功能。它的原理到底是怎样的呢？在 IdleStateHandler 中通过 lastReadTime、lastWriteTime 等几个字段，记录了最近一次读/写事件的时间，IdleStateHandler 初始化的时候，会创建一个定时任务，定时检测当前时间与最后一次读/写时间的差值。如果超过我们设置的阈值（也就是上面 NettyServer 中设置的 idleTimeout），就会触发 IdleStateEvent 事件，并传递给后续的 ChannelHandler 进行处理。后续 ChannelHandler 的 userEventTriggered() 方法会根据接收到的 IdleStateEvent 事件，决定是关闭长时间空闲的连接，还是发送心跳探活。</p>
 <p>最后来看<strong>NettyServerHandler</strong>，它继承了 ChannelDuplexHandler，这是 Netty 提供的一个同时处理 Inbound 数据和 Outbound 数据的 ChannelHandler，从下面的继承图就能看出来。</p>
-<p><img src="assets/Ciqc1F9wcFKAQQZ3AAB282frbWw282.png" alt="Drawing 5.png" /></p>
+<p><img src="assets/Ciqc1F9wcFKAQQZ3AAB282frbWw282.png" alt="png" /></p>
 <p>NettyServerHandler 继承关系图</p>
 <p>在 NettyServerHandler 中有 channels 和 handler 两个核心字段。</p>
 <ul>
 <li>channels（Map&lt;String,Channel&gt;集合）：记录了当前 Server 创建的所有 Channel，从下图中可以看到，连接创建（触发 channelActive() 方法）、连接断开（触发 channelInactive()方法）会操作 channels 集合进行相应的增删。</li>
 </ul>
-<p><img src="assets/Ciqc1F9wcFuABJWsAAaIoTwCIA0958.png" alt="Drawing 6.png" /></p>
+<p><img src="assets/Ciqc1F9wcFuABJWsAAaIoTwCIA0958.png" alt="png" /></p>
 <ul>
 <li>handler（ChannelHandler 类型）：NettyServerHandler 内几乎所有方法都会触发该 Dubbo ChannelHandler 对象（如下图）。</li>
 </ul>
-<p><img src="assets/CgqCHl9wcGOAE_ykAAFvy5a4X58367.png" alt="Drawing 7.png" /></p>
+<p><img src="assets/CgqCHl9wcGOAE_ykAAFvy5a4X58367.png" alt="png" /></p>
 <p>这里以 write() 方法为例进行简单分析：</p>
 <pre><code>public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
     super.write(ctx, msg, promise); // 将发送的数据继续向下传递
@@ -575,10 +575,10 @@ protected void afterExecute(Runnable r, Throwable t) {
 <pre><code>final NettyServerHandler nettyServerHandler = new NettyServerHandler(getUrl(), this);
 </code></pre>
 <p>其中第二个参数传入的是 NettyServer 这个对象，你可以追溯一下 NettyServer 的继承结构，会发现它的最顶层父类 AbstractPeer 实现了 ChannelHandler，并且将所有的方法委托给其中封装的 ChannelHandler 对象，如下图所示：</p>
-<p><img src="assets/Ciqc1F9wcGuADQi3AAD6EEURlNU871.png" alt="Drawing 8.png" /></p>
+<p><img src="assets/Ciqc1F9wcGuADQi3AAD6EEURlNU871.png" alt="png" /></p>
 <p>也就是说，NettyServerHandler 会将数据委托给这个 ChannelHandler。</p>
 <p>到此为止，Server 这条继承线就介绍完了。你可以回顾一下，从 AbstractPeer 开始往下，一路继承下来，NettyServer 拥有了 Endpoint、ChannelHandler 以及RemotingServer多个接口的能力，关联了一个 ChannelHandler 对象以及 Codec2 对象，并最终将数据委托给这两个对象进行处理。所以，上层调用方只需要实现 ChannelHandler 和 Codec2 这两个接口就可以了。</p>
-<p><img src="assets/Ciqc1F9y4MyAR8XLAABTLdOZqrc228.png" alt="6.png" /></p>
+<p><img src="assets/Ciqc1F9y4MyAR8XLAABTLdOZqrc228.png" alt="png" /></p>
 <h3>总结</h3>
 <p>本课时重点介绍了 Dubbo Transporter 层中 Server 相关的实现。</p>
 <p>首先，我们介绍了 AbstractPeer 这个最顶层的抽象类，了解了 Server、Client 和 Channel 的公共属性。接下来，介绍了 AbstractEndpoint 抽象类，它提供了编解码等 Server 和 Client 所需的公共能力。最后，我们深入分析了 AbstractServer 抽象类以及基于 Netty 4 实现的 NettyServer，同时，还深入剖析了涉及的各种组件，例如，ExecutorRepository、NettyServerHandler 等。</p>
